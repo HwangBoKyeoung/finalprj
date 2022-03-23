@@ -100,10 +100,7 @@
            <div>
            
            <a class="nav-link"  data-placement="bottom" href="login.do" target="_blank">
-              
-            
               <button  class="btn btn-primary btn-round login" type="button">로그인</button>
-                
             </a>
              </div>
           </li>
