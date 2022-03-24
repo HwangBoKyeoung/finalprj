@@ -36,7 +36,7 @@
 <form name="join" action="mailSending.do" method="post">
 	<input type="text" name="id" required="required"> 
 	@ 
-	<input type="text" name="email" disabled> 
+	<input type="text" name="email" disabled>
 	
 	<!-- Hidden의 value값을 이용하여 값 삽입 -->	
 	<input type="hidden" name="content" id="content" required="required">  

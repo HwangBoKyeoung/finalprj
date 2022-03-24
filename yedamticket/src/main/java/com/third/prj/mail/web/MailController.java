@@ -31,7 +31,7 @@ public class MailController {
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(all); // 받는사람 이메일
 			messageHelper.setText(content); // 메일 내용
-
+ 
 			mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println(e);

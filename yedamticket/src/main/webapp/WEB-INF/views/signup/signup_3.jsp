@@ -95,7 +95,7 @@
 								<option value="12">12</option>
 						</select>
 						</span>
-					</div>
+					</div> 
 
 					<!-- BIRTH_DD -->
 					<div id="bir_dd">

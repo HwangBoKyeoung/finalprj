@@ -16,7 +16,7 @@ public class UserController {
 //		return "signup/signup_2";
 //	}
 	
-	@RequestMapping("/signup_3.do")
+	@RequestMapping("/signup_3.do") 
 	public String signUp_3() {
 		return "signup/signup_3";
 	}
