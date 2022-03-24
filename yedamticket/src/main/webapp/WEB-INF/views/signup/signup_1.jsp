@@ -34,24 +34,25 @@
 </head>
 <h1>회원가입</h1>
 <form name="join" action="mailSending.do" method="post">
-	<input type="text" name="id">
+	<input type="text" name="id" required="required"> 
 	@ 
-	<input type="text" name="email" disabled>
+	<input type="text" name="email" disabled> 
 	
-	<input type = "hidden" name = "content" id = "content"> 
-	<select name="email" onchange="email_change()">
-		<option value="0">선택하세요</option>
-		<option value="9">직접입력</option>
-		<option value="naver.com">naver.com</option>
-		<option value="nate.com">nate.com</option>
-		<option value="gmail.com">gmail.com</option>
-	</select>
+	<!-- Hidden의 value값을 이용하여 값 삽입 -->	
+	<input type="hidden" name="content" id="content" required="required">  
+	<input type="hidden" name="subject" id="subject" required="required"> 
+		<select name="email" onchange="email_change()">
+			<option value="0">선택하세요</option>
+			<option value="9">직접입력</option>
+			<option value="naver.com">naver.com</option>
+			<option value="nate.com">nate.com</option>
+			<option value="gmail.com">gmail.com</option>
+		</select>
 	<div>
 		<input type="button" onclick="location.href='home.do'" value="홈으로" />
-		<input type="submit" value="이메일 발송" /> 
-		<input type="reset" value="취소" />
+		<input type="submit" value="이메일 발송" /> <input type="reset" value="취소" />
 	</div>
-		
+
 </form>
 <div>
 	<a href="businessmemberInsertForm">기업회원이십니까?</a>
@@ -72,9 +73,12 @@
 			document.join.email2.value = document.join.email.options[document.join.email.selectedIndex].value;
 		}
 	}
-	var text = 'jskadhsajkdhsajdkjshdjskah';
-	document.getElementById('content').value = text;
+	var subject = 'YDTICKET 회원가입 이메일 입니다.';
+	document.getElementById('subject').value = subject;
 
+	var content = 'http://localhost/prj/signup_3.do';
+	document.getElementById('content').value = content;
+	
 </script>
 
 </html>

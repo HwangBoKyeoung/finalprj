@@ -22,12 +22,12 @@ public class MailController {
 		String email = request.getParameter("email"); // 받는 사람 이메일
 		String all = id + "@" + email; // 아이디 형식 완성
 		String content = request.getParameter("content"); // 내용
+		String subject = request.getParameter("subject"); // 제목
 		System.out.println(content);
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
-			MimeMessageHelper messageHelper = new MimeMessageHelper(message,
-					true, "UTF-8");
-
+			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
+			messageHelper.setSubject(subject); // 제목
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(all); // 받는사람 이메일
 			messageHelper.setText(content); // 메일 내용
@@ -36,6 +36,6 @@ public class MailController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "signup_2";
+		return "/signup/signup_2";
 	}
 }
