@@ -13,4 +13,5 @@ public class GoodsVO {
 	private String content;
 	private String sellNo;
 	private String fileCd;
+	private String goodsCd;
 }
