@@ -116,7 +116,7 @@
 					class="int" maxlength="16" placeholder="전화번호 입력">
 				</span> <span class="error_next_box"></span>
 			</div>
-			<!-- JOIN BTN-->
+			<!-- JOIN BTN--> 
 			<div class="btn_area">
 				<button type="button" id="btnJoin">
 					<span>가입하기</span>
