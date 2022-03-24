@@ -11,7 +11,7 @@ public class MovieVO {
 	private int mvNo;
 	private String name;
 	private String genre;
-	private String starttime;
+	private String startTime;
 	private String director;
 	private String rating;
 	private String distibutor;

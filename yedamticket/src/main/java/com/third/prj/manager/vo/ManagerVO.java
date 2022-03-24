@@ -12,5 +12,5 @@ public class ManagerVO {
 	private String depart;
 	private String phone;
 	private String authCd;
-	private String managerstat;
+	private String managerStat;
 }
