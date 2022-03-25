@@ -16,7 +16,7 @@ public class UserController {
 	
 	@RequestMapping(value = "/signup_3.do", method = RequestMethod.GET) 
 	public String signUp_3(@RequestParam String email, Model model) {
-		model.addAttribute("email",email);
+		model.addAttribute("email", email);
 		return "signup/signup_3";
 	}
 	
