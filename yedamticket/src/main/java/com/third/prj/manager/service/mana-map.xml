@@ -3,18 +3,19 @@
 <mapper namespace="com.third.prj.manager.service.ManagerMapper">
 
  	<select id="managerSelectList" resultType="com.third.prj.manager.vo.ManagerVO">
- 		SELECT * 
- 		FROM MANAGER
- 		ORDER BY M_ID DESC
+ 		SELECT *
+		FROM MANAGER
+		WHERE M_ID != 'micol'
+		ORDER BY M_ID DESC
  	</select>
  	<select id="managerSelect" resultType="com.third.prj.manager.vo.ManagerVO" parameterType="com.third.prj.manager.vo.ManagerVO">
  		SELECT *
  		FROM MANAGER
- 		WHERE M_ID = #{mId}
+ 		WHERE M_ID = #{MId}
  	</select>
  	<insert id="managerInsert" parameterType="com.third.prj.manager.vo.ManagerVO">
  		INSERT INTO MANAGER (M_ID, NAME, PWD, DEPART, PHONE, AUTH_CD)
- 		VALUES(#{mId},#{name},#{pwd},#{depart},#{phone},#{authCd})
+ 		VALUES(#{MId},#{name},#{pwd},#{depart},#{phone},#{authCd})
  	</insert>
  	<update id="managerUpdate" parameterType="com.third.prj.manager.vo.ManagerVO">
  		UPDATE MANAGER
@@ -22,12 +23,25 @@
  			<if test="pwd != null">PWD = #{pwd},</if>
  			<if test="name != null">NAME = #{name},</if>
  			<if test="phone != null">PHONE = #{phone},</if>
- 			<if test="authCd != null">AUTH_CD =#{authCd}</if>
+ 			<if test="depart != null">DEPART = #{depart},</if>
+ 			<if test="authCd != null">AUTH_CD =#{authCd},</if>
  		</set>
- 		WHERE M_ID = #{mId}
+ 		WHERE M_ID = #{MId}
  	</update>
  	<delete id="managerDelete" parameterType="com.third.prj.manager.vo.ManagerVO">
  		DELETE FROM MANAGER 
- 		WHERE M_ID = #{mId}
+ 		WHERE M_ID = #{MId}
  	</delete>
+ 	
+ 	<select id="managerSearch" resultType="com.third.prj.manager.vo.ManagerVO" parameterType="String">
+ 		SELECT *
+		FROM MANAGER 
+		WHERE M_ID != 'micol'
+		AND
+		<if test="key == '전체'">1=1</if>
+		<if test="key == '부서'">DEPART LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
+		<if test="key == '아이디'">M_ID LIKE '%'||#{val}||'%'</if>
+		ORDER BY M_ID DESC
+ 	</select>
 </mapper>

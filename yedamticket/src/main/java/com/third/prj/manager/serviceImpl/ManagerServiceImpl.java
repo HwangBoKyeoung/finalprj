@@ -39,6 +39,12 @@ public class ManagerServiceImpl implements ManagerService{
 	public int managerDelete(ManagerVO vo) {
 		return map.managerDelete(vo);
 	}
+
+	@Override
+	public List<ManagerVO> managerSearch(String key, String val) {
+		// TODO Auto-generated method stub
+		return map.managerSearch(key, val);
+	}
 	
 	
 }

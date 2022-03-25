@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/users/js/core/jquery.min.js" type="text/javascript"></script>
 </head>
 <body>
 	<div class="col-md-10 grid-margin stretch-card">		
@@ -17,42 +18,42 @@
 						<label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control"
-								id="exampleInputUsername2" placeholder="Username">
+								id="mId" name="mId" placeholder="ID">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
 						<div class="col-sm-9">
 							<input type="password" class="form-control"
-								id="exampleInputPassword2" placeholder="Password">
+								id="pwd" name="pwd" placeholder="Password">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="exampleInputConfirmPassword2">
+							<input type="text" class="form-control" id="name" name="name">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="exampleInputEmail2" class="col-sm-3 col-form-label">Depart</label>
 						<div class="col-sm-9">
-							<input type="email" class="form-control" id="exampleInputEmail2">
+							<input type="text" class="form-control" id="depart" name="depart">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="exampleInputMobile" class="col-sm-3 col-form-label">Phone</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="exampleInputMobile"
+							<input type="text" class="form-control" id="phone" name="phone"
 								placeholder="Mobile number">
 						</div>
 					</div>
 					<div class="form-group row">
 						<label for="exampleInputMobile" class="col-sm-3 col-form-label">AuthCode</label>
 						<div class="input-group-prepend">
-                          	<select>
-                          	<option value="영화">영화담당자</option>
-                          	<option value="공연">공연담당자</option>
-                          	<option value="굿즈">굿즈담당자</option>
+                          	<select name="authCd" id="selected">
+	                          	<option value="영화" >영화담당자</option>
+	                          	<option value="공연">공연담당자</option>
+	                          	<option value="굿즈">굿즈담당자</option>
                           	</select>
                         </div>
                        </div>
@@ -62,5 +63,9 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		let selected = $("#selected option:selected").val();
+		console.log(selected);
+	</script>
 </body>
 </html>

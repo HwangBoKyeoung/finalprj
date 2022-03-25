@@ -11,4 +11,6 @@ public interface ManagerService {
 	int managerInsert(ManagerVO vo);
 	int managerUpdate(ManagerVO vo);
 	int managerDelete(ManagerVO vo);
+	
+	List<ManagerVO> managerSearch(String key, String val);
 }
