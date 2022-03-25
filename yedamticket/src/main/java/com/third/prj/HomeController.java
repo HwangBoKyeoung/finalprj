@@ -27,4 +27,8 @@ public class HomeController {
 	public String login() {
 		return "login/login";
 	}
+	@RequestMapping("/membership.do")
+	public String membership() {
+		return "membership/membership";
+	}
 }
