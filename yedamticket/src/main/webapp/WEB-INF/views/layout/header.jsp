@@ -111,7 +111,7 @@
            <div>
            
            <a class="nav-link"  data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
-
+ 
             <i class="fa-solid fa-user fa-2x"></i>마이페이지  
             </a>
              </div>
