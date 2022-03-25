@@ -119,21 +119,20 @@ border-radius: 30px;
 										</span>
 									</div>
 									<input type="text" class="form-control"
-										placeholder="First Name...">
+										placeholder="Id...">
 								</div>
 								<div class="input-group no-border input-lg">
 									<div class="input-group-prepend">
-										<span class="input-group-text"> <i
-											class="now-ui-icons text_caps-small"></i>
+										<span class="input-group-text"> 
+										<i class="now-ui-icons objects_key-25"></i>
 										</span>
 									</div>
-									<input type="text" placeholder="Last Name..."
+									<input type="text" placeholder="Password..."
 										class="form-control" />
 								</div><br>
 								<div class="card-footer text-center">
 									<a href="#pablo"
-										class="btn btn-primary btn-round btn-lg btn-block">Get
-										Started</a>
+										class="btn btn-primary btn-round btn-lg btn-block">Login</a>
 								</div>
 								<div class="card-footer text-center">
 									<a

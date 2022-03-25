@@ -10,12 +10,12 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home() {
-		return "user/home/home";
+		return "home/home";
 	}
 	
 	@RequestMapping("/home.do")
 	public String home(Model model) {
-		return "user/home/home";
+		return "home/home";
 	}
 	
 	@RequestMapping("/homeM.do")

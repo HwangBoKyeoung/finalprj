@@ -8,6 +8,11 @@ public class UserController {
 	
 	@RequestMapping("/userLoginForm.do")
 	public String userLoiginForm() {
-		return "user/userLoginForm";
+		return "user/user/userLoginForm";
+	}
+	
+	@RequestMapping("/userService.do")
+	public String userService() {
+		return "user/userService";
 	}
 }

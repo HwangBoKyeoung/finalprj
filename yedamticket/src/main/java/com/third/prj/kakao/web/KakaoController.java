@@ -61,6 +61,8 @@ public class KakaoController {
         	msg = "로그인 실패";
         }
         else {
+        	
+        	
         	msg = "로그인 성공";
         	session.setAttribute("name", name);
         	session.setAttribute("sessionId",id);

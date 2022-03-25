@@ -99,12 +99,20 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				</a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownMenuLink1">
-						<a class="dropdown-item" href="./index.html"> <i
+						<a class="dropdown-item" href="userService.do"> <i
 							class="fa-regular fa-comment-dots fa-2x"></i> 상담
-						</a> <a class="dropdown-item" target="_blank"
-							href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
-							<i class="fa-regular fa-circle-question fa-2x"></i> FAQ
 						</a>
+					</div></li>
+					<li class="nav-item dropdown"><a href="#"
+					class="nav-link dropdown-toggle" id="navbarDropdownMenuLink1"
+					data-toggle="dropdown"> <i class="fa-solid fa-headset fa-2x"></i>
+						마이페이지
+				</a>
+					<div class="dropdown-menu dropdown-menu-right"
+						aria-labelledby="navbarDropdownMenuLink1">
+						<a class="dropdown-item" href="userPage.do"> <i
+							class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
+						</a> 
 					</div></li>
 
 				<li>
@@ -131,11 +139,11 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	</div>
 </nav>
 <div class="wrapper">
-	<div class="page-header clear-filter">
+	<div class="clear-filter">
 		<div class="page-header-image" data-parallax="true"
-			style="background-image: url('resources/users/img/love.jpg');">
+			style="background-image: url('resources/users/img/love.jpg'); height: 200px;">
 		</div>
-		<div class="container">
+		<%-- <div class="container">
 			<div class="content-center brand">
 
 				<h1 class="h1-seo">1석3조.</h1>
@@ -143,13 +151,9 @@ SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			</div>
 			<div>
 			<h1>${sessionScope.name}님 로그인중.</h1>
-				세션 생성시간 :
-				<%=session.getCreationTime()%><br> 세션 생성시간 :
-				<%=sf.format(time)%><br> 세션 유지시간 :
-				<%=session.getMaxInactiveInterval()%>
 			</div>
 
-		</div>
+		</div> --%>
 	</div>
 </div>
 </html>
