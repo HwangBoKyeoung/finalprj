@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -17,7 +18,7 @@ public class MailController {
 	@RequestMapping(value = "mailSending.do")
 	public String mailSending(HttpServletRequest request) {
 
-		String setfrom = "@gmail.com";
+		String setfrom = "qqoxmaos2@gmail.com";
 		String id = request.getParameter("id"); // 받는 사람 아이디
 		String email = request.getParameter("email"); // 받는 사람 이메일
 		String all = id + "@" + email; // 아이디 형식 완성
@@ -36,6 +37,6 @@ public class MailController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "/signup/signup_2";
+		return "signup/signup_2"; 
 	}
 }

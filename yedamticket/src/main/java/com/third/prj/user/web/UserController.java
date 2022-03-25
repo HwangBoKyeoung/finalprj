@@ -1,7 +1,10 @@
 package com.third.prj.user.web;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
 public class UserController {
@@ -11,13 +14,10 @@ public class UserController {
 		return "signup/signup_1";
 	}
 	
-//	@RequestMapping("/signup_2.do")
-//	public String signUp_2() {
-//		return "signup/signup_2";
-//	}
-	
-	@RequestMapping("/signup_3.do") 
-	public String signUp_3() {
+	@RequestMapping(value = "/signup_3.do", method = RequestMethod.GET) 
+	public String signUp_3(@RequestParam String email, Model model) {
+		model.addAttribute("email",email);
 		return "signup/signup_3";
 	}
+	
 }
