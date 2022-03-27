@@ -10,4 +10,8 @@ public class MovieController {
 	public String movieList() {
 		return "movie/movieList";
 	}
+	@RequestMapping("/movieDetail.do")
+	public String movieDetail() {
+		return "movie/movieDetail";
+	}
 }

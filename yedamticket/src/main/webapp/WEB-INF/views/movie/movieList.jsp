@@ -31,10 +31,10 @@ figure > img{
   width: 100%;
   opacity: 0;
   transition: .5s ease;
-  background-color: rgba(0,0,0,0.5);
+  background-color: rgba(0,0,0,0.7);
 }
 .text {
-  color: red;
+  color: white;
   font-size: 20px;
   top: 50%;
   left: 50%;
@@ -82,14 +82,14 @@ figure > img{
                 card.classList.add('card');
               	//header
                 let header=document.createElement('header');
-                let h4=document.createElement('h4');
-                h4.innerText=list[i].movieNm;
-                header.appendChild(h4);
+                let h5=document.createElement('h5');
+                h5.innerText=list[i].movieNm;
+                header.appendChild(h5);
 
              	//figure
                 let figure=document.createElement('figure');
                 let img=document.createElement('img');
-                img.src="resources/users/img/creative-tim-white-slim2.png";
+                img.src="resources/users/img/poster1.png";
                 figure.appendChild(img);
 
                 //p1
@@ -104,11 +104,35 @@ figure > img{
                 let openDt=document.createElement('p');
                 openDt.classList.add('text');
                 openDt.innerText='개봉일자: '+list[i].openDt;
-                
                 let audiAcc=document.createElement('p');
                 audiAcc.classList.add('text');
-                audiAcc.innerText='누적 관객수: '+list[i].audiAcc;
-                caption.append(openDt,audiAcc);
+                audiAcc.innerText='누적 관객수: '+list[i].audiAcc+'명';
+                
+                //caption > detailBtn
+                let detailBtn=document.createElement('button');
+                detailBtn.innerText="상세보기";
+                detailBtn.type="button";
+                detailBtn.classList.add('text');
+                detailBtn.classList.add('btn');
+                detailBtn.classList.add('btn-warning');
+                detailBtn.onclick=(function(){
+                	location.href='movieDetail.do';
+                })
+                //caption > bookingBtn
+                let bookingBtn=document.createElement('button');
+                bookingBtn.innerText="예매하기";
+                bookingBtn.type="button";
+                bookingBtn.classList.add('text');
+                bookingBtn.classList.add('btn');
+                bookingBtn.classList.add('btn-success');
+                let br=document.createElement('br');
+                bookingBtn.onclick=(function(){
+                	location.href='movieBooking.do';
+                })
+                caption.append(openDt,audiAcc,detailBtn,br,bookingBtn);
+                
+                
+                
                 
                 card.append(header,figure,p1,caption);
                 result.append(card);
@@ -162,7 +186,7 @@ figure > img{
         //figure
         let figure=document.createElement('figure');
         let img=document.createElement('img');
-        img.src="resources/users/img/julie.jpg";
+        img.src="resources/users/img/poster2.png";
         figure.appendChild(img);
         //p1
         let p1=document.createElement('p');
