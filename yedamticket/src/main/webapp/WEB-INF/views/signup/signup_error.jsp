@@ -16,10 +16,10 @@
 			<div class="row">
 				<div class="card card-signup" data-background-color="orange">
 					<div class="card-header text-center">
-						<h3 class="card-title title-up">메일이 발송되었습니다!</h3>
+						<h3 class="card-title title-up">에러가 발생했습니다!</h3>
 					</div>
 					<div class="card-header text-center">
-						<h4 class="card-title title-up">이메일을 확인해주세요.</h4>
+						<h4 class="card-title title-up">다시 회원가입 해주세요.</h4>
 					</div>
 					<div class="card-body"></div>
 					<div class="card-footer text-center">

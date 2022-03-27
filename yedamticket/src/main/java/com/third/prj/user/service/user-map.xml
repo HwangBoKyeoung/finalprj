@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.user.service.UserMapper">
 	<insert id="userInsert" parameterType="com.third.prj.user.vo.UserVO">
-		INSERT INTO users(U_ID, )
+		INSERT INTO users(name, u_id, pwd, email, addr, phone, birthdt)
+		VALUES (#{name}, #{Uid}, #{pwd}, #{email}, #{addr}, #{phone}, #{birthDt})
 	</insert>
 </mapper>

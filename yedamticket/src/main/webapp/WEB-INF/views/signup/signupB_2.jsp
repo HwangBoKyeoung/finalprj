@@ -31,7 +31,7 @@
             <div class="card card-signup" data-background-color="black"> 
               <form class="form" method="POST" action="signup_4.do">
                 <div class="card-header text-center">
-                  <h3 class="card-title title-up">회원가입</h3>
+                  <h3 class="card-title title-up">기업회원가입</h3>
                   <div class="social-line">
                   	<img src="./resources/signup/yedamticket.png">
                   </div>
@@ -43,7 +43,7 @@
                         <i class="now-ui-icons users_circle-08"></i>
                       </span>
                     </div>
-                    <input type="text" class="form-control" placeholder="이름" required="required" id ="name" name = "name">
+                    <input type="text" class="form-control" placeholder="기업명" required="required" id ="name" name = "name">
                   </div>
                   
                   <div class="input-group no-border">
@@ -107,6 +107,16 @@
                       </span>
                     </div>
                     <input type="text" class="form-control" placeholder="생년월일(8자리로 입력)" required="required" id = "birth" name = "birth">
+                  </div>
+                 
+                 <div class="input-group no-border">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">
+                        <i class="now-ui-icons business_badge"></i>
+                      </span>
+                    </div>
+                    <input type="text" class="form-control" placeholder="사업자등록번호" required="required" id = "" name = "">
+                    <button type="button">확인</button>
                   </div>
                  
               	<!-- CAPTCHA -->   
