@@ -100,7 +100,7 @@ border-radius: 30px;
 	<!-- End Navbar -->
 	<div class="page-header ">
 		<div class="page-header-image"
-			style="background-image: url(resources/users/img/login.jpg)"></div>
+			style="background-image: url(resources/users/img/login2.jpg)"></div>
 		<div class="content">
 			<div class="container">
 				<div class="col-md-4 ml-auto mr-auto">

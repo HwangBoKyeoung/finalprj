@@ -70,8 +70,4 @@ public class UserController {
 		return "user/user/userLoginForm";
 	}
 	
-	@RequestMapping("/userService.do")
-	public String userService() {
-		return "user/userService";
-	}
 }

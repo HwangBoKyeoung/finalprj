@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
 #wrapper {
@@ -15,6 +17,7 @@
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
+
 #sidebar-wrapper {
 	z-index: 1000;
 	position: fixed;
@@ -29,9 +32,11 @@
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
+
 #sidebar-wrapper {
 	box-shadow: inset -1px 0px 0px 0px #DDDDDD;
 }
+
 #page-content-wrapper {
 	width: 100%;
 	position: absolute;
@@ -46,33 +51,41 @@
 	padding: 0;
 	list-style: none;
 }
+
 .sidebar-nav li {
 	text-indent: 20px;
 	line-height: 40px;
 }
+
 .sidebar-nav li a {
 	display: block;
 	text-decoration: none;
 	color: #999999;
 }
+
 .sidebar-nav li a:hover {
 	text-decoration: none;
 }
+
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
 	text-decoration: none;
 }
+
 .sidebar-nav>.sidebar-brand {
 	height: 65px;
 	font-size: 18px;
 	line-height: 60px;
 }
+
 .sidebar-nav>.sidebar-brand a {
 	color: #999999;
 }
+
 .sidebar-nav>.sidebar-brand a:hover {
 	color: #fff;
 	background: none;
 }
+
 @media ( min-width :768px) {
 	#wrapper {
 		padding-left: 250px;
@@ -121,23 +134,60 @@
 		float: left;
 	}
 }
-</style>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
-<script type="text/javascript">
-$(function() {
-	var icons = {
-		header : "ui-icon-circle-arrow-e",
-		activeHeader : "ui-icon-circle-arrow-s"
-	};
-	$("#accordion").accordion({
-		icons : icons
-	});
-});
-</script>
+* {
+	box-sizing: border-box;
+}
+
+.que:first-child {
+	border-top: 1px solid black;
+}
+
+.que {
+	position: relative;
+	padding: 17px 0;
+	cursor: pointer;
+	font-size: 14px;
+	border-bottom: 1px solid #dddddd;
+}
+
+.que::before {
+	display: inline-block;
+	content: 'Q';
+	font-size: 14px;
+	color: #006633;
+	margin-right: 5px;
+}
+
+.que.on>span {
+	font-weight: bold;
+	color: #006633;
+}
+
+.anw {
+	display: none;
+	overflow: hidden;
+	font-size: 14px;
+	background-color: #f4f4f2;
+	padding: 27px 0;
+}
+
+.anw::before {
+	display: inline-block;
+	content: 'A';
+	font-size: 14px;
+	font-weight: bold;
+	color: #666;
+	margin-right: 5px;
+}
+</style>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+
+
 </head>
 <body>
 	<div id="wrapper" class="wrapper-content">
@@ -161,7 +211,7 @@ $(function() {
 			</ul>
 		</div>
 		<div class="container ">
-			<br>
+
 			<nothingTag>공지사항</nothingTag>
 			<button onclick="location.href='noticeList.do'">더보기</button>
 			<table class="table">
@@ -177,15 +227,27 @@ $(function() {
 			</table>
 		</div>
 		<br> <br> <br>
-		<div id="accordion">
-   <c:forEach items="${faqs}" var="faq">
-      <h3>${faq.FNo}</h3>
-      <div>
-         <p>${faq.content }</p>
-      </div>
-   </c:forEach>
-</div>
-</div>
-
+	</div>
+	<div class="container ">
+		<c:forEach items="${faqs }" var="faq">
+			<div class="col-8">
+				<div id="Accordion_wrap">
+					<div class="que">
+						<span>${faq.FNo }</span> <span>${faq.title }</span>
+					</div>
+					<div class="anw">
+						<span>${faq.content }</span>
+					</div>
+				</div>
+			</div>
+		</c:forEach>
+	</div>
+	<script type="text/javascript">
+		$(".que").click(function() {
+			$(this).next(".anw").stop().slideToggle(300);
+			$(this).toggleClass('on').siblings().removeClass('on');
+			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		});
+	</script>
 </body>
-</html> 
+</html>

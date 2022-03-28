@@ -160,7 +160,7 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${faqs }" var="faq">
-						<tr onclick="noticeSearch('${faq.FNo }')">
+						<tr onclick="faqSearch('${faq.FNo }')">
 							<td>${faq.FNo }</td>
 							<td>${faq.qstCd }</td>
 							<td>${faq.title }</td>
@@ -180,7 +180,7 @@
 	</div>
 
 	<script type="text/javascript">
-		function noticeSearch(n) {
+		function faqSearch(n) {
 			frm.FNo.value = n;
 			frm.submit();
 		}

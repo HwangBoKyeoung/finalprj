@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.notice.mapper.NoticeMapper;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.notice.service.NoticeVO;
+import com.third.prj.notice.service.PagingVO;
 
 @Repository("noticeDao")
 public class NoticeServiceImpl implements NoticeService {
@@ -43,6 +44,18 @@ public class NoticeServiceImpl implements NoticeService {
 	public void noticeHitUpdate(int noticeNo) {
 		map.noticeHitUpdate(noticeNo);
 
+	}
+
+	@Override
+	public int countBoard() {
+		// TODO Auto-generated method stub
+		return map.countBoard();
+	}
+
+	@Override
+	public List<NoticeVO> selectBoard(PagingVO vo) {
+		// TODO Auto-generated method stub
+		return map.selectBoard(vo);
 	}
 
 }
