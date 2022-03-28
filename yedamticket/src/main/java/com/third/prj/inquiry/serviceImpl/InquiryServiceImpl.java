@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.third.prj.inquiry.service.InquiryMapper;
+import com.third.prj.inquiry.mapper.InquiryMapper;
 import com.third.prj.inquiry.service.InquiryService;
-import com.third.prj.inquiry.vo.InquiryVO;
+import com.third.prj.inquiry.service.InquiryVO;
 
 @Repository("inquiryDao")
 public class InquiryServiceImpl implements InquiryService {

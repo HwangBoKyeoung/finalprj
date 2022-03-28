@@ -3,9 +3,9 @@ package com.third.prj.company.serviceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.third.prj.company.service.CompanyMapper;
+import com.third.prj.company.mapper.CompanyMapper;
 import com.third.prj.company.service.CompanyService;
-import com.third.prj.company.vo.CompanyVO;
+import com.third.prj.company.service.CompanyVO;
 
 @Repository("companyDao")
 public class CompanyServiceImpl implements CompanyService{

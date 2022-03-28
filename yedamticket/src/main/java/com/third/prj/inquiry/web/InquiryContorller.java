@@ -6,8 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.third.prj.inquiry.service.InquiryService;
-import com.third.prj.inquiry.vo.InquiryVO;
-import com.third.prj.inquiryreply.vo.InquiryReplyVO;
+import com.third.prj.inquiry.service.InquiryVO;
 
 @Controller
 public class InquiryContorller {

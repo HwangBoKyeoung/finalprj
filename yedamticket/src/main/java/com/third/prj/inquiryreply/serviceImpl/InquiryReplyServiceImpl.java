@@ -5,9 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.third.prj.inquiryreply.service.InquiryReplyMapper;
+import com.third.prj.inquiryreply.mapper.InquiryReplyMapper;
 import com.third.prj.inquiryreply.service.InquiryReplyService;
-import com.third.prj.inquiryreply.vo.InquiryReplyVO;
+import com.third.prj.inquiryreply.service.InquiryReplyVO;
 
 @Repository("inquiryReplyDao")
 public class InquiryReplyServiceImpl implements InquiryReplyService{

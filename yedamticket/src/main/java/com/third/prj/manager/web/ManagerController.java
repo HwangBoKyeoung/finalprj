@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.manager.service.ManagerService;
-import com.third.prj.manager.vo.ManagerVO;
+import com.third.prj.manager.service.ManagerVO;
 
 @Controller
 public class ManagerController {

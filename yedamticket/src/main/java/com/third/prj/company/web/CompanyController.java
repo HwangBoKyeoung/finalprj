@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.company.service.CompanyService;
-import com.third.prj.company.vo.CompanyVO;
+import com.third.prj.company.service.CompanyVO;
 
 @Controller
 public class CompanyController {

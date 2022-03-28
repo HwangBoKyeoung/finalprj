@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
-import com.third.prj.user.vo.UserVO;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class UserController {
@@ -63,5 +63,15 @@ public class UserController {
 			e.printStackTrace();
 			return -1; // 에러
 		}
+	}
+	
+	@RequestMapping("/userLoginForm.do")
+	public String userLoiginForm() {
+		return "user/user/userLoginForm";
+	}
+	
+	@RequestMapping("/userService.do")
+	public String userService() {
+		return "user/userService";
 	}
 }

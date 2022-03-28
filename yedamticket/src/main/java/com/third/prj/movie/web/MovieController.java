@@ -6,7 +6,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.third.prj.movie.service.MovieService;
-import com.third.prj.movie.vo.MovieVO;
+import com.third.prj.movie.service.MovieVO;
 
 @Controller
 public class MovieController {

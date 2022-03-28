@@ -2,8 +2,6 @@ package com.third.prj.manager.service;
 
 import java.util.List;
 
-import com.third.prj.manager.vo.ManagerVO;
-
 public interface ManagerService {
 
 	List<ManagerVO> managerSelectList();

@@ -6,9 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.third.prj.manager.service.ManagerMapper;
+import com.third.prj.manager.mapper.ManagerMapper;
 import com.third.prj.manager.service.ManagerService;
-import com.third.prj.manager.vo.ManagerVO;
+import com.third.prj.manager.service.ManagerVO;
 
 @Repository("managerDao")
 public class ManagerServiceImpl implements ManagerService{

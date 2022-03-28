@@ -2,8 +2,6 @@ package com.third.prj.inquiryreply.service;
 
 import java.util.List;
 
-import com.third.prj.inquiryreply.vo.InquiryReplyVO;
-
 public interface InquiryReplyService {
 
 	List<InquiryReplyVO> inquiryReplySelect(InquiryReplyVO vo);//댓글가져오기
