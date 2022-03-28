@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.movie.service.MovieMapper">
+<resultMap type="com.third.prj.movie.vo.MovieVO" id="movieResultMap">
+	<id property="mvNo" column="movie_no"/>
+	<result property="name" column="name"/>
+	<result property="genre" column="genre"/>
+	<result property="startDate" column="startDate"/>
+	<result property="director" column="director"/>
+	<result property="rating" column="rating"/>
+	<result property="distibutor" column="distibutor"/>
+	<result property="country" column="country"/>
+	<result property="runtime" column="runtime"/>
+	<result property="content" column="content"/>
+	<result property="CId" column="c_id"/>
+	<result property="actor" column="actor"/>
+	<result property="fileCd" column="file_cd"/>
+	<result property="docId" column="docId"/>
+	
+</resultMap>
+	<select id="movieDetail" resultMap="movieResultMap">
+		SELECT * FROM MOVIE WHERE NAME=#{name} AND STARTDATE=#{startDate}
+	</select>
+</mapper>

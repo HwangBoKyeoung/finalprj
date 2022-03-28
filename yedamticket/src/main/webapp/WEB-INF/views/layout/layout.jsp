@@ -20,7 +20,7 @@
   <!-- CSS Just for demo purpose, don't include it in your project -->
   <link href="./resources/users/demo/demo.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/84d54512c7.js" crossorigin="anonymous"></script>
-
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/"><!-- 부트스트랩 cdn -->
 </head>
 <body class="index-page sidebar-collapse">
   <!-- Navbar -->
