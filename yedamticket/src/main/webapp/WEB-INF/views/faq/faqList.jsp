@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
 <style>
 #wrapper {
 	padding-left: 0;
@@ -133,28 +132,11 @@
 		float: left;
 	}
 }
-
 </style>
-<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="/resources/demos/style.css">
-  <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-  <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
-<script type="text/javascript">
-
-$(function() {
-	var icons = {
-		header : "ui-icon-circle-arrow-e",
-		activeHeader : "ui-icon-circle-arrow-s"
-	};
-	$("#accordion").accordion({
-		icons : icons
-	});
-});
-
-</script>
 </head>
 <body>
+
 	<div id="wrapper" class="wrapper-content">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
@@ -177,30 +159,43 @@ $(function() {
 		</div>
 		<div class="container ">
 			<br>
-			<nothingTag>공지사항</nothingTag>
-			<button onclick="location.href='noticeList.do'">더보기</button>
+			<div>
+				<h3>FAQ</h3>
+			</div>
 			<table class="table">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>유형</th>
+						<th>제목</th>
+					</tr>
+				</thead>
 				<tbody>
-					<c:forEach items="${notices }" var="notice">
-						<tr onclick="noticeSearch('${notice.noticeNo }')">
-							<td>${notice.title }</td>
-							<td>${notice.writer }</td>
-							<td>${notice.wrDt}</td>
+					<c:forEach items="${faqs }" var="faq">
+						<tr onclick="noticeSearch('${faq.FNo }')">
+							<td>${faq.FNo }</td>
+							<td>${faq.qstCd }</td>
+							<td>${faq.title }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
 		</div>
-		<br> <br> <br>
-		<div id="accordion">
-   <c:forEach items="${faqs}" var="faq">
-      <h3>${faq.FNo}</h3>
-      <div>
-         <p>${faq.content }</p>
-      </div>
-   </c:forEach>
-</div>
-</div>
-		
+		<div>
+			<form id="frm" action="faqSelect.do" method="post">
+				<input type="hidden" id="FNo" name="FNo">
+			</form>
+		</div>
+		<div>
+			<button type="button" onclick="location.href='faqWriteForm.do'">글등록</button>
+		</div>
+	</div>
+
+	<script type="text/javascript">
+		function noticeSearch(n) {
+			frm.FNo.value = n;
+			frm.submit();
+		}
+	</script>
 </body>
 </html>
