@@ -15,6 +15,6 @@ public class CompanyVO {
 	private String bizno;
 	private String dealAgreeCd;
 	private String name;
-	private String cId;
+	private String Cid;
 	private Date rdt;
 }

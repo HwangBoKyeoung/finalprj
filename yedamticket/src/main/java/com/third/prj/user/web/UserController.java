@@ -2,6 +2,7 @@ package com.third.prj.user.web;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -32,12 +33,6 @@ public class UserController {
 		return "signup/signup_3";
 	}
 
-	@RequestMapping(value = "/signupB_2.do", method = RequestMethod.GET)
-	public String signUpB_2(@RequestParam String email, Model model) {
-		model.addAttribute("email", email);
-		return "signup/signupB_2";
-	}
-	
 	@PostMapping("/signup_4.do")
 	public String signUp_4(UserVO userVO) {
 		int n = userDao.userInsert(userVO);
@@ -47,9 +42,11 @@ public class UserController {
 		return "signup/signup_error";
 	}
 
-	@RequestMapping("/signupB_1.do")
-	public String signUpB_2() {
-		return "signup/signupB_1";
+	@ResponseBody
+	@RequestMapping(value = "/idChk", method = RequestMethod.POST)
+	public int idChk(UserVO userVO) {
+		int i = userDao.idChk(userVO);
+		return i;
 	}
 	
 	@ResponseBody

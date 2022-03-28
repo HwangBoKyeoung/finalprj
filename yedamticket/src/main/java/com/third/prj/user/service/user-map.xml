@@ -5,4 +5,11 @@
 		INSERT INTO users(name, u_id, pwd, email, addr, phone, birthdt)
 		VALUES (#{name}, #{Uid}, #{pwd}, #{email}, #{addr}, #{phone}, #{birthDt})
 	</insert>
+	
+	<select id="idChk" resultType="int">
+		SELECT COUNT(*)
+		FROM   users
+		WHERE  u_id = #{Uid}
+	</select>
+	
 </mapper>

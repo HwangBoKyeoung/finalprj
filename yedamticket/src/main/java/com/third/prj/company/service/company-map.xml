@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.company.service.CompanyMapper">
+	<insert id="companyInsert" parameterType="com.third.prj.company.vo.CompanyVO">
+		INSERT INTO company(name, c_id, pwd, email, addr, phone, bizno)
+		VALUES (#{name}, #{Cid}, #{pwd}, #{email}, #{addr}, #{phone}, #{bizno})
+	</insert>
+	
+	<select id="cidChk" resultType="int">
+		SELECT COUNT(*)
+		FROM   company
+		WHERE  c_id = #{Cid}
+	</select>
+</mapper>

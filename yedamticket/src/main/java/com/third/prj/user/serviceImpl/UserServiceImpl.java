@@ -18,4 +18,9 @@ public class UserServiceImpl implements UserService {
 		return map.userInsert(vo);
 	}
 
+	@Override
+	public int idChk(UserVO vo) {
+		int i = map.idChk(vo);
+		return i;
+	}
 }
