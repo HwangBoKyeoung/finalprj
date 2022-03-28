@@ -13,8 +13,8 @@
 <nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
     <div class="container">
       <div class="navbar-translate">
-        <a class="navbar-brand" href="home.do" rel="tooltip" title="Designed by Invision. Coded by Creative Tim" data-placement="bottom" >
-           홈으로
+        <a class="navbar-brand" href="home.do" rel="tooltip" title="Designed by 1석3조" data-placement="bottom" >
+          <img width="200" src="resources/users/img/logo8.png">
         </a>
         <button class="navbar-toggler navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-bar top-bar"></span>
@@ -30,10 +30,10 @@
               <p>굿즈</p>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink1">
-              <a class="dropdown-item" href="./index.html">
+              <a class="dropdown-item" href="cGoodsList.do">
                 <i class="fa-solid fa-gift fa-2x"></i> 공연굿즈
               </a>
-              <a class="dropdown-item" target="_blank" href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
+              <a class="dropdown-item"  href="mGoodsList.do">
                <i class="fa-solid fa-gifts fa-2x"></i>영화굿즈
               </a>
             </div>
@@ -47,7 +47,7 @@
               <a class="dropdown-item" href="./index.html">
                <i class="fa-solid fa-ticket fa-2x"></i> 영화예매
               </a>
-              <a class="dropdown-item" target="_blank" href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
+              <a class="dropdown-item" href="movieList.do">
                 <i class="fa-solid fa-ranking-star fa-2x"></i> 박스오피스 순위
               </a>
             </div>
@@ -92,6 +92,9 @@
               <a class="dropdown-item" target="_blank" href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
                 <i class="fa-regular fa-circle-question fa-2x"></i> FAQ
               </a>
+              <a class="dropdown-item" target="_blank" href="membership.do">
+                <i class="fa-solid fa-circle-info fa-2x"></i> 멤버십 안내
+              </a>
             </div>
            
           </li>
@@ -108,7 +111,7 @@
            <div>
            
            <a class="nav-link"  data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
-
+ 
             <i class="fa-solid fa-user fa-2x"></i>마이페이지  
             </a>
              </div>
