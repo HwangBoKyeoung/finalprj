@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
     <footer class="footer" data-background-color="black">
       <div class=" container ">
         <nav>
@@ -24,6 +24,7 @@
         </nav>
         <div class="copyright" id="copyright">
           &copy;
+         <script type="text/javascript" src="resources/chatbot/Chatbot.js"></script>
           <script>
             document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
           </script>, Designed by

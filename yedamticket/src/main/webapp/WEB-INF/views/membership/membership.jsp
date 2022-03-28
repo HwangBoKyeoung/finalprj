@@ -9,42 +9,36 @@
 <body>
 <div class="section section-team text-center">
       <div class="container">
-        <h2 class="title">Here is our team</h2>
+        <h2 class="title">멤버십 안내</h2>
+        <p class="category text-default">저희 <b style="color: red">Yedam Ticket</b> 고객님께 제공하는 멤버십 고객 등급 제도입니다.</p>
+        <p class="category text-default">고객님의 <b class="category text-primary">월 결제내역</b>에 따라 고객등급이 산정됩니다.</p>
         <div class="team">
           <div class="row">
             <div class="col-md-4">
               <div class="team-player">
-                <img src="../assets/img/avatar.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Romina Hadid</h4>
-                <p class="category text-primary">Model</p>
-                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                  <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-instagram"></i></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-facebook-square"></i></a>
+                <img src="resources/membership/img/membershipImg.png" alt="membership Image" class="rounded-circle img-fluid img-raised">
+                <h4 class="title" style="color: red">VVIP</h4>
+                <p class="category text-danger">월 20만원 이상 결제하신 고객님</p>
+                <p class="category text-primary">공연할인 혜택</p> <hr>
+                <p class="category text-default"><b style="color: red">VVIP</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">30%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>
             <div class="col-md-4">
               <div class="team-player">
-                <img src="../assets/img/ryan.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Ryan Tompson</h4>
-                <p class="category text-primary">Designer</p>
-                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                  <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-linkedin"></i></a>
+                <img src="resources/membership/img/membershipImg.png" alt="membership Image" class="rounded-circle img-fluid img-raised">
+                <h4 class="title" style="color: purple">VIP</h4>
+                <p class="category text-danger">월 15만원 이상 결제하신 고객님</p>
+                <p class="category text-primary">공연할인 혜택</p> <hr>
+                <p class="category text-default"><b style="color: purple">VIP</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">20%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>
             <div class="col-md-4">
               <div class="team-player">
-                <img src="../assets/img/eva.jpg" alt="Thumbnail Image" class="rounded-circle img-fluid img-raised">
-                <h4 class="title">Eva Jenner</h4>
-                <p class="category text-primary">Fashion</p>
-                <p class="description">You can write here details about one of your team members. You can give more details about what they do. Feel free to add some
-                  <a href="#">links</a> for people to be able to follow them outside the site.</p>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-google-plus"></i></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-youtube"></i></a>
-                <a href="#pablo" class="btn btn-primary btn-icon btn-round"><i class="fab fa-twitter"></i></a>
+                <img src="resources/membership/img/membershipImg.png" alt="membership Image" class="rounded-circle img-fluid img-raised">
+                <h4 class="title" style="color: gold">GOLD</h4>
+                <p class="category text-danger">월 10만원 이상 결제하신 고객님</p>
+                <p class="category text-primary">공연할인 혜택</p> <hr>
+                <p class="category text-default"><b style="color: gold">GOLD</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">10%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>
           </div>
