@@ -92,6 +92,9 @@
               <a class="dropdown-item" target="_blank" href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
                 <i class="fa-regular fa-circle-question fa-2x"></i> FAQ
               </a>
+              <a class="dropdown-item" target="_blank" href="membership.do">
+                <i class="fa-solid fa-circle-info fa-2x"></i> 멤버십 안내
+              </a>
             </div>
            
           </li>
@@ -108,7 +111,7 @@
            <div>
            
            <a class="nav-link"  data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
-
+ 
             <i class="fa-solid fa-user fa-2x"></i>마이페이지  
             </a>
              </div>
