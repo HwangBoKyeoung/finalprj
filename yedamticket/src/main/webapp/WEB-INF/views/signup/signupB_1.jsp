@@ -26,9 +26,9 @@
 	<div class="container">
 		<div class="row">
 			<div class="card card-signup" data-background-color="orange">
-				<form class="form" name="join" action="mailSending.do" method="post">
+				<form class="form" name="join" action="mailSending2.do" method="post">
 					<div class="card-header text-center">
-						<h3 class="card-title title-up">회원가입</h3>
+						<h3 class="card-title title-up">기업회원 회원가입</h3>
 					</div>
 					<div class="card-header text-center">
 						<h4 class="card-title title-up">이메일을 입력해주세요.</h4>
@@ -57,9 +57,9 @@
 			</div>
 		</div>
 		<div class="col text-center">
-			<a href="signupB_1.do"
+			<a href="signup_1.do"
 				class="btn btn-outline-default btn-round btn-white btn-lg"
-				target="_blank">기업회원이십니까?</a> 
+				target="_blank">일반회원이십니까?</a> 
 		</div>
 	</div>
 </div>
@@ -89,7 +89,7 @@
 		document.getElementById('subject').value = subject;
 		
 		var content = "안녕하세요 YD TICKET입니다. 회원가입을 계속 진행하시려면 아래 링크를 눌러주세요\n\n"; 
-		content += "http://localhost/prj/signup_3.do?email=";
+		content += "http://localhost/prj/signupB_2.do?email=";
 		content += all;
 		document.getElementById("content").value = content;	
 	}

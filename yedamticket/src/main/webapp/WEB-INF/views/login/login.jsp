@@ -1,22 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!--
-
-=========================================================
-* Now UI Kit - v1.3.0
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/now-ui-kit
-* Copyright 2019 Creative Tim (http://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/now-ui-kit/blob/master/LICENSE.md)
-
-* Designed by www.invisionapp.com Coded by www.creative-tim.com
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
--->
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -110,3 +92,52 @@
 </body>
 
 </html>
+
+<!-- <h1>회원가입</h1>
+<form name="join" action="mailSending.do" method="post">
+	<input type="text" name="id" required="required"> @ 
+	<input type="text" name="email" disabled>
+
+	Hidden의 value값을 이용하여 값 삽입
+	<input type="hidden" name="content" id="content" required="required">
+	<input type="hidden" name="subject" id="subject" required="required">
+	<select name="email" onchange="email_change()">
+		<option value="0">선택하세요</option>
+		<option value="9">직접입력</option>
+		<option value="naver.com">naver.com</option>
+		<option value="nate.com">nate.com</option>
+		<option value="gmail.com">gmail.com</option>
+	</select>
+	<div>
+		<input type="button" onclick="location.href='home.do'" value="홈으로" />
+		<input type="submit" value="이메일 발송" /> 
+		<input type="reset" value="취소" />
+	</div>
+
+</form>
+<div>
+	<a href="businessmemberInsertForm">기업회원이십니까?</a>
+</div>
+</body>
+<script type="text/javascript">
+	function email_change() {
+		if (document.join.email.options[document.join.email.selectedIndex].value == '0') {
+			document.join.email2.disabled = true;
+			document.join.email2.value = "";
+		}
+		if (document.join.email.options[document.join.email.selectedIndex].value == '9') {
+			document.join.email2.disabled = false;
+			document.join.email2.value = "";
+			document.join.email2.focus();
+		} else {
+			document.join.email2.disabled = true;
+			document.join.email2.value = document.join.email.options[document.join.mail.selectedIndex].value;
+		}
+	}
+	var subject = 'YDTICKET 회원가입 이메일 입니다.';
+	document.getElementById('subject').value = subject;
+
+	var content = 'http://localhost/prj/signup_3.do';
+	document.getElementById('content').value = content;
+</script>
+ -->
