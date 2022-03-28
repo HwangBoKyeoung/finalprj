@@ -73,6 +73,7 @@
 									</span>
 								</div>
 								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd">
+								
 							</div>
 
 							<div class="input-group no-border">
@@ -81,9 +82,11 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
+								
 								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()">
 							</div>
-
+ 
+ 
 							<div class="input-group no-border">
 								<div class="input-group-prepend">
 									<span class="input-group-text"> 
@@ -134,7 +137,7 @@
 				</div>
 			</div>
 			<div class="col text-center">
-				<a href="login.do"
+				<a href="userLoginForm.do"
 					class="btn btn-outline-default btn-round btn-white btn-lg"
 					target="_blank">로그인 페이지로</a>
 			</div>
@@ -186,10 +189,12 @@
 			var passwordConfirmClassName = $('#pwd2').attr('name');
 			if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
 				/* document.getElementById("pwd2").className = 'form-group has-success'; */
-				$('#pwd2').attr("class", "form-group has-success")
+				$('#pwd2').css("color", "green")
+				$('#submit_input').attr("disabled", false)
 			} else {
 				/* document.getElementById("pwd2").className = 'form-group has-danger'; */
-				$('#pwd2').attr("class", "form-group has-danger")
+				$('#pwd2').css("color", "red")
+				$('#submit_input').attr("disabled", true)
 			}
 		}
 	</script>

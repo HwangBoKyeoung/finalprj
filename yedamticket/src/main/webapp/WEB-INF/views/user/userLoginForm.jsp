@@ -99,8 +99,7 @@ border-radius: 30px;
 	</nav>
 	<!-- End Navbar -->
 	<div class="page-header ">
-		<div class="page-header-image"
-			style="background-image: url(resources/users/img/login.jpg)"></div>
+		<div class="page-header-image" style="background-image: url(resources/users/img/login2.jpg)"></div>
 		<div class="content">
 			<div class="container">
 				<div class="col-md-4 ml-auto mr-auto">
@@ -142,13 +141,10 @@ border-radius: 30px;
 								</div><br>
 								<div class="pull-left">
 									<h6>
-										<a href="#pablo" class="link">Create Account</a>
+										<a href="signup_1.do" class="link">Create Account</a>
 									</h6>
 								</div>
 								<div class="pull-right">
-									<h6>
-										<a href="#pablo" class="link">Need Help?</a>
-									</h6>
 								</div>
 						</form>
 					</div>
