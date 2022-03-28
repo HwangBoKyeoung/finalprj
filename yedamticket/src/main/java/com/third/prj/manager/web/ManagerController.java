@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.manager.service.ManagerService;
 import com.third.prj.manager.vo.ManagerVO;
@@ -65,6 +66,13 @@ public class ManagerController {
 			return "redirect:/admin.do";
 		}
 		return "manager/admin/managerError";
+	}
+	//관리자 등록 아이디 중복확인
+	@ResponseBody
+	@RequestMapping("/idCheck.do")
+	public int idCheck(String MId) throws Exception{
+		int result = managerDao.idCheck(MId);
+		return result;
 	}
 	
 	

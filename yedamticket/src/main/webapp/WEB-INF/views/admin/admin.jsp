@@ -75,11 +75,11 @@
 			var tb = $("#body");
 			$("#body").empty();
 			$.each(result, function(index, item){
-				console.log(item.MId);
+				console.log(item);
 				var tr = $("<tr />").attr({
-					onclick : "'managerSelet.do?MId=${item.MId}'"
+					onclick : "location.href='managerSelet.do?MId=" + item.mid + "'"
 				}).append(
-					$("<td />").text(item.MId),
+					$("<td />").text(item.mid),
 					$("<td />").text(item.name),
 					$("<td />").text(item.phone),
 					$("<td />").text(item.depart),

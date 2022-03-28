@@ -38,10 +38,15 @@
 		FROM MANAGER 
 		WHERE M_ID != 'micol'
 		AND
-		<if test="key == '전체'">1=1</if>
+		<if test="key == '전체'">DEPART LIKE '%'||#{val}||'%' OR NAME LIKE '%'||#{val}||'%' OR M_ID LIKE '%'||#{val}||'%'</if>
 		<if test="key == '부서'">DEPART LIKE '%'||#{val}||'%'</if>
 		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
 		<if test="key == '아이디'">M_ID LIKE '%'||#{val}||'%'</if>
 		ORDER BY M_ID DESC
+ 	</select>
+ 	<select id="idCheck" parameterType="String" resultType="int">
+ 		SELECT COUNT(M_ID)
+ 		FROM MANAGER
+ 		WHERE M_ID = #{MId}
  	</select>
 </mapper>

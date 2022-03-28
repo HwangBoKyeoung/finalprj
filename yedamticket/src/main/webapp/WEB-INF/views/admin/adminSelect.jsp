@@ -44,9 +44,9 @@
                   <label for="exampleInputMobile">AuthCode</label>
                   <div class="input-group-prepend">
                      <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6">
-                        <option value="영화" <c:if test="${mana.authCd=='영화'}"> selected</c:if>> 영화담당자</option>
-                        <option value="공연" <c:if test="${mana.authCd=='공연'}"> selected</c:if>> 공연담당자</option>
-                        <option value="굿즈" <c:if test="${mana.authCd=='굿즈'}"> selected</c:if>> 굿즈담당자 </option>
+                        <option value="movie" <c:if test="${mana.authCd=='movie'}"> selected</c:if>> 영화담당자</option>
+                        <option value="consert" <c:if test="${mana.authCd=='consert'}"> selected</c:if>> 공연담당자</option>
+                        <option value="goods" <c:if test="${mana.authCd=='goods'}"> selected</c:if>> 굿즈담당자 </option>
                      </select>
                   </div>
                </div>

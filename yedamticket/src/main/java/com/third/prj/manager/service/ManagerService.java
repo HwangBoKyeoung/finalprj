@@ -12,5 +12,7 @@ public interface ManagerService {
 	int managerUpdate(ManagerVO vo);
 	int managerDelete(ManagerVO vo);
 	
+	int idCheck(String MId);
+	
 	List<ManagerVO> managerSearch(String key, String val);
 }

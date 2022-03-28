@@ -14,5 +14,7 @@ public interface ManagerMapper {
 	int managerUpdate(ManagerVO vo);
 	int managerDelete(ManagerVO vo);
 	
+	int idCheck(String MId);
+	
 	List<ManagerVO> managerSearch(@Param("key") String key, @Param("val") String val);
 }

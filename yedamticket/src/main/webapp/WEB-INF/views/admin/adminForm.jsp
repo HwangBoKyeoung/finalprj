@@ -13,12 +13,13 @@
 			<div class="card-body">
 				<h4 class="card-title">Admin Insert</h4>
 				<p class="card-description">Horizontal form layout</p>
-				<form class="forms-sample" action="adminInsert.do">
+				<form class="forms-sample" action="adminInsert.do" onsubmit="return check();">
 					<div class="form-group row">
 						<label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
-						<div class="col-sm-9">
+						<div class="col-sm-6">
 							<input type="text" class="form-control"
-								id="mId" name="mId" placeholder="ID">
+								id="MId" name="MId" placeholder="ID">
+							<button type="button" class="btn btn-light" id="idCheck" name="idCheck" onclick="fn_idCheck();" value="N" >중복체크</button>
 						</div>
 					</div>
 					<div class="form-group row">
@@ -51,9 +52,9 @@
 						<label for="exampleInputMobile" class="col-sm-3 col-form-label">AuthCode</label>
 						<div class="input-group-prepend">
                           	<select name="authCd" id="selected">
-	                          	<option value="영화" >영화담당자</option>
-	                          	<option value="공연">공연담당자</option>
-	                          	<option value="굿즈">굿즈담당자</option>
+	                          	<option value="movie" >영화담당자</option>
+	                          	<option value="consert">공연담당자</option>
+	                          	<option value="goods">굿즈담당자</option>
                           	</select>
                         </div>
                        </div>
@@ -66,6 +67,30 @@
 	<script>
 		let selected = $("#selected option:selected").val();
 		console.log(selected);
+		
+		/* function check(){
+			if(!fn_idCheck()){
+				console.log("중복값있음")
+			}
+			
+		} */
+		
+		function fn_idCheck() {
+			$.ajax({
+				url : "idCheck.do",
+				type : "POST",
+				dataType : "json",
+				data : {"MId" : $("#MId").val()},
+				success : function(data){
+					if(data >= 1){
+						alert('중복');
+					}else if(data == 0){
+						$("idCheck").attr("value","Y");
+						alert("사용가능한 아이디 입니다");
+					}
+				}
+			})
+		}
 	</script>
 </body>
 </html>

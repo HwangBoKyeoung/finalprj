@@ -2,6 +2,7 @@ package com.third.prj.manager.serviceImpl;
 
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -44,6 +45,12 @@ public class ManagerServiceImpl implements ManagerService{
 	public List<ManagerVO> managerSearch(String key, String val) {
 		// TODO Auto-generated method stub
 		return map.managerSearch(key, val);
+	}
+
+	
+	@Override
+	public int idCheck(String MId) {
+		return map.idCheck(MId);
 	}
 	
 	
