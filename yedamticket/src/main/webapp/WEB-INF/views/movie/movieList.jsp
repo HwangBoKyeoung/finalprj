@@ -42,7 +42,7 @@ figure > img{
   transform: translate(-50%, -50%);
   text-align: center;
 }
-#result>.card:hover .caption {
+#result> .card:hover .caption {
   opacity: 1;
 }
 </style>
@@ -77,6 +77,7 @@ figure > img{
             let list = response.boxOfficeResult
                 .weeklyBoxOfficeList;
             for (i = 0; i < list.length; i++) {
+            	
             	//card
                 let card=document.createElement('div');
                 card.classList.add('card');
@@ -84,6 +85,7 @@ figure > img{
                 let header=document.createElement('header');
                 let h5=document.createElement('h5');
                 h5.innerText=list[i].movieNm;
+             
                 header.appendChild(h5);
 
              	//figure
@@ -97,6 +99,12 @@ figure > img{
                 let audiCnt=document.createElement('span');
                 audiCnt.innerText='관객수: '+list[i].audiCnt;
                 p1.appendChild(audiCnt); 
+              	//p2
+                let p2=document.createElement('p');
+                let salesShare=document.createElement('span');
+                salesShare.innerText='예매율: '+list[i].salesShare;
+                p2.appendChild(salesShare); 
+               
                 
                 //caption
                 let caption=document.createElement('div');
@@ -107,17 +115,36 @@ figure > img{
                 let audiAcc=document.createElement('p');
                 audiAcc.classList.add('text');
                 audiAcc.innerText='누적 관객수: '+list[i].audiAcc+'명';
-                
+              //form
+                let form=document.createElement('form');
+                    form.action='movieDetail.do';
+                    form.method='post';
+                    let inputNm=document.createElement('input');
+                    inputNm.type='hidden';
+                    inputNm.name='name';
+                    inputNm.value=list[i].movieNm;
+                    console.log(inputNm);
+                    let inputDt=document.createElement('input');
+                    inputDt.type='hidden';
+                    inputDt.name='startDate';
+                    let splitDay=(list[i].openDt).split('-');
+                  console.log(splitDay);
+                    let splitDate='';
+                    for (var j=0;j<splitDay.length;j++){
+                        splitDate+=splitDay[j];
+                    }
+                    console.log(splitDate);
+                    inputDt.value=splitDate;
+
+                    form.append(inputNm,inputDt);
                 //caption > detailBtn
                 let detailBtn=document.createElement('button');
                 detailBtn.innerText="상세보기";
-                detailBtn.type="button";
+                detailBtn.type="submit";
                 detailBtn.classList.add('text');
                 detailBtn.classList.add('btn');
                 detailBtn.classList.add('btn-warning');
-                detailBtn.onclick=(function(){
-                	location.href='movieDetail.do';
-                })
+               	form.append(detailBtn);
                 //caption > bookingBtn
                 let bookingBtn=document.createElement('button');
                 bookingBtn.innerText="예매하기";
@@ -127,14 +154,12 @@ figure > img{
                 bookingBtn.classList.add('btn-success');
                 let br=document.createElement('br');
                 bookingBtn.onclick=(function(){
+                	
                 	location.href='movieBooking.do';
                 })
-                caption.append(openDt,audiAcc,detailBtn,br,bookingBtn);
-                
-                
-                
-                
-                card.append(header,figure,p1,caption);
+                caption.append(openDt,audiAcc,form,br,bookingBtn);
+                card.append(header,figure,p1,p2,caption);
+               
                 result.append(card);
             }
         });
@@ -152,7 +177,7 @@ figure > img{
              month='' + month
          }; 
          let now=String(year)+String(month)+String(day);
-         console.log(now);
+         
          //14일 더한 날짜 yyyymmdd
          let weeks=new Date(date.setDate(date.getDate()+15));
          let y=weeks.getFullYear();
@@ -164,12 +189,12 @@ figure > img{
              m='' + m
          }; 
          let future=String(y)+String(m)+String(d);
-         console.log(future);
+         
          let url='http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=U8ECM752YKB763PI62AV&releaseDts='+now+'&releaseDte='+future+'&listCount=30';
     fetch(url)
     .then(response => response.json())
     .then(response =>{
-        console.log(response);
+       
         let list=response.Data[0].Result;
         console.log(list);
         let wrapper=document.getElementById('wrapper');
@@ -186,7 +211,16 @@ figure > img{
         //figure
         let figure=document.createElement('figure');
         let img=document.createElement('img');
+    
+        let a=list[i].posters;
+        if(a==''){
         img.src="resources/users/img/poster2.png";
+        }else{
+        let posterImg=a.split('|');
+        img.src=posterImg[0];
+        }
+        
+        
         figure.appendChild(img);
         //p1
         let p1=document.createElement('p');

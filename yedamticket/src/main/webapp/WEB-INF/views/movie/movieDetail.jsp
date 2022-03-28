@@ -107,6 +107,7 @@ button:focus{
 </style>
 </head>
 <body>
+${movie }
  <div id="container">
         <header>
             <div id="logo">
