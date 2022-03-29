@@ -206,7 +206,10 @@
 		// 생년월일 번호 유효성 검사
 		function birthConfirm(){
 	 		var birth = document.getElementById('birth').value;
-			var regBirth = /^(19[0-9]{2}|20[0-9]{2})([01-12]{2})([01-31]{2})$/;
+			//var regBirth = /^(19[0-9][0-9]{2}|20[0-9]{2})[1-12]{2}[1-31]{2}$/;
+			var regBirth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
+
+			
 			if(!regBirth.test(birth)) {
 				console.log('올바른 생년월일을 입력하세요.');
 				$('#birth').css("color", "#FE0A03");
