@@ -20,9 +20,7 @@
 		<c:if test="${not empty notice.noticeNo }">
 			<div>
 				<table border="1">
-
 					<tr>
-
 						<th width="100">작성자</th>
 						<td align="center" width="150">${notice.writer }</td>
 						<th width="100">작성일자</th>

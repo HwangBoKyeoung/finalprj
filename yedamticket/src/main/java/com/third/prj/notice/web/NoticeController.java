@@ -30,7 +30,7 @@ public class NoticeController {
 	 */
 	
 	@GetMapping("/noticeList.do")
-	public String boardList(PagingVO vo, Model model
+	public String noticeList(PagingVO vo, Model model
 			, @RequestParam(value="nowPage", required=false)String nowPage
 			, @RequestParam(value="cntPerPage", required=false)String cntPerPage) {
 		
@@ -79,7 +79,7 @@ public class NoticeController {
 	}
 
 	@RequestMapping("/noticeUpdateForm.do")
-	public String memberUpdateForm(NoticeVO vo, Model model) {
+	public String noticeUpdateForm(NoticeVO vo, Model model) {
 		vo = noticeDao.noticeSelect(vo);
 		model.addAttribute("notice", vo);
 

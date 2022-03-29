@@ -26,4 +26,24 @@ public class InquiryServiceImpl implements InquiryService {
 		return map.inquirySelect(vo);
 	}
 
+	@Override
+	public int inquiryInsert(InquiryVO vo) {
+		// TODO Auto-generated method stub
+		return map.inquiryInsert(vo);
+	}
+
+	@Override
+	public int inquiryUpdate(InquiryVO vo) {
+		// TODO Auto-generated method stub
+		return map.inquiryUpdate(vo);
+	}
+
+	@Override
+	public int inquiryDelete(InquiryVO vo) {
+		// TODO Auto-generated method stub
+		return map.inquiryDelete(vo);
+	}
+	
+	
+	
 }

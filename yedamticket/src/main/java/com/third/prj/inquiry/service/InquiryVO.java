@@ -13,4 +13,5 @@ public class InquiryVO {
 	private String content;
 	private Date inDt;
 	private String uId;
+	
 }

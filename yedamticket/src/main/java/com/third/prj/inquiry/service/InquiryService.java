@@ -6,4 +6,9 @@ public interface InquiryService {
 
 	List<InquiryVO> inquirySelectList();
 	InquiryVO inquirySelect(InquiryVO vo);
+	//1:1문의
+	int inquiryInsert(InquiryVO vo);
+	int inquiryUpdate(InquiryVO vo);
+	int inquiryDelete(InquiryVO vo);
+ 
 }
