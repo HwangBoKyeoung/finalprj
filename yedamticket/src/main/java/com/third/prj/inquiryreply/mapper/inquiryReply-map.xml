@@ -6,10 +6,16 @@
 		SELECT * FROM INQUIRY_REPLY
 		WHERE IN_NO = #{inNo}
 	</select>
+	
 	<insert id="inquiryReplyInsert" parameterType="com.third.prj.inquiryreply.service.InquiryReplyVO">
-		INSERT INTO INQUIRY_REPLY
-		VALUES (in_re_no.nextval,#{ans},#{inNo})
+		<selectKey keyProperty="inReNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(IN_RE_NO), 0)+1
+			FROM INQUIRY_REPLY
+		</selectKey>
+		INSERT INTO INQUIRY_REPLY(IN_NO, IN_RE_NO, ANS)
+		VALUES (#{inNo}, #{inReNo}, #{ans})
 	</insert>
+	
 	<update id="inquiryReplyUpdate" parameterType="com.third.prj.inquiryreply.service.InquiryReplyVO">
 		UPDATE INQUIRY_REPLY
 		<set>

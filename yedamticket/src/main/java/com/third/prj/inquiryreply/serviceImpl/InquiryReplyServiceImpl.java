@@ -1,6 +1,5 @@
 package com.third.prj.inquiryreply.serviceImpl;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -15,7 +14,7 @@ public class InquiryReplyServiceImpl implements InquiryReplyService{
 	@Autowired
 	private InquiryReplyMapper map;
 	@Override
-	public List<InquiryReplyVO> inquiryReplySelect(InquiryReplyVO vo) {
+	public InquiryReplyVO inquiryReplySelect(InquiryReplyVO vo) {
 		// TODO Auto-generated method stub
 		return map.inquiryReplySelect(vo);
 	}

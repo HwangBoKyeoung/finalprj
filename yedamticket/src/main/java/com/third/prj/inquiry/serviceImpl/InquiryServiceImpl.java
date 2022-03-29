@@ -26,4 +26,10 @@ public class InquiryServiceImpl implements InquiryService {
 		return map.inquirySelect(vo);
 	}
 
+	@Override
+	public List<InquiryVO> inquirySearch(String key, String val) {
+		// TODO Auto-generated method stub
+		return map.inquirySearch(key, val);
+	}
+
 }

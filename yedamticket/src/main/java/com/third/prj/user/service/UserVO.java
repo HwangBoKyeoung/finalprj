@@ -2,6 +2,8 @@ package com.third.prj.user.service;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -19,5 +21,6 @@ public class UserVO {
 	private int point;
 	private String membership;
 	private String loginCd;
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date rdt;
 }

@@ -1,5 +1,7 @@
 package com.third.prj.user.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -23,4 +25,23 @@ public class UserServiceImpl implements UserService {
 		int i = map.idChk(vo);
 		return i;
 	}
+
+	@Override
+	public List<UserVO> userList() {
+		// TODO Auto-generated method stub
+		return map.userList();
+	}
+
+	@Override
+	public UserVO userSelect(UserVO vo) {
+		// TODO Auto-generated method stub
+		return map.userSelect(vo);
+	}
+
+	@Override
+	public List<UserVO> userSearch(String key, String val) {
+		// TODO Auto-generated method stub
+		return map.userSearch(key, val);
+	}
+	
 }

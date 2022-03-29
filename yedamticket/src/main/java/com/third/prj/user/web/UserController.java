@@ -74,4 +74,15 @@ public class UserController {
 	public String userService() {
 		return "user/userService";
 	}
+	@RequestMapping("/user.do")
+	public String user(Model model) {
+		model.addAttribute("users", userDao.userList());
+		return "manager/user/user";
+	}
+	@RequestMapping("/userSelet.do")
+	public String userSelet(UserVO vo, Model model) {
+		vo = userDao.userSelect(vo);
+		model.addAttribute("users", vo);
+		return "manager/user/userSelect";
+	}
 }
