@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.movie.mapper.MovieMapper">
 <resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
-	<id property="mvNo" column="movie_no"/>
+	<id property="mvNo" column="mv_no"/>
 	<result property="name" column="name"/>
 	<result property="genre" column="genre"/>
 	<result property="startDate" column="startDate"/>

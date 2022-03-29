@@ -123,20 +123,23 @@ figure > img{
                     inputNm.type='hidden';
                     inputNm.name='name';
                     inputNm.value=list[i].movieNm;
-                    console.log(inputNm);
+                    console.log(list[i].movieNm);
+                    let inputMvNo=document.createElement('input');
+                    inputMvNo.type='hidden';
+                    inputMvNo.name='mvNo';
+                    inputMvNo.value=212;
                     let inputDt=document.createElement('input');
                     inputDt.type='hidden';
                     inputDt.name='startDate';
                     let splitDay=(list[i].openDt).split('-');
-                  console.log(splitDay);
                     let splitDate='';
                     for (var j=0;j<splitDay.length;j++){
                         splitDate+=splitDay[j];
                     }
                     console.log(splitDate);
                     inputDt.value=splitDate;
-
-                    form.append(inputNm,inputDt);
+                    
+                    form.append(inputNm,inputDt,inputMvNo);
                 //caption > detailBtn
                 let detailBtn=document.createElement('button');
                 detailBtn.innerText="상세보기";

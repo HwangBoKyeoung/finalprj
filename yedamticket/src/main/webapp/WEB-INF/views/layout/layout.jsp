@@ -21,16 +21,48 @@
   <link href="./resources/users/demo/demo.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/84d54512c7.js" crossorigin="anonymous"></script>
 <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/"><!-- 부트스트랩 cdn -->
+<style>
+	html, body {
+	    margin: 0;
+	    padding: 0;
+	    height: 100%;
+	}
+	
+	.main-panel{
+		min-height: 100%;
+		position: relative;
+	}
+	
+	.body-content{
+		margin-top: 70px;
+		padding-bottom: 100px;	/* footer 높이 */
+		padding-left: 100px;
+	}
+	
+	.footer{
+		width: 100%;
+	    height: 100px; /* footer의 높이 */
+	    position: absolute;  
+	    bottom: 0;
+	    left: 0;
+	}
+</style>
 </head>
 <body class="index-page sidebar-collapse">
   <!-- Navbar -->
   <tiles:insertAttribute name="header"/>
   <!-- End Navbar -->
     <div class="main">
+    <div class="main-panel">
+        	<div class="body-content">
       <tiles:insertAttribute name="body"/>
+      </div>
+      </div>
     <!--  End Modal -->
     <!--start footer-->
+    <div class="footer">
     <tiles:insertAttribute name="footer"/>
+    </div>
     <!--end footer-->
   </div>
   <!--   Core JS Files   -->
