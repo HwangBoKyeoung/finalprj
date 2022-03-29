@@ -63,7 +63,7 @@
 									</span>
 								</div>
 								<input type="text" placeholder="아이디" class="form-control" required="required" id="Uid" name="Uid" maxlength="10"/>
-								<button type="button" class="idChk" id="idChk" value="N" data-value="" onclick="fn_idChk(); ">중복체크</button>
+								<button type="button" class="idChk" id="idChk" value="N" onclick="fn_idChk(); ">중복체크</button>
 							</div>
 
 							<div class="input-group no-border">
@@ -130,8 +130,7 @@
 						</div>
 
 						<div class="card-footer text-center">
-							<input type="submit" id="submit_input"
-								class="btn btn-neutral btn-round btn-lg">
+							<input type="submit" id="submit_input" class="btn btn-neutral btn-round btn-lg">
 						</div>
 					</form>
 				</div>
@@ -146,7 +145,20 @@
 	
 	<script>
 	// 시작할 때 제출버튼 비 활성화로 시작
-	$('#submit_input').attr("disabled", true)
+	// $('#submit_input').attr("disabled", true)
+	var idCnum = 1;
+	var phoneCnum = 1;
+	var passCnum = 1;
+	var birthCnum = 1;
+	
+	function submitChk(){
+		console.log()
+		if(Cnum > 0){
+			$('#submit_input').attr("disabled", true)
+		}else{
+			$('#submit_input').attr("disabled", false)
+		}
+	}
 	
 		// 리캡챠
 		function check_recaptcha() {
@@ -165,6 +177,7 @@
 
 		// id 중복확인
 		function fn_idChk() {
+			var chk = 0;
 			$.ajax({
 				url : "idChk",
 				type : "post",
@@ -176,10 +189,13 @@
 					if (data == 1) {
 						console.log($("#idChk").val());
 						alert("중복된 아이디 입니다..");
+						idCnum = 1;
+						submitChk()
 					} else if (data == 0) {
 						$("#idChk").val('Y');
 						alert("사용가능한 아이디 입니다.");
-						console.log($("#idChk").val());
+						idCnum = 0;
+						submitChk()
 					} else {
 						alert("아이디를 입력해주세요.");
 					}
@@ -195,32 +211,42 @@
 				console.log('올바른 전화번호를 입력하세요.');
 				$('#phone').css("color", "#FE0A03");
 				$('#phone').css("font-weight", "bold")
-				$('#submit_input').attr("disabled", true)
+				/* $('#submit_input').attr("disabled", true) */
+				phoneCnum = 1;
+				submitChk()
 			}else{
 				console.log('정상적인 전화번호입니다..!');
 				$('#phone').css("color", "greenyellow")
-				$('#submit_input').attr("disabled", false)
+				/* $('#submit_input').attr("disabled", false) */
+				phoneCnum = 0;
+				submitChk()
 				}
 			}
 		
 		// 생년월일 번호 유효성 검사
 		function birthConfirm(){
 	 		var birth = document.getElementById('birth').value;
-			//var regBirth = /^(19[0-9][0-9]{2}|20[0-9]{2})[1-12]{2}[1-31]{2}$/;
-			var regBirth = /^(19[0-9][0-9]|20\d{2})(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
-
-			
+			var regBirth = /^(19[0-9][0-9]|20[0-2][0-2])(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
+						
 			if(!regBirth.test(birth)) {
 				console.log('올바른 생년월일을 입력하세요.');
 				$('#birth').css("color", "#FE0A03");
 				$('#birth').css("font-weight", "bold")
-				$('#submit_input').attr("disabled", true)
-			}else{
+				/* $('#submit_input').attr("disabled", true) */
+				birthCnum = 1;
+				submitChk()
+			}
+			else{
+				if(birth < 20220329){
 				console.log('정상적인 생년월일입니다..!');
 				$('#birth').css("color", "greenyellow")
-				$('#submit_input').attr("disabled", false)
-				}
+				$('#submit_input').attr("disabled", false) 
+				birthCnum = 0;
+				submitChk()
+				} 
 			}
+			}
+			
 		
 		// 비밀번호 확인		
 		function passConfirm() {
@@ -230,12 +256,16 @@
 			if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
 				/* document.getElementById("pwd2").className = 'form-group has-success'; */
 				$('#pwd2').css("color", "greenyellow")
-				$('#submit_input').attr("disabled", false)
+				/* $('#submit_input').attr("disabled", false) */
+				passCnum = 0;
+				submitChk()
 			} else {
 				/* document.getElementById("pwd2").className = 'form-group has-danger'; */
 				$('#pwd2').css("color", "#FE0A03")
 				$('#pwd2').css("font-weight", "bold")
-				$('#submit_input').attr("disabled", true)
+				/* $('#submit_input').attr("disabled", true) */
+				passCnum = 1;
+				submitChk()
 			}
 		}
 		
