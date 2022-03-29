@@ -23,4 +23,5 @@ public class UserServiceImpl implements UserService {
 		int i = map.idChk(vo);
 		return i;
 	}
+	
 }

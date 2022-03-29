@@ -48,7 +48,7 @@ public class UserController {
 		int i = userDao.idChk(userVO);
 		return i;
 	}
-	
+
 	@ResponseBody
 	@RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
 	public int VerifyRecaptcha(HttpServletRequest request) {
@@ -64,12 +64,12 @@ public class UserController {
 			return -1; // 에러
 		}
 	}
-	
+
 	@RequestMapping("/userLoginForm.do")
 	public String userLoiginForm() {
 		return "user/user/userLoginForm";
 	}
-	
+
 	@RequestMapping("/userService.do")
 	public String userService() {
 		return "user/userService";

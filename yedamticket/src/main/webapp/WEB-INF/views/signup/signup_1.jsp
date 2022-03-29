@@ -42,11 +42,11 @@
 						</div>
 						<div class="form-group">
 						<select class="form-control" id="exampleFormControlSelect1" name = "email" onchange="email_change()">
-							<option value="0">선택하세요</option>
-							<option value="9">직접입력</option>
-							<option value="naver.com">naver.com</option>
-							<option value="nate.com">nate.com</option>
-							<option value="gmail.com">gmail.com</option>
+							<option value="0" style="color : black">선택하세요</option>
+							<option value="9" style="color : black">직접입력</option>
+							<option value="naver.com" style="color : black">naver.com</option>
+							<option value="nate.com" style="color : black">nate.com</option>
+							<option value="gmail.com" style="color : black">gmail.com</option>
 						</select>
 						</div>
 					</div>

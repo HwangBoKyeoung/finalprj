@@ -53,7 +53,7 @@
 									 <i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="이름" required="required" id="name" name="name">
+								<input type="text" class="form-control" placeholder="이름" required="required" id="name" name="name" maxlength="8">
 							</div>
 
 							<div class="input-group no-border">
@@ -62,7 +62,7 @@
 										<i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" placeholder="아이디" class="form-control" required="required" id="Uid" name="Uid" />
+								<input type="text" placeholder="아이디" class="form-control" required="required" id="Uid" name="Uid" maxlength="10"/>
 								<button type="button" class="idChk" id="idChk" value="N" data-value="" onclick="fn_idChk(); ">중복체크</button>
 							</div>
 
@@ -72,7 +72,7 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd">
+								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="10">
 								
 							</div>
 
@@ -83,7 +83,7 @@
 									</span>
 								</div>
 								
-								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()">
+								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()" maxlength="10">
 							</div>
  
  
@@ -102,7 +102,7 @@
 										<i class="now-ui-icons location_pin"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="주소" required="required" id="addr" name="addr">
+								<input type="text" class="form-control" placeholder="주소" required="required" id="addr" name="addr" maxlength="20">
 							</div>
 
 							<div class="input-group no-border">
@@ -111,7 +111,7 @@
 										<i class="now-ui-icons tech_mobile"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone">
+								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone" maxlength="11" onkeyup="phoneConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -120,7 +120,7 @@
 										<i class="now-ui-icons business_badge"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="생년월일(8자리로 입력)" required="required" id="birth" name="birth">
+								<input type="text" class="form-control" placeholder="생년월일 ex)20000101" required="required" id="birth" name="birth" maxlength="8" onkeyup="birthConfirm()">
 							</div>
 
 							<!-- CAPTCHA -->
@@ -143,14 +143,17 @@
 			</div>
 		</div>
 	</div>
+	
 	<script>
+	// 시작할 때 제출버튼 비 활성화로 시작
+	$('#submit_input').attr("disabled", true)
+	
+		// 리캡챠
 		function check_recaptcha() {
-
 			if ($("#idChk").val() == 'N') {
 				alert('아이디중복체크하세요');
 				return false;
 			}
-
 			var v = grecaptcha.getResponse()
 			if (v.length == 0) {
 				alert("자동가입방지를 체크해주세요.")
@@ -160,6 +163,7 @@
 			}
 		}
 
+		// id 중복확인
 		function fn_idChk() {
 			$.ajax({
 				url : "idChk",
@@ -183,20 +187,57 @@
 			})
 		}
 
+		// 휴대폰 번호 유효성 검사
+		function phoneConfirm(){
+	 		var phone = document.getElementById('phone').value;
+			var regTel = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+			if(!regTel.test(phone)) {
+				console.log('올바른 전화번호를 입력하세요.');
+				$('#phone').css("color", "#FE0A03");
+				$('#phone').css("font-weight", "bold")
+				$('#submit_input').attr("disabled", true)
+			}else{
+				console.log('정상적인 전화번호입니다..!');
+				$('#phone').css("color", "greenyellow")
+				$('#submit_input').attr("disabled", false)
+				}
+			}
+		
+		// 생년월일 번호 유효성 검사
+		function birthConfirm(){
+	 		var birth = document.getElementById('birth').value;
+			var regBirth = /^(19[0-9]{2}|20[0-9]{2})([01-12]{2})([01-31]{2})$/;
+			if(!regBirth.test(birth)) {
+				console.log('올바른 생년월일을 입력하세요.');
+				$('#birth').css("color", "#FE0A03");
+				$('#birth').css("font-weight", "bold")
+				$('#submit_input').attr("disabled", true)
+			}else{
+				console.log('정상적인 생년월일입니다..!');
+				$('#birth').css("color", "greenyellow")
+				$('#submit_input').attr("disabled", false)
+				}
+			}
+		
+		// 비밀번호 확인		
 		function passConfirm() {
 			var password = document.getElementById('pwd'); //비밀번호 
 			var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
 			var passwordConfirmClassName = $('#pwd2').attr('name');
 			if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
 				/* document.getElementById("pwd2").className = 'form-group has-success'; */
-				$('#pwd2').css("color", "green")
+				$('#pwd2').css("color", "greenyellow")
 				$('#submit_input').attr("disabled", false)
 			} else {
 				/* document.getElementById("pwd2").className = 'form-group has-danger'; */
-				$('#pwd2').css("color", "red")
+				$('#pwd2').css("color", "#FE0A03")
+				$('#pwd2').css("font-weight", "bold")
 				$('#submit_input').attr("disabled", true)
 			}
 		}
+		
+		
+		
 	</script>
 </body>
 </html>
