@@ -38,6 +38,7 @@
 		<div>
 			<button type="button" onclick="location.href='inqList.do'">목록가기</button>
 			<button type="submit" >수정</button>
+			<button type="button" onclick="location.href='replyWriteForm.do'">답글달기</button>
 			<button type="button"
 				onclick="location.href='inqDelete.do?inNo=${inqs.inNo}'">삭제</button>
 		</div>

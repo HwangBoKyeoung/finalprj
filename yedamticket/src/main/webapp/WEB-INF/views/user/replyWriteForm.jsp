@@ -8,7 +8,7 @@
 <script src="resources/js/jquery.min.js"></script>
 </head>
 <body>
-<form id="frm" action="inqWrite.do" method="post">
+<form id="frm" action="inqReply.do" method="post">
 	<div class="col-lg-6 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
@@ -39,6 +39,7 @@
 		<div>
 				<input type="submit"  value="등록">
 				<input type="button" onclick="location.href='inqList.do'" value="목록">
+				<input type="button" onclick="location.href='relayForm.do'" value="답변">
 				<input type="reset" value="취소">
 			</div>
 	</div>

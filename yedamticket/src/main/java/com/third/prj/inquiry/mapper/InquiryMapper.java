@@ -13,6 +13,9 @@ public interface InquiryMapper {
 	int inquiryUpdate(InquiryVO vo);
 	int inquiryDelete(InquiryVO vo);
 	
+	//답글
+	int replyupdate(InquiryVO vo);
+	int replyInsert(InquiryVO vo);
 
 	
 	 

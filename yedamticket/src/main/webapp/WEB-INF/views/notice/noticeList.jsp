@@ -14,6 +14,7 @@
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
+
 #sidebar-wrapper {
 	z-index: 1000;
 	position: fixed;
@@ -28,9 +29,11 @@
 	-o-transition: all 0.5s ease;
 	transition: all 0.5s ease;
 }
+
 #sidebar-wrapper {
 	box-shadow: inset -1px 0px 0px 0px #DDDDDD;
 }
+
 #page-content-wrapper {
 	width: 100%;
 	position: absolute;
@@ -45,33 +48,41 @@
 	padding: 0;
 	list-style: none;
 }
+
 .sidebar-nav li {
 	text-indent: 20px;
 	line-height: 40px;
 }
+
 .sidebar-nav li a {
 	display: block;
 	text-decoration: none;
 	color: #999999;
 }
+
 .sidebar-nav li a:hover {
 	text-decoration: none;
 }
+
 .sidebar-nav li a:active, .sidebar-nav li a:focus {
 	text-decoration: none;
 }
+
 .sidebar-nav>.sidebar-brand {
 	height: 65px;
 	font-size: 18px;
 	line-height: 60px;
 }
+
 .sidebar-nav>.sidebar-brand a {
 	color: #999999;
 }
+
 .sidebar-nav>.sidebar-brand a:hover {
 	color: #fff;
 	background: none;
 }
+
 @media ( min-width :768px) {
 	#wrapper {
 		padding-left: 250px;
@@ -123,6 +134,7 @@
 </style>
 </head>
 <body>
+
 	<div id="wrapper" class="wrapper-content">
 		<div id="sidebar-wrapper">
 			<ul class="sidebar-nav">
@@ -141,54 +153,54 @@
 					&nbsp;&nbsp;<span>토요일 09:00~17:00 </span><br> &nbsp;&nbsp;<span>일요일
 						공휴일 휴무</span>
 				<li class="border-top my-3"></li>
-
 			</ul>
-
 		</div>
 
-		<div class="container ">
-			<br>
-			<div>
-				<h3>공지사항</h3>
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+			<!-- DataTales Example -->
+			<div class="card shadow mb-4">
+				<div class="card-header py-3">
+					<h6 class="m-0 font-weight-bold text-primary">공지 사항</h6>
+				</div>
+				<div class="card-body">
+					<div class="table-responsive">
+						<table class="table table-bordered" width="100%" cellspacing="0"
+							style="text-align: center;">
+							<thead>
+								<tr>
+									<th>번호</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일자</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+							<c:forEach items="${notices }" var="notice">
+								<tr onclick="noticeSearch('${notice.noticeNo }')">
+									<td>${notice.noticeNo}</td>
+									<td>${notice.title }</td>
+									<td>${notice.writer }</td>
+									<td>${notice.wrDt}</td>
+									<td>${notice.hit}</td>
+								</tr>
+							</c:forEach>
+							</tbody>
+						</table>
+						<form id="frm" action="noticeSelect.do" method="post">
+							<input type="hidden" id="noticeNo" name="noticeNo">
+						</form>
+					</div>
+					<button type="button" onclick="location.href='noticeWriteForm.do'">글등록</button>
+				</div>
 			</div>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>번호</th>
-						<th>제목</th>
-						<th align="right">작성자</th>
-						<th>작성일자</th>
-						<th>조회수</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${notices }" var="notice">
-						<tr onclick="noticeSearch('${notice.noticeNo }')">
-							<td>${notice.noticeNo}</td>
-							<td>${notice.title }</td>
-							<td>${notice.writer }</td>
-							<td>${notice.wrDt}</td>
-							<td>${notice.hit}</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
 		</div>
-		<div>
-			<form id="frm" action="noticeSelect.do" method="post">
-				<input type="hidden" id="noticeNo" name="noticeNo">
-			</form>
-		</div>
-		<div>
-			<button type="button" onclick="location.href='noticeWriteForm.do'">글등록</button>
-		</div>
-	</div>
-
-	<script type="text/javascript">
-		function noticeSearch(n) {
-			frm.noticeNo.value = n;
-			frm.submit();
-		}
-	</script>
+		<script type="text/javascript">
+			function noticeSearch(n) {
+				frm.noticeNo.value = n;
+				frm.submit();
+			}
+		</script>
+		<!-- /.container-fluid -->
 </body>
 </html>

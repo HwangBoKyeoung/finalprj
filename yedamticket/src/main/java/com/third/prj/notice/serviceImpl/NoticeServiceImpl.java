@@ -1,14 +1,14 @@
 package com.third.prj.notice.serviceImpl;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.notice.mapper.NoticeMapper;
+import com.third.prj.notice.service.CriteriaVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.notice.service.NoticeVO;
-import com.third.prj.notice.service.PagingVO;
 
 @Repository("noticeDao")
 public class NoticeServiceImpl implements NoticeService {
@@ -46,16 +46,29 @@ public class NoticeServiceImpl implements NoticeService {
 
 	}
 
+//	@Override
+//	public int countBoard() {
+//		// TODO Auto-generated method stub
+//		return map.countBoard();
+//	}
+//
+//	@Override
+//	public List<NoticeVO> selectBoard(PagingVO vo) {
+//		// TODO Auto-generated method stub
+//		return map.selectBoard(vo);
+//	}
+
 	@Override
-	public int countBoard() {
+	public List<NoticeVO> getList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return map.countBoard();
+		return map.getList(cri);
 	}
 
 	@Override
-	public List<NoticeVO> selectBoard(PagingVO vo) {
+	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return map.selectBoard(vo);
+		return map.getTotal(cri);
 	}
+
 
 }

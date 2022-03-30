@@ -3,12 +3,11 @@ package com.third.prj.inquiry.web;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.third.prj.inquiry.service.InquiryService;
 import com.third.prj.inquiry.service.InquiryVO;
-import com.third.prj.notice.service.NoticeVO;
+
 
 @Controller
 public class InquiryContorller {
@@ -85,4 +84,6 @@ public class InquiryContorller {
 		}
 		return "notice/inqError";
 	}
+	
+
 }
