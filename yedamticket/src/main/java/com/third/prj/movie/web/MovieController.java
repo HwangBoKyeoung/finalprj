@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
+import com.third.prj.moviehall.service.MovieHallService;
+import com.third.prj.moviehall.service.MovieHallVO;
 import com.third.prj.moviereply.service.MovieReplyService;
 import com.third.prj.moviereply.service.MovieReplyVO;
 
@@ -20,10 +22,13 @@ public class MovieController {
 	private MovieService movieDao;
 	@Autowired
 	private MovieReplyService movieReplyDao;
+	@Autowired
+	private MovieHallService movieHallDao;
 	@RequestMapping("/movieList.do")
 	public String movieList() {
 		return "movie/movieList";
 	}
+	//영화상세
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model,MovieVO vo,MovieReplyVO rvo) {
 		System.out.println("무비넘어"+vo.getMvNo());
@@ -35,6 +40,7 @@ public class MovieController {
 		model.addAttribute("movie",vo);
 		return "movie/movieDetail";
 	}
+	//댓글 입력
 	@PostMapping("/movieReplyInsert")
 	 @ResponseBody
 	public String movieReplyInsert(Model model,MovieReplyVO vo) {
@@ -53,6 +59,7 @@ public class MovieController {
 		}
 		
 	}
+	//댓글삭제
 	@RequestMapping("/movieReplyDelete")
 	 @ResponseBody
 	public String movieReplyDelete(MovieReplyVO vo) {
@@ -63,6 +70,20 @@ public class MovieController {
 		}else {
 			return "fail";
 		}
+	}
+	
+	//영화 예약페이지로
+	@RequestMapping("/movieBooking.do")
+	public String movieBooking() {
+		return "movie/movieBookingForm";
+	}
+	//영화예약페이지에서 영화를 클릭하면 해당영화를 상영하는 영화관리스트호출
+	@RequestMapping("/movieHallList.do")
+	 @ResponseBody
+	public List<MovieHallVO> movieHallList(Model model,MovieHallVO vo) {
+		System.out.println("docid"+vo.getDocId());
+
+		return movieHallDao.movieHallList(vo);
 	}
 }
 
