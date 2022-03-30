@@ -1,8 +1,9 @@
 package com.third.prj.inquiry.mapper;
 
-import java.util.List; 
+import java.util.List;  
 
 import com.third.prj.inquiry.service.InquiryVO;
+
 
 public interface InquiryMapper {
 
@@ -14,8 +15,9 @@ public interface InquiryMapper {
 	int inquiryDelete(InquiryVO vo);
 	
 	//답글
-	int replyupdate(InquiryVO vo);
-	int replyInsert(InquiryVO vo);
+	int maxNum();
+
+	void updateReply(InquiryVO vo);
 
 	
 	 

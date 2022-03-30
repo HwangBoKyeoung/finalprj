@@ -12,7 +12,8 @@ public interface InquiryService {
 	int inquiryDelete(InquiryVO vo);
 	
 	//답글
-	int replyupdate(InquiryVO vo);
-	int replyInsert(InquiryVO vo);
+	int maxNum();
+
+	void updateReply(InquiryVO vo);
 	
 }

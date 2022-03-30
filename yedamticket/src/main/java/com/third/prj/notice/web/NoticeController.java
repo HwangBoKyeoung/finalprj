@@ -108,12 +108,5 @@ public class NoticeController {
 		return "notice/noticeError";
 	}
 
-	@RequestMapping("/userService.do")
-	public String userService(Model model) {
-		model.addAttribute("notices", noticeDao.noticeSelectList());
-		model.addAttribute("faqs", faqDao.faqSelectList());
-		return "user/userService";
-
-	}
 
 }
