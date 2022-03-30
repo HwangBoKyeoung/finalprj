@@ -120,7 +120,7 @@
 										<i class="now-ui-icons business_badge"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="생년월일 ex)20000101" required="required" id="birth" name="birth" maxlength="8" onkeyup="birthConfirm()">
+								<input type="date" class="form-control" placeholder="생년월일 ex)20000101" required="required" id="birthDt" name="birthDt" maxlength="8" onkeyup="birthConfirm()" max="2022-03-30">
 							</div>
 
 							<!-- CAPTCHA -->
@@ -144,21 +144,21 @@
 	</div>
 	
 	<script>
+
 	// 시작할 때 제출버튼 비 활성화로 시작
 	// $('#submit_input').attr("disabled", true)
-	var idCnum = 1;
-	var phoneCnum = 1;
-	var passCnum = 1;
-	var birthCnum = 1;
+		var idCnum = 1;
+		var phoneCnum = 1;
+		var passCnum = 1;
+		var birthCnum = 1; 
 	
-	function submitChk(){
-		console.log()
-		if(Cnum > 0){
-			$('#submit_input').attr("disabled", true)
-		}else{
-			$('#submit_input').attr("disabled", false)
+		function submitChk(){
+			if(idCnum + phoneCnum + passCnum + birthCnum > 0){
+				alert("중복체크를 확인해주세요")
+			}else{
+				$('.form').submit();
+			}
 		}
-	}
 	
 		// 리캡챠
 		function check_recaptcha() {
@@ -190,12 +190,10 @@
 						console.log($("#idChk").val());
 						alert("중복된 아이디 입니다..");
 						idCnum = 1;
-						submitChk()
 					} else if (data == 0) {
 						$("#idChk").val('Y');
 						alert("사용가능한 아이디 입니다.");
 						idCnum = 0;
-						submitChk()
 					} else {
 						alert("아이디를 입력해주세요.");
 					}
@@ -213,40 +211,35 @@
 				$('#phone').css("font-weight", "bold")
 				/* $('#submit_input').attr("disabled", true) */
 				phoneCnum = 1;
-				submitChk()
 			}else{
 				console.log('정상적인 전화번호입니다..!');
 				$('#phone').css("color", "greenyellow")
 				/* $('#submit_input').attr("disabled", false) */
 				phoneCnum = 0;
-				submitChk()
 				}
 			}
 		
 		// 생년월일 번호 유효성 검사
 		function birthConfirm(){
-	 		var birth = document.getElementById('birth').value;
+	 		var birth = document.getElementById('birthDt').value;
 			var regBirth = /^(19[0-9][0-9]|20[0-2][0-2])(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
 						
 			if(!regBirth.test(birth)) {
 				console.log('올바른 생년월일을 입력하세요.');
-				$('#birth').css("color", "#FE0A03");
-				$('#birth').css("font-weight", "bold")
+				$('#birthDt').css("color", "#FE0A03");
+				$('#birthDt').css("font-weight", "bold")
 				/* $('#submit_input').attr("disabled", true) */
 				birthCnum = 1;
-				submitChk()
 			}
 			else{
 				if(birth < 20220329){
 				console.log('정상적인 생년월일입니다..!');
-				$('#birth').css("color", "greenyellow")
-				$('#submit_input').attr("disabled", false) 
+				$('#birthDt').css("color", "greenyellow")
+				//$('#submit_input').attr("disabled", false) 
 				birthCnum = 0;
-				submitChk()
 				} 
 			}
 			}
-			
 		
 		// 비밀번호 확인		
 		function passConfirm() {
@@ -258,19 +251,14 @@
 				$('#pwd2').css("color", "greenyellow")
 				/* $('#submit_input').attr("disabled", false) */
 				passCnum = 0;
-				submitChk()
 			} else {
 				/* document.getElementById("pwd2").className = 'form-group has-danger'; */
 				$('#pwd2').css("color", "#FE0A03")
 				$('#pwd2').css("font-weight", "bold")
 				/* $('#submit_input').attr("disabled", true) */
 				passCnum = 1;
-				submitChk()
 			}
 		}
-		
-		
-		
 	</script>
 </body>
 </html>
