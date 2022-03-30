@@ -12,4 +12,36 @@
 		WHERE  u_id = #{Uid}
 	</select>
 	
+	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id=#{Uid}
+		<if test="pwd!=null">
+			AND pwd=#{pwd}
+		</if>
+	</select>
+	
+	<select id="userList" resultType="com.third.prj.user.service.UserVO">
+		SELECT   *
+		FROM     users
+		ORDER BY u_id DESC
+	</select>
+	
+	<select id="userSearch" resultType="com.third.prj.user.service.UserVO" parameterType="String">
+		SELECT *
+		FROM   users
+		WHERE
+		<if test="key == '전체'">u_id LIKE '%'||#{val}||'%' OR name LIKE '%'||#{val}||'%' OR email LIKE '%'||#{val}||'%'</if>
+		<if test="key == '아이디'">u_id LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이름'">name LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이메일'">email LIKE '%'||#{val}||'%'</if>
+		ORDER BY u_id DESC
+	</select>
+	
+		<select id="getUser" parameterType="com.third.prj.user.service.UserVO" resultType="com.third.prj.user.service.UserVO">
+	      SELECT U_ID, {noop}PWD, ROLE
+	      FROM USERS
+	      WHERE U_ID=#{Uid}
+	   </select>
+	
 </mapper>

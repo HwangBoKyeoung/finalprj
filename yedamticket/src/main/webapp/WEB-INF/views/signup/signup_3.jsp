@@ -25,8 +25,7 @@
 
 <!-- CSS Files -->
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
-<link href="./resources/users/css/now-ui-kit.css?v=1.3.0"
-	rel="stylesheet" />
+
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -39,7 +38,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="black">
-					<form class="form" method="POST" action="signup_4.do" onsubmit='return check_recaptcha();'>
+					<form class="form" method="POST" action="signup_4.do" onsubmit='check_recaptcha();'>
 						<div class="card-header text-center">
 							<h3 class="card-title title-up">회원가입</h3>
 							<div class="social-line">
