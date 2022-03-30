@@ -24,8 +24,11 @@
         </nav>
         <div class="copyright" id="copyright">
           &copy;
+          
+          <!-- 챗봇 스크립트 -->
          <script type="text/javascript" src="resources/chatbot/Chatbot.js"></script>
-          <script>
+         
+         <script>
             document.getElementById('copyright').appendChild(document.createTextNode(new Date().getFullYear()))
           </script>, Designed by
           <a href="https://www.invisionapp.com" target="_blank">Invision</a>. Coded by
