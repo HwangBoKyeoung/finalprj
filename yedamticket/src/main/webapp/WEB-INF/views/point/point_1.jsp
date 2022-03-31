@@ -5,17 +5,13 @@
 <head>
 <meta charset="UTF-8">
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<style>
-#point:read-only{
-	
-}
-</style>
 </head>
 <body>
 	<div class="section section-signup" style="background-image: url('./resources/users/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px; padding-top: 0; display: flex; align-items: center; justify-content: center;">
 		<div style="width: 535px; height:600px; padding:1rem; margin:1rem; float: left;">
 			<div class="card card-signup" data-background-color="black" style="height:100%; width:100%;">
-				<form>
+				<form onsubmit="chkSessionId();">
+				<!-- method="POST" action="point_2.do" -->
 					<div class="card-header text-center">
 						<h3 class="card-title title-up">충전</h3>
 					</div>
@@ -33,6 +29,7 @@
 					      oninput="maxLengthChk(this);"
 					      style="width: 80%; margin-left: auto; margin-right: auto; background-color:gray;"
 					    />
+					    <input type="hidden" id="id" name="id" value="${sessionId}"/>
 							<button class="btn" type="button" onclick="fiveThousand();">+5천 원</button>
 						    <button class="btn" type="button" onclick="tenThousand();">+1만 원</button>
 						    <button class="btn" type="button" onclick="fiftyThousand();">+5만 원</button>
@@ -52,6 +49,18 @@
 </body>
 
 <script>
+	
+	// 세션아이디 값의 유무를 체크
+	function chkSessionId(){
+		if($('#id').val() == ''){
+			alert("세션값이 없다!")
+			return false;
+		}else{
+			alert("현재 세션값 : " + ${sessionId})
+			return true;
+		}
+	
+	}
 	
 	// 포인트 부분 변수 선언 후 시작할 때 제출 버튼 비 활성화
 	t1 = $("#point").val()

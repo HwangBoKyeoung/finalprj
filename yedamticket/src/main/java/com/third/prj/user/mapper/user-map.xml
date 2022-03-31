@@ -39,9 +39,9 @@
 	</select>
 	
 		<select id="getUser" parameterType="com.third.prj.user.service.UserVO" resultType="com.third.prj.user.service.UserVO">
-	      SELECT U_ID, {noop}PWD, ROLE
-	      FROM USERS
-	      WHERE U_ID=#{Uid}
+	      SELECT u_id, {noop}pwd, role
+	      FROM users
+	      WHERE u_id=#{Uid}
 	   </select>
 	
 </mapper>
