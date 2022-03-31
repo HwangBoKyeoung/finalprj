@@ -1,25 +1,45 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.third.prj.moviereply.mapper.MovieReplyMapper">
-<resultMap type="com.third.prj.moviereply.service.MovieReplyVO" id="movieReplyResultMap">
-	<id property="mvReNo" column="mv_re_no"/>
-	<result property="mvNo" column="mv_no"/>
-	<result property="content" column="content"/>
-	<result property="star" column="star"/>
-	<result property="wrDt" column="wrdt"/>
-	<result property="uid" column="u_id"/>
-</resultMap>
+
+	<resultMap type="com.third.prj.moviereply.service.MovieReplyVO" id="movieReplyResultMap">
+		<id property="mvReNo" column="mv_re_no"/>
+		<result property="mvNo" column="mv_no"/>
+		<result property="content" column="content"/>
+		<result property="star" column="star"/>
+		<result property="wrDt" column="wrdt"/>
+		<result property="uid" column="u_id"/>
+	</resultMap>
+
 	<insert id="movieReplyInsert" parameterType="com.third.prj.moviereply.service.MovieReplyVO">
-	   INSERT INTO MOVIE_REPLY (mv_re_no,mv_no,content,star,wrdt,u_id)
-	   					VALUES (moviereply_seq.nextval,#{mvNo},#{content},#{star},sysdate,#{uid})
+	   INSERT INTO MOVIE_REPLY(MV_RE_NO
+	   						 , MV_NO,CONTENT
+	   						 , STAR
+	   						 , WRDT
+	   						 , U_ID)
+	   VALUES (MOVIEREPLY_SEQ.NEXTVAL
+	   		 , #{mvNo}
+	   		 , #{content}
+	   		 , #{star}
+	   		 , SYSDATE
+	   		 , #{uid})
 	</insert>
+	
 	<delete id="movieReplyDelete">
-		DELETE FROM MOVIE_REPLY WHERE MV_RE_NO=#{mvReNo}
+		DELETE FROM MOVIE_REPLY
+		WHERE MV_RE_NO=#{mvReNo}
 	</delete>
+	
 	<select id="selectReplyNo" resultMap="movieReplyResultMap">
-		SELECT MAX(MV_RE_NO) AS MV_RE_NO FROM MOVIE_REPLY
+		SELECT MAX(MV_RE_NO) AS MV_RE_NO
+		FROM MOVIE_REPLY
 	</select>
+	
 	<select id="movieReplyList" resultMap="movieReplyResultMap">
-		SELECT * FROM MOVIE_REPLY WHERE MV_NO=#{mvNo}
+		SELECT *
+		FROM MOVIE_REPLY
+		WHERE MV_NO=#{mvNo}
 	</select>
+	
 </mapper>

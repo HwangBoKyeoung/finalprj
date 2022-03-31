@@ -18,7 +18,6 @@ public class FaqController {
 	@RequestMapping("/faqList.do")
 	public String faqList(Model model) {
 		model.addAttribute("faqs", faqDao.faqSelectList());
-
 		return "faq/faqList";
 	}
 
@@ -37,6 +36,7 @@ public class FaqController {
 			return "faq/faqError";
 		}
 	}
+	
 	@PostMapping("/faqSelect.do")
 	public String faqSelect(FaqVO vo, Model model) {
 		vo = faqDao.faqSelect(vo);
@@ -66,6 +66,7 @@ public class FaqController {
 		}
 		return "faq/faqError";
 	}
+	
 	@RequestMapping("/faqDelete.do")
 	public String faqDelete(FaqVO vo) {
 		int n = faqDao.faqDelete(vo);
@@ -75,4 +76,5 @@ public class FaqController {
 		}
 		return "faq/faqError";
 	}
+	
 }

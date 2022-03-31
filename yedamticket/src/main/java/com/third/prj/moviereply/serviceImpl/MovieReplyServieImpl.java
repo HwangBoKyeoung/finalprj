@@ -10,31 +10,28 @@ import com.third.prj.moviereply.service.MovieReplyService;
 import com.third.prj.moviereply.service.MovieReplyVO;
 
 @Repository("movieReplyDao")
-public class MovieReplyServieImpl implements MovieReplyService{
+public class MovieReplyServieImpl implements MovieReplyService {
+	
 	@Autowired
-	private MovieReplyMapper map;
+	private MovieReplyMapper mapper;
 
 	@Override
 	public List<MovieReplyVO> movieReplyList(MovieReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieReplyList(vo);
+		return mapper.movieReplyList(vo);
 	}
 
 	@Override
 	public int movieReplyInsert(MovieReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieReplyInsert(vo);
+		return mapper.movieReplyInsert(vo);
 	}
 
 	@Override
 	public int movieReplyDelete(MovieReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieReplyDelete(vo);
+		return mapper.movieReplyDelete(vo);
 	}
 
 	@Override
 	public MovieReplyVO selectReplyNo() {
-		// TODO Auto-generated method stub
-		return map.selectReplyNo();
+		return mapper.selectReplyNo();
 	}
 }

@@ -9,18 +9,19 @@ import com.third.prj.moviehall.mapper.MovieHallMapper;
 import com.third.prj.moviehall.service.MovieHallService;
 import com.third.prj.moviehall.service.MovieHallVO;
 @Repository("movieHallDao")
-public class MovieHallServiceImpl implements MovieHallService{
+public class MovieHallServiceImpl implements MovieHallService {
+	
 	@Autowired
-	private MovieHallMapper map;
+	private MovieHallMapper mapper;
+	
 	@Override
 	public List<MovieHallVO> movieHallList(MovieHallVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieHallList(vo);
+		return mapper.movieHallList(vo);
 	}
+	
 	@Override
 	public List<MovieHallVO> movieLocList(MovieHallVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieLocList(vo);
+		return mapper.movieLocList(vo);
 	}
 	
 }

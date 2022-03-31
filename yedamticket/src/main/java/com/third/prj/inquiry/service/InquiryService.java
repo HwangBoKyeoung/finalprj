@@ -11,4 +11,5 @@ public interface InquiryService {
 	int inquiryDelete(InquiryVO vo);
 
 	List<InquiryVO> inquirySearch(String key, String val);
+	
 }

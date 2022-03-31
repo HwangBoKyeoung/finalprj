@@ -10,12 +10,16 @@ import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 
 public class PerformanceScheduleServiceImpl implements PerformanceScheduleService {
 	
-	@Autowired PerformanceScheduleMapper map;
+	@Autowired PerformanceScheduleMapper mapper;
 	
 	@Override
 	public List<PerformanceScheduleVO> PerformanceScheduleList() {
-		// TODO Auto-generated method stub
-		return map.PerformanceScheduleList();
+		return mapper.PerformanceScheduleList();
+	}
+
+	@Override
+	public int PSchedulUpdate(PerformanceScheduleVO vo) {
+		return 0;
 	}
 
 }

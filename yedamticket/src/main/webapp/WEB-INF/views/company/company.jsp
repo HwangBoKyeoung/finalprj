@@ -41,16 +41,16 @@
 							<option value="이메일">이메일</option>
 							<option value="기업이름">기업이름</option>
 							<option value="기업아이디">기업아이디</option>
-						</select> &nbsp; <input type="text" size="5" name="val" id="val"
-							class="form-control" aria-label="Text input with dropdown button">
+						</select> &nbsp; 
+						<input type="text" size="5" name="val" id="val" class="form-control" aria-label="Text input with dropdown button">
 						&nbsp;
-						<button type="button" onclick="SearchList()"
-							class="btn btn-outline-secondary">검색</button>
+						<button type="button" onclick="SearchList()" class="btn btn-outline-secondary">검색</button>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
+	
 	<script type="text/javascript">
 	function SearchList(){
 		$.ajax({

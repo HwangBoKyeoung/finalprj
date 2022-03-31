@@ -1,17 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.third.prj.performance.mapper.PerformanceMapper">
-<resultMap type="hashmap" id="procedureCall"> 
 
-</resultMap>
+<mapper namespace="com.third.prj.performance.mapper.PerformanceMapper">
+
+	<resultMap type="hashmap" id="procedureCall"></resultMap>
 
 	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT * FROM PERFORMANCE
+		SELECT * 
+		FROM PERFORMANCE
 	</select>
+	
 	<select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT * FROM PERFORMANCE
+		SELECT * 
+		FROM PERFORMANCE
 		where p_no = #{PNo}
 	</select>
+	
 	<update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">
 		UPDATE PERFORMANCE
 		<set>
@@ -44,6 +48,5 @@
 	    #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	    #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
 	</select>
-	
-	
+
 </mapper>

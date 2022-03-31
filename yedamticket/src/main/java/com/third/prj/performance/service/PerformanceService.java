@@ -9,5 +9,8 @@ public interface PerformanceService {
 	PerformanceVO perSelect(PerformanceVO vo);
 	int perforUpdate(PerformanceVO vo);
 	int perforDelete(PerformanceVO vo);
+	
+//	프로시저 호출(update에 필요)
 	public void procedureCall(Map map);
+	
 }

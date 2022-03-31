@@ -43,6 +43,6 @@ public class PointController {
 	@GetMapping("/kakaoPaySuccess")
 	public void kakaoPaySuccess(@RequestParam("pg_token") String pg_token, Model model) {
 		System.out.println("kakaopaysuccess get > " + pg_token);
-		
 	}
+	
 }

@@ -1,22 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.moviehall.mapper.MovieHallMapper">
-<resultMap type="com.third.prj.moviehall.service.MovieHallVO" id="movieHallResult">
-	<id property="mvHallNo" column="mv_hall_no"/>
-	<result property="loc" column="loc"/>
-	<result property="mvNo" column="mv_no"/>
-	<result property="name" column="name"/>
-	<result property="docId" column="docid"/>
-</resultMap>
-<select id="movieHallList" resultMap="movieHallResult">
-SELECT LOC, COUNT(*) AS MV_NO
-FROM MOVIE_HALL
-WHERE DOCID=#{docId}
-GROUP BY LOC
-</select>
-<select id="movieLocList" resultMap="movieHallResult">
-SELECT NAME,MV_HALL_NO,DOCID
-FROM MOVIE_HALL
-WHERE LOC=#{loc}
-</select>
+
+	<resultMap type="com.third.prj.moviehall.service.MovieHallVO" id="movieHallResult">
+		<id property="mvHallNo" column="mv_hall_no"/>
+		<result property="loc" column="loc"/>
+		<result property="mvNo" column="mv_no"/>
+		<result property="name" column="name"/>
+		<result property="docId" column="docid"/>
+	</resultMap>
+	
+	<select id="movieHallList" resultMap="movieHallResult">
+		SELECT LOC
+			 , COUNT(*) AS MV_NO
+		FROM MOVIE_HALL
+		WHERE DOCID=#{docId}
+		GROUP BY LOC
+	</select>
+	
+	<select id="movieLocList" resultMap="movieHallResult">
+		SELECT NAME
+		     , MV_HALL_NO
+		     , DOCID
+		FROM MOVIE_HALL
+		WHERE LOC=#{loc}
+	</select>
+
 </mapper>

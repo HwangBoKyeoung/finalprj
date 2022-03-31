@@ -29,10 +29,6 @@ public class UserController {
 
 	@Autowired
 	private NoticeService noticeDao;
-	@Autowired
-	private FaqService faqDao;
-	@Autowired
-	private NoticeService noticeDao;
 
 	@RequestMapping("/signup_1.do")
 	public String signUp_1() {
@@ -114,4 +110,5 @@ public class UserController {
 	public String userPage() {
 		return "user/userPage";
 	}
+	
 }

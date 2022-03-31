@@ -195,7 +195,7 @@ label {
 								<input class="upload-name" value="파일선택" disabled="disabled"
 									style="width: 200px;"> <label for="input_file">업로드</label>
 								<input type="file" id="input_file" class="upload-hidden">
-							</div> 
+							</div>
 							<!-- If you want to add a checkbox to this form, uncomment this code -->
 							<!-- <div class="checkbox">
 								<input id="checkboxSignup" type="checkbox">

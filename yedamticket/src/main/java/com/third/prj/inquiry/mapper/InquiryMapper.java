@@ -2,6 +2,7 @@ package com.third.prj.inquiry.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
 
 import com.third.prj.inquiry.service.InquiryVO;
 
@@ -12,7 +13,7 @@ public interface InquiryMapper {
 	int inquiryInsert(InquiryVO vo);
 	int inquiryUpdate(InquiryVO vo);
 	int inquiryDelete(InquiryVO vo);
-
-	List<InquiryVO> inquirySearch(String key, String val);
+	
+	List<InquiryVO> inquirySearch(@Param("key") String key, @Param("val") String val);
 
 }

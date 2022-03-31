@@ -10,4 +10,5 @@ public class KakaoPayReadyVO {
 	private String Tid;
 	private String NextRedirectPcUrl;
 	private Date createdAt;
+	
 }

@@ -5,4 +5,5 @@ import com.third.prj.performancevideo.service.PerformanceVideoVO;
 public interface PerformanceVideoMapper {
 
 	int PVideoUpdate(PerformanceVideoVO vo);
+	
 }

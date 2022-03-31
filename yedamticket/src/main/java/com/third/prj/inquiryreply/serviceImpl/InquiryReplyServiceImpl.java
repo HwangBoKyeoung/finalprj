@@ -9,38 +9,34 @@ import com.third.prj.inquiryreply.service.InquiryReplyService;
 import com.third.prj.inquiryreply.service.InquiryReplyVO;
 
 @Repository("inquiryReplyDao")
-public class InquiryReplyServiceImpl implements InquiryReplyService{
+public class InquiryReplyServiceImpl implements InquiryReplyService {
 
 	@Autowired
-	private InquiryReplyMapper map;
+	private InquiryReplyMapper mapper;
+	
 	@Override
 	public InquiryReplyVO inquiryReplySelect(InquiryReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.inquiryReplySelect(vo);
+		return mapper.inquiryReplySelect(vo);
 	}
 
 	@Override
 	public int inquiryReplyInsert(InquiryReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.inquiryReplyInsert(vo);
+		return mapper.inquiryReplyInsert(vo);
 	}
 
 	@Override
 	public int inquiryReplyUpdate(InquiryReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.inquiryReplyUpdate(vo);
+		return mapper.inquiryReplyUpdate(vo);
 	}
 
 	@Override
 	public int inquiryReplyDelete(InquiryReplyVO vo) {
-		// TODO Auto-generated method stub
-		return map.inquiryReplyDelete(vo);
+		return mapper.inquiryReplyDelete(vo);
 	}
 
 	@Override
 	public InquiryReplyVO selectReplyNo() {
-		// TODO Auto-generated method stub
-		return map.selectReplyNo();
+		return mapper.selectReplyNo();
 	}
 
 }

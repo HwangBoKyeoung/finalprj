@@ -13,47 +13,41 @@ import com.third.prj.user.service.UserVO;
 public class UserServiceImpl implements UserService {
 
 	@Autowired
-	private UserMapper map;
+	private UserMapper mapper;
 
 	@Override
 	public int userInsert(UserVO vo) {
-		// TODO Auto-generated method stub
-		return map.userInsert(vo);
+		return mapper.userInsert(vo);
 	}
 
 	@Override
 	public int idChk(UserVO vo) {
-		// TODO Auto-generated method stub
-		return map.idChk(vo);
+		return mapper.idChk(vo);
 	}
 
 	@Override
 	public List<UserVO> userList() {
-		// TODO Auto-generated method stub
-		return map.userList();
+		return mapper.userList();
 	}
 
 	@Override
 	public UserVO userSelect(UserVO vo) {
-		// TODO Auto-generated method stub
-		return map.userSelect(vo);
+		return mapper.userSelect(vo);
 	}
 
 	@Override
 	public List<UserVO> userSearch(String key, String val) {
-		// TODO Auto-generated method stub
-		return map.userSearch(key, val);
+		return mapper.userSearch(key, val);
 	}
 
 	@Override
 	public UserVO getUser(UserVO vo) {
-		return map.getUser(vo);
+		return mapper.getUser(vo);
 	}
 
 	@Override
 	public UserVO emailCheck(UserVO vo) {
-		// TODO Auto-generated method stub
-		return map.emailCheck(vo);
+		return mapper.emailCheck(vo);
 	}
 	
 }

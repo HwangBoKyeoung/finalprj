@@ -16,7 +16,6 @@ import org.springframework.web.client.RestTemplate;
 public class KakaoPay {
 
 	private static final String HOST = "https://kapi.kakao.com";
-
 	private KakaoPayReadyVO kakaoPayReadyVO;
 
 	public String kakaoPayReady() {
@@ -45,18 +44,18 @@ public class KakaoPay {
 		HttpEntity<MultiValueMap<String, String>> body = new HttpEntity<MultiValueMap<String, String>>(params, headers);
 
 		try {
-			kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body, KakaoPayReadyVO.class);
+			kakaoPayReadyVO = restTemplate.postForObject(new URI(HOST + "/v1/payment/ready"), body,
+					KakaoPayReadyVO.class);
 
 			return kakaoPayReadyVO.getNextRedirectPcUrl();
 
 		} catch (RestClientException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (URISyntaxException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
 		return "/pay";
 	}
+	
 }

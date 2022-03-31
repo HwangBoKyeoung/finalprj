@@ -10,6 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class CompanyVO {
+	
 	private String email;
 	private String pwd;
 	private String addr;

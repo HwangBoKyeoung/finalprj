@@ -10,5 +10,6 @@ import com.third.prj.point.service.PointService;
 public class PointServiceImpl implements PointService {
 
 	@Autowired
-	private PointMapper map;
+	private PointMapper mapper;
+	
 }

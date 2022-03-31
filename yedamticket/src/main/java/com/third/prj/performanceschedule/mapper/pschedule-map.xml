@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.third.prj.performanceschedule.mapper.PerformanceScheduleMapper">
+<mapper namespace="com.third.prj.performanceschedule.mapper.PerformanceScheduleMapper">
+
 	<update id="PSchedulUpdate" parameterType="com.third.prj.performanceschedule.service.PerformanceScheduleVO">
 		UPDATE PERFORMANCE_SCHEDULE
 		<set>
@@ -11,4 +11,5 @@
 		</set>
 		WHERE P_SCH_NO = #{pSchNo}
 	</update>
+	
 </mapper>

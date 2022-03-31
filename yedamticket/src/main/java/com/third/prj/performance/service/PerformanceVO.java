@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PerformanceVO {
+	
 	private int pNo;  //공연번호
 	private String name; //공연이름
 	private String content; //공연설명
@@ -15,4 +16,5 @@ public class PerformanceVO {
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
 	private int price;	//공연가격
+	
 }

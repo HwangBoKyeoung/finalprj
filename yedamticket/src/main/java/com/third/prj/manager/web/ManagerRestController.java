@@ -12,14 +12,14 @@ import com.third.prj.manager.service.ManagerVO;
 
 @RestController
 public class ManagerRestController {
-	
+
 	@Autowired
 	private ManagerService managerDao;
-	
-	//관리자 검색
-		@PostMapping("/ajaxManagerSerch.do")
-		public List<ManagerVO> ajaxManagerSerch(@RequestParam("key") String key, @RequestParam("val") String val){
-			return managerDao.managerSearch(key, val);
-		}
+
+	// 관리자 검색
+	@PostMapping("/ajaxManagerSerch.do")
+	public List<ManagerVO> ajaxManagerSerch(@RequestParam("key") String key, @RequestParam("val") String val) {
+		return managerDao.managerSearch(key, val);
+	}
 
 }

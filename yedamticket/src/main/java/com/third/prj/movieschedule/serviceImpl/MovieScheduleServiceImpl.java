@@ -8,14 +8,16 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.movieschedule.mapper.MovieScheduleMapper;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
+
 @Repository("movieScheduleDao")
-public class MovieScheduleServiceImpl implements MovieScheduleService{
+public class MovieScheduleServiceImpl implements MovieScheduleService {
+	
 	@Autowired
-	private MovieScheduleMapper map;
+	private MovieScheduleMapper mapper;
+	
 	@Override
 	public List<MovieScheduleVO> movieSchdtList(MovieScheduleVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieSchdtList(vo);
+		return mapper.movieSchdtList(vo);
 	}
 
 }

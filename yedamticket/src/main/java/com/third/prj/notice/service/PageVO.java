@@ -15,6 +15,7 @@ public class PageVO {
 	private int amount; //보여질 데이터 개수
 	
 	private CriteriaVO cri;
+	
 	//생성자
 	public PageVO(CriteriaVO cri, int total) {
 		//번호, 개수, 총 게시글 수 초기화
@@ -55,6 +56,5 @@ public class PageVO {
 		this.next = realEnd > this.endPage;
 		
 	}
-	
 	
 }

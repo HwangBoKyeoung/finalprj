@@ -5,5 +5,7 @@ import java.util.List;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
 
 public interface MovieScheduleMapper {
+	
 	List<MovieScheduleVO> movieSchdtList(MovieScheduleVO vo);
+	
 }

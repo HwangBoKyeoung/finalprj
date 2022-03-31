@@ -4,11 +4,14 @@ import java.util.List;
 
 
 public interface CompanyService {
-	int companyInsert(CompanyVO vo);
-	int cidChk(CompanyVO vo);
 	
 	List<CompanyVO> companyList();
 	CompanyVO companySelect(CompanyVO vo);
-	
+	int companyInsert(CompanyVO vo);
+
+//	company 아이디 체크
+	int cidChk(CompanyVO vo);
+//	company 검색
 	List<CompanyVO> companySearch(String key, String val);
+	
 }

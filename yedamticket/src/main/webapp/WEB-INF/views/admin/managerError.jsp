@@ -7,7 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-에러 돌아가기
-<a href="admin.do">목록으로 돌아가기</a>
+	에러 돌아가기
+	<a href="admin.do">목록으로 돌아가기</a>
 </body>
 </html>
