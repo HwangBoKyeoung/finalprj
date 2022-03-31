@@ -1,7 +1,5 @@
 package com.third.prj.moviereservation.service;
 
-import java.sql.Date;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,10 +7,11 @@ import lombok.Setter;
 @Setter
 public class MovieReservationVO {
 	private int mvReservNo;
-	private Date reservDt;
+	private String reservDt;
 	private String cancelCd;
 	private int mvNo;
 	private String uId;
-	private int mvSchNo;
+	private String schDate;
 	private String seatStatCd;
+	private String seatName;
 }

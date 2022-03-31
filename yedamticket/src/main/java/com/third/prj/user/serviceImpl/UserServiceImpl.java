@@ -17,27 +17,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int userInsert(UserVO vo) {
+		// TODO Auto-generated method stub
 		return map.userInsert(vo);
 	}
 
 	@Override
 	public int idChk(UserVO vo) {
-		int i = map.idChk(vo);
-		return i;
+		// TODO Auto-generated method stub
+		return map.idChk(vo);
 	}
 
 	@Override
 	public List<UserVO> userList() {
+		// TODO Auto-generated method stub
 		return map.userList();
 	}
 
 	@Override
 	public UserVO userSelect(UserVO vo) {
+		// TODO Auto-generated method stub
 		return map.userSelect(vo);
 	}
 
 	@Override
 	public List<UserVO> userSearch(String key, String val) {
+		// TODO Auto-generated method stub
 		return map.userSearch(key, val);
 	}
 
@@ -46,4 +50,11 @@ public class UserServiceImpl implements UserService {
 		return map.getUser(vo);
 	}
 
+	@Override
+	public UserVO emailCheck(UserVO vo) {
+		// TODO Auto-generated method stub
+		return map.emailCheck(vo);
+	}
+	
 }
+

@@ -2,11 +2,21 @@ package com.third.prj.user.service;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 public interface UserService {
-	int userInsert(UserVO vo);
-	int idChk(UserVO vo);
+	
 	List<UserVO> userList();
 	UserVO userSelect(UserVO vo);
-	List<UserVO> userSearch(String key,String val);
+	int userInsert(UserVO vo);
+	
+//	검색
+	List<UserVO> userSearch(@Param("key")String key, @Param("val") String val);
+//	아이디체크
+	int idChk(UserVO vo);
+//	security
 	UserVO getUser(UserVO vo);
+//	이메일체크
+	UserVO emailCheck(UserVO vo);
+  
 }

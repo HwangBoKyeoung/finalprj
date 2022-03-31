@@ -29,7 +29,11 @@ public class UserController {
 
 	@Autowired
 	private NoticeService noticeDao;
-	
+	@Autowired
+	private FaqService faqDao;
+	@Autowired
+	private NoticeService noticeDao;
+
 	@RequestMapping("/signup_1.do")
 	public String signUp_1() {
 		return "signup/signup_1";
@@ -74,7 +78,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/userLoginForm.do")
-	public String userLoiginForm() {
+	public String userLoiginForm(String error) {
 		return "user/user/userLoginForm";
 	}
 
@@ -104,5 +108,10 @@ public class UserController {
 		model.addAttribute("notices", noticeDao.noticeSelectList());
 		model.addAttribute("faqs", faqDao.faqSelectList());
 		return "user/userService";
+	}
+
+	@RequestMapping("/userPage.do")
+	public String userPage() {
+		return "user/userPage";
 	}
 }

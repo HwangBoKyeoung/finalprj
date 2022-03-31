@@ -11,4 +11,24 @@
 		FROM   company
 		WHERE  c_id = #{Cid}
 	</select>
+	
+	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
+		SELECT * FROM COMPANY
+	</select>
+	
+	<select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">
+		SELECT * FROM COMPANY
+		WHERE c_id = #{cid}
+	</select>
+	
+	<select id="companySearch" resultType="com.third.prj.company.service.CompanyVO" parameterType="String">
+		SELECT *
+		FROM COMPANY
+		WHERE
+		<if test="key == '전체'">EMAIL LIKE '%'||#{val}||'%' OR NAME LIKE '%'||#{val}||'%' OR C_ID LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
+		<if test="key == '기업이름'">NAME LIKE '%'||#{val}||'%'</if>
+		<if test="key == '기업아이디'">C_ID LIKE '%'||#{val}||'%'</if>
+		ORDER BY c_id DESC
+	</select>
 </mapper>

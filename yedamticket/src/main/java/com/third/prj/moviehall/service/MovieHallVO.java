@@ -10,4 +10,5 @@ public class MovieHallVO {
 	private String loc;
 	private int mvNo;
 	private String name;
+	private String docId;
 }
