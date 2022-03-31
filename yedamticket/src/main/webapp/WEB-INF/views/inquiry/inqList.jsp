@@ -1,14 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
 <head>
-<title>Sidebar 02</title>
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="resources/js/jquery.min.js"></script>
+</head>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
@@ -74,6 +73,21 @@ p {
 ul, li {
 	margin: 0;
 	list-style-type: none
+}
+
+input {
+	display: block;
+	outline: none;
+	border: none !important
+}
+
+textarea {
+	display: block;
+	outline: none
+}
+
+textarea:focus, input:focus {
+	border-color: transparent !important
 }
 
 iframe {
@@ -283,10 +297,7 @@ iframe {
 	color: #666;
 	margin-right: 5px;
 }
-
-
 </style>
-
 <body>
 	<div class="wrapper d-flex align-items-stretch ">
 		<nav id="sidebar">
@@ -321,108 +332,46 @@ iframe {
 			</div>
 		</nav>
 		<div id="content">
-			<form action="noticeList.do">
-				<div class="searchBar" align="right">
-					<select name="searchType">
-						<option value="title"
-							${pageVO.cri.searchType eq 'title' ? 'selected' : '' }>제목</option>
-						<option value="content"
-							${pageVO.cri.searchType eq 'content' ? 'selected' : '' }>내용</option>
-						<option value="writer"
-							${pageVO.cri.searchType eq 'writer' ? 'selected' : '' }>작성자</option>
-						<option value="titcont"
-							${pageVO.cri.searchType eq 'titcont' ? 'selected' : '' }>제목+내용</option>
-					</select> <input type="text" name="searchName"
-						value="${pageVO.cri.searchName }">
-					<button type="submit" class="btn btn-primary">검색</button>
-					<!-- hidden으로 숨겨서 들어갈 값 -->
-					<input type="hidden" name="pageNum" value="1">
-					<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-					<input type="hidden" name="amount" value="${pageVO.amount }">
-				</div>
-
-				
-					<table class="table" style="text-align: center;">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>작성자</th>
-								<th>작성일자</th>
-								<th>조회수</th>
-							</tr>
-						</thead>
-						<c:forEach items="${list }" var="list">
-							<tr
-								onclick="location.href='noticeSelect.do?noticeNo=${list.noticeNo }'">
-								<td>${list.noticeNo}</td>
-								<td>${list.title }</td>
-								<td>${list.writer }</td>
-								<td>${list.wrDt}</td>
-								<td>${list.hit}</td>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-					<br> <br>
-				
-				<div align="right" class="subBtn">
-					<button type="button" class="btn btn-primary"
-						onclick="location.href='noticeWriteForm.do'">글등록</button>
-				</div>
-				<div id="content" align="center">
-					<c:if test="${pageVO.prev }">
-						<!-- 이전버튼 활성화 여부 -->
-						<a href="noticeList.do?pageNum=${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn btn-secondary"></a>
-					</c:if>
-					<!-- pageNum -->
-					<c:forEach var="num" begin="${pageVO.startPage }"
-						end="${pageVO.endPage }">
-						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="noticeList.do?pageNum=${num }"> <input type="button"
-							value="${num }" class="btn btn-secondary"></a>
+			<br>
+			<table class="table table-bordered" style="text-align: center;">
+				<thead>
+					<tr>
+						<th>NO</th>
+						<th>제목</th>
+						<th>일자</th>
+						<th>아이디</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${inqs }" var="inq">
+						<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
+							<td>${inq.inNo }</td>
+							<td>${inq.title}</td>
+							<td>${inq.inDt }</td>
+							<td>${inq.UId }</td>
+						</tr>
 					</c:forEach>
-					<!-- 다음버튼 -->
-					<c:if test="${pageVO.next }">
-						<a href="noticeList.do?pageNum=${pageVO.endPage+1 }"> <input
-							type="button" value="다음" class="btn btn-secondary"></a>
-					</c:if>
-				</div>
-			</form>
+				</tbody>
+			</table>
+			<br>
+			<div align="right">
+				<button type="button" class="btn btn-primary" onclick="location.href='inqWriteForm.do'">글등록</button>
+			</div>
 		</div>
 	</div>
 
-
-
-
-
-
-	<script>
-		window.onload = function() {
-			if (history.state == '')
-				return; // 메시지를 출력했다면 함수종료
-
-			var msg = '<c:out value="${msg }" />';
-
-			if (msg != '') {
-				alert(msg);
-				// 기존 기록을 삭제하고 새로운 기록을 추가 ( 이렇게 변경된 값은 history.state로 데이터를 확인가능 )
-				history.replaceState('', null, null); // 브라우저 기록컨트롤 (추가할데이터, 제목, url주소)
-				// console.log(history.state);
-			}
-		}
-
+	<script type="text/javascript">
 		$(".que").click(function() {
 			$(this).next(".anw").stop().slideToggle(300);
 			$(this).toggleClass('on').siblings().removeClass('on');
 			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		});
 	</script>
+
+
 	<script src="./resources/users/js/core/jquery.min.js"></script>
 	<script src="./resources/users/js/core/popper.js"></script>
 	<script src="./resources/users/js/core/bootstrap.min.js"></script>
 	<script src="./resources/users/js/main.js"></script>
 </body>
-
 </html>

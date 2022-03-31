@@ -100,12 +100,12 @@ border-radius: 30px;
 	<!-- End Navbar -->
 	<div class="page-header ">
 		<div class="page-header-image"
-			style="background-image: url(resources/users/img/login.jpg)"></div>
+			style="background-image: url(resources/users/img/login2.jpg)"></div>
 		<div class="content">
 			<div class="container">
 				<div class="col-md-4 ml-auto mr-auto">
 					<div class="card card-login card-plain">
-						<form class="form" method="" action="">
+						<form class="form" action="userSelect.do" method="POST">
 							<div class="card-header text-center">
 								<div class="logo-container">
 									<img src="resources/users/img/now-logo.png" alt="">
@@ -118,8 +118,7 @@ border-radius: 30px;
 											class="now-ui-icons users_circle-08"></i>
 										</span>
 									</div>
-									<input type="text" class="form-control"
-										placeholder="Id...">
+									<input type="text" class="form-control" name = "Uid" placeholder="Id...">
 								</div>
 								<div class="input-group no-border input-lg">
 									<div class="input-group-prepend">
@@ -127,16 +126,16 @@ border-radius: 30px;
 										<i class="now-ui-icons objects_key-25"></i>
 										</span>
 									</div>
-									<input type="text" placeholder="Password..."
-										class="form-control" />
+									<input type="text" placeholder="Password..." name = "pwd" class="form-control" />
 								</div><br>
 								<div class="card-footer text-center">
-									<a href="#pablo"
-										class="btn btn-primary btn-round btn-lg btn-block">Login</a>
+									<input type="submit" class="btn btn-primary btn-round btn-lg btn-block" placeholder="LOGIN">
+									<!-- <a href="userSelect.do" class="btn btn-primary btn-round btn-lg btn-block">Login</a> -->
 								</div>
 								<div class="card-footer text-center">
 									<a
 										href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&redirect_uri=http://localhost/prj/kakaoLogin.do&response_type=code">
+										
 										<img src="resources/users/img/kakao_login_large_wide.png"  class="loginBtn" >
 									</a>
 								</div><br>
@@ -149,6 +148,7 @@ border-radius: 30px;
 									<h6>
 										<a href="#pablo" class="link">Need Help?</a>
 									</h6>
+								</div>
 								</div>
 						</form>
 					</div>

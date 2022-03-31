@@ -1,11 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.inquiry.mapper.InquiryMapper">
-	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
+
+	<resultMap type="com.third.prj.inquiry.service.InquiryVO"
+		id="inquiryResultMap">
+		<id property="inNo" column="in_no" /><!-- primary key -->
+		<result property="title" column="title" />
+		<result property="content" column="content" />
+		<result property="inDt" column="indt" />
+		<result property="uId" column="u_id" />
+	</resultMap>
+
+
+	<select id="inquirySelectList"
+		resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT * FROM INQUIRY
+		ORDER BY IN_NO DESC
 	</select>
-	<select id="inquirySelect" resultType="com.third.prj.inquiry.service.InquiryVO">
+	<select id="inquirySelect"
+		resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT * FROM INQUIRY
 		WHERE IN_NO = #{inNo}
 	</select>
+
+	<!-- 1:1문의 -->
+
+	<insert id="inquiryInsert"
+		parameterType="com.third.prj.inquiry.service.InquiryVO">
+		<selectKey keyProperty="inNo" resultType="int" order="BEFORE">
+			SELECT MAX(IN_NO)+1 AS INNO FROM INQUIRY
+		</selectKey>
+		INSERT INTO INQUIRY(IN_NO, INDT,TITLE, CONTENT, U_ID)
+		VALUES(#{inNo},#{inDt} ,#{title}, #{content}, #{UId})
+	</insert>
+	
+
+	<update id="inquiryUpdate"
+		parameterType="com.third.prj.inquiry.service.InquiryVO">
+		UPDATE INQUIRY
+		<set>
+			<if test="title != null"> TITLE = #{title},</if>
+			<if test="content != null"> CONTENT = #{content},</if>
+		</set>
+		WHERE IN_NO = #{inNo}
+	</update>
+
+	<delete id="inquiryDelete"
+		parameterType="com.third.prj.inquiry.service.InquiryVO">
+		DELETE FROM INQUIRY WHERE IN_NO = #{inNo}
+	</delete>
+	
+
+
 </mapper>
