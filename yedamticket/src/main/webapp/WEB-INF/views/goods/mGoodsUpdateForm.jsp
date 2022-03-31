@@ -177,7 +177,7 @@ label {
 					<form class="form" method="" action=""
 						enctype="multipart/form-data">
 						<div class="card-header text-center">
-							<h3 class="card-title title-up">공연굿즈 정보수정</h3>
+							<h3 class="card-title title-up">영화굿즈 정보수정</h3>
 							<div class="social-line"></div>
 						</div>
 						<div class="card-body">

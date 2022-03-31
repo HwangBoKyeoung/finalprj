@@ -32,5 +32,10 @@ public class GoodsController {
 		
 		return "goods/cGoodsUpdateForm";
 	}
+	@RequestMapping("/mGoodsUpdateForm.do")
+	public String mGoodsUpdateForm() {
+		
+		return "goods/mGoodsUpdateForm";
+	}
 
 }
