@@ -15,6 +15,15 @@
 		WHERE
 		u_id = #{Uid}
 	</select>
+	
+	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id=#{Uid}
+		<if test="pwd!=null">
+			AND pwd=#{pwd}
+		</if>
+	</select>
 
 	<select id="userSelect"
 		resultType="com.third.prj.user.service.UserVO">

@@ -3918,7 +3918,7 @@ img {
     left: 0
 }
 .card-signup {
-    max-width: 450px;
+    max-width: 350px;
     margin: 0 auto
 }
 .card-signup .card-header {

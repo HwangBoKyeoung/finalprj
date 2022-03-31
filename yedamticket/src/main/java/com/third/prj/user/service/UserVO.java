@@ -1,6 +1,8 @@
 package com.third.prj.user.service;
 
-import java.sql.Date; 
+
+import java.sql.Date;
+
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -8,8 +10,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
-import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -30,11 +30,10 @@ public class UserVO implements UserDetails{
 	private int point;
 	private String membership;
 	private String loginCd;
-	@JsonFormat(pattern = "yyyy-MM-dd", timezone="Asia/Seoul")
+	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date rdt;
 	private String role;
-	
-	
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		// TODO Auto-generated method stub

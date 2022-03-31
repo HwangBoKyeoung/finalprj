@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 public interface UserService {
-
+	
 	List<UserVO> userList();
 	UserVO userSelect(UserVO vo);
 	int userInsert(UserVO vo);
@@ -18,5 +18,5 @@ public interface UserService {
 	UserVO getUser(UserVO vo);
 //	이메일체크
 	UserVO emailCheck(UserVO vo);
-	
+  
 }

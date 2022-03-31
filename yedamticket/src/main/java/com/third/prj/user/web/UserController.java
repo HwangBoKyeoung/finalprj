@@ -22,8 +22,13 @@ import com.third.prj.user.service.UserVO;
 public class UserController {
 
 	@Autowired
+	private FaqService faqDao;
+	
+	@Autowired
 	private UserService userDao;
 
+	@Autowired
+	private NoticeService noticeDao;
 	@Autowired
 	private FaqService faqDao;
 	@Autowired
