@@ -17,5 +17,10 @@ public class MovieHallServiceImpl implements MovieHallService{
 		// TODO Auto-generated method stub
 		return map.movieHallList(vo);
 	}
+	@Override
+	public List<MovieHallVO> movieLocList(MovieHallVO vo) {
+		// TODO Auto-generated method stub
+		return map.movieLocList(vo);
+	}
 	
 }

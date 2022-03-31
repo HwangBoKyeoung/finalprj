@@ -14,4 +14,9 @@ FROM MOVIE_HALL
 WHERE DOCID=#{docId}
 GROUP BY LOC
 </select>
+<select id="movieLocList" resultMap="movieHallResult">
+SELECT NAME,MV_HALL_NO,DOCID
+FROM MOVIE_HALL
+WHERE LOC=#{loc}
+</select>
 </mapper>

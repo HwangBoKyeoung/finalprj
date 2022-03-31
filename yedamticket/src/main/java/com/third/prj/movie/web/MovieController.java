@@ -15,6 +15,8 @@ import com.third.prj.moviehall.service.MovieHallService;
 import com.third.prj.moviehall.service.MovieHallVO;
 import com.third.prj.moviereply.service.MovieReplyService;
 import com.third.prj.moviereply.service.MovieReplyVO;
+import com.third.prj.movieschedule.service.MovieScheduleService;
+import com.third.prj.movieschedule.service.MovieScheduleVO;
 
 @Controller
 public class MovieController {
@@ -24,6 +26,8 @@ public class MovieController {
 	private MovieReplyService movieReplyDao;
 	@Autowired
 	private MovieHallService movieHallDao;
+	@Autowired
+	private MovieScheduleService movieScheduleDao;
 	@RequestMapping("/movieList.do")
 	public String movieList() {
 		return "movie/movieList";
@@ -84,6 +88,17 @@ public class MovieController {
 		System.out.println("docid"+vo.getDocId());
 
 		return movieHallDao.movieHallList(vo);
+	}
+	@RequestMapping("/movieLocList.do")
+	 @ResponseBody
+	 public List<MovieHallVO> movieLocList(Model model,MovieHallVO vo) {
+		System.out.println("loc"+vo.getLoc());
+		return movieHallDao.movieLocList(vo);
+	}
+	@RequestMapping("/movieSchdtList.do")
+	 @ResponseBody
+	 public List<MovieScheduleVO> movieSchdtList(Model model,MovieScheduleVO vo){
+		return movieScheduleDao.movieSchdtList(vo);
 	}
 }
 

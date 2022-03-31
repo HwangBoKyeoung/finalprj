@@ -50,7 +50,7 @@
 				</a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownMenuLink1">
-						<a class="dropdown-item" href="./index.html"> <i
+						<a class="dropdown-item" href="movieBooking.do"> <i
 							class="fa-solid fa-ticket fa-2x"></i> 영화예매
 						</a> <a class="dropdown-item" href="movieList.do"> <i
 							class="fa-solid fa-ranking-star fa-2x"></i> 박스오피스 순위
