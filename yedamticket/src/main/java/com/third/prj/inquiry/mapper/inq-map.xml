@@ -50,19 +50,6 @@
 		DELETE FROM INQUIRY WHERE IN_NO = #{inNo}
 	</delete>
 	
-	<update id="updateReply" parameterType="com.third.prj.inquiry.service.InquiryVO">
-	<![CDATA[
-		UPDATE INQUIRY SET
-		STEP = STEP+1
-		WHERE REFER = #{refer} AND STEP > #{step}
-		]]>
-	</update>
-	
-	<select id="maxNum" resultType="integer">
-		<!-- ref와 num이 같을 수도 있고 다를 수도 있어서 따로 생성 -->
-		SELECT NVL(MAX(IN_NO),0) + 1 IN_NO
-		FROM INQUIRY
-	</select>
 
 
 </mapper>

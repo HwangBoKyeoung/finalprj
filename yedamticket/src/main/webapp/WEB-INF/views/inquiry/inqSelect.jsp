@@ -23,18 +23,18 @@ textarea {
 					<input type="hidden" name="inNo" id="inNo" value="${inqs.inNo}">
 					<table class="table">
 						<tr>
-							<th width="100">No</th>
-							<td width="150">${inqs.inNo }</td>
+							<th width="100">작성자</th>
+							<td width="150">${inqs.UId}</td>
 							<th width="100">작성일자</th>
 							<td width="150">${inqs.inDt }</td>
 						</tr>
 						<tr>
-							<th>제목</th>
-							<td colspan="3">${inqs.title}</td>
+						<th width="100">제목</th>
+							<td width="150">${inqs.title}</td>
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td colspan="3"><text	"
+							<td colspan="3"><textarea rows="10" cols="80"
 									readonly="readonly">${inqs.content }</textarea></td>
 					</table>
 					<div align="center">

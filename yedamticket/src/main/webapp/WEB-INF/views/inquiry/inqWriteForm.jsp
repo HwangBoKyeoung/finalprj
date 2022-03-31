@@ -17,10 +17,10 @@ textarea {
 <body>
  <div class="container">
         <div class="row">
-            <div class="col-md-2"></div>
+            <div class="col-md-2"></div>a
             <div class="col-md-8"><br>
                 <h2 class="text-center">1:1문의 작성</h2>
-                <form id="frm" action="inqWrite.do" method="post">
+                <form id="frm" action="inqWrite.do" method="post" >
                     <table class="table">
                         <tr>
                             <td>작성자</td>

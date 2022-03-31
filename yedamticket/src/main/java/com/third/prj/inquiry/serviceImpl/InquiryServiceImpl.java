@@ -43,24 +43,5 @@ public class InquiryServiceImpl implements InquiryService {
 		// TODO Auto-generated method stub
 		return map.inquiryDelete(vo);
 	}
-
-	@Override
-	public int maxNum() {
-		// TODO Auto-generated method stub
-		return map.maxNum();
-	}
-
-	@Override
-	public void updateReply(InquiryVO vo) {
-		// TODO Auto-generated method stub
-		map.updateReply(vo);
-	}
-
-	
-	
-
-
-	
-	
 	
 }

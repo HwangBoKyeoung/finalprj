@@ -40,19 +40,19 @@ public class InquiryContorller {
 	@RequestMapping("/inqList.do")
 	public String inqList(Model model) {
 		model.addAttribute("inqs", inquiryDao.inquirySelectList());
-		return"user/inqList";
+		return"inquiry/inqList";
 	}
 	
 	@RequestMapping("/inqSelect.do")
 	public String inqSelect(InquiryVO vo, Model model) {
 		vo = inquiryDao.inquirySelect(vo);
 		model.addAttribute("inqs",vo);
-		return "user/inqSelect";
+		return "inquiry/inqSelect";
 	}
 	
 	@RequestMapping("/inqWriteForm.do")
 	public String inqWriteForm() {
-		return "user/inqWriteForm";
+		return "inquiry/inqWriteForm";
 	}
 	@RequestMapping("/inqWrite.do")
 	public String inqWrite(InquiryVO vo) {
@@ -69,7 +69,7 @@ public class InquiryContorller {
 		vo = inquiryDao.inquirySelect(vo);
 		model.addAttribute("inqs", vo);
 
-		return "user/inqUpdateForm";
+		return "inquiry/inqUpdateForm";
 	}
 
 	@RequestMapping("/inqUpdate.do")

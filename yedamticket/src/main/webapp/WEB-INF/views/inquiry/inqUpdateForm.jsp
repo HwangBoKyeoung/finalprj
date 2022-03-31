@@ -25,7 +25,7 @@ textarea {
                     <table class="table">
                         <tr>
                             <td>작성자</td>
-                            <td><input type="text" id="UId" name="UId" value="${sessionId }" readonly="readonly"></td>
+                            <td><input type="text" id="UId" name="UId" value="${inqs.UId }" readonly="readonly"></td>
                         </tr>
                         <tr>
                             <td>작성일자</td>
@@ -33,11 +33,11 @@ textarea {
                         </tr>
                         <tr>
                             <td>제목</td>
-                            <td><input type="text" size="75" id="title" name="title" required="required"></td>
+                            <td><input type="text" size="75" id="title" name="title" value="${inqs.title }" required="required"></td>
                         </tr>
                         <tr>
                             <td>내용</td>
-                            <td><textarea rows="10" cols="75" id="content" name="content"></textarea></td>
+                            <td><textarea rows="10" cols="75" id="content" name="content" >${inqs.content }</textarea></td>
                         </tr>
                         <tr>
 

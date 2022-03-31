@@ -46,17 +46,6 @@ public class NoticeServiceImpl implements NoticeService {
 
 	}
 
-//	@Override
-//	public int countBoard() {
-//		// TODO Auto-generated method stub
-//		return map.countBoard();
-//	}
-//
-//	@Override
-//	public List<NoticeVO> selectBoard(PagingVO vo) {
-//		// TODO Auto-generated method stub
-//		return map.selectBoard(vo);
-//	}
 
 	@Override
 	public List<NoticeVO> getList(CriteriaVO cri) {

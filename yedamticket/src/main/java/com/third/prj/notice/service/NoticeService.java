@@ -15,12 +15,6 @@ public interface NoticeService {
 
 	void noticeHitUpdate(int noticeNo);
 
-//	// 게시물 총 갯수
-//	public int countBoard();
-//
-//	// 페이징 처리 게시글 조회
-//	public List<NoticeVO> selectBoard(PagingVO vo);
-
 	//페이징 
 	public List<NoticeVO> getList(CriteriaVO cri);
 	
