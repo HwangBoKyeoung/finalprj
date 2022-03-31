@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title><tiles:getAsString name="title" /></title>
+<link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/"><!-- 부트스트랩 cdn -->
 <!-- plugins:css -->
 <link rel="stylesheet" href="resources/managers/assets/vendors/mdi/css/materialdesignicons.min.css">
 <link rel="stylesheet" href="resources/managers/assets/vendors/css/vendor.bundle.base.css">
@@ -73,6 +74,7 @@
     <!-- container-scroller -->
     <!-- plugins:js -->
     <script src="resources/managers/assets/vendors/js/vendor.bundle.base.js"></script>
+    <script src="./resources/users/js/core/jquery.min.js" type="text/javascript"></script>
     <!-- endinject -->
     <!-- Plugin js for this page -->
     <script src="resources/managers/assets/vendors/chart.js/Chart.min.js"></script>

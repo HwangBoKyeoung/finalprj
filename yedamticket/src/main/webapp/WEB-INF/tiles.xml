@@ -4,6 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
 	<tiles-definitions>
+	
 		<definition name="my.home" template="/WEB-INF/views/layout/layout.jsp">
 			<put-attribute name="title" value="MyWebSite" />
 			<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
@@ -15,7 +16,16 @@
 		<definition name="*/*" extends="my.home">
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
-
+		
+		<definition name="my.user" template="/WEB-INF/views/layout/layoutO.jsp">
+			<put-attribute name="title" value="MyWebSite" />
+			<put-attribute name="body" value="" />
+		</definition>
+	
+		<definition name="user/*/*" extends="my.user">
+			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
+		
 		<definition name="manager.home" template="/WEB-INF/views/layout/layoutM.jsp">
 			<put-attribute name="title" value="ManagerSite" />
 			<put-attribute name="header" value="/WEB-INF/views/layout/headerM.jsp" />
@@ -27,4 +37,5 @@
 		<definition name="manager/*/*" extends="manager.home">
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
+		
 	</tiles-definitions>

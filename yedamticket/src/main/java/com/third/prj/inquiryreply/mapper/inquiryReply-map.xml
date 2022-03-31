@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.prj.inquiryreply.mapper.InquiryReplyMapper">
+
+	<select id="inquiryReplySelect" resultType="com.third.prj.inquiryreply.service.InquiryReplyVO">
+		SELECT * 
+		FROM INQUIRY_REPLY
+		WHERE IN_NO = #{inNo}
+	</select>
+	
+	<insert id="inquiryReplyInsert" parameterType="com.third.prj.inquiryreply.service.InquiryReplyVO">
+		<selectKey keyProperty="inReNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(IN_RE_NO), 0) + 1
+			FROM INQUIRY_REPLY
+		</selectKey>
+		INSERT INTO INQUIRY_REPLY(IN_NO
+								, IN_RE_NO
+								, ANS)
+		VALUES (#{inNo}
+			  , #{inReNo}
+			  , #{ans})
+	</insert>
+	
+	<update id="inquiryReplyUpdate" parameterType="com.third.prj.inquiryreply.service.InquiryReplyVO">
+		UPDATE INQUIRY_REPLY
+		<set>
+			<if test="ans != null">ANS = #{ans},</if>
+		</set>
+		WHERE IN_NO = #{inNo}
+	</update>
+	
+	<delete id="inquiryReplyDelete" parameterType="com.third.prj.inquiryreply.service.InquiryReplyVO">
+		DELETE FROM INQUIRY_REPLY
+		WHERE IN_RE_NO = #{inReNo}		
+	</delete>
+	
+	<select id="selectReplyNo" resultType="com.third.prj.inquiryreply.service.InquiryReplyVO">
+		SELECT MAX(IN_RE_NO) AS IN_RE_NO 
+		FROM INQUIRY_REPLY
+	</select>
+	
+</mapper>

@@ -23,8 +23,13 @@ public class HomeController {
 		return "manager/home/homeM";
 	}
 	
-	@RequestMapping("/login.do")
+	/*@RequestMapping("/login.do")
 	public String login() {
 		return "login/login";
+	}*/
+	
+	@RequestMapping("/membership.do")
+	public String membership() {
+		return "membership/membership";
 	}
 }

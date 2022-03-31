@@ -7,13 +7,13 @@
           <div class="row">
             <div class="col-md-12">
               <div class="hero-images-container">
-                <img src="resources/users/img/bg1000.jpg" alt="">
+                <img src="./resources/users/img/bg1.jpg" alt="">
               </div>
               <div class="hero-images-container-1">
-                <img src="resources/users/img/bg1000.jpg" alt="">
+                <img src="./resources/users/img/bg1.jpg" alt="">
               </div>
               <div class="hero-images-container-2">
-                <img src="resources/users/img/bg1000.jpg" alt="">
+                <img src="./resources/users/img/bg1.jpg" alt="">
               </div>
             </div>
           </div>
@@ -198,7 +198,7 @@
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                   </button>
-                  <div class="collapse navbar-collapse" id="example-navbar" data-nav-image="resources/img/blurred-image-1.jpg">
+                  <div class="collapse navbar-collapse" id="example-navbar" data-nav-image="./resources/users/img/blurred-image-1.jpg">
                     <ul class="navbar-nav">
                       <li class="nav-item active">
                         <a class="nav-link" href="#">
@@ -269,7 +269,7 @@
           <h4>Navigation</h4>
         </div>
         <div id="navbar">
-          <div class="navigation-example" style="background-image:url('resources/img/bg7.jpg')">
+          <div class="navigation-example" style="background-image:url('./resources/users/img/bg7.jpg')">
             <!-- Navbar Primary  -->
             <nav class="navbar navbar-expand-lg bg-primary">
               <div class="container">
@@ -840,19 +840,19 @@
             <div class="row">
               <div class="col-sm-2">
                 <p class="category">Image</p>
-                <img src="resources/users/img/julie.jpg" alt="Rounded Image" class="rounded">
+                <img src="./resources/users/img/julie.jpg" alt="Rounded Image" class="rounded">
               </div>
               <div class="col-sm-2">
                 <p class="category">Circle Image</p>
-                <img src="resources/users/img/julie.jpg" alt="Circle Image" class="rounded-circle">
+                <img src="./resources/users/img/julie.jpg" alt="Circle Image" class="rounded-circle">
               </div>
               <div class="col-sm-2">
                 <p class="category">Raised</p>
-                <img src="resources/users/img/julie.jpg" alt="Raised Image" class="rounded img-raised">
+                <img src="./resources/users/img/julie.jpg" alt="Raised Image" class="rounded img-raised">
               </div>
               <div class="col-sm-2">
                 <p class="category">Circle Raised</p>
-                <img src="resources/users/img/julie.jpg" alt="Thumbnail Image" class="rounded-circle img-raised">
+                <img src="./resources/users/img/julie.jpg" alt="Thumbnail Image" class="rounded-circle img-raised">
               </div>
             </div>
           </div>
