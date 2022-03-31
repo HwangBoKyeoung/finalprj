@@ -57,7 +57,7 @@
 			return false;
 		}else{
 			alert("현재 세션값 : " + ${sessionId})
-			return true;
+			return true; 
 		}
 	
 	}
