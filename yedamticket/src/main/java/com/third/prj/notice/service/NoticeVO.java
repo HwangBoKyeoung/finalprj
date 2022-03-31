@@ -14,4 +14,15 @@ public class NoticeVO {
 	private Date wrDt;
 	private int hit;
 	private String writer;
+	
+	
+	//검색
+	private String searchKeyword;
+
+	public String getSearchKeyword() {
+		return searchKeyword;
+	}
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
 }

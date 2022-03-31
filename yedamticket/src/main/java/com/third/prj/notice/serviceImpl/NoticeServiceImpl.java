@@ -1,11 +1,12 @@
 package com.third.prj.notice.serviceImpl;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.notice.mapper.NoticeMapper;
+import com.third.prj.notice.service.CriteriaVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.notice.service.NoticeVO;
 
@@ -44,5 +45,19 @@ public class NoticeServiceImpl implements NoticeService {
 		map.noticeHitUpdate(noticeNo);
 
 	}
+
+
+	@Override
+	public List<NoticeVO> getList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return map.getList(cri);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return map.getTotal(cri);
+	}
+
 
 }

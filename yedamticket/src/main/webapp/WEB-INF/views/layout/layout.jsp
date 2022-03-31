@@ -63,6 +63,18 @@
 	}
 </style>
 </head>
+<style>
+header {
+  height: 75px;
+  padding: 1rem;
+  color: white;
+  background: teal;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+</style>
 <body class="index-page sidebar-collapse">
   <!-- Navbar -->
   <tiles:insertAttribute name="header"/>

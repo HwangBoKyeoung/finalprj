@@ -45,5 +45,19 @@ public class CompanyController {
 		return i;
 	}
 	
+	//기업회원 리스트(관리자페이지)
+	@RequestMapping("/company.do")
+	public String company(Model model) {
+		model.addAttribute("companys", companyDao.companyList());
+		return "manager/company/company";
+	}
+	//기업회원 상세정보(관리자페이지)
+	@RequestMapping("/companySelect.do")
+	public String companySelet(CompanyVO vo, Model model) {
+		vo = companyDao.companySelect(vo);
+		model.addAttribute("com",vo);
+		return "manager/company/companySelect";
+	}
+	
 	
 }
