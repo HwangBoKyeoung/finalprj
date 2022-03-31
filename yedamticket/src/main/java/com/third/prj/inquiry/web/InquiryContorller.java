@@ -1,12 +1,17 @@
 package com.third.prj.inquiry.web;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.inquiry.service.InquiryService;
 import com.third.prj.inquiry.service.InquiryVO;
+import com.third.prj.inquiryreply.service.InquiryReplyService;
+import com.third.prj.inquiryreply.service.InquiryReplyVO;
 
 
 @Controller
@@ -14,6 +19,8 @@ public class InquiryContorller {
 	
 	@Autowired
 	private InquiryService inquiryDao;
+	@Autowired
+	private InquiryReplyService inquiryReplyDao;
 	
 	//상담페이지(상담리스트)
 	@RequestMapping("/inquiry.do")
@@ -84,6 +91,12 @@ public class InquiryContorller {
 		}
 		return "notice/inqError";
 	}
+	@RequestMapping("/inqReply.do")
+	@ResponseBody
+	public List<InquiryReplyVO> inqReply(InquiryReplyVO vo){
+		
+		return inquiryReplyDao.inquiryReplySelect(vo);
+	} 
 	
 
 }

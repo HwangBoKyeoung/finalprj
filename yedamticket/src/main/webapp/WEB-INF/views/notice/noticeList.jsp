@@ -195,6 +195,7 @@
 				</div>
 			</div>
 		</div>
+		</div>
 		<script type="text/javascript">
 			function noticeSearch(n) {
 				frm.noticeNo.value = n;

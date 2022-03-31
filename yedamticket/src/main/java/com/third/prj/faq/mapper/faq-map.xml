@@ -38,7 +38,7 @@
 	</update>
 
 	<delete id="faqDelete" parameterType="com.third.prj.faq.service.FaqVO">
-	DELETE FROM NOTICE WHERE F_NO = #{fNo}
+	DELETE FROM FAQ WHERE F_NO = #{fNo}
 	</delete>
 
 </mapper> 

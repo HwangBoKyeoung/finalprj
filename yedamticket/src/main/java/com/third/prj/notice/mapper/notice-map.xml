@@ -39,15 +39,15 @@
 		SELECT * FROM NOTICE WHERE NOTICE_NO = #{noticeNo}
 	</select>
 
-	<insert id="noticeInsert"
-		parameterType="com.third.prj.notice.service.NoticeVO">
-		<selectKey keyProperty="noticeNo" resultType="int"
-			order="BEFORE">
-			SELECT MAX(NOTICE_NO)+1 AS NOTICENO FROM NOTICE
+	<insert id="noticeInsert" parameterType="com.third.prj.notice.service.NoticeVO">
+		<selectKey keyProperty="noticeNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(NOTICE_NO), 0)+1 AS NOTICENO FROM NOTICE
 		</selectKey>
-		INSERT INTO NOTICE(NOTICE_NO, TITLE, CONTENT, WRDT, WRITER)
-		VALUES(#{noticeNo}, #{title}, #{content}, #{wrDt}, #{writer})
+		INSERT INTO NOTICE(NOTICE_NO, TITLE, WRDT ,CONTENT,  WRITER)
+		VALUES(#{noticeNo}, #{title}, #{wrDt} ,#{content}, #{writer})
 	</insert>
+	
+	
 
 	<update id="noticeUpdate"
 		parameterType="com.third.prj.notice.service.NoticeVO">

@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,37 +7,44 @@
 <title>Insert title here</title>
 </head>
 <body>
-<div align="center">
-	<div><h1>게 시 글 작성</h1></div>
-	<div>
-		<form id="frm" action="faqWrite.do" method="post">
-			<div>
-				<table border="1">
-					<tr>
-						<th width="100">제목</th>
-						<td width="150">
-							<input type="text" id="title" name="title" required="required">
-						</td>
-						<th width="100">유형</th>
-						<td width="150">
-							<input type="text" id="qstCd" name="qstCd" required="required"> 
-						</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td colspan="3">
-						 	<textarea rows="10" cols="80" id="content" name="content"></textarea>
-						</td>
-					</tr>	
-				</table>
-			</div><br>
-			<div>
-				<input type="submit"  value="등록">
-				<input type="button" onclick="location.href='faqList.do'" value="목록">
-				<input type="reset" value="취소">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-2"></div>
+			<div class="col-md-8">
+				<br>
+				<h2 class="text-center">FAQ 작성</h2>
+				<form id="frm" action="faqWrite.do" method="post">
+					<table class="table">
+						<tr>
+							<td>제목</td>
+							<td><input type="text" id="title" name="title"
+								required="required"></td>
+						</tr>
+						<tr>
+							<td>유형</td>
+							<td><select name="qstCd">
+									<option value="티켓예매">티켓예매/발권</option>
+									<option value="취소/환불">취소/환불</option>
+									<option value="배송/반송" selected="selected">배송/반송</option>
+							</select></td>
+						</tr>
+						<tr>
+							<td>내용</td>
+							<td><textarea rows="10" cols="75" id="content"
+									name="content"></textarea></td>
+						</tr>
+						<tr>
+							<td colspan="2" class="text-center">
+							<input type="submit" value="등록" class="btn btn-success"> 
+							<input type="reset" value="취소" class="btn btn-warning"> 
+							<input type="button" onclick="location.href='faqList.do'" value="목록" class="btn btn-primary">
+							</td>
+						</tr>
+
+					</table>
+				</form>
 			</div>
-		</form>
+		</div>
 	</div>
-</div>	
 </body>
 </html>

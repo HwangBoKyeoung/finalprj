@@ -49,6 +49,12 @@ public class UserServiceImpl implements UserService {
 	public UserVO getUser(UserVO vo) {
 		return map.getUser(vo);
 	}
+
+	@Override
+	public UserVO emailCheck(UserVO vo) {
+		// TODO Auto-generated method stub
+		return map.emailCheck(vo);
+	}
 	
 	
 	

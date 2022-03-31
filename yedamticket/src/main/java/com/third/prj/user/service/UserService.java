@@ -9,4 +9,5 @@ public interface UserService {
 	UserVO userSelect(UserVO vo);
 	List<UserVO> userSearch(String key,String val);
 	UserVO getUser(UserVO vo);
+	UserVO emailCheck(UserVO vo);
 }

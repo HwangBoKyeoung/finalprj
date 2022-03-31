@@ -22,7 +22,7 @@ public class FaqController {
 		return "faq/faqList";
 	}
 
-	@RequestMapping("/faqWriteForm")
+	@RequestMapping("/faqWriteForm.do")
 	public String faqWriteForm() {
 		return "faq/faqWriteForm";
 	}
@@ -32,7 +32,7 @@ public class FaqController {
 		int n = faqDao.faqInsert(vo);
 
 		if (n != 0) {
-			return "faq/faqList";
+			return "redirect:faqList.do";
 		} else {
 			return "faq/faqError";
 		}

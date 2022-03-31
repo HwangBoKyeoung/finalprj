@@ -5,6 +5,7 @@ import java.io.IOException;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,9 +15,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.third.prj.kakao.util.kakao_restapi;
+import com.third.prj.user.service.UserService;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class KakaoController {
+	
+
 
 	@RequestMapping(value="/kakaoLogin.do", produces="application/json", method=RequestMethod.GET)
 	public String kakaoLogin( @RequestParam("code") String code , RedirectAttributes ra, HttpSession session, HttpServletResponse response ,Model model)throws IOException{
@@ -45,11 +50,13 @@ public class KakaoController {
 
         name = properties.path("nickname").asText();
         email = kakao_account.path("email").asText();
-
+        
+        
         System.out.println("id : " + id);
         System.out.println("name : " + name);
         System.out.println("email : " + email);
-
+        
+        
         String msg = "";
         String url = "";
 

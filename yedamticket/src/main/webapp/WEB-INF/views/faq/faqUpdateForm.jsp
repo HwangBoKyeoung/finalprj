@@ -25,7 +25,8 @@
 					</tr>
 					<tr>
 						<th>내용</th>
-						<td colspan="3"><textarea rows="10" cols="80" >${faqs.content }</textarea>
+						<td colspan="3">
+						 	<textarea rows="10" cols="80" id="content" name="content" >${faq.content }</textarea>
 						</td>
 					</tr>
 				</table>

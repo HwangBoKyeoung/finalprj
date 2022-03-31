@@ -66,7 +66,7 @@ public class NoticeController {
 		return "notice/noticeError";
 	}
 
-	@PostMapping("/noticeSelect.do")
+	@RequestMapping("/noticeSelect.do")
 	public String noticeSelect(NoticeVO vo, Model model) {
 		vo = noticeDao.noticeSelect(vo);
 		if (vo != null) {

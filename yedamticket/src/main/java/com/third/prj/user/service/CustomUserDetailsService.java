@@ -10,13 +10,15 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
 	UserDAO dao;
+	@Autowired
+	UserService userDao;
 	
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		단건조회 return
 		UserVO vo = new UserVO();
 		vo.setUid(username);
-		UserVO userVO = dao.getUser(vo);
+		UserVO userVO = userDao.userSelect(vo);
 		
 //		아이디가 없으면?
 		if(userVO == null) {

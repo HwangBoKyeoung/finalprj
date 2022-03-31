@@ -1,6 +1,8 @@
 package com.third.prj.user.service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -16,13 +18,26 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
-	@Override
+	@Override //만들때 add로 implements에 있는거 add해서만들기
 	public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
 			Authentication authentication) throws IOException, ServletException {
-//		로그인 이후 추가적으로 처리할 내용
-		log.debug("로그인 완료");
-		System.out.println("로그인 완료");
-		response.sendRedirect("/home.do");
+		// Authentication 객체를 이용해서 사용자가 가진 모든 권한을 체크
+		log.warn("Login Success");
+		List<String> roleNames = new ArrayList<>();
+		authentication.getAuthorities().forEach(authority->{
+			roleNames.add(authority.getAuthority());
+		});
+		log.warn("ROLE NAMES : "+roleNames);
+		if(roleNames.contains("ROLE_ADMIN")) {
+			response.sendRedirect("/sample/admin");
+			return;
+		}
+		if(roleNames.contains("ROLE_USER")) {
+			response.sendRedirect("/sample/member");
+			return;
+		}
+		response.sendRedirect("/");
+		
 	}
-	
+
 }

@@ -30,8 +30,8 @@
 		<selectKey keyProperty="inNo" resultType="int" order="BEFORE">
 			SELECT MAX(IN_NO)+1 AS INNO FROM INQUIRY
 		</selectKey>
-		INSERT INTO INQUIRY(IN_NO, TITLE, CONTENT, U_ID)
-		VALUES(#{inNo}, #{title}, #{content}, #{UId})
+		INSERT INTO INQUIRY(IN_NO, INDT,TITLE, CONTENT, U_ID)
+		VALUES(#{inNo},#{inDt} ,#{title}, #{content}, #{UId})
 	</insert>
 	
 
