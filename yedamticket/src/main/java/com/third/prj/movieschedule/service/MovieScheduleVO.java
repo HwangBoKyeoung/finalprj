@@ -2,6 +2,8 @@ package com.third.prj.movieschedule.service;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,8 +11,9 @@ import lombok.Setter;
 @Setter
 public class MovieScheduleVO {
 	private int mvSchNo;
+	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date schDt;
-	private int no;
+	private String docId;
 	private String time;
 	private int mvHallNo;
 }

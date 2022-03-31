@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <style>
@@ -50,7 +50,7 @@
 				</a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownMenuLink1">
-						<a class="dropdown-item" href="./index.html"> <i
+						<a class="dropdown-item" href="movieBooking.do"> <i
 							class="fa-solid fa-ticket fa-2x"></i> 영화예매
 						</a> <a class="dropdown-item" href="movieList.do"> <i
 							class="fa-solid fa-ranking-star fa-2x"></i> 박스오피스 순위
@@ -107,23 +107,29 @@
 						<a class="dropdown-item" href="userPage.do"> <i
 							class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
 						</a>
+						<a class="dropdown-item" href="conPage.do"> <i
+							class="fa-regular fa-comment-dots fa-2x"></i> 공연정보
+						</a>
+						<a class="dropdown-item" href="goodsPage.do"> <i
+							class="fa-regular fa-comment-dots fa-2x"></i> 굿즈정보
+						</a>
 					</div></li>
 				<li>
 					<div>
 
 						<c:choose>
-						<c:when test="${empty sessionId}">
-							<a class="nav-link" data-placement="bottom"
-								href="userLoginForm.do">
-								<button class="btn btn-primary btn-round login" type="button">로그인</button>
-							</a>
-						</c:when>
-						<c:otherwise>
-							<a class="nav-link" data-placement="bottom"
-								href="kakaoLogout.do">
-								<button class="btn btn-primary btn-round login" type="button">로그아웃</button>
-							</a>
-						</c:otherwise>
+							<c:when test="${empty sessionId}">
+								<a class="nav-link" data-placement="bottom"
+									href="userLoginForm.do">
+									<button class="btn btn-primary btn-round login" type="button">로그인</button>
+								</a>
+							</c:when>
+							<c:otherwise>
+								<a class="nav-link" data-placement="bottom"
+									href="kakaoLogout.do">
+									<button class="btn btn-primary btn-round login" type="button">로그아웃</button>
+								</a>
+							</c:otherwise>
 						</c:choose>
 					</div>
 				</li>
@@ -136,15 +142,9 @@
 		<div class="page-header-image" data-parallax="true"
 			style="background-image: url('resources/users/img/love.jpg'); height: 200px;">
 		</div>
-		<!-- <div class="container"> -->
-			<div class="content-center brand">
 
-				<h1 class="h1-seo">1석3조.</h1>
-				<h3>BTS 오빠들 사랑해여</h3>
-			</div>
 
-		<!-- </div> -->
-		<h1>${sessionScope.name}님 로그인중.</h1>
+		<%-- <h1>${sessionScope.name}님 로그인중.</h1> --%>
 	</div>
 
 </div>

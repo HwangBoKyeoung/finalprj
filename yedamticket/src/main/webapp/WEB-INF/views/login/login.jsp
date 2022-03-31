@@ -26,7 +26,7 @@
 
   <!-- End Navbar -->
   <div class="page-header clear-filter" filter-color="orange">
-    <div class="page-header-image" style="background-image:url(resources/users/assets/img/login.jpg)"></div>
+    <div class="page-header-image" style="background-image:url(resources/users/assets/img/login2.jpg)"></div>
     <div class="content">
       <div class="container">
         <div class="col-md-4 ml-auto mr-auto">

@@ -11,11 +11,12 @@
 	</resultMap>
 
 	<select id="faqSelectList" resultMap="faqResultMap">
-	SELECT * FROM FAQ
+	SELECT * FROM FAQ ORDER BY F_NO DESC
 	</select>
 
-	<select id="faqSelect" parameterType="com.third.prj.faq.service.FaqVO">
-	SELECT * FROM FAQ WHERE F_NO =#{fNo}
+	<select id="faqSelect" parameterType="com.third.prj.faq.service.FaqVO"
+			resultMap="faqResultMap">
+		SELECT * FROM FAQ WHERE F_NO = #{fNo}	
 	</select>
 
 	<insert id="faqInsert" parameterType="com.third.prj.faq.service.FaqVO">
@@ -37,7 +38,7 @@
 	</update>
 
 	<delete id="faqDelete" parameterType="com.third.prj.faq.service.FaqVO">
-	DELETE FROM NOTICE WHERE F_NO = #{fNo}
+	DELETE FROM FAQ WHERE F_NO = #{fNo}
 	</delete>
 
 </mapper> 
