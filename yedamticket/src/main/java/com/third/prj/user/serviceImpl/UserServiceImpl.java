@@ -14,16 +14,17 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private UserMapper map;
-	
+
 	@Override
 	public int userInsert(UserVO vo) {
+		// TODO Auto-generated method stub
 		return map.userInsert(vo);
 	}
 
 	@Override
 	public int idChk(UserVO vo) {
-		int i = map.idChk(vo);
-		return i;
+		// TODO Auto-generated method stub
+		return map.idChk(vo);
 	}
 
 	@Override
@@ -43,5 +44,17 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return map.userSearch(key, val);
 	}
+
+	@Override
+	public UserVO getUser(UserVO vo) {
+		return map.getUser(vo);
+	}
+
+	@Override
+	public UserVO emailCheck(UserVO vo) {
+		// TODO Auto-generated method stub
+		return map.emailCheck(vo);
+	}
 	
 }
+

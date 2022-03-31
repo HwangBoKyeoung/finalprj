@@ -14,22 +14,34 @@ public class InquiryServiceImpl implements InquiryService {
 
 	@Autowired
 	private InquiryMapper map;
+	
 	@Override
 	public List<InquiryVO> inquirySelectList() {
-		// TODO Auto-generated method stub
 		return map.inquirySelectList();
 	}
 
 	@Override
 	public InquiryVO inquirySelect(InquiryVO vo) {
-		// TODO Auto-generated method stub
 		return map.inquirySelect(vo);
 	}
 
 	@Override
 	public List<InquiryVO> inquirySearch(String key, String val) {
-		// TODO Auto-generated method stub
 		return map.inquirySearch(key, val);
 	}
+	
+	@Override
+	public int inquiryInsert(InquiryVO vo) {
+		return map.inquiryInsert(vo);
+	}
 
+	@Override
+	public int inquiryUpdate(InquiryVO vo) {
+		return map.inquiryUpdate(vo);
+	}
+
+	@Override
+	public int inquiryDelete(InquiryVO vo) {
+		return map.inquiryDelete(vo);
+	}
 }

@@ -1,23 +1,46 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html >
+
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
-<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
-	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
-
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="./resources/users/css/style.css">
+	<title>Sidebar 02</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet"
+		href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+	<link rel="stylesheet" href="/resources/demos/style.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
+	
+		<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="./resources/users/css/style.css">
+</head>
 <style>
+	@font-face {
+		font-family: Poppins-Regular;
+		src: url(https://colorlib.com/etc/tb/Table_Responsive_v2/fonts/poppins/Poppins-Regular.ttf)
+	}
 
+	@font-face {
+		font-family: Poppins-Bold;
+		src: url(https://colorlib.com/etc/tb/Table_Responsive_v2/fonts/poppins/Poppins-Bold.ttf)
+	}
+
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box
+	}
+
+	body,
+	html {
+		height: 100%;
+		font-family: sans-serif
+	}
 
 	a {
 		margin: 0;
@@ -297,14 +320,11 @@
 	color: #666;
 	margin-right: 5px;
 }
-.wbtn{
-	position: relative;
-	left:650px;
-}
 </style>
-</head>
+
 <body>
-<div class="wrapper d-flex align-items-stretch">
+
+	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="custom-menu">
 				<button type="button" id="sidebarCollapse" class="btn btn-primary">
@@ -339,9 +359,44 @@
 				</div>
 			</div>
 		</nav>
-	<div class="container">
+		
+
+		<!-- Page Content  -->
+		<div id="content" >
+			<div class="container-table100">
+				<div class="wrap-table100">
+					<div class="table">
+						<div class="row header">
+							<div class="cell">
+								제목
+							</div>
+							<div class="cell">
+								작성자
+							</div>
+							<div class="cell">
+								작성일자
+							</div>
+						</div>
+						<c:forEach items="${notices }" var="notice" begin="0" end="4">
+						<div class="row" onclick="noticeSearch('${notice.noticeNo }')">
+							<div class="cell" data-title="Full Name">
+								${notice.title }
+							</div>
+							<div class="cell" data-title="Age">
+								${notice.writer }
+							</div>
+							<div class="cell" data-title="Job Title">
+								${notice.wrDt}
+							</div>
+						</div>
+					</c:forEach>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="container  ">
 		<br>
-		<c:forEach items="${faqs }" var="faq" begin="0" end="9">
+		<c:forEach items="${faqs }" var="faq" begin="0" end="5">
 			<div class="col-8">
 				<div id="Accordion_wrap">
 					<div class="que">
@@ -353,12 +408,7 @@
 				</div>
 			</div>
 		</c:forEach>
-		<div class="wbtn">
-		<button type="button" onclick="location.href='faqWriteForm.do'" class="btn btn-primary">글등록</button>
-		</div>
 	</div>
-	</div>
-	
 	<script type="text/javascript">
 		$(".que").click(function() {
 			$(this).next(".anw").stop().slideToggle(300);
@@ -366,16 +416,13 @@
 			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		});
 	</script>
+	</div>
+	
 
-	<script type="text/javascript">
-		function faqSearch(n) {
-			frm.FNo.value = n;
-			frm.submit();
-		}
-	</script>
-		<script src="./resources/users/js/core/jquery.min.js"></script>
+	<script src="./resources/users/js/core/jquery.min.js"></script>
 	<script src="./resources/users/js/core/popper.js"></script>
 	<script src="./resources/users/js/core/bootstrap.min.js"></script>
 	<script src="./resources/users/js/main.js"></script>
 </body>
-</html> 
+
+</html>

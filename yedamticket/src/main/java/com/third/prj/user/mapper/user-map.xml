@@ -1,38 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
-	<insert id="userInsert" parameterType="com.third.prj.user.service.UserVO">
-		INSERT INTO users(name, u_id, pwd, email, addr, phone, birthdt)
-		VALUES (#{name}, #{Uid}, #{pwd}, #{email}, #{addr}, #{phone}, #{birthDt})
+	<insert id="userInsert"
+		parameterType="com.third.prj.user.service.UserVO">
+		INSERT INTO users(name, u_id, pwd, email, addr, phone,
+		birthdt)
+		VALUES (#{name}, #{Uid}, #{pwd}, #{email}, #{addr}, #{phone},
+		#{birthDt})
 	</insert>
-	
+
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*)
-		FROM   users
-		WHERE  u_id = #{Uid}
+		FROM users
+		WHERE
+		u_id = #{Uid}
 	</select>
-	
-	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
+
+	<select id="userSelect"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		WHERE U_ID= #{Uid}
+		<if test="pwd!=null">
+			AND pwd = #{pwd}
+		</if>
 	</select>
-	
-	<select id="userList" resultType="com.third.prj.user.service.UserVO">
+
+	<select id="userList"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		ORDER BY U_ID DESC
 	</select>
-	
-	<select id="userSearch" resultType="com.third.prj.user.service.UserVO" parameterType="String">
+
+	<select id="userSearch"
+		resultType="com.third.prj.user.service.UserVO" parameterType="String">
 		SELECT *
 		FROM USERS
 		WHERE
-		<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%' OR NAME LIKE '%'||#{val}||'%' OR EMAIL LIKE '%'||#{val}||'%'</if>
+		<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%' OR NAME LIKE '%'||#{val}||'%'
+			OR EMAIL LIKE '%'||#{val}||'%'</if>
 		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
 		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
 		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
 		ORDER BY U_ID DESC
 	</select>
-	
+
+	<select id="getUser"
+		parameterType="com.third.prj.user.service.UserVO"
+		resultType="com.third.prj.user.service.UserVO">
+		SELECT U_ID, {noop}PWD, ROLE
+		FROM USERS
+		WHERE U_ID=#{Uid}
+	</select>
+
+	<select id="emailCheck"
+		resultType="com.third.prj.user.service.UserVO">
+		SELECT COUNT(*) FROM USERS
+		WHERE EMAIL = #{email}
+	</select>
+
 </mapper>
