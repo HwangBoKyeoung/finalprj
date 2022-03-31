@@ -1,6 +1,8 @@
 package com.third.prj.performance.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -13,29 +15,34 @@ import com.third.prj.performance.service.PerformanceVO;
 public class PerformanceServiceImpl implements PerformanceService{
 
 	@Autowired
-	public PerformanceMapper map;
+	public PerformanceMapper mapper;
 	@Override
 	public int perforUpdate(PerformanceVO vo) {
 		// TODO Auto-generated method stub
-		return map.perforUpdate(vo);
+		return mapper.perforUpdate(vo);
 	}
 
 	@Override
 	public int perforDelete(PerformanceVO vo) {
 		// TODO Auto-generated method stub
-		return map.perforDelete(vo);
+		return mapper.perforDelete(vo);
 	}
 
 	@Override
 	public PerformanceVO perSelect(PerformanceVO vo) {
 		// TODO Auto-generated method stub
-		return map.perSelect(vo);
+		return mapper.perSelect(vo);
 	}
 
 	@Override
 	public List<PerformanceVO> perSelectList() {
 		// TODO Auto-generated method stub
-		return map.perSelectList();
+		return mapper.perSelectList();
+	}
+
+	@Override
+	public void procedureCall(Map map) {
+		mapper.procedureCall(map);
 	}
 
 	

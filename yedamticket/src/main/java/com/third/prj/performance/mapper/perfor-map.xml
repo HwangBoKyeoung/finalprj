@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.performance.mapper.PerformanceMapper">
+<resultMap type="hashmap" id="procedureCall"> 
+
+</resultMap>
 
 	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
 		SELECT * FROM PERFORMANCE
@@ -21,4 +24,26 @@
 		</set>
 		WHERE P_NO = #{PNo}
 	</update>
+	
+	<select id="procedureCall" statementType="CALLABLE">
+	    {CALL perfor_pro( 
+<!-- 	    #{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT}, -->
+	    #{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+<!-- 	    #{p_price, mode=IN, jdbcType=INTEGER, javaType=INT}, -->
+	    #{p_Iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_Irename, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_frdt, mode=IN, jdbcType=DATE, javaType=DATE},
+<!-- 	    #{p_scno, mode=IN, jdbcType=INTEGER, javaType=INT}, -->
+	    #{p_time, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_vrename, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	    #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
+	</select>
+	
+	
 </mapper>
