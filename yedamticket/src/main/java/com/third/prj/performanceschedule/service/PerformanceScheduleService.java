@@ -1,6 +1,8 @@
 package com.third.prj.performanceschedule.service;
 
-public interface PerformanceScheduleService {
+import java.util.List;
 
+public interface PerformanceScheduleService {
+	List<PerformanceScheduleVO> PerformanceScheduleList();
 	int PSchedulUpdate(PerformanceScheduleVO vo);
 }

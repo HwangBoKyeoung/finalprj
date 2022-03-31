@@ -26,5 +26,16 @@ public class GoodsController {
 		model.addAttribute("mGoods",goodsDao.goodsList(goodsCd));
 		return "goods/mGoodsList";
 	}
+	
+	@RequestMapping("/cGoodsUpdateForm.do")
+	public String cGoodsUpdateForm() {
+		
+		return "goods/cGoodsUpdateForm";
+	}
+	@RequestMapping("/mGoodsUpdateForm.do")
+	public String mGoodsUpdateForm() {
+		
+		return "goods/mGoodsUpdateForm";
+	}
 
 }
