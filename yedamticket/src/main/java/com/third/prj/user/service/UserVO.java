@@ -18,7 +18,6 @@ import lombok.Setter;
 
 @Getter
 @Setter
-
 public class UserVO implements UserDetails{
 	private String Uid; // not null
 	private String email;
