@@ -2,6 +2,8 @@ package com.third.prj.company.service;
 
 import java.sql.Date;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +18,7 @@ public class CompanyVO {
 	private String dealAgreeCd;
 	private String name;
 	private String Cid;
+	@JsonFormat(pattern = "yy-MM-dd", timezone="Asia/Seoul")
 	private Date rdt;
+	
 }

@@ -104,6 +104,7 @@ public class UserController {
 		model.addAttribute("faqs", faqDao.faqSelectList());
 		return "user/userService";
 	}
+
 	@RequestMapping("/userPage.do")
 	public String userPage() {
 		return "user/userPage";

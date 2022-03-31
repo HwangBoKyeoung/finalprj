@@ -15,12 +15,22 @@
 	<select id="inquirySelectList"
 		resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT * FROM INQUIRY
-		ORDER BY IN_NO DESC
+		ORDER BY INDT DESC
+		<!-- ORDER BY IN_NO DESC -->
 	</select>
 	<select id="inquirySelect"
 		resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT * FROM INQUIRY
-		WHERE IN_NO = #{inNo}
+		WHERE IN_NO=#{inNo}
+	</select>
+	<select id="inquirySearch" resultType="com.third.prj.inquiry.service.InquiryVO" parameterType="String">
+		SELECT *
+		FROM INQUIRY
+		WHERE
+		<if test="key == '전체'">TITLE LIKE '%'||#{val}||'%' OR U_ID LIKE '%'||#{val}||'%'</if>
+		<if test="key == '제목'">TITLE LIKE '%'||#{val}||'%'</if>
+		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
+		ORDER BY INDT DESC
 	</select>
 
 	<!-- 1:1문의 -->

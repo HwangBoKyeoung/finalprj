@@ -1,6 +1,5 @@
 package com.third.prj.inquiry.web;
 
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +18,10 @@ public class InquiryContorller {
 	
 	@Autowired
 	private InquiryService inquiryDao;
+	
+	@Autowired
+	private InquiryReplyService irDao;
+	
 	@Autowired
 	private InquiryReplyService inquiryReplyDao;
 	
@@ -28,11 +31,17 @@ public class InquiryContorller {
 		model.addAttribute("inquirys", inquiryDao.inquirySelectList());
 		return"manager/inquiry/inquiry";
 	}
+	
 	//상담상세페이지
 	@RequestMapping("/inquirySelect.do")
-	public String inquirySelect(InquiryVO vo, Model model) {
+	public String inquirySelect(InquiryVO vo,InquiryReplyVO replyvo, Model model) {
+//		new 답변VO
+//		답변Vo.set(vo.get답변ID())
+		replyvo.setInNo(vo.getInNo());
 		vo = inquiryDao.inquirySelect(vo);
+		replyvo = irDao.inquiryReplySelect(replyvo);
 		model.addAttribute("inq",vo);
+		model.addAttribute("inqReply", replyvo);
 		return "manager/inquiry/inquirySelect";
 	}
 	
@@ -54,6 +63,7 @@ public class InquiryContorller {
 	public String inqWriteForm() {
 		return "inquiry/inqWriteForm";
 	}
+	
 	@RequestMapping("/inqWrite.do")
 	public String inqWrite(InquiryVO vo) {
 		int n = inquiryDao.inquiryInsert(vo);
@@ -91,10 +101,10 @@ public class InquiryContorller {
 		}
 		return "notice/inqError";
 	}
+	
 	@RequestMapping("/inqReply.do")
 	@ResponseBody
-	public List<InquiryReplyVO> inqReply(InquiryReplyVO vo){
-		
+	public InquiryReplyVO inqReply(InquiryReplyVO vo){
 		return inquiryReplyDao.inquiryReplySelect(vo);
 	} 
 	

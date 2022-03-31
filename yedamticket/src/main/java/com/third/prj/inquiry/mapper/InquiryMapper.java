@@ -1,9 +1,9 @@
 package com.third.prj.inquiry.mapper;
 
-import java.util.List;  
+import java.util.List;
+
 
 import com.third.prj.inquiry.service.InquiryVO;
-
 
 public interface InquiryMapper {
 
@@ -12,7 +12,7 @@ public interface InquiryMapper {
 	int inquiryInsert(InquiryVO vo);
 	int inquiryUpdate(InquiryVO vo);
 	int inquiryDelete(InquiryVO vo);
-	
 
-	 
+	List<InquiryVO> inquirySearch(String key, String val);
+
 }
