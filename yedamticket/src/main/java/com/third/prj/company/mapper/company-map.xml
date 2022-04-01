@@ -1,34 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.third.prj.company.mapper.CompanyMapper">
+
 	<insert id="companyInsert" parameterType="com.third.prj.company.service.CompanyVO">
-		INSERT INTO company(name, c_id, pwd, email, addr, phone, bizno)
-		VALUES (#{name}, #{Cid}, #{pwd}, #{email}, #{addr}, #{phone}, #{bizno})
+		INSERT INTO COMPANY (NAME
+						   , C_ID
+						   , PWD
+						   , EMAIL
+						   , ADDR
+						   , PHONE
+						   , BIZNO
+						   , DEAL_AGREE_CD)
+		VALUES (#{name}
+			  , #{Cid}
+			  , #{pwd}
+			  , #{email}
+			  , #{addr}
+			  , #{phone}
+			  , #{bizno}
+			  , #{dealAgreeCd})
 	</insert>
 	
 	<select id="cidChk" resultType="int">
 		SELECT COUNT(*)
-		FROM   company
-		WHERE  c_id = #{Cid}
+		FROM   COMPANY
+		WHERE  C_ID = #{Cid}
 	</select>
 	
 	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
-		SELECT * FROM COMPANY
+		SELECT * 
+		FROM COMPANY
 	</select>
 	
 	<select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">
-		SELECT * FROM COMPANY
-		WHERE c_id = #{cid}
+		SELECT * 
+		FROM COMPANY
+		WHERE C_ID = #{cid}
 	</select>
 	
 	<select id="companySearch" resultType="com.third.prj.company.service.CompanyVO" parameterType="String">
 		SELECT *
 		FROM COMPANY
 		WHERE
-		<if test="key == '전체'">EMAIL LIKE '%'||#{val}||'%' OR NAME LIKE '%'||#{val}||'%' OR C_ID LIKE '%'||#{val}||'%'</if>
-		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
-		<if test="key == '기업이름'">NAME LIKE '%'||#{val}||'%'</if>
-		<if test="key == '기업아이디'">C_ID LIKE '%'||#{val}||'%'</if>
-		ORDER BY c_id DESC
+			<if test="key == '전체'">EMAIL LIKE '%'||#{val}||'%' 
+								    OR NAME LIKE '%'||#{val}||'%' 
+								    OR C_ID LIKE '%'||#{val}||'%'</if>
+			<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
+			<if test="key == '기업이름'">NAME LIKE '%'||#{val}||'%'</if>
+			<if test="key == '기업아이디'">C_ID LIKE '%'||#{val}||'%'</if>
+		ORDER BY C_ID DESC
 	</select>
+	
 </mapper>

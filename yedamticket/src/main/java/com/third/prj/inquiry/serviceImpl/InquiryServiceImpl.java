@@ -13,35 +13,36 @@ import com.third.prj.inquiry.service.InquiryVO;
 public class InquiryServiceImpl implements InquiryService {
 
 	@Autowired
-	private InquiryMapper map;
+	private InquiryMapper mapper;
 	
 	@Override
 	public List<InquiryVO> inquirySelectList() {
-		return map.inquirySelectList();
+		return mapper.inquirySelectList();
 	}
 
 	@Override
 	public InquiryVO inquirySelect(InquiryVO vo) {
-		return map.inquirySelect(vo);
+		return mapper.inquirySelect(vo);
 	}
 
 	@Override
 	public List<InquiryVO> inquirySearch(String key, String val) {
-		return map.inquirySearch(key, val);
+		return mapper.inquirySearch(key, val);
 	}
 	
 	@Override
 	public int inquiryInsert(InquiryVO vo) {
-		return map.inquiryInsert(vo);
+		return mapper.inquiryInsert(vo);
 	}
 
 	@Override
 	public int inquiryUpdate(InquiryVO vo) {
-		return map.inquiryUpdate(vo);
+		return mapper.inquiryUpdate(vo);
 	}
 
 	@Override
 	public int inquiryDelete(InquiryVO vo) {
-		return map.inquiryDelete(vo);
+		return mapper.inquiryDelete(vo);
 	}
+	
 }

@@ -1,52 +1,59 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
 <mapper namespace="com.third.prj.inquiry.mapper.InquiryMapper">
 
-	<resultMap type="com.third.prj.inquiry.service.InquiryVO"
-		id="inquiryResultMap">
-		<id property="inNo" column="in_no" /><!-- primary key -->
+	<resultMap type="com.third.prj.inquiry.service.InquiryVO" id="inquiryResultMap">
+		<id property="inNo" column="in_no" />
 		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="inDt" column="indt" />
 		<result property="uId" column="u_id" />
 	</resultMap>
 
-
-	<select id="inquirySelectList"
-		resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT * FROM INQUIRY
+	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
+		SELECT * 
+		FROM INQUIRY
 		ORDER BY INDT DESC
 		<!-- ORDER BY IN_NO DESC -->
 	</select>
-	<select id="inquirySelect"
-		resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT * FROM INQUIRY
+	
+	<select id="inquirySelect" resultType="com.third.prj.inquiry.service.InquiryVO">
+		SELECT * 
+		FROM INQUIRY
 		WHERE IN_NO=#{inNo}
 	</select>
+	
 	<select id="inquirySearch" resultType="com.third.prj.inquiry.service.InquiryVO" parameterType="String">
 		SELECT *
 		FROM INQUIRY
 		WHERE
-		<if test="key == '전체'">TITLE LIKE '%'||#{val}||'%' OR U_ID LIKE '%'||#{val}||'%'</if>
-		<if test="key == '제목'">TITLE LIKE '%'||#{val}||'%'</if>
-		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
+			<if test="key == '전체'">TITLE LIKE '%'||#{val}||'%' 
+									OR U_ID LIKE '%'||#{val}||'%'</if>
+			<if test="key == '제목'">TITLE LIKE '%'||#{val}||'%'</if>
+			<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
 		ORDER BY INDT DESC
 	</select>
 
 	<!-- 1:1문의 -->
-
-	<insert id="inquiryInsert"
-		parameterType="com.third.prj.inquiry.service.InquiryVO">
+	<insert id="inquiryInsert" parameterType="com.third.prj.inquiry.service.InquiryVO">
 		<selectKey keyProperty="inNo" resultType="int" order="BEFORE">
-			SELECT MAX(IN_NO)+1 AS INNO FROM INQUIRY
+			SELECT NVL(MAX(IN_NO),0)+1 AS INNO 
+			FROM INQUIRY
 		</selectKey>
-		INSERT INTO INQUIRY(IN_NO, INDT,TITLE, CONTENT, U_ID)
-		VALUES(#{inNo},#{inDt} ,#{title}, #{content}, #{UId})
+		INSERT INTO INQUIRY(IN_NO
+						  , INDT
+						  , TITLE
+						  , CONTENT
+						  , U_ID)
+		VALUES(#{inNo}
+			 , #{inDt}
+			 , #{title}
+		     , #{content}
+		     , #{UId})
 	</insert>
 	
-
-	<update id="inquiryUpdate"
-		parameterType="com.third.prj.inquiry.service.InquiryVO">
+	<update id="inquiryUpdate" parameterType="com.third.prj.inquiry.service.InquiryVO">
 		UPDATE INQUIRY
 		<set>
 			<if test="title != null"> TITLE = #{title},</if>
@@ -55,11 +62,9 @@
 		WHERE IN_NO = #{inNo}
 	</update>
 
-	<delete id="inquiryDelete"
-		parameterType="com.third.prj.inquiry.service.InquiryVO">
-		DELETE FROM INQUIRY WHERE IN_NO = #{inNo}
+	<delete id="inquiryDelete" parameterType="com.third.prj.inquiry.service.InquiryVO">
+		DELETE FROM INQUIRY 
+		WHERE IN_NO = #{inNo}
 	</delete>
 	
-
-
 </mapper>

@@ -17,8 +17,8 @@ public class InquiryRestController {
 	private InquiryService inquiryDao;
 	
 	@PostMapping("/ajaxInqSearch.do")
-	public List<InquiryVO> ajaxInqSearch(@RequestParam("key") String key, @RequestParam("val") String val){
+	public List<InquiryVO> ajaxInqSearch(@RequestParam("key") String key, @RequestParam("val") String val) {
 		return inquiryDao.inquirySearch(key, val);
-		
 	}
+	
 }

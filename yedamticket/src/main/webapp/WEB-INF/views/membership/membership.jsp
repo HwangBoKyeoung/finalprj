@@ -19,7 +19,7 @@
                 <img src="resources/membership/img/membershipImg.png" alt="membership Image" class="rounded-circle img-fluid img-raised">
                 <h4 class="title" style="color: red">VVIP</h4>
                 <p class="category text-danger">월 20만원 이상 결제하신 고객님</p>
-                <p class="category text-primary">공연할인 혜택</p> <hr>
+                <p class="category text-primary">공연할인 혜택</p> <hr color="#cfccc6">
                 <p class="category text-default"><b style="color: red">VVIP</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">30%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>
@@ -28,7 +28,7 @@
                 <img src="resources/membership/img/membershipImg.png" alt="membership Image" class="rounded-circle img-fluid img-raised">
                 <h4 class="title" style="color: purple">VIP</h4>
                 <p class="category text-danger">월 15만원 이상 결제하신 고객님</p>
-                <p class="category text-primary">공연할인 혜택</p> <hr>
+                <p class="category text-primary">공연할인 혜택</p> <hr color="#cfccc6">
                 <p class="category text-default"><b style="color: purple">VIP</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">20%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>
@@ -37,7 +37,7 @@
                 <img src="resources/membership/img/membershipImg.png" alt="membership Image" class="rounded-circle img-fluid img-raised">
                 <h4 class="title" style="color: gold">GOLD</h4>
                 <p class="category text-danger">월 10만원 이상 결제하신 고객님</p>
-                <p class="category text-primary">공연할인 혜택</p> <hr>
+                <p class="category text-primary">공연할인 혜택</p> <hr color="#cfccc6">
                 <p class="category text-default"><b style="color: gold">GOLD</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">10%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>

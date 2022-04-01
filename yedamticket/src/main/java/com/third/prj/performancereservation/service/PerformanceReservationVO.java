@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PerformanceReservationVO {
+	
 	private int pReservNo;
 	private Date reserveDttm;
 	private String cancelCd;
@@ -15,4 +16,5 @@ public class PerformanceReservationVO {
 	private int pSchNo;
 	private String seatStatCd;
 	private String seatNo;
+	
 }

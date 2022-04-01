@@ -64,6 +64,7 @@
 									</span>
 								</div>
 								<input type="text" placeholder="아이디" class="form-control" required="required" id="Cid" name="Cid" />
+								<button type="button" class="idChk" id="idChk" value="N" data-value="" onclick="fn_idChk()">중복체크</button>
 							</div>
 
 							<div class="input-group no-border">
@@ -81,7 +82,7 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2">
+								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -108,7 +109,7 @@
 										<i class="now-ui-icons tech_mobile"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone">
+								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone" onkeyup="phoneConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -117,25 +118,27 @@
 										<i class="now-ui-icons business_badge"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="사업자등록번호" required="required" id="bizno" name="bizno">
-								<button type="button">확인</button>
+								<input type="text" class="form-control" placeholder="사업자등록번호('-'기호 제거후 입력)" required="required" id="bizno" name="bizno">
+								<button type="button" onclick="biznoConfirm()">확인</button>
 							</div>
 
 							<div class="input-group no-border">
-								개인 간 양도 / 양수 계약에 동의하십니까?
+								
+								<p style="font-size: 13px; width : 100vw; margin : 0">개인 간 양도 / 양수 계약에 동의하십니까?</p>
+								
 								<div class="form-check form-check-radio">
-									<label class="form-check-label"> <input
-										class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1"> 
-										<span class="form-check-sign"></span> 
-											<font color="white">예</font>
+									<label class="form-check-label"> 
+										<input class="form-check-input" type="radio" name="dealAgreeCd" id="dealagreecd" value="Y"> 
+											<span class="form-check-sign"></span> 
+												<font color="white">예</font>
 									</label>
 								</div>
 
 								<div class="form-check form-check-radio">
 									<label class="form-check-label"> 
-										<input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2" checked> 
-										<span class="form-check-sign"></span> 
-										<font color="white">아니오</font>
+										<input class="form-check-input" type="radio" name="dealAgreeCd" id="dealagreecd" value="N" checked> 
+											<span class="form-check-sign"></span> 
+												<font color="white">아니오</font>
 									</label>
 								</div>
 							</div>
@@ -146,7 +149,7 @@
 						</div>
 
 						<div class="card-footer text-center">
-							<input type="submit" class="btn btn-neutral btn-round btn-lg">
+							<input type="submit" id="submit_input" class="btn btn-neutral btn-round btn-lg">
 						</div>
 					</form>
 				</div>
@@ -158,7 +161,12 @@
 			</div>
 		</div>
 	</div>
+	
 	<script>
+	// 시작할 때 제출버튼 비 활성화로 시작
+	$('#submit_input').attr("disabled", true)
+	
+		// 리캡챠
 		function check_recaptcha() {
 			var v = grecaptcha.getResponse()
 			if (v.length == 0) {
@@ -169,6 +177,7 @@
 			}
 		}
 
+		// 아이디 중복확인
 		function fn_idChk() {
 			$.ajax({
 				url : "cidChk",
@@ -190,6 +199,68 @@
 					}
 				}
 			})
+		}
+		
+		// 휴대폰 번호 유효성 검사
+		function phoneConfirm(){
+	 		var phone = document.getElementById('phone').value;
+			var regTel = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
+			if(!regTel.test(phone)) {
+				console.log('올바른 전화번호를 입력하세요.');
+				$('#phone').css("color", "#FE0A03");
+				$('#phone').css("font-weight", "bold")
+				$('#submit_input').attr("disabled", true)
+			}else{
+				console.log('정상적인 전화번호입니다..!');
+				$('#phone').css("color", "greenyellow")
+				$('#submit_input').attr("disabled", false)
+				}
+			}
+		
+		// 비밀번호 확인
+		function passConfirm() {
+			var password = document.getElementById('pwd'); //비밀번호 
+			var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
+			var passwordConfirmClassName = $('#pwd2').attr('name');
+			if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+				/* document.getElementById("pwd2").className = 'form-group has-success'; */
+				$('#pwd2').css("color", "greenyellow")
+				$('#submit_input').attr("disabled", false)
+			} else {
+				/* document.getElementById("pwd2").className = 'form-group has-danger'; */
+				$('#pwd2').css("color", "red")
+				$('#submit_input').attr("disabled", true)
+			}
+		}
+		
+		// 사업자등록번호 유효성 검사
+		function biznoConfirm(){
+			// 샘플용 사업자등록번호(카카오) : 5048600471 
+			var bizno = $('#bizno').val()
+			var data = {
+		      b_no: [bizno],
+		    }
+		
+		    $.ajax({
+		      url: "https://api.odcloud.kr/api/nts-businessman/v1/status?serviceKey=N%2FyDCz6DnRrV45AM81yqvJ9T0C1jPO6x8V8bh1ZUPRwTHQg9C%2B3vOgc6%2FtZcvfaQAwypSKSxXNUW2cpmJBqoZA%3D%3D",
+		      type: "POST",
+		      data: JSON.stringify(data), // json 을 string으로 변환하여 전송
+		      dataType: "JSON",
+		      contentType: "application/json",
+		      accept: "application/json",
+		      success: function (result) {
+		        var bnum = result.data[0].b_stt_cd
+		        if(bnum == 1){
+		        	alert("확인되었습니다.")
+		        	$('#submit_input').attr("disabled", false)
+		        }else{
+		        	alert("존재하지 않는 사업자등록번호 정보입니다.")
+		        }
+		      },
+		      error: function (result) {
+		        console.log(result.responseText) //responseText의 에러메세지 확인
+		      },
+		    })
 		}
 	</script>
 </body>

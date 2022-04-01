@@ -24,11 +24,13 @@ public class ManagerController {
 		model.addAttribute("managers", managerDao.managerSelectList());
 		return "manager/admin/admin";
 	}
+	
 	//관리자 등록 폼
 	@GetMapping("/adminForm.do")
 	public String adminForm() {
 		return "manager/admin/adminForm";
 	}
+	
 	//관리자 등록
 	@RequestMapping("/adminInsert.do")
 	public String adminInsert(ManagerVO vo) {
@@ -38,6 +40,7 @@ public class ManagerController {
 		}
 		return "manager/admin/managerError";
 	}
+	
 	//관리자 상세정보
 	@RequestMapping("/managerSelet.do")
 	public String managerSelet(ManagerVO vo, Model model) {
@@ -45,6 +48,7 @@ public class ManagerController {
 		model.addAttribute("mana",vo);
 		return "manager/admin/adminSelect";
 	}
+	
 	//관리자 정보변경
 	@RequestMapping("/adminUpdate.do")
 	public String adminUpdate(ManagerVO vo) {
@@ -66,6 +70,7 @@ public class ManagerController {
 		}
 		return "manager/admin/managerError";
 	}
+	
 	//관리자 등록 아이디 중복확인
 	@ResponseBody
 	@RequestMapping("/idCheck.do")
@@ -73,7 +78,5 @@ public class ManagerController {
 		int result = managerDao.idCheck(MId);
 		return result;
 	}
-	
-	
 	
 }

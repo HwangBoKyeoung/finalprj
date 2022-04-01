@@ -2917,7 +2917,7 @@ fieldset[disabled] .btn-link.active {
 
 .input-group,
 .form-group {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   position: relative;
 }
 
@@ -5545,7 +5545,7 @@ img {
 }
 
 .card-signup {
-  max-width: 350px;
+  max-width: 500px;
   margin: 0 auto;
 }
 

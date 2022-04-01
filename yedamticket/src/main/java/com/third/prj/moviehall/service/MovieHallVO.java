@@ -6,9 +6,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MovieHallVO {
+	
 	private int mvHallNo;
 	private String loc;
 	private int mvNo;
 	private String name;
 	private String docId;
+	
 }

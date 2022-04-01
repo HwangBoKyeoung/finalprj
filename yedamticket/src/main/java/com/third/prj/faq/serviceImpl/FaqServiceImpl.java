@@ -11,36 +11,33 @@ import com.third.prj.faq.service.FaqVO;
 
 @Repository("faqDao")
 public class FaqServiceImpl implements FaqService {
+	
 	@Autowired
-	private FaqMapper map;
+	private FaqMapper mapper;
 
 	@Override
 	public List<FaqVO> faqSelectList() {
-		return map.faqSelectList();
+		return mapper.faqSelectList();
 	}
 
 	@Override
 	public FaqVO faqSelect(FaqVO vo) {
-		// TODO Auto-generated method stub
-		return map.faqSelect(vo);
+		return mapper.faqSelect(vo);
 	}
 
 	@Override
 	public int faqInsert(FaqVO vo) {
-		// TODO Auto-generated method stub
-		return map.faqInsert(vo);
+		return mapper.faqInsert(vo);
 	}
 
 	@Override
 	public int faqUpdate(FaqVO vo) {
-		// TODO Auto-generated method stub
-		return map.faqUpdate(vo);
+		return mapper.faqUpdate(vo);
 	}
 
 	@Override
 	public int faqDelete(FaqVO vo) {
-		// TODO Auto-generated method stub
-		return map.faqDelete(vo);
+		return mapper.faqDelete(vo);
 	}
 
 }

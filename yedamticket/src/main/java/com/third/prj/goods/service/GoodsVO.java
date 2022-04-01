@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class GoodsVO {
+	
 	private int gNo;
 	private String name;
 	private String seller;
@@ -14,4 +15,5 @@ public class GoodsVO {
 	private String sellNo;
 	private String fileCd;
 	private String goodsCd;
+	
 }

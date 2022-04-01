@@ -12,52 +12,49 @@ import com.third.prj.notice.service.NoticeVO;
 
 @Repository("noticeDao")
 public class NoticeServiceImpl implements NoticeService {
+	
 	@Autowired
-	private NoticeMapper map;
+	private NoticeMapper mapper;
 
 	@Override
 	public List<NoticeVO> noticeSelectList() {
-		return map.noticeSelectList();
+		return mapper.noticeSelectList();
 	}
 
 	@Override
 	public NoticeVO noticeSelect(NoticeVO vo) {
-		return map.noticeSelect(vo);
+		return mapper.noticeSelect(vo);
 	}
 
 	@Override
 	public int noticeInsert(NoticeVO vo) {
-		return map.noticeInsert(vo);
+		return mapper.noticeInsert(vo);
 	}
 
 	@Override
 	public int noticeUpdate(NoticeVO vo) {
-		return map.noticeUpdate(vo);
+		return mapper.noticeUpdate(vo);
 	}
 
 	@Override
 	public int noticeDelete(NoticeVO vo) {
-		return map.noticeDelete(vo);
+		return mapper.noticeDelete(vo);
 	}
 
 	@Override
 	public void noticeHitUpdate(int noticeNo) {
-		map.noticeHitUpdate(noticeNo);
+		mapper.noticeHitUpdate(noticeNo);
 
 	}
 
-
 	@Override
 	public List<NoticeVO> getList(CriteriaVO cri) {
-		// TODO Auto-generated method stub
-		return map.getList(cri);
+		return mapper.getList(cri);
 	}
 
 	@Override
 	public int getTotal(CriteriaVO cri) {
-		// TODO Auto-generated method stub
-		return map.getTotal(cri);
+		return mapper.getTotal(cri);
 	}
-
 
 }

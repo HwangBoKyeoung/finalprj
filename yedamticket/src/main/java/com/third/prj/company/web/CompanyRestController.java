@@ -17,7 +17,7 @@ public class CompanyRestController {
 	private CompanyService companyDao;
 	
 	@PostMapping("/ajaxCompanySearch.do")
-	public List<CompanyVO>ajaxCompanySearch(@RequestParam("key")String key, @RequestParam("val") String val){
+	public List<CompanyVO> ajaxCompanySearch(@RequestParam("key")String key, @RequestParam("val") String val) {
 		return companyDao.companySearch(key, val);
 	}
 }

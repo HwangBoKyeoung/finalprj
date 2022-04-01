@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class TicketDealVO {
+	
 	private int dealNo;
 	private int tNo;
 	private String uNo;

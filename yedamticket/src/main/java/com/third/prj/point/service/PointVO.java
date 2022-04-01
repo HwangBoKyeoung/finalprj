@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PointVO {
+	
 	private int charge;
 	private Date payDt;
 	private String cancelCd;
@@ -15,4 +16,5 @@ public class PointVO {
 	private String uId;
 	private int pay;
 	private String buyCtntCd;
+	
 }

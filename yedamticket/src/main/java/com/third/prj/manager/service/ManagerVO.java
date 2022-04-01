@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ManagerVO {
+	
 	private String mId;
 	private String name;
 	private String pwd;
@@ -13,4 +14,5 @@ public class ManagerVO {
 	private String phone;
 	private String authCd;
 	private String managerStat;
+	
 }

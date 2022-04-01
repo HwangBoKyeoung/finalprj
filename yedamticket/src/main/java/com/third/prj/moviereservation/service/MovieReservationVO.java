@@ -6,6 +6,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MovieReservationVO {
+	
 	private int mvReservNo;
 	private String reservDt;
 	private String cancelCd;
@@ -14,4 +15,5 @@ public class MovieReservationVO {
 	private String schDate;
 	private String seatStatCd;
 	private String seatName;
+	
 }

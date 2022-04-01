@@ -8,6 +8,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class DeleteRequestVO {
+	
 	private int delReqNo;
 	private Date delDt;
 	private String cId;
@@ -15,4 +16,5 @@ public class DeleteRequestVO {
 	private String content;
 	private int mvNo;
 	private int pNo;
+	
 }

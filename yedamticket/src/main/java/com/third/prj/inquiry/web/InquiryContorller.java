@@ -34,7 +34,7 @@ public class InquiryContorller {
 	
 	//상담상세페이지
 	@RequestMapping("/inquirySelect.do")
-	public String inquirySelect(InquiryVO vo,InquiryReplyVO replyvo, Model model) {
+	public String inquirySelect(InquiryVO vo, InquiryReplyVO replyvo, Model model) {
 //		new 답변VO
 //		답변Vo.set(vo.get답변ID())
 		replyvo.setInNo(vo.getInNo());
@@ -78,7 +78,6 @@ public class InquiryContorller {
 	public String inqUpdateForm(InquiryVO vo, Model model) {
 		vo = inquiryDao.inquirySelect(vo);
 		model.addAttribute("inqs", vo);
-
 		return "inquiry/inqUpdateForm";
 	}
 
@@ -108,5 +107,4 @@ public class InquiryContorller {
 		return inquiryReplyDao.inquiryReplySelect(vo);
 	} 
 	
-
 }

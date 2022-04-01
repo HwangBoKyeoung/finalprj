@@ -18,18 +18,13 @@ public class NoticeController {
 	@Autowired
 	private NoticeService noticeDao;
 
-
 	@RequestMapping("/noticeList.do")
 	public String noticeList(Model model, CriteriaVO cri) {
-		
-		
 		PageVO pageVO = new PageVO(cri, noticeDao.getTotal(cri)); //(기준, 토탈)
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달		
 		model.addAttribute("list", noticeDao.getList(cri)); //게시글전달
 		return "notice/noticeList";
 	}
-
-
 
 	@RequestMapping("/noticeWriteForm.do")
 	public String noticeWriteForm() {
@@ -64,7 +59,6 @@ public class NoticeController {
 	public String noticeUpdateForm(NoticeVO vo, Model model) {
 		vo = noticeDao.noticeSelect(vo);
 		model.addAttribute("notice", vo);
-
 		return "notice/noticeUpdateForm";
 	}
 
@@ -87,6 +81,5 @@ public class NoticeController {
 		}
 		return "notice/noticeError";
 	}
-
 
 }

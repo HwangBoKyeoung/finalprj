@@ -20,30 +20,32 @@
 		<c:if test="${not empty faqs.FNo }">
 			<div>
 				<table border="1">
-
-					<tr>
-						<th width="100">유형</th>
-						<td align="center" width="150">${faqs.qstCd }</td>
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td colspan="3">${faqs.title }</td>
-					</tr>
-					<tr>
-						<th>내용</th>
-						<td colspan="3"><textarea rows="10" cols="80" readonly="readonly">${faqs.content }</textarea>
-						</td>
-					</tr>
+					<tbody>
+						<tr>
+							<th width="100">유형</th>
+							<td align="center" width="150">${faqs.qstCd }</td>
+						</tr>
+						<tr>
+							<th>제목</th>
+							<td colspan="3">${faqs.title }</td>
+						</tr>
+						<tr>
+							<th>내용</th>
+							<td colspan="3"><textarea rows="10" cols="80" readonly="readonly">${faqs.content }</textarea>
+							</td>
+						</tr>
+					</tbody>
 				</table>
 			</div>
 		</c:if>
 		<br>
+		
 		<div>
 			<button type="button" onclick="location.href='faqList.do'">목록가기</button>
 			<button type="submit" >수정</button>
-			<button type="button"
-				onclick="location.href='faqDelete.do?FNo=${faqs.FNo}'">삭제</button>
+			<button type="button" onclick="location.href='faqDelete.do?FNo=${faqs.FNo}'">삭제</button>
 		</div>
+		
 	</form>
 </body>
 </html> 

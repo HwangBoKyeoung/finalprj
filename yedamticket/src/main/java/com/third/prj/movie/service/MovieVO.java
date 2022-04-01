@@ -1,13 +1,12 @@
 package com.third.prj.movie.service;
 
-
-
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
 public class MovieVO {
+	
 	private int mvNo;
 	private String name;
 	private String genre;
@@ -22,4 +21,5 @@ public class MovieVO {
 	private String actor;
 	private String fileCd;
 	private String docId;
+	
 }

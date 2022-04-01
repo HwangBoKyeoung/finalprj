@@ -22,10 +22,11 @@ import com.third.prj.user.service.UserVO;
 public class UserController {
 
 	@Autowired
+	private FaqService faqDao;
+	
+	@Autowired
 	private UserService userDao;
 
-	@Autowired
-	private FaqService faqDao;
 	@Autowired
 	private NoticeService noticeDao;
 
@@ -109,4 +110,5 @@ public class UserController {
 	public String userPage() {
 		return "user/userPage";
 	}
+	
 }

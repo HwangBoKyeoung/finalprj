@@ -14,7 +14,9 @@ public interface ManagerMapper {
 	int managerUpdate(ManagerVO vo);
 	int managerDelete(ManagerVO vo);
 	
+//	관리자아이디중복체크
 	int idCheck(String MId);
-	
+//	관리자 검색
 	List<ManagerVO> managerSearch(@Param("key") String key, @Param("val") String val);
+	
 }

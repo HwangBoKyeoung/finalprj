@@ -15,10 +15,10 @@ public class UserRestController {
 	
 	@Autowired
 	private UserService userDao;
+	
 	@RequestMapping("/ajaxUserSearch.do")
-	public List<UserVO> ajaxUserSearch(@RequestParam("key") String key, @RequestParam("val") String val){
+	public List<UserVO> ajaxUserSearch(@RequestParam("key") String key, @RequestParam("val") String val) {
 		return userDao.userSearch(key, val);
-				
 	}
 
 }

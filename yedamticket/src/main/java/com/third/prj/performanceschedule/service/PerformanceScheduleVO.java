@@ -8,9 +8,11 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PerformanceScheduleVO {
+	
 	private int pSchNo;
 	private Date frDt;
 	private int no;
 	private String time;
 	private int pNo;
+	
 }

@@ -10,10 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class MovieScheduleVO {
+	
 	private int mvSchNo;
 	@JsonFormat(pattern="MM/dd/yyyy")
 	private Date schDt;
 	private String docId;
 	private String time;
 	private int mvHallNo;
+	
 }

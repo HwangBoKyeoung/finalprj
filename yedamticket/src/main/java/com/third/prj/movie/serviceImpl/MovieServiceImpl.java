@@ -8,14 +8,14 @@ import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
 
 @Repository("movieDao")
-public class MovieServiceImpl implements MovieService{
+public class MovieServiceImpl implements MovieService {
+	
 	@Autowired
-	private MovieMapper map;
+	private MovieMapper mapper;
+	
 	@Override
 	public MovieVO movieDetail(MovieVO vo) {
-		// TODO Auto-generated method stub
-		return map.movieDetail(vo);
+		return mapper.movieDetail(vo);
 	}
-	
 	
 }

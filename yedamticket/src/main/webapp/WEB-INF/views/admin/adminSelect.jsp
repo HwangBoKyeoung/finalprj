@@ -19,27 +19,33 @@
          <div class="card-body">
             <h4 class="card-title">상세페이지</h4>
             <form class="forms-sample" action="adminUpdate.do" method="post">
+            
                <div class="form-group">
                   <label for="exampleInputUsername1">ID</label> <input type="text"
                      class="form-control" id="MId" name="MId" readonly="readonly" value="${mana.MId }">
                </div>
+               
                <div class="form-group">
                   <label for="exampleInputEmail1">Password</label> <input
                      type="password" class="form-control" id="pwd" name="pwd" value="${mana.pwd }" readonly="readonly">
                </div>
+               
                <div class="form-group">
                   <label for="exampleInputUsername1">Name</label> <input type="text"
                      class="form-control" id="name" name="name" value="${mana.name }" readonly="readonly">
                </div>
+               
                <div class="form-group">
                   <label for="exampleInputUsername1">Depart</label> <input
                      type="text" class="form-control" id="depart" value="${mana.depart }" name="depart">
                </div>
+               
                <div class="form-group">
                   <label for="exampleInputUsername1">Phone</label> <input
                      type="text" class="form-control" id="phone" name="phone"
                      placeholder="Mobile number" value="${mana.phone }" readonly="readonly">
                </div>
+               
                <div class="form-group">
                   <label for="exampleInputMobile">AuthCode</label>
                   <div class="input-group-prepend">
@@ -52,16 +58,18 @@
                </div>
                   <button type="submit" class="btn btn-gradient-primary me-2">UPDATE</button>
             </form>
+            
             <div>
             	<button style="margin-right:7px;" class="btn btn-gradient-primary me-2" onclick="location.href='admindelete.do?MId=${mana.MId}'">DELETE</button>
             	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="btn btn-gradient-primary me-2" onclick="location.href='admin.do'">Cancel</button>
             </div>
+            
          </div>
       </div>
    </div>
+   
    <script type="text/javascript">
-   		
    		
    		/* $("#defaults").on('click', function(){
    			location.href='admindelete.do?MId='+ ${mana.MId};
