@@ -48,9 +48,9 @@
 	}
 	
 	.body-content{
-		margin-top: 70px;
+		margin-top: 0px;
 		padding-bottom: 100px;	/* footer 높이 */
-		padding-left: 100px;
+		padding-left: 0px;
 	}
 	
 	.footer{

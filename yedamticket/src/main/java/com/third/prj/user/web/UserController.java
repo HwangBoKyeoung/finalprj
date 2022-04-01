@@ -110,5 +110,9 @@ public class UserController {
 	public String userPage() {
 		return "user/userPage";
 	}
+	@RequestMapping("/userUpdateForm.do")
+	public String userUpdateForm() {
+		return "user/userUpdateForm";
+	}
 	
 }

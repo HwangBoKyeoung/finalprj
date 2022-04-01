@@ -62,10 +62,17 @@
 		WHERE U_ID = #{Uid}
 	</select>
 
-	<select id="emailCheck" resultType="com.third.prj.user.service.UserVO">
-		SELECT COUNT(*)
-		FROM USERS
+	
+	<select id="emailCheck"
+		resultType="int">
+		SELECT COUNT(*) FROM USERS
 		WHERE EMAIL = #{email}
 	</select>
+	
+	<insert id="kakaoInsert" parameterType="com.third.prj.user.service.UserVO">
+		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
+		VALUES (#{name}, #{Uid},  #{email} , #{loginCd} )
+	
+	</insert>
 
 </mapper>

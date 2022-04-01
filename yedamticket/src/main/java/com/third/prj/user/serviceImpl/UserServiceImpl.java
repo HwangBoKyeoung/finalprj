@@ -46,9 +46,18 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO emailCheck(UserVO vo) {
-		return mapper.emailCheck(vo);
+	public int emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return mapper.emailCheck(email);
 	}
+
+	@Override
+	public int kakaoInsert(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.kakaoInsert(vo);
+	}
+
+	
 	
 }
 

@@ -17,6 +17,8 @@ public interface UserService {
 //	security
 	UserVO getUser(UserVO vo);
 //	이메일체크
-	UserVO emailCheck(UserVO vo);
+	int emailCheck(String email);
+// 카카오 회원가입	
+	int kakaoInsert(UserVO vo);
   
 }
