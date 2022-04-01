@@ -2,14 +2,21 @@
 (function() {
     let date=new Date();
     let year=date.getFullYear();
-    let day=date.getDate()-8;
+    let day=date.getDate();
+
      var month = date.getMonth() + 1;
+	if(day < 10 ) {
+         day='0'+ day
+     } else{
+         day='' + day
+     }; 
      if(month < 10 ) {
          month='0'+ month
      } else{
          month='' + month
      }; 
     let now=String(year)+String(month)+String(day);
+	console.log(now);
     let url =
     'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt='+now;
     fetch(url)
@@ -139,6 +146,11 @@
          let year=date.getFullYear();
          let day=date.getDate();
          var month = date.getMonth() + 1;
+ 		if(day < 10 ) {
+             day='0'+ day
+         } else{
+             day='' + day
+         }; 
          if(month < 10 ) {
              month='0'+ month
          } else{
