@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<div class="section section-images">
+<!-- <div class="section section-images">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -18,7 +18,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div> -->
       <div class="section section-basic" id="basic-elements">
         <div class="container">
           <h3 class="title">Basic Elements</h3>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.third.prj.moviereservation.mapper.MovieReservMapper">
+	
+	<insert id="movieReservationInsert" parameterType="com.third.prj.moviereservation.service.MovieReservationVO">
+		INSERT INTO MOVIE_RESERVATION
+		(MV_RESERV_NO,
+		RESERVDT,
+		U_ID,
+		SCH_DATE,
+		SCHTIME,
+		SEAT_STAT_CD,
+		SEAT_NAME,
+		RESERVLOC,
+		RESERVHALL,
+		DOCID)
+		VALUES(RESERV_SEQ.nextval,
+				sysdate,
+				#{UId},
+				#{schDate},
+				#{schTime},
+				'0',
+				#{seatName},
+				#{reservLoc},
+				#{reservHall},
+				#{docId})
+	</insert>
+	
+</mapper>

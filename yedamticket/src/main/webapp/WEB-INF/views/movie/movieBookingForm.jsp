@@ -90,11 +90,12 @@ body {
         </div>
         
       <form action="movieReservation.do" method="post">
-        <input type="text" id="mvNo" name="mvNo"><!-- 무비넘버 -->
+        <input type="text" id="docId" name="docId"><!-- 무비넘버 -->
         <input type="text" id="reservLoc" name="reservLoc"><!-- 지역 -->
         <input type="text" id="reservHall" name="reservHall"><!-- 영화관 -->
-        <input type="text" id="uId" name="uId" value="test"><!-- 사용자 -->
+        <input type="text" id="UId" name="UId" value="test"><!-- 사용자 -->
         <input type="text" id="schDate" name="schDate"><!-- 날짜+시간값 -->
+        <input type="text" id="schTime" name="schTime">
         <input type="text" id="seatName" name="seatName"><!-- 좌석이름 -->
         <button type="submit">예매하기</button>
        </form>
@@ -123,7 +124,7 @@ fetch(url)
 movieList.addEventListener('click',selectedList);
 function selectedList(){
 	console.log(event.target.getAttribute('data-cd'));
-	mvNo.value=event.target.getAttribute('data-cd');
+	docId.value=event.target.getAttribute('data-cd');
 	if(event.target.classList.contains('selectedList')){
 		event.target.classList.remove('selectedList');
     }else{
@@ -212,6 +213,8 @@ $('#showTime').on('click',function(){
     }else{
     	event.target.setAttribute('class','showTime');  
     };
+    console.log($(event.target).text());
+    $('#schTime').val($(event.target).text());
 });
 //좌석
   var i, j;
@@ -254,6 +257,8 @@ $('#showTime').on('click',function(){
           let p=document.createElement('span');
           p.innerText=this.innerText;
           result.append(p);
+          console.log($(event.target).text());
+          $('#seatName').val($(event.target).text());
       }
 </script>  
 </body>

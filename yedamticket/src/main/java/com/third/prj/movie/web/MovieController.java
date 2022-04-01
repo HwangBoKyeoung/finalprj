@@ -15,6 +15,8 @@ import com.third.prj.moviehall.service.MovieHallService;
 import com.third.prj.moviehall.service.MovieHallVO;
 import com.third.prj.moviereply.service.MovieReplyService;
 import com.third.prj.moviereply.service.MovieReplyVO;
+import com.third.prj.moviereservation.service.MovieReservService;
+import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
 
@@ -32,7 +34,11 @@ public class MovieController {
 
 	@Autowired
 	private MovieScheduleService movieScheduleDao;
-
+	
+	@Autowired
+	private MovieReservService movieReservationDao;
+	
+	
 	@RequestMapping("/movieList.do")
 	public String movieList() {
 		return "movie/movieList";
@@ -42,7 +48,7 @@ public class MovieController {
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
 		System.out.println("무비넘어" + vo.getMvNo());
-		rvo.setMvNo(vo.getMvNo());
+		//rvo.setMvNo(vo.getMvNo());
 		System.out.println("댓글에준 무비넘버" + rvo.getMvNo());
 
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
@@ -62,10 +68,10 @@ public class MovieController {
 
 		int n = movieReplyDao.movieReplyInsert(vo);
 		System.out.println(n);
-
+		//select key 사용 바꾸기
 		if (n != 0) {
-			vo = movieReplyDao.selectReplyNo();
-			System.out.println(Integer.toString(vo.getMvReNo()));
+			//vo = movieReplyDao.selectReplyNo();
+			//System.out.println(Integer.toString(vo.getMvReNo()));
 			return Integer.toString(vo.getMvReNo());
 		} else {
 			return null;
@@ -110,5 +116,13 @@ public class MovieController {
 	public List<MovieScheduleVO> movieSchdtList(Model model, MovieScheduleVO vo) {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
-
+	//결제페이지로
+	@RequestMapping("/movieReservation.do")
+	public String movieReservation(Model model,	MovieReservationVO vo) {
+		System.out.println("hall"+vo.getReservHall());
+		System.out.println("loc"+vo.getReservLoc());
+		 movieReservationDao.movieReservationInsert(vo);
+		 model.addAttribute("re",vo);
+		return "movie/movieReservationForm";
+	}
 }
