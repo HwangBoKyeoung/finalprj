@@ -22,4 +22,12 @@ public class PointController {
 		return "point/point_2";
 	}
 	
+	/*
+	 * @RequestMapping(value = "/point_2.do", method = RequestMethod.POST) public
+	 * String point_3(Model model, @RequestParam int point, @RequestParam String id)
+	 * { model.addAttribute("point", point); model.addAttribute("id", id); return
+	 * "point/point_3"; }
+	 */
+	
+	
 }

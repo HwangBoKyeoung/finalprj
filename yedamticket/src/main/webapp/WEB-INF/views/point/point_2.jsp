@@ -30,7 +30,7 @@
 
 			// 결제창에서 보여질 이름
 			// name: '주문명 : ${auction.a_title}',
-			name :"${point}원을 충전합니다",
+			name :"${point} 원을 충전합니다",
 
 			// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
 			// amount: ${bid.b_bid},
@@ -48,6 +48,7 @@
 				// success.submit();
 				// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 				// 자세한 설명은 구글링으로 보시는게 좋습니다.
+				
 			} else {
 				var msg = "결제에 실패하였습니다."
 				msg += "에러내용 : " + rsp.error_msg

@@ -11,14 +11,21 @@
 						, addr
 						, phone
 						, birthdt)
-		VALUES (#{name}
-			  , #{Uid}
-			  , #{pwd}
-			  , #{email}
-			  , #{addr}
-			  , #{phone}
-			  , #{birthDt})
+				   VALUES(#{name}
+		  			    , #{Uid}
+					    , #{pwd}
+					    , #{email}
+					    , #{addr}
+					    , #{phone}
+					    , #{birthDt})
 	</insert>
+
+	<!-- <update id="userPointUpdate">
+		UPDATE users
+		<set>
+			<if test=""></if>
+		</set>
+	</update> -->
 
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*)
