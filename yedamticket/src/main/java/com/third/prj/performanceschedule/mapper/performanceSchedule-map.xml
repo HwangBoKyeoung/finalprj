@@ -11,8 +11,14 @@
 	</resultMap>
 	
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
-		SELECT * 
-		FROM PERFORMANCE_SCHEDULE
+		SELECT TO_CHAR(FRDT, 'YYYY-MM-DD') || 'T' || TIME AS "start",
+				FRDT,
+				TIME,
+				no,
+				p_sch_no,
+				p_no
+		from PERFORMANCE_SCHEDULE
+        ORDER BY P_NO
 	</select>
 	
 </mapper>

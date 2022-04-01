@@ -7,18 +7,18 @@
 <title>consertSchedule</title>
 <link href='resources/calender/main.css' rel='stylesheet' />
 <script src='resources/calender/main.js'></script>
-<script
-	src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var request = $.ajax({
-			url : "consertSchedule.do",
+			url : "consertCalender.do",
 			method : "GET",
 			dataType : "json"
 		});
 
 		request.done(function(data) {
 			console.log(data);
+			
 			var calendarEl = document.getElementById('calendar');
 
 			var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -30,7 +30,7 @@
 				},
 				events : data
 			});
-
+			console.log(data[0].frDt);
 			calendar.render();
 		});
 		request.fail(function(jqXHR, textStatus) {
