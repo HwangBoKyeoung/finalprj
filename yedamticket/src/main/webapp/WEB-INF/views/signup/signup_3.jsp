@@ -6,25 +6,20 @@
 <meta charset="UTF-8">
 <head>
 <meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76"
-	href="./resources/users/img/apple-icon.png">
-<link rel="icon" type="image/png"
-	href="./resources/users/img/favicon.png">
+<link rel="apple-touch-icon" sizes="76x76" href="./resources/users/img/apple-icon.png">
+<link rel="icon" type="image/png" href="./resources/users/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-	name='viewport' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 <!--     Fonts and icons     -->
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
-	rel="stylesheet" />
-<link rel="stylesheet"
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet"/>
+<link rel="stylesheet" 
 	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
 	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
 	crossorigin="anonymous">
 
 <!-- CSS Files -->
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
+<link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
 
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
@@ -38,7 +33,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="black">
-					<form class="form" method="POST" action="signup_4.do" onsubmit='check_recaptcha();'>
+					<form class="form" method="POST" action="signup_4.do" onsubmit='return check_recaptcha();'>
 						<div class="card-header text-center">
 							<h3 class="card-title title-up">회원가입</h3>
 							<div class="social-line">
@@ -146,7 +141,7 @@
 
 	// 시작할 때 제출버튼 비 활성화로 시작
 	// $('#submit_input').attr("disabled", true)
-		var idCnum = 1;
+	/* 	var idCnum = 1;
 		var phoneCnum = 1;
 		var passCnum = 1;
 		var birthCnum = 1; 
@@ -157,12 +152,12 @@
 			}else{
 				$('.form').submit();
 			}
-		}
+		} */
 	
 		// 리캡챠
 		function check_recaptcha() {
 			if ($("#idChk").val() == 'N') {
-				alert('아이디중복체크하세요');
+				alert('아이디 중복체크 하세요.');
 				return false;
 			}
 			var v = grecaptcha.getResponse()
@@ -186,7 +181,7 @@
 				},
 				success : function(data) {
 					if (data == 1) {
-						console.log($("#idChk").val());
+						$("#idChk").val('N');
 						alert("중복된 아이디 입니다..");
 						idCnum = 1;
 					} else if (data == 0) {

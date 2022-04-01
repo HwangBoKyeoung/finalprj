@@ -6,27 +6,19 @@
 <meta charset="UTF-8">
 <head>
 <meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76"
-	href="./resources/users/img/apple-icon.png">
-<link rel="icon" type="image/png"
-	href="./resources/users/img/favicon.png">
+<link rel="apple-touch-icon" sizes="76x76" href="./resources/users/img/apple-icon.png">
+<link rel="icon" type="image/png" href="./resources/users/img/favicon.png">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-	name='viewport' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport'/>
 <!--     Fonts and icons     -->
-<link
-	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
-	rel="stylesheet" />
-<link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-	crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" 
+					   integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" 
+					   crossorigin="anonymous">
 
 <!-- CSS Files -->
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
-<link href="./resources/users/css/now-ui-kit.css?v=1.3.0"
-	rel="stylesheet" />
+<link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
 <!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
@@ -39,8 +31,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="black">
-					<form class="form" method="POST" action="signupB_3.do"
-						onsubmit='return check_recaptcha();'>
+					<form class="form" method="POST" action="signupB_3.do" onsubmit='return check_recaptcha();'>
 						<div class="card-header text-center">
 							<h3 class="card-title title-up">기업회원가입</h3>
 							<div class="social-line">
@@ -64,7 +55,7 @@
 									</span>
 								</div>
 								<input type="text" placeholder="아이디" class="form-control" required="required" id="Cid" name="Cid" />
-								<button type="button" class="idChk" id="idChk" value="N" data-value="" onclick="fn_idChk()">중복체크</button>
+								<button type="button" class="cidChk" id="cidChk" value="N" onclick="fn_idChk()">중복체크</button>
 							</div>
 
 							<div class="input-group no-border">
@@ -119,7 +110,7 @@
 									</span>
 								</div>
 								<input type="text" class="form-control" placeholder="사업자등록번호('-'기호 제거후 입력)" required="required" id="bizno" name="bizno">
-								<button type="button" onclick="biznoConfirm()">확인</button>
+								<button type="button" class="bizChk" id="bizChk" value="N" onclick="biznoConfirm()">중복체크</button>
 							</div>
 
 							<div class="input-group no-border">
@@ -164,10 +155,32 @@
 	
 	<script>
 	// 시작할 때 제출버튼 비 활성화로 시작
-	$('#submit_input').attr("disabled", true)
+	//$('#submit_input').attr("disabled", true)
+	
+	/* var idCnum = 1;
+	var phoneCnum = 1;
+	var passCnum = 1;
+	var biznoCnum = 1;
+	
+	function submitChk(){
+		if(idCnum + phoneCnum + passCnum + biznoCnum > 0){
+			alert("중복체크를 확인해주세요")
+		}else{
+			$('.form').submit();
+		}
+	} */
 	
 		// 리캡챠
 		function check_recaptcha() {
+			if($('#cidChk').val() == 'N'){
+				alert('아이디 중복체크 하세요')
+				return false;
+			}
+			if($('#bizChk').val() == 'N'){
+				alert('사업자 등록번호 중복체크 하세요.')
+				return false
+			}
+		
 			var v = grecaptcha.getResponse()
 			if (v.length == 0) {
 				alert("자동가입방지를 체크해주세요.")
@@ -188,12 +201,13 @@
 				},
 				success : function(data) {
 					if (data == 1) {
-						console.log($("#cidChk").val());
+						$("#cidChk").val('N');
 						alert("중복된 아이디 입니다..");
+						idCnum = 1;
 					} else if (data == 0) {
 						$("#cidChk").val('Y');
 						alert("사용가능한 아이디 입니다.");
-						console.log($("#cidChk").val());
+						idCnum = 0;
 					} else {
 						alert("아이디를 입력해주세요.");
 					}
@@ -209,11 +223,13 @@
 				console.log('올바른 전화번호를 입력하세요.');
 				$('#phone').css("color", "#FE0A03");
 				$('#phone').css("font-weight", "bold")
-				$('#submit_input').attr("disabled", true)
+				/* $('#submit_input').attr("disabled", true) */
+				phoneCnum = 1;
 			}else{
 				console.log('정상적인 전화번호입니다..!');
 				$('#phone').css("color", "greenyellow")
-				$('#submit_input').attr("disabled", false)
+				/* $('#submit_input').attr("disabled", false) */
+				phoneCnum = 0;
 				}
 			}
 		
@@ -225,11 +241,13 @@
 			if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
 				/* document.getElementById("pwd2").className = 'form-group has-success'; */
 				$('#pwd2').css("color", "greenyellow")
-				$('#submit_input').attr("disabled", false)
+				/* $('#submit_input').attr("disabled", false) */
+				passCnum = 0;
 			} else {
 				/* document.getElementById("pwd2").className = 'form-group has-danger'; */
 				$('#pwd2').css("color", "red")
-				$('#submit_input').attr("disabled", true)
+				/* $('#submit_input').attr("disabled", true) */
+				passCnum = 1;
 			}
 		}
 		
@@ -251,9 +269,12 @@
 		      success: function (result) {
 		        var bnum = result.data[0].b_stt_cd
 		        if(bnum == 1){
+		        	$('#bizChk').val("Y")
 		        	alert("확인되었습니다.")
-		        	$('#submit_input').attr("disabled", false)
+		        	/* $('#submit_input').attr("disabled", false) */
+		        	
 		        }else{
+		        	$('#bizChk').val("N")
 		        	alert("존재하지 않는 사업자등록번호 정보입니다.")
 		        }
 		      },
