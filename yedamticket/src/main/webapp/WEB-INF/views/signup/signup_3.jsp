@@ -143,7 +143,7 @@
 	// $('#submit_input').attr("disabled", true)
 	/* 	var idCnum = 1;
 		var phoneCnum = 1;
-		var passCnum = 1;
+		
 		var birthCnum = 1; 
 	
 		function submitChk(){
@@ -153,13 +153,19 @@
 				$('.form').submit();
 			}
 		} */
-	
-		// 리캡챠
+		
+		// 리캡챠 및 submit버튼 확인
 		function check_recaptcha() {
 			if ($("#idChk").val() == 'N') {
 				alert('아이디 중복체크 하세요.');
 				return false;
 			}
+			
+			if (passCnum == 1){
+				alert("비밀번호를 확인해주세요.")
+				return false
+			}
+			
 			var v = grecaptcha.getResponse()
 			if (v.length == 0) {
 				alert("자동가입방지를 체크해주세요.")
@@ -237,7 +243,7 @@
 		
 		// 비밀번호 확인		
 		function passConfirm() {
-			var password = document.getElementById('pwd'); //비밀번호 
+			var password = document.getElementById('pwd'); //비밀번호
 			var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
 			var passwordConfirmClassName = $('#pwd2').attr('name');
 			if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.

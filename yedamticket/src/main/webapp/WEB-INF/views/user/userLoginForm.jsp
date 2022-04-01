@@ -141,7 +141,7 @@ border-radius: 30px;
 								</div><br>
 								<div class="pull-left">
 									<h6>
-										<a href="#pablo" class="link">Create Account</a>
+										<a href="signup_1.do" class="link">Create Account</a>
 									</h6>
 								</div>
 								<div class="pull-right">

@@ -170,12 +170,18 @@
 		}
 	} */
 	
-		// 리캡챠
+		// 리캡챠 및 submit버튼 확인
 		function check_recaptcha() {
 			if($('#cidChk').val() == 'N'){
 				alert('아이디 중복체크 하세요')
 				return false;
 			}
+			
+			if (passCnum == 1){
+				alert("비밀번호를 확인해주세요.")
+				return false
+			}
+			
 			if($('#bizChk').val() == 'N'){
 				alert('사업자 등록번호 중복체크 하세요.')
 				return false

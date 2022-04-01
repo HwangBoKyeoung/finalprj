@@ -10,8 +10,8 @@
 	<div class="section section-signup" style="background-image: url('./resources/users/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px; padding-top: 0; display: flex; align-items: center; justify-content: center;">
 		<div style="width: 535px; height:600px; padding:1rem; margin:1rem; float: left;">
 			<div class="card card-signup" data-background-color="black" style="height:100%; width:100%;">
-				<form onsubmit="chkSessionId();">
-				<!-- method="POST" action="point_2.do" -->
+				<form id="frm" action="point_2.do" method="POST">
+				<!-- onsubmit="return chkSessionId(); -->
 					<div class="card-header text-center">
 						<h3 class="card-title title-up">충전</h3>
 					</div>
@@ -51,16 +51,17 @@
 <script>
 	
 	// 세션아이디 값의 유무를 체크
-	function chkSessionId(){
+	 
+	/* function chkSessionId(){
 		if($('#id').val() == ''){
 			alert("세션값이 없다!")
 			return false;
-		}else{
-			alert("현재 세션값 : " + ${sessionId})
-			return true; 
+		}else{			
+			alert("현재 세션 값 : ${sessionId} , 결제 페이지로 이동합니다.")
+			return true;
 		}
+	} */ 
 	
-	}
 	
 	// 포인트 부분 변수 선언 후 시작할 때 제출 버튼 비 활성화
 	t1 = $("#point").val()
