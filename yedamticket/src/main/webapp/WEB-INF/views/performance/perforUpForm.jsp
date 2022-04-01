@@ -21,73 +21,73 @@
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">공연번호</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="PNo" name="PNo"value="${pers.PNo}">
+								<input type="text" class="form-control" id="PNo" name="PNo" value="${pers.PNo}">
 							</div>
 						</div>
 						<div class="form-group row">
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">공연이름</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="name" name="name"value="${pers.name}">
+								<input type="text" class="form-control" id="name" name="name" value="${pers.name }">
 							</div>
 						</div>
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연설명</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<!-- 								<input type="text" class="form-control" id="content" name="content" -->
-<%-- 									value="${pers.content}" placeholder="Password"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">출연자이름</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="text" class="form-control" id="actor" name="actor" value="${pers.actor }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연장</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="text" class="form-control" id="loc" name="loc" value="${pers.loc }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연장 상세주소</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="text" class="form-control" id="addr" name="addr" value="${pers.addr }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연가격</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="text" class="form-control" id="price" name="price" value="${pers.price }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연이미지</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="file" class="form-control" id="price" name="price" value="${pers.price }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연일정</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="date" class="form-control" id="price" name="price" value="${pers.price }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
-<!-- 						<div class="form-group row"> -->
-<!-- 							<label for="exampleInputConfirmPassword2" -->
-<!-- 								class="col-sm-3 col-form-label">공연영상</label> -->
-<!-- 							<div class="col-sm-9"> -->
-<%-- 								<input type="file" class="form-control" id="price" name="price" value="${pers.price }"> --%>
-<!-- 							</div> -->
-<!-- 						</div> -->
+						<div class="form-group row">
+							<label for="exampleInputPassword2"
+								class="col-sm-3 col-form-label">공연설명</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="content" name="content"
+									value="${pers.content}" placeholder="Password">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">출연자이름</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="actor" name="actor" value="${pers.actor }">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">공연장</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="loc" name="loc" value="${pers.loc }">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">공연장 상세주소</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="addr" name="addr" value="${pers.addr }">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">공연가격</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="price" name="price" value="${pers.price }">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">공연이미지</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="iname" name="iname" value="${persi.iname }">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">공연일정</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="frDt" name="frDt" value="${perse.frDt }">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">공연영상</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="vname" name="vname" value="${persv.vname }">
+							</div>
+						</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>
