@@ -52,6 +52,7 @@
 					</div>
 					<div class="card-footer text-center">
 						<input type="submit" class="btn btn-neutral btn-round btn-lg" value="이메일 발송" onclick="btnFnc()"/>
+						<input type="hidden" name = "all">
 					</div>
 				</form>
 			</div>
@@ -85,12 +86,20 @@
 		var id = document.getElementsByName("id")[0].value;
 		var mail = document.getElementsByName("email")[1].value;
 		all = id + "@" + mail;
+		
 		var subject = "YD TICKET 회원가입 이메일 입니다.";
 		document.getElementById('subject').value = subject;
 		
-		var content = "안녕하세요 YD TICKET입니다. 회원가입을 계속 진행하시려면 아래 링크를 눌러주세요\n\n"; 
-		content += "http://localhost/prj/signup_3.do?email=";
-		content += all;
+		var content = "<div align='center' style='border: 1px solid black; width: 400px; height: 600px'>"
+		content += "<p>안녕하세요 YD TICKET입니다.</p>"; 
+		//content += "http://localhost/prj/signup_3.do?email=";
+		content += "<p>회원가입을 계속 진행하시려면 아래 링크를 눌러주세요</p>"
+		//content += all;
+		content += "<a href='localhost/prj/signup_3.do'>회원가입 링크</a><br />";
+		content += "<div>";
+		content += "<img src='\cid:logo\' style='width: 30%; height: 30%' />";
+	   	content += "</div>";
+		content += "</div>"
 		document.getElementById("content").value = content;	
 	}
 </script> 

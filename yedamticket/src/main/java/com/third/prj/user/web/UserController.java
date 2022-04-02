@@ -36,8 +36,8 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)
-	public String signUp_3(@RequestParam String email, Model model) {
-		model.addAttribute("email", email);
+	public String signUp_3(HttpSession session) {
+		session.getAttribute("all");
 		return "signup/signup_3";
 	}
 

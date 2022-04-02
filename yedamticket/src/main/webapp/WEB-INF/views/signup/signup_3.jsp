@@ -87,7 +87,7 @@
 										<i class="now-ui-icons ui-1_email-85"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="이메일" value="${email }" readonly="readonly" id="email" name="email">
+								<input type="text" class="form-control" placeholder="이메일" value="${all }" readonly="readonly" id="email" name="email">
 							</div>
 
 							<div class="input-group no-border">
