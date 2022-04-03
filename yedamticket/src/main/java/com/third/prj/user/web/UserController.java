@@ -1,5 +1,8 @@
 package com.third.prj.user.web;
 
+import java.security.Principal;
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -23,7 +26,7 @@ public class UserController {
 
 	@Autowired
 	private FaqService faqDao;
-	
+
 	@Autowired
 	private UserService userDao;
 
@@ -74,10 +77,10 @@ public class UserController {
 	}
 
 	@RequestMapping("/userLoginForm.do")
-	public String userLoiginForm(String error) {
-		return "user/user/userLoginForm";
+	public String userLoiginForm() {
+		return "user/userLoginForm";
 	}
-
+	
 	@RequestMapping("/user.do")
 	public String user(Model model) {
 		model.addAttribute("users", userDao.userList());
@@ -95,10 +98,18 @@ public class UserController {
 	public String userSelect(HttpSession session, UserVO vo, Model model) {
 		userDao.userSelect(vo);
 		session.setAttribute("sessionId", vo.getUid());
-		System.out.println("----------------sessionId : " + session.getAttribute("sessionId") + "-----------------------");
+		session.setAttribute("sessionPwd", vo.getPwd());
+		
+		/*
+		 * model.addAttribute("modelId", vo.getUid()); model.addAttribute("modelPwd",
+		 * vo.getPwd()); model.addAttribute("modelName", vo.getName());
+		 * model.addAttribute("modelPhone", vo.getPhone());
+		 * model.addAttribute("modelAddr", vo.getAddr());
+		 * model.addAttribute("modelEmail", vo.getEmail());
+		 */
 		return "home/home";
 	}
-	
+
 	@RequestMapping("/userService.do")
 	public String userService(Model model) {
 		model.addAttribute("notices", noticeDao.noticeSelectList());
@@ -108,11 +119,16 @@ public class UserController {
 
 	@RequestMapping("/userPage.do")
 	public String userPage() {
+		
 		return "user/userPage";
 	}
+
 	@RequestMapping("/userUpdateForm.do")
-	public String userUpdateForm() {
+	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
+		
+		vo = userDao.getById((String)session.getAttribute("sessionId"));
+		System.out.println("------------------------------------"+vo);
+		model.addAttribute("user", vo);
 		return "user/userUpdateForm";
 	}
-	
 }

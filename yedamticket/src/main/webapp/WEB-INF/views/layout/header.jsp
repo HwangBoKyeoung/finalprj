@@ -104,7 +104,7 @@
 				</a>
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdownMenuLink1">
-						<a class="dropdown-item" href="userPage.do"> <i
+						<a class="dropdown-item" href="userPage.do${user.UId}"> <i
 							class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
 						</a>
 						<a class="dropdown-item" href="conPage.do"> <i

@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -40,50 +39,43 @@
 						<div class="col-12" align="left">
 							<label for="UId" class="form-label">아이디</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="UId" id="UId"
-									placeholder="Id" required>
+								<input type="text" class="form-control" name="UId" id="UId" value="${user.u_id}" placeholder="Id" required>
 							</div>
 						</div>
 						<div class="col-6" align="left">
 							<label for="password" class="form-label">비밀번호</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="pwd" id="pwd"
-									placeholder="password" required>
+								<input type="password" class="form-control" name="pwd" id="pwd" value="${user.pwd }" placeholder="password" required>
 							</div>
 						</div>
 						<div class="col-6" align="left">
 							<label for="password" class="form-label">비밀번호확인</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="pwd" id="pwd"
-									placeholder="password" required>
+								<input type="password" class="form-control" name="pwd" id="pwd" value="" placeholder="password" required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="username" class="form-label">이름</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" id="name" name="name"
-									placeholder="Username" required>
+								<input type="text" class="form-control" id="name" name="name" value="${user.name }"placeholder="Username" required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">이메일</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="email" id="email"
-									placeholder="your@email.com.." required>
+								<input type="text" class="form-control" name="email" id="email" value="${user.email}"placeholder="your@email.com.." required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">전화번호</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="phone" id="phone"
-									placeholder="phone" required>
+								<input type="text" class="form-control" name="phone" id="phone" value="${user.phone}"placeholder="phone" required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="addr" class="form-label">주소</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="addr" id="addr"
-									placeholder="daegu..." required>
+								<input type="text" class="form-control" name="addr" id="addr" value="${user.addr }"placeholder="daegu..." required>
 							</div>
 							<div align="right">
 								<button type="button" class="btn btn-primary">수정</button>

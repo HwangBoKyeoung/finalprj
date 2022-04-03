@@ -3,76 +3,101 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<insert id="userInsert" parameterType="com.third.prj.user.service.UserVO">
+	<insert id="userInsert"
+		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO users(name
-						, u_id
-						, pwd
-						, email
-						, addr
-						, phone
-						, birthdt)
+		, u_id
+		, pwd
+		, email
+		, addr
+		, phone
+		, birthdt)
 		VALUES (#{name}
-			  , #{Uid}
-			  , #{pwd}
-			  , #{email}
-			  , #{addr}
-			  , #{phone}
-			  , #{birthDt})
+		, #{Uid}
+		, #{pwd}
+		, #{email}
+		, #{addr}
+		, #{phone}
+		, #{birthDt})
 	</insert>
 
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*)
 		FROM users
-		WHERE u_id = #{Uid}
-	</select>
-	
-	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM USERS
-		WHERE U_ID= #{Uid}
-		<if test="pwd!=null">
-			AND pwd = #{pwd}
-		</if>
+		WHERE
+		u_id = #{Uid}
 	</select>
 
-	<select id="userList" resultType="com.third.prj.user.service.UserVO">
+	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   USERS
+		WHERE  U_ID = #{Uid}
+		AND	   pwd  = #{pwd}
+	</select>
+
+	<select id="userList"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="userSearch" resultType="com.third.prj.user.service.UserVO" parameterType="String">
+	<select id="userSearch"
+		resultType="com.third.prj.user.service.UserVO" parameterType="String">
 		SELECT *
 		FROM USERS
 		WHERE
-			<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%' 
-									OR NAME LIKE '%'||#{val}||'%'
-									OR EMAIL LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
+		<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%'
+			OR NAME LIKE '%'||#{val}||'%'
+			OR EMAIL LIKE '%'||#{val}||'%'</if>
+		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="getUser" parameterType="com.third.prj.user.service.UserVO" resultType="com.third.prj.user.service.UserVO">
+	<select id="getUser"
+		parameterType="com.third.prj.user.service.UserVO"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT U_ID
-			 , {noop}PWD
-			 , ROLE
+		, {noop}PWD
+		, ROLE
 		FROM USERS
 		WHERE U_ID = #{Uid}
 	</select>
 
-	
-	<select id="emailCheck"
-		resultType="int">
+
+	<select id="emailCheck" resultType="int">
 		SELECT COUNT(*) FROM USERS
 		WHERE EMAIL = #{email}
 	</select>
-	
-	<insert id="kakaoInsert" parameterType="com.third.prj.user.service.UserVO">
+
+	<insert id="kakaoInsert"
+		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
-		VALUES (#{name}, #{Uid},  #{email} , #{loginCd} )
-	
+		VALUES
+		(#{name}, #{Uid}, #{email} , #{loginCd} )
+
 	</insert>
+
+	
+	<update id="userUpdate" parameterType="com.third.prj.user.service.UserVO">
+			UPDATE USERS
+		<set>
+			<if test="pwd != null"> PWD = #{pwd},</if>
+			<if test="email != null"> EMAIL = #{email},</if>
+			<if test="addr != null"> ADDR = #{addr},</if>
+			<if test="phone != null"> PHONE = #{phone},</if>
+		</set>
+		WHERE U_ID = #{Uid} 
+	
+	</update>
+	
+	<select id="getById" parameterType="String" resultType="com.third.prj.user.service.UserVO">
+	 	SELECT * 
+	 	FROM users 
+	 	WHERE u_id = #{Uid} 
+	 </select>
+
 
 </mapper>

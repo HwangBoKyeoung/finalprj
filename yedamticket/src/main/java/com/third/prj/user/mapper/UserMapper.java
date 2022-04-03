@@ -1,9 +1,10 @@
 package com.third.prj.user.mapper;
 
+import java.util.HashMap;
 import java.util.List;
 
-
 import org.apache.ibatis.annotations.Param;
+
 import com.third.prj.user.service.UserVO;
 
 public interface UserMapper {
@@ -11,6 +12,7 @@ public interface UserMapper {
 	List<UserVO> userList();
 	UserVO userSelect(UserVO vo);
 	int userInsert(UserVO vo);
+	int userUpdate(UserVO vo);
 	
 //	검색
 	List<UserVO> userSearch(@Param("key")String key, @Param("val") String val);
@@ -22,5 +24,10 @@ public interface UserMapper {
 	int emailCheck(String email);
 // 카카오 회원가입	
 	int kakaoInsert(UserVO vo);
+	
+	UserVO getById(String id);
+	
+
+
 	
 }

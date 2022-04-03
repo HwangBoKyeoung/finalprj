@@ -1,5 +1,6 @@
 package com.third.prj.user.serviceImpl;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,6 +57,19 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return mapper.kakaoInsert(vo);
 	}
+
+	@Override
+	public int userUpdate(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userUpdate(vo);
+	}
+
+	@Override
+	public UserVO getById(String id) {
+		// TODO Auto-generated method stub
+		return mapper.getById(id);
+	}
+
 
 	
 	
