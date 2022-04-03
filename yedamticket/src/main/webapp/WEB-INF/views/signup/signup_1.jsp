@@ -1,28 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<head>
-<meta charset="utf-8" />
-<link rel="apple-touch-icon" sizes="76x76"
-	href="./resources/users/img/apple-icon.png">
-<link rel="icon" type="image/png" href="./resources/users/img/favicon.png">
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
-<!--     Fonts and icons     -->
-<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+<link rel="apple-touch-icon" sizes="76x76" href="./resources/users/img/apple-icon.png">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<!-- CSS Files -->
+<link rel="image_src" href="./resources/users/img/bg11.jpg"/>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
 <link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
-</head>
+<link href="./resources/signup/css/signup.css" rel="stylesheet" />
+<script src="./resources/signup/js/signup_1.js"></script>
 
-<div class="section section-signup"
-	style="background-image: url('./resources/users/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+</head>
+<div id="signup1" class="section section-signup">
 	<div class="container">
 		<div class="row">
 			<div class="card card-signup" data-background-color="orange">
@@ -58,49 +50,9 @@
 			</div>
 		</div>
 		<div class="col text-center">
-			<a href="signupB_1.do"
-				class="btn btn-outline-default btn-round btn-white btn-lg"
-				target="_blank">기업회원이십니까?</a> 
+			<a href="signupB_1.do" class="btn btn-outline-default btn-round btn-white btn-lg" target="_blank">기업회원이십니까?</a> 
 		</div>
 	</div>
 </div>
-
 </head>
-<script src="resources/signup/main.js"></script>
-<script type="text/javascript">
-	function email_change(){
-		let em = document.getElementsByName("email")[0];
-		let email = document.getElementsByName("email")[1];
-		if(email.value == '0'){
-			em.disabled = true;
-		}
-		if(email.value == '9'){
-			em.disabled = false;
-		} else{
-			em.disabled = true;
-		}
-	}
-	
-	function btnFnc(){
-		var all = "";
-		var id = document.getElementsByName("id")[0].value;
-		var mail = document.getElementsByName("email")[1].value;
-		all = id + "@" + mail;
-		
-		var subject = "YD TICKET 회원가입 이메일 입니다.";
-		document.getElementById('subject').value = subject;
-		
-		var content = "<div align='center' style='border: 1px solid black; width: 400px; height: 600px'>"
-		content += "<p>안녕하세요 YD TICKET입니다.</p>"; 
-		//content += "http://localhost/prj/signup_3.do?email=";
-		content += "<p>회원가입을 계속 진행하시려면 아래 링크를 눌러주세요</p>"
-		//content += all;
-		content += "<a href='localhost/prj/signup_3.do'>회원가입 링크</a><br />";
-		content += "<div>";
-		content += "<img src='\cid:logo\' style='width: 30%; height: 30%' />";
-	   	content += "</div>";
-		content += "</div>"
-		document.getElementById("content").value = content;	
-	}
-</script> 
 </html> 
