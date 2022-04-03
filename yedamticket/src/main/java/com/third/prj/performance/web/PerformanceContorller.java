@@ -22,6 +22,11 @@ public class PerformanceContorller {
 		model.addAttribute("pers", perDao.perSelectList());
 		return "performance/perforList";
 	}
+	@RequestMapping("/pList.do")
+	public String pList() {
+		
+		return "performance/pList";
+	}
 	
 //	@RequestMapping("/pserSelect.do")
 //	public String perSelect(PerformanceVO vo, Model model) {

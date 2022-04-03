@@ -4,10 +4,10 @@ window.onload = function() {
 
 //지도 그리기
 function drawMap(target) {
-    var width = 700; //지도의 넓이
-    var height = 700; //지도의 높이
-    var initialScale = 5500; //확대시킬 값
-    var initialX = -11900; //초기 위치값 X
+    var width = 400; //지도의 넓이
+    var height = 400; //지도의 높이
+    var initialScale = 5800; //확대시킬 값
+    var initialX = -12700; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
     var labels;
 
@@ -31,8 +31,17 @@ function drawMap(target) {
         .attr('id', 'map')
         .attr('class', 'map')
         .on("click", function(){
-            console.log('ddddddddd------------')
-        });
+              var eid=event.target.id;
+            result.value=eid.substr(eid.indexOf('-')+1,eid.length);
+/*            $.ajax({
+                url:"",
+                type:"get",
+                data:{loc:"${'#result.'}.val()"},
+                success:function(data){
+                    console.log(data);
+                }
+            });
+*/        });
 
     var states = svg
         .append('g')
@@ -46,7 +55,7 @@ function drawMap(target) {
         .attr('height', height + 'px');
 
     //geoJson데이터를 파싱하여 지도그리기
-    d3.json('json/korea.json', function(json) {
+    d3.json('resources/json/korea.json', function(json) {
         states
             .selectAll('path') //지역 설정
             .data(json.features)
