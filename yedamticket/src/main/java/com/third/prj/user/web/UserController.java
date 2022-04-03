@@ -9,7 +9,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.faq.service.FaqService;
@@ -23,7 +22,7 @@ public class UserController {
 
 	@Autowired
 	private FaqService faqDao;
-	
+
 	@Autowired
 	private UserService userDao;
 
@@ -92,13 +91,21 @@ public class UserController {
 	}
 
 	@RequestMapping("/userSelect.do")
-	public String userSelect(HttpSession session, UserVO vo, Model model) {
+	public String userSelect(HttpSession session, UserVO vo) {
 		userDao.userSelect(vo);
 		session.setAttribute("sessionId", vo.getUid());
-		System.out.println("----------------sessionId : " + session.getAttribute("sessionId") + "-----------------------");
+		session.setAttribute("sessionPwd", vo.getPwd());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("id :" + vo.getUid());
+		System.out.println("pwd :" + vo.getPwd());
+		System.out.println("name :" + vo.getName());
+		System.out.println("email :" + vo.getEmail());
+		System.out.println("phone :" + vo.getPhone());
+		System.out.println("addr :" + vo.getAddr());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "home/home";
 	}
-	
+
 	@RequestMapping("/userService.do")
 	public String userService(Model model) {
 		model.addAttribute("notices", noticeDao.noticeSelectList());
@@ -108,7 +115,12 @@ public class UserController {
 
 	@RequestMapping("/userPage.do")
 	public String userPage() {
+
 		return "user/userPage";
 	}
-	
+
+	@RequestMapping("/userUpdateForm.do")
+	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
+		return "user/userUpdateForm";
+	}
 }

@@ -20,5 +20,4 @@ public interface UserMapper {
 	UserVO getUser(UserVO vo);
 //	이메일체크
 	UserVO emailCheck(UserVO vo);
-	
 }

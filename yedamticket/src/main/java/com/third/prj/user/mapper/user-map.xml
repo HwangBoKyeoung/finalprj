@@ -35,13 +35,20 @@
 	
 	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
-		FROM USERS
-		WHERE U_ID= #{Uid}
-		<if test="pwd!=null">
-			AND pwd = #{pwd}
-		</if>
+		FROM   USERS
+		WHERE  U_ID = #{Uid}
+		AND	   PWD  = #{pwd}
 	</select>
-
+	
+	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
+		<id column="u_id" property="Uid"/>
+		<result column="pwd" property="pwd"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="addr" property="addr"/>
+	</resultMap>
+	
 	<select id="userList" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
@@ -74,5 +81,5 @@
 		FROM USERS
 		WHERE EMAIL = #{email}
 	</select>
-
+	
 </mapper>

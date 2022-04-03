@@ -43,7 +43,8 @@ public class MailController {
 			messageHelper.setSubject(subject); // 제목
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(all); // 받는사람 이메일
-			messageHelper.setText(content, true); // 메일 내용
+			messageHelper.setText(content, true); // 메일 내용 "true"옵션으로 html태그 사용 가능
+			// 메일 내에 이미지 삽입
 			messageHelper.addInline("logo", new FileDataSource("C:\\Users\\qqoxm\\git\\finalprj\\yedamticket\\src\\main\\webapp\\resources\\signup\\yedamticket.png"));
  
 			mailSender.send(message);
@@ -70,13 +71,15 @@ public class MailController {
 			messageHelper.setSubject(subject); // 제목
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(all); // 받는사람 이메일
-			messageHelper.setText(content); // 메일 내용
+			messageHelper.setText(content, true); // 메일 내용 "true"옵션으로 html태그 사용 가능
+			// 메일 내에 이미지 삽입
+			messageHelper.addInline("logo", new FileDataSource("C:\\Users\\qqoxm\\git\\finalprj\\yedamticket\\src\\main\\webapp\\resources\\signup\\yedamticket.png"));
  
 			mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "signup/signup_2"; 
+		return "forward:/mailChk.do"; 
 	}
 	
 }
