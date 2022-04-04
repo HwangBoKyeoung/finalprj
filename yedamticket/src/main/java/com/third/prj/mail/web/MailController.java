@@ -1,6 +1,5 @@
 package com.third.prj.mail.web;
 
-import javax.activation.FileDataSource;
 import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -9,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -21,7 +19,6 @@ public class MailController {
 	
 	@RequestMapping(value = "mailChk.do", method=RequestMethod.POST)
 	public String mailChk(HttpSession session) {
-		System.out.println("---------------------sessionEmail : " + session.getAttribute("all"));
 		return "signup/signup_2";
 	}
 	
@@ -44,9 +41,6 @@ public class MailController {
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(all); // 받는사람 이메일
 			messageHelper.setText(content, true); // 메일 내용 "true"옵션으로 html태그 사용 가능
-			// 메일 내에 이미지 삽입
-			messageHelper.addInline("logo", new FileDataSource("C:\\Users\\qqoxm\\git\\finalprj\\yedamticket\\src\\main\\webapp\\resources\\signup\\yedamticket.png"));
- 
 			mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println(e);
@@ -55,12 +49,13 @@ public class MailController {
 	}
 	
 	@RequestMapping(value = "mailSending2.do")
-	public String mailSending2(HttpServletRequest request) {
+	public String mailSending2(HttpServletRequest request, HttpSession session) {
 		
 		String setfrom = "qqoxmaos2@gmail.com";
 		String id = request.getParameter("id"); // 받는 사람 아이디
 		String email = request.getParameter("email"); // 받는 사람 이메일
 		String all = id + "@" + email; // 아이디 형식 완성
+		session.setAttribute("all", all);
 		String content = request.getParameter("content"); // 내용
 		String subject = request.getParameter("subject"); // 제목
 		System.out.println(content);
@@ -72,9 +67,6 @@ public class MailController {
 			messageHelper.setFrom(setfrom); // 보내는사람 생략하면 정상작동을 안함
 			messageHelper.setTo(all); // 받는사람 이메일
 			messageHelper.setText(content, true); // 메일 내용 "true"옵션으로 html태그 사용 가능
-			// 메일 내에 이미지 삽입
-			messageHelper.addInline("logo", new FileDataSource("C:\\Users\\qqoxm\\git\\finalprj\\yedamticket\\src\\main\\webapp\\resources\\signup\\yedamticket.png"));
- 
 			mailSender.send(message);
 		} catch (Exception e) {
 			System.out.println(e);

@@ -10,6 +10,7 @@
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
 <link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
 <div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
@@ -54,14 +55,6 @@
 </div>
 </head>
 <script>
-function loadJQuery() {
-    var oScript = document.createElement("script");
-    oScript.type = "text/javascript";
-    oScript.charset = "utf-8";		  
-    oScript.src = "http://code.jquery.com/jquery-3.5.1.min.js";	
-    document.getElementsByTagName("head")[0].appendChild(oScript);
-}
-
 function email_change() {
 	let em = document.getElementsByName("email")[0];
 	let email = document.getElementsByName("email")[1];
@@ -86,12 +79,9 @@ function btnFnc() {
 
 	var content = "<div align='center' style='border: 1px solid black; width: 400px; height: 600px'>"
 	content += "<p>안녕하세요 YD TICKET입니다.</p>";
-	//content += "http://localhost/prj/signup_3.do?email=";
 	content += "<p>회원가입을 계속 진행하시려면 아래 링크를 눌러주세요</p>"
-	//content += all;
-	content += "<a href='localhost/prj/signup_3.do'>회원가입 링크</a><br />";
+	content += "<a href='localhost/prj/signup_3.do'>회원가입 링크</a><br/>";
 	content += "<div>";
-	content += "<img src='\cid:logo\' style='width: 30%; height: 30%' />";
 	content += "</div>";
 	content += "</div>"
 	document.getElementById("content").value = content;

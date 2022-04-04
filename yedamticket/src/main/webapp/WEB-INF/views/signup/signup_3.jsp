@@ -44,7 +44,7 @@
 										<i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" placeholder="아이디" class="form-control" required="required" id="Uid" name="Uid" maxlength="10"/>
+								<input type="text" placeholder="아이디" class="form-control" required="required" id="Uid" name="Uid" maxlength="10" onkeyup="idbtnC();"/>
 								<button type="button" class="idChk" id="idChk" value="N" onclick="fn_idChk(); ">중복체크</button>
 							</div>
 
@@ -146,6 +146,18 @@
 		}
 	}
 
+	// 시작 시 비활성화로 시작
+	$('#idChk').attr("disabled", true)
+	
+	// id가 비어있을 때 중복확인 버튼 비활성화
+	function idbtnC(){
+		if($('#Uid').val().length < 1){
+			$('#idChk').attr("disabled", true)
+		}else{
+			$('#idChk').attr("disabled", false)
+		}
+	}
+	
 	// id 중복확인
 	function fn_idChk() {
 		var chk = 0;

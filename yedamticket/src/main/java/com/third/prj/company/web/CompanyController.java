@@ -1,5 +1,7 @@
 package com.third.prj.company.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,8 +26,8 @@ public class CompanyController {
 	}
 	
 	@RequestMapping(value = "/signupB_2.do", method = RequestMethod.GET)
-	public String signUpB_2(@RequestParam String email, Model model) {
-		model.addAttribute("email", email);
+	public String signUpB_2(HttpSession session) {
+		session.getAttribute("all");
 		return "signup/signupB_2";
 	}
 	
@@ -59,5 +61,4 @@ public class CompanyController {
 		model.addAttribute("com",vo);
 		return "manager/company/companySelect";
 	}
-	
 }
