@@ -15,5 +15,10 @@ public class MovieReservationVO {
 	private String schDate;
 	private String seatStatCd;
 	private String seatName;
+	private String schTime;
+	private String docId;
+	private String reservHall;
+	private String reservLoc;
+	
 	
 }

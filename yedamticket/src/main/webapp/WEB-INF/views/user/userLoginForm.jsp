@@ -105,7 +105,7 @@ border-radius: 30px;
 			<div class="container">
 				<div class="col-md-4 ml-auto mr-auto">
 					<div class="card card-login card-plain">
-						<form class="form" action="userSelect.do" method="POST">
+						<form class="form" action="userLogin.do" method="POST">
 							<div class="card-header text-center">
 								<div class="logo-container">
 									<img src="resources/users/img/now-logo.png" alt="">

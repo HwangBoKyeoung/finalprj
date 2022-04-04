@@ -1,9 +1,7 @@
 package com.third.prj.user.web;
 
-import java.security.Principal;
-import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequest; 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +12,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.faq.service.FaqService;
+import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
@@ -78,7 +78,7 @@ public class UserController {
 
 	@RequestMapping("/userLoginForm.do")
 	public String userLoiginForm() {
-		return "user/userLoginForm";
+		return "user/user/userLoginForm";
 	}
 	
 	@RequestMapping("/user.do")
@@ -94,20 +94,29 @@ public class UserController {
 		return "manager/user/userSelect";
 	}
 
-	@RequestMapping("/userSelect.do")
-	public String userSelect(HttpSession session, UserVO vo, Model model) {
-		userDao.userSelect(vo);
-		session.setAttribute("sessionId", vo.getUid());
-		session.setAttribute("sessionPwd", vo.getPwd());
+	@RequestMapping("/userLogin.do")
+	public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
+//		userDao.userSelect(vo);
+//		session.setAttribute("sessionId", vo.getUid());
+//		session.setAttribute("sessionPwd", vo.getPwd());
+		vo = userDao.userSelect(vo);
+		if(vo == null) {
+			mv.addObject("errorMsg", "로그인실패");
+			mv.setViewName("user/errorPage");
+		}else {
+			session.setAttribute("sessionId", vo.getUid());
+			session.setAttribute("sessionEmail",vo.getEmail());
+			session.setAttribute("sessionName", vo.getName());
+			session.setAttribute("sessionAddr", vo.getAddr());
+			session.setAttribute("sessionPhone", vo.getPhone());
+			mv.setViewName("redirect:/");
+		}
+		System.out.println("======================================");
+		System.out.println(vo);
+		System.out.println("======================================");
+		return mv;
 		
-		/*
-		 * model.addAttribute("modelId", vo.getUid()); model.addAttribute("modelPwd",
-		 * vo.getPwd()); model.addAttribute("modelName", vo.getName());
-		 * model.addAttribute("modelPhone", vo.getPhone());
-		 * model.addAttribute("modelAddr", vo.getAddr());
-		 * model.addAttribute("modelEmail", vo.getEmail());
-		 */
-		return "home/home";
+		
 	}
 
 	@RequestMapping("/userService.do")
@@ -124,11 +133,41 @@ public class UserController {
 	}
 
 	@RequestMapping("/userUpdateForm.do")
-	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
-		
-		vo = userDao.getById((String)session.getAttribute("sessionId"));
-		System.out.println("------------------------------------"+vo);
-		model.addAttribute("user", vo);
+	public String userUpdateForm() {
 		return "user/userUpdateForm";
+	}
+	
+	@RequestMapping("/userUpdate.do")
+	public String userUpdate(UserVO vo) {
+		int n = userDao.userUpdate(vo);
+		
+		if(n != 0) {
+			return "redirect:userUpdateForm.do";
+		}
+		return "user/errorPage";
+	}
+	@RequestMapping("/userDeleteForm.do")
+	public String userDeleteForm() {
+		return "user/userDeleteForm";
+	}
+	
+	@RequestMapping("/userDelete.do")
+	public String userDelete(UserVO vo, HttpSession session) {
+		int n = userDao.userDelete(vo);
+		
+		
+		if(n != 0) {
+			session.invalidate();
+			return "redirect:/";
+		}
+		return "user/errorPage";
+	}
+	
+	@RequestMapping("/mvReservList.do")
+	public String mvReservList(Model model, MovieReservVO vo, HttpSession session) {
+		vo.setUid((String)session.getAttribute("sessionId"));
+		System.out.println(vo.getUid());
+		model.addAttribute("mvList", userDao.MvReservList(vo));
+		return "user/mvReservList";
 	}
 }

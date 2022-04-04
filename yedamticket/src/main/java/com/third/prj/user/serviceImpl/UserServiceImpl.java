@@ -1,11 +1,11 @@
 package com.third.prj.user.serviceImpl;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.user.mapper.UserMapper;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -65,13 +65,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO getById(String id) {
+	public int userDelete(UserVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.getById(id);
+		return mapper.userDelete(vo);
 	}
 
+	@Override
+	public List<MovieReservVO> MvReservList(MovieReservVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.MvReservList(vo);
+	}
 
-	
 	
 }
 

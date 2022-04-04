@@ -27,58 +27,59 @@
         <li><a href="userUpdateForm.do">회원정보수정</a></li>
       </ul>
       <ul class="nav nav-pills nav-stacked">
-      <li><a href="#">회원탈퇴</a></li>
+      <li><a href="userDeleteForm.do">회원탈퇴</a></li>
       </ul>
     </nav>
 
 		<div class="col-sm-9 page">
 			<div class="col-6">
 				<h4 class="mb-3" align="left">회원정보수정</h4>
-				<form class="frm" action="userUpdate.do" method="POST">
+				<form class="frm" action="userUpdate.do" method="POST" onsubmit="alertt();">
+					
 					<div class="row g-3">
 						<div class="col-12" align="left">
-							<label for="UId" class="form-label">아이디</label>
+							<label for="Uid" class="form-label">아이디</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="UId" id="UId" value="${user.u_id}" placeholder="Id" required>
+								<input type="text" class="form-control" name="Uid" id="Uid" value="${sessionId}" placeholder="Id" readonly="readonly">
 							</div>
 						</div>
 						<div class="col-6" align="left">
 							<label for="password" class="form-label">비밀번호</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="pwd" id="pwd" value="${user.pwd }" placeholder="password" required>
+								<input type="password" class="form-control pw" name="pwd" id="pwd1" value="" placeholder="password" required>
 							</div>
 						</div>
 						<div class="col-6" align="left">
-							<label for="password" class="form-label">비밀번호확인</label>
+							<label for="password" class="form-label">비밀번호확인</label>&nbsp;&nbsp;<font id = "checkPw" size = "2"></font>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control" name="pwd" id="pwd" value="" placeholder="password" required>
+								<input type="password" class="form-control pw" name="pwd2" id="pwd2" value="" placeholder="password" >
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="username" class="form-label">이름</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" id="name" name="name" value="${user.name }"placeholder="Username" required>
+								<input type="text" class="form-control" id="name" name="name" value="${sessionName }"placeholder="Username" readonly="readonly">
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">이메일</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="email" id="email" value="${user.email}"placeholder="your@email.com.." required>
+								<input type="text" class="form-control" name="email" id="email" value="${sessionEmail}"placeholder="your@email.com.." required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">전화번호</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="phone" id="phone" value="${user.phone}"placeholder="phone" required>
+								<input type="text" class="form-control" name="phone" id="phone" value="${sessionPhone}"placeholder="phone" required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="addr" class="form-label">주소</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="addr" id="addr" value="${user.addr }"placeholder="daegu..." required>
+								<input type="text" class="form-control" name="addr" id="addr" value="${sessionAddr }"placeholder="daegu..." required>
 							</div>
 							<div align="right">
-								<button type="button" class="btn btn-primary">수정</button>
+								<button type="submit" id= "subBtn"class="btn btn-primary">수정</button>
 							</div>
 						</div>
 					</div>
@@ -86,5 +87,31 @@
 			</div>
 		</div>
 	</div>
+	<script src = "js/jquery-3.6.0.min.js"></script>
+	<script>
+	$("#subBtn").attr('disabled',true);
+	$('.pw').keyup(function(){
+    	let pass1 = $("#pwd1").val();
+        let pass2 = $("#pwd2").val();
+        
+        if (pass1 != "" || pass2 != ""){
+        	if (pass1 == pass2){
+            	$("#checkPw").html('일치');
+            	$("#checkPw").attr('color','green');
+            	$("#subBtn").attr('disabled',false);
+            } else {
+            	$("#checkPw").html('불일치');
+                $("#checkPw").attr('color','red');
+                $("#subBtn").attr('disabled',true);
+            }
+        }
+    
+    })
+	   
+    function alertt(){
+		alert("회원정보가 수정되었습니다.")
+	}
+    
+	</script>
 </body>
 </html>

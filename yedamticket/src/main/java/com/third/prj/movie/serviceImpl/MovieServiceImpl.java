@@ -1,5 +1,7 @@
 package com.third.prj.movie.serviceImpl;
 
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -17,5 +19,5 @@ public class MovieServiceImpl implements MovieService {
 	public MovieVO movieDetail(MovieVO vo) {
 		return mapper.movieDetail(vo);
 	}
-	
+
 }

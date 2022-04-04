@@ -1,10 +1,15 @@
 package com.third.prj.movie.service;
 
+
+import com.third.prj.moviereservation.service.MovieReservVO;
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class MovieVO {
 	
 	private int mvNo;
@@ -22,4 +27,6 @@ public class MovieVO {
 	private String fileCd;
 	private String docId;
 	
+	private MovieReservVO movieReservVO;
+
 }

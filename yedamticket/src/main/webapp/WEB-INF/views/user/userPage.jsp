@@ -19,12 +19,12 @@
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li>
-						<h6>${session.user.UId}님은 회원 입니다</h6>
+						<h6>${sessionId }님은 회원 입니다</h6>
 						<h6>포인트 원</h6> <br>
 					</li>
-					<li><a href="userUpdateForm.do">회원정보수정${user.UId }</a></li>
+					<li><a href="userUpdateForm.do">회원정보수정</a></li>
 					<li><a href="pfReserv.do">공연예매내역</a></li>
-					<li><a href="mvReserv.do">영화예매내역</a></li>
+					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
