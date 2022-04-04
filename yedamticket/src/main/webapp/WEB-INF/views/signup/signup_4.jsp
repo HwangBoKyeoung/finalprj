@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	<div id="signup_4" class="section section-signup">
+	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="orange">
