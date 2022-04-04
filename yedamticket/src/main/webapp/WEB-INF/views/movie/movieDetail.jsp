@@ -85,7 +85,7 @@ head {
 <body>
 
 	<div id="container">
-		<header>
+		
 			<div id="logo">
 				<img id="poster">
 			</div>
@@ -98,7 +98,7 @@ head {
 				<p>개봉:${movie.startDate }</p>
 				<button class="btn btn-warning">예매하기</button>
 			</div>
-		</header>
+		
 		<div class="row justify-content-center">
 			<div class="col-lg-8 col-md-12">
 				<div id="carouselExampleIndicators" class="carousel slide"
@@ -114,7 +114,7 @@ head {
 							<img class="d-block" id="img1"
 								alt="First slide">
 							<div class="carousel-caption d-none d-md-block">
-								<h5>Nature, United States</h5>
+							
 							</div>
 						</div>
 						<div class="carousel-item">
@@ -124,7 +124,7 @@ head {
 
 							<div class="carousel-caption d-none d-md-block">
 
-								<h5>Somewhere Beyond, United States</h5>
+								
 
 							</div>
 
@@ -137,7 +137,7 @@ head {
 
 							<div class="carousel-caption d-none d-md-block">
 
-								<h5>Yellowstone National Park, United States</h5>
+								
 
 							</div>
 
@@ -164,8 +164,7 @@ head {
 		<div id="contents">
 
 			<div id="tabMenu">
-				<iframe width="560" height="300" src="https://www.kmdb.or.kr/db/kor/detail/movie/F/55025/own/videoData" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-				</iframe>
+				<iframe width="600" height="300" src="https://www.youtube.com/embed/qhKCYXSHpWY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			</div>
 			<div id="links">
 					<div id="comment">

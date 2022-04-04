@@ -48,7 +48,7 @@ public class MovieController {
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
 		System.out.println("무비넘어" + vo.getMvNo());
-		//rvo.setMvNo(vo.getMvNo());
+		rvo.setMvNo(vo.getMvNo());
 		System.out.println("댓글에준 무비넘버" + rvo.getMvNo());
 
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
@@ -58,7 +58,7 @@ public class MovieController {
 	}
 
 	// 댓글 입력
-	@PostMapping("/movieReplyInsert")
+	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
 	public String movieReplyInsert(Model model, MovieReplyVO vo) {
 		System.out.println(vo.getUid());
@@ -70,8 +70,8 @@ public class MovieController {
 		System.out.println(n);
 		//select key 사용 바꾸기
 		if (n != 0) {
-			//vo = movieReplyDao.selectReplyNo();
-			//System.out.println(Integer.toString(vo.getMvReNo()));
+			vo = movieReplyDao.selectReplyNo();
+			System.out.println(Integer.toString(vo.getMvReNo()));
 			return Integer.toString(vo.getMvReNo());
 		} else {
 			return null;
@@ -115,6 +115,12 @@ public class MovieController {
 	@ResponseBody
 	public List<MovieScheduleVO> movieSchdtList(Model model, MovieScheduleVO vo) {
 		return movieScheduleDao.movieSchdtList(vo);
+	}
+	//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
+	@RequestMapping("/seatSearch.do")
+	@ResponseBody
+	public List<MovieReservationVO> seatSearch(MovieReservationVO vo) {
+		return movieReservationDao.seatSearch(vo);
 	}
 	//결제페이지로
 	@RequestMapping("/movieReservation.do")

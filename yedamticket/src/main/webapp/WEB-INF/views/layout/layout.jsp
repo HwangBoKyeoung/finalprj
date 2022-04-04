@@ -20,8 +20,7 @@
   <link href="./resources/users/demo/demo.css" rel="stylesheet" />
   <script src="https://kit.fontawesome.com/84d54512c7.js" crossorigin="anonymous"></script>
 <link rel="canonical" href="https://getbootstrap.com/docs/5.1/examples/album/"><!-- 부트스트랩 cdn -->
-
- <!--   Core JS Files   -->
+<!--   Core JS Files   -->
   <script src="./resources/users/js/core/jquery.min.js" type="text/javascript"></script>
      <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script> 
   <script src="./resources/users/js/core/popper.min.js" type="text/javascript"></script>
@@ -35,6 +34,7 @@
   <!--  Google Maps Plugin    -->
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
   <script src="./resources/users/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
+ 
 <style>
 	html, body {
 	    margin: 0;
@@ -63,7 +63,7 @@
 </style>
 </head>
 <style>
-header {
+/* header {
   height: 75px;
   padding: 1rem;
   color: white;
@@ -72,7 +72,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
+} */
 </style>
 <body class="index-page sidebar-collapse">
   <!-- Navbar -->

@@ -1,6 +1,8 @@
 package com.third.prj.moviereservation.serviceImpl;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +17,11 @@ public class MovieReservationServiceImpl implements MovieReservService{
 	public int movieReservationInsert(MovieReservationVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.movieReservationInsert(vo);
+	}
+	@Override
+	public List<MovieReservationVO> seatSearch(MovieReservationVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.seatSearch(vo);
 	}
 	
 }
