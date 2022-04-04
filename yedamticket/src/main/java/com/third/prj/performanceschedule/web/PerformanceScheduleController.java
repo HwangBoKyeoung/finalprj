@@ -30,4 +30,9 @@ public class PerformanceScheduleController {
 	public String consertSchedule() {
 		return "consert/consertSchedule";
 	}
+	
+	@RequestMapping("/modalForm.do")
+	public String modalForm() {
+		return "consert/modalForm";
+	}
 }
