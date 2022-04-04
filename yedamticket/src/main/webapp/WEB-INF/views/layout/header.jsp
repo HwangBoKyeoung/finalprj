@@ -137,7 +137,7 @@
 		</div>
 	</div>
 </nav>
-<div class="wrapper">
+
 	<div class="clear-filter">
 		<div class="page-header-image" data-parallax="true"
 			style="background-image: url('resources/users/img/love.jpg'); height: 200px;">
@@ -145,7 +145,7 @@
 
 
 		<%-- <h1>${sessionScope.name}님 로그인중.</h1> --%>
-	</div>
+	
 
 </div>
 </html>

@@ -10,6 +10,27 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
+<style>
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%
+}
+
+footer {
+	height: 60px;
+}
+
+.main-content {
+	flex: 1;
+}
+</style>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">

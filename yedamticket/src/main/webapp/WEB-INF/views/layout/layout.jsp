@@ -36,30 +36,36 @@
   <!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
   <script src="./resources/users/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
 <style>
-	html, body {
-	    margin: 0;
-	    padding: 0;
-	    height: 100%;
-	}
-	
-	.main-panel{
-		min-height: 100%;
-		position: relative;
-	}
-	
-	.body-content{
-		margin-top: 0px;
-		padding-bottom: 100px;	/* footer 높이 */
-		padding-left: 0px;
-	}
-	
-	.footer{
+html, body {
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+.main-panel {
+	min-height: 100%;
+	position: relative;
+}
+
+.body-content {
+	margin-top: 0px;
+	padding-bottom: 100px; /* footer 높이 */
+	padding-left: 0px;
+}
+
+/* .footer{
 		width: 100%;
-	    height: 100px; /* footer의 높이 */
+	    height: 100px;
 	    position: absolute;  
 	    bottom: 0;
 	    left: 0;
-	}
+	} */
+	
+footer {
+	height: 60px;
+	position: relative;
+	transform: translateY(-100%);
+}
 </style>
 </head>
 <style>
