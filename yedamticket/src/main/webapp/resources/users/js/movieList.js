@@ -1,15 +1,23 @@
 //박스오피스
 (function() {
-    let date=new Date();
-    let year=date.getFullYear();
-    let day=date.getDate()-8;
-     var month = date.getMonth() + 1;
+    //현재 날짜에서 8일 정도 빼기
+  var dateOffset = (24*60*60*1000) * 8; //8 days
+  var myDate = new Date();
+  myDate.setTime(myDate.getTime() - dateOffset);
+  var year=myDate.getFullYear();
+  var month=myDate.getMonth()+1;
+  var date=myDate.getDate();
+  if(date < 10 ) {
+    date='0'+ date
+     } else{
+      date='' + date
+     }; 
      if(month < 10 ) {
          month='0'+ month
      } else{
          month='' + month
      }; 
-    let now=String(year)+String(month)+String(day);
+    let now=String(year)+String(month)+String(date);
     let url =
     'http://kobis.or.kr/kobisopenapi/webservice/rest/boxoffice/searchWeeklyBoxOfficeList.json?key=f5eef3421c602c6cb7ea224104795888&targetDt='+now;
     fetch(url)
@@ -65,7 +73,7 @@
                     inputNm.type='hidden';
                     inputNm.name='name';
                     inputNm.value=list[i].movieNm;
-                    console.log(list[i].movieNm);
+                   
                     let inputMvNo=document.createElement('input');
                     inputMvNo.type='hidden';
                     inputMvNo.name='mvNo';
@@ -78,7 +86,7 @@
                     for (var j=0;j<splitDay.length;j++){
                         splitDate+=splitDay[j];
                     }
-                    console.log(splitDate);
+                  
                     inputDt.value=splitDate;
                     
                     form.append(inputNm,inputDt,inputMvNo);
@@ -98,7 +106,7 @@
                 inputNm1.type='hidden';
                 inputNm1.name='name';
                 inputNm1.value=list[i].movieNm;
-                console.log(list[i].movieNm);
+               
                 let inputMvNo1=document.createElement('input');
                 inputMvNo1.type='hidden';
                 inputMvNo1.name='mvNo';
@@ -111,7 +119,7 @@
                 for (var j=0;j<splitDay1.length;j++){
                         splitDate1+=splitDay1[j];
                     }
-                    console.log(splitDate1);
+                   
                     inputDt1.value=splitDate1;
                     
                     form1.append(inputNm1,inputDt1,inputMvNo1);
@@ -139,15 +147,22 @@
          let year=date.getFullYear();
          let day=date.getDate();
          var month = date.getMonth() + 1;
+ 		if(day < 10 ) {
+             day='0'+ day
+         } else{
+             day='' + day
+         }; 
          if(month < 10 ) {
              month='0'+ month
          } else{
              month='' + month
          }; 
          let now=String(year)+String(month)+String(day);
-         
+         console.log(now);
          //14일 더한 날짜 yyyymmdd
-         let weeks=new Date(date.setDate(date.getDate()+15));
+		 let dateOffset=(60*60*24*1000)*14;
+         let weeks=new Date();
+		 weeks.setTime(weeks.getTime()+dateOffset);
          let y=weeks.getFullYear();
          let m=weeks.getMonth()+1;
          let d=weeks.getDate();
@@ -157,7 +172,6 @@
              m='' + m
          }; 
          let future=String(y)+String(m)+String(d);
-         
          let url='http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=U8ECM752YKB763PI62AV&releaseDts='+now+'&releaseDte='+future+'&listCount=30';
     fetch(url)
     .then(response => response.json())

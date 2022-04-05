@@ -2,7 +2,8 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<!--  <div class="section section-images">
+
+<!-- <div class="section section-images">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -18,7 +19,9 @@
             </div>
           </div>
         </div>
-      </div>  -->
+
+      </div> -->
+
       <div class="section section-basic" id="basic-elements">
         <div class="container">
           <h3 class="title">Basic Elements</h3>
@@ -198,7 +201,7 @@
                     <span class="navbar-toggler-bar bar2"></span>
                     <span class="navbar-toggler-bar bar3"></span>
                   </button>
-                  <div class="collapse navbar-collapse" id="example-navbar" data-nav-image="./resources/users/img/blurred-image-1.jpg">
+                  <div class="collapse navbar-collapse" id="example-navbar" data-nav-image="#">
                     <ul class="navbar-nav">
                       <li class="nav-item active">
                         <a class="nav-link" href="#">

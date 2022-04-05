@@ -37,12 +37,20 @@ public class PerformanceContorller {
 		return "performance/perforList";
 	}
 
+	@RequestMapping("/pList.do")
+	public String pList() {
+		
+		return "performance/pList";
+	}
+	
+//	@RequestMapping("/pserSelect.do")
+//	public String perSelect(PerformanceVO vo, Model model) {
+
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {
 		PerformanceVideoVO vvo = new PerformanceVideoVO();
 		PerformanceImageVO ivo = new PerformanceImageVO();
-
 
 		vo = perDao.perSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
@@ -58,6 +66,7 @@ public class PerformanceContorller {
 		model.addAttribute("videos", vvo);
 		return "performance/perforUpForm";
 	}
+  
 	/*
 	 * @PostMapping("/performanceUpdate.do") public String performanceUpdate(Model
 	 * model, PerformanceVO vo) { int n = perDao.perforUpdate(vo); if(n !=0) {

@@ -85,7 +85,7 @@ head {
 <body>
 
 	<div id="container">
-		<header>
+		
 			<div id="logo">
 				<img id="poster">
 			</div>
@@ -98,7 +98,7 @@ head {
 				<p>개봉:${movie.startDate }</p>
 				<button class="btn btn-warning">예매하기</button>
 			</div>
-		</header>
+		
 		<div class="row justify-content-center">
 			<div class="col-lg-8 col-md-12">
 				<div id="carouselExampleIndicators" class="carousel slide"
@@ -114,7 +114,7 @@ head {
 							<img class="d-block" id="img1"
 								alt="First slide">
 							<div class="carousel-caption d-none d-md-block">
-								<h5>Nature, United States</h5>
+							
 							</div>
 						</div>
 						<div class="carousel-item">
@@ -124,7 +124,7 @@ head {
 
 							<div class="carousel-caption d-none d-md-block">
 
-								<h5>Somewhere Beyond, United States</h5>
+								
 
 							</div>
 
@@ -137,7 +137,7 @@ head {
 
 							<div class="carousel-caption d-none d-md-block">
 
-								<h5>Yellowstone National Park, United States</h5>
+								
 
 							</div>
 
@@ -164,14 +164,13 @@ head {
 		<div id="contents">
 
 			<div id="tabMenu">
-				<iframe width="560" height="300" src="https://www.kmdb.or.kr/db/kor/detail/movie/F/55025/own/videoData" title="YouTube video player" frameborder="1" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
-				</iframe>
+				<iframe width="600" height="300" src="https://www.youtube.com/embed/qhKCYXSHpWY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 			</div>
 			<div id="links">
 					<div id="comment">
 						<form>
 
-						 <jsuites-rating value="0" tooltip="Ugly, Bad, Average, Good, Outstanding"></jsuites-rating>
+						 <jsuites-rating id="starsrating" value="0" tooltip="Ugly, Bad, Average, Good, Outstanding"></jsuites-rating>
  
     					<input type="hidden" name="star" id="star">
 						<label for="comment">Comments:</label>
@@ -180,14 +179,13 @@ head {
 						</form>
 					</div>
 					<div id="reply">
-						<c:if test="${empty replys }">
+						<%-- <c:if test="${empty replys }">
 						<div>등록된 댓글이없어요</div>
 						 <table class="table table-hover" id = "rtable" border = "1"></table>
-						</c:if>
+						</c:if> --%>
 						<c:if test="${not empty replys }">
 						<table class="table table-hover" id = "rtable" border = "1">
 							<c:forEach items="${replys }" var="reply">
-							
 								<tr>
 			                         <td width = "400">${reply.content }</td>
 			                         <td> <jsuites-rating value=${reply.star }></jsuites-rating></td>
@@ -206,6 +204,8 @@ head {
 </body>
 
 <script>
+let star=$("<jsuites-rating value=4></jsuites-rating>");
+console.log(star);
 //filecd가 여러개 잇는 값 자르기
 	let fileCd="${movie.fileCd}";
 	console.log(fileCd);
@@ -224,28 +224,42 @@ function aJaxCall() {
        url : "movieReplyInsert.do",
        type : "post",
        data : {"Uid" : "test", "mvNo" : ${movie.mvNo},"content" : $("#content").val(),"star" : $("#star").val()},
-       dataType : "text",
+       dataType : "json",
        success : function(data){
-          htmlConvert(data);
+           htmlConvert(data);
+           $("#content").val('');
+           $("#starsrating").val('0');
        }
     });
  } 
  
 function htmlConvert(data) {
-    var button = "<button id = 'delete' onclick = 'deleteReply(" + data + " )'>삭제</button>";
-    var tb = $("#rtable");
-       var row = $("<tr />").append(
-       $("<td width = '400'/>").text($("#content").val()),
-       $("<td align = 'center' width = '70'/>").append(button) // 삭제버튼 넣어야 함
-       
-    );
-    tb.append(row);
-    $("#content").val(""); // input box 초기화
-    $("#reply").append($("#rtable")); //화면에 추가
-    location.reload();
+	let tr=document.createElement('tr');
+	$("#rtable").empty();
+	$.each(data, function(idx, item){
+		console.log(item.content);
+		
+		let tr = $("<tr>");
+		tr.append(
+			$("<td>").attr("width", "400px").text(item.content),
+			$("<td>").append(
+				$("<jsuites-rating value='"+item.star+"'>")	
+			),
+			$("<td>").attr({
+				"width" : "45px",
+				"align" : "center"
+			}).append(
+				$("<button>").addClass("btn btn-primary").attr("onclick","deleteReply("+item.mvReNo+")").text("삭제")
+			)
+		);
+		$('#rtable').append(tr);
+	});
+	
+  
  }
 function deleteReply(n){ // 전달받은 replyId
-   
+   let btn = $(event.target);
+   console.log(btn);
     $.ajax({
        url : "movieReplyDelete.do",
        type : "post",
@@ -253,17 +267,15 @@ function deleteReply(n){ // 전달받은 replyId
        async : false, // 전역변수를 동기화해서 같이 사용
        dataType : "text",
        success : function(data) {
-          if(data.length > 0){
-             del = true;
-          }
+        console.log(data);
+        if(data =='success'){
+        	/* $(event.target).parent().parent().remove(); */
+        	btn.parent().parent().remove();
+        }
+        
        }
-    })
-    if(del){
-    $(event.target).parent().parent().remove();
-    } else{
-       alert(del + "삭제 실패.");
-    }
-     //event.target.parentElement.parenElement.remove();
+    });
+   
  }
  
 
