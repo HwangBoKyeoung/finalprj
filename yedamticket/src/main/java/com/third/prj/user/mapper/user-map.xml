@@ -75,12 +75,13 @@
 		WHERE EMAIL = #{email}
 	</select>
 	
+	
 	<update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
-		UPDATE users 
+		UPDATE users
 		SET    point = (SELECT point
 		             	FROM   users
-		             	WHERE  u_id = '${sessionId}) + ${point}
-		WHERE  u_id = '${sessionId}';
+		             	WHERE  u_id = #{Uid}) + #{point}
+		WHERE  u_id = #{Uid}
 	</update>
 	
 </mapper>

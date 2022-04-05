@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.third.prj.user.service.UserService;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class PointController {
@@ -29,10 +30,10 @@ public class PointController {
 	 */
 	
 	@RequestMapping(value = "/point_2.do", method = RequestMethod.POST)
-	public String point_2(Model model, @RequestParam int point, @RequestParam String id) {
+	public String point_2(UserVO userVO, Model model, @RequestParam int point, @RequestParam String Uid) {
 		model.addAttribute("point", point);
-		model.addAttribute("id", id);
-		userDao.userCharge(null0);
+		model.addAttribute("Uid", Uid);
+		userDao.userCharge(userVO);
 		return "point/point_2";
 	}
 	

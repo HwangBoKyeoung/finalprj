@@ -17,7 +17,7 @@
 					<div class="card-header text-center">
 						<input type="number" id="point" class="form-control" placeholder="금액을 입력해주세요." required="required" readonly="readonly" name="point" maxlength="7" onkeyup="maxPoint();" oninput="maxLengthChk(this);" 
 						 style="background-color: gray; width: 80%; margin-left: auto; margin-right: auto; width: 80%;"/>
-					    <input type="hidden" id="id" name="id" value="${sessionId}"/>
+					    <input type="hidden" id="Uid" name="Uid" value="${sessionId}"/>
 							<button class="btn" type="button" onclick="fiveThousand();">+5천 원</button>
 						    <button class="btn" type="button" onclick="tenThousand();">+1만 원</button>
 						    <button class="btn" type="button" onclick="fiftyThousand();">+5만 원</button>
@@ -83,7 +83,7 @@ function pay(){
 
 //세션아이디 값의 유무를 체크
 /* function chkSessionId(){
-	if($('#id').val() == ''){
+	if($('#Uid').val() == ''){
 		alert("세션값이 없다!")
 		return false;
 	}else{			

@@ -25,7 +25,7 @@
 						<div class="card-header text-center">
 							<h3 class="card-title title-up">회원가입</h3>
 							<div class="social-line">
-								<img src="./resources/signup/yedamticket.png">
+								<img src="./resources/yedamticket.png">
 							</div>
 						</div>
 						<div class="card-body">
