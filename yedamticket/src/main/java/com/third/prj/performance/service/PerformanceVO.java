@@ -1,10 +1,13 @@
 package com.third.prj.performance.service;
 
+
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class PerformanceVO {
 	
 	private int pNo;  //공연번호
@@ -16,5 +19,7 @@ public class PerformanceVO {
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
 	private int price;	//공연가격
+	
+	
 	
 }
