@@ -1,54 +1,38 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.performance.mapper.PerformanceMapper">
 
-	<resultMap type="hashmap" id="procedureCall"></resultMap>
+	<resultMap id="procedureCall" type="hashmap"/>
 
 	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
-		FROM PERFORMANCE
+	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+	FROM PERFORMANCE 
 	</select>
-	
+
 	<select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
-		FROM PERFORMANCE
-		where p_no = #{PNo}
+	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+	FROM PERFORMANCE 
+	WHERE p_no = #{PNo} 
 	</select>
 	
-<!-- 	<update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO"> -->
-<!-- 		UPDATE PERFORMANCE -->
-<!-- 		<set> -->
-<!-- 			<if test="name != null">NAME = #{name},</if> -->
-<!-- 			<if test="content != null">CONTENT = #{content},</if> -->
-<!-- 			<if test="actor != null"> ACTOR = #{actor},</if> -->
-<!-- 			<if test="loc != null">LOC = #{loc},</if> -->
-<!-- 			<if test="addr != null">ADDR = #{addr},</if> -->
-<!-- 			<if test="price != null"> PRICE = #{price},</if> -->
-<!-- 		</set> -->
-<!-- 		WHERE P_NO = #{PNo} -->
-<!-- 	</update> -->
-	
+
+<!-- <update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">UPDATE PERFORMANCE<set><if test="name != null">NAME = #{name},</if><if test="content != null">CONTENT = #{content},</if><if test="actor != null"> ACTOR = #{actor},</if><if test="loc != null">LOC = #{loc},</if><if test="addr != null">ADDR = #{addr},</if><if test="price != null"> PRICE = #{price},</if></set>WHERE P_NO = #{PNo}</update> -->
+
+
+
 	<update id="procedureCall" statementType="CALLABLE">
-	<![CDATA[
-	    {CALL perfor_pro( 
-	    #{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
-	    #{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
-	    #{p_Iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_Irename, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_frdt, mode=IN, jdbcType=DATE, javaType=DATE},
-	    #{p_scno, mode=IN, jdbcType=INTEGER, javaType=INT},
-	    #{p_time, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_vrename, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	    #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
-	    ]]>
+	{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
+	                 #{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                 #{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                 #{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                 #{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                 #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+					 #{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
+					 #{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+					 #{p_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+					 #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+					 #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})} 
 	</update>
 
 </mapper>

@@ -29,7 +29,7 @@
                   <li class="nav-item"><a class="nav-link" href="popularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
-            <li class="nav-item"><a class="nav-link" href="goods.do"> <span class="menu-title">Goods</span>
+            <li class="nav-item"><a class="nav-link" href="deleteRe.do"> <span class="menu-title">Delete Request</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>
             <li class="nav-item"><a class="nav-link" href="consert.do"> <span class="menu-title">Consert</span>

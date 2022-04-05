@@ -6,9 +6,9 @@
 	<select id="periSelect" resultType="com.third.prj.performanceimage.service.PerformanceImageVO">
 		SELECT P_IMG_NO, INAME,IRENAMES,FILE_CD
 		FROM PERFORMANCE_IMAGE
+		WHERE FILE_CD = #{fileCd}
 	</select>
 	
-	<select id=""></select>
 
 <!-- 	<update id="PImageUpdate" parameterType="com.third.prj.performanceimage.service.PerformanceImageVO"> -->
 <!-- 		UPDATE PERFORMANCE_IMAGE -->

@@ -1,5 +1,7 @@
 package com.third.prj.performance.service;
 
+import com.third.prj.deleterequest.service.DeleteRequestVO;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -18,5 +20,8 @@ public class PerformanceVO {
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
 	private int price;	//공연가격
+	
+	//삭제요청 join-2022/04/05(RJH)
+	private DeleteRequestVO delrequestVO;
 	
 }

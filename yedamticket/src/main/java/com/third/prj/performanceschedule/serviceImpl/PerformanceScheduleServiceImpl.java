@@ -23,11 +23,5 @@ public class PerformanceScheduleServiceImpl implements PerformanceScheduleServic
 	public int PSchedulUpdate(PerformanceScheduleVO vo) {
 		return 0;
 	}
-//프로시저 조회용 22/04/01(RJH)
-	@Override
-	public PerformanceScheduleVO persSelect(PerformanceScheduleVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.persSelect(vo);
-	}
 
 }

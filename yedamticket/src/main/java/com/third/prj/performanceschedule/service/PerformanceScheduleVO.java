@@ -15,6 +15,6 @@ public class PerformanceScheduleVO {
 	private Date frDt;
 	private int no;
 	private String time;
-//	private int pNo;
+	private int pNo;
 	
 }

@@ -7,16 +7,12 @@
 		<result property="frDt" column="FRDT"/>
 		<result property="no" column="NO"/>
 		<result property="time" column="TIME"/>
-		<result property="pNo" column="P_NO"/>
+		<result property="PNo" column="P_NO"/>
 	</resultMap>
 	
-<!-- 	<select id="PerformanceScheduleList" resultMap="pfmcMap"> -->
-<!-- 		SELECT *  -->
-<!-- 		FROM PERFORMANCE_SCHEDULE -->
-<!-- 	</select> -->
-<!-- 	프로시저 조회용-->
-	<select id="persSelect" resultType="com.third.prj.performancevideo.service.PerformanceVideoVO">
-	SELECT P_SCH_NO, FRDT, NO, TIME, P_NO
-	FROM PERFORMANCE_SCHEDULE
+	<select id="PerformanceScheduleList" resultMap="pfmcMap">
+		SELECT * 
+		FROM PERFORMANCE_SCHEDULE
 	</select>
+
 </mapper>

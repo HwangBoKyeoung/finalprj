@@ -12,7 +12,7 @@ public class PerformanceVideoVO {
 	private int pVideoNo;
 	private String vname;
 	private String vrenames;
-//	private int pNo;
+	private int pNo;
 	private String fileCd;
 	
 }

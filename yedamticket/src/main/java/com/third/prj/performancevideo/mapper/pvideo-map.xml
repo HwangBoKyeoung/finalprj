@@ -5,7 +5,7 @@
 	<select id="pervSelect" resultType="com.third.prj.performancevideo.service.PerformanceVideoVO">
 	SELECT P_VIDEO_NO,VNAME,VRENAMES,P_NO,FILE_CD
 	FROM PERFORMANCE_VIDEO
-
+	WHERE P_NO = #{PNo}
 	</select>
 		
 </mapper>

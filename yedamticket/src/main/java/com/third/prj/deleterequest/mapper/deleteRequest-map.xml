@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.third.prj.deleterequest.mapper.DeleteRequestMapper">
+	
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="performanceMap">
+		<result column="P_NO" property="PNo"/>
+		<result column="NAME" property="name"/>
+		<result column="CONTENT" property="content" />
+		<result column="C_ID" property="CId"/>
+		<result column="ACTOR" property="actor"/>
+		<result column="FILE_CD" property="fileCd"/>
+		<result column="LOC" property="loc"/>
+		<result column="ADDR" property="addr"/>
+		<result column="PRICE" property="price"/>
+		<collection property="delrequestVO" resultMap="performanceMap"></collection>
+	</resultMap>
+	
+	<select id="delSelectList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
+		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
+		FROM DELETE_REQUEST
+	</select>
+	
+	<select id="delSelect" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
+		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
+		FROM DELETE_REQUEST
+		WHERE DEL_REQ_NO = #{delReqNo} 
+	</select>
+	
+	<insert id="delInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+		<selectKey keyProperty="delReqNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(DEL_REQ_NO),0)+1
+			FROM DELETE_REQUEST
+		</selectKey>
+		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,P_NO)
+		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{PNo})		
+	</insert>
+	<update id="delUpdate" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+		UPDATE DELETE_REQUEST
+		SET DELETE_CD = #{deleteCd}
+		WHERE DEL_REQ_NO = #{delReqNo}
+	</update>
+	<delete id="delDelete" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+		DELETE FROM DELETE_REQUEST
+		WHERE DELETE_CD = #{deleteCd}
+	</delete>
+	
+	<select id="updatedel" resultMap="performanceMap">
+		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR
+		FROM DELETE_REQUEST.D,PERFORMANCE.P
+		WHERE P.P_NO=D.P_NO
+		AND P.C_ID = D.C_ID
+		AND D.DEL_REQ_NO=#{delReqNo}
+	</select>
+</mapper>
