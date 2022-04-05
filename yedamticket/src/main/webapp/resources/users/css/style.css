@@ -1579,7 +1579,7 @@ pre {
     -webkit-overflow-scrolling: touch; }
     .table-responsive-xl > .table-bordered {
       border: 0; } }
-
+     
 .table-responsive {
   display: block;
   width: 100%;
@@ -6430,7 +6430,7 @@ button.bg-dark:focus {
   position: sticky !important; }
 
 .fixed-top {
-  position: fixed;
+  position: relative;
   top: 0;
   right: 0;
   left: 0;
@@ -8190,7 +8190,7 @@ h1, h2, h3, h4, h5,
 
 .navbar {
   padding: 15px 10px;
-  background: #fff;
+  /* background: #fff; */
   border: none;
   border-radius: 0;
   margin-bottom: 40px;
