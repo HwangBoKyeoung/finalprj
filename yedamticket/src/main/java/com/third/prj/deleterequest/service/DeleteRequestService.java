@@ -19,6 +19,6 @@ public interface DeleteRequestService {
 	//검색
 	List<DeleteRequestVO> delSearch(String key, String val);
 	//삭제처리상세페이지
-	PerformanceVO updatedel(PerformanceVO vo);
+	DeleteRequestVO updatedel(DeleteRequestVO vo);
 	
 }

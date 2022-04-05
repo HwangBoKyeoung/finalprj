@@ -67,7 +67,7 @@
 								  <option value="울산광역시" <c:if test="${pers.loc=='울산광역시'}">selected</c:if>> 울산광역시</option>
 								  <option value="전라남도" <c:if test="${pers.loc=='전라남도'}">selected</c:if>> 전라남도</option>
 								  <option value="전라북도" <c:if test="${pers.loc=='전라북도'}">selected</c:if>> 전라북도</option>
-								  <option value="제주특별자치도" <c:if test="${pers.loc=='서울특별시'}">selected</c:if>> 제주특별자치도</option>
+								  <option value="제주특별자치도" <c:if test="${pers.loc=='제주특별자치도'}">selected</c:if>> 제주특별자치도</option>
 								  <option value="충천남도" <c:if test="${pers.loc=='충천남도'}">selected</c:if>> 충천남도</option>
 								  <option value="충청북도" <c:if test="${pers.loc=='충청북도'}">selected</c:if>> 충청북도</option>
 								</select>

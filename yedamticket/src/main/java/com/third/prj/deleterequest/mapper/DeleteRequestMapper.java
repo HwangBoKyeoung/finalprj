@@ -21,6 +21,6 @@ public interface DeleteRequestMapper {
 	//검색
 	List<DeleteRequestVO> delSearch(@Param("key") String key,@Param("val") String val);
 	//삭제처리상세페이지
-	PerformanceVO updatedel(PerformanceVO vo);
+	DeleteRequestVO updatedel(DeleteRequestVO vo);
 
 }

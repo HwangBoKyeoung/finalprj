@@ -24,19 +24,25 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${dels}" var="del">
+							<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
 						<tr onclick="location.href='delSelect.do?delReqNo=${del.delReqNo }'">
-						<td><input type="text" name="PNo" id="PNo" value="${del.PNo }"></td>
-							<td>${del.delReqNo }</td>
+							<td><input type="hidden" value="${del.delReqNo }" name="delReqNo">${del.delReqNo }</td>
 							<td>${del.CId }</td>
-							<td>${del.delDt }</td>
-							<td>${del.deleteCd }</td>
+							<td><input type="hidden" value="${del.delDt }" name="delDt">${del.delDt }</td>
+							<td><input type="hidden" value="${del.deleteCd }" name="deleteCd">${del.deleteCd }</td>
 						</tr>
 						</c:forEach>
 					</tbody>
 				</table>
+				<br>
 			</div>
 		</div>
 	</div>
-
+	
+	<script>
+		function deleteJoin(){
+			
+		}
+	</script>
 </body>
 </html>

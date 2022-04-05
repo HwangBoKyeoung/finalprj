@@ -1,7 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.third.prj.deleterequest.mapper.DeleteRequestMapper">
+<mapper namespace="com.third.prj.deleterequest.mapper.DeleteRequestMapper">
+	
+	
+	<resultMap type="com.third.prj.deleterequest.service.DeleteRequestVO" id="delrequestMap">
+		<result column="DEL_REQ_NO" property="delReqNo"/>
+		<result column="DELDT" property="delDt"/>
+		<result column="C_ID" property="CId"/>
+		<result column="DELETE_CD" property="deleteCd"/>
+		<result column="MV_NO" property="mvNo"/>
+		<result column="P_NO" property="PNo"/>		
+		<collection property="performanceVO" resultMap="performanceMap"></collection>
+	</resultMap>
 	
 	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="performanceMap">
 		<result column="P_NO" property="PNo"/>
@@ -13,7 +23,6 @@
 		<result column="LOC" property="loc"/>
 		<result column="ADDR" property="addr"/>
 		<result column="PRICE" property="price"/>
-		<collection property="delrequestVO" resultMap="performanceMap"></collection>
 	</resultMap>
 	
 	<select id="delSelectList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
@@ -37,19 +46,22 @@
 	</insert>
 	<update id="delUpdate" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		UPDATE DELETE_REQUEST
-		SET DELETE_CD = #{deleteCd}
+		<set>
+			<if test="deleteCd != null">DELETE_CD = #{deleteCd},</if>
+			<if test="content != null">CONTENT = #{content},</if>
+		</set>
 		WHERE DEL_REQ_NO = #{delReqNo}
 	</update>
+	
 	<delete id="delDelete" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		DELETE FROM DELETE_REQUEST
 		WHERE DELETE_CD = #{deleteCd}
 	</delete>
 	
-	<select id="updatedel" resultMap="performanceMap">
+	<select id="updatedel" resultMap="delrequestMap">
 		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR
-		FROM DELETE_REQUEST.D,PERFORMANCE.P
+		FROM DELETE_REQUEST D,PERFORMANCE P
 		WHERE P.P_NO=D.P_NO
-		AND P.C_ID = D.C_ID
 		AND D.DEL_REQ_NO=#{delReqNo}
 	</select>
 </mapper>

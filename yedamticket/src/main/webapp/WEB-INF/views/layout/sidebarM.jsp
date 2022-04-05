@@ -32,7 +32,7 @@
             <li class="nav-item"><a class="nav-link" href="deleteRe.do"> <span class="menu-title">Delete Request</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>
-            <li class="nav-item"><a class="nav-link" href="consert.do"> <span class="menu-title">Consert</span>
+            <li class="nav-item"><a class="nav-link" href="concert.do"> <span class="menu-title">Concert</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>
             <li class="nav-item"><a class="nav-link" href="inquiry.do"> <span class="menu-title">Inquiry</span>

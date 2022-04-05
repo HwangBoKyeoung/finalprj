@@ -52,7 +52,7 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 	}
 
 	@Override
-	public PerformanceVO updatedel(PerformanceVO vo) {
+	public DeleteRequestVO updatedel(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.updatedel(vo);
 	}

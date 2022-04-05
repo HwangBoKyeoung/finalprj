@@ -1,5 +1,7 @@
 package com.third.prj.deleterequest.web;
 
+import java.sql.Date;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -51,13 +53,16 @@ public class DeleteRequestController {
 	
 	//삭제 처리리스트
 		@RequestMapping("/delUpdate.do")
-		public String delUpdate(Model model, DeleteRequestVO vo) {
-			model.addAttribute("del", delDao.delUpdate(vo));
+		public String delUpdate(DeleteRequestVO vo) {
+			delDao.delUpdate(vo);
 			return "redirect:deleteRe.do";
 		}
 	//삭제요청 상세히 보기
 		@RequestMapping("/delSelect.do")
-		public String delSelect() {
-
+		public String delSelect(Model model, DeleteRequestVO vo) {
+			
+			
+			model.addAttribute("del", delDao.updatedel(vo));
+			return "manager/deleteRequest/delSelect";
 		}
 }
