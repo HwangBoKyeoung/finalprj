@@ -16,6 +16,13 @@
       font-size:12px;
       maring:5px;
     }
+    #selectedSeat td{
+    	border-collapse: separate;
+    	border: 1px solid #444444;
+    	width:55px;
+    	height:65px;
+    	
+    }
     .selectedSeat,.selectedList,.selectedLoc,.selectedHall,.showTime{
         background-color: blueviolet;
     }
@@ -30,23 +37,16 @@
     text-align:center;
      width: 300px;
      height: 500px;
-     overflow: auto;
+	overflow: auto;
     }
-    <!--scrollbar-->
-    .col-sm::-webkit-scrollbar {
-    width: 10px;
-  	}
-  	.col-sm::-webkit-scrollbar-thumb {
-    background-color: #2f3542;
-    border-radius: 10px;
-    background-clip: padding-box;
-    border: 2px solid transparent;
-  	}
-  	.col-sm::-webkit-scrollbar-track {
-    background-color: grey;
-    border-radius: 10px;
-    box-shadow: inset 0px 0px 5px white;
- 	 }
+    .col{
+   
+    text-align:center;
+     width: 200px;
+     height: 250px;
+	float:bottom;
+    }
+	
 #movieList{
 	text-align:left;
 	font-size:14px;
@@ -144,10 +144,41 @@
           </div>
           <div class="col-lg-3">
            <h2>자리 배치도</h2>
-                <div id="seat">
+           
+                <div id="seat" align="center">
                 </div> 
-                <div id="seatResult">
-                <h4>선택한 좌석</h4>
+                <div class="row align-items-end">
+                	<div class="col" >
+                		<h5>관람객수</h5>
+							<select id="peopleCnt" name="peopleCnt">
+							    <option value="1">1명</option>
+							    <option value="2">2명</option>
+							    <option value="3">3명</option>
+							    <option value="4">4명</option>
+							    <option value="5">5명</option>
+							    <option value="6">6명</option>
+							</select>
+							
+                	</div>
+                	
+                	<div class="col" id="seatResult">
+                		<h5>선택한 좌석</h5>
+                	<table id="selectedSeat">
+                		<tr>
+                			<td>-</td>
+                			<td>-</td>
+                		</tr>
+                		<tr>
+                			<td>-</td>
+                			<td>-</td>
+                		</tr>
+                		<tr>
+                			<td>-</td>
+                			<td>-</td>
+                		</tr>
+                	</table>
+                	</div>
+                	
                 </div>
           </div>
           
@@ -167,6 +198,18 @@
     
 <script>
 var cnt=0;
+let pCnt=0;
+	$(function peopleCnt(){
+	$('#peopleCnt').change(function(){
+		var peopleCnt=$(this).find('option:selected');
+		var myVal=peopleCnt.attr('value');
+		
+		pCnt=myVal;
+	});
+});
+
+
+console.log(pCnt);
 //영화관지역
 movieList.addEventListener('click',selectedList);
 function selectedList(){
@@ -246,8 +289,7 @@ function selectedHall(){
     	success:function(data){   		
     		    $( "#datepicker" ).datepicker({
     		      minDate:0, maxDate: data[0].schDt ,
-    		      onSelect: function() { 
-    		                                
+    		      onSelect: function() { 	                                
     		            date = $("#datepicker").val();
     		          var sDate = date.split('/');
     		            console.log('date'+sDate[0]);
@@ -315,9 +357,9 @@ $('#showTime').on('click',function(){
     		          td.innerText=seatChr+'-'+seatNo;
     		         
     		          tr.append(td);
-    		    }
+    		    	}
     		          table.append(tr);
-    		  }
+    		  	}
     		      seat.append(table);
     		      var people=2;
     		      var cnt=0;
@@ -328,21 +370,24 @@ $('#showTime').on('click',function(){
     		      
     		      
     		      function selectSeat(){
-    		         cnt++;
-    		         if(cnt>3){
-    		        	 
-    		        	  alert("초과");
+    		    	 //선택된 좌석 좌석표 밑에 표시하기
+    		    	 let selectedSeat=document.getElementById('selectedSeat');
+    		    	 let tdList=selectedSeat.getElementsByTagName('td');
+    		    	
+    		       
+    		         console.log("cnt++후에 cnt"+cnt);
+    		         if(3>cnt){
+    		        	  tdList[cnt].style.cssText  = 'background:violet'; 
+    		        	  tdList[cnt].innerText=$(event.target).text();
+    		        	  this.setAttribute('class','selectedSeat');
+    		          	  $('#seatName').val($(event.target).text());
+    		          	    cnt++;
     		         }else{
-    		        	  this.setAttribute('class','selectedSeat');  
-    		         }
-    		        
-    		          let p=document.createElement('span');
-    		          p.innerText=this.innerText;
-    		          seatResult.append(p);
-    		          console.log($(event.target).text());
-    		          $('#seatName').val($(event.target).text());
-    		      }      		      
-    		   ///
+    		        	  alert("좌석선택이 완료되엇습니다.");
+    		         };		       
+    		         
+    		      } 		      
+    		    ///예약된좌석 이벤트 없애기
     		   	for(var i=0;i<result.length;i++){
     			console.log(result[i].seatName);
     			var a="#seat td:contains("+result[i].seatName+")";
