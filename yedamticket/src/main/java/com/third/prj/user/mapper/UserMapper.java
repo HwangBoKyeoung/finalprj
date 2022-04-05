@@ -20,4 +20,7 @@ public interface UserMapper {
 	UserVO getUser(UserVO vo);
 //	이메일체크
 	UserVO emailCheck(UserVO vo);
+	
+	// 포인트 충전
+	int userCharge(UserVO vo);
 }

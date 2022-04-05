@@ -3,23 +3,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
-<script src="./resources/point/js/point_1.js"></script>
 </head>
 <body>
-	<div id="pointdiv1" class="section section-signup" 
-		style="
-		background-image: url('./resources/users/img/bg11.jpg');
-		background-size: cover;
-		background-position: top center;
-		min-height: 700px;
-		padding-top: 0;
-		display: flex;
-		align-items: center;
-		justify-content: center;">
+	<div id="pointdiv1" class="section section-signup" style="background-image: url('./resources/users/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px; padding-top: 0; display: flex; align-items: center; justify-content: center;">
 		<div id="pointdiv2" style="width: 535px; height: 600px; padding: 1rem; margin: 1rem; float: left;"> 
 			<div class="card card-signup" data-background-color="black" style="height:100%; width:100%;">
-				<form id="frm" action="point_2.do" method="POST">
+				<form id="form" action="point_2.do" method="POST">
 					<div class="card-header text-center">
 						<h3 class="card-title title-up">충전</h3>
 					</div>
@@ -42,7 +33,7 @@
 						margin-left: auto;
 						left: 0;
 						right: 0;">
-						<input type="submit" id="submit" class="btn btn-neutral btn-round btn-lg" value="충전">
+						<input type="button" id="payment" class="btn btn-neutral btn-round btn-lg" value="충전" onclick="pay();">
 						<input type="reset" id="reset" class="btn btn-neutral btn-round btn-lg" onclick="resetPoint();" value="초기화">
 					</div>
 				</form>
@@ -50,8 +41,47 @@
 		</div>
 	</div>
 <script>
-//세션아이디 값의 유무를 체크
+function pay(){
+	var IMP = window.IMP // 생략가능
+	var point = $('#point').val()
+	IMP.init("imp08063906")
+	// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
+	// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
+	IMP.request_pay({
+		pg: "kakao",
+		pay_method: "card",
+		merchant_uid: "merchant_" + new Date().getTime(),
 
+		// 결제창에서 보여질 이름
+		// name: '주문명 : ${auction.a_title}',
+		name: "YD TICKET에서 " + point + " 원을 충전합니다",
+
+		// 위와같이 model에 담은 정보를 넣어 쓸수도 있습니다.
+		// amount: ${bid.b_bid},
+		amount: point,
+		// 가격
+		// 구매자 이름, 구매자 정보도 model값으로 바꿀 수 있습니다.
+		// 구매자 정보에 여러가지도 있으므로, 자세한 내용은 맨 위 링크를 참고해주세요.
+		buyer_name: "${sessionId}",
+
+	}, function(rsp) {
+		console.log(rsp)
+		if (rsp.success) {
+			var msg = "결제가 완료되었습니다."
+			msg += "결제 금액 : " + rsp.paid_amount
+			// success.submit();
+			// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
+			// 자세한 설명은 구글링으로 보시는게 좋습니다.
+			$("form").submit();
+		} else {
+			var msg = "결제에 실패하였습니다."
+			msg += "에러내용 : " + rsp.error_msg
+		}
+		alert(msg)
+	})
+}
+
+//세션아이디 값의 유무를 체크
 /* function chkSessionId(){
 	if($('#id').val() == ''){
 		alert("세션값이 없다!")

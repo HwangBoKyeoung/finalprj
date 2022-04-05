@@ -60,4 +60,9 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public int userCharge(UserVO vo) {
+		return mapper.userCharge(vo);
+	}
 }
