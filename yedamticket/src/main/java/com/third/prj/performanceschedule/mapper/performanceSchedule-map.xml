@@ -6,13 +6,21 @@
 		<id property="pSchNo" column="P_SCH_NO" />
 		<result property="frDt" column="FRDT"/>
 		<result property="no" column="NO"/>
+		<result property="pNo" column="P_NO"/>
 		<result property="time" column="TIME"/>
-		<result property="PNo" column="P_NO"/>
 	</resultMap>
 	
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
-		SELECT * 
-		FROM PERFORMANCE_SCHEDULE
+		SELECT TO_CHAR(s.FRDT, 'YYYY-MM-DD') || 'T' || s.TIME AS "start",
+				s.FRDT,
+				s.TIME as "time",
+				s.no,
+				s.p_sch_no,
+				s.p_no,
+                p.name AS "title"
+		from PERFORMANCE_SCHEDULE s, performance p
+        where s.p_no = p.p_no
+        ORDER BY P_NO
 	</select>
 
 </mapper>
