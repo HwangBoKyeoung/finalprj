@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.third.prj.deleterequest.service.DeleteRequestVO;
-import com.third.prj.deleterequest.service.Impl.DeleteRequestServiceImpl;
+import com.third.prj.deleterequest.serviceImpl.DeleteRequestServiceImpl;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performance.serviceImpl.PerformanceServiceImpl;
 
