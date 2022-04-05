@@ -55,6 +55,8 @@
 </div>
 </head>
 <script>
+
+// select 태그에서 이메일 변경을 위한 함수
 function email_change() {
 	let em = document.getElementsByName("email")[0];
 	let email = document.getElementsByName("email")[1];
@@ -68,6 +70,7 @@ function email_change() {
 	}
 }
 
+//전송 버튼을 눌렀을 때 메일을 html 형식으로 보내는 함수
 function btnFnc() {
 	var all = "";
 	var id = document.getElementsByName("id")[0].value;

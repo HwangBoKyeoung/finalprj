@@ -1,9 +1,11 @@
 package com.third.prj.user.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -17,6 +19,8 @@ import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
+import freemarker.log.Logger;
+
 @Controller
 public class UserController {
 
@@ -28,6 +32,9 @@ public class UserController {
 
 	@Autowired
 	private NoticeService noticeDao;
+	
+	@Inject
+	private BCryptPasswordEncoder pwdEncoder;
 
 	@RequestMapping("/signup_1.do")
 	public String signUp_1() {
@@ -41,7 +48,10 @@ public class UserController {
 	}
 
 	@PostMapping("/signup_4.do")
-	public String signUp_4(UserVO userVO) {
+	public String signUp_4(UserVO userVO, Model model) {
+		String encodedPwd = userVO.getPwd();
+		String decodedPwd = pwdEncoder.encode(encodedPwd);
+		userVO.setPwd(decodedPwd);
 		int n = userDao.userInsert(userVO);
 		if (n != 0) {
 			return "home/home";
