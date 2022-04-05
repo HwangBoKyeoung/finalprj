@@ -2,13 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
-	
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
-		<result column="name" property="name"/>
-		<collection property="movieReservVO" resultMap="MovieReservMap"/>
+
+	<resultMap type="com.third.prj.movie.service.MovieVO"
+		id="MovieMap">
+		<result column="name" property="name" />
+		<collection property="movieReservVO"
+			resultMap="MovieReservMap" />
 	</resultMap>
-	
-	<resultMap type="com.third.prj.moviereservation.service.MovieReservVO" id="MovieReservMap">
+
+	<resultMap
+		type="com.third.prj.moviereservation.service.MovieReservVO"
+		id="MovieReservMap">
 		<result column="MV_RESERV_NO" property="mvReservNo" />
 		<result column="RESERVDT" property="reservDt" />
 		<result column="SEAT_NAME" property="seatName" />
@@ -16,8 +20,33 @@
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
 		<result column="U_ID" property="Uid" />
-	</resultMap> 
-	
+	</resultMap>
+
+	<resultMap
+		type="com.third.prj.performanceschedule.service.PerformanceScheduleVO"
+		id="pfScheduleMap">
+		<result column="FRDT" property="frDt" />
+		<result column="TIME" property="time" />
+	</resultMap>
+	<resultMap
+		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
+		id="pfReservMap">
+		<result column="P_RESERV_NO" property="pReservNo" />
+		<result column="RESERVE_DTTM" property="reserveDttm" />
+		<result column="U_ID" property="uId" />
+		<result column="SEATNO" property="seatNo" />
+	</resultMap>
+	<resultMap
+		type="com.third.prj.performance.service.PerformanceVO"
+		id="performanceMap">
+		<result column="NAME" property="name" />
+		<collection property="performanceReservationVO"
+			resultMap="pfReservMap"></collection>
+		<collection property="performanceScheduleVO"
+			resultMap="pfScheduleMap"></collection>
+	</resultMap>
+
+
 
 
 	<insert id="userInsert"
@@ -122,15 +151,31 @@
 		WHERE U_ID = #{Uid}
 		AND PWD = #{pwd}
 	</delete>
-	
-	<select id = "MvReservList" resultMap="MovieReservMap">
-	SELECT R.MV_RESERV_NO , R.RESERVDT,
+
+	<select id="MvReservList" resultMap="MovieReservMap">
+		SELECT R.MV_RESERV_NO ,
+		R.RESERVDT,
 		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
-		FROM MOVIE_RESERVATION R JOIN MOVIE M
+		FROM
+		MOVIE_RESERVATION
+		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		 WHERE U_ID = #{Uid}
-	
+		WHERE U_ID = #{Uid}
+
 	</select>
+
+	<select id="pfReservList" resultMap="performanceMap">
+		SELECT X.P_RESERV_NO,
+		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
+		FROM
+		PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
+		WHERE
+		X.P_SCH_NO = Y.P_SCH_NO
+		AND Y.P_NO = Z.P_NO
+		AND X.U_ID = #{uId}
+	</select>
+	
+
 
 
 </mapper>

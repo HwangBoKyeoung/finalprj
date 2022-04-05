@@ -1,11 +1,13 @@
 package com.third.prj.user.serviceImpl;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.user.mapper.UserMapper;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -75,6 +77,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return mapper.MvReservList(vo);
 	}
+
+	@Override
+	public List<PerformanceVO> pfReservList(PerformanceReservationVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pfReservList(vo);
+	}
+
 
 	
 }

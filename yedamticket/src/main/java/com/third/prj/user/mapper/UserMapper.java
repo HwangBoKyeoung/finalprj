@@ -1,11 +1,12 @@
 package com.third.prj.user.mapper;
 
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.user.service.UserVO;
 
 public interface UserMapper {
@@ -33,9 +34,13 @@ public interface UserMapper {
 //	이메일체크
 	int emailCheck(String email);
 
-// 카카오 회원가입	
+//  카카오 회원가입	
 	int kakaoInsert(UserVO vo);
-//영화 예매 내역	
+	
+//  영화 예매 내역	
 	List<MovieReservVO> MvReservList(MovieReservVO vo);
+	
+//  공연 예매 내역
+	List<PerformanceVO> pfReservList(PerformanceReservationVO vo);
 
 }

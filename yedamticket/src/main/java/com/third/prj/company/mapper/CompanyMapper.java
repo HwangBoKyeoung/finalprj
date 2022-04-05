@@ -16,5 +16,6 @@ public interface CompanyMapper {
 	int cidChk(CompanyVO vo);
 //	company 검색
 	List<CompanyVO> companySearch(@Param("key") String key, @Param("val") String val);
-	
+//  company 로그인
+	CompanyVO companyLogin(CompanyVO vo);
 }

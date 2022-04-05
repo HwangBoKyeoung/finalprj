@@ -1,7 +1,7 @@
 package com.third.prj.user.web;
 
 
-import javax.servlet.http.HttpServletRequest; 
+import javax.servlet.http.HttpServletRequest;  
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
+import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -99,17 +101,26 @@ public class UserController {
 //		userDao.userSelect(vo);
 //		session.setAttribute("sessionId", vo.getUid());
 //		session.setAttribute("sessionPwd", vo.getPwd());
+		String msg = "";
+        String url = "";
 		vo = userDao.userSelect(vo);
 		if(vo == null) {
-			mv.addObject("errorMsg", "로그인실패");
-			mv.setViewName("user/errorPage");
+			msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+			url = "userLoginForm.do";
+			mv.addObject("msg", msg);
+			mv.addObject("url", url);
+			mv.setViewName("user/alert");
 		}else {
+			msg = "로그인 성공";
+			url = "home.do";		
 			session.setAttribute("sessionId", vo.getUid());
 			session.setAttribute("sessionEmail",vo.getEmail());
 			session.setAttribute("sessionName", vo.getName());
 			session.setAttribute("sessionAddr", vo.getAddr());
 			session.setAttribute("sessionPhone", vo.getPhone());
-			mv.setViewName("redirect:/");
+			mv.addObject("msg", msg);
+			mv.addObject("url", url);
+			mv.setViewName("user/alert");
 		}
 		System.out.println("======================================");
 		System.out.println(vo);
@@ -169,5 +180,16 @@ public class UserController {
 		System.out.println(vo.getUid());
 		model.addAttribute("mvList", userDao.MvReservList(vo));
 		return "user/mvReservList";
+	}
+	
+	@RequestMapping("pfReservList.do")
+	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo , PerformanceVO vo) {
+		pvo.setUId((String)session.getAttribute("sessionId"));
+		model.addAttribute("pfList", userDao.pfReservList(pvo));
+		return "user/pfReservList";
+	}
+	@RequestMapping("/userBuyList.do")
+	public String userBuyList() {
+		return "user/userBuyList";
 	}
 }
