@@ -1,5 +1,7 @@
 package com.third.prj.movie.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,12 @@ public class MovieServiceImpl implements MovieService {
 	@Override
 	public MovieVO movieDetail(MovieVO vo) {
 		return mapper.movieDetail(vo);
+	}
+
+	@Override
+	public List<MovieVO> movieList() {
+		// TODO Auto-generated method stub
+		return mapper.movieList();
 	}
 	
 }

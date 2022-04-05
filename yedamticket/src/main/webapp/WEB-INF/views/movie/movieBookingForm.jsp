@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -81,6 +82,28 @@
         	<div class="col-lg-3" >  
         	 <h2> 영화선택</h2>
         		<div id="movieList" >
+        		<c:forEach var="m" items="${movies }">
+        				<div data-cd="${m.docId }" data-poster="${m.fileCd }">${m.name }
+        				<c:choose >
+        					<c:when test="${m.rating eq '전체관람가'}">
+        						<span class="all">ALL</span>
+        					</c:when>
+        					<c:when test="${m.rating eq '12세관람가'}">
+        						<span class="a">12</span>
+        					</c:when>
+        					<c:when test="${m.rating eq '15세관람가'}">
+        						<span class="b">15</span>
+        					</c:when>
+        					<c:when test="${m.rating eq '18세관람가(청소년관람불가)'}">
+        						<span class="c">18</span>
+        					</c:when>
+        					<c:otherwise>
+        						<span class="d">미정</span>
+        					</c:otherwise>
+        				</c:choose>		
+        				</div>
+        			</c:forEach>
+        		
                 </div>
                 
         	</div>
@@ -143,87 +166,17 @@
       </div>
     
 <script>
-
-//현재 날짜 yyyymmdd
-let date=new Date();
-let year=date.getFullYear();
-let day=date.getDate();
-var month = date.getMonth() + 1;
-if(day < 10 ) {
-    day='0'+ day
-} else{
-    day='' + day
-}; 
-if(month < 10 ) {
-    month='0'+ month
-} else{
-    month='' + month
-}; 
-let now=String(year)+String(month)+String(day);
-//현재 날짜에서 31일전
-let prevDate=new Date();
-prevDate.setTime(prevDate.getTime()-(60*60*24*1000)*31);
-let pYear=prevDate.getFullYear();
-let pMonth=prevDate.getMonth()+1;
-let pDate=prevDate.getDate();
-if(pDate < 10 ) {
-	pDate='0'+ pDate
-} else{
-	pDate='' + pDate
-}; 
-if(pMonth < 10 ) {
-	pMonth='0'+ pMonth
-} else{
-	pMonth='' + pMonth
-}; 
-let prevDay=String(pYear)+String(pMonth)+String(pDate);
-var url = 'http://api.koreafilm.or.kr/openapi-data2/wisenut/search_api/search_json2.jsp?collection=kmdb_new2&detail=Y&ServiceKey=U8ECM752YKB763PI62AV&releaseDts='+prevDay+'&releaseDte='+now+'&listCount=500';
-fetch(url)
-                .then(response => response.json())
-                .then(response => {
-                   console.log(response);
-                   let list=response.Data[0].Result;
-                   for(var i=0;i<list.length;i++){
-                	  let div=document.createElement('div');
-                	    let span=document.createElement('span');
-                        div.innerText=list[i].title; 
-                	  switch(list[i].rating){
-                	  	case "전체관람가":
-                	  		 span.innerText="ALL";
-                            span.setAttribute('class','all');
-                	  		 break;
-                	  	case "12세관람가":
-               	  		     span.innerText="12";
-                            span.setAttribute('class','a');
-               	  			 break;
-                	  	case "15세관람가":
-                  	  		 span.innerText="15";
-                            span.setAttribute('class','b');
-                  	  		 break;
-                	  	case "18세관람가(청소년관람불가)":
-                  	  		 span.innerText="청불";
-                            span.setAttribute('class','c');
-                  	  		 break;
-                	  	case "":
-                	  		span.setAttribute('class','d');
-                  	  		 span.innerText="미정";
-                  	  		 break;
-                	  };	 
-                       div.append(span);
-                       //poster data에 넣기
-                       let posterArry=(list[i].posters).split('|');
-                       div.setAttribute("data-poster",posterArry[0]);   
-                	   div.setAttribute("data-cd",list[i].DOCID);    
-                	   movieList.append(div);  
-                   };           
-                });
+var cnt=0;
 //영화관지역
 movieList.addEventListener('click',selectedList);
 function selectedList(){
-	moviePoster.setAttribute('src',event.target.getAttribute('data-poster'));
+	
+	console.log(event.target.getAttribute('data-poster'));
+	let posterArry=event.target.getAttribute('data-poster').split('|');
+	moviePoster.setAttribute('src',posterArry[0]);
 	docId.value=event.target.getAttribute('data-cd');
 	//버튼누르면 색바뀜
-	let childNodes=event.target.parentNode.childNodes;
+		let childNodes=event.target.parentNode.children;
 	 for(var i=1;i<childNodes.length;i++){
 	childNodes[i].setAttribute('class','nonSelectedList');  
 	} 
@@ -282,7 +235,7 @@ function selectedHall(){
 	$('#reservHall').val($(event.target).data("name"));
 	//버튼누르면 색바뀜
 	let childNodes=event.target.parentNode.childNodes;
-	 for(var i=1;i<childNodes.length;i++){
+	 for(var i=0;i<childNodes.length;i++){
 	childNodes[i].setAttribute('class','nonSelectedList');  
 	} 
     event.target.setAttribute('class','selectedList');  
@@ -366,16 +319,23 @@ $('#showTime').on('click',function(){
     		          table.append(tr);
     		  }
     		      seat.append(table);
+    		      var people=2;
+    		      var cnt=0;
     		      var seatTd = document.getElementsByTagName('td');
     		      for(i=0;i<seatTd.length;i++){
     		          seatTd[i].addEventListener('click',selectSeat);
-    		      }
+    		      };
+    		      
+    		      
     		      function selectSeat(){
-    		          if(this.classList.contains('selectedSeat')){
-    		              this.classList.remove('selectedSeat');
-    		          }else{
-    		            this.setAttribute('class','selectedSeat');  
-    		          }
+    		         cnt++;
+    		         if(cnt>3){
+    		        	 
+    		        	  alert("초과");
+    		         }else{
+    		        	  this.setAttribute('class','selectedSeat');  
+    		         }
+    		        
     		          let p=document.createElement('span');
     		          p.innerText=this.innerText;
     		          seatResult.append(p);
@@ -387,7 +347,7 @@ $('#showTime').on('click',function(){
     			console.log(result[i].seatName);
     			var a="#seat td:contains("+result[i].seatName+")";
     			$(a)[0].removeEventListener('click',selectSeat);
-    			$(a).css("backgroundColor","black"); 		
+    			$(a).css("backgroundColor","black");
     			}
    		    } 
     	

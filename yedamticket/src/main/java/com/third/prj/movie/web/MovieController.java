@@ -60,7 +60,7 @@ public class MovieController {
 	// 댓글 입력
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
-	public String movieReplyInsert(Model model, MovieReplyVO vo) {
+	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
 		System.out.println(vo.getUid());
 		System.out.println(vo.getMvNo());
 		System.out.println(vo.getContent());
@@ -70,19 +70,21 @@ public class MovieController {
 		System.out.println(n);
 		//select key 사용 바꾸기
 		if (n != 0) {
-			vo = movieReplyDao.selectReplyNo();
+//			vo = movieReplyDao.selectReplyNo();
+			
 			System.out.println(Integer.toString(vo.getMvReNo()));
-			return Integer.toString(vo.getMvReNo());
+			return movieReplyDao.movieReplyList(vo);
 		} else {
 			return null;
 		}
 	}
 
 	// 댓글삭제
-	@RequestMapping("/movieReplyDelete")
+	@RequestMapping("/movieReplyDelete.do")
 	@ResponseBody
 	public String movieReplyDelete(MovieReplyVO vo) {
 		int n = movieReplyDao.movieReplyDelete(vo);
+		System.out.println("삭제된건수"+n);
 		if (n > 0) {
 			return "success";
 		} else {
@@ -92,8 +94,10 @@ public class MovieController {
 
 	// 영화 예약페이지로
 	@RequestMapping("/movieBooking.do")
-	public String movieBooking() {
+	public String movieBooking(Model model) {
+		model.addAttribute("movies",movieDao.movieList());
 		return "movie/movieBookingForm";
+	
 	}
 
 	// 영화예약페이지에서 영화를 클릭하면 해당영화를 상영하는 영화관리스트호출
