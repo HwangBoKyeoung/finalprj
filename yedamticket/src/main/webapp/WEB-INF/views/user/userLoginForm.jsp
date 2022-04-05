@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
 <!DOCTYPE html>
@@ -10,20 +9,18 @@
 
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 <title>로그인</title>
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-	name='viewport' />
+<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
 <script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <!--     Fonts and icons     -->
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-  <!-- CSS Files -->
-  <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-  <!-- CSS Just for demo purpose, don't include it in your project -->
-  <link href="./resources/users/demo/demo.css" rel="stylesheet" />
-  <script src="https://kit.fontawesome.com/84d54512c7.js" crossorigin="anonymous"></script>
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+<!-- CSS Files -->
+<link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
+<link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
+<!-- CSS Just for demo purpose, don't include it in your project -->
+<link href="./resources/users/demo/demo.css" rel="stylesheet" />
+<script src="https://kit.fontawesome.com/84d54512c7.js" crossorigin="anonymous"></script>
 </head>
 <style>
 .loginBtn{
@@ -33,9 +30,7 @@ border-radius: 30px;
 
 <body class="login-page sidebar-collapse">
 	<!-- Navbar -->
-	<nav
-		class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent "
-		color-on-scroll="400">
+	<nav class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent " color-on-scroll="400">
 		<div class="container">
 			<div class="dropdown button-dropdown">
 				<a href="#pablo" class="dropdown-toggle" id="navbarDropdown"
@@ -62,25 +57,20 @@ border-radius: 30px;
 					data-toggle="collapse" data-target="#navigation"
 					aria-controls="navigation-index" aria-expanded="false"
 					aria-label="Toggle navigation">
-					<span class="navbar-toggler-bar top-bar"></span> <span
-						class="navbar-toggler-bar middle-bar"></span> <span
-						class="navbar-toggler-bar bottom-bar"></span>
+					<span class="navbar-toggler-bar top-bar"></span>
+					<span class="navbar-toggler-bar middle-bar"></span> 
+					<span class="navbar-toggler-bar bottom-bar"></span>
 				</button>
 			</div>
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navigation"
-				data-nav-image="resources/users/img/blurred-image-1.jpg">
+			<div class="collapse navbar-collapse justify-content-end" id="navigation" data-nav-image="resources/users/img/blurred-image-1.jpg"> 
 				<ul class="navbar-nav">
 					<li class="nav-item"><a class="nav-link" href="home.do">홈으로</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="https://github.com/creativetimofficial/now-ui-kit/issues">Have
-							an issue?</a></li>
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="Follow us on Twitter" data-placement="bottom"
-						href="https://twitter.com/CreativeTim" target="_blank"> <i
-							class="fab fa-twitter"></i>
+					<li class="nav-item"><a class="nav-link" href="https://github.com/creativetimofficial/now-ui-kit/issues">Have an issue?</a></li>
+					<li class="nav-item"><a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
+						<i class="fab fa-twitter"></i>
 							<p class="d-lg-none d-xl-none">Twitter</p>
-					</a></li>
+						</a>
+					</li>
 					<li class="nav-item"><a class="nav-link" rel="tooltip"
 						title="Like us on Facebook" data-placement="bottom"
 						href="https://www.facebook.com/CreativeTim" target="_blank"> <i
@@ -141,7 +131,7 @@ border-radius: 30px;
 								</div><br>
 								<div class="pull-left">
 									<h6>
-										<a href="#pablo" class="link">Create Account</a>
+										<a href="signup_1.do" class="link">Create Account</a>
 									</h6>
 								</div>
 								<div class="pull-right">

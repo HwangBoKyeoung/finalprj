@@ -28,12 +28,14 @@
       </ul>
       <ul class="nav nav-pills nav-stacked">
       <li><a href="userDeleteForm.do">회원탈퇴</a></li>
+
       </ul>
     </nav>
 
 		<div class="col-sm-9 page">
 			<div class="col-6">
 				<h4 class="mb-3" align="left">회원정보수정</h4>
+
 				<form class="frm" action="userUpdate.do" method="POST" onsubmit="alertt();">
 					
 					<div class="row g-3">
@@ -46,6 +48,7 @@
 						<div class="col-6" align="left">
 							<label for="password" class="form-label">비밀번호</label>
 							<div class="input-group has-validation">
+
 								<input type="password" class="form-control pw" name="pwd" id="pwd1" value="" placeholder="password" required>
 							</div>
 						</div>
@@ -53,24 +56,28 @@
 							<label for="password" class="form-label">비밀번호확인</label>&nbsp;&nbsp;<font id = "checkPw" size = "2"></font>
 							<div class="input-group has-validation">
 								<input type="password" class="form-control pw" name="pwd2" id="pwd2" value="" placeholder="password" >
+
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="username" class="form-label">이름</label>
 							<div class="input-group has-validation">
+
 								<input type="text" class="form-control" id="name" name="name" value="${sessionName }"placeholder="Username" readonly="readonly">
+
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">이메일</label>
 							<div class="input-group has-validation">
+
 								<input type="text" class="form-control" name="email" id="email" value="${sessionEmail}"placeholder="your@email.com.." required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">전화번호</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="phone" id="phone" value="${sessionPhone}"placeholder="phone" required>
+							<input type="text" class="form-control" name="phone" id="phone" value="${sessionPhone}"placeholder="phone" required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
@@ -87,6 +94,7 @@
 			</div>
 		</div>
 	</div>
+
 	<script src = "js/jquery-3.6.0.min.js"></script>
 	<script>
 	$("#subBtn").attr('disabled',true);
@@ -113,5 +121,6 @@
 	}
     
 	</script>
+
 </body>
 </html>

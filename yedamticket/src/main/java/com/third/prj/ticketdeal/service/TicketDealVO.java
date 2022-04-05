@@ -16,5 +16,4 @@ public class TicketDealVO {
 	private String dealAgreeCd;
 	private String dealStatCd;
 	private String dealGb;
-	
 }

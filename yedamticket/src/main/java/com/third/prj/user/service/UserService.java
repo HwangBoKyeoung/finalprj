@@ -21,8 +21,10 @@ public interface UserService {
 //	 회원 탈퇴
 	int userDelete(UserVO vo);
 
+	int userPointUpdate(int point, String id);
+
 //	검색
-	List<UserVO> userSearch(@Param("key") String key, @Param("val") String val);
+	List<UserVO> userSearch(String key, String val);
 
 //	아이디체크
 	int idChk(UserVO vo);
@@ -35,11 +37,14 @@ public interface UserService {
 
 //  카카오 회원가입	
 	int kakaoInsert(UserVO vo);
-
-//  영화 예매 내역
+	
+//  영화 예매 내역	
 	List<MovieReservVO> MvReservList(MovieReservVO vo);
-
+	
 //  공연 예매 내역
 	List<PerformanceVO> pfReservList(PerformanceReservationVO vo);
 
+	// 포인트 충전
+	int userCharge(UserVO vo);
+  
 }

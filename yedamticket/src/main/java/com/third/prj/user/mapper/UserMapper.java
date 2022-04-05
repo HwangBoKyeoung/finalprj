@@ -22,6 +22,8 @@ public interface UserMapper {
 //	 회원 탈퇴
 	int userDelete(UserVO vo);
 
+	int userPointUpdate(@Param("point")int point, @Param("id") String id);
+
 //	검색
 	List<UserVO> userSearch(@Param("key") String key, @Param("val") String val);
 
@@ -42,5 +44,8 @@ public interface UserMapper {
 	
 //  공연 예매 내역
 	List<PerformanceVO> pfReservList(PerformanceReservationVO vo);
+
+	// 포인트 충전
+	int userCharge(UserVO vo);
 
 }

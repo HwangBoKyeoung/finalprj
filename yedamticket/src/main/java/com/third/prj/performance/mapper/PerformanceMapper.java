@@ -13,6 +13,6 @@ public interface PerformanceMapper {
 	int perforDelete(PerformanceVO vo);
 	
 //	프로시저 호출(update에 필요)
-	public void procedureCall(Map map);
+	int procedureCall(Map<String, Object> map);
 	
 }

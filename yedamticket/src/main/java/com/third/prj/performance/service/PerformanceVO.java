@@ -24,4 +24,5 @@ public class PerformanceVO {
 	
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;
+  
 }

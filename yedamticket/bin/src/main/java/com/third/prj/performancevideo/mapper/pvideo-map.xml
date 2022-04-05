@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.prj.performancevideo.mapper.PerformanceVideoMapper">
+
+	<update id="PVideoUpdate">
+		UPDATE PERFORMANCE_VIDEO
+		<set>
+			<if test="name != null">name = #{name},</if>
+			<if test="renames != null">RENAMES = #{renames}</if>
+		</set>
+		WHERE P_VIDEO_NO = #{pVideoNo}
+	</update>
+	
+</mapper>
