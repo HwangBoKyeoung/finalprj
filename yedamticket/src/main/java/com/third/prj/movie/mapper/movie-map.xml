@@ -19,6 +19,23 @@
 		<result property="fileCd" column="file_cd"/>
 		<result property="docId" column="docId"/>
 	</resultMap>
+	<!-- 프로시저 -->
+	<resultMap type="hashmap" id="procedureCall"/>
+	
+	<update id="procedureCall" statementType="CALLABLE">
+	{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
+	                #{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_director, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
+	</update>
 	
 	<select id="movieDetail" resultMap="movieResultMap">
 		SELECT * 

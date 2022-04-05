@@ -1,4 +1,4 @@
-package com.third.prj.performancevideo.service.impl;
+package com.third.prj.performancevideo.serviceImpl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
