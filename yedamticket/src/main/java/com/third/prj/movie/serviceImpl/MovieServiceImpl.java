@@ -2,6 +2,9 @@ package com.third.prj.movie.serviceImpl;
 
 import java.util.Map;
 
+import java.util.List;
+
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,11 +23,16 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.movieDetail(vo);
 	}
 
-
 	@Override
 	public int procedureCall(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return mapper.procedureCall(map);
+  }
+  
+	@Override
+	public List<MovieVO> movieList() {
+		// TODO Auto-generated method stub
+		return mapper.movieList();
 	}
 	
 }

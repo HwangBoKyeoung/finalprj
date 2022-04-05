@@ -19,6 +19,7 @@
 		<result property="fileCd" column="file_cd"/>
 		<result property="docId" column="docId"/>
 	</resultMap>
+
 	<!-- 프로시저 -->
 	<resultMap type="hashmap" id="procedureCall"/>
 	
@@ -37,6 +38,13 @@
 	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
 	
+	<select id="movieList" resultMap="movieResultMap">
+		SELECT * FROM MOVIE
+		WHERE STARTDATE 
+		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd') 
+		AND TO_CHAR(SYSDATE,'yyyyMMdd')
+	</select>
+
 	<select id="movieDetail" resultMap="movieResultMap">
 		SELECT * 
 		FROM MOVIE 

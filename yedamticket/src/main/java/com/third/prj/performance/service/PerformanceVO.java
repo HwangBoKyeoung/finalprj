@@ -1,5 +1,7 @@
 package com.third.prj.performance.service;
 
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,6 +22,7 @@ public class PerformanceVO {
 	private String addr; //공연장 상세주소
 	private int price;	//공연가격
 	
-	
-	
+	private PerformanceReservationVO performanceReservationVO;
+	private PerformanceScheduleVO performanceScheduleVO;
+  
 }

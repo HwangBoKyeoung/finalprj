@@ -17,12 +17,15 @@ import com.third.prj.moviehall.service.MovieHallService;
 import com.third.prj.moviehall.service.MovieHallVO;
 import com.third.prj.moviereply.service.MovieReplyService;
 import com.third.prj.moviereply.service.MovieReplyVO;
+import com.third.prj.moviereservation.service.MovieReservService;
+import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
+import com.third.prj.user.service.UserService;
 
 @Controller
 public class MovieController {
@@ -38,6 +41,9 @@ public class MovieController {
 
 	@Autowired
 	private MovieScheduleService movieScheduleDao;
+	
+	@Autowired
+	private MovieReservService movieReservationDao;
 
 	@RequestMapping("/movieList.do")
 	public String movieList() {
@@ -63,9 +69,9 @@ public class MovieController {
 	}
 
 	// 댓글 입력
-	@PostMapping("/movieReplyInsert")
+	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
-	public String movieReplyInsert(Model model, MovieReplyVO vo) {
+	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
 		System.out.println(vo.getUid());
 		System.out.println(vo.getMvNo());
 		System.out.println(vo.getContent());
@@ -73,21 +79,23 @@ public class MovieController {
 
 		int n = movieReplyDao.movieReplyInsert(vo);
 		System.out.println(n);
-
+		//select key 사용 바꾸기
 		if (n != 0) {
-			vo = movieReplyDao.selectReplyNo();
+//			vo = movieReplyDao.selectReplyNo();
+			
 			System.out.println(Integer.toString(vo.getMvReNo()));
-			return Integer.toString(vo.getMvReNo());
+			return movieReplyDao.movieReplyList(vo);
 		} else {
 			return null;
 		}
 	}
 
 	// 댓글삭제
-	@RequestMapping("/movieReplyDelete")
+	@RequestMapping("/movieReplyDelete.do")
 	@ResponseBody
 	public String movieReplyDelete(MovieReplyVO vo) {
 		int n = movieReplyDao.movieReplyDelete(vo);
+		System.out.println("삭제된건수"+n);
 		if (n > 0) {
 			return "success";
 		} else {
@@ -97,8 +105,10 @@ public class MovieController {
 
 	// 영화 예약페이지로
 	@RequestMapping("/movieBooking.do")
-	public String movieBooking() {
+	public String movieBooking(Model model) {
+		model.addAttribute("movies",movieDao.movieList());
 		return "movie/movieBookingForm";
+	
 	}
 
 	// 영화예약페이지에서 영화를 클릭하면 해당영화를 상영하는 영화관리스트호출
@@ -144,6 +154,7 @@ public class MovieController {
 		
 		return "redirect:/movieDetail.do";
 	}
+  
 	//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
 	@RequestMapping("/mvSelect.do")
 	public String mvSelect(MovieVO vo, Model model) {
@@ -160,5 +171,21 @@ public class MovieController {
 		return "movie/movieUpdate";
 	}
 	
+	//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
+	@RequestMapping("/seatSearch.do")
+	@ResponseBody
+	public List<MovieReservationVO> seatSearch(MovieReservationVO vo) {
+		return movieReservationDao.seatSearch(vo);
+	}
+  
+	//결제페이지로
+	@RequestMapping("/movieReservation.do")
+	public String movieReservation(Model model,	MovieReservationVO vo) {
+		System.out.println("hall"+vo.getReservHall());
+		System.out.println("loc"+vo.getReservLoc());
+		 movieReservationDao.movieReservationInsert(vo);
+		 model.addAttribute("re",vo);
+		return "movie/movieReservationForm";
+	}
 
 }
