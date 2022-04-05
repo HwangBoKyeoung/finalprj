@@ -1,6 +1,10 @@
 package com.third.prj.company.web;
 
+import javax.inject.Inject;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,26 +15,33 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.company.service.CompanyService;
 import com.third.prj.company.service.CompanyVO;
+import com.third.prj.user.service.UserService;
 
 @Controller
 public class CompanyController {
 
 	@Autowired
 	private CompanyService companyDao;
-
+	
+	@Inject
+	private BCryptPasswordEncoder pwdEncoder;
+	
 	@RequestMapping("/signupB_1.do")
 	public String signUpB_2() {
 		return "signup/signupB_1";
 	}
 	
 	@RequestMapping(value = "/signupB_2.do", method = RequestMethod.GET)
-	public String signUpB_2(@RequestParam String email, Model model) {
-		model.addAttribute("email", email);
+	public String signUpB_2(HttpSession session) {
+		session.getAttribute("all");
 		return "signup/signupB_2";
 	}
 	
 	@PostMapping("/signupB_3.do")
-	public String signUpB_3(CompanyVO companyVO) {
+	public String signUpB_3(CompanyVO companyVO, Model model) {
+		String encodedPwd = companyVO.getPwd();
+		String decodedPwd = pwdEncoder.encode(encodedPwd);
+		companyVO.setPwd(decodedPwd);
 		int n = companyDao.companyInsert(companyVO);
 		if (n != 0) {
 			return "home/home";
@@ -59,5 +70,4 @@ public class CompanyController {
 		model.addAttribute("com",vo);
 		return "manager/company/companySelect";
 	}
-	
 }

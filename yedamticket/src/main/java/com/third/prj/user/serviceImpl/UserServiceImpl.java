@@ -20,6 +20,11 @@ public class UserServiceImpl implements UserService {
 		return mapper.userInsert(vo);
 	}
 
+	/*
+	 * @Override public int userPointUpdate(UserVO vo) { return
+	 * mapper.userPointUpdate(vo); }
+	 */
+	
 	@Override
 	public int idChk(UserVO vo) {
 		return mapper.idChk(vo);
@@ -49,6 +54,14 @@ public class UserServiceImpl implements UserService {
 	public UserVO emailCheck(UserVO vo) {
 		return mapper.emailCheck(vo);
 	}
-	
-}
 
+	@Override
+	public int userPointUpdate(UserVO vo) {
+		return 0;
+	}
+
+	@Override
+	public int userCharge(UserVO vo) {
+		return mapper.userCharge(vo);
+	}
+}
