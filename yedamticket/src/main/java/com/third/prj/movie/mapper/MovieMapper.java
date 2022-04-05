@@ -8,4 +8,5 @@ public interface MovieMapper {
 	
 	MovieVO movieDetail(MovieVO vo);
 	List<MovieVO> movieList();
+
 }

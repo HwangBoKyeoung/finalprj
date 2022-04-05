@@ -40,5 +40,11 @@ public class CompanyServiceImpl implements CompanyService {
 	public List<CompanyVO> companySearch(String key, String val) {
 		return mapper.companySearch(key, val);
 	}
+
+	@Override
+	public CompanyVO companyLogin(CompanyVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.companyLogin(vo);
+	}
 	
 }

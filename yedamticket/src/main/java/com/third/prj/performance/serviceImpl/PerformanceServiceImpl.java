@@ -37,8 +37,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public void procedureCall(Map map) {
-		mapper.procedureCall(map);
+	public int procedureCall(Map map) {
+		return mapper.procedureCall(map);
 	}
 
 }

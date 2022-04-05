@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.movieschedule.mapper.MovieScheduleMapper">
+
+	<resultMap type="com.third.prj.movieschedule.service.MovieScheduleVO" id="MovieScheduleResult">
+		<id property="mvSchNo" column="mv_sch_no"/>
+		<result property="mvHallNo" column="mv_hall_No"/>
+		<result property="time" column="time"/>
+		<result property="schDt" column="schdt"/>
+		<result property="docId" column="docid"/>
+	</resultMap>
+	
+	<select id="movieSchdtList" resultMap="MovieScheduleResult">
+		SELECT MAX(SCHDT) AS SCHDT
+		FROM MOVIE_SCHEDULE
+		WHERE DOCID=#{docId}
+	</select>
+	
+</mapper>

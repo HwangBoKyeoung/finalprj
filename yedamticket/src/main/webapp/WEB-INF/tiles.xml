@@ -54,4 +54,13 @@
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
 		
+		<definition name="company.home" template="/WEB-INF/views/layout/layoutC.jsp">
+			<put-attribute name="title" value="CompanySite" />
+			<put-attribute name="body" value="" />
+		</definition>
+	
+		<definition name="company/*/*" extends="company.home">
+			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
+		
 	</tiles-definitions>

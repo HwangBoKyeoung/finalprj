@@ -51,14 +51,14 @@ public class InquiryContorller {
 		model.addAttribute("inqs", inquiryDao.inquirySelectList());
 		return"inquiry/inqList";
 	}
-	
+	//한건조회
 	@RequestMapping("/inqSelect.do")
 	public String inqSelect(InquiryVO vo, Model model) {
 		vo = inquiryDao.inquirySelect(vo);
 		model.addAttribute("inqs",vo);
 		return "inquiry/inqSelect";
 	}
-	
+	//글쓰기
 	@RequestMapping("/inqWriteForm.do")
 	public String inqWriteForm() {
 		return "inquiry/inqWriteForm";

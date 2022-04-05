@@ -19,6 +19,7 @@ import com.third.prj.moviereservation.service.MovieReservService;
 import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
+import com.third.prj.user.service.UserService;
 
 @Controller
 public class MovieController {
@@ -37,8 +38,7 @@ public class MovieController {
 	
 	@Autowired
 	private MovieReservService movieReservationDao;
-	
-	
+
 	@RequestMapping("/movieList.do")
 	public String movieList() {
 		return "movie/movieList";
@@ -120,12 +120,14 @@ public class MovieController {
 	public List<MovieScheduleVO> movieSchdtList(Model model, MovieScheduleVO vo) {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
+
 	//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
 	@RequestMapping("/seatSearch.do")
 	@ResponseBody
 	public List<MovieReservationVO> seatSearch(MovieReservationVO vo) {
 		return movieReservationDao.seatSearch(vo);
 	}
+  
 	//결제페이지로
 	@RequestMapping("/movieReservation.do")
 	public String movieReservation(Model model,	MovieReservationVO vo) {
@@ -135,4 +137,5 @@ public class MovieController {
 		 model.addAttribute("re",vo);
 		return "movie/movieReservationForm";
 	}
+
 }
