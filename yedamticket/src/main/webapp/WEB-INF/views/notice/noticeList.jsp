@@ -419,10 +419,6 @@ iframe {
 			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		});
 	</script>
-	<script src="./resources/users/js/core/jquery.min.js"></script>
-	<script src="./resources/users/js/core/popper.js"></script>
-	<script src="./resources/users/js/core/bootstrap.min.js"></script>
-	<script src="./resources/users/js/main.js"></script>
 </body>
 
 </html>

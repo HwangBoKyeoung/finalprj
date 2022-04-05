@@ -1,10 +1,13 @@
 package com.third.prj.user.serviceImpl;
 
-import java.util.List;
+import java.util.List; 
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.user.mapper.UserMapper;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -51,8 +54,39 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO emailCheck(UserVO vo) {
-		return mapper.emailCheck(vo);
+	public int emailCheck(String email) {
+		// TODO Auto-generated method stub
+		return mapper.emailCheck(email);
+	}
+
+	@Override
+	public int kakaoInsert(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.kakaoInsert(vo);
+	}
+
+	@Override
+	public int userUpdate(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userUpdate(vo);
+	}
+
+	@Override
+	public int userDelete(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userDelete(vo);
+	}
+
+	@Override
+	public List<MovieReservVO> MvReservList(MovieReservVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.MvReservList(vo);
+	}
+
+	@Override
+	public List<PerformanceVO> pfReservList(PerformanceReservationVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pfReservList(vo);
 	}
 
 	@Override

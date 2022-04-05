@@ -17,6 +17,7 @@ import com.third.prj.moviereply.service.MovieReplyService;
 import com.third.prj.moviereply.service.MovieReplyVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
+import com.third.prj.user.service.UserService;
 
 @Controller
 public class MovieController {
@@ -32,6 +33,8 @@ public class MovieController {
 
 	@Autowired
 	private MovieScheduleService movieScheduleDao;
+	
+
 
 	@RequestMapping("/movieList.do")
 	public String movieList() {
@@ -110,5 +113,7 @@ public class MovieController {
 	public List<MovieScheduleVO> movieSchdtList(Model model, MovieScheduleVO vo) {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
+	
+
 
 }

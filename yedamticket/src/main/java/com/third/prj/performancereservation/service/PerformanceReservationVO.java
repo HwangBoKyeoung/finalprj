@@ -1,6 +1,6 @@
 package com.third.prj.performancereservation.service;
 
-import java.sql.Date;
+import java.sql.Date; 
 
 import lombok.Getter;
 import lombok.Setter;
@@ -18,5 +18,6 @@ public class PerformanceReservationVO {
 	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
+	
 	
 }

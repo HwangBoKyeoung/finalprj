@@ -2,7 +2,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<div class="section section-images">
+<!--  <div class="section section-images">
         <div class="container">
           <div class="row">
             <div class="col-md-12">
@@ -18,7 +18,7 @@
             </div>
           </div>
         </div>
-      </div>
+      </div>  -->
       <div class="section section-basic" id="basic-elements">
         <div class="container">
           <h3 class="title">Basic Elements</h3>
@@ -305,7 +305,7 @@
                 </div>
               </div>
             </nav>
-            <!-- End Navbar Primary -->
+            <!--  Primary -->
             <!-- Navbar Info -->
             <nav class="navbar navbar-expand-lg bg-info">
               <div class="container">
@@ -338,7 +338,7 @@
                 </div>
               </div>
             </nav>
-            <!-- End Navbar Info -->
+            <!--  Info -->
             <!-- Navbar Success -->
             <nav class="navbar navbar-expand-lg bg-success">
               <div class="container">
@@ -371,7 +371,7 @@
                 </div>
               </div>
             </nav>
-            <!-- End Navbar Success -->
+            <!--  Success -->
             <!-- Navbar Warning -->
             <nav class="navbar navbar-expand-lg bg-warning">
               <div class="container">
@@ -409,7 +409,7 @@
                 </div>
               </div>
             </nav>
-            <!-- End Navbar Warning -->
+            <!--  Warning -->
             <!-- Navbar Danger -->
             <nav class="navbar navbar-expand-lg bg-danger">
               <div class="container">
@@ -445,7 +445,7 @@
                 </div>
               </div>
             </nav>
-            <!-- End Navbar Danger -->
+            <!--  Danger -->
             <!-- Navbar Transparent -->
             <nav class="navbar navbar-expand-lg navbar-transparent">
               <div class="container">
@@ -481,7 +481,7 @@
                 </div>
               </div>
             </nav>
-            <!-- End Navbar Transparent-->
+            <!--  Transparent-->
           </div>
         </div>
       </div>

@@ -10,11 +10,46 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
 </head>
+<style>
+html, body {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+.wrapper {
+	display: flex;
+	flex-direction: column;
+	height: 100%
+}
+
+footer {
+	height: 60px;
+}
+
+.main-content {
+	flex: 1;
+}
+</style>
+
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
 				<h1>
+
+					<a href="#" class="logo">MyPage</a>
+				</h1>
+				<ul class="list-unstyled components mb-5">
+					<li>
+						<h6>${sessionId }님은 회원 입니다</h6>
+						<h6>포인트 원</h6> <br>
+					</li>
+					<li><a href="userUpdateForm.do">회원정보수정</a></li>
+					<li><a href="pfReservList.do">공연예매내역</a></li>
+					<li><a href="mvReservList.do">영화예매내역</a></li>
+					<li><a href="userBuyList.do">포인트사용내역</a></li>
+
 					<a href="myPage.do" class="logo">MyPage</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
@@ -25,6 +60,7 @@
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
 					<li><a href="pfReserv.do">공연예매내역</a></li>
 					<li><a href="mvReserv.do">영화예매내역</a></li>
+
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
@@ -125,6 +161,13 @@
 		});
 	</script>
 
+	<script type="text/javascript">
+		$(".que").click(function() {
+			$(this).next(".anw").stop().slideToggle(300);
+			$(this).toggleClass('on').siblings().removeClass('on');
+			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		});
+	</script>
 
 </body>
 
