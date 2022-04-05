@@ -9,6 +9,7 @@ public interface UserService {
 	List<UserVO> userList();
 	UserVO userSelect(UserVO vo);
 	int userInsert(UserVO vo);
+	int userPointUpdate(UserVO vo);
 	
 //	검색
 	List<UserVO> userSearch(@Param("key")String key, @Param("val") String val);
@@ -18,5 +19,7 @@ public interface UserService {
 	UserVO getUser(UserVO vo);
 //	이메일체크
 	UserVO emailCheck(UserVO vo);
-  
+	
+	// 포인트 충전
+	int userCharge(UserVO vo);
 }

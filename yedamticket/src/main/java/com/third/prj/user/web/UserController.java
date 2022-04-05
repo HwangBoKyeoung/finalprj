@@ -1,19 +1,21 @@
 package com.third.prj.user.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.notice.service.NoticeService;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -23,12 +25,15 @@ public class UserController {
 
 	@Autowired
 	private FaqService faqDao;
-	
+
 	@Autowired
 	private UserService userDao;
 
 	@Autowired
 	private NoticeService noticeDao;
+
+	@Inject
+	private BCryptPasswordEncoder pwdEncoder;
 
 	@RequestMapping("/signup_1.do")
 	public String signUp_1() {
@@ -36,13 +41,16 @@ public class UserController {
 	}
 
 	@RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)
-	public String signUp_3(@RequestParam String email, Model model) {
-		model.addAttribute("email", email);
+	public String signUp_3(HttpSession session) {
+		session.getAttribute("all");
 		return "signup/signup_3";
 	}
 
 	@PostMapping("/signup_4.do")
-	public String signUp_4(UserVO userVO) {
+	public String signUp_4(UserVO userVO, Model model) {
+		String encodedPwd = userVO.getPwd();
+		String decodedPwd = pwdEncoder.encode(encodedPwd);
+		userVO.setPwd(decodedPwd);
 		int n = userDao.userInsert(userVO);
 		if (n != 0) {
 			return "home/home";
@@ -72,6 +80,11 @@ public class UserController {
 			return -1; // 에러
 		}
 	}
+	/*
+	 * 
+	 * 
+	 * 	
+	 */
 
 	@RequestMapping("/userLoginForm.do")
 	public String userLoiginForm(String error) {
@@ -92,13 +105,21 @@ public class UserController {
 	}
 
 	@RequestMapping("/userSelect.do")
-	public String userSelect(HttpSession session, UserVO vo, Model model) {
+	public String userSelect(HttpSession session, UserVO vo) {
 		userDao.userSelect(vo);
 		session.setAttribute("sessionId", vo.getUid());
-		System.out.println("----------------sessionId : " + session.getAttribute("sessionId") + "-----------------------");
+		session.setAttribute("sessionPwd", vo.getPwd());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println("id :" + vo.getUid());
+		System.out.println("pwd :" + vo.getPwd());
+		System.out.println("name :" + vo.getName());
+		System.out.println("email :" + vo.getEmail());
+		System.out.println("phone :" + vo.getPhone());
+		System.out.println("addr :" + vo.getAddr());
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		return "home/home";
 	}
-	
+
 	@RequestMapping("/userService.do")
 	public String userService(Model model) {
 		model.addAttribute("notices", noticeDao.noticeSelectList());
@@ -108,7 +129,12 @@ public class UserController {
 
 	@RequestMapping("/userPage.do")
 	public String userPage() {
+
 		return "user/userPage";
 	}
-	
+
+	@RequestMapping("/userUpdateForm.do")
+	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
+		return "user/userUpdateForm";
+	}
 }

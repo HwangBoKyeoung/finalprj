@@ -11,7 +11,7 @@ public interface UserMapper {
 	List<UserVO> userList();
 	UserVO userSelect(UserVO vo);
 	int userInsert(UserVO vo);
-	
+	int userPointUpdate(@Param("point")int point, @Param("id") String id);
 //	검색
 	List<UserVO> userSearch(@Param("key")String key, @Param("val") String val);
 //	아이디체크
@@ -21,4 +21,8 @@ public interface UserMapper {
 //	이메일체크
 	UserVO emailCheck(UserVO vo);
 	
+	// 포인트 충전
+	int userCharge(UserVO vo);
+	
+
 }

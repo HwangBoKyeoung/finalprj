@@ -51,14 +51,15 @@
  	<select id="managerSearch" resultType="com.third.prj.manager.service.ManagerVO" parameterType="String">
  		SELECT *
 		FROM MANAGER 
-		WHERE M_ID != 'micol'
-		AND
-			<if test="key == '전체'">DEPART LIKE '%'||#{val}||'%' 
+		WHERE M_ID != 'micol'	
+		<if test="val != null and val != ''">
+			<if test="key == '전체'">AND (DEPART LIKE '%'||#{val}||'%' 
 									OR NAME LIKE '%'||#{val}||'%' 
-									OR M_ID LIKE '%'||#{val}||'%'</if>
-			<if test="key == '부서'">DEPART LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">M_ID LIKE '%'||#{val}||'%'</if>
+									OR M_ID LIKE '%'||#{val}||'%')</if>
+			<if test="key == '부서'">AND DEPART LIKE '%'||#{val}||'%'</if>
+			<if test="key == '이름'">AND NAME LIKE '%'||#{val}||'%'</if>
+			<if test="key == '아이디'">AND M_ID LIKE '%'||#{val}||'%'</if>
+			</if>
 		ORDER BY M_ID DESC
  	</select>
  	

@@ -7,6 +7,7 @@
 		<result property="frDt" column="FRDT"/>
 		<result property="no" column="NO"/>
 		<result property="pNo" column="P_NO"/>
+		<result property="time" column="TIME"/>
 	</resultMap>
 	
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
@@ -21,5 +22,5 @@
         where s.p_no = p.p_no
         ORDER BY P_NO
 	</select>
-	
+
 </mapper>

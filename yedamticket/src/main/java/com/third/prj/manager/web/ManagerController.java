@@ -61,9 +61,9 @@ public class ManagerController {
 	
 	//관리자 정보 삭제
 	@RequestMapping("/admindelete.do")
-	public String admindelete(@RequestParam("MId") String id) {
-		ManagerVO vo = new ManagerVO();
-		vo.setMId(id);
+	public String admindelete(ManagerVO vo) {
+//		ManagerVO vo = new ManagerVO();
+//		vo.setMId(id);
 		int n = managerDao.managerDelete(vo);
 		if(n != 0) {
 			return "redirect:/admin.do";
