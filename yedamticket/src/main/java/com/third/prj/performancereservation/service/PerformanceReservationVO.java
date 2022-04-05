@@ -4,16 +4,18 @@ import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class PerformanceReservationVO {
 	
-	private int pReservNo;
+	private int PReservNo;
 	private Date reserveDttm;
 	private String cancelCd;
-	private String uId;
-	private int pSchNo;
+	private String Uid;
+	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
 	

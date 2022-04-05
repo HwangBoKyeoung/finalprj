@@ -15,11 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.notice.service.NoticeService;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
-
-import freemarker.log.Logger;
 
 @Controller
 public class UserController {
@@ -32,7 +31,7 @@ public class UserController {
 
 	@Autowired
 	private NoticeService noticeDao;
-	
+
 	@Inject
 	private BCryptPasswordEncoder pwdEncoder;
 
@@ -81,6 +80,11 @@ public class UserController {
 			return -1; // 에러
 		}
 	}
+	/*
+	 * 
+	 * 
+	 * 	
+	 */
 
 	@RequestMapping("/userLoginForm.do")
 	public String userLoiginForm(String error) {

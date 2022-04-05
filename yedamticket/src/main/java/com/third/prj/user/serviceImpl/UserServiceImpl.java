@@ -57,7 +57,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int userPointUpdate(UserVO vo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

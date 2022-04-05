@@ -83,5 +83,4 @@
 		             	WHERE  u_id = #{Uid}) + #{point}
 		WHERE  u_id = #{Uid}
 	</update>
-	
 </mapper>

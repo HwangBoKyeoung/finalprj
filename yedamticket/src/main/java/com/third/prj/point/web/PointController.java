@@ -34,7 +34,7 @@ public class PointController {
 		model.addAttribute("point", point);
 		model.addAttribute("Uid", Uid);
 		userDao.userCharge(userVO);
-		return "point/point_2";
+		return "user/userPage";
 	}
 	
 	/*

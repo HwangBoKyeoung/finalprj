@@ -23,4 +23,6 @@ public interface UserMapper {
 	
 	// 포인트 충전
 	int userCharge(UserVO vo);
+	
+
 }
