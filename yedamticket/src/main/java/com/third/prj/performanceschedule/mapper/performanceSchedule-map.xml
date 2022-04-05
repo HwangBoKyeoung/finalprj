@@ -7,12 +7,12 @@
 		<result property="frDt" column="FRDT"/>
 		<result property="no" column="NO"/>
 		<result property="time" column="TIME"/>
-		<result property="pNo" column="P_NO"/>
+		<result property="PNo" column="P_NO"/>
 	</resultMap>
 	
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
 		SELECT * 
 		FROM PERFORMANCE_SCHEDULE
 	</select>
-	
+
 </mapper>
