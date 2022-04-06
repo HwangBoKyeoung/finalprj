@@ -24,5 +24,8 @@ public class PerformanceVO {
 	
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;
+	
+	//검색용
+	private String frDt;
   
 }

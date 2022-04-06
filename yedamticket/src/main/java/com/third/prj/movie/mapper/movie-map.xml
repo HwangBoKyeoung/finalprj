@@ -3,22 +3,7 @@
 
 <mapper namespace="com.third.prj.movie.mapper.MovieMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
-		<id property="mvNo" column="mv_no"/>
-		<result property="name" column="name"/>
-		<result property="genre" column="genre"/>
-		<result property="startDate" column="startDate"/>
-		<result property="director" column="director"/>
-		<result property="rating" column="rating"/>
-		<result property="distibutor" column="distibutor"/>
-		<result property="country" column="country"/>
-		<result property="runtime" column="runtime"/>
-		<result property="content" column="content"/>
-		<result property="CId" column="c_id"/>
-		<result property="actor" column="actor"/>
-		<result property="fileCd" column="file_cd"/>
-		<result property="docId" column="docId"/>
-	</resultMap>
+	
 
 	<!-- 프로시저 -->
 	<resultMap type="hashmap" id="procedureCall"/>
@@ -37,14 +22,54 @@
 	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
+	<!-- 황규복 -->
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
+		<id property="mvNo" column="mv_no"/>
+		<result property="name" column="name"/>
+		<result property="genre" column="genre"/>
+		<result property="startDate" column="startDate"/>
+		<result property="director" column="director"/>
+		<result property="rating" column="rating"/>
+		<result property="distibutor" column="distibutor"/>
+		<result property="country" column="country"/>
+		<result property="runtime" column="runtime"/>
+		<result property="content" column="content"/>
+		<result property="CId" column="c_id"/>
+		<result property="actor" column="actor"/>
+		<result property="fileCd" column="file_cd"/>
+		<result property="docId" column="docId"/>
+	</resultMap>
 	
+	<!-- 페이징 
+	<select id="getListWithPaging" resultMap="movieResultMap">
+	<![CDATA[
+		SELECT
+			*
+		FROM
+			(
+			select /*+INDEX_DESC(tbl_board pk_board)*/
+			rownum rn,
+			from 
+			movie
+			where rownum <= #{pageNum} * #{amount}
+			)
+			where rn > (#{pageNum}-1)*#{amount}
+			]]>
+	</select>-->
+	<!-- 영화상영예정작 -->
+	<select id="mList" resultMap="movieResultMap">
+		SELECT * FROM MOVIE
+        WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
+        AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
+	</select>
+	<!-- 영화리스트 -->
 	<select id="movieList" resultMap="movieResultMap">
 		SELECT * FROM MOVIE
 		WHERE STARTDATE 
 		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd') 
 		AND TO_CHAR(SYSDATE,'yyyyMMdd')
 	</select>
-
+	<!-- 영화상세 -->
 	<select id="movieDetail" resultMap="movieResultMap">
 		SELECT * 
 		FROM MOVIE 

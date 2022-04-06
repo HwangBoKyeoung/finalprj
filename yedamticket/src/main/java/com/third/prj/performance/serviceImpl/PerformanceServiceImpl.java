@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.performance.mapper.PerformanceMapper;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 
 @Repository("perDao")
 public class PerformanceServiceImpl implements PerformanceService {
@@ -36,5 +37,22 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public int procedureCall(Map map) {
 		return mapper.procedureCall(map);
 	}
+
+
+	@Override
+	public List<PerformanceVO> pList() {
+		// TODO Auto-generated method stub
+		return mapper.pList();
+	}
+
+
+	@Override
+	public List<PerformanceVO> pSearch(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pSearch(vo);
+	}
+
+
+	
 
 }

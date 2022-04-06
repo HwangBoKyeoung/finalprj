@@ -38,14 +38,19 @@ public class PerformanceContorller {
 	}
 
 	@RequestMapping("/pList.do")
-	public String pList() {
-		
+	public String pList(Model model) {
+		model.addAttribute("performance",perDao.pList());
 		return "performance/pList";
 	}
-	
-//	@RequestMapping("/pserSelect.do")
-//	public String perSelect(PerformanceVO vo, Model model) {
-
+	@RequestMapping("/pSearch.do")
+	public String pSearch(PerformanceVO vo, Model model) {
+		System.out.println("날짜"+vo.getFrDt());
+		System.out.println("지역"+vo.getLoc());
+		System.out.println("행사"+vo.getName());
+		
+		perDao.pSearch(vo);
+		return "";
+	}
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {

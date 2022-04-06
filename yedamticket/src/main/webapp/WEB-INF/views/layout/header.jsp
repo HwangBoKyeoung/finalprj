@@ -106,9 +106,9 @@
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="./index.html"> <i
 								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
-							</a> <a class="dropdown-item" target="_blank"
+							</a> <a class="dropdown-item" 
 								href="pList.do">
-								<i class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
+								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
@@ -156,21 +156,19 @@
 					<li>
 						<div class="login-css-add" align="right">
 							<c:choose>
-								<c:when test="${empty sessionId}">
-									<li class="nav-item dropdown login-css-add"><a
-										href="userLoginForm.do" id="navbarDropdownMenuLink1"
-										data-toggle="dropdown"> <i
-											class="fa-solid fa-headset fa-2x"></i> 로그인
-									</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="nav-item dropdown login-css-add"><a
-										href="kakaoLogout.do" id="navbarDropdownMenuLink1"
-										data-toggle="dropdown"> <i
-											class="fa-solid fa-headset fa-2x"></i> 로그아웃
-									</a></li>
-								</c:otherwise>
-							</c:choose>
+                        <c:when test="${empty sessionId}">
+                           <li class="login-css-add"><a
+                              href="userLoginForm.do" > <i
+                                 class="fa-solid fa-headset fa-2x"></i> 로그인
+                           </a></li>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="login-css-add"><a
+                              href="kakaoLogout.do" > <i
+                                 class="fa-solid fa-headset fa-2x"></i> 로그아웃
+                           </a></li>
+                        </c:otherwise>
+                     </c:choose>
 						</div>
 					</li>
 				</ul>
