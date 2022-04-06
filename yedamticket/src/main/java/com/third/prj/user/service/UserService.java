@@ -2,7 +2,7 @@ package com.third.prj.user.service;
 
 import java.util.List;
 
-import org.apache.ibatis.annotations.Param;
+import javax.servlet.http.HttpSession;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
@@ -46,5 +46,9 @@ public interface UserService {
 
 	// 포인트 충전
 	int userCharge(UserVO vo);
-  
+	
+	// 로그인 체크용 메서드
+	public UserVO loginChk(UserVO vo);
+	public UserVO loginChk(UserVO vo, HttpSession session);
+	
 }

@@ -188,4 +188,11 @@
 		             	WHERE  u_id = #{Uid}) + #{point}
 		WHERE  u_id = #{Uid}
 	</update>
+	
+	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id = #{Uid}
+	</select>
+	
 </mapper>
