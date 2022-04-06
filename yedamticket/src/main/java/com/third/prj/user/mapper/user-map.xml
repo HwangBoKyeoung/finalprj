@@ -3,11 +3,9 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO"
-		id="MovieMap">
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
 		<result column="name" property="name" />
-		<collection property="movieReservVO"
-			resultMap="MovieReservMap" />
+		<collection property="movieReservVO" resultMap="MovieReservMap" />
 	</resultMap>
 
 	<resultMap
@@ -40,10 +38,8 @@
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
 		<result column="NAME" property="name" />
-		<collection property="performanceReservationVO"
-			resultMap="pfReservMap"></collection>
-		<collection property="performanceScheduleVO"
-			resultMap="pfScheduleMap"></collection>
+		<collection property="performanceReservationVO" resultMap="pfReservMap"></collection>
+		<collection property="performanceScheduleVO" resultMap="pfScheduleMap"></collection>
 	</resultMap>
 
 
@@ -80,6 +76,12 @@
 		FROM   USERS
 		WHERE  U_ID = #{Uid}
 		AND	   PWD  = #{pwd}
+	</select> 
+	
+	<select id = "userSelectOne" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   USERS 
+		WHERE  U_ID = #{Uid}
 	</select>
 	
 	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
@@ -178,7 +180,7 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID = #{uId}
+		AND X.U_ID = #{Uid}
 	</select>
 	
 	<update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >

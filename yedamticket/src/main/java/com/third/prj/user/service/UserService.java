@@ -11,8 +11,10 @@ import com.third.prj.performancereservation.service.PerformanceReservationVO;
 public interface UserService {
 
 	List<UserVO> userList();
-
+//  유저 로그인
 	UserVO userSelect(UserVO vo);
+//	유저 검색
+	UserVO userSelectOne(UserVO vo);
 
 	int userInsert(UserVO vo);
 

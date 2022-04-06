@@ -12,11 +12,13 @@ import com.third.prj.user.service.UserVO;
 public interface UserMapper {
 
 	List<UserVO> userList();
-
+//	로그인
 	UserVO userSelect(UserVO vo);
-
+//	유저 검색
+	UserVO userSelectOne(UserVO vo);
+//	회원가입
 	int userInsert(UserVO vo);
-
+//	회원정보 수정
 	int userUpdate(UserVO vo);
 
 //	 회원 탈퇴

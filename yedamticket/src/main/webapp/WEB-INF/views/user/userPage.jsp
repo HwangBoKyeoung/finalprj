@@ -37,7 +37,6 @@ footer {
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
 				<h1>
-
 					<a href="#" class="logo">MyPage</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
@@ -49,18 +48,6 @@ footer {
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="userBuyList.do">포인트사용내역</a></li>
-
-					<a href="myPage.do" class="logo">MyPage</a>
-				</h1>
-				<ul class="list-unstyled components mb-5">
-					<li>
-						<h6>${sessionId}님은 회원 입니다</h6>
-						<h6>포인트 원</h6> <br>
-					</li>
-					<li><a href="userUpdateForm.do">회원정보수정</a></li>
-					<li><a href="pfReserv.do">공연예매내역</a></li>
-					<li><a href="mvReserv.do">영화예매내역</a></li>
-
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">

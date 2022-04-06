@@ -154,19 +154,17 @@
 							</a>
 						</div></li>
 					<li>
-						<div class="login-css-add" align="right">
+						<div align="right">
 							<c:choose>
 								<c:when test="${empty sessionId}">
-									<li class="nav-item dropdown login-css-add"><a
-										href="userLoginForm.do" id="navbarDropdownMenuLink1"
-										data-toggle="dropdown"> <i
+									<li class="login-css-add"><a
+										href="userLoginForm.do" > <i
 											class="fa-solid fa-headset fa-2x"></i> 로그인
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="nav-item dropdown login-css-add"><a
-										href="kakaoLogout.do" id="navbarDropdownMenuLink1"
-										data-toggle="dropdown"> <i
+									<li class="login-css-add"><a
+										href="kakaoLogout.do" > <i
 											class="fa-solid fa-headset fa-2x"></i> 로그아웃
 									</a></li>
 								</c:otherwise>

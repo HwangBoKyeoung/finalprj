@@ -169,7 +169,9 @@ public class UserController {
 	}
 
 	@RequestMapping("/userUpdateForm.do")
-	public String userUpdateForm() {
+	public String userUpdateForm(Model model, UserVO vo, HttpSession session) {
+		vo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
 		return "user/userUpdateForm";
 	}
 	

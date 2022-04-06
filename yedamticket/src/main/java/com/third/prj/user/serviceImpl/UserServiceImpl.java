@@ -99,4 +99,10 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return 0;
 	}
+
+	@Override
+	public UserVO userSelectOne(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userSelectOne(vo);
+	}
 }
