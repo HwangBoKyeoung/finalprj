@@ -1,7 +1,10 @@
 package com.third.prj.user.serviceImpl;
 
-import java.util.List; 
+import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -18,6 +21,12 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private UserMapper mapper;
 
+	@Autowired
+	private UserService dao;
+	
+	@Autowired
+	private SqlSession sqlSession;
+	
 	@Override
 	public int userInsert(UserVO vo) {
 		return mapper.userInsert(vo);
@@ -101,8 +110,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+
 	public UserVO userSelectOne(UserVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.userSelectOne(vo);
+	}
+
+	public UserVO loginChk(UserVO vo) {
+		return sqlSession.selectOne("loginChk", vo);
+	}
+
+	@Override
+	public UserVO loginChk(UserVO vo, HttpSession session) {
+		return dao.loginChk(vo);
+
 	}
 }
