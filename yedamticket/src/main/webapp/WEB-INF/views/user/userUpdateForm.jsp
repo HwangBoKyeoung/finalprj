@@ -117,6 +117,32 @@
 			} 
 			
 		});*/
+		
+
+		$("#updateBtn").attr('disabled',true);
+		$('.pw').keyup(function(){
+	    	let pass1 = $("#pwd1").val();
+	        let pass2 = $("#pwd2").val();
+	        
+	        if (pass1 != "" || pass2 != ""){
+	        	if (pass1 == pass2){
+	            	$("#checkPw").html('일치');
+	            	$("#checkPw").attr('color','green');
+	            	$("#updateBtn").attr('disabled',false);
+	            } else {
+	            	$("#checkPw").html('불일치');
+	                $("#checkPw").attr('color','red');
+	                $("#updateBtn").attr('disabled',true);
+	            }
+	        }
+	    
+	    })
+		   
+	    function alertt(){
+			alert("회원정보가 수정되었습니다.")
+		}
+	    
+		
 	
 	</script>
 </body>

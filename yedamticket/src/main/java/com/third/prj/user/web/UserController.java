@@ -15,10 +15,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.faq.service.FaqService;
+import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -166,7 +168,10 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-	public String userPage() {
+	public String userPage(Model model,UserVO vo, HttpSession session) {
+		vo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+	
 		return "user/userPage";
 	}
 
@@ -179,8 +184,10 @@ public class UserController {
 
 	@RequestMapping("/userUpdate.do")
 	public String userUpdate(UserVO vo) {
+		String pwd = vo.getPwd();
+		String encryptedPwd = pwdEncoder.encode(pwd);
+		vo.setPwd(encryptedPwd);
 		int n = userDao.userUpdate(vo);
-
 		if (n != 0) {
 			return "redirect:userUpdateForm.do";
 		}
@@ -204,27 +211,30 @@ public class UserController {
 	}
 
 	@RequestMapping("/mvReservList.do")
-	public String mvReservList(Model model, MovieReservVO vo, HttpSession session) {
-		vo.setUid((String) session.getAttribute("sessionId"));
-		System.out.println(vo.getUid());
-		model.addAttribute("mvList", userDao.MvReservList(vo));
+	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session) {
+		mvo.setUid((String) session.getAttribute("sessionId"));
+		vo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+		model.addAttribute("mvList", userDao.MvReservList(mvo));
 		return "user/mvReservList";
 	}
 
 	@RequestMapping("pfReservList.do")
-	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, PerformanceVO vo) {
+	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo,UserVO vo ) {
 		pvo.setUid((String) session.getAttribute("sessionId"));
+		vo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
 		model.addAttribute("pfList", userDao.pfReservList(pvo));
 		return "user/pfReservList";
 	}
 
 	@RequestMapping("/userBuyList.do")
-	public String userBuyList() {
+	public String userBuyList(Model model, HttpSession session ,PointVO povo) {
+		
+		povo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("point", userDao.myPoint(povo));
 		return "user/userBuyList";
 	}
 
-//	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
-//		return "user/userUpdateForm";
-//	}
 
 }

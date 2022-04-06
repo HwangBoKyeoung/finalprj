@@ -8,9 +8,12 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.notice.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.user.mapper.UserMapper;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -125,4 +128,25 @@ public class UserServiceImpl implements UserService {
 		return dao.loginChk(vo);
 
 	}
+
+	@Override
+	public MovieVO mNameSelect(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mNameSelect(vo);
+	}
+
+
+	@Override
+	public PointVO myPoint(PointVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.myPoint(vo);
+	}
+
+	@Override
+	public PerformanceVO pNameSelect(PerformanceReservationVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pNameSelect(vo);
+	}
+
+
 }

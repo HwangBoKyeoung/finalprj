@@ -13,7 +13,7 @@ public class PointVO {
 	private Date payDt;
 	private String cancelCd;
 	private int payNo;
-	private String uId;
+	private String Uid;
 	private int pay;
 	private String buyCtntCd;
 	

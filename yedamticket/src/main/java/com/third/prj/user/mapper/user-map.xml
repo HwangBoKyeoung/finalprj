@@ -38,29 +38,30 @@
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
 		<result column="NAME" property="name" />
-		<collection property="performanceReservationVO" resultMap="pfReservMap"></collection>
-		<collection property="performanceScheduleVO" resultMap="pfScheduleMap"></collection>
+		<collection property="performanceReservationVO"
+			resultMap="pfReservMap"></collection>
+		<collection property="performanceScheduleVO"
+			resultMap="pfScheduleMap"></collection>
 	</resultMap>
-
 
 
 
 	<insert id="userInsert"
 		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO users(name
-						, u_id
-						, pwd
-						, email
-						, addr
-						, phone
-						, birthdt)
-				   VALUES(#{name}
-		  			    , #{Uid}
-					    , #{pwd}
-					    , #{email}
-					    , #{addr}
-					    , #{phone}
-					    , #{birthDt})
+		, u_id
+		, pwd
+		, email
+		, addr
+		, phone
+		, birthdt)
+		VALUES(#{name}
+		, #{Uid}
+		, #{pwd}
+		, #{email}
+		, #{addr}
+		, #{phone}
+		, #{birthDt})
 	</insert>
 
 	<select id="idChk" resultType="int">
@@ -73,27 +74,32 @@
 	<select id="userSelect"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
-		FROM   USERS
-		WHERE  U_ID = #{Uid}
-		AND	   PWD  = #{pwd}
-	</select> 
-	
-	<select id = "userSelectOne" resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM   USERS 
-		WHERE  U_ID = #{Uid}
+		FROM USERS
+		WHERE U_ID = #{Uid}
+		AND PWD = #{pwd}
 	</select>
-	
-	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
-		<id column="u_id" property="Uid"/>
-		<result column="pwd" property="pwd"/>
-		<result column="name" property="name"/>
-		<result column="email" property="email"/>
-		<result column="phone" property="phone"/>
-		<result column="addr" property="addr"/>
+
+	<select id="userSelectOne"
+		resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM USERS
+		WHERE U_ID = #{Uid}
+	</select>
+
+	<resultMap type="com.third.prj.user.service.UserVO"
+		id="userMap">
+		<id column="u_id" property="Uid" />
+		<result column="pwd" property="pwd" />
+		<result column="name" property="name" />
+		<result column="email" property="email" />
+		<result column="phone" property="phone" />
+		<result column="addr" property="addr" />
 	</resultMap>
-	
-	<select id="userList" resultType="com.third.prj.user.service.UserVO">
+
+
+
+	<select id="userList"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		ORDER BY U_ID DESC
@@ -160,16 +166,15 @@
 		AND PWD = #{pwd}
 	</delete>
 
+
+
 	<select id="MvReservList" resultMap="MovieReservMap">
 		SELECT R.MV_RESERV_NO ,
 		R.RESERVDT,
 		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
-		FROM
-		MOVIE_RESERVATION
-		R JOIN MOVIE M
+		FROM MOVIE_RESERVATION R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
 		WHERE U_ID = #{Uid}
-
 	</select>
 
 	<select id="pfReservList" resultMap="performanceMap">
@@ -182,19 +187,46 @@
 		AND Y.P_NO = Z.P_NO
 		AND X.U_ID = #{Uid}
 	</select>
-	
-	<update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
+
+	<update id="userCharge"
+		parameterType="com.third.prj.user.service.UserVO">
 		UPDATE users
-		SET    point = (SELECT point
-		             	FROM   users
-		             	WHERE  u_id = #{Uid}) + #{point}
-		WHERE  u_id = #{Uid}
+		SET
+		point = (SELECT point
+		FROM users
+		WHERE u_id = #{Uid}) + #{point}
+		WHERE u_id = #{Uid}
 	</update>
-	
-	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+
+	<select id="loginChk"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
-		FROM   users
-		WHERE  u_id = #{Uid}
+		FROM users
+		WHERE u_id = #{Uid}
 	</select>
-	
+
+	<select id="mNameSelect" resultMap="MovieMap">
+		select x.name
+		from movie x join movie_reservation y
+		on x.docid = y.docid
+		where U_ID = #{Uid}
+	</select>
+
+	<select id="pNameSelect" resultMap="performanceMap">
+		SELECT X.NAME
+		FROM PERFORMANCE X, PERFORMANCE_SCHEDULE Y, PERFORMANCE_RESERVATION Z
+		WHERE X.P_NO = Y.P_NO
+		AND Y.P_SCH_NO = Z.P_SCH_NO
+		AND U_ID = #{Uid}
+	</select>
+
+	<select id="myPoint" resultType="com.third.prj.point.service.PointVO">
+		SELECT PAYDT,PAY,CHARGE
+		FROM POINT
+		WHERE U_ID = #{Uid}
+	</select>
+
+
+
+
 </mapper>

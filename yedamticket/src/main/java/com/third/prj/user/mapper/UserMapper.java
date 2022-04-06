@@ -6,9 +6,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.user.service.UserVO;
 
 public interface UserMapper {
@@ -55,4 +57,13 @@ public interface UserMapper {
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
+	
+	//영화네임검색
+	MovieVO mNameSelect (MovieVO vo);
+	//공연이름검색
+	PerformanceVO pNameSelect (PerformanceReservationVO vo);
+	//포인트검색
+	PointVO myPoint (PointVO vo);
+	
+	
 }
