@@ -66,4 +66,23 @@
 		WHERE IN_NO = #{inNo}
 	</delete>
 	
+	<select id="getList"
+		resultType="com.third.prj.inquiry.service.InquiryVO">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT * 
+	          			FROM INQUIRY 
+	          			ORDER BY IN_NO DESC ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<!-- 검색조건에 맞춰서 total변경 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL FROM INQUIRY 
+	</select>
+	
 </mapper>

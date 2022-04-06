@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.notice.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
@@ -57,9 +58,10 @@ public interface UserService {
 	public UserVO loginChk(UserVO vo, HttpSession session);
 	
 	//영화네임검색
-	MovieVO mNameSelect (MovieVO vo);
+	MovieVO mNameSelect (MovieReservVO vo);
 	//공연이름검색
 	PerformanceVO pNameSelect (PerformanceReservationVO vo);
 	//포인트검색
 	PointVO myPoint (PointVO vo);
+	
 }

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.notice.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
@@ -129,11 +130,6 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public MovieVO mNameSelect(MovieVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.mNameSelect(vo);
-	}
 
 
 	@Override
@@ -147,6 +143,13 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return mapper.pNameSelect(vo);
 	}
+
+	@Override
+	public MovieVO mNameSelect(MovieReservVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mNameSelect(vo);
+	}
+
 
 
 }

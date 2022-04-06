@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.inquiry.mapper.InquiryMapper;
 import com.third.prj.inquiry.service.InquiryService;
 import com.third.prj.inquiry.service.InquiryVO;
+import com.third.prj.notice.service.CriteriaVO;
 
 @Repository("inquiryDao")
 public class InquiryServiceImpl implements InquiryService {
@@ -43,6 +44,18 @@ public class InquiryServiceImpl implements InquiryService {
 	@Override
 	public int inquiryDelete(InquiryVO vo) {
 		return mapper.inquiryDelete(vo);
+	}
+
+	@Override
+	public List<InquiryVO> getList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getList(cri);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
 	}
 	
 }

@@ -11,6 +11,9 @@ import com.third.prj.inquiry.service.InquiryService;
 import com.third.prj.inquiry.service.InquiryVO;
 import com.third.prj.inquiryreply.service.InquiryReplyService;
 import com.third.prj.inquiryreply.service.InquiryReplyVO;
+import com.third.prj.notice.service.CriteriaVO;
+import com.third.prj.notice.service.PageVO;
+import com.third.prj.user.service.UserDAO;
 
 
 @Controller
@@ -46,11 +49,19 @@ public class InquiryContorller {
 	}
 	
 	//1:1문의
+//	@RequestMapping("/inqList.do")
+//	public String inqList(Model model) {
+//		model.addAttribute("inqs", inquiryDao.inquirySelectList());
+//		return"inquiry/inqList";
+//	}
 	@RequestMapping("/inqList.do")
-	public String inqList(Model model) {
-		model.addAttribute("inqs", inquiryDao.inquirySelectList());
+	public String inqList(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, inquiryDao.getTotal(cri)); //(기준, 토탈)
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("inqs", inquiryDao.getList(cri));
 		return"inquiry/inqList";
 	}
+	
 	//한건조회
 	@RequestMapping("/inqSelect.do")
 	public String inqSelect(InquiryVO vo, Model model) {

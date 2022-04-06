@@ -3,9 +3,11 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
+	<resultMap type="com.third.prj.movie.service.MovieVO"
+		id="MovieMap">
 		<result column="name" property="name" />
-		<collection property="movieReservVO" resultMap="MovieReservMap" />
+		<collection property="movieReservVO"
+			resultMap="MovieReservMap" />
 	</resultMap>
 
 	<resultMap
@@ -54,14 +56,16 @@
 		, email
 		, addr
 		, phone
-		, birthdt)
+		,
+		birthdt)
 		VALUES(#{name}
 		, #{Uid}
 		, #{pwd}
 		, #{email}
 		, #{addr}
 		, #{phone}
-		, #{birthDt})
+		,
+		#{birthDt})
 	</insert>
 
 	<select id="idChk" resultType="int">
@@ -172,9 +176,11 @@
 		SELECT R.MV_RESERV_NO ,
 		R.RESERVDT,
 		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
-		FROM MOVIE_RESERVATION R JOIN MOVIE M
+		FROM
+		MOVIE_RESERVATION R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid}
+		WHERE U_ID =
+		#{Uid}
 	</select>
 
 	<select id="pfReservList" resultMap="performanceMap">
@@ -194,7 +200,8 @@
 		SET
 		point = (SELECT point
 		FROM users
-		WHERE u_id = #{Uid}) + #{point}
+		WHERE u_id
+		= #{Uid}) + #{point}
 		WHERE u_id = #{Uid}
 	</update>
 
@@ -207,24 +214,29 @@
 
 	<select id="mNameSelect" resultMap="MovieMap">
 		select x.name
-		from movie x join movie_reservation y
+		from movie x
+		join movie_reservation y
 		on x.docid = y.docid
 		where U_ID = #{Uid}
 	</select>
 
 	<select id="pNameSelect" resultMap="performanceMap">
 		SELECT X.NAME
-		FROM PERFORMANCE X, PERFORMANCE_SCHEDULE Y, PERFORMANCE_RESERVATION Z
-		WHERE X.P_NO = Y.P_NO
+		FROM PERFORMANCE
+		X, PERFORMANCE_SCHEDULE Y, PERFORMANCE_RESERVATION Z
+		WHERE X.P_NO =
+		Y.P_NO
 		AND Y.P_SCH_NO = Z.P_SCH_NO
 		AND U_ID = #{Uid}
 	</select>
 
-	<select id="myPoint" resultType="com.third.prj.point.service.PointVO">
+	<select id="myPoint"
+		resultType="com.third.prj.point.service.PointVO">
 		SELECT PAYDT,PAY,CHARGE
 		FROM POINT
 		WHERE U_ID = #{Uid}
 	</select>
+
 
 
 

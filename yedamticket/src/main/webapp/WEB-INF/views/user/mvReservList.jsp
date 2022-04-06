@@ -417,7 +417,6 @@ html, body {
 		<h2>영화예매내역</h2>
 		<div class="main-content">
 			<div class="cols-12">
-				<c:forEach items="${mvList}" var="mv">
 					<table class="table table-sm">
 						<thead>
 							<tr>
@@ -431,19 +430,21 @@ html, body {
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td scope="row">${mv.mvReservNo}</td>
-								<td>${mv.reservDt}</td>
-								<td>${mv.name}</td>
-								<td>${mv.schDate}</td>
-								<td>${mv.schTime}</td>
-								<td>${mv.seatName}</td>
-								<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
-								<td><button type="button" id="MBTN" class="checkBtn btn-xs btn-primary">보기</button></td>
-							</tr>
+							<c:forEach items="${mvList}" var="mv">
+								<tr>
+									<td scope="row">${mv.mvReservNo}</td>
+									<td>${mv.reservDt}</td>
+									<td>${mv.name}</td>
+									<td>${mv.schDate}</td>
+									<td>${mv.schTime}</td>
+									<td>${mv.seatName}</td>
+									<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
+									<td><button type="button" id="MBTN"
+											class="checkBtn btn-xs btn-primary">보기</button></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
-				</c:forEach>
 			</div>
 		</div>
 	</div>

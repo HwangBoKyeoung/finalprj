@@ -401,8 +401,7 @@
 			<h2>공연예매내역</h2>
 			<div class="main-content">
 				<div class="cols-12">
-					<c:forEach var="pf" items="${pfList}">
-						<table class="table table-sm">
+						<table class="table table-sm tblMemSearch">
 							<thead>
 								<tr>
 									<th scope="col">예매번호</th>
@@ -415,6 +414,7 @@
 								</tr>
 							</thead>
 							<tbody>
+							<c:forEach var="pf" items="${pfList}">
 								<tr>
 									<td>${pf.performanceReservationVO.PReservNo}</td>
 									<td>${pf.performanceReservationVO.reserveDttm}</td>
@@ -424,9 +424,9 @@
 									<td>${pf.performanceReservationVO.seatNo}</td>						
 									<td><button type="button" id="MBTN"class="checkBtn btn-xs btn-primary">보기</button></td>
 								</tr>
+							</c:forEach>
 							</tbody>
 						</table>
-					</c:forEach>
 				</div>
 			</div>
 		</div>
