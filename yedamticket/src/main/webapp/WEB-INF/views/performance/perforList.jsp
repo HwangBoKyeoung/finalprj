@@ -36,5 +36,6 @@
 			</div>
 		</div>
 	</div>
+	<button onclick="location.href='CMvList.do'">영화</button>
 </body>
 </html>

@@ -23,4 +23,9 @@ public interface DeleteRequestMapper {
 	//삭제처리상세페이지
 	DeleteRequestVO updatedel(DeleteRequestVO vo);
 
+	//영화삭제요청등록
+		int mvDelInsert(DeleteRequestVO vo);
+		
+	//영화삭제처리상세페이지
+		DeleteRequestVO mvUpdel(DeleteRequestVO vo);
 }

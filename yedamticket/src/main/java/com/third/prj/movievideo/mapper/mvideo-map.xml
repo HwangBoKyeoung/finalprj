@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.prj.performancevideo.mapper.MovieVideoMapper">
+	<select id="mvvSelect">
+		SELECT P_VIDEO_NO,NAME,RENAMES,MV_NO,FILE_CD
+		FROM MOVIE_VIDEO
+		WEHRE MV_NO=#{mvNo}
+	</select>
+</mapper>

@@ -3,7 +3,6 @@ package com.third.prj.movie.service;
 import java.util.Map;
 import java.util.List;
 
-import com.third.prj.movie.service.MovieVO;
 
 public interface MovieService {
 	
@@ -13,4 +12,10 @@ public interface MovieService {
 	int procedureCall(Map<String, Object> map);
 
 	List<MovieVO> movieList();
+	
+	
+	//페이징
+	List<MovieVO> mvListPaging(CriteriaVO cri);
+	//기업회원페이지 상세페이지겸 수정페이지
+	MovieVO mvSelect(MovieVO vo);
 }

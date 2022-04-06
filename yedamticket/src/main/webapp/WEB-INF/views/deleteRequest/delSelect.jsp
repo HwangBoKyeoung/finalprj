@@ -14,14 +14,15 @@
 				<div class="card-body">
 					<h4 class="card-title">삭제처리페이지</h4>
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }">
-					<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
+					<input type="text" name="PNo" id="PNo" value="${del.PNo }">
+					<input type="text" name="mvNo" id="mvNo" value="${del.mvNo }">
 					<p class="card-description"></p>
 					<form class="forms-sample" action="delUpdate.do" method="post">
-					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }">
+					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }" >
 						<div class="form-group row">
 							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">삭제신청 사유</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="content" name="content" value="${del.performanceVO.content }">
+								<input type="text" class="form-control" id="content" name="content" value="${del.performanceVO.content }"  readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">

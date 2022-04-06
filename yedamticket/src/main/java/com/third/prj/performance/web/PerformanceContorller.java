@@ -5,7 +5,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -13,10 +12,6 @@ import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
-import com.third.prj.performanceschedule.service.PerformanceScheduleService;
-import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
-import com.third.prj.performancevideo.service.PerformanceVideoService;
-import com.third.prj.performancevideo.service.PerformanceVideoVO;
 
 @Controller
 public class PerformanceContorller {
@@ -26,8 +21,6 @@ public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceImageService periDao;
-	@Autowired
-	private PerformanceVideoService pervDao;
 
 
 	//모두조회
@@ -49,21 +42,17 @@ public class PerformanceContorller {
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {
-		PerformanceVideoVO vvo = new PerformanceVideoVO();
 		PerformanceImageVO ivo = new PerformanceImageVO();
 
 		vo = perDao.perSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
-		vvo.setPNo(vo.getPNo());
 		
 		ivo.setFileCd(vo.getFileCd());
 		
 		ivo = periDao.periSelect(ivo);
-		vvo = pervDao.pervSelect(vvo);
 
 		model.addAttribute("images", ivo);
 		model.addAttribute("pers", vo);
-		model.addAttribute("videos", vvo);
 		return "performance/perforUpForm";
 	}
   
@@ -75,9 +64,8 @@ public class PerformanceContorller {
 
 	//프로시저 수정
 	@RequestMapping("/performanceUpdate.do")
-	public String perSelect(Model model, @RequestParam("lname") String lname,@RequestParam("vname") String vname, Map<String, Object> map, PerformanceVO vo) {
+	public String perSelect(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
 
-		PerformanceVideoVO vvo = new PerformanceVideoVO();
 		PerformanceImageVO ivo = new PerformanceImageVO();
 
 //		vo = perDao.perSelect(vo);
@@ -86,8 +74,6 @@ public class PerformanceContorller {
 //		model.addAttribute("perse",svo);
 //		ivo = periDao.periSelect(ivo);
 //		model.addAttribute("persi",ivo);
-//		vvo=pervDao.pervSelect(vvo);
-//		model.addAttribute("persv",vvo);
 
 		map.put("vp_no", vo.getPNo());
 		map.put("p_name", vo.getName());
@@ -97,13 +83,11 @@ public class PerformanceContorller {
 		map.put("p_addr", vo.getAddr());
 		map.put("p_price", vo.getPrice());
 		map.put("p_lname", lname);
-		map.put("p_vname", vname);
 		map.put("p_cd", vo.getFileCd());
 
 		perDao.procedureCall(map);
 		System.out.println(vo);
 		System.out.println(ivo);
-		System.out.println(vvo);
 		System.out.println("프로시저콜 : ");
 
 		return "redirect:/conPage.do";

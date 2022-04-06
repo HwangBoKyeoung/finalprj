@@ -1,4 +1,4 @@
-package com.third.prj.performancevideo.service;
+package com.third.prj.movievideo.service;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,12 +7,12 @@ import lombok.ToString;
 @Setter
 @Getter
 @ToString
-public class PerformanceVideoVO {
+public class MovieVideoVO {
 	
 	private int pVideoNo;
 	private String vname;
 	private String vrenames;
-	private int pNo;
+	private int MvNo;
 	private String fileCd;
 	
 }

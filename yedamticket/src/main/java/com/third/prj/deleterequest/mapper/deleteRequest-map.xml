@@ -11,6 +11,7 @@
 		<result column="MV_NO" property="mvNo"/>
 		<result column="P_NO" property="PNo"/>		
 		<collection property="performanceVO" resultMap="performanceMap"></collection>
+		<collection property="movieVO" resultMap="movieMap"></collection>
 	</resultMap>
 	
 	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="performanceMap">
@@ -23,6 +24,21 @@
 		<result column="LOC" property="loc"/>
 		<result column="ADDR" property="addr"/>
 		<result column="PRICE" property="price"/>
+	</resultMap>
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieMap">
+		<result column="MV_NO" property="mvNo"/>
+		<result column="NAME" property="name"/>
+		<result column="GENRE" property="startDate"/>
+		<result column="DIRECTOR" property="director"/>
+		<result column="RATING" property="rating"/>
+		<result column="DISTRIBUTOR" property="distibutor"/>
+		<result column="COUNTRY" property="country"/>
+		<result column="RUNTIME" property="runtime"/>
+		<result column="CONTENT" property="content"/>
+		<result column="C_ID" property="cId"/>
+		<result column="ACTOR" property="actor"/>
+		<result column="FILE_CD" property="fileCd"/>
+		<result column="DOCID" property="docId"/>
 	</resultMap>
 	
 	<select id="delSelectList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
@@ -48,7 +64,6 @@
 		UPDATE DELETE_REQUEST
 		<set>
 			<if test="deleteCd != null">DELETE_CD = #{deleteCd},</if>
-			<if test="content != null">CONTENT = #{content},</if>
 		</set>
 		WHERE DEL_REQ_NO = #{delReqNo}
 	</update>
@@ -59,9 +74,25 @@
 	</delete>
 	
 	<select id="updatedel" resultMap="delrequestMap">
-		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR
+		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO
 		FROM DELETE_REQUEST D,PERFORMANCE P
 		WHERE P.P_NO=D.P_NO
 		AND D.DEL_REQ_NO=#{delReqNo}
 	</select>
+	<select id="mvUpdel" resultMap="delrequestMap">
+		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,M.NAME,M.CONTENT,M.ACTOR,M.MV_NO
+		FROM DELETE_REQUEST D,MOVIE M
+		WHERE M.MV_NO=D.MV_NO
+		AND D.DEL_REQ_NO=#{delReqNo}
+	</select>
+	
+	<insert id="mvDelInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+		<selectKey keyProperty="delReqNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(DEL_REQ_NO),0)+1
+			FROM DELETE_REQUEST
+		</selectKey>
+		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,MV_NO)
+		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{mvNo})		
+	</insert>
+	
 </mapper>

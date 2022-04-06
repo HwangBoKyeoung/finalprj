@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.deleterequest.mapper.DeleteRequestMapper;
 import com.third.prj.deleterequest.service.DeleteRequestService;
 import com.third.prj.deleterequest.service.DeleteRequestVO;
-import com.third.prj.performance.service.PerformanceVO;
 
 @Repository("delDao")
 public class DeleteRequestServiceImpl implements DeleteRequestService{
@@ -55,6 +54,18 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 	public DeleteRequestVO updatedel(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.updatedel(vo);
+	}
+
+	@Override
+	public int mvDelInsert(DeleteRequestVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mvDelInsert(vo);
+	}
+
+	@Override
+	public DeleteRequestVO mvUpdel(DeleteRequestVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mvUpdel(vo);
 	}
 
 }
