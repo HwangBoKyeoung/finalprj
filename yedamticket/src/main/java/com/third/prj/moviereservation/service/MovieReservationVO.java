@@ -20,10 +20,5 @@ public class MovieReservationVO {
 	private String reservHall;
 	private String docId;
 	private String schTime; 
-
-	private String schTime;
-	private String docId;
-	private String reservHall;
-	private String reservLoc;
 	
 }

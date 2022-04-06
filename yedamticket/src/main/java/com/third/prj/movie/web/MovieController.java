@@ -181,8 +181,10 @@ public class MovieController {
 	//결제페이지로
 	@RequestMapping("/movieReservation.do")
 	public String movieReservation(Model model,	MovieReservationVO vo) {
-		System.out.println("hall"+vo.getReservHall());
-		System.out.println("loc"+vo.getReservLoc());
+		/*
+		 * System.out.println("hall"+vo.getReservHall());
+		 * System.out.println("loc"+vo.getReservLoc());
+		 */
 		 movieReservationDao.movieReservationInsert(vo);
 		 model.addAttribute("re",vo);
 		return "movie/movieReservationForm";

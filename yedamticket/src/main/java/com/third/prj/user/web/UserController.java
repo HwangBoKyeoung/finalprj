@@ -138,6 +138,7 @@ public class UserController {
 		System.out.println(vo);
 		System.out.println("======================================");
 		return mv;
+	}
 	
 	@RequestMapping("/userSelect.do")
 	public String userSelect(HttpSession session, UserVO vo) {
@@ -208,7 +209,7 @@ public class UserController {
 	
 	@RequestMapping("pfReservList.do")
 	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo , PerformanceVO vo) {
-		pvo.setUId((String)session.getAttribute("sessionId"));
+		pvo.setUid((String)session.getAttribute("sessionId"));
 		model.addAttribute("pfList", userDao.pfReservList(pvo));
 		return "user/pfReservList";
 	}

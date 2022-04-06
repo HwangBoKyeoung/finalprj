@@ -7,8 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-</head>
-<style>
+ <script src="./resources/users/js/core/jquery.min.js"
+		type="text/javascript"></script>
+		<style>
 
   
     td {
@@ -73,9 +74,9 @@
   border-radius: 50%;
   }
   
-
-
 </style>
+</head>
+
 <body>
 <div class="container">
         <div class="row">

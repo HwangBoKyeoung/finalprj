@@ -107,7 +107,7 @@
 							<a class="dropdown-item" href="./index.html"> <i
 								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
 							</a> <a class="dropdown-item" target="_blank"
-								href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
+								href="pList.do">
 								<i class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 							</a>
 						</div></li>

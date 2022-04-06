@@ -281,11 +281,12 @@ function deleteReply(n){ // 전달받은 replyId
 
 //슬라이더 미완성
 
-var slideIndex = 1;
+/* var slideIndex = 1;
 showDivs(slideIndex);
 function plusDivs(n) {
   showDivs(slideIndex += n);
 }
+
 function showDivs(n) {
   var i;
   var x = document.getElementsByClassName("mySlides");
@@ -295,7 +296,7 @@ function showDivs(n) {
     x[i].style.display = "none";  
   }
   x[slideIndex-1].style.display = "block";  
-}
+} */
 </script>
 
 </html>

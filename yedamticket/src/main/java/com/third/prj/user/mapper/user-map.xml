@@ -31,9 +31,9 @@
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
-		<result column="P_RESERV_NO" property="pReservNo" />
+		<result column="P_RESERV_NO" property="PReservNo" />
 		<result column="RESERVE_DTTM" property="reserveDttm" />
-		<result column="U_ID" property="uId" />
+		<result column="U_ID" property="Uid" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
 	<resultMap

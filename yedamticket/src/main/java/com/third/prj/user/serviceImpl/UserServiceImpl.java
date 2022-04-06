@@ -90,12 +90,13 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int userPointUpdate(UserVO vo) {
-		return 0;
+	public int userCharge(UserVO vo) {
+		return mapper.userCharge(vo);
 	}
 
 	@Override
-	public int userCharge(UserVO vo) {
-		return mapper.userCharge(vo);
+	public int userPointUpdate(int point, String id) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 }
