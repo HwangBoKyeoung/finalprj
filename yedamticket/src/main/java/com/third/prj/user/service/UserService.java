@@ -36,7 +36,7 @@ public interface UserService {
 	int emailCheck(String email);
 
 //  카카오 회원가입	
-	int kakaoInsert(UserVO vo);
+	int kakaoInsert(UserVO vo); 
 	
 //  영화 예매 내역	
 	List<MovieReservVO> MvReservList(MovieReservVO vo);
