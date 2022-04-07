@@ -8,6 +8,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.third.prj.performance.service.CriteriaVO;
+import com.third.prj.performance.service.PageVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
@@ -25,8 +27,9 @@ public class PerformanceContorller {
 
 	//모두조회
 	@RequestMapping("/conPage.do")
-	public String conPage(Model model) {
-		model.addAttribute("pers", perDao.perSelectList());
+	public String conPage(Model model,CriteriaVO cri) {
+		model.addAttribute("pers", perDao.perSelectList(cri));
+		model.addAttribute("pageVO", new PageVO(cri,123));
 		return "performance/perforList";
 	}
 

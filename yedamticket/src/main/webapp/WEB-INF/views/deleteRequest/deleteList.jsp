@@ -24,7 +24,7 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${dels}" var="del">
-							<input type="text" name="PNo" id="PNo" value="${del.PNo }">
+							<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
 						<tr onclick="location.href='delSelect.do?delReqNo=${del.delReqNo }'">
 							<td><input type="hidden" value="${del.delReqNo }" name="delReqNo">${del.delReqNo }</td>
 							<td>${del.CId }</td>

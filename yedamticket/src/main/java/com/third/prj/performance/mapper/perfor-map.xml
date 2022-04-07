@@ -6,8 +6,17 @@
 	<resultMap id="procedureCall" type="hashmap"/>
 
 	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
-	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
-	FROM PERFORMANCE 
+		<![CDATA[
+		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+		FROM
+			(
+			SELECT 
+				ROWNUM RN,P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+			FROM PERFORMANCE
+			WHERE ROWNUM <= #{pageNum} * #{amount}
+			)
+		WHERE rn > (#{pageNum} -1) *#{amount}		
+		]]>
 	</select>
 
 	<select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">

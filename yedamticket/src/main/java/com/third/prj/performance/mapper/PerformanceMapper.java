@@ -3,11 +3,12 @@ package com.third.prj.performance.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceVO;
 
 public interface PerformanceMapper {
 
-	List<PerformanceVO> perSelectList();
+	List<PerformanceVO> perSelectList(CriteriaVO vo);
 	PerformanceVO perSelect(PerformanceVO vo);
 	int perforUpdate(PerformanceVO vo);
 	

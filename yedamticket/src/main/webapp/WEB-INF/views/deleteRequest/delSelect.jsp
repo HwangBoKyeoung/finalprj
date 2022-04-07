@@ -14,8 +14,8 @@
 				<div class="card-body">
 					<h4 class="card-title">삭제처리페이지</h4>
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }">
-					<input type="text" name="PNo" id="PNo" value="${del.PNo }">
-					<input type="text" name="mvNo" id="mvNo" value="${del.mvNo }">
+					<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
+					<input type="hidden" name="mvNo" id="mvNo" value="${del.mvNo }">
 					<p class="card-description"></p>
 					<form class="forms-sample" action="delUpdate.do" method="post">
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }" >

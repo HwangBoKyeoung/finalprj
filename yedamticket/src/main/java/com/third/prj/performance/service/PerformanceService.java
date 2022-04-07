@@ -5,7 +5,7 @@ import java.util.Map;
 
 public interface PerformanceService {
 
-	List<PerformanceVO> perSelectList();
+	List<PerformanceVO> perSelectList(CriteriaVO cri);
 	PerformanceVO perSelect(PerformanceVO vo);
 	int perforUpdate(PerformanceVO vo);
 	

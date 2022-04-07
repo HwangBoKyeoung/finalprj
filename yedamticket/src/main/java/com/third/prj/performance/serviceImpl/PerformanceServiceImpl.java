@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.performance.mapper.PerformanceMapper;
+import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 
@@ -28,8 +29,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
-	public List<PerformanceVO> perSelectList() {
-		return mapper.perSelectList();
+	public List<PerformanceVO> perSelectList(CriteriaVO cri) {
+		return mapper.perSelectList(cri);
 	}
 
 	@Override

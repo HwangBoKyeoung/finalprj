@@ -55,24 +55,23 @@ public class DeleteRequestController {
 			delDao.delUpdate(vo);
 			return "redirect:deleteRe.do";
 		}
-	//삭제요청 상세히 보기
-		@RequestMapping("/delSelect.do")
-		public String delSelect(Model model, DeleteRequestVO vo) {
-			System.out.println("황보경입니다.ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
-			System.out.println("====================="+vo.getPNo());
-			System.out.println("==================" + vo.getDelReqNo());
-			System.out.println("===============" + vo.getMvNo());
-//			if(vo.getPNo() >= 1 ) {
-//				vo= delDao.updatedel(vo);
-//			}else {
-//				vo = delDao.mvUpdel(vo);
-//			}
-//			model.addAttribute("del", vo);
-			
-			model.addAttribute("del1", delDao.mvUpdel(vo));
-			model.addAttribute("del2", delDao.updatedel(vo));
-			return "manager/deleteRequest/delSelect";
-		}
+		//삭제요청 상세히 보기
+	      @RequestMapping("/delSelect.do")
+	      public String delSelect(Model model, DeleteRequestVO vo) {
+	         System.out.println("황보경입니다.ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
+	         vo = delDao.delSelect(vo);
+	         System.out.println("kkkkkkkkkkkkkkkkkkkk" + vo);
+	         
+	         if(vo.getPNo()!=0) {
+	            vo = delDao.updatedel(vo);
+	         } else if(vo.getMvNo()!=0) {
+	            vo = delDao.mvUpdel(vo);
+	         }
+	         model.addAttribute("del", vo);
+
+	         return "manager/deleteRequest/delSelect";
+	      }
+	      
 	//삭제요청페이지
 		@RequestMapping("/mvDel.do")
 		public String mvDel(DeleteRequestVO vo, Model model, MovieVO mvo, @RequestParam("mvNo") int mvNo) {
