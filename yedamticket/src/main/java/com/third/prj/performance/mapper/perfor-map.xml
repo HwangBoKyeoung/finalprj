@@ -24,7 +24,7 @@
 	                 #{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                 #{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                 #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-					 #{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
+					 #{p_price, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
