@@ -20,9 +20,12 @@ public class PerformanceVO {
 	private String fileCd; // 파일번호
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
-	private int price;	//공연가격
+	private String price;	//공연가격
 	
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;
+	
+	//검색용
+	private String frDt;
   
 }

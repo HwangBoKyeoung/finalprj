@@ -46,7 +46,9 @@ public class MovieController {
 	private MovieReservService movieReservationDao;
 
 	@RequestMapping("/movieList.do")
-	public String movieList() {
+	public String movieList(Model model) {
+		//상영예정작 넘김
+		model.addAttribute("m",movieDao.mList());
 		return "movie/movieList";
 	}
 	//select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))

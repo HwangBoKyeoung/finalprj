@@ -15,10 +15,6 @@
 	FROM PERFORMANCE 
 	WHERE p_no = #{PNo} 
 	</select>
-	
-
-<!-- <update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">UPDATE PERFORMANCE<set><if test="name != null">NAME = #{name},</if><if test="content != null">CONTENT = #{content},</if><if test="actor != null"> ACTOR = #{actor},</if><if test="loc != null">LOC = #{loc},</if><if test="addr != null">ADDR = #{addr},</if><if test="price != null"> PRICE = #{price},</if></set>WHERE P_NO = #{PNo}</update> -->
-
 
 
 	<update id="procedureCall" statementType="CALLABLE">
@@ -28,11 +24,65 @@
 	                 #{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                 #{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                 #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-					 #{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
+					 #{p_price, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})} 
 	</update>
 
+
+	<!-- 황규복 -->
+	<!-- performanceSch resultMap -->
+	<resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pScheduleMap">
+		<result column="frdt" property="frDt"/>
+		<result column="time" property="time"/>
+	</resultMap>
+	<!-- performance resultMap -->
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
+		<result column="p_no" property="pNo"/>
+		<result column="name" property="name"/>
+		<result column="content" property="content"/>
+		<result column="actor" property="actor"/>
+		<result column="file_cd" property="fileCd"/>
+		<result column="loc" property="loc"/>
+		<result column="addr" property="addr"/>
+		<result column="price" property="price"/>
+		<collection property="performanceScheduleVO" resultMap="pScheduleMap"/>
+	</resultMap>
+	<select id="pList" resultMap="pMap">
+		SELECT 
+		P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+		FROM 
+		PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+		ON 
+		P.P_NO = PS.P_NO
+	</select>
+	
+	<select id="pSearch" resultMap="pMap">
+		SELECT P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+		FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+		ON P.P_NO = PS.P_NO
+		<!-- 날짜만 입력받은 경우 -->
+		<if test="frDt != null and frDt !=''">
+		WHERE PS.FRDT = #{frDt}
+		</if>
+		<!-- 날짜 + 이벤트 -->
+		<if test="frDt != null and frDt !='' and name != null and name !=''">
+		WHERE PS.FRDT = #{frDt} AND
+			  P.NAME LIKE '%' || #{name} || '%'
+		</if>
+		<!-- 날짜 + 지역 -->
+		<if test="frDt != null and frDt !='' and loc != null and loc !=''">
+		WHERE PS.FRDT = #{frDt} AND
+			  P.LOC  LIKE '%' || #{loc} || '%'
+		</if>
+		<!-- 날짜 + 지역 +이벤트 -->
+		<if test="frDt != null and frDt !='' and name != null and name !='' and loc != null and loc !=''">
+		WHERE PS.FRDT = #{frDt} AND
+			  P.NAME  LIKE '%' || #{name} || '%' AND
+			  P.LOC   LIKE '%' || #{loc}  || '%'
+		</if>
+	</select>
+	
 </mapper>
