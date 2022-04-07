@@ -1,6 +1,7 @@
 package com.third.prj.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -45,7 +46,7 @@ public interface UserService {
 	List<PerformanceVO> pfReservList(PerformanceReservationVO vo);
 
 	// 포인트 충전
-	int userCharge(UserVO vo);
+	int userCharge(Map<String, Object> map);
 	
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);

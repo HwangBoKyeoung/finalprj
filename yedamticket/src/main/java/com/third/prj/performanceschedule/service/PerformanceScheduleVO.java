@@ -20,5 +20,5 @@ public class PerformanceScheduleVO {
 	private String time;
 	private int pNo;
 	private String start;
-	String title;
+	private String title;
 }

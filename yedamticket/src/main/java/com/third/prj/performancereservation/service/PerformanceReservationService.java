@@ -5,5 +5,5 @@ import java.util.List;
 public interface PerformanceReservationService {
 
 	// 보유 티켓
-	List<PerformanceReservationVO> userTicket(PerformanceReservationVO performancereservationVO);
+	List<PerformanceReservationViewVO> userTicket(PerformanceReservationViewVO performancereservationviewVO);
 }

@@ -28,6 +28,7 @@
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
+	
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
@@ -36,6 +37,7 @@
 		<result column="U_ID" property="Uid" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
+	
 	<resultMap
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
@@ -45,8 +47,8 @@
 		<collection property="performanceScheduleVO"
 			resultMap="pfScheduleMap"></collection>
 	</resultMap>
-
-
+	
+	<resultMap type="hashmap" id="procedureCall"/>
 
 
 	<insert id="userInsert"
@@ -181,12 +183,20 @@
 		AND X.U_ID = #{uId}
 	</select>
 	
-	<update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
+	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
 		UPDATE users
 		SET    point = (SELECT point
 		             	FROM   users
 		             	WHERE  u_id = #{Uid}) + #{point}
 		WHERE  u_id = #{Uid}
+	</update> -->
+	
+	<update id="userCharge" statementType="CALLABLE" >
+		{CALL 
+		insertPoint(#{p1, mode=IN, jdbcType=INTEGER, javaType=INT},
+					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+					)
+		}
 	</update>
 	
 	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">

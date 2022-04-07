@@ -1,6 +1,7 @@
 package com.third.prj.user.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -98,10 +99,9 @@ public class UserServiceImpl implements UserService {
 		return mapper.pfReservList(vo);
 	}
 
-	@Override
-	public int userCharge(UserVO vo) {
-		return mapper.userCharge(vo);
-	}
+	/*
+	 * @Override public int userCharge(UserVO vo) { return mapper.userCharge(vo); }
+	 */
 
 	@Override
 	public int userPointUpdate(int point, String id) {
@@ -117,5 +117,10 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO loginChk(UserVO vo, HttpSession session) {
 		return dao.loginChk(vo);
+	}
+
+	@Override
+	public int userCharge(Map<String, Object> map) {
+		return mapper.userCharge(map);
 	}
 }
