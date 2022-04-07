@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="./resources/users/js/core/jquery.min.js"
-	type="text/javascript"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document)
 			.ready(
@@ -169,45 +169,58 @@ label {
 </style>
 </head>
 <body>
-	<div class="section section-signup"
-		style="background-image: url('assets/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
-		<div class="container">
-			<div class="row">
-				<div class="card card-signup" data-background-color="orange">
-					<form class="form" method="" action=""
-						enctype="multipart/form-data">
-						<div class="card-header text-center">
-							<h3 class="card-title title-up">영화굿즈 정보수정</h3>
-							<div class="social-line"></div>
+	<div>
+		<div class="col-md-10 grid-margin stretch-card">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">Goods Update</h4>
+					<p class="card-description"></p>
+					<form class="forms-sample" id="frm" action="goodsUpdate.do" method="post"> <!--  enctype="multipart/form-data" -->
+						<input type="hidden" value="${gds.GNo}" id="GNo" name="GNo">
+						<div class="form-group row">
+							<label for="exampleInputUsername2"
+								class="col-sm-3 col-form-label">굿즈 이름</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="name" name="name" value="${gds.name}">
+							</div>
 						</div>
-						<div class="card-body">
-							<div class="input-group no-border">
-								<input type="text" placeholder="굿즈이름" class="form-control" />
+						<div class="form-group row">
+							<label for="exampleInputPassword2"
+								class="col-sm-3 col-form-label">기업명</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="seller" name="seller"
+									value="${gds.seller}" readonly="readonly">
 							</div>
-							<div class="input-group no-border">
-								<input type="text" class="form-control" placeholder="굿즈가격">
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">굿즈 가격</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="price" name="price" value="${gds.price}">
 							</div>
-							<div class="input-group no-border">
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">굿즈 설명</label>
+							<div class="col-sm-9">
 								<textarea rows="7" cols="20" class="form-control"
-									placeholder="굿즈설명"></textarea>
+									placeholder="굿즈설명" id="content" name="content" >${gds.content}</textarea>
 							</div>
-							<div class="filebox bs3-primary preview-image">
-								<input class="upload-name" value="파일선택" disabled="disabled"
-									style="width: 200px;"> <label for="input_file">업로드</label>
+						</div>
+						<div class="filebox bs3-primary preview-image">
+								<br>
+								<label for="input_file">업로드</label>
+								<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
 								<input type="file" id="input_file" class="upload-hidden">
-							</div> 
-							<!-- If you want to add a checkbox to this form, uncomment this code -->
-							<!-- <div class="checkbox">
-								<input id="checkboxSignup" type="checkbox">
-									<label for="checkboxSignup">
-									Unchecked
-									</label>
-								</div> -->
 						</div>
-						<div class="card-footer text-center">
-							<a href="#pablo" class="btn btn-neutral btn-round btn-lg">수정</a>
-							<a href="#pablo" class="btn btn-neutral btn-round btn-lg">삭제요청</a>
-						</div>
+							<div class="input-group no-border">
+								<input type="hidden" class="form-control" id="goodsCd"
+									name="goodsCd" placeholder="1" readonly="readonly"
+									value="${gds.goodsCd}">
+							</div>
+						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
+						<button class="btn btn-light" type="reset">Cancel</button>
+						<button class="btn btn-gradient-primary me-2" onclick="location.href='goodsDelete.do?gNo=${gds.GNo}'">삭제</button>
 					</form>
 				</div>
 			</div>

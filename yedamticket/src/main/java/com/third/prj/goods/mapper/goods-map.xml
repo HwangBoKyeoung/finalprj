@@ -19,5 +19,30 @@
 		FROM GOODS 
 		WHERE GOODS_CD = #{goodsCd}
 	</select>
-
+	<select id="goodsLi" resultMap="goodsResultMap">
+		SELECT * 
+		FROM GOODS
+	</select>
+	
+	<select id="goodsSelect" resultMap="goodsResultMap">
+		SELECT G_NO, NAME, SELLER, PRICE, CONTENT, GOODS_CD
+		FROM GOODS
+		WHERE G_NO = #{gNo}
+	</select>
+	
+	<update id="goodsUpdate" parameterType="com.third.prj.goods.service.GoodsVO">
+		UPDATE GOODS
+		<set>
+			<if test="name != null"> NAME = #{name},</if>
+			<if test="price != null"> PRICE = #{price},</if>
+			<if test="content != null"> CONTENT = #{content},</if>
+		</set>
+		WHERE G_NO = #{GNo}
+	</update>
+	
+	<delete id="goodsDelete" parameterType="com.third.prj.goods.service.GoodsVO">
+		DELETE FROM GOODS
+		WHERE G_NO = #{GNo}
+	</delete>
+	
 </mapper>

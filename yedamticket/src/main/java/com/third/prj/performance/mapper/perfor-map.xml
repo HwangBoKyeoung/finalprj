@@ -26,7 +26,6 @@
 	                 #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_price, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-					 #{p_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})} 
 	</update>

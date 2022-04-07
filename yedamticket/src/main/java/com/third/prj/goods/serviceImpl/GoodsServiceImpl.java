@@ -19,5 +19,29 @@ public class GoodsServiceImpl implements GoodsService {
 	public List<GoodsVO> goodsList(String goodsCd) {
 		return mapper.goodsList(goodsCd);
 	}
+
+	@Override
+	public int goodsUpdate(GoodsVO vo) {
+		return mapper.goodsUpdate(vo);
+	}
+
+
+	@Override
+	public GoodsVO goodsSelect(GoodsVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.goodsSelect(vo);
+	}
+
+	@Override
+	public List<GoodsVO> goodsLi() {
+		// TODO Auto-generated method stub
+		return mapper.goodsLi();
+	}
+
+	@Override
+	public int goodsDelete(GoodsVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.goodsDelete(vo);
+	}
 	
 }

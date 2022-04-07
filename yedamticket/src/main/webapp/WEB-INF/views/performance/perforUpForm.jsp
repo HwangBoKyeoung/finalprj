@@ -96,18 +96,6 @@
 							</div>
 <!-- 							</form> -->
 						</div>
-						<div class="form-group row">
-<!-- 						<form name="fileForm" action="fileupload1" method="post" enctype="multipart/form-data"> -->
-<%-- 						<sec:csrfInput/> --%>
-							<label for="exampleInputConfirmPassword2"
-								class="col-sm-3 col-form-label">공연영상</label>
-							<div class="col-sm-9">
-								<input type="file" class="form-control" id="vname" name="vname" value="${videos.vname }">
-								<input type="submit" value="전송">
-							</div>
-<!-- 						</form> -->
-						</div>
-						<input type="hidden" name="fileCd" id="fileCd" value="${videos.fileCd }">
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>

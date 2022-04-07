@@ -26,8 +26,6 @@ public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceImageService periDao;
-	@Autowired
-	private PerformanceVideoService pervDao;
 
 
 	//모두조회
@@ -54,21 +52,17 @@ public class PerformanceContorller {
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {
-		PerformanceVideoVO vvo = new PerformanceVideoVO();
 		PerformanceImageVO ivo = new PerformanceImageVO();
 
 		vo = perDao.perSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
-		vvo.setPNo(vo.getPNo());
 		
 		ivo.setFileCd(vo.getFileCd());
 		
 		ivo = periDao.periSelect(ivo);
-		vvo = pervDao.pervSelect(vvo);
 
 		model.addAttribute("images", ivo);
 		model.addAttribute("pers", vo);
-		model.addAttribute("videos", vvo);
 		return "performance/perforUpForm";
 	}
   
