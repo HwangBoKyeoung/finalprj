@@ -1,4 +1,4 @@
-package com.third.prj.deleterequest.service.Impl;
+package com.third.prj.deleterequest.serviceImpl;
 
 import java.util.List;
 

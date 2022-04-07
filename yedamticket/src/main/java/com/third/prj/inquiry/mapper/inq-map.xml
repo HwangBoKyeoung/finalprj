@@ -14,7 +14,7 @@
 	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 		FROM INQUIRY
-		ORDER BY INDT DESC;  
+		ORDER BY INDT DESC
 	</select>
 	
 	<select id="inquirySelect" resultType="com.third.prj.inquiry.service.InquiryVO">

@@ -1,6 +1,5 @@
 package com.third.prj.user.web;
 
-import javax.servlet.http.HttpServletRequest;  
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,9 +51,9 @@ public class UserController {
 
 	@PostMapping("/signup_4.do")
 	public String signUp_4(UserVO userVO, Model model) {
-		String encodedPwd = userVO.getPwd();
-		String decodedPwd = pwdEncoder.encode(encodedPwd);
-		userVO.setPwd(decodedPwd);
+		String pwd = userVO.getPwd();
+		String encryptedPwd = pwdEncoder.encode(pwd);
+		userVO.setPwd(encryptedPwd);
 		int n = userDao.userInsert(userVO);
 		if (n != 0) {
 			return "home/home";
@@ -94,7 +93,7 @@ public class UserController {
 	public String userLoiginForm() {
 		return "user/user/userLoginForm";
 	}
-	
+
 	@RequestMapping("/user.do")
 	public String user(Model model) {
 		model.addAttribute("users", userDao.userList());
@@ -114,31 +113,35 @@ public class UserController {
 //		session.setAttribute("sessionId", vo.getUid());
 //		session.setAttribute("sessionPwd", vo.getPwd());
 		String msg = "";
-        String url = "";
-		vo = userDao.userSelect(vo);
-		if(vo == null) {
-			msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-			url = "userLoginForm.do";
-			mv.addObject("msg", msg);
-			mv.addObject("url", url);
-			mv.setViewName("user/alert");
-		}else {
+		String url = "";
+		UserVO login = userDao.loginChk(vo, session);
+		boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+
+		if (login != null && pwdChk) {
 			msg = "로그인 성공";
-			url = "home.do";		
+			url = "home.do";
 			session.setAttribute("sessionId", vo.getUid());
-			session.setAttribute("sessionEmail",vo.getEmail());
+			session.setAttribute("sessionEmail", vo.getEmail());
 			session.setAttribute("sessionName", vo.getName());
 			session.setAttribute("sessionAddr", vo.getAddr());
 			session.setAttribute("sessionPhone", vo.getPhone());
 			mv.addObject("msg", msg);
 			mv.addObject("url", url);
 			mv.setViewName("user/alert");
+		} else {
+			msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+			url = "userLoginForm.do";
+			mv.addObject("msg", msg);
+			mv.addObject("url", url);
+			mv.setViewName("user/alert");
 		}
+
 		System.out.println("======================================");
 		System.out.println(vo);
 		System.out.println("======================================");
 		return mv;
-	
+	}
+
 	@RequestMapping("/userSelect.do")
 	public String userSelect(HttpSession session, UserVO vo) {
 		userDao.userSelect(vo);
@@ -171,48 +174,48 @@ public class UserController {
 	public String userUpdateForm() {
 		return "user/userUpdateForm";
 	}
-	
+
 	@RequestMapping("/userUpdate.do")
 	public String userUpdate(UserVO vo) {
 		int n = userDao.userUpdate(vo);
-		
-		if(n != 0) {
+
+		if (n != 0) {
 			return "redirect:userUpdateForm.do";
 		}
 		return "user/errorPage";
 	}
-    
+
 	@RequestMapping("/userDeleteForm.do")
 	public String userDeleteForm() {
 		return "user/userDeleteForm";
 	}
-	
+
 	@RequestMapping("/userDelete.do")
 	public String userDelete(UserVO vo, HttpSession session) {
 		int n = userDao.userDelete(vo);
-		
-		if(n != 0) {
+
+		if (n != 0) {
 			session.invalidate();
 			return "redirect:/";
 		}
 		return "user/errorPage";
 	}
-	
+
 	@RequestMapping("/mvReservList.do")
 	public String mvReservList(Model model, MovieReservVO vo, HttpSession session) {
-		vo.setUid((String)session.getAttribute("sessionId"));
+		vo.setUid((String) session.getAttribute("sessionId"));
 		System.out.println(vo.getUid());
 		model.addAttribute("mvList", userDao.MvReservList(vo));
 		return "user/mvReservList";
 	}
-	
+
 	@RequestMapping("pfReservList.do")
-	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo , PerformanceVO vo) {
-		pvo.setUId((String)session.getAttribute("sessionId"));
+	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, PerformanceVO vo) {
+		pvo.setUid((String) session.getAttribute("sessionId"));
 		model.addAttribute("pfList", userDao.pfReservList(pvo));
 		return "user/pfReservList";
 	}
-    
+
 	@RequestMapping("/userBuyList.do")
 	public String userBuyList() {
 		return "user/userBuyList";

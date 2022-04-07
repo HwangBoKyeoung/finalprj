@@ -21,10 +21,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return mapper.perforUpdate(vo);
 	}
 
-	@Override
-	public int perforDelete(PerformanceVO vo) {
-		return mapper.perforDelete(vo);
-	}
 
 	@Override
 	public PerformanceVO perSelect(PerformanceVO vo) {
