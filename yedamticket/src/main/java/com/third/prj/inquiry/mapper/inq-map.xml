@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.third.prj.inquiry.mapper.InquiryMapper">
-
 	<resultMap type="com.third.prj.inquiry.service.InquiryVO" id="inquiryResultMap">
 		<id property="inNo" column="in_no" />
 		<result property="title" column="title" />
@@ -11,6 +10,26 @@
 		<result property="uId" column="u_id" />
 	</resultMap>
 
+	<select id="countinq" resultType="int">
+		SELECT COUNT(*)
+		FROM INQUIRY
+	</select>
+	
+	<select id="inquiryList" resultType="com.third.prj.inquiry.service.InquiryVO">
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+		<![CDATA[
+		FROM
+			(
+			SELECT ROWNUM RN, A.*
+			FROM (
+			SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+			FROM INQUIRY
+			ORDER BY INNO
+			)A)
+		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]>
+	</select>
+	
 	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 		FROM INQUIRY

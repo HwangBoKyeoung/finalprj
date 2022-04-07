@@ -12,6 +12,7 @@ import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.user.mapper.UserMapper;
+import com.third.prj.user.service.CriteriaVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -43,8 +44,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserVO> userList() {
-		return mapper.userList();
+	public List<UserVO> userList(CriteriaVO cri) {
+		return mapper.userList(cri);
 	}
 
 	@Override
@@ -117,5 +118,17 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO loginChk(UserVO vo, HttpSession session) {
 		return dao.loginChk(vo);
+	}
+
+	@Override
+	public int countUser(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.countUser(cri);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
 	}
 }

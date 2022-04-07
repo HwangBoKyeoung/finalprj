@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface ManagerService {
 
-	List<ManagerVO> managerSelectList();
+	List<ManagerVO> managerSelectList(CriteriaVO cri);
 	ManagerVO managerSelect(ManagerVO vo);
 	int managerInsert(ManagerVO vo);
 	int managerUpdate(ManagerVO vo);
@@ -14,4 +14,7 @@ public interface ManagerService {
 	int idCheck(String MId);
 //	관리자 검색
 	List<ManagerVO> managerSearch(String key, String val);
+	
+	//페이징처리
+	int countmana(CriteriaVO cri);
 }

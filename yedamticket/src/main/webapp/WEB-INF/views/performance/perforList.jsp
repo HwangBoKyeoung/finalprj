@@ -16,6 +16,7 @@
 				<table class="table table-hover" id="contents">
 					<thead>
 						<tr>
+						<th>rhddus</th>
 							<th>공연 이름</th>
 							<th>출연진</th>
 							<th>공연지역</th>
@@ -25,6 +26,7 @@
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
 							<tr onclick="location.href='pserSelect.do?PNo=${per.PNo}' ">
+								<td>${per.PNo }</td>
 								<td>${per.name}</td>
 								<td>${per.actor}</td>
 								<td>${per.loc}</td>

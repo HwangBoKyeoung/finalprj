@@ -3,6 +3,7 @@ package com.third.prj.performance.serviceImpl;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -36,6 +37,18 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public int procedureCall(Map map) {
 		return mapper.procedureCall(map);
+	}
+
+
+	@Override
+	public int countperf(CriteriaVO cri) {
+		return mapper.countperf(cri);
+	}
+
+
+	@Override
+	public int totalPerf() {
+		return 0;
 	}
 
 }

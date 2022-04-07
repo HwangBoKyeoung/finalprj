@@ -20,6 +20,8 @@ import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
+import com.third.prj.user.service.CriteriaVO;
+import com.third.prj.user.service.PageVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -95,14 +97,18 @@ public class UserController {
 	}
 
 	@RequestMapping("/user.do")
-	public String user(Model model) {
-		model.addAttribute("users", userDao.userList());
+	public String user(Model model,CriteriaVO cri) {
+//		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
+		model.addAttribute("users", userDao.userList(cri));
+		int total = userDao.countUser(cri);
+		model.addAttribute("pageVO", new PageVO(cri,total));//전체게시글 기준으로가지고옴
 		return "manager/user/user";
 	}
 
 	@RequestMapping("/userSelet.do")
 	public String userSelet(UserVO vo, Model model) {
 		vo = userDao.userSelect(vo);
+		
 		model.addAttribute("users", vo);
 		return "manager/user/userSelect";
 	}

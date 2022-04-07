@@ -35,6 +35,24 @@
 					</tbody>
 				</table>
 				<br> 
+				<div id="content" align="center">
+							<c:if test="${pageVO.prev }">
+								<!-- 이전버튼 활성화 여부 -->
+								<a href="admin.do?pageNum=${pageVO.startPage-1 }"> 
+								<input type="button" value="이전" class="btn btn-secondary"></a>
+							</c:if>
+							<!-- pageNum -->
+							<c:forEach var="num" begin="${pageVO.startPage }"
+								end="${pageVO.endPage }">
+								<a class="${pageVO.pageNum == num ? 'active': '' }" href="admin.do?pageNum=${num }"> 
+								<input type="button" value="${num }" class="btn btn-secondary"></a>
+							</c:forEach>
+							<!-- 다음버튼 -->
+							<c:if test="${pageVO.next }">
+								<a href="admin.do?pageNum=${pageVO.endPage+1 }"> 
+								<input type="button" value="다음" class="btn btn-secondary"></a>
+							</c:if>
+						</div>
 				<input type="button" class="btn btn-gradient-primary me-2" onclick="location.href='adminForm.do'" value="등록">
 				
 				<!-- 검색기능 -->

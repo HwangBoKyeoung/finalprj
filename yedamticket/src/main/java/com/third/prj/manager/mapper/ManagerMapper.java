@@ -4,11 +4,12 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.third.prj.manager.service.CriteriaVO;
 import com.third.prj.manager.service.ManagerVO;
 
 public interface ManagerMapper {
 
-	List<ManagerVO> managerSelectList();
+	List<ManagerVO> managerSelectList(CriteriaVO cri);
 	ManagerVO managerSelect(ManagerVO vo);
 	int managerInsert(ManagerVO vo);
 	int managerUpdate(ManagerVO vo);
@@ -18,5 +19,6 @@ public interface ManagerMapper {
 	int idCheck(String MId);
 //	관리자 검색
 	List<ManagerVO> managerSearch(@Param("key") String key, @Param("val") String val);
-	
+	//페이징처리
+		int countmana(CriteriaVO cri);
 }

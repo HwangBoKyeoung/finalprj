@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.manager.mapper.ManagerMapper;
+import com.third.prj.manager.service.CriteriaVO;
 import com.third.prj.manager.service.ManagerService;
 import com.third.prj.manager.service.ManagerVO;
 
@@ -16,8 +17,8 @@ public class ManagerServiceImpl implements ManagerService{
 	private ManagerMapper mapper;
 
 	@Override
-	public List<ManagerVO> managerSelectList() {
-		return mapper.managerSelectList();
+	public List<ManagerVO> managerSelectList(CriteriaVO cri) {
+		return mapper.managerSelectList(cri);
 	}
 
 	@Override
@@ -49,6 +50,12 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public int idCheck(String MId) {
 		return mapper.idCheck(MId);
+	}
+
+	@Override
+	public int countmana(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.countmana(cri);
 	}
 	
 	

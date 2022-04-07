@@ -5,18 +5,29 @@
 
 	<resultMap id="procedureCall" type="hashmap"/>
 
+	<select id="countperf" resultType="int">
+		SELECT COUNT(*) FROM PERFORMANCE
+	</select>
+
 	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
-		<![CDATA[
-		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
-		FROM
-			(
-			SELECT 
-				ROWNUM RN,P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
-			FROM PERFORMANCE
-			WHERE ROWNUM <= #{pageNum} * #{amount}
-			)
-		WHERE rn > (#{pageNum} -1) *#{amount}		
-		]]>
+
+	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+	<![CDATA[
+	FROM
+		(
+		SELECT ROWNUM RN,A.* 
+		FROM (
+		SELECT 
+			P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+		FROM PERFORMANCE
+		
+		ORDER BY P_NO
+	
+			)A)
+			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+				]]>
+
+	
 	</select>
 
 	<select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">

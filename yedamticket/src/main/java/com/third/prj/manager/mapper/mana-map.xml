@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.third.prj.manager.mapper.ManagerMapper">
 
+	<select id="countmana" resultType="int">
+		SELECT COUNT(*) FROM MANAGER
+	</select>
+	
  	<select id="managerSelectList" resultType="com.third.prj.manager.service.ManagerVO">
- 		SELECT *
-		FROM MANAGER
-		WHERE M_ID != 'micol'
-		ORDER BY M_ID DESC
+ 	<![CDATA[
+ 		SELECT M_ID,NAME,PWD,DEPART,PHONE,AUTH_CD,MANAGERSTAT
+ 		FROM
+ 			(
+ 			SELECT 
+ 				ROWNUM RN,M_ID,NAME,PWD,DEPART,PHONE,AUTH_CD,MANAGERSTAT
+			FROM 
+				MANAGER
+			WHERE M_ID != 'micol'
+			AND ROWNUM <= #{pageNum} * #{amount}
+			ORDER BY M_ID DESC
+			)
+		WHERE RN > (#{pageNum} -1) * #{amount}
+		]]>
  	</select>
- 	
  	<select id="managerSelect" resultType="com.third.prj.manager.service.ManagerVO" parameterType="com.third.prj.manager.service.ManagerVO">
  		SELECT *
  		FROM MANAGER
  		WHERE M_ID = #{MId}
  	</select>
- 	
  	<insert id="managerInsert" parameterType="com.third.prj.manager.service.ManagerVO">
- 		INSERT INTO MANAGER (M_ID
- 						   , NAME
- 						   , PWD
- 						   , DEPART
- 						   , PHONE
- 						   , AUTH_CD)
- 		VALUES(#{MId}
- 			 , #{name}
- 			 , #{pwd}
- 			 , #{depart}
- 			 , #{phone}
- 			 , #{authCd})
+ 		INSERT INTO MANAGER (M_ID, NAME, PWD, DEPART, PHONE, AUTH_CD)
+ 		VALUES(#{MId},#{name},#{pwd},#{depart},#{phone},#{authCd})
  	</insert>
- 	
  	<update id="managerUpdate" parameterType="com.third.prj.manager.service.ManagerVO">
  		UPDATE MANAGER
  		<set>
@@ -42,7 +42,6 @@
  		</set>
  		WHERE M_ID = #{MId}
  	</update>
- 	
  	<delete id="managerDelete" parameterType="com.third.prj.manager.service.ManagerVO">
  		DELETE FROM MANAGER 
  		WHERE M_ID = #{MId}
@@ -51,22 +50,17 @@
  	<select id="managerSearch" resultType="com.third.prj.manager.service.ManagerVO" parameterType="String">
  		SELECT *
 		FROM MANAGER 
-		WHERE M_ID != 'micol'	
-		<if test="val != null and val != ''">
-			<if test="key == '전체'">AND (DEPART LIKE '%'||#{val}||'%' 
-									OR NAME LIKE '%'||#{val}||'%' 
-									OR M_ID LIKE '%'||#{val}||'%')</if>
-			<if test="key == '부서'">AND DEPART LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이름'">AND NAME LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">AND M_ID LIKE '%'||#{val}||'%'</if>
-			</if>
+		WHERE M_ID != 'micol'
+		AND
+		<if test="key == '전체'">DEPART LIKE '%'||#{val}||'%' OR NAME LIKE '%'||#{val}||'%' OR M_ID LIKE '%'||#{val}||'%'</if>
+		<if test="key == '부서'">DEPART LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
+		<if test="key == '아이디'">M_ID LIKE '%'||#{val}||'%'</if>
 		ORDER BY M_ID DESC
  	</select>
- 	
  	<select id="idCheck" parameterType="String" resultType="int">
  		SELECT COUNT(M_ID)
  		FROM MANAGER
  		WHERE M_ID = #{MId}
  	</select>
- 	
 </mapper>

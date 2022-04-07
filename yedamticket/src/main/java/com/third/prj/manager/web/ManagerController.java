@@ -1,82 +1,86 @@
 package com.third.prj.manager.web;
 
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.third.prj.manager.service.CriteriaVO;
 import com.third.prj.manager.service.ManagerService;
 import com.third.prj.manager.service.ManagerVO;
+import com.third.prj.manager.service.PageVO;
 
 @Controller
 public class ManagerController {
 
 	@Autowired
 	private ManagerService managerDao;
-	
-	//관리자 리스트 페이지
+
+	// 관리자 리스트 페이지
 	@RequestMapping("/admin.do")
-	public String admin(Model model) {
-		model.addAttribute("managers", managerDao.managerSelectList());
+	public String admin(Model model, CriteriaVO cri) {
+		model.addAttribute("managers", managerDao.managerSelectList(cri));
+		int total = managerDao.countmana(cri);
+		model.addAttribute("pageVO", new PageVO(cri, total));
 		return "manager/admin/admin";
 	}
-	
-	//관리자 등록 폼
+
+	// 관리자 등록 폼
 	@GetMapping("/adminForm.do")
 	public String adminForm() {
 		return "manager/admin/adminForm";
 	}
-	
-	//관리자 등록
+
+	// 관리자 등록
 	@RequestMapping("/adminInsert.do")
 	public String adminInsert(ManagerVO vo) {
 		int n = managerDao.managerInsert(vo);
-		if(n!=0) {
-		return "redirect:admin.do";
-		}
-		return "manager/admin/managerError";
-	}
-	
-	//관리자 상세정보
-	@RequestMapping("/managerSelet.do")
-	public String managerSelet(ManagerVO vo, Model model) {
-		vo = managerDao.managerSelect(vo);
-		model.addAttribute("mana",vo);
-		return "manager/admin/adminSelect";
-	}
-	
-	//관리자 정보변경
-	@RequestMapping("/adminUpdate.do")
-	public String adminUpdate(ManagerVO vo) {
-		int n = managerDao.managerUpdate(vo);
-		if(n != 0 ) {
+		if (n != 0) {
 			return "redirect:admin.do";
 		}
 		return "manager/admin/managerError";
 	}
-	
-	//관리자 정보 삭제
+
+	// 관리자 상세정보
+	@RequestMapping("/managerSelet.do")
+	public String managerSelet(ManagerVO vo, Model model) {
+		vo = managerDao.managerSelect(vo);
+		model.addAttribute("mana", vo);
+		return "manager/admin/adminSelect";
+	}
+
+	// 관리자 정보변경
+	@RequestMapping("/adminUpdate.do")
+	public String adminUpdate(ManagerVO vo) {
+		int n = managerDao.managerUpdate(vo);
+		if (n != 0) {
+			return "redirect:admin.do";
+		}
+		return "manager/admin/managerError";
+	}
+
+	// 관리자 정보 삭제
 	@RequestMapping("/admindelete.do")
 	public String admindelete(ManagerVO vo) {
 //		ManagerVO vo = new ManagerVO();
 //		vo.setMId(id);
 		int n = managerDao.managerDelete(vo);
-		if(n != 0) {
+		if (n != 0) {
 			return "redirect:/admin.do";
 		}
 		return "manager/admin/managerError";
 	}
-	
-	//관리자 등록 아이디 중복확인
+
+	// 관리자 등록 아이디 중복확인
 	@ResponseBody
 	@RequestMapping("/idCheck.do")
-	public int idCheck(String MId) throws Exception{
+	public int idCheck(String MId) throws Exception {
 		int result = managerDao.idCheck(MId);
 		return result;
 	}
-	
+
 }

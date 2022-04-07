@@ -29,7 +29,8 @@ public class PerformanceContorller {
 	@RequestMapping("/conPage.do")
 	public String conPage(Model model,CriteriaVO cri) {
 		model.addAttribute("pers", perDao.perSelectList(cri));
-		model.addAttribute("pageVO", new PageVO(cri,123));
+		int total= perDao.countperf(cri);
+		model.addAttribute("pageVO", new PageVO(cri,total));
 		return "performance/perforList";
 	}
 

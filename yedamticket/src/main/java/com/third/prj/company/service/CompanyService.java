@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CompanyService {
 
-	List<CompanyVO> companyList();
+	List<CompanyVO> companyList(CriteriaVO cri);
 
 	CompanyVO companySelect(CompanyVO vo);
 
@@ -18,4 +18,6 @@ public interface CompanyService {
 
 //  company 로그인
 	CompanyVO companyLogin(CompanyVO vo);
+	
+	int countcompany(CriteriaVO cri);
 }

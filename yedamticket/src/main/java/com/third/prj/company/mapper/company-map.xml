@@ -27,10 +27,23 @@
 		FROM   COMPANY
 		WHERE  C_ID = #{Cid}
 	</select>
-	
-	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
-		SELECT * 
+	<select id="countcompany" resultType="int">
+		SELECT COUNT(*)
 		FROM COMPANY
+	</select>
+	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
+		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT 
+		<![CDATA[
+		FROM
+			(
+			SELECT ROWNUM RN,A.* 
+			FROM (
+			SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT
+			FROM COMPANY
+			ORDER BY C_ID
+			)A)
+			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]>
 	</select>
 	
 	<select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">

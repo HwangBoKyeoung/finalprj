@@ -16,6 +16,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.company.service.CompanyService;
 import com.third.prj.company.service.CompanyVO;
+import com.third.prj.company.service.CriteriaVO;
+import com.third.prj.company.service.PageVO;
 import com.third.prj.user.service.UserService;
 
 @Controller
@@ -59,8 +61,10 @@ public class CompanyController {
 	
 	//기업회원 리스트(관리자페이지)
 	@RequestMapping("/company.do")
-	public String company(Model model) {
-		model.addAttribute("companys", companyDao.companyList());
+	public String company(Model model, CriteriaVO cri) {
+		model.addAttribute("companys", companyDao.companyList(cri));
+		int total = companyDao.countcompany(cri);
+		model.addAttribute("pageVO", new PageVO(cri, total));
 		return "manager/company/company";
 	}
 	
