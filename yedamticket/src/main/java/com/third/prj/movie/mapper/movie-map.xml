@@ -3,53 +3,106 @@
 
 <mapper namespace="com.third.prj.movie.mapper.MovieMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
-		<id property="mvNo" column="mv_no"/>
-		<result property="name" column="name"/>
-		<result property="genre" column="genre"/>
-		<result property="startDate" column="startDate"/>
-		<result property="director" column="director"/>
-		<result property="rating" column="rating"/>
-		<result property="distibutor" column="distibutor"/>
-		<result property="country" column="country"/>
-		<result property="runtime" column="runtime"/>
-		<result property="content" column="content"/>
-		<result property="CId" column="c_id"/>
-		<result property="actor" column="actor"/>
-		<result property="fileCd" column="file_cd"/>
-		<result property="docId" column="docId"/>
+	<resultMap type="com.third.prj.movie.service.MovieVO"
+		id="movieResultMap">
+		<id property="mvNo" column="mv_no" />
+		<result property="name" column="name" />
+		<result property="genre" column="genre" />
+		<result property="startDate" column="startDate" />
+		<result property="director" column="director" />
+		<result property="rating" column="rating" />
+		<result property="distibutor" column="distibutor" />
+		<result property="country" column="country" />
+		<result property="runtime" column="runtime" />
+		<result property="content" column="content" />
+		<result property="CId" column="c_id" />
+		<result property="actor" column="actor" />
+		<result property="fileCd" column="file_cd" />
+		<result property="docId" column="docId" />
 	</resultMap>
 
+	<resultMap type="com.third.prj.movie.service.MovieViewVO"
+		id="movieViewMap">
+		<result property="mvReservNo" column="MV_RESERV_NO" />
+		<result property="name" column="NAME" />
+		<result property="payDt" column="PAYDT" />
+		<result property="pay" column="PAY" />
+		<result property="charge" column="CHARGE" />
+		<result property="point" column="POINT" />
+		<result property="buyCtntCd" column="BUY_CTNT_CD" />
+		<result property="Uid" column="U_ID" />
+	</resultMap>
+
+
+
 	<!-- 프로시저 -->
-	<resultMap type="hashmap" id="procedureCall"/>
-	
+	<resultMap type="hashmap" id="procedureCall" />
+
 	<update id="procedureCall" statementType="CALLABLE">
-	{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
-	                #{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_director, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
+		{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
+		#{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_director, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
-	
+
 	<select id="movieList" resultMap="movieResultMap">
 		SELECT * FROM MOVIE
-		WHERE STARTDATE 
-		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd') 
+		WHERE
+		STARTDATE
+		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
 		AND TO_CHAR(SYSDATE,'yyyyMMdd')
 	</select>
 
 	<select id="movieDetail" resultMap="movieResultMap">
-		SELECT * 
-		FROM MOVIE 
-		WHERE NAME=#{name} 
+		SELECT *
+		FROM MOVIE
+		WHERE NAME=#{name}
 		AND STARTDATE=#{startDate}
 	</select>
-	
+
+	<select id="mvBuyList" resultMap="movieViewMap">
+		SELECT *
+		FROM MOVIEVIEW
+		WHERE BUY_CTNT_CD = 'mv'
+		AND U_ID = #{Uid}
+
+	</select>
+
+	<select id="mvBuyList"
+		resultMap="movieViewMap">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.* 
+	    		FROM (  SELECT *
+	FROM MOVIEVIEW
+	WHERE BUY_CTNT_CD = 'mv'
+	AND U_ID = #{Uid} ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+
+	<!-- 검색조건에 맞춰서 total변경 -->
+	<select id="mvBuyTotal" resultType="int">
+		  SELECT COUNT(*) AS TOTAL 
+		FROM ( SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT *
+	FROM MOVIEVIEW
+	WHERE BUY_CTNT_CD = 'mv'
+	AND U_ID = 'micol1234' ) A ))
+		
+	</select>
+
 </mapper>

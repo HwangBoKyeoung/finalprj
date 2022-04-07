@@ -2,6 +2,8 @@ package com.third.prj.performance.service;
 
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
+import com.third.prj.point.service.PointVO;
+import com.third.prj.user.service.UserVO;
 
 import lombok.Getter;
 import lombok.Setter;

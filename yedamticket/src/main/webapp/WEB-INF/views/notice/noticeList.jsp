@@ -364,13 +364,11 @@ iframe {
 						</c:forEach>
 						</tbody>
 					</table>
-					<br> <br>
-				
-				<div align="right" class="subBtn">
+					<div align="right" class="subBtn">
 					<button type="button" class="btn btn-primary"
 						onclick="location.href='noticeWriteForm.do'">글등록</button>
 				</div>
-				<div id="content" align="center">
+					<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
 						<a href="noticeList.do?pageNum=${pageVO.startPage-1 }"> <input

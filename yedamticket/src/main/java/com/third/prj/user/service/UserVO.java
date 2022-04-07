@@ -32,6 +32,8 @@ public class UserVO implements UserDetails{
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone = "Asia/Seoul")
 	private Date rdt;
 	private String role;
+	
+	private UserCriteriaVO cri;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

@@ -1,6 +1,6 @@
 package com.third.prj.user.web;
 
-import javax.inject.Inject;
+import javax.inject.Inject;  
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -13,17 +13,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
-
 import com.third.prj.faq.service.FaqService;
-import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
-import com.third.prj.notice.service.CriteriaVO;
 import com.third.prj.notice.service.NoticeService;
-import com.third.prj.notice.service.PageVO;
-import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
-import com.third.prj.point.service.PointVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
+import com.third.prj.user.service.UserCriteriaVO;
+import com.third.prj.user.service.UserPageVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -213,29 +209,33 @@ public class UserController {
 	}
 
 	@RequestMapping("/mvReservList.do")
-	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session) {
-		mvo.setUid((String) session.getAttribute("sessionId"));
+	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
+		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
+		cri.setUid((String)session.getAttribute("sessionId"));
+		System.out.println("=============== cri userid"+cri.getUid() + "===============");
+		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("mvList", userDao.mvRList(cri));
 		vo.setUid((String)session.getAttribute("sessionId"));
 		model.addAttribute("user", userDao.userSelectOne(vo));
-		model.addAttribute("mvList", userDao.MvReservList(mvo));
+		
+
 		return "user/mvReservList";
 	}
 
 	@RequestMapping("pfReservList.do")
-	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo,UserVO vo ) {
-		pvo.setUid((String) session.getAttribute("sessionId"));
+	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo,UserVO vo, UserCriteriaVO cri ) {
+		cri.setUid((String)session.getAttribute("sessionId"));
+		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
+		
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("pfList", userDao.pfRList(cri));
+		
 		vo.setUid((String)session.getAttribute("sessionId"));
 		model.addAttribute("user", userDao.userSelectOne(vo));
-		model.addAttribute("pfList", userDao.pfReservList(pvo));
 		return "user/pfReservList";
 	}
 
-	@RequestMapping("/userBuyList.do")
-	public String userBuyList(Model model, HttpSession session ,PointVO povo, MovieReservVO mvo, PerformanceReservationVO pvo) {
-		povo.setUid((String)session.getAttribute("sessionId"));
-		model.addAttribute("point", userDao.myPoint(povo));
-		return "user/userBuyList";
-	}
 
 
 }

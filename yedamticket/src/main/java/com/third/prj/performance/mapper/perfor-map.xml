@@ -3,6 +3,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.performance.mapper.PerformanceMapper">
 
+	<resultMap type="com.third.prj.performance.service.PerformanceViewVO" id="performanceViewMap">
+		<result property="pReservNo" column="P_RESERV_NO"/>
+		<result property="name" column="NAME"/>
+		<result property="charge" column="CHARGE"/>
+		<result property="payDt" column="PAYDT"/>
+		<result property="pay" column="PAY"/>
+		<result property="point" column="POINT"/>
+		<result property="buyCtntCd" column="BUY_CTNT_CD"/>
+		<result property="Uid" column="U_ID"/>
+	</resultMap>
+
 	<resultMap id="procedureCall" type="hashmap"/>
 
 	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
@@ -34,5 +45,12 @@
 					 #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 					 #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})} 
 	</update>
+	
+	<select id ="pfBuyList" resultMap="performanceViewMap">
+		SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+    	AND U_ID = #{Uid}
+	</select>
 
 </mapper>

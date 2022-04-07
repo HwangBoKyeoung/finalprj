@@ -386,6 +386,7 @@ html, body {
 </style>
 </head>
 <body>
+
 <div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
@@ -445,6 +446,26 @@ html, body {
 							</c:forEach>
 						</tbody>
 					</table>
+					<br>
+					<div id="content" align="center">
+				<c:if test="${pageVO.prev }">
+					<!-- 이전버튼 활성화 여부 -->
+					<a href="mvReservList.do?pageNum=${pageVO.startPage-1 }"> <input
+						type="button" value="이전" class="btn btn-secondary"></a>
+				</c:if>
+				<!-- pageNum -->
+				<c:forEach var="num" begin="${pageVO.startPage }"
+					end="${pageVO.endPage }">
+					<a class="${pageVO.pageNum == num ? 'active': '' }"
+						href="mvReservList.do?pageNum=${num }"> <input type="button"
+						value="${num }" class="btn btn-secondary"></a>
+				</c:forEach>
+				<!-- 다음버튼 -->
+				<c:if test="${pageVO.next }">
+					<a href="mvReservList.do?pageNum=${pageVO.endPage+1 }"> <input
+						type="button" value="다음" class="btn btn-secondary"></a>
+				</c:if>
+			</div>
 			</div>
 		</div>
 	</div>

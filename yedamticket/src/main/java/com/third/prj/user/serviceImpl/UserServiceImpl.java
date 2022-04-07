@@ -1,6 +1,6 @@
 package com.third.prj.user.serviceImpl;
 
-import java.util.List;
+import java.util.List; 
 
 import javax.servlet.http.HttpSession;
 
@@ -16,6 +16,8 @@ import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.point.service.PointVO;
 import com.third.prj.user.mapper.UserMapper;
+import com.third.prj.user.service.UserCriteriaVO;
+import com.third.prj.user.service.UserPointViewVo;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -91,18 +93,6 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<MovieReservVO> MvReservList(MovieReservVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.MvReservList(vo);
-	}
-
-	@Override
-	public List<PerformanceVO> pfReservList(PerformanceReservationVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.pfReservList(vo);
-	}
-
-	@Override
 	public int userCharge(UserVO vo) {
 		return mapper.userCharge(vo);
 	}
@@ -130,25 +120,38 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-
-
 	@Override
-	public PointVO myPoint(PointVO vo) {
+	public List<UserPointViewVo> pointBuyList(UserPointViewVo vo) {
 		// TODO Auto-generated method stub
-		return mapper.myPoint(vo);
+		return mapper.pointBuyList(vo);
 	}
 
 	@Override
-	public PerformanceVO pNameSelect(PerformanceReservationVO vo) {
+	public List<MovieReservVO> mvRList(UserCriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.pNameSelect(vo);
+		return mapper.mvRList(cri);
 	}
 
 	@Override
-	public MovieVO mNameSelect(MovieReservVO vo) {
+	public int getMTotal(UserCriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.mNameSelect(vo);
+		return mapper.getMTotal(cri);
 	}
+
+	@Override
+	public List<PerformanceVO> pfRList(UserCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pfRList(cri);
+	}
+
+	@Override
+	public int getFTotal(UserCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getFTotal(cri);
+	}
+
+
+
 
 
 

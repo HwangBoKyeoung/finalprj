@@ -11,10 +11,10 @@ public class PointVO {
 	
 	private int charge;
 	private Date payDt;
+	private int pay;
 	private String cancelCd;
 	private int payNo;
 	private String Uid;
-	private int pay;
 	private String buyCtntCd;
 	
 }

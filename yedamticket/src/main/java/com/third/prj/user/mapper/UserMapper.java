@@ -1,19 +1,15 @@
 package com.third.prj.user.mapper;
 
-import java.util.List;
+import java.util.List;  
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
-
-import com.third.prj.movie.service.MovieVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
-import com.third.prj.moviereservation.service.MovieReservationVO;
-import com.third.prj.notice.service.CriteriaVO;
-import com.third.prj.notice.service.NoticeVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
-import com.third.prj.point.service.PointVO;
+import com.third.prj.user.service.UserCriteriaVO;
+import com.third.prj.user.service.UserPointViewVo;
 import com.third.prj.user.service.UserVO;
 
 public interface UserMapper {
@@ -48,11 +44,6 @@ public interface UserMapper {
 //  카카오 회원가입	
 	int kakaoInsert(UserVO vo);
 	
-//  영화 예매 내역	
-	List<MovieReservVO> MvReservList(MovieReservVO vo);
-	
-//  공연 예매 내역
-	List<PerformanceVO> pfReservList(PerformanceReservationVO vo);
 
 	// 포인트 충전
 	int userCharge(UserVO vo);
@@ -61,12 +52,22 @@ public interface UserMapper {
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
 	
-	//영화네임검색
-	MovieVO mNameSelect (MovieReservVO vo);
-	//공연이름검색
-	PerformanceVO pNameSelect (PerformanceReservationVO vo);
-	//포인트검색
-	PointVO myPoint (PointVO vo);
+	//유저포인트리스트
+	List<UserPointViewVo> pointBuyList(UserPointViewVo vo);
+	
+	//영화 예매 내역 리스트
+	public List<MovieReservVO> mvRList(UserCriteriaVO cri);
+	
+	// 전체 게시글수
+	public int getMTotal(UserCriteriaVO cri);
+	
+	//공연 예매 내역 리스트
+	public List<PerformanceVO> pfRList(UserCriteriaVO cri);
+	
+	//공연 예매 리스트 페이징
+	public int getFTotal(UserCriteriaVO cri);
+	
+
 	
 	
 }

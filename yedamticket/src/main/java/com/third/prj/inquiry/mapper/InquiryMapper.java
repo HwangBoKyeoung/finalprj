@@ -1,12 +1,11 @@
 package com.third.prj.inquiry.mapper;
 
-import java.util.List;
+import java.util.List; 
 
 import org.apache.ibatis.annotations.Param;
 
 import com.third.prj.inquiry.service.InquiryVO;
 import com.third.prj.notice.service.CriteriaVO;
-import com.third.prj.notice.service.NoticeVO;
 
 public interface InquiryMapper {
 
