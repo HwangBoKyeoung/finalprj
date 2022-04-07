@@ -56,11 +56,7 @@
 
                         <div class="event-date">${p.performanceScheduleVO.frDt }  ${p.performanceScheduleVO.time }</div>
                     </div>
-					 <c:if test="${p.price eq 0 }">
-                    <div class="event-cost flex justify-content-center align-items-center">
-                        <p>무 료</p>
-                    </div>
-                    </c:if> 
+				
                     
                   
                     <div class="event-cost flex justify-content-center align-items-center">
