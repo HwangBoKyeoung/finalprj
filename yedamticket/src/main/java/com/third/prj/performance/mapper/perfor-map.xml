@@ -62,9 +62,7 @@
 				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
 				 FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 				 ON 
-				 P.P_NO = PS.P_NO
-				 
-				 
+				 P.P_NO = PS.P_NO 
 		]]>	
 		<where>
 		<if test="frDt == null and name == null and loc == null">
@@ -134,7 +132,13 @@
 		 ) A )
 	</select>
 	<!-- 공연선택 -->
-	<select id="pSelect">
-		select * from
+	<select id="pSelect" resultMap="pMap">
+		SELECT 
+			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+			FROM 
+			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+			ON 
+			P.P_NO = PS.P_NO
+	        WHERE P.NAME = #{name}
 	</select>
 </mapper>

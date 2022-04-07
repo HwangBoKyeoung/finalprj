@@ -17,7 +17,7 @@
 </head>
 <style>
 svg .seat:hover{
-  fill: red;
+  fill: purple;
   cursor:pointer;
 }
 </style>
@@ -25,6 +25,7 @@ svg .seat:hover{
 
 <div class="container">
     <div class="row">
+  ${performance }
         <div class="col-12 single-event">
             <div class="event-content-wrap">
                 <header class="entry-header flex flex-wrap justify-content-between align-items-end">
@@ -40,7 +41,7 @@ svg .seat:hover{
                         <a class="btn gradient-bg" href="#">Buy Tikets</a>
                     </div>
                 </header>
-
+${performance }
                 <figure class="events-thumbnail">
                     <img src="images/summer.jpg" alt="">
                 </figure>
@@ -492,7 +493,7 @@ svg .seat:hover{
 
     <script>
     $(".seat").click(function() {
-  alert( event.target.id+"자리를 예매하시겟습니까?" );
+  console.log(event.target.id);
 })
 </script>
 </div>

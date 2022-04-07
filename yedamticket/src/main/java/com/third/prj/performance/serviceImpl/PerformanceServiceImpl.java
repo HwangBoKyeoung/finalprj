@@ -44,21 +44,16 @@ public class PerformanceServiceImpl implements PerformanceService {
 		// TODO Auto-generated method stub
 		return mapper.pList(cri);
 	}
-
 	@Override
 	public List<PerformanceVO> epList() {
 		// TODO Auto-generated method stub
 		return mapper.epList();
 	}
-
-
 	@Override
 	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
-
-
 	@Override
 	public PerformanceVO pSelect(PerformanceVO vo) {
 		// TODO Auto-generated method stub

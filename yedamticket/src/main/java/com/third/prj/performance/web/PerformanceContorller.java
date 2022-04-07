@@ -46,7 +46,11 @@ public class PerformanceContorller {
 	}
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
-		//System.out.println("pNo"+vo.getPNo());
+		System.out.println("name"+vo.getName());
+		System.out.println("pNo"+vo.getPNo());
+		
+		
+		model.addAttribute("performance",perDao.pSelect(vo));
 		return "performance/pBookingForm";
 	}
 	//한건조회

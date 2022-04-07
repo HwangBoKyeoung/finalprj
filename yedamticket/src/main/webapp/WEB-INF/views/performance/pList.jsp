@@ -46,6 +46,7 @@
 <div class="container">
     <div class="row events-list">
     	<c:forEach items="${performance }" var="p">
+    	<form action="pBookingForm.do" method="post">
         <div class="col-12 col-lg-6 single-event">
             <figure class="events-thumbnail">
                 <a href="#"><img src="resources/performance/images/event-1.jpg" alt=""></a>
@@ -54,24 +55,26 @@
             <div class="event-content-wrap">
                 <header class="entry-header flex justify-content-between">
                     <div>
-                        <h2 class="entry-title"><a href=#>${p.name }</a></h2>
+                        <h2 class="entry-title">${p.name }</h2>
 
                         <div class="event-location">${p.loc }</div>
-
+						
                         <div class="event-date">${p.performanceScheduleVO.frDt }  ${p.performanceScheduleVO.time }</div>
                     </div>
                     <div class="event-cost flex justify-content-center align-items-center">
                         <p>${p.price }</p>
                     </div>
-                   
+                    <!-- pno으로 해야하는데 임시 -->
+                   <input type="hidden" name='name' value="${p.name }">
                     
                 </header>
 
                 <footer class="entry-footer">
-                    <button type="submit" id="pBookingForm.do" class="btn gradient-bg" >Buy Tikets</button>
+                    <button type="submit"  class="btn gradient-bg" >Buy Tikets</button>
                 </footer>
             </div>
         </div>
+        </form>
  		</c:forEach>
     </div>
 </div>
