@@ -81,28 +81,28 @@
 					</tbody>
 				</table>
 				<br>
-				<br> <span>포인트 충전내역</span>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">결제일자</th>
-							<th scope="col">사용처</th>
-							<th scope="col">포인트 충전</th>
-							<th scope="col">총포인트</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list3 }" var="point">
-							<tr class="plist">
-								<td>${point.chargeDt }</td>
-								<td>포인트충전</td>
-								<td>+ ${point.charge }</td>
-								<td>${point.point }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
 			</div>
+			<br> <span>포인트 충전내역</span>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">결제일자</th>
+						<th scope="col">사용처</th>
+						<th scope="col">포인트 충전</th>
+						<th scope="col">총포인트</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list3 }" var="point">
+						<tr class="plist">
+							<td>${point.chargeDt }</td>
+							<td>포인트충전</td>
+							<td>+ ${point.charge }</td>
+							<td>${point.point }</td>
+						</tr>
+					</c:forEach>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>

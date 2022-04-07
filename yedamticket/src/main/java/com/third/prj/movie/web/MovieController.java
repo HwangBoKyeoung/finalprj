@@ -1,9 +1,8 @@
 package com.third.prj.movie.web;
 
-import java.util.List;
+import java.util.List; 
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
-import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.moviehall.service.MovieHallService;
 import com.third.prj.moviehall.service.MovieHallVO;
 import com.third.prj.moviereply.service.MovieReplyService;
@@ -24,12 +22,10 @@ import com.third.prj.moviereservation.service.MovieReservService;
 import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
-import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
-import com.third.prj.user.service.UserService;
 
 @Controller
 public class MovieController {

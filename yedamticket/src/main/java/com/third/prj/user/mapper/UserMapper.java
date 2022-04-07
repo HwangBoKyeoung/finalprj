@@ -1,13 +1,15 @@
 package com.third.prj.user.mapper;
 
-import java.util.List;  
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.annotations.Param;
+
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
-import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.point.service.PointCriteriaVO;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.user.service.UserCriteriaVO;
 import com.third.prj.user.service.UserPointViewVo;
 import com.third.prj.user.service.UserVO;
@@ -66,6 +68,12 @@ public interface UserMapper {
 	
 	//공연 예매 리스트 페이징
 	public int getFTotal(UserCriteriaVO cri);
+	
+	//포인트 충전내역 리스트
+	public List<PointVO> pointBuyList2(PointCriteriaVO cri);
+		
+	//포인트 충전내역 페이징
+	public int pointBuyTotal(PointCriteriaVO cri);
 	
 
 	

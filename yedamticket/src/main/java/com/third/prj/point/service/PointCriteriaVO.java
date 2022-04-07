@@ -1,9 +1,9 @@
-package com.third.prj.movie.service;
+package com.third.prj.point.service;
 
 import lombok.Data;
 
 @Data
-public class MvCriteriaVO {
+public class PointCriteriaVO {
 	private int pageNum;
 	private int amount;
 	
@@ -14,11 +14,11 @@ public class MvCriteriaVO {
 	
 	
 	
-	public MvCriteriaVO() {
-		this(1,10);
+	public PointCriteriaVO() {
+		this(1,5);
 	}
 	
-	public MvCriteriaVO(int pageNum, int amount) {
+	public PointCriteriaVO(int pageNum, int amount) {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}

@@ -426,7 +426,7 @@ html, body {
 								<th scope="col">영화명</th>
 								<th scope="col">관람일</th>
 								<th scope="col">상영시간</th>
-								<th scope="col">좌석이름</th>
+								<th scope="col">좌석번호</th>
 								<th scope="col">모바일티켓</th>
 							</tr>
 						</thead>

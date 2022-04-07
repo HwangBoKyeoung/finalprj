@@ -1,27 +1,19 @@
 package com.third.prj.performance.web;
 
-import java.util.Map;
+import java.util.Map; 
 
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import com.third.prj.movie.service.MovieService;
-import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
-import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
-import com.third.prj.user.service.UserPointViewVo;
-import com.third.prj.user.service.UserService;
-import com.third.prj.user.service.UserVO;
 
 @Controller
 public class PerformanceContorller {
@@ -33,10 +25,7 @@ public class PerformanceContorller {
 	private PerformanceImageService periDao;
 	@Autowired
 	private PerformanceVideoService pervDao;
-	@Autowired
-	private MovieService movieDao;
-	@Autowired
-	private UserService userDao;
+
 
 
 	//모두조회
@@ -118,18 +107,7 @@ public class PerformanceContorller {
 		return "redirect:/conPage.do";
 	}
 	
-	@RequestMapping("/userBuyList.do")
-	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo,UserVO vo) {
-		vo.setUid((String)session.getAttribute("sessionId"));	
-		mvo.setUid((String)session.getAttribute("sessionId"));
-		pvo.setUid((String)session.getAttribute("sessionId"));
-		uvo.setUid((String)session.getAttribute("sessionId"));	
-		model.addAttribute("user", userDao.userSelectOne(vo));
-		model.addAttribute("list3", userDao.pointBuyList(uvo));
-		model.addAttribute("list2",movieDao.mvBuyList(mvo));
-		model.addAttribute("list1", perDao.pfBuyList(pvo));
-		return "user/userBuyList";
-	}
+
 	
 	
 }

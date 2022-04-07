@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performance.service.PerformanceViewVO;
+import com.third.prj.point.service.PointCriteriaVO;
 
 public interface PerformanceMapper {
 
@@ -17,6 +18,13 @@ public interface PerformanceMapper {
 	
 	//공연 구매내역
 	List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo);
+	
+	//공연 예매 내역 리스트
+	public List<PerformanceVO> pfBuyList2(PointCriteriaVO cri);
+	
+	//공연 예매 리스트 페이징
+	public int pfBuyTotal(PointCriteriaVO cri);
+	
 	
 
 	

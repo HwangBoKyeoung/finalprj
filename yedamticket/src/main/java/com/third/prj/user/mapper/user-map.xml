@@ -218,9 +218,7 @@
 				MOVIE_RESERVATION R JOIN MOVIE M
 				ON R.DOCID = M.DOCID
 				WHERE U_ID = #{Uid} ) A )
-		
-		 	 
-        
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 
@@ -276,6 +274,32 @@
 		AND Y.P_NO = Z.P_NO
 		AND X.U_ID ='micol1234' ) A ) )
 		
+	</select>
+	
+	<select id="pointBuyList2"
+		resultMap="userPointMap">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  select *
+		from userPointView
+		where u_id = #{Uid} ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		]]> 
+	</select>
+	
+	<!-- 검색조건에 맞춰서 total변경 -->
+	<select id="pointBuyTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL 
+		FROM (SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  select *
+		from userPointView
+		where u_id = #{Uid} ) A ) )
 	</select>
 	
 	

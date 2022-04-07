@@ -1,9 +1,9 @@
-package com.third.prj.movie.service;
+package com.third.prj.point.service;
 
 import lombok.Data;
 
 @Data
-public class MvPageVO {
+public class PointPageVO {
 
 	private int startPage; //첫페이지 번호
 	private int endPage; //마지막페이지 번호
@@ -14,10 +14,10 @@ public class MvPageVO {
 	private int pageNum; //조회하는 페이지번호 (cri도 존재함)
 	private int amount; //보여질 데이터 개수
 	
-	private MvCriteriaVO cri;
+	private PointCriteriaVO cri;
 	
 	//생성자
-	public MvPageVO(MvCriteriaVO cri, int total) {
+	public PointPageVO(PointCriteriaVO cri, int total) {
 		//번호, 개수, 총 게시글 수 초기화
 		this.pageNum = cri.getPageNum();
 		this.amount = cri.getAmount();
