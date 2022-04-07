@@ -5,16 +5,16 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
+
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.third.prj.performance.service.CriteriaVO;
+import com.third.prj.performance.service.PageVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
-import com.third.prj.performanceschedule.service.PerformanceScheduleService;
-import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
 
@@ -23,7 +23,6 @@ public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceService perDao;
-
 	@Autowired
 	private PerformanceImageService periDao;
 	@Autowired
@@ -38,18 +37,17 @@ public class PerformanceContorller {
 	}
 
 	@RequestMapping("/pList.do")
-	public String pList(Model model) {
-		model.addAttribute("performance",perDao.pList());
+	public String pList(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달
+		model.addAttribute("performance",perDao.pList(cri));
+		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
 	}
-	@RequestMapping("/pSearch.do")
-	public String pSearch(PerformanceVO vo, Model model) {
-		System.out.println("날짜"+vo.getFrDt());
-		System.out.println("지역"+vo.getLoc());
-		System.out.println("행사"+vo.getName());
-		
-		perDao.pSearch(vo);
-		return "";
+	@RequestMapping("/pBookingForm.do")
+	public String pBookingForm(Model model,PerformanceVO vo) {
+		//System.out.println("pNo"+vo.getPNo());
+		return "performance/pBookingForm";
 	}
 	//한건조회
 	@RequestMapping("/pserSelect.do")

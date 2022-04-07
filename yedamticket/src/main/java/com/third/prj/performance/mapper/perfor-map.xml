@@ -50,39 +50,91 @@
 		<result column="price" property="price"/>
 		<collection property="performanceScheduleVO" resultMap="pScheduleMap"/>
 	</resultMap>
+	<!-- 공연 전체리스트  -->
 	<select id="pList" resultMap="pMap">
-		SELECT 
-		P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
-		FROM 
-		PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
-		ON 
-		P.P_NO = PS.P_NO
-	</select>
-	
-	<select id="pSearch" resultMap="pMap">
-		SELECT P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
-		FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
-		ON P.P_NO = PS.P_NO
+	  	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN, A.*
+	    		FROM (
+	    		
+	    		 SELECT 
+				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+				 FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+				 ON 
+				 P.P_NO = PS.P_NO
+				 
+				 
+		]]>	
+		<where>
+		<if test="frDt == null and name == null and loc == null">
+		AND 1=1
+		</if>
 		<!-- 날짜만 입력받은 경우 -->
 		<if test="frDt != null and frDt !=''">
-		WHERE PS.FRDT = #{frDt}
+		AND PS.FRDT = #{frDt}
 		</if>
 		<!-- 날짜 + 이벤트 -->
-		<if test="frDt != null and frDt !='' and name != null and name !=''">
-		WHERE PS.FRDT = #{frDt} AND
-			  P.NAME LIKE '%' || #{name} || '%'
+		<if test="name != null and name !=''" >
+		AND P.NAME LIKE '%' || #{name} || '%'
 		</if>
 		<!-- 날짜 + 지역 -->
-		<if test="frDt != null and frDt !='' and loc != null and loc !=''">
-		WHERE PS.FRDT = #{frDt} AND
-			  P.LOC  LIKE '%' || #{loc} || '%'
+		<if test="loc != null and loc !=''">
+		AND P.LOC  LIKE '%' || #{loc} || '%'
 		</if>
-		<!-- 날짜 + 지역 +이벤트 -->
-		<if test="frDt != null and frDt !='' and name != null and name !='' and loc != null and loc !=''">
-		WHERE PS.FRDT = #{frDt} AND
-			  P.NAME  LIKE '%' || #{name} || '%' AND
-			  P.LOC   LIKE '%' || #{loc}  || '%'
-		</if>
+	</where>
+		<![CDATA[
+	    		 ) A ) 
+		         WHERE RN > (#{pageNum}-1) * #{amount} 
+		         AND RN <= #{pageNum} * #{amount}
+		]]>	
+	</select>
+	<!-- 예정공연  -->
+	<select id="epList"  resultMap="pMap">
+			SELECT 
+			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+			FROM 
+			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+			ON 
+			P.P_NO = PS.P_NO
+	        where FRDT > TO_CHAR(SYSDATE,'YY/MM/DD')
+	        
 	</select>
 	
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) AS TOTAL 
+			FROM (
+	    		SELECT ROWNUM RN, A.*
+	    		FROM (
+	    		
+	    		 SELECT 
+				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+				 FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+				 ON 
+				 P.P_NO = PS.P_NO     
+		]]>	
+		<where>
+		<if test="frDt == null and name == null and loc == null">
+		AND 1=1
+		</if>
+		<!-- 날짜만 입력받은 경우 -->
+		<if test="frDt != null and frDt !=''">
+		AND PS.FRDT = #{frDt}
+		</if>
+		<!-- 날짜 + 이벤트 -->
+		<if test="name != null and name !=''" >
+		AND P.NAME LIKE '%' || #{name} || '%'
+		</if>
+		<!-- 날짜 + 지역 -->
+		<if test="loc != null and loc !=''">
+		AND P.LOC  LIKE '%' || #{loc} || '%'
+		</if>
+	</where>
+		 ) A )
+	</select>
+	<!-- 공연선택 -->
+	<select id="pSelect">
+		select * from
+	</select>
 </mapper>

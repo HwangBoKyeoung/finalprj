@@ -3,7 +3,7 @@ package com.third.prj.performance.service;
 import java.util.List;
 import java.util.Map;
 
-import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
+
 
 public interface PerformanceService {
 
@@ -16,7 +16,11 @@ public interface PerformanceService {
 	
 	//황규복
 	//그냥 공연전체리스트
-	List<PerformanceVO> pList();
-	//pList에서 공연검색
-	List<PerformanceVO> pSearch(PerformanceVO vo);
+	List<PerformanceVO> pList(CriteriaVO cri);
+	//공연예정
+	List<PerformanceVO> epList();
+	//공연선택
+	PerformanceVO pSelect(PerformanceVO vo);
+	// 전체 게시글수
+	public int getTotal(CriteriaVO cri);
 }

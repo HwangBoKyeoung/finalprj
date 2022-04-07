@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.performance.mapper.PerformanceMapper;
+import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
-import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 
 @Repository("perDao")
 public class PerformanceServiceImpl implements PerformanceService {
@@ -38,18 +38,31 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return mapper.procedureCall(map);
 	}
 
+	//황규복
+	@Override
+	public List<PerformanceVO> pList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pList(cri);
+	}
 
 	@Override
-	public List<PerformanceVO> pList() {
+	public List<PerformanceVO> epList() {
 		// TODO Auto-generated method stub
-		return mapper.pList();
+		return mapper.epList();
 	}
 
 
 	@Override
-	public List<PerformanceVO> pSearch(PerformanceVO vo) {
+	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.pSearch(vo);
+		return mapper.getTotal(cri);
+	}
+
+
+	@Override
+	public PerformanceVO pSelect(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.perSelect(vo);
 	}
 
 
