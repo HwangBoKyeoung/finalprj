@@ -27,8 +27,6 @@ public interface UserMapper {
 
 	int userPointUpdate(@Param("point")int point, @Param("id") String id);
 
-//	검색
-	List<UserVO> userSearch(@Param("key") String key, @Param("val") String val);
 
 //	아이디체크
 	int idChk(UserVO vo);
@@ -55,7 +53,6 @@ public interface UserMapper {
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
 	
-	//페이징
-	 int countUser(CriteriaVO cri);
+	//페이징(관리자 - 회원리스트페이지)
 	 int getTotal(CriteriaVO cri);
 }

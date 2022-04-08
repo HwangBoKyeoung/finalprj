@@ -20,6 +20,7 @@
 								class="col-sm-3 col-form-label">영화번호</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="mvNo" name="mvNo" value="${mv.mvNo}">
+								<input type="hidden" class="form-control" id="CId" name="CId" value="${mv.CId}">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -48,11 +49,11 @@
 								class="col-sm-3 col-form-label">관람등급</label>
 							<div class="col-sm-9">
 								<select class="col-md-10" id="selectedval" name="rating" data-rating="${mv.rating }">
-								  <option value="전체관람가능" <c:if test="${pers.loc=='전체관람가능'}">selected</c:if>> 전체관람가능</option>
-								  <option value="7세관람가" <c:if test="${pers.loc=='7세관람가'}">selected</c:if>> 7세관람가</option>
-								  <option value="12세관람가" <c:if test="${pers.loc=='12세관람가'}">selected</c:if>> 12세관람가</option>
-								  <option value="15세관람가" <c:if test="${pers.loc=='15세관람가'}">selected</c:if>> 15세관람가</option>
-								  <option value="18세관람가" <c:if test="${pers.loc=='18세관람가'}">selected</c:if>> 18세관람가</option>
+								  <option value="전체관람가능" <c:if test="${mv.rating=='전체관람가능'}">selected</c:if>> 전체관람가능</option>
+								  <option value="7세관람가" <c:if test="${mv.rating=='7세관람가'}">selected</c:if>> 7세관람가</option>
+								  <option value="12세관람가" <c:if test="${mv.rating=='12세관람가'}">selected</c:if>> 12세관람가</option>
+								  <option value="15세관람가" <c:if test="${mv.rating=='15세관람가'}">selected</c:if>> 15세관람가</option>
+								  <option value="18세관람가" <c:if test="${mv.rating=='18세관람가'}">selected</c:if>> 18세관람가</option>
 								</select>
 							</div>
 						</div>
@@ -88,7 +89,7 @@
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>
-						<button class="btn btn-gradient-primary me-2" onclick="location.href='mvDel.do?mvNo=${mv.mvNo}'">삭제요청</button>
+						<button class="btn btn-gradient-primary me-2" onclick="location.href='mvDel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
 				</div>
 			</div>
 		</div>

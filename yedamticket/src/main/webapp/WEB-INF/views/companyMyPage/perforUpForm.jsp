@@ -38,7 +38,7 @@
 								class="col-sm-3 col-form-label">공연설명</label>
 							<div class="col-sm-9">
 								<input type="text" class="form-control" id="content" name="content"
-									value="${pers.content}" placeholder="Password">
+									value="${pers.content}">
 							</div>
 						</div>
 						<div class="form-group row">

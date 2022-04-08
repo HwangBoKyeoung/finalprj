@@ -41,14 +41,10 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 
 	@Override
-	public int countperf(CriteriaVO cri) {
-		return mapper.countperf(cri);
+	public int getTotal(CriteriaVO cri) {
+		return mapper.getTotal(cri);
 	}
 
 
-	@Override
-	public int totalPerf() {
-		return 0;
-	}
 
 }

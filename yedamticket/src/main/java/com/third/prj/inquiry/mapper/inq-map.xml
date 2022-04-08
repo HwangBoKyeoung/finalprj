@@ -24,7 +24,7 @@
 			FROM (
 			SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 			FROM INQUIRY
-			ORDER BY INNO
+			ORDER BY IN_NO
 			)A)
 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
 		]]>

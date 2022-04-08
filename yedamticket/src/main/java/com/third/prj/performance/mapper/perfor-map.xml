@@ -1,18 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.third.prj.performance.mapper.PerformanceMapper">
+<mapper
+	namespace="com.third.prj.performance.mapper.PerformanceMapper">
 
-	<resultMap id="procedureCall" type="hashmap"/>
+	<resultMap id="procedureCall" type="hashmap" />
 
-	<select id="countperf" resultType="int">
-		SELECT COUNT(*) FROM PERFORMANCE
-	</select>
 
-	<select id="perSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
-
-	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+	<select id="perSelectList"
+		resultType="com.third.prj.performance.service.PerformanceVO">
 	<![CDATA[
+	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
 	FROM
 		(
 		SELECT ROWNUM RN,A.* 
@@ -20,38 +18,62 @@
 		SELECT 
 			P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
 		FROM PERFORMANCE
-		
-		ORDER BY P_NO
-	
-			)A)
-			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
-				]]>
+		WHERE
+	]]>
+		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+			OR ACTOR LIKE '%'||#{searchName}||'%'
+			OR LOC LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'ACTOR'">ACTOR LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+		ORDER BY P_NO DESC ) A )
+		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+	]]>
 
-	
+
+	</select>
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM PERFORMANCE
+		WHERE
+		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+			OR ACTOR LIKE '%'||#{searchName}||'%'
+			OR LOC LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'ACTOR'">ACTOR LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 
-	<select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">
-	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
-	FROM PERFORMANCE 
-	WHERE p_no = #{PNo} 
+	<select id="perSelect"
+		resultType="com.third.prj.performance.service.PerformanceVO">
+		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+		FROM PERFORMANCE
+		WHERE p_no = #{PNo}
 	</select>
-	
 
-<!-- <update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">UPDATE PERFORMANCE<set><if test="name != null">NAME = #{name},</if><if test="content != null">CONTENT = #{content},</if><if test="actor != null"> ACTOR = #{actor},</if><if test="loc != null">LOC = #{loc},</if><if test="addr != null">ADDR = #{addr},</if><if test="price != null"> PRICE = #{price},</if></set>WHERE P_NO = #{PNo}</update> -->
+
+	<!-- <update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">UPDATE 
+		PERFORMANCE<set><if test="name != null">NAME = #{name},</if><if test="content 
+		!= null">CONTENT = #{content},</if><if test="actor != null"> ACTOR = #{actor},</if><if 
+		test="loc != null">LOC = #{loc},</if><if test="addr != null">ADDR = #{addr},</if><if 
+		test="price != null"> PRICE = #{price},</if></set>WHERE P_NO = #{PNo}</update> -->
 
 
 
 	<update id="procedureCall" statementType="CALLABLE">
-	{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
-	                 #{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                 #{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                 #{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                 #{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                 #{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-					 #{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
-					 #{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-					 #{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-					 #{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})} 
+		{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
+		#{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
+		#{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
 	</update>
 
 </mapper>

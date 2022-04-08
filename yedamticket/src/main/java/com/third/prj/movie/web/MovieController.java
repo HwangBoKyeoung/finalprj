@@ -137,33 +137,33 @@ public class MovieController {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
 	//기업회원페이지에서 리스트르 출력
-	@GetMapping("/CMvList.do")
-	public String CMvList(CriteriaVO cri, Model model) {
-		System.out.println("=============="+ cri);
-		model.addAttribute("mvs",movieDao.mvListPaging(cri));		
-		model.addAttribute("pageVO", new PageVO(cri, 123));
-		return "movie/cmvList";
+	@RequestMapping("/companyMovieList.do")
+	public String companyMovieList(CriteriaVO cri, Model model) {
+		PageVO pageVO = new PageVO(cri, movieDao.getTotal(cri));
+		model.addAttribute("mvs",movieDao.mvListPaging(cri));	
+		model.addAttribute("pageVO", pageVO);
+		return "companyMyPage/companyMovieList";
 	}
 	  
 		//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
 		@RequestMapping("/cMvSelect.do")
-		public String mvSelect(MovieVO vo, Model model) {
-			MovieVideoVO vvo = new MovieVideoVO();
+		public String cMvSelect(MovieVO vo, MovieVideoVO vvo, Model model) {
+//			MovieVideoVO vvo = new MovieVideoVO();
 			vo=movieDao.mvSelect(vo);
 			System.out.println("============================"+vo.getMvNo());
 			vvo.setMvNo(vo.getMvNo());
-			
+			vvo = mvvDao.mvvSelect(vvo);
+			System.out.println("============================"+vvo);
 			model.addAttribute("videos", vvo);
+			
 			model.addAttribute("mv", vo);	
 			
-			return "movie/cmovieUpdate";
+			return "companyMyPage/cmovieUpdate";
 		}
 	
 	//영화 수정 페이지(프로시저 ->rjh(2022/04/05)
 	@RequestMapping("/mvUpdate.do")
-	public String mvUpdate(Model model,@RequestParam("vname")String vname,Map<String, Object>map, MovieVO vo) {
-			MovieVideoVO vvo = new MovieVideoVO();
-				
+	public String mvUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo) {
 		map.put("vm_vno", vo.getMvNo());
 		map.put("mv_name", vo.getName());
 		map.put("mv_genre", vo.getGenre());
@@ -171,8 +171,9 @@ public class MovieController {
 		map.put("mv_rating", vo.getRating());
 		map.put("mv_country", vo.getCountry());
 		map.put("mv_content", vo.getContent());
+		map.put("mv_cid", vo.getCId());
 		map.put("mv_actor", vo.getActor());
-		map.put("mv_vname", vname);
+		map.put("mv_vname", vvo.getVname());
 		map.put("mv_cd", vo.getFileCd());
 		
 		movieDao.procedureCall(map);

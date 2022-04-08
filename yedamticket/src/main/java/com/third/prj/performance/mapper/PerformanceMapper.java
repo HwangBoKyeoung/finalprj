@@ -15,6 +15,6 @@ public interface PerformanceMapper {
 //	프로시저 호출(update에 필요)
 	int procedureCall(Map<String, Object> map);
 	
-	public int countperf(CriteriaVO cri);
-	public int totalPerf();
+	//기업회원 마이페이지
+	int getTotal(CriteriaVO cri);
 }

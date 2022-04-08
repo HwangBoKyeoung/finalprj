@@ -98,10 +98,9 @@ public class UserController {
 
 	@RequestMapping("/user.do")
 	public String user(Model model,CriteriaVO cri) {
-//		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
+		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
 		model.addAttribute("users", userDao.userList(cri));
-		int total = userDao.countUser(cri);
-		model.addAttribute("pageVO", new PageVO(cri,total));//전체게시글 기준으로가지고옴
+		model.addAttribute("pageVO", pageVO);//전체게시글 기준으로가지고옴
 		return "manager/user/user";
 	}
 
@@ -230,5 +229,11 @@ public class UserController {
 //	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
 //		return "user/userUpdateForm";
 //	}
+	@RequestMapping("/companyMyPage.do")
+	public String companyMyPage() {
+		return "companyMyPage/companyMyPage";
+	}
+	
+	
 
 }

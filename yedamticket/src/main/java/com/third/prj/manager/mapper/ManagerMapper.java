@@ -21,4 +21,7 @@ public interface ManagerMapper {
 	List<ManagerVO> managerSearch(@Param("key") String key, @Param("val") String val);
 	//페이징처리
 		int countmana(CriteriaVO cri);
+		
+		//로그인
+		ManagerVO manaLogin(ManagerVO vo);
 }

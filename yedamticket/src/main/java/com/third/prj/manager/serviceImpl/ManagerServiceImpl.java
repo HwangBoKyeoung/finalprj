@@ -57,6 +57,12 @@ public class ManagerServiceImpl implements ManagerService{
 		// TODO Auto-generated method stub
 		return mapper.countmana(cri);
 	}
+
+	@Override
+	public ManagerVO manaLogin(ManagerVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.manaLogin(vo);
+	}
 	
 	
 }

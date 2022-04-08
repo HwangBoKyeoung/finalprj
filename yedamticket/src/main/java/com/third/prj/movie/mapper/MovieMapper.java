@@ -20,5 +20,7 @@ public interface MovieMapper {
 	List<MovieVO> mvListPaging(CriteriaVO cri);
 	//기업회원페이지 상세페이지겸 수정페이지
 	MovieVO mvSelect(MovieVO vo);
+	//검색
+	int getTotal(CriteriaVO cri);
 		
 }

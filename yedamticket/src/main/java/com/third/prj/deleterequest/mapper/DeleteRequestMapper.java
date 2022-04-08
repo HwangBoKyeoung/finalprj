@@ -4,12 +4,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.third.prj.deleterequest.service.CriteriaVO;
 import com.third.prj.deleterequest.service.DeleteRequestVO;
 import com.third.prj.performance.service.PerformanceVO;
 
 public interface DeleteRequestMapper {
 	//젠체리스트
-	List<DeleteRequestVO> delSelectList();
+		List<DeleteRequestVO> delSelectList(CriteriaVO cri);
 	//단건조회
 	DeleteRequestVO delSelect(DeleteRequestVO vo);
 	//등록
@@ -28,4 +29,7 @@ public interface DeleteRequestMapper {
 		
 	//영화삭제처리상세페이지
 		DeleteRequestVO mvUpdel(DeleteRequestVO vo);
+		
+		//페이징처리
+		int countdelreqest(CriteriaVO cri);
 }

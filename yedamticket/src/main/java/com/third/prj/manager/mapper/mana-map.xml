@@ -63,4 +63,10 @@
  		FROM MANAGER
  		WHERE M_ID = #{MId}
  	</select>
+ 	<select id="manaLogin" resultType="com.third.prj.manager.service.ManagerVO">
+ 		SELECT M_ID,NAME, PWD, DEPART, PHONE, AUTH_CD
+ 		FROM MANAGER
+ 		WHERE M_ID = #{MId}
+ 		AND PWD = #{pwd}
+ 	</select>
 </mapper>

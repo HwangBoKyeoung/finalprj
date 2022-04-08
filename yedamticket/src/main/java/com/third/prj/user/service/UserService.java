@@ -23,9 +23,6 @@ public interface UserService {
 
 	int userPointUpdate(int point, String id);
 
-//	검색
-	List<UserVO> userSearch(String key, String val);
-
 //	아이디체크
 	int idChk(UserVO vo);
 
@@ -50,9 +47,7 @@ public interface UserService {
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
-	//페이징
-		 int countUser(CriteriaVO cri);
-		 
+	//페이징(관리자-회원리스트 파트)
 		 int getTotal(CriteriaVO cri);
 	
 }

@@ -53,10 +53,6 @@ public class UserServiceImpl implements UserService {
 		return mapper.userSelect(vo);
 	}
 
-	@Override
-	public List<UserVO> userSearch(String key, String val) {
-		return mapper.userSearch(key, val);
-	}
 
 	@Override
 	public UserVO getUser(UserVO vo) {
@@ -118,12 +114,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO loginChk(UserVO vo, HttpSession session) {
 		return dao.loginChk(vo);
-	}
-
-	@Override
-	public int countUser(CriteriaVO cri) {
-		// TODO Auto-generated method stub
-		return mapper.countUser(cri);
 	}
 
 	@Override

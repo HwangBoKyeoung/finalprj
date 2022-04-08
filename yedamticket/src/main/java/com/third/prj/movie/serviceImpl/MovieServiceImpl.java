@@ -53,6 +53,12 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.mvListPaging(cri);
 	}
 
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
+	}
+
 	
 	
 }

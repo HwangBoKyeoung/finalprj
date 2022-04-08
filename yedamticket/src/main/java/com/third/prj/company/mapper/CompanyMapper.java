@@ -19,5 +19,7 @@ public interface CompanyMapper {
 	List<CompanyVO> companySearch(@Param("key") String key, @Param("val") String val);
 //  company 로그인
 	CompanyVO companyLogin(CompanyVO vo);
+	
+	//관리자 -기업회원 로그인처리
 	int countcompany(CriteriaVO cri);
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.deleterequest.mapper.DeleteRequestMapper;
+import com.third.prj.deleterequest.service.CriteriaVO;
 import com.third.prj.deleterequest.service.DeleteRequestService;
 import com.third.prj.deleterequest.service.DeleteRequestVO;
 
@@ -15,9 +16,9 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 	@Autowired
 	private DeleteRequestMapper mapper;
 	@Override
-	public List<DeleteRequestVO> delSelectList() {
+	public List<DeleteRequestVO> delSelectList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.delSelectList();
+		return mapper.delSelectList(cri);
 	}
 
 	@Override
@@ -66,6 +67,12 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 	public DeleteRequestVO mvUpdel(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.mvUpdel(vo);
+	}
+
+	@Override
+	public int countdelreqest(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.countdelreqest(cri);
 	}
 
 }

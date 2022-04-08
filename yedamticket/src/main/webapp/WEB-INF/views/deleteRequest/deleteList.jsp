@@ -35,6 +35,24 @@
 					</tbody>
 				</table>
 				<br>
+				<div id="content" align="center">
+							<c:if test="${pageVO.prev }">
+								<!-- 이전버튼 활성화 여부 -->
+								<a href="inquiry.do?pageNum=${pageVO.startPage-1 }"> 
+								<input type="button" value="이전" class="btn btn-secondary"></a>
+							</c:if>
+							<!-- pageNum -->
+							<c:forEach var="num" begin="${pageVO.startPage }"
+								end="${pageVO.endPage }">
+								<a class="${pageVO.pageNum == num ? 'active': '' }" href="inquiry.do?pageNum=${num }"> 
+								<input type="button" value="${num }" class="btn btn-secondary"></a>
+							</c:forEach>
+							<!-- 다음버튼 -->
+							<c:if test="${pageVO.next }">
+								<a href="inquiry.do?pageNum=${pageVO.endPage+1 }"> 
+								<input type="button" value="다음" class="btn btn-secondary"></a>
+							</c:if>
+						</div>
 			</div>
 		</div>
 	</div>

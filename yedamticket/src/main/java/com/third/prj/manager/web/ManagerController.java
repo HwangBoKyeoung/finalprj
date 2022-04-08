@@ -1,14 +1,19 @@
 package com.third.prj.manager.web;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 
+import com.third.prj.company.service.CompanyVO;
 import com.third.prj.manager.service.CriteriaVO;
 import com.third.prj.manager.service.ManagerService;
 import com.third.prj.manager.service.ManagerVO;
@@ -82,5 +87,34 @@ public class ManagerController {
 		int result = managerDao.idCheck(MId);
 		return result;
 	}
+	
+	@RequestMapping("/managerLoginForm.do")
+	public String managerLoginForm() {
+		return "admin/managerLoginForm";
+	}
+	  
+		//기업회원 로그인
+		@RequestMapping("/manaLogin.do")
+		public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
+			String msg = "";
+	        String url = "";
+			vo = managerDao.manaLogin(vo);
+			if(vo == null) {
+				msg = "아이디가 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+				url = "managerLoginForm.do";
+				mv.addObject("msg", msg);
+				mv.addObject("url", url);
+				mv.setViewName("company/alert");
+			}else {
+				msg = "로그인 성공";
+				url = "homeM.do";	
+				session.setAttribute("sessionId", vo.getMId());
+				session.setAttribute("pwd", vo.getPwd());
+				mv.addObject("msg", msg);
+				mv.addObject("url", url);
+				mv.setViewName("company/alert");
+			}
+			return mv;
+		}
 
 }

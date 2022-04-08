@@ -17,4 +17,7 @@ public interface ManagerService {
 	
 	//페이징처리
 	int countmana(CriteriaVO cri);
+	
+	//로그인
+	ManagerVO manaLogin(ManagerVO vo);
 }

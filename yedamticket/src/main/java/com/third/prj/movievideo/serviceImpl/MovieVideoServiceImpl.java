@@ -11,9 +11,9 @@ public class MovieVideoServiceImpl implements MovieVideoService {
 
 	@Autowired
 	private MovieVideoMapper map;
+	
 	@Override
 	public MovieVideoVO mvvSelect(MovieVideoVO vo) {
-		// TODO Auto-generated method stub
 		return map.mvvSelect(vo);
 	}
 

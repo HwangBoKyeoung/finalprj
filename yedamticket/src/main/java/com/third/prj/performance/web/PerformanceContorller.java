@@ -26,12 +26,12 @@ public class PerformanceContorller {
 
 
 	//모두조회
-	@RequestMapping("/conPage.do")
+	@RequestMapping("/companyPerforList.do")
 	public String conPage(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
 		model.addAttribute("pers", perDao.perSelectList(cri));
-		int total= perDao.countperf(cri);
-		model.addAttribute("pageVO", new PageVO(cri,total));
-		return "performance/perforList";
+		model.addAttribute("pageVO", pageVO);
+		return "companyMyPage/companyMyPerforList";
 	}
 
 	@RequestMapping("/pList.do")
@@ -57,7 +57,7 @@ public class PerformanceContorller {
 
 		model.addAttribute("images", ivo);
 		model.addAttribute("pers", vo);
-		return "performance/perforUpForm";
+		return "companyMyPage/perforUpForm";
 	}
   
 	/*

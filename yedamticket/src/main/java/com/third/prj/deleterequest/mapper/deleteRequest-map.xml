@@ -41,9 +41,23 @@
 		<result column="DOCID" property="docId"/>
 	</resultMap>
 	
+	<select id="countdelreqest" resultType="int">
+		SELECT COUNT(*)
+		FROM DELETE_REQUEST
+	</select>
 	<select id="delSelectList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
-		FROM DELETE_REQUEST
+		<![CDATA[
+		FROM 
+			(
+			SELECT ROWNUM RN, A.*
+			FROM (
+			SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
+			FROM DELETE_REQUEST
+			ORDER BY DEL_REQ_NO
+			)A)
+		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]>
 	</select>
 	
 	<select id="delSelect" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
@@ -52,14 +66,20 @@
 		WHERE DEL_REQ_NO = #{delReqNo} 
 	</select>
 	
+	
+	
 	<insert id="delInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		<selectKey keyProperty="delReqNo" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(DEL_REQ_NO),0)+1
 			FROM DELETE_REQUEST
 		</selectKey>
-		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,P_NO)
-		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{PNo})		
+		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,P_NO,C_ID)
+		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{PNo},#{CId})		
 	</insert>
+	
+	
+	
+	
 	<update id="delUpdate" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		UPDATE DELETE_REQUEST
 		<set>
