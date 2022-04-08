@@ -10,11 +10,11 @@
 	FROM PERFORMANCE 
 	</select>
 
-	<select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">
+	 <select id="perSelect" resultType="com.third.prj.performance.service.PerformanceVO">
 	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
 	FROM PERFORMANCE 
 	WHERE p_no = #{PNo} 
-	</select>
+	</select> 
 
 
 	<update id="procedureCall" statementType="CALLABLE">
@@ -139,6 +139,6 @@
 			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 			ON 
 			P.P_NO = PS.P_NO
-	        WHERE P.NAME = #{name}
+	        WHERE P.P_NO = #{PNo}
 	</select>
 </mapper>

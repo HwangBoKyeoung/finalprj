@@ -27,5 +27,6 @@ public class PerformanceVO {
 	
 	//검색용
 	private String frDt;
+	private String time;
   
 }

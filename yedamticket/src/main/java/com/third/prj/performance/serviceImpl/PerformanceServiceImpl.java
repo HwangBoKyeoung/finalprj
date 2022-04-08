@@ -57,7 +57,7 @@ public class PerformanceServiceImpl implements PerformanceService {
 	@Override
 	public PerformanceVO pSelect(PerformanceVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.perSelect(vo);
+		return mapper.pSelect(vo);
 	}
 
 

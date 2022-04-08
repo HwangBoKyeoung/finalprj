@@ -48,9 +48,11 @@ public class MovieController {
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		//상영예정작 넘김
-		model.addAttribute("m",movieDao.mList());
+		model.addAttribute("movies",movieDao.mList());
 		return "movie/movieList";
 	}
+	
+	
 	//select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
 	@Autowired
 	private PerformanceImageService periDao;

@@ -65,7 +65,7 @@
                         <p>${p.price }</p>
                     </div>
                     <!-- pno으로 해야하는데 임시 -->
-                   <input type="hidden" name='name' value="${p.name }">
+                   <input type="hidden" name='pNo' value="${p.PNo }">
                     
                 </header>
 

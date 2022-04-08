@@ -15,6 +15,7 @@ import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
 
@@ -35,6 +36,7 @@ public class PerformanceContorller {
 		model.addAttribute("pers", perDao.perSelectList());
 		return "performance/perforList";
 	}
+	
 
 	@RequestMapping("/pList.do")
 	public String pList(Model model,CriteriaVO cri) {
@@ -44,15 +46,24 @@ public class PerformanceContorller {
 		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
 	}
+	
+	
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
 		System.out.println("name"+vo.getName());
 		System.out.println("pNo"+vo.getPNo());
 		
+		vo = perDao.pSelect(vo);
+		
+		PerformanceScheduleVO pvo = new PerformanceScheduleVO();
+		System.out.println("+++++++++++++++++++++++++++++++++++++++" + pvo);
 		
 		model.addAttribute("performance",perDao.pSelect(vo));
+		
 		return "performance/pBookingForm";
 	}
+	
+	
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {

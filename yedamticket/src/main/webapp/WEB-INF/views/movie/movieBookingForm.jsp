@@ -9,23 +9,17 @@
  <link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
  <script src="./resources/users/js/core/jquery.min.js"
 		type="text/javascript"></script>
-		<style>
+<style> 
 
-  
-    td {
-      padding:5px;
-      font-size:12px;
-      maring:5px;
-    }
     #selectedSeat td{
-    	border-collapse: separate;
+    	
     	border: 1px solid #444444;
     	width:55px;
     	height:65px;
     	
     }
     .selectedSeat,.selectedList,.selectedLoc,.selectedHall,.showTime{
-        background-color: blueviolet;
+        background-color: purple;
     }
     .nonSelectedSeat,.nonSelectedList,.nonSelectedLoc,.nonSelectedHall,.nonShowTime{
         background-color: white;
@@ -508,8 +502,8 @@ html, body {
           </div>
           <div class="col-lg-3">
            <h2>자리 배치도</h2>
-           
                 <div id="seat" align="center">
+    			</div>  
                 </div> 
                 <div class="row align-items-end">
                 	<div class="col" >
@@ -521,9 +515,8 @@ html, body {
 							    <option value="4">4명</option>
 							    <option value="5">5명</option>
 							    <option value="6">6명</option>
-							</select>
-							
-                	</div>
+							</select>	
+                </div>
                 	
                 	<div class="col" id="seatResult">
                 		<h5>선택한 좌석</h5>
@@ -545,7 +538,7 @@ html, body {
                 	
                 </div>
           </div>
-          
+          <div>
         </div>
         <button type="button" id="payBtn" class="btn btn-warning">결제하기</button>
       </div>
@@ -624,6 +617,20 @@ html, body {
 	</div>
 	</form>
 <script>
+
+var i,j;
+for(i=0;i<8;i++){
+	let row=document.createElement('div');
+	row.setAttribute('class','row');
+	for(j=0;j<8;j++){
+		let col=document.createElement('div');
+		col.setAttribute('class','seat');
+		row.append(col);
+	}
+	$('.seatContainer').append(row);
+}
+
+
 //modal
 $(function(){ 
 
@@ -784,7 +791,7 @@ $('#showTime').on('click',function(){
     	},
     	success:function(result){
     		//좌석
-    		$('#seat').empty();
+			$('#seat').empty();
     		  var i, j;
     		  const memNum =42;  // 전체 입장객 
     		  const colNum = 7;  // 한 줄에 앉을 사람
@@ -819,7 +826,6 @@ $('#showTime').on('click',function(){
     		      for(i=0;i<seatTd.length;i++){
     		          seatTd[i].addEventListener('click',selectSeat);
     		      };
-    		      
     		      
     		      function selectSeat(){
     		    	 //선택된 좌석 좌석표 밑에 표시하기

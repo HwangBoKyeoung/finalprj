@@ -1418,6 +1418,7 @@ ul.tabs-nav .tab-nav.active {
     border: 1px solid #e5e5e5;
     background: #f3f8f9;
     padding: 15px;
+    height: 600px;
 }
 
 .tab-content {
