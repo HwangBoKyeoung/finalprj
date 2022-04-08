@@ -12,7 +12,7 @@
 		<result property="startDate" column="startDate" />
 		<result property="director" column="director" />
 		<result property="rating" column="rating" />
-		<result property="distibutor" column="distibutor" />
+		<result property="distributor" column="distributor" />
 		<result property="country" column="country" />
 		<result property="runtime" column="runtime" />
 		<result property="content" column="content" />
@@ -53,6 +53,13 @@
 		#{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
+	
+	<!-- 영화상영예정작 -->
+   <select id="mList" resultMap="movieResultMap">
+      SELECT * FROM MOVIE
+        WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
+        AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
+   </select>
 
 	<select id="movieList" resultMap="movieResultMap">
 		SELECT * FROM MOVIE
@@ -104,5 +111,13 @@
 				AND U_ID = #{Uid} ) A ))
 		
 	</select>
+	
+	<insert id = "movieInsert">
+		<selectKey keyProperty ="mvNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO 
+			FROM MOVIE
+		</selectKey>
+		INSERT INTO MOVIE VALUES(#{mvNo},#{name},#{genre}, to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{cId},#{actor},#{fileCd},#{docId},#{renames})
+	</insert>
 
 </mapper>

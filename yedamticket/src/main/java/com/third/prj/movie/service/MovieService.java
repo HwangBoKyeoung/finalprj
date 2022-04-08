@@ -22,4 +22,9 @@ public interface MovieService {
 	
 	//공연 예매 리스트 페이징
 	public int mvBuyTotal(PointCriteriaVO cri);
+	
+	//영화 등록
+	int movieInsert(MovieVO vo);
+	
+	List<MovieVO> mList();
 }

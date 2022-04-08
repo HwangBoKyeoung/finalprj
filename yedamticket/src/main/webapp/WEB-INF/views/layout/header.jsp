@@ -152,6 +152,9 @@
 							</a> <a class="dropdown-item" href="goodsPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈정보
 							</a>
+							</a> <a class="dropdown-item" href="movieInsertForm.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 영화등록
+							</a>
 						</div></li>
 					<li>
 						<div align="right">

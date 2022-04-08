@@ -53,4 +53,16 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.mvBuyTotal(cri);
 	}
 
+	@Override
+	public int movieInsert(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.movieInsert(vo);
+	}
+
+	@Override
+	public List<MovieVO> mList() {
+		// TODO Auto-generated method stub
+		return mapper.mList();
+	}
+
 }
