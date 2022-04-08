@@ -11,8 +11,23 @@
 <div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
+			<form action="goodsPage.do">
 				<h4 class="card-title">Goods List</h4>
 				<p class="card-description">굿즈 리스트</p>
+				<div class="searchBar" align="right">
+					<select id="inputState" name="searchType" style="border-style: none;">
+						<option value="name"
+							${pageVO.cri.searchType eq 'name' ? 'selected' : '' }>이름</option>
+						<option value="goodsCd"
+							${pageVO.cri.searchType eq 'goodsCd' ? 'selected' : '' }>영화/공연 구분</option>
+					</select> <input type="text" name="searchName"
+						value="${pageVO.cri.searchName }">
+					<button type="submit" class="btn btn-primary">검색</button>
+					<!-- hidden으로 숨겨서 들어갈 값 -->
+					<input type="hidden" name="pageNum" value="1">
+					<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
+					<input type="hidden" name="amount" value="${pageVO.amount }">
+				</div>
 				<table class="table table-hover" id="contents">
 					<thead>
 						<tr>
@@ -41,6 +56,26 @@
 						</c:forEach>
 					</tbody>
 				</table>
+				<div id="content" align="center">
+					<c:if test="${pageVO.prev }">
+						<!-- 이전버튼 활성화 여부 -->
+						<a href="goodsPage.do?pageNum=${pageVO.startPage-1 }"> <input
+							type="button" value="이전" class="btn btn-secondary"></a>
+					</c:if>
+					<!-- pageNum -->
+					<c:forEach var="num" begin="${pageVO.startPage }"
+						end="${pageVO.endPage }">
+						<a class="${pageVO.pageNum == num ? 'active': '' }"
+							href="goodsPage.do?pageNum=${num }"> <input type="button"
+							value="${num }" class="btn btn-secondary"></a>
+					</c:forEach>
+					<!-- 다음버튼 -->
+					<c:if test="${pageVO.next }">
+						<a href="goodsPage.do?pageNum=${pageVO.endPage+1 }"> <input
+							type="button" value="다음" class="btn btn-secondary"></a>
+					</c:if>
+				</div>
+				</form>
 			</div>
 		</div>
 	</div>

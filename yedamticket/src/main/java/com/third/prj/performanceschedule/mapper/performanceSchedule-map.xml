@@ -11,16 +11,40 @@
 	</resultMap>
 	
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
-		SELECT TO_CHAR(s.FRDT, 'YYYY-MM-DD') || 'T' || s.TIME AS "start",
-				s.FRDT,
-				s.TIME as "time",
-				s.no,
-				s.p_sch_no,
-				s.p_no,
-                p.name AS "title"
-		from PERFORMANCE_SCHEDULE s, performance p
-        where s.p_no = p.p_no
-        ORDER BY P_NO
+		SELECT
+			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "DTTM",
+			S.FRDT AS "START",
+			S.TIME AS "TIME",
+			S.P_SCH_NO,
+			S.P_NO,
+			P.NAME AS "title",
+			P.ACTOR,
+			P.CONTENT,
+			P.LOC,
+			P.ADDR,
+			P.PRICE
+		FROM PERFORMANCE_SCHEDULE S, 
+			 PERFORMANCE P
+		WHERE P.P_NO = S.P_NO
+	</select>
+	
+	<select id="PerformanceScheduleList2" resultMap="pfmcMap">
+		SELECT
+			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "DTTM",
+			S.FRDT AS "START",
+			S.TIME AS "TIME",
+			S.P_SCH_NO,
+			S.P_NO,
+			P.NAME AS "title",
+			P.ACTOR,
+			P.CONTENT,
+			P.LOC,
+			P.ADDR,
+			P.PRICE
+		FROM PERFORMANCE_SCHEDULE S, 
+			 PERFORMANCE P
+		WHERE P.P_NO = S.P_NO
+		AND S.FRDT=#{frDt}
 	</select>
 
 </mapper>

@@ -10,5 +10,5 @@ public interface PerformanceScheduleMapper {
 	List<PerformanceScheduleVO> PerformanceScheduleList();
 	int PSchedulUpdate(PerformanceScheduleVO vo);
 	
-
+	List<PerformanceScheduleVO> PerformanceScheduleList2(PerformanceScheduleVO vo);
 }

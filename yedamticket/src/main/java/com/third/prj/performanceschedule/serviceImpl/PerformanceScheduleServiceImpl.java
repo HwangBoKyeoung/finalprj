@@ -21,12 +21,15 @@ public class PerformanceScheduleServiceImpl implements PerformanceScheduleServic
 		return mapper.PerformanceScheduleList();
 	}
 
-
 	@Override
 	public int PSchedulUpdate(PerformanceScheduleVO vo) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
+	@Override
+	public List<PerformanceScheduleVO> PerformanceScheduleList2(PerformanceScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.PerformanceScheduleList2(vo);
+	}
 
 }

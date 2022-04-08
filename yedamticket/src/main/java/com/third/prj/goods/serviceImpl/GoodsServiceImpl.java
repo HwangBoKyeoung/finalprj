@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.goods.mapper.GoodsMapper;
+import com.third.prj.goods.service.CriteriaVO;
 import com.third.prj.goods.service.GoodsService;
 import com.third.prj.goods.service.GoodsVO;
 
@@ -42,6 +43,18 @@ public class GoodsServiceImpl implements GoodsService {
 	public int goodsDelete(GoodsVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.goodsDelete(vo);
+	}
+
+	@Override
+	public List<GoodsVO> getList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getList(cri);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
 	}
 	
 }

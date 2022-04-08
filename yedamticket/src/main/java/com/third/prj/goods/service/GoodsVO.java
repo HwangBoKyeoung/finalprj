@@ -18,4 +18,14 @@ public class GoodsVO {
 	private String fileCd;
 	private String goodsCd;
 	
+	//검색
+	private String searchKeyword;
+		
+	public void setSearchKeyword(String searchKeyword) {
+		this.searchKeyword = searchKeyword;
+	}
+		
+	public String getSearchKeyword() {
+			return searchKeyword;
+	}
 }

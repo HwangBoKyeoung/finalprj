@@ -7,8 +7,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.third.prj.goods.service.CriteriaVO;
 import com.third.prj.goods.service.GoodsService;
 import com.third.prj.goods.service.GoodsVO;
+import com.third.prj.goods.service.PageVO;
 
 
 @Controller
@@ -61,8 +63,10 @@ public class GoodsController {
 	
 	//전체 조회
 	@RequestMapping("/goodsPage.do")
-	public String goodsPage(Model model) {
-		model.addAttribute("gods", goodsDao.goodsLi());
+	public String goodsPage(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, goodsDao.getTotal(cri));
+		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("gods", goodsDao.getList(cri));
 		return "goods/goodsPage";
 	}
 	
