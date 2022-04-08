@@ -65,37 +65,31 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int emailCheck(String email) {
-		// TODO Auto-generated method stub
 		return mapper.emailCheck(email);
 	}
 
 	@Override
 	public int kakaoInsert(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.kakaoInsert(vo);
 	}
 
 	@Override
 	public int userUpdate(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.userUpdate(vo);
 	}
 
 	@Override
 	public int userDelete(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.userDelete(vo);
 	}
 
 	@Override
 	public List<MovieReservVO> MvReservList(MovieReservVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.MvReservList(vo);
 	}
 
 	@Override
 	public List<PerformanceVO> pfReservList(PerformanceReservationVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.pfReservList(vo);
 	}
 
@@ -105,7 +99,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int userPointUpdate(int point, String id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 

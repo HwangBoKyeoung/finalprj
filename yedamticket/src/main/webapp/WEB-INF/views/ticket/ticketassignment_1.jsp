@@ -4,7 +4,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
 <style>
 * {
 	margin: 0;
@@ -32,22 +31,19 @@ body {
 }
 
 .widthitem {
-	border: 1px solid black;
 	margin: 15px;
-	min-width: 15rem;
-	min-height: 25rem;
+	min-width: 20rem;
+	min-height: 18rem;
 	list-style: none;
 	user-select: none;
-	text-align: center;
 }
 </style>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
+<h1>티켓양도</h1>
+<h3>${sessionId }님이 보유중인 티켓입니다!</h3>
 	<div align="center">
-		<h1>티켓양도</h1>
-		<h2>${sessionId }님이보유한티켓정보</h2>
-
 		<c:if test="${empty prInfo }">
 			<div>
 				<h1>보유중인 티켓이 없습니다..!</h1>
@@ -57,23 +53,58 @@ body {
  		<div id="widthslider" align="center">
 			<ul class="widthlist">
 				<c:forEach items="${prInfo }" var="pr">
-					<li class="widthitem">
-						<p>공연이름 : ${pr.name }
-						<p>공연일정 : ${pr.frDt}</p> <br>
-						<p>좌석번호 : ${pr.seatNo }</p> <br>
-						<p>가격 : ${pr.price }</p>
-					    
-						<div class="btnArea">
-							<input class="btn" type="button" value="선택">
-						</div>
-					</li>
+				<li class="widthitem">
+					<div class="card" style="width: 20rem;">
+					  <div class="card-body">
+					    <p class="card-title" >공연 명 : ${pr.name }</p>
+					    <p class="card-text">공연일정 : ${pr.frDt }</p>
+					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+					    <p class="card-text">가  격 : ${pr.price }</p>
+					    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
+					  </div>
+					</div>
+				</li>
 				</c:forEach>
 			</ul>
 			<input type="button" onclick="resetPosition()" value="원위치로" />
-		</div>
 			
+			<!-- Modal -->
+			<div class="modal fade" id="prInfoModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <form action="ticketassignment_2.do" method="POST">
+			      <div class="modal-body">
+			      	<h5 class="modal-title" id="Mname"></h5>
+			      	<input type="hidden" id="name" name="name">
+			      	
+			      	<p id="Mdate"></p>
+			      	<input type="hidden" id="date" name="date">
+			      	
+			      	<p id="Mseat" ></p>
+			      	<input type="hidden" id="seatNo" name="seatNo">
+			      	
+			      	<p id="Mprice" ></p>
+			      	<input type="hidden" id="price" name="price">
+			      </div>
+			      <div class="modal-footer">
+			      	<p>맞으시면 확인 버튼을 눌러주세요.</p>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			        <input type="submit" class="btn btn-primary" value="확인">
+			      </div>
+			      </form>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal End -->
+			
+		</div>
 	</div>
-
+	
 	<script>
 	// 요소
 	const list = document.querySelector(".widthlist")
@@ -101,6 +132,7 @@ body {
 	const onScrollMove = (e) => {
 	  nowX = getClientX(e)
 	  setTranslateX(listX + nowX - startX)
+	  
 	}
 
 	// 스크롤이 끝난 상태 기록
@@ -179,6 +211,33 @@ body {
 	}
 	
 	bindEvents()
+	
+// 	$('#btnl').on("click", function(){
+// 		console.log("ㅋㅋ");
+// 		console.log($(event.target).prev().prev().prev().prev().text().substring(7,))
+//  		console.log($(this).prev().prev().prev().text().substring(7,))
+//  		console.log($(this).prev().prev().text().substring(7,))
+//  		console.log($(this).prev().text().substring(7,))
+// 	});
+	
+	function selectedFnc(){
+		//var name = $(event.target).prev().prev().prev().prev().text().substring(7,);
+		var name = $(event.target).prev().prev().prev().prev().text();
+		var date = $(event.target).prev().prev().prev().text();
+		var seat = $(event.target).prev().prev().text();
+		var price = $(event.target).prev().text();
+		
+		$('#Mname').html(name);
+		$('#Mdate').html(date);
+		$('#Mseat').html(seat);
+		$('#Mprice').html(price);
+		
+		$("#name").val(name.substring(7,))
+		$("#date").val(date.substring(7,))
+		$("#seatNo").val(seat.substring(7,))
+		$("#price").val(price.substring(7,))
+	}
+	
 	</script>
 
 </body>

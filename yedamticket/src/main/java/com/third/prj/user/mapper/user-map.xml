@@ -149,7 +149,6 @@
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
 		WHERE U_ID = #{Uid}
-
 	</update>
 
 	<delete id="userDelete"

@@ -1,5 +1,6 @@
 package com.third.prj.performancereservation.web;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,4 +41,24 @@ public class PerformanceReservationController {
 //		session.getAttribute("sessionId");
 		return "ticket/ticketassignment_1";
 	}
+	
+	@RequestMapping("/ticketassignment_2.do")
+	public String ticketAssignment_2(HttpServletRequest httpServletRequest,Model model) {
+		String name = httpServletRequest.getParameter("name");
+		String date = httpServletRequest.getParameter("date");
+		String seat = httpServletRequest.getParameter("seatNo");
+		String price = httpServletRequest.getParameter("price");
+		
+		model.addAttribute("name", name);
+		model.addAttribute("date", date);
+		model.addAttribute("seatNo", seat);
+		model.addAttribute("price", price);
+		return "ticket/ticketassignment_2";
+	}
+	
+	@RequestMapping("/ticketassignment_personal_1.do")
+	public String TicketAssignment_Personal_1(HttpServletRequest httpservletrequest) {
+		return "ticket/ticketassignment_personal_1";
+		}
+	
 }
