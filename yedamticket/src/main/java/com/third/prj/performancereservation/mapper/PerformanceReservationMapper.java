@@ -7,4 +7,6 @@ import com.third.prj.performancereservation.service.PerformanceReservationVO;
 public interface PerformanceReservationMapper {
 	// 보유 티켓
 	List<PerformanceReservationVO> userTicket(PerformanceReservationVO performancereservationVO);
+	//공연 결제
+		int pReservation(PerformanceReservationVO prvo);
 }

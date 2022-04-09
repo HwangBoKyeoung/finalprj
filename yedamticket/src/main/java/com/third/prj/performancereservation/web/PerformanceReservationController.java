@@ -34,7 +34,7 @@ public class PerformanceReservationController {
 	public String ticketAssignment_1(PerformanceReservationVO performancereservationVO ,HttpSession session, Model model) {
 		String Uid = (String) session.getAttribute("sessionId");
 		System.out.println(Uid);
-		performancereservationVO.setUid(Uid);
+		performancereservationVO.setUId(Uid);
 		System.out.println("-------------------------------" + performancereservationVO);
 		performancereservationDao.userTicket(performancereservationVO);
 		System.out.println("-------------------------------||" + performancereservationVO);

@@ -20,4 +20,10 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		return map.userTicket(performancereservationVO);
 	}
 
+	@Override
+	public int pReservation(PerformanceReservationVO prvo) {
+		// TODO Auto-generated method stub
+		return map.pReservation(prvo);
+	}
+
 }

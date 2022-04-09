@@ -15,6 +15,8 @@ import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
+import com.third.prj.performancereservation.service.PerformanceReservationService;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
@@ -28,7 +30,8 @@ public class PerformanceContorller {
 	private PerformanceImageService periDao;
 	@Autowired
 	private PerformanceVideoService pervDao;
-
+	@Autowired
+	private PerformanceReservationService perRDao;
 
 	//모두조회
 	@RequestMapping("/conPage.do")
@@ -37,7 +40,7 @@ public class PerformanceContorller {
 		return "performance/perforList";
 	}
 	
-
+	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
 	public String pList(Model model,CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
@@ -46,8 +49,7 @@ public class PerformanceContorller {
 		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
 	}
-	
-	
+	//공연 상세페이지 + 예약	
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
 		System.out.println("name"+vo.getName());
@@ -62,8 +64,12 @@ public class PerformanceContorller {
 		
 		return "performance/pBookingForm";
 	}
-	
-	
+	//공연 결제
+	@RequestMapping("/pReservation.do")
+	public String pReservation(Model model,PerformanceReservationVO prvo) {
+		perRDao.pReservation(prvo);
+		return "performance/pPayForm";
+	}
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {

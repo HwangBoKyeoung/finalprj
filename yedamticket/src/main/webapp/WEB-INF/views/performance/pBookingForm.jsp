@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -67,13 +68,24 @@ section > article > #map{
 .seat:nth-last-of-type(2) {
   margin-left: 18px;
 }
-.p-container{
-	width:300px;
-	height:300px;
+
+#selectedSeat td{    	
+   border: 1px solid #444444;
+   width:40px;
+   height:40px;  
+   text-align:center; 	
+   color:black;
+}
+.seatGray{
+	background:gray;
+}
+
+.seatNone{
+	background:white;
 }
 </style>
 <body>
-
+${performance }
 <div class="container">
     <div class="row">
         <div class="col-12 single-event">
@@ -84,9 +96,15 @@ section > article > #map{
                         <div class="event-location"><a href="#">${performance.addr }</a></div>
                         <div class="event-date">${performance.frDt }  ${performance.time }</div>
                     </div>
+                    <form action="pReservation.do" method="post">
+                    <input type="hidden" id="PSchNo" name="PSchNo" value="${performance.performanceScheduleVO.PSchNo }">
+                    <input type="hidden" id="UId" name="UId" value="micol1234">
+                    <input type="hidden" id="loc" name="loc">
+                    <input type="hidden" id="seatNo" name="seatNo">
                     <div class="buy-tickets flex justify-content-center align-items-center">
-                        <a class="btn gradient-bg" href="#">Buy Tikets</a>
+                        <button type="submit" class="btn gradient-bg">Buy Tikets</button>
                     </div>
+                    </form>
                 </header>
                 <figure class="events-thumbnail">
                     <img src="resources/performance/images/summer.jpg" alt="">
@@ -107,9 +125,19 @@ section > article > #map{
                     <div id="tab_details" class="tab-content">
                         <div class="flex flex-wrap justify-content-between">
                             <div class="single-event-details">
+                            
+                           
                                 <div class="single-event-details-row">
-                                    <label>Start:</label>
-                                    <p>${performance.performanceScheduleVO.frDt }  ${performance.performanceScheduleVO.time }</p>
+                                    <label>일자:</label>
+                                    <p>${performance.performanceScheduleVO.frDt } ~ ${performance.performanceScheduleVO.trDt }</p>
+                                </div>
+                         
+                             
+                            
+                                
+                                <div class="single-event-details-row">
+                                    <label>시간:</label>
+                                    <p>${performance.performanceScheduleVO.time } ~ ${performance.performanceScheduleVO.endTime }</p>
                                 </div>
 
                                 <div class="single-event-details-row">
@@ -131,7 +159,18 @@ section > article > #map{
                                 </div>
                                 <div class="single-event-details-row">
                                     <label>좌석</label>
-                                    <p id="seatName"></p>
+                                    <div id="seatName">
+                                    	<table id="selectedSeat">
+					                		<tr>
+					                			<td>+</td>
+					                			<td>+</td>
+					                		</tr>
+					                		<tr>
+					                			<td>+</td>
+					                			<td>+</td>
+					                		</tr>
+					                	</table>
+                                    </div>
                                 </div>
                             </div>
                             <div class="single-event-map">
@@ -556,67 +595,156 @@ section > article > #map{
 
 
 <script>
-let peopleCnt=0;//1
+
 //인원추가하는 버튼
 $('#plus').on("click",function(){
 	var cnt=$('#cnt').text();
-	$('#cnt').text(parseInt(cnt)+1);
-	peopleCnt++;
-	if($('#cnt').text() > 4){
-		$('#cnt').text(4);
+	
+	if($('#cnt').text() == 4){
+		$('#cnt').text(4);	
 		
 		alert("최대 예약인원은 4명입니다.");
+	}else{
+		//예약인원을 늘릴때마다 회색으로 칠하기
+		let selectedSeat = document.getElementById('selectedSeat');
+		let tdList=selectedSeat.getElementsByTagName('td');
+		tdList[cnt].setAttribute('class','seatGray'); 
+		cnt++;
+		console.log(cnt);
+		$('#cnt').text(cnt);
+		
 	}
 });
-
 //인원다운하는 버튼
 $('#minus').on("click",function(){
-
 	var cnt=$('#cnt').text();
-	$('#cnt').text(parseInt(cnt)-1);
-	peopleCnt=$('#cnt').text();
-	if($('#cnt').text() < 0){
+	
+	if($('#cnt').text() <= 0){
 		$('#cnt').text(0);
+	}else{
+		--cnt;
+		//예약인원을 줄일 때 마다 흰색으로 칠하기
+		let selectedSeat = document.getElementById('selectedSeat');
+		let tdList=selectedSeat.getElementsByTagName('td');
+		tdList[cnt].setAttribute('class','seatNone');  
+		tdList[cnt].innerText='+';
+		console.log(cnt);
+		$('#cnt').text(cnt);
 	}
 });
-console.log(peopleCnt);
-//좌석 
-var i,j;
-let cnt=1;
-for(i=0;i<8;i++){
-	let row=document.createElement('div');
-	row.setAttribute('class','row');
-	for(j=0;j<8;j++){
-		let col=document.createElement('div');
-		col.setAttribute('class','seat');
-		col.innerText=cnt++;
-		row.append(col);
-	}
-	$('.seatContainer').append(row);
-}
-
-
-$('.seatContainer > .row > .seat').on('click',function(){
-	$(event.target).addClass('occupied');
-	seatName.innerText+=$(event.target).text()+",";
-});	
-
-
-
 
 
 //좌석선택하면 보엿다가 끄기
     $(".seat").click(function() {
+    	$('#loc').val(event.target.id);
 	    $('#locName').text(event.target.id);
 	    $('svg').css('display', 'none');
+	 
+	   let cnt=0;
+	   //좌석 생성
+	    var i,j;
+	    let num=1;
+	    for(i=0;i<8;i++){
+	    	let row=document.createElement('div');
+	    	row.setAttribute('class','row');
+	    	for(j=0;j<8;j++){
+	    		let col=document.createElement('div');
+	    		col.setAttribute('class','seat');
+	    		col.innerText=num++;
+	    		row.append(col);
+	    	}
+	    	$('.seatContainer').append(row);
+	    	
+	    }
 	    $('#detailSeat').css('display','block');
+	    
+	  //.seatContainer .seat 수만큼 클릭이벤트걸기
+	    
+	    let seat = $('.seatContainer .seat');
+	    for(var i =0;i<seat.length;i++){
+	    	seat[i].addEventListener('click',selectSeat);
+	    }
+	    function selectSeat(){
+	    	console.log(this.innerText);
+	    	console.log($('#selectedSeat .seatGray').length);
+	    	let selectedSeat = document.getElementById('selectedSeat');
+	    	let tdList=selectedSeat.getElementsByTagName('td');
+	    	if($('#selectedSeat .seatGray').length > cnt){
+	    		tdList[cnt].innerText=$(event.target).text();
+	    		event.target.removeEventListener("click",selectSeat);
+	    		event.target.classList.add('occupied');
+	    		seatNo.value += $(event.target).text()+",";
+	    		cnt++
+	    	}else if($('#selectedSeat .seatGray').length == 0){//seatGray class의 수가 0이면
+	      	  alert("인원선택을 먼저해주세요!!!"); 
+	        }else{
+	       	  alert("좌석선택이 완료되엇습니다.");
+	        };		
+	    	
+	    }
 	    
     });
     $('#backBtn').click(function(){
-    	 $('svg').css('display', 'block');
+    	$('svg').css('display', 'block');
  	    $('#detailSeat').css('display','none');
+ 	 	//초기화
+ 		  $('.seatContainer').empty();
+ 		  $('#cnt').text(0);
+ 		  $('#seatNo').val('');
+ 			let td=$('td');
+ 		 for(var i=0;i<td.length;i++){
+ 			 td.text('+');
+ 			 td.removeClass();
+ 		 };
     });
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 //지도
 	function initMap() {
 		
@@ -642,14 +770,14 @@ $('.seatContainer > .row > .seat').on('click',function(){
 		} ];
 		
 		var my_position = {
-			lat : 37.47771836,
-			lng : 127.0098178
+			lat : ${performance.lat},
+			lng : ${performance.lng}
 		};
 		
 		var map = new google.maps.Map(document.getElementById('map'), {
 			center : my_position,
 			scrollwheel : true,
-			zoom : 18,
+			zoom : 16,
 			styles : styleArray
 		});
 		

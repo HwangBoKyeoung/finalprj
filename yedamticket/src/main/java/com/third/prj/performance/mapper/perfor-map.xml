@@ -35,19 +35,24 @@
 	<!-- 황규복 -->
 	<!-- performanceSch resultMap -->
 	<resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pScheduleMap">
-		<result column="frdt" property="frDt"/>
-		<result column="time" property="time"/>
+		<result property="PSchNo" column="P_SCH_NO"/>
+		<result property="frDt" column="FRDT"/>
+		<result property="trDt" column="TRDT"/>
+		<result property="time" column="TIME"/>
+		<result property="endTime" column="ENDTIME"/>
 	</resultMap>
 	<!-- performance resultMap -->
 	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
-		<result column="p_no" property="pNo"/>
-		<result column="name" property="name"/>
-		<result column="content" property="content"/>
-		<result column="actor" property="actor"/>
-		<result column="file_cd" property="fileCd"/>
-		<result column="loc" property="loc"/>
-		<result column="addr" property="addr"/>
-		<result column="price" property="price"/>
+		<result column="P_NO" property="pNo"/>
+		<result column="NAME" property="name"/>
+		<result column="CONTENT" property="content"/>
+		<result column="ACTOR" property="actor"/>
+		<result column="FILE_CD" property="fileCd"/>
+		<result column="LOC" property="loc"/>
+		<result column="ADDR" property="addr"/>
+		<result column="PRICE" property="price"/>
+		<result column="LAT" property="lat"/>
+		<result column="LNG" property="lng"/>
 		<collection property="performanceScheduleVO" resultMap="pScheduleMap"/>
 	</resultMap>
 	<!-- 공연 전체리스트  -->
@@ -59,7 +64,8 @@
 	    		FROM (
 	    		
 	    		 SELECT 
-				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+				 PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
 				 FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 				 ON 
 				 P.P_NO = PS.P_NO 
@@ -90,7 +96,8 @@
 	<!-- 예정공연  -->
 	<select id="epList"  resultMap="pMap">
 			SELECT 
-			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+			PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
 			FROM 
 			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 			ON 
@@ -107,7 +114,8 @@
 	    		FROM (
 	    		
 	    		 SELECT 
-				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+				 PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
 				 FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 				 ON 
 				 P.P_NO = PS.P_NO     
@@ -134,7 +142,8 @@
 	<!-- 공연선택 -->
 	<select id="pSelect" resultMap="pMap">
 		SELECT 
-			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,PS.FRDT,PS.TIME 
+			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+			PS.P_SCH_NO,PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
 			FROM 
 			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 			ON 

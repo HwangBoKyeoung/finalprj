@@ -7,5 +7,9 @@
 			FROM   performance_reservation
 			WHERE  u_id = #{Uid}
 	</select>
-
+	<insert id="pReservation" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">
+			INSERT INTO PERFORMANCE_RESERVATION
+			(P_RESERV_NO,RESERVE_DTTM,U_ID,P_SCH_NO,LOC,SEATNO)
+			VALUES(RESERV_SEQ.NEXTVAL,SYSDATE,#{UId},#{PSchNo},#{loc},SUBSTR(#{seatNo},0,length(#{seatNo})-1))
+	</insert>
 </mapper>
