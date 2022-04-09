@@ -29,7 +29,8 @@
 	<select id="seatSearch"  parameterType="com.third.prj.moviereservation.service.MovieReservationVO" resultType="com.third.prj.moviereservation.service.MovieReservationVO">
 		SELECT SEAT_NAME
 		FROM MOVIE_RESERVATION
-		WHERE DOCID=#{docId} AND
+		WHERE 
+		DOCID=#{docId} AND
         RESERVLOC=#{reservLoc} AND
         RESERVHALL=#{reservHall} AND
         SCH_DATE=#{schDate} AND

@@ -10,7 +10,22 @@
  <script src="./resources/users/js/core/jquery.min.js"
 		type="text/javascript"></script>
 <style> 
+#plus,#minus,#cnt{
+border:1px solid black;
+width:50px;
+height:50px;
+font-size:30px;
+text-align:center;
+float:left;
+background-color:violet;
+}
+.seatGray{
+	background:gray;
+}
 
+.seatNone{
+	background:white;
+}
     #selectedSeat td{
     	
     	border: 1px solid #444444;
@@ -35,7 +50,6 @@
 	overflow: auto;
     }
     .col{
-   
     text-align:center;
      width: 200px;
      height: 250px;
@@ -68,356 +82,11 @@
   border-radius: 50%;
   }
   
-  
-  
-  
-body {
-	margin: 0;
-	padding: 0;
-	background: #fff;
-}
-
-.box {
-	position: absolute;
-	top: calc(50% - 125px);
-	top: -webkit-calc(50% - 125px);
-	left: calc(50% - 300px);
-	left: -webkit-calc(50% - 300px);
-}
-
-.ticket {
-	width: 600px;
-	height: 250px;
-	background: #f8475b;
-	border-radius: 3px;
-	box-shadow: 0 0 100px #aaa;
-	border-top: 1px solid #f8475b;
-	border-bottom: 1px solid #f8475b;
-}
-
-.left {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: absolute;
-	top: 0px;
-	left: -5px;
-}
-
-.left li {
-	width: 0px;
-	height: 0px;
-}
-
-.left li:nth-child(-n+2) {
-	margin-top: 8px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #f8475b;
-}
-
-.left li:nth-child(3), .left li:nth-child(6) {
-	margin-top: 8px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #EEEEEE;
-}
-
-.left li:nth-child(4) {
-	margin-top: 8px;
-	margin-left: 2px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #EEEEEE;
-}
-
-.left li:nth-child(5) {
-	margin-top: 8px;
-	margin-left: -1px;
-	border-top: 6px solid transparent;
-	border-bottom: 6px solid transparent;
-	border-right: 6px solid #EEEEEE;
-}
-
-.left li:nth-child(7), .left li:nth-child(9), .left li:nth-child(11),
-	.left li:nth-child(12) {
-	margin-top: 7px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #E5E5E5;
-}
-
-.left li:nth-child(8) {
-	margin-top: 7px;
-	margin-left: 2px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #E5E5E5;
-}
-
-.left li:nth-child(10) {
-	margin-top: 7px;
-	margin-left: 1px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #E5E5E5;
-}
-
-.left li:nth-child(13) {
-	margin-top: 7px;
-	margin-left: 2px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #f8475b;
-}
-
-.left li:nth-child(14) {
-	margin-top: 7px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-right: 5px solid #f8475b;
-}
-
-.right {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	position: absolute;
-	top: 0px;
-	right: -5px;
-}
-
-.right li:nth-child(-n+2) {
-	margin-top: 8px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #f8475b;
-}
-
-.right li:nth-child(3), .right li:nth-child(4), .right li:nth-child(6) {
-	margin-top: 8px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #EEEEEE;
-}
-
-.right li:nth-child(5) {
-	margin-top: 8px;
-	margin-left: -2px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #EEEEEE;
-}
-
-.right li:nth-child(8), .right li:nth-child(9), .right li:nth-child(11)
-	{
-	margin-top: 7px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #E5E5E5;
-}
-
-.right li:nth-child(7) {
-	margin-top: 7px;
-	margin-left: -3px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #E5E5E5;
-}
-
-.right li:nth-child(10) {
-	margin-top: 7px;
-	margin-left: -2px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #E5E5E5;
-}
-
-.right li:nth-child(12) {
-	margin-top: 7px;
-	border-top: 6px solid transparent;
-	border-bottom: 6px solid transparent;
-	border-left: 6px solid #E5E5E5;
-}
-
-.right li:nth-child(13), .right li:nth-child(14) {
-	margin-top: 7px;
-	border-top: 5px solid transparent;
-	border-bottom: 5px solid transparent;
-	border-left: 5px solid #f8475b;
-}
-
-.ticket:after {
-	content: '';
-	position: absolute;
-	right: 200px;
-	top: 0px;
-	width: 2px;
-	height: 250px;
-	box-shadow: inset 0 0 0 #f8475b, inset 0 -10px 0 #B56E0A, inset 0 -20px
-		0 #f8475b, inset 0 -30px 0 #B56E0A, inset 0 -40px 0 #f8475b, inset 0
-		-50px 0 #999999, inset 0 -60px 0 #E5E5E5, inset 0 -70px 0 #999999,
-		inset 0 -80px 0 #E5E5E5, inset 0 -90px 0 #999999, inset 0 -100px 0
-		#E5E5E5, inset 0 -110px 0 #999999, inset 0 -120px 0 #E5E5E5, inset 0
-		-130px 0 #999999, inset 0 -140px 0 #E5E5E5, inset 0 -150px 0 #B0B0B0,
-		inset 0 -160px 0 #EEEEEE, inset 0 -170px 0 #B0B0B0, inset 0 -180px 0
-		#EEEEEE, inset 0 -190px 0 #B0B0B0, inset 0 -200px 0 #EEEEEE, inset 0
-		-210px 0 #B0B0B0, inset 0 -220px 0 #f8475b, inset 0 -230px 0 #B56E0A,
-		inset 0 -240px 0 #f8475b, inset 0 -250px 0 #B56E0A;
-}
-
-.content {
-	position: absolute;
-	top: 40px;
-	width: 100%;
-	height: 170px;
-	background: #fff;
-}
-
-.airline {
-	position: absolute;
-	top: 10px;
-	left: 6%;
-	font-family: Arial;
-	font-size: 15px;
-	font-weight: bold;
-	color: rgba(0, 0, 102, 1);
-}
-
-.jfk {
-	position: absolute;
-	top: 32px;
-	left: 25px;
-	font-family: Arial;
-	font-size: 45px;
-	color: #222;
-}
-
-.sub-content {
-	width: 100%;
-	height: 100px;
-	position: absolute;
-	top: 70px;
-}
-
-.name {
-	position: absolute;
-	top: 10px;
-	left: 30px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
-}
-
-.name span {
-	color: #555;
-	font-size: 17px;
-}
-
-.flight {
-	position: absolute;
-	top: 10px;
-	left: 140px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
-}
-
-.flight span {
-	color: #555;
-	font-size: 17px;
-}
-
-.gate {
-	position: absolute;
-	top: 10px;
-	left: 260px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
-}
-
-.gate span {
-	color: #555;
-	font-size: 17px;
-}
-
-.seat {
-	position: absolute;
-	top: 10px;
-	left: 340px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
-}
-
-.seat span {
-	color: #555;
-	font-size: 17px;
-}
-
-.barcode {
-	position: absolute;
-	left: 8px;
-	bottom: 6px;
-	height: 30px;
-	width: 90px;
-	background: #222;
-	box-shadow: inset 0 1px 0 #f8475b, inset -2px 0 0 #f8475b, inset -4px 0
-		0 #222, inset -5px 0 0 #f8475b, inset -6px 0 0 #222, inset -9px 0 0
-		#f8475b, inset -12px 0 0 #222, inset -13px 0 0 #f8475b, inset -14px 0
-		0 #222, inset -15px 0 0 #f8475b, inset -16px 0 0 #222, inset -17px 0 0
-		#f8475b, inset -19px 0 0 #222, inset -20px 0 0 #f8475b, inset -23px 0
-		0 #222, inset -25px 0 0 #f8475b, inset -26px 0 0 #222, inset -26px 0 0
-		#f8475b, inset -27px 0 0 #222, inset -30px 0 0 #f8475b, inset -31px 0
-		0 #222, inset -33px 0 0 #f8475b, inset -35px 0 0 #222, inset -37px 0 0
-		#f8475b, inset -40px 0 0 #222, inset -43px 0 0 #f8475b, inset -44px 0
-		0 #222, inset -45px 0 0 #f8475b, inset -46px 0 0 #222, inset -48px 0 0
-		#f8475b, inset -49px 0 0 #222, inset -50px 0 0 #f8475b, inset -52px 0
-		0 #222, inset -54px 0 0 #f8475b, inset -55px 0 0 #222, inset -57px 0 0
-		#f8475b, inset -59px 0 0 #222, inset -61px 0 0 #f8475b, inset -64px 0
-		0 #222, inset -66px 0 0 #f8475b, inset -67px 0 0 #222, inset -68px 0 0
-		#f8475b, inset -69px 0 0 #222, inset -71px 0 0 #f8475b, inset -72px 0
-		0 #222, inset -73px 0 0 #f8475b, inset -75px 0 0 #222, inset -77px 0 0
-		#f8475b, inset -80px 0 0 #222, inset -82px 0 0 #f8475b, inset -83px 0
-		0 #222, inset -84px 0 0 #f8475b, inset -86px 0 0 #222, inset -88px 0 0
-		#f8475b, inset -89px 0 0 #222, inset -90px 0 0 #f8475b;
-}
-
-.slip {
-	left: 455px;
-}
-
-.jfkslip {
-	font-size: 30px;
-	top: 10px;
-	left: 420px;
-}
-
-.airlineslip {
-	left: 450px;
-}
-
-html, body {
-	height: 100%;
-	width: 100%;
-	margin: 0;
-	padding: 0;
-}
-
 .wrapper {
 	height: auto;
 	min-height: 100%;
 	padding-bottom: 60px;
 }
-  
-  
-
-
 .modal{ 
   position:absolute; width:160%; height:160%; background: rgba(0,0,0,0.8); top:0; left:0; display:none;
 }
@@ -504,18 +173,13 @@ html, body {
            <h2>자리 배치도</h2>
                 <div id="seat" align="center">
     			</div>  
-                </div> 
+               
                 <div class="row align-items-end">
                 	<div class="col" >
                 		<h5>관람객수</h5>
-							<select id="peopleCnt" name="peopleCnt">
-							    <option value="1">1명</option>
-							    <option value="2">2명</option>
-							    <option value="3">3명</option>
-							    <option value="4">4명</option>
-							    <option value="5">5명</option>
-							    <option value="6">6명</option>
-							</select>	
+							<div>
+  								<div id="minus">-</div><div id="cnt">0</div><div id="plus">+</div>
+  							</div>
                 </div>
                 	
                 	<div class="col" id="seatResult">
@@ -535,100 +199,62 @@ html, body {
                 		</tr>
                 	</table>
                 	</div>
-                	
+                	 </div> 
+        
                 </div>
           </div>
           <div>
-        </div>
-        <button type="button" id="payBtn" class="btn btn-warning">결제하기</button>
-      </div>
-      <form action="movieReservation.do" method="post">
-   	<div class="modal">
-   		<input type="text" id="docId" name="docId"><!-- 무비넘버 -->
+        <form action="movieReservation.do" method="post">
+        <input type="text" id="docId" name="docId"><!-- 무비넘버 -->
         <input type="text" id="reservLoc" name="reservLoc"><!-- 지역 -->
         <input type="text" id="reservHall" name="reservHall"><!-- 영화관 -->
         <input type="text" id="UId" name="UId" value="enc1115"><!-- 사용자 -->
         <input type="text" id="schDate" name="schDate"><!-- 날짜-->
         <input type="text" id="schTime" name="schTime"><!-- 시간 -->
-        <input type="text" id="seatName" name="seatName"><!-- 좌석이름 -->
+        <input type="text" id="seatName" name="seatName"><!-- 좌석이름 -->	
+         <button type="submit"  class="btn btn-warning">결제하기</button>
+		</form>
+        </div>
+       
+      </div>
+      
+   	<div class="modal">
+   		
 		<div class="modal_content">
-			<div class="box">
-				<ul class="left">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-				<ul class="right">
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-					<li></li>
-				</ul>
-				<div class="ticket">
-					<span class="airline">YEDAM BOX</span> <span
-						class="airline airlineslip">YEDAM BOX</span>
-					<div class="content">
-						<span class="jfk" id="mvName"></span> <span class="jfk jfkslip">
-							<img id="ticketImg" width="160px">
-							
-							
-						</span> <span class="plane planeslip">
-							<?xml version="1.0" ?>
-						</span>
-						<div class="sub-content">
-							<span class="flight">상영시간<br>
-							<span id="schTime1"></span></span> <span class="name">관람일<br>
-							<span id="schdate1"></span></span> <span class="gate">예매번호<br>
-							<span id="mvReservNo1"></span></span> <span class="seat">좌석<br>
-							<span id="seat1"></span></span>
-						</div>
-					</div>
-					<div class="barcode"></div>
-					<div class="barcode slip">
-					<button type="submit" class="btn">예매하기</button>
-					</div>
-					
-				</div>
-				
-			</div>
-			
 		</div>
 	</div>
-	</form>
+	
 <script>
-
-var i,j;
-for(i=0;i<8;i++){
-	let row=document.createElement('div');
-	row.setAttribute('class','row');
-	for(j=0;j<8;j++){
-		let col=document.createElement('div');
-		col.setAttribute('class','seat');
-		row.append(col);
+//인원추가하는 버튼
+$('#plus').on("click",function(){
+	var cnt=$('#cnt').text();
+	if($('#cnt').text() == 6){
+		$('#cnt').text(6);	
+		alert("최대 예약인원은 6명입니다.");
+	}else{
+		//예약인원을 늘릴때마다 회색으로 칠하기
+		let selectedSeat = document.getElementById('selectedSeat');
+		let tdList=selectedSeat.getElementsByTagName('td');
+		tdList[cnt].classList.add('seatGray'); 
+		cnt++;
+		$('#cnt').text(cnt);    
 	}
-	$('.seatContainer').append(row);
-}
+});
+//인원다운하는 버튼
+$('#minus').on("click",function(){
+	var cnt=$('#cnt').text();
+	
+	if($('#cnt').text() <= 0){
+		$('#cnt').text(0);
+	}else{
+		--cnt;
+		//예약인원을 줄일 때 마다 회색으로 칠하기
+		let selectedSeat = document.getElementById('selectedSeat');
+		let tdList=selectedSeat.getElementsByTagName('td');
+		tdList[cnt].classList.add('seatNone'); 
+		$('#cnt').text(cnt);
+	}
+});
 
 
 //modal
@@ -644,31 +270,7 @@ $(function(){
   
 });
 
-//payBtn
-$('#payBtn').click(function(){
-	console.log("payBtn");
-	
-	
-	$("#schdate1").html($('#schDate').val());
-	$("#schTime1").html($('#schTime').val());
-	$("#mvReservNo1").html($('#mvReservNo').val());
-	$("#seat1").html($('#seatName').val());
-});
 
-
-var cnt=0;
-let pCnt=0;
-	$(function peopleCnt(){
-	$('#peopleCnt').change(function(){
-		var peopleCnt=$(this).find('option:selected');
-		var myVal=peopleCnt.attr('value');
-		
-		pCnt=myVal;
-	});
-});
-
-
-console.log(pCnt);
 //영화관지역
 movieList.addEventListener('click',selectedList);
 function selectedList(){
@@ -676,7 +278,6 @@ function selectedList(){
 	console.log(event.target.getAttribute('data-poster'));
 	let posterArry=event.target.getAttribute('data-poster').split('|');
 	moviePoster.setAttribute('src',posterArry[0]);
-	ticketImg.setAttribute('src',posterArry[0]);
 	docId.value=event.target.getAttribute('data-cd');
 	//버튼누르면 색바뀜
 		let childNodes=event.target.parentNode.children;
@@ -828,30 +429,50 @@ $('#showTime').on('click',function(){
     		      };
     		      
     		      function selectSeat(){
-    		    	 //선택된 좌석 좌석표 밑에 표시하기
-    		    	 let selectedSeat=document.getElementById('selectedSeat');
+    		    	 //선택된 좌석을 좌석표 밑에 표시하기
+    		    	 let selectedSeat = document.getElementById('selectedSeat');
     		    	 let tdList=selectedSeat.getElementsByTagName('td');
-    		    	
-    		       
-    		         console.log("cnt++후에 cnt"+cnt);
-    		         if(3>cnt){
+    				//seatGray class의 수 만큼만 좌석을 선택가능 
+    		         if($('#selectedSeat .seatGray').length>cnt){
     		        	  tdList[cnt].style.cssText  = 'background:violet'; 
     		        	  tdList[cnt].innerText=$(event.target).text();
     		        	  this.setAttribute('class','selectedSeat');
-    		          	  $('#seatName').val($(event.target).text());
-    		          	    cnt++;
+    		        	  seatName.value += $(event.target).text();
+    		          	  cnt++;
+    		         }else if($('#selectedSeat .seatGray').length == 0){//seatGray class의 수가 0이면
+    		        	  alert("인원선택을 먼저해주세요!!!"); 
     		         }else{
     		        	  alert("좌석선택이 완료되엇습니다.");
-    		         };		       
+    		         };		 
+    		              
     		         
-    		      } 		      
-    		    ///예약된좌석 이벤트 없애기
-    		   	for(var i=0;i<result.length;i++){
-    			console.log(result[i].seatName);
-    			var a="#seat td:contains("+result[i].seatName+")";
+    		      } 	
+    		    //예약된 좌석문자열을(ex.F-5F-6F-7) 하나의단일 좌석으로 쪼갠다.	    	
+    		    if(result.length == 0){
+    		    	console.log("result is null");
+    		    var splitSeatName='0-A';
+    		    }else{
+    		    var splitSeatName=result[0].seatName;
+    		    	console.log("result > 0");
+    		    	let seatNameArry=[];
+    		    for(var i=0;i<splitSeatName.length;i+=3){
+    		    	seatNameArry.push(splitSeatName.substr(i,3));
+    		    }
+    		    
+    		    console.log(seatNameArry);
+    		    //예약된좌석 이벤트 없애기
+    		   	for(var i=0;i<seatNameArry.length;i++){
+    			console.log(seatNameArry[i]);
+    			var a="#seat td:contains("+seatNameArry[i]+")";
+    			
     			$(a)[0].removeEventListener('click',selectSeat);
     			$(a).css("backgroundColor","black");
     			}
+    		    	
+    		    	
+    		    }
+    		    
+    		    
    		    } 
     	
     });

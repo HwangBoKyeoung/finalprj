@@ -20,10 +20,10 @@
 border:1px solid black;
 width:50px;
 height:50px;
-font-size:large;
+font-size:30px;
 text-align:center;
 float:left;
-background-color:purple;
+background-color:violet;
 }
 svg .seat:hover{
   fill: purple;
@@ -479,21 +479,18 @@ section > article > #map{
   								 <!-- 공연장 상세 좌석도 -->
   								 <div id="detailSeat" style="display:none">
   								 <div>
-  								 	<div id="plus">+</div><div id="cnt">0</div><div id="minus">-</div>
+  								 	<div id="minus">-</div><div id="cnt">0</div><div id="plus">+</div>
   								 </div>
   								 	<button id="backBtn" class="btn gradient-bg">뒤로가기</button>
   								 	<div class="seatContainer">
 								        <div class="screen">
 								        	<img height="100px" width="290px" src="resources/performance/images/stage.png">
-								        </div>
-								        
+								        </div>								        
 								    </div>
   							 	</div>
                             </div>
                         </div>
-                    </div>
-				
-						
+                    </div>	
                     <div id="tab_venue" class="tab-content">
 							<section>
 								<article>
@@ -590,7 +587,6 @@ for(i=0;i<8;i++){
 	let row=document.createElement('div');
 	row.setAttribute('class','row');
 	for(j=0;j<8;j++){
-		
 		let col=document.createElement('div');
 		col.setAttribute('class','seat');
 		col.innerText=cnt++;
@@ -599,13 +595,10 @@ for(i=0;i<8;i++){
 	$('.seatContainer').append(row);
 }
 
-let a=0;
 
 $('.seatContainer > .row > .seat').on('click',function(){
 	$(event.target).addClass('occupied');
 	seatName.innerText+=$(event.target).text()+",";
-	peopleCnt++;
-	
 });	
 
 
@@ -617,6 +610,7 @@ $('.seatContainer > .row > .seat').on('click',function(){
 	    $('#locName').text(event.target.id);
 	    $('svg').css('display', 'none');
 	    $('#detailSeat').css('display','block');
+	    
     });
     $('#backBtn').click(function(){
     	 $('svg').css('display', 'block');
