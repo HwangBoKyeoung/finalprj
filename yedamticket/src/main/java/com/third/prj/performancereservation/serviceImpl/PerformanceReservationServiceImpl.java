@@ -26,4 +26,10 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		return map.pReservation(prvo);
 	}
 
+	@Override
+	public List<PerformanceReservationVO> searchSeatNo(PerformanceReservationVO prvo) {
+		// TODO Auto-generated method stub
+		return map.searchSeatNo(prvo);
+	}
+
 }

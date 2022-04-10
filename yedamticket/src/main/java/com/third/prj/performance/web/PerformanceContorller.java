@@ -1,13 +1,14 @@
 package com.third.prj.performance.web;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PageVO;
@@ -39,7 +40,7 @@ public class PerformanceContorller {
 		model.addAttribute("pers", perDao.perSelectList());
 		return "performance/perforList";
 	}
-	
+	//황규복 start
 	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
 	public String pList(Model model,CriteriaVO cri) {
@@ -64,12 +65,19 @@ public class PerformanceContorller {
 		
 		return "performance/pBookingForm";
 	}
+	@RequestMapping("/searchSeatNo.do")
+	@ResponseBody
+	public List<PerformanceReservationVO> searchSeatNo(PerformanceReservationVO prvo) {
+		return perRDao.searchSeatNo(prvo);
+	}
 	//공연 결제
 	@RequestMapping("/pReservation.do")
 	public String pReservation(Model model,PerformanceReservationVO prvo) {
 		perRDao.pReservation(prvo);
 		return "performance/pPayForm";
 	}
+	
+	//황규복 end
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {

@@ -76,5 +76,11 @@
 		WHERE NAME=#{name} 
 		AND STARTDATE=#{startDate}
 	</select>
-	
+	<!--결제페이지로갈 영화상세 -->
+	<select id="mDetail" resultMap="movieResultMap">
+		SELECT * 
+		FROM MOVIE 
+		WHERE DOCID=#{docId} 
+		
+	</select>
 </mapper>

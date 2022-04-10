@@ -435,8 +435,8 @@
 										data : {
 											"docId" : $('#docId').val(),
 											"reservLoc" : $('#reservLoc').val(),
-											"reservHall" : $('#reservHall')
-													.val(),
+											"reservHall" : $('#reservHall').val(),
+													
 											"schDate" : $('#schDate').val(),
 											"schTime" : $('#schTime').val()
 										},
@@ -526,9 +526,7 @@
 													cnt = 0;
 												} else {
 													alert("좌석선택이 완료되엇습니다.");
-												}
-												;
-
+												};						
 											}
 											let seatNameArry = [];
 											console.log(result);
@@ -539,38 +537,22 @@
 												console.log("result > 0");
 												for (var i = 0; i < result.length; i++) {
 													var splitSeatName = result[i].seatName;
-
 													for (var j = 0; j < splitSeatName.length; j += 3) {
-														seatNameArry
-																.push(splitSeatName
-																		.substr(
-																				j,
-																				3));
+														seatNameArry.push(splitSeatName.substr(j,3));
 													}
 												}
 												console.log(seatNameArry);
 												//예약된좌석 이벤트 없애기
 												for (var i = 0; i < seatNameArry.length; i++) {
-													console
-															.log(seatNameArry[i]);
-													var a = "#seat td:contains("
-															+ seatNameArry[i]
-															+ ")";
-
-													$(a)[0]
-															.removeEventListener(
-																	'click',
-																	selectSeat);
-													$(a).css("backgroundColor",
-															"black");
+													console.log(seatNameArry[i]);
+													var a = "#seat td:contains("+ seatNameArry[i]+ ")";
+													console.log($(a));
+													$(a)[0].removeEventListener('click',selectSeat);
+													$(a).css("backgroundColor","black");
 												}
-
 											}
-
 										}
-
 									});
-
 						});
 	</script>
 </body>

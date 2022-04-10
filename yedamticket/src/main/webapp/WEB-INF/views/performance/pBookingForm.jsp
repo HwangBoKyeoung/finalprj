@@ -633,37 +633,62 @@ $('#minus').on("click",function(){
 	}
 });
 
-
+let cnt=0;
+let tmpArry=[];
+let seatArry=[];
 //좌석선택하면 보엿다가 끄기
     $(".seat").click(function() {
     	$('#loc').val(event.target.id);
 	    $('#locName').text(event.target.id);
 	    $('svg').css('display', 'none');
-	 
-	   let cnt=0;
-	   //좌석 생성
-	    var i,j;
-	    let num=1;
-	    for(i=0;i<8;i++){
-	    	let row=document.createElement('div');
-	    	row.setAttribute('class','row');
-	    	for(j=0;j<8;j++){
-	    		let col=document.createElement('div');
-	    		col.setAttribute('class','seat');
-	    		col.innerText=num++;
-	    		row.append(col);
-	    	}
-	    	$('.seatContainer').append(row);
-	    	
-	    }
-	    $('#detailSeat').css('display','block');
-	    
-	  //.seatContainer .seat 수만큼 클릭이벤트걸기
-	    
-	    let seat = $('.seatContainer .seat');
-	    for(var i =0;i<seat.length;i++){
-	    	seat[i].addEventListener('click',selectSeat);
-	    }
+	    console.log("ajax"+event.target.id);
+	 	 $.ajax({
+	 		url:"searchSeatNo.do",
+	 		type:"post",
+	 		data:{'PSchNo':$('#PSchNo').val(),
+	 			  'loc':$('#loc').val()},
+	 		success:function(result){
+	 			console.log(result);
+	 			
+	 			for(var i =0;i<result.length;i++){
+	 				tmpArry=(result[i].seatNo).split(',');
+	 				for(var j=0;j<tmpArry.length;j++){
+	 					seatArry.push(tmpArry[j]);
+	 				}//end j for
+	 			}//end i for
+	 			//좌석 생성 		    
+			    let num=1;
+			    for(var i=0;i<8;i++){
+			    	let row=document.createElement('div');
+			    	row.setAttribute('class','row');
+			    	var A = 65 + i;
+			    	for(var j=0;j<8;j++){
+			    		let col=document.createElement('div');
+			    		col.setAttribute('class','seat');
+			    		let seatChr = String
+						.fromCharCode(A);
+			    		col.innerText=seatChr+(j+1);
+			    		row.append(col);
+			    	}//end j for
+			    	$('.seatContainer').append(row);
+			    }//end i for
+			    $('#detailSeat').css('display','block');
+			    //.seatContainer .seat 수만큼 클릭이벤트걸기
+			    let seat = $('.seatContainer .seat');
+			    for(var i =0;i<seat.length;i++){
+			    	seat[i].addEventListener('click',selectSeat);
+			    }//end i for
+			    
+			     //seatArry배열안에 값들을 이벤트제거 + 예약못하게 색바꾸기
+			    console.log(seatArry);
+			    for(var i = 0;i<seatArry.length;i++){
+			    	var a = ".row .seat:contains("+ seatArry[i]+ ")";
+			    	console.log($(a)[0]);
+			    	$(a).addClass('occupied');
+			    	$(a)[0].removeEventListener('click',selectSeat);
+			    } 
+	 		}//end success
+	 	}); //end ajax
 	    function selectSeat(){
 	    	console.log(this.innerText);
 	    	console.log($('#selectedSeat .seatGray').length);
@@ -681,17 +706,25 @@ $('#minus').on("click",function(){
 	       	  alert("좌석선택이 완료되엇습니다.");
 	        };		
 	    	
-	    }
+	    };//end selectSeat fnt
 	    
-    });
+    });//end seat click fnt
+    
+    
+    
+    
+    
+    //뒤로가기 and 초기화
     $('#backBtn').click(function(){
     	$('svg').css('display', 'block');
  	    $('#detailSeat').css('display','none');
- 	 	//초기화
  		  $('.seatContainer').empty();
+ 		 
  		  $('#cnt').text(0);
  		  $('#seatNo').val('');
  			let td=$('td');
+ 			
+ 		 
  		 for(var i=0;i<td.length;i++){
  			 td.text('+');
  			 td.removeClass();
