@@ -24,7 +24,7 @@
 		<result property="Cid" column="c_id"/>
 		<result property="actor" column="actor"/>
 		<result property="fileCd" column="file_cd"/>
-		<result property="loc" column="log"/>
+		<result property="loc" column="loc"/>
 		<result property="addr" column="addr"/>
 		<result property="price" column="price"/>
 	</resultMap>

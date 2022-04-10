@@ -1,5 +1,7 @@
 package com.third.prj.performancereservation.web;
 
+import java.sql.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -29,36 +31,46 @@ public class PerformanceReservationController {
 	 * System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@"); return
 	 * "ticket/ticketassignment_1"; }
 	 */
-	
+
 	@RequestMapping("/ticketassignment_1.do")
-	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO ,HttpSession session, Model model) {
+	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session, Model model) {
 		String Uid = (String) session.getAttribute("sessionId");
 		performancereservationviewVO.setUid(Uid);
-		System.out.println("-------------------------------" + performancereservationviewVO);
 		performancereservationDao.userTicket(performancereservationviewVO);
-		System.out.println("-------------------------------||" + performancereservationviewVO);
 		model.addAttribute("prInfo", performancereservationDao.userTicket(performancereservationviewVO));
-//		session.getAttribute("sessionId");
 		return "ticket/ticketassignment_1";
 	}
-	
+
 	@RequestMapping("/ticketassignment_2.do")
-	public String ticketAssignment_2(HttpServletRequest httpServletRequest,Model model) {
+	public String ticketAssignment_2(HttpServletRequest httpServletRequest, Model model) {
 		String name = httpServletRequest.getParameter("name");
 		String date = httpServletRequest.getParameter("date");
 		String seat = httpServletRequest.getParameter("seatNo");
 		String price = httpServletRequest.getParameter("price");
+		String loc = httpServletRequest.getParameter("loc");
 		
 		model.addAttribute("name", name);
 		model.addAttribute("date", date);
 		model.addAttribute("seatNo", seat);
 		model.addAttribute("price", price);
+		model.addAttribute("loc", loc);
+		
 		return "ticket/ticketassignment_2";
 	}
-	
+
 	@RequestMapping("/ticketassignment_personal_1.do")
-	public String TicketAssignment_Personal_1(HttpServletRequest httpservletrequest) {
-		return "ticket/ticketassignment_personal_1";
-		}
-	
+	public String TicketAssignment_Personal_1(Model model, HttpServletRequest httpServletRequest) {
+		String name = httpServletRequest.getParameter("name");
+		String date = httpServletRequest.getParameter("date");
+		String seat = httpServletRequest.getParameter("seatNo");
+		String price = httpServletRequest.getParameter("price");
+		String loc = httpServletRequest.getParameter("loc");
+		
+		model.addAttribute("name", name);
+		model.addAttribute("date", date);
+		model.addAttribute("seatNo", seat);
+		model.addAttribute("price", price);
+		model.addAttribute("loc", loc);
+		return "ticket/ticketassignment_personal_1"; 
+	}
 }

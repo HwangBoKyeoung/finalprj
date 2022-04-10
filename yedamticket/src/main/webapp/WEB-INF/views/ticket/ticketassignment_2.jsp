@@ -129,28 +129,56 @@
       #btnr:before{
       	background-color:#bdbdef;
       }
+      
     </style>
   </head>
   <body>
   	<h1>티켓 양도</h1>
+  	
     <div class="item-wrap">
       <div class="items">
         <div class="item left">
           <div class="inner">
-            <button id="btnl" class="button-48" role="button" style="background-color:#9adbb36b" onclick="location.href='ticketassignment_personal_1.do'">
-              <span class="text">개인 거래</span>
+          	<form id="lfrm" action="ticketassignment_personal_1.do" method="POST">
+		  	<input name="name" type="hidden" value="${name }">
+		  	<input name="date" type="hidden" value="${date }">
+		  	<input name="seatNo" type="hidden" value="${seatNo }">
+		  	<input name="loc" type="hidden" value="${loc }">
+		  	<input name="price" type="hidden" value="${price }">
+	  	  	<button id="btnl" class="button-48" role="button" onclick="submitleft();" style="background-color:#9adbb36b">
+            <span class="text">개인 거래</span>
             </button>
+	  	  	</form>
           </div>
         </div>
+        
         <div class="item right">
           <div class="inner">
-            <button id="btnr" class="button-48" role="button" style="background-color:#E6E6FA">
+          <form id="lfrm" action="ticketassignment_personal_2.do" method="POST">
+		  	<input name="name" type="hidden" value="${name }">
+		  	<input name="date" type="hidden" value="${date }">
+		  	<input name="seatNo" type="hidden" value="${seatNo }">
+		  	<input name="loc" type="hidden" value="${loc }">
+		  	<input name="price" type="hidden" value="${price }">
+	  	  	<button id="btnl" class="button-48" role="button" onclick="submitright();" style="background-color:#E6E6FA">
               <span class="text">자유 거래</span>
             </button>
+	  	  	</form>
           </div>
         </div>
       </div>
     </div>
+    
+    <script>
+    function submitleft(){
+    	$('#lfrm').submit();
+    }
+    
+    function submitright(){
+    	$('#lfrm').submit();
+    }
+    </script>
+    
   </body>
 </html>
 	

@@ -59,6 +59,7 @@ body {
 					    <p class="card-title" >공연 명 : ${pr.name }</p>
 					    <p class="card-text">공연일정 : ${pr.frDt }</p>
 					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+					    <p class="card-text">좌석구역 : ${pr.loc }</p>
 					    <p class="card-text">가  격 : ${pr.price }</p>
 					    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
 					  </div>
@@ -87,6 +88,9 @@ body {
 			      	
 			      	<p id="Mseat" ></p>
 			      	<input type="hidden" id="seatNo" name="seatNo">
+			      	
+			      	<p id="Mloc" ></p>
+			      	<input type="hidden" id="loc" name="loc">
 			      	
 			      	<p id="Mprice" ></p>
 			      	<input type="hidden" id="price" name="price">
@@ -212,30 +216,24 @@ body {
 	
 	bindEvents()
 	
-// 	$('#btnl').on("click", function(){
-// 		console.log("ㅋㅋ");
-// 		console.log($(event.target).prev().prev().prev().prev().text().substring(7,))
-//  		console.log($(this).prev().prev().prev().text().substring(7,))
-//  		console.log($(this).prev().prev().text().substring(7,))
-//  		console.log($(this).prev().text().substring(7,))
-// 	});
-	
 	function selectedFnc(){
-		//var name = $(event.target).prev().prev().prev().prev().text().substring(7,);
-		var name = $(event.target).prev().prev().prev().prev().text();
-		var date = $(event.target).prev().prev().prev().text();
-		var seat = $(event.target).prev().prev().text();
-		var price = $(event.target).prev().text();
+		var name = $(event.target).prev().prev().prev().prev().prev().text();
+		var date = $(event.target).prev().prev().prev().prev().text();
+		var seat = $(event.target).prev().prev().prev().text();
+		var price = $(event.target).prev().prev().text();
+		var loc = $(event.target).prev().text();
 		
 		$('#Mname').html(name);
 		$('#Mdate').html(date);
 		$('#Mseat').html(seat);
 		$('#Mprice').html(price);
+		$('#Mloc').html(loc);
 		
 		$("#name").val(name.substring(7,))
 		$("#date").val(date.substring(7,))
 		$("#seatNo").val(seat.substring(7,))
 		$("#price").val(price.substring(7,))
+		$("#loc").val(loc.substring(7,))
 	}
 	
 	</script>
