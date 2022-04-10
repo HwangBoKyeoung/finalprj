@@ -35,32 +35,46 @@
 		<result column="COUNTRY" property="country"/>
 		<result column="RUNTIME" property="runtime"/>
 		<result column="CONTENT" property="content"/>
-		<result column="C_ID" property="cId"/>
+		<result column="C_ID" property="CId"/>
 		<result column="ACTOR" property="actor"/>
 		<result column="FILE_CD" property="fileCd"/>
 		<result column="DOCID" property="docId"/>
 	</resultMap>
 	
-	<select id="countdelreqest" resultType="int">
+	<select id="getTotal" resultType="int">
 		SELECT COUNT(*)
 		FROM DELETE_REQUEST
+		WHERE
+		<if test="searchType == 'ALL'">(CONTENT LIKE '%'||#{searchName}||'%'
+			OR C_ID LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'CONTENT'">CONTENT LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'C_ID'">C_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
-	<select id="delSelectList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
-		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
+	<select id="deleteRequestList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		<![CDATA[
+		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
 		FROM 
 			(
 			SELECT ROWNUM RN, A.*
 			FROM (
 			SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
 			FROM DELETE_REQUEST
+			WHERE
+			]]>
+			<if test="searchType == 'ALL'">(CONTENT LIKE '%'||#{searchName}||'%'
+			OR C_ID LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'CONTENT'">CONTENT LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'C_ID'">C_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
 			ORDER BY DEL_REQ_NO
 			)A)
 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
 		]]>
 	</select>
 	
-	<select id="delSelect" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
+	<select id="deleteRequestSelect" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
 		FROM DELETE_REQUEST
 		WHERE DEL_REQ_NO = #{delReqNo} 
@@ -68,7 +82,7 @@
 	
 	
 	
-	<insert id="delInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+	<insert id="deletePerforInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		<selectKey keyProperty="delReqNo" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(DEL_REQ_NO),0)+1
 			FROM DELETE_REQUEST
@@ -80,7 +94,7 @@
 	
 	
 	
-	<update id="delUpdate" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+	<update id="deleteRequestUpdate" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		UPDATE DELETE_REQUEST
 		<set>
 			<if test="deleteCd != null">DELETE_CD = #{deleteCd},</if>
@@ -88,31 +102,63 @@
 		WHERE DEL_REQ_NO = #{delReqNo}
 	</update>
 	
-	<delete id="delDelete" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
-		DELETE FROM DELETE_REQUEST
-		WHERE DELETE_CD = #{deleteCd}
-	</delete>
 	
-	<select id="updatedel" resultMap="delrequestMap">
-		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO
+	<select id="deleteRequestPerforSelect" resultMap="delrequestMap">
+		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO,D.C_ID
 		FROM DELETE_REQUEST D,PERFORMANCE P
 		WHERE P.P_NO=D.P_NO
 		AND D.DEL_REQ_NO=#{delReqNo}
 	</select>
-	<select id="mvUpdel" resultMap="delrequestMap">
-		SELECT D.DEL_REQ_NO,D.DELDT,D.C_ID,D.DELETE_CD,D.CONTENT,M.NAME,M.CONTENT,M.ACTOR,M.MV_NO
+	<select id="deleteRequestMovieSelect" resultMap="delrequestMap">
+		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,M.NAME,M.CONTENT,M.ACTOR,M.MV_NO,D.C_ID
 		FROM DELETE_REQUEST D,MOVIE M
 		WHERE M.MV_NO=D.MV_NO
 		AND D.DEL_REQ_NO=#{delReqNo}
 	</select>
 	
-	<insert id="mvDelInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
+	<insert id="deleteMovieInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		<selectKey keyProperty="delReqNo" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(DEL_REQ_NO),0)+1
 			FROM DELETE_REQUEST
 		</selectKey>
-		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,MV_NO)
-		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{mvNo})		
+		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,MV_NO,C_ID)
+		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{mvNo},#{CId})		
 	</insert>
+	
+<!-- 	<select id="companyMyDeletePerforList" resultMap="delrequestMap"> -->
+<!-- 	<![CDATA[ -->
+<!-- 		SELECT M.NAME, M.ACTOR, D.CONTENT, D.DELETE_CD -->
+<!-- 		FROM ( -->
+<!-- 		SELECT M.NAME, M.ACTOR, D.CONTENT, D.DELETE_CD -->
+<!-- 		FROM MOVIE M, DELETE_REQUEST D -->
+<!-- 		WHERE M.C_ID = #{CId} -->
+<!-- 		AND ]]> -->
+<!-- 		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%' -->
+<!-- 			OR DELETE_CD LIKE '%'||#{searchName}||'%')</if> -->
+<!-- 		<if test="searchType == 'NAME'">M.NAME LIKE '%'||#{searchName}||'%'</if> -->
+<!-- 		<if test="searchType == 'DELETE_CD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if> -->
+<!-- 		<if test="searchType == null or searchType ==''"> 1 = 1</if> -->
+<!-- 		<![CDATA[ -->
+<!-- 		ORDER BY M.NAME )A) -->
+<!-- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
+	
+<!-- 	<select id="companyMyDeletePerforList" resultMap="delrequestMap"> -->
+<!-- 	<![CDATA[ -->
+<!-- 		SELECT P.NAME, P.ACTOR, D.CONTENT, D.DELETE_CD -->
+<!-- 		FROM PERFORMANCE P, DELETE_REQUEST D -->
+<!-- 		WHERE P.C_ID = #{CId} -->
+<!-- 		AND ]]> -->
+<!-- 		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%' -->
+<!-- 			OR DELETE_CD LIKE '%'||#{searchName}||'%')</if> -->
+<!-- 		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if> -->
+<!-- 		<if test="searchType == 'DELETE_CD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if> -->
+<!-- 		<if test="searchType == null or searchType ==''"> 1 = 1</if> -->
+<!-- 		<![CDATA[ -->
+<!-- 		ORDER BY P.NAME )A) -->
+<!-- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} -->
+<!-- 		]]> -->
+<!-- 	</select> -->
 	
 </mapper>

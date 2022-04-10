@@ -1,6 +1,6 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,17 +9,19 @@
 </head>
 <body>
 	<div class="col-lg-6 grid-margin stretch-card">
-		<form action="deleInsert.do" method="post">
+		<form action="deleteMovieInsert.do" method="post">
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">삭제 신청 페이지</h4>
-					<p class="card-description">Performance</p>
+					<input type="hidden" id="CId" name="CId" value="${CId}">
+					<p class="card-description">Movie</p>
 					<table class="table">
+					
 						<tr>
-							<%-- 							<th><input type="hidden" name="cId" id="cId" value="${sessionId }"></th> --%>
 							<th>삭제 사유</th>
 							<td><input type="text" name="content" id="content"></td>
-							<th><input type="hidden" name="PNo" id="PNo" value="${del}"></th>
+							<th><input type="text" name="mvNo" id="mvNo" value="${del}"></th>
+							 	
 						</tr>
 						<tr>
 							<th>구분 코드</th>

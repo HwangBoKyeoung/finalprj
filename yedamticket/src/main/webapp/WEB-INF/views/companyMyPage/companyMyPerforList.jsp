@@ -300,6 +300,8 @@ iframe {
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
 					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
+					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
 				<div class="form-group d-flex">
 					<div class="icon">
@@ -348,7 +350,7 @@ iframe {
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
-							<tr onclick="location.href='pserSelect.do?PNo=${per.PNo}' ">
+							<tr onclick="location.href='companyPerforUpdateForm.do?PNo=${per.PNo}' ">
 								<td>${per.name}</td>
 								<td>${per.actor}</td>
 								<td>${per.loc}</td>
@@ -360,26 +362,24 @@ iframe {
 				<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
-						<a href="conPage.do?pageNum=${pageVO.startPage-1 }"> <input
+						<a href="companyPerforList.do?pageNum=${pageVO.startPage-1 }"> <input
 							type="button" value="이전" class="btn btn-secondary"></a>
 					</c:if>
 					<!-- pageNum -->
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="conPage.do?pageNum=${num }"> <input type="button"
+							href="companyPerforList.do?pageNum=${num }"> <input type="button"
 							value="${num }" class="btn btn-secondary"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
-						<a href="conPage.do?pageNum=${pageVO.endPage+1 }"> <input
+						<a href="companyPerforList.do?pageNum=${pageVO.endPage+1 }"> <input
 							type="button" value="다음" class="btn btn-secondary"></a>
 					</c:if>
 				</div>
 			</div>
 		</div>
 	</div>
-	</div>
-	<button onclick="location.href='CMvList.do'">영화</button>
 </body>
 </html>

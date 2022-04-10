@@ -313,72 +313,70 @@ iframe {
 
 		<div class="col-lg-12 grid-margin stretch-card">
 			<div class="card">
+
 				<div class="card-body">
-					<h4 class="card-title">Movie List</h4>
-					<p class="card-description">영화 리스트</p>
-					<form action="companyMovieList.do">
-					<div class="col-10">					
-						<div class="searchBar" align="right">
-							<select name="searchType" class="btn btn-outline-secondary">
-								<option value="ALL"
-									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-								<option value="NAME"
-									${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>영화제목</option>
-								<option value="GENRE"
-									${pageVO.cri.searchType eq 'GENRE' ? 'selected' : '' }>장르</option>
-								<option value="RATING"
-									${pageVO.cri.searchType eq 'RATING' ? 'selected' : '' }>연령</option>
-								<option value="DIRECTOR"
-									${pageVO.cri.searchType eq 'DIRECTOR' ? 'selected' : '' }>감독</option>
-							</select> <input type="text" name="searchName"
-								value="${pageVO.cri.searchName }">
-							<button type="submit" class="btn btn-primary">검색</button>
-							<input type="hidden" name="pageNum" value="1">
-							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-							<input type="hidden" name="amount" value="${pageVO.amount }">
+					<h4 class="card-title">Performance Delete List</h4>
+					<p class="card-description">기업회원마이페이지</p>
+					<form action="companyMyDeleteMovieList.do">
+						<div class="col-10">
+							<div class="searchBar" align="right">
+								<select name="searchType" class="btn btn-outline-secondary">
+									<option value="ALL"
+										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
+									<option value="NAME"
+										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
+									<option value="ATCOR"
+										${pageVO.cri.searchType eq 'ATCOR' ? 'selected' : '' }>출연진</option>
+									<option value="LOC"
+										${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>공연지역</option>
+								</select> <input type="text" name="searchName"
+									value="${pageVO.cri.searchName }">
+								<button type="submit" class="btn btn-primary">검색</button>
+								<input type="hidden" name="pageNum" value="1">
+								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
+								<input type="hidden" name="amount" value="${pageVO.amount }">
+							</div>
 						</div>
-					</div>
-					<table class="table table-hover" id="contents">
-						<thead>
+					</form>
+				</div>
+				<table class="table table-hover">
+					<thead>
+						<tr>
+							<th>공연 이름</th>
+							<th>출연자</th>
+							<th>삭제 사유</th>
+							<th>신청 현황</th>
+						</tr>
+					</thead>
+					<tbody id="body">
+						<c:forEach items="${pers }" var="per">
 							<tr>
-								<th>영화 이름</th>
-								<th>장르</th>
-								<th>관람등금</th>
-								<th>감독</th>
+								<td>${per.name}</td>
+								<td>${per.actor}</td>
+								<td>${per.loc}</td>
+								<td>${per.price}</td>
 							</tr>
-						</thead>
-						<tbody id="body">
-							<c:forEach items="${mvs }" var="mv">
-								<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
-									<td>${mv.name}</td>
-									<td>${mv.genre}</td>
-									<td>${mv.rating}</td>
-									<td>${mv.director}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-					<div id="content" align="center">
-						<c:if test="${pageVO.prev }">
-							<!-- 이전버튼 활성화 여부 -->
-							<a href="companyMovieList.do?pageNum=${pageVO.startPage-1 }"> <input
-								type="button" value="이전" class="btn btn-secondary"></a>
-						</c:if>
-						<!-- pageNum -->
-						<c:forEach var="num" begin="${pageVO.startPage }"
-							end="${pageVO.endPage }">
-							<a class="${pageVO.pageNum == num ? 'active': '' }"
-								href="companyMovieList.do?pageNum=${num }"> <input type="button"
-								value="${num }" class="btn btn-secondary"></a>
 						</c:forEach>
-						<!-- 다음버튼 -->
-						<c:if test="${pageVO.next }">
-							<a href="companyMovieList.do?pageNum=${pageVO.endPage+1 }"> <input
-								type="button" value="다음" class="btn btn-secondary"></a>
-						</c:if>
-					</div>
-					
-						</form>
+					</tbody>
+				</table>
+				<div id="content" align="center">
+					<c:if test="${pageVO.prev }">
+						<!-- 이전버튼 활성화 여부 -->
+						<a href="companyMyDeletePerforList.do?pageNum=${pageVO.startPage-1 }"> <input
+							type="button" value="이전" class="btn btn-secondary"></a>
+					</c:if>
+					<!-- pageNum -->
+					<c:forEach var="num" begin="${pageVO.startPage }"
+						end="${pageVO.endPage }">
+						<a class="${pageVO.pageNum == num ? 'active': '' }"
+							href="companyMyDeletePerforList.do?pageNum=${num }"> <input type="button"
+							value="${num }" class="btn btn-secondary"></a>
+					</c:forEach>
+					<!-- 다음버튼 -->
+					<c:if test="${pageVO.next }">
+						<a href="companyMyDeletePerforList.do?pageNum=${pageVO.endPage+1 }"> <input
+							type="button" value="다음" class="btn btn-secondary"></a>
+					</c:if>
 				</div>
 			</div>
 		</div>

@@ -41,11 +41,7 @@ public class ManagerServiceImpl implements ManagerService{
 		return mapper.managerDelete(vo);
 	}
 
-	@Override
-	public List<ManagerVO> managerSearch(String key, String val) {
-		return mapper.managerSearch(key, val);
-	}
-
+	
 	
 	@Override
 	public int idCheck(String MId) {
@@ -53,9 +49,9 @@ public class ManagerServiceImpl implements ManagerService{
 	}
 
 	@Override
-	public int countmana(CriteriaVO cri) {
+	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.countmana(cri);
+		return mapper.getTotal(cri);
 	}
 
 	@Override

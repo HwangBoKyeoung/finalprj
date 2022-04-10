@@ -7,25 +7,27 @@ import com.third.prj.performance.service.PerformanceVO;
 public interface DeleteRequestService {
 
 	//젠체리스트
-	List<DeleteRequestVO> delSelectList(CriteriaVO cri);
+	List<DeleteRequestVO> deleteRequestList(CriteriaVO cri);
 	//단건조회
-	DeleteRequestVO delSelect(DeleteRequestVO vo);
+	DeleteRequestVO deleteRequestSelect(DeleteRequestVO vo);
 	//등록
-	int delInsert(DeleteRequestVO vo);
+	int deletePerforInsert(DeleteRequestVO vo);
 	//수정
-	int delUpdate(DeleteRequestVO vo);
-	//삭제(필요없을것같음 - RJH)
-	int delDelete(DeleteRequestVO vo);
-	//검색
-	List<DeleteRequestVO> delSearch(String key, String val);
+	int deleteRequestUpdate(DeleteRequestVO vo);
+	
 	//삭제처리상세페이지
-	DeleteRequestVO updatedel(DeleteRequestVO vo);
+	DeleteRequestVO deleteRequestPerforSelect(DeleteRequestVO vo);
 	
 	//영화삭제요청등록
-	int mvDelInsert(DeleteRequestVO vo);
+	int deleteMovieInsert(DeleteRequestVO vo);
 	
 	//영화삭제처리상세페이지
-	DeleteRequestVO mvUpdel(DeleteRequestVO vo);
+	DeleteRequestVO deleteRequestMovieSelect(DeleteRequestVO vo);
 	//페이징처리
-	int countdelreqest(CriteriaVO cri);
+	int getTotal(CriteriaVO cri);
+	
+	//기업마이페이지 삭제 현황(공연)
+	List<DeleteRequestVO> companyMyDeletePerforList(CriteriaVO cri);
+	//기업마이페이지 삭제 현황(영화)
+	List<DeleteRequestVO> companyMyDeleteMovieList(CriteriaVO cri);
 }

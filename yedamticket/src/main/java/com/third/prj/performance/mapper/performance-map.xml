@@ -7,7 +7,7 @@
 	<resultMap id="procedureCall" type="hashmap" />
 
 
-	<select id="perSelectList"
+	<select id="companyPerforSelectList"
 		resultType="com.third.prj.performance.service.PerformanceVO">
 	<![CDATA[
 	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
@@ -47,7 +47,7 @@
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 
-	<select id="perSelect"
+	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
 		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
 		FROM PERFORMANCE
@@ -70,7 +70,7 @@
 		#{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{p_price, mode=IN, jdbcType=INTEGER, javaType=INT},
+		#{p_price, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}

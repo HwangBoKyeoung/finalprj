@@ -5,8 +5,8 @@ import java.util.Map;
 
 public interface PerformanceService {
 
-	List<PerformanceVO> perSelectList(CriteriaVO cri);
-	PerformanceVO perSelect(PerformanceVO vo);
+	List<PerformanceVO> companyPerforSelectList(CriteriaVO cri);
+	PerformanceVO perforSelect(PerformanceVO vo);
 	int perforUpdate(PerformanceVO vo);
 	
 //	프로시저 호출(update에 필요)

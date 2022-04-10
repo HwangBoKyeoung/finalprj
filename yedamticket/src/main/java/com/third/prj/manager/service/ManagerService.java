@@ -12,11 +12,8 @@ public interface ManagerService {
 	
 //	관리자아이디중복체크
 	int idCheck(String MId);
-//	관리자 검색
-	List<ManagerVO> managerSearch(String key, String val);
-	
-	//페이징처리
-	int countmana(CriteriaVO cri);
+	//리스트 처리 + 검색
+	int getTotal(CriteriaVO cri);
 	
 	//로그인
 	ManagerVO manaLogin(ManagerVO vo);

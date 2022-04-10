@@ -29,7 +29,7 @@ public class PerformanceContorller {
 	@RequestMapping("/companyPerforList.do")
 	public String conPage(Model model,CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
-		model.addAttribute("pers", perDao.perSelectList(cri));
+		model.addAttribute("pers", perDao.companyPerforSelectList(cri));
 		model.addAttribute("pageVO", pageVO);
 		return "companyMyPage/companyMyPerforList";
 	}
@@ -44,11 +44,11 @@ public class PerformanceContorller {
 //	public String perSelect(PerformanceVO vo, Model model) {
 
 	//한건조회
-	@RequestMapping("/pserSelect.do")
-	public String perSelect(PerformanceVO vo, Model model) {
+	@RequestMapping("/companyPerforUpdateForm.do")
+	public String companyPerforUpdateForm(PerformanceVO vo, Model model) {
 		PerformanceImageVO ivo = new PerformanceImageVO();
 
-		vo = perDao.perSelect(vo);
+		vo = perDao.perforSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
 		
 		ivo.setFileCd(vo.getFileCd());
@@ -57,7 +57,7 @@ public class PerformanceContorller {
 
 		model.addAttribute("images", ivo);
 		model.addAttribute("pers", vo);
-		return "companyMyPage/perforUpForm";
+		return "companyMyPage/companyPerforUpdateForm";
 	}
   
 	/*
@@ -67,8 +67,8 @@ public class PerformanceContorller {
 	 */
 
 	//프로시저 수정
-	@RequestMapping("/performanceUpdate.do")
-	public String perSelect(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
+	@RequestMapping("/companyPerforUpdate.do")
+	public String companyPerforUpdate(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
 
 		PerformanceImageVO ivo = new PerformanceImageVO();
 
@@ -94,7 +94,7 @@ public class PerformanceContorller {
 		System.out.println(ivo);
 		System.out.println("프로시저콜 : ");
 
-		return "redirect:/conPage.do";
+		return "redirect:/companyPerforList.do";
 	}
 	
 	

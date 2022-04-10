@@ -26,28 +26,28 @@ public class ManagerController {
 	private ManagerService managerDao;
 
 	// 관리자 리스트 페이지
-	@RequestMapping("/admin.do")
-	public String admin(Model model, CriteriaVO cri) {
-		model.addAttribute("managers", managerDao.managerSelectList(cri));
-		int total = managerDao.countmana(cri);
-		model.addAttribute("pageVO", new PageVO(cri, total));
-		return "manager/admin/admin";
+	@RequestMapping("/manager.do")
+	public String manager(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, managerDao.getTotal(cri));
+		model.addAttribute("manas", managerDao.managerSelectList(cri));
+		model.addAttribute("pagaVO",pageVO);
+		return "manager/manager/manager";
 	}
 
 	// 관리자 등록 폼
-	@GetMapping("/adminForm.do")
-	public String adminForm() {
-		return "manager/admin/adminForm";
+	@GetMapping("/managerForm.do")
+	public String managerForm() {
+		return "manager/manager/managerForm";
 	}
 
 	// 관리자 등록
-	@RequestMapping("/adminInsert.do")
-	public String adminInsert(ManagerVO vo) {
+	@RequestMapping("/managerInsert.do")
+	public String managerInsert(ManagerVO vo) {
 		int n = managerDao.managerInsert(vo);
 		if (n != 0) {
-			return "redirect:admin.do";
+			return "redirect:manager.do";
 		}
-		return "manager/admin/managerError";
+		return "manager/manager/managerError";
 	}
 
 	// 관리자 상세정보
@@ -55,29 +55,29 @@ public class ManagerController {
 	public String managerSelet(ManagerVO vo, Model model) {
 		vo = managerDao.managerSelect(vo);
 		model.addAttribute("mana", vo);
-		return "manager/admin/adminSelect";
+		return "manager/manager/managerSelect";
 	}
 
 	// 관리자 정보변경
-	@RequestMapping("/adminUpdate.do")
-	public String adminUpdate(ManagerVO vo) {
+	@RequestMapping("/managerUpdate.do")
+	public String managerUpdate(ManagerVO vo) {
 		int n = managerDao.managerUpdate(vo);
 		if (n != 0) {
-			return "redirect:admin.do";
+			return "redirect:manager.do";
 		}
-		return "manager/admin/managerError";
+		return "manager/manager/managerError";
 	}
 
 	// 관리자 정보 삭제
-	@RequestMapping("/admindelete.do")
-	public String admindelete(ManagerVO vo) {
+	@RequestMapping("/managerDelete.do")
+	public String managerDelete(ManagerVO vo) {
 //		ManagerVO vo = new ManagerVO();
 //		vo.setMId(id);
 		int n = managerDao.managerDelete(vo);
 		if (n != 0) {
-			return "redirect:/admin.do";
+			return "redirect:/manager.do";
 		}
-		return "manager/admin/managerError";
+		return "manager/manager/managerError";
 	}
 
 	// 관리자 등록 아이디 중복확인
@@ -90,10 +90,10 @@ public class ManagerController {
 	
 	@RequestMapping("/managerLoginForm.do")
 	public String managerLoginForm() {
-		return "admin/managerLoginForm";
+		return "manager/managerLoginForm";
 	}
 	  
-		//기업회원 로그인
+		//관리자회원 로그인
 		@RequestMapping("/manaLogin.do")
 		public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
 			String msg = "";

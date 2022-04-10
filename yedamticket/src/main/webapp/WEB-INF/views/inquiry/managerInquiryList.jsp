@@ -36,70 +36,47 @@
 				<div id="content" align="center">
 							<c:if test="${pageVO.prev }">
 								<!-- 이전버튼 활성화 여부 -->
-								<a href="inquiry.do?pageNum=${pageVO.startPage-1 }"> 
+								<a href="managerInquiryList.do?pageNum=${pageVO.startPage-1 }"> 
 								<input type="button" value="이전" class="btn btn-secondary"></a>
 							</c:if>
 							<!-- pageNum -->
 							<c:forEach var="num" begin="${pageVO.startPage }"
 								end="${pageVO.endPage }">
-								<a class="${pageVO.pageNum == num ? 'active': '' }" href="inquiry.do?pageNum=${num }"> 
+								<a class="${pageVO.pageNum == num ? 'active': '' }" href="managerInquiryList.do?pageNum=${num }"> 
 								<input type="button" value="${num }" class="btn btn-secondary"></a>
 							</c:forEach>
 							<!-- 다음버튼 -->
 							<c:if test="${pageVO.next }">
-								<a href="inquiry.do?pageNum=${pageVO.endPage+1 }"> 
+								<a href="managerInquiryList.do?pageNum=${pageVO.endPage+1 }"> 
 								<input type="button" value="다음" class="btn btn-secondary"></a>
 							</c:if>
 						</div>
-				<div class="col-3">
+				<div class="col-15">
 					<div class="input-group mb-3">			
-						<select name="key" id="key" class="btn btn-outline-secondary">
-							<option value="전체">전체</option>
-							<option value="제목">제목</option>
-							<option value="아이디">아이디</option>
-						</select> &nbsp;
-				<input type="text" size="5" name ="val" id = "val" class="form-control" aria-label="Text input with dropdown button"> &nbsp;
-				<button type="button" onclick="InqSearchList()" class="btn btn-outline-secondary">검색</button>	
+						<div class="col-3">
+					<div class="input-group mb-3" align="right">
+						<select name="searchType" class="btn btn-outline-secondary">
+							<option value="ALL"
+								${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
+							<option value="TITLE"
+								${pageVO.cri.searchType eq 'TITLE' ? 'selected' : '' }>제목</option>
+							<option value="U_ID"
+								${pageVO.cri.searchType eq 'U_ID' ? 'selected' : '' }>회원 ID</option>
+						</select> <input type="text" name="searchName"
+							value="${pageVO.cri.searchName }" class="form-control"
+							aria-label="Text input with dropdown button">
+						<button type="submit" class="btn btn-outline-secondary">검색</button>
+						<input type="hidden" name="pageNum" value="1">
+						<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
+						<input type="hidden" name="amount" value="${pageVO.amount }">
+					</div>
+				</div>	
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 	
-	<script type="text/javascript">
-		function InqSearchList() {
-			//$('#tbod').remove();
-			$.ajax({
-				url : "ajaxInqSearch.do",
-				type : "post",
-				data : {"key" : $("#key").val(), "val": $("#val").val()},
-				dataType : "json",
-				success : function(result){
-					if(result.length > 0) {
-						console.log(result);
-						jsonHtml(result);
-					}
-				}
-			});			
-		}
-		function jsonHtml(result){
-			var tb = $("#body");
-			$("#body").empty();
-			$.each(result, function(index, item){
-				console.log(index)
-				console.log(item);
-				var tr = $("<tr />").attr({
-					onclick : "location.href='inquirySelect.do?inNo=" + item.inNo + "'"
-				}).append(
-					$("<td />").text(item.inNo),
-					$("<td />").text(item.title),
-					$("<td />").text(item.inDt),
-					$("<td />").text(item.uid),
-				);
-				tb.append(tr);
-			});
-			$("#contents").append(tb);
-		}
-	</script>
+	
 </body>
 </html>

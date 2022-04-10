@@ -37,10 +37,6 @@ public class CompanyServiceImpl implements CompanyService {
 		return mapper.companySelect(vo);
 	}
 
-	@Override
-	public List<CompanyVO> companySearch(String key, String val) {
-		return mapper.companySearch(key, val);
-	}
 
 	@Override
 	public CompanyVO companyLogin(CompanyVO vo) {
@@ -49,9 +45,9 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 
 	@Override
-	public int countcompany(CriteriaVO cri) {
+	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.countcompany(cri);
+		return mapper.getTotal(cri);
 	}
 	
 }

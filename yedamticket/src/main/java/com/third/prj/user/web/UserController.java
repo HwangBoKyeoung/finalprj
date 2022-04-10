@@ -96,20 +96,20 @@ public class UserController {
 		return "user/user/userLoginForm";
 	}
 
-	@RequestMapping("/user.do")
-	public String user(Model model,CriteriaVO cri) {
+	@RequestMapping("/managerUser.do")
+	public String managerUser(Model model,CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
 		model.addAttribute("users", userDao.userList(cri));
 		model.addAttribute("pageVO", pageVO);//전체게시글 기준으로가지고옴
-		return "manager/user/user";
+		return "manager/user/managerUser";
 	}
 
-	@RequestMapping("/userSelet.do")
-	public String userSelet(UserVO vo, Model model) {
+	@RequestMapping("/managerUserSelect.do")
+	public String managerUserSelect(UserVO vo, Model model) {
 		vo = userDao.userSelect(vo);
 		
 		model.addAttribute("users", vo);
-		return "manager/user/userSelect";
+		return "manager/user/managerUserSelect";
 	}
 
 	@RequestMapping("/userLogin.do")

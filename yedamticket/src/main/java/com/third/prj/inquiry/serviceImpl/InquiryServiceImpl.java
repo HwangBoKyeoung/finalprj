@@ -27,10 +27,6 @@ public class InquiryServiceImpl implements InquiryService {
 		return mapper.inquirySelect(vo);
 	}
 
-	@Override
-	public List<InquiryVO> inquirySearch(String key, String val) {
-		return mapper.inquirySearch(key, val);
-	}
 
 	@Override
 	public int inquiryInsert(InquiryVO vo) {
@@ -48,13 +44,13 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
-	public int countinq(CriteriaVO cri) {
-		return mapper.countinq(cri);
+	public int getTotal(CriteriaVO cri) {
+		return mapper.getTotal(cri);
 	}
 
 	@Override
-	public List<InquiryVO> inquiryList(CriteriaVO cri) {
-		return mapper.inquiryList(cri);
+	public List<InquiryVO> manaerInquiryList(CriteriaVO cri) {
+		return mapper.manaerInquiryList(cri);
 	}
 
 }

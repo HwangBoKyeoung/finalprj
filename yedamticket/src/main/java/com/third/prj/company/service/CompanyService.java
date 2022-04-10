@@ -13,11 +13,9 @@ public interface CompanyService {
 //	company 아이디 체크
 	int cidChk(CompanyVO vo);
 
-//	company 검색
-	List<CompanyVO> companySearch(String key, String val);
 
 //  company 로그인
 	CompanyVO companyLogin(CompanyVO vo);
 	
-	int countcompany(CriteriaVO cri);
+	int getTotal(CriteriaVO cri);
 }

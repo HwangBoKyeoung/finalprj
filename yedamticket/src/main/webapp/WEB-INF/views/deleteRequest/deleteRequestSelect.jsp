@@ -17,7 +17,7 @@
 					<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
 					<input type="hidden" name="mvNo" id="mvNo" value="${del.mvNo }">
 					<p class="card-description"></p>
-					<form class="forms-sample" action="delUpdate.do" method="post">
+					<form class="forms-sample" action="deleteRequestUpdate.do" method="post">
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }" >
 						<div class="form-group row">
 							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">삭제신청 사유</label>
@@ -43,7 +43,7 @@
 							<div class="col-sm-9">
 								<select class="col-md-10" id="selectedval" name="deleteCd"
 										data-loc="${del.deleteCd }">
-									<option value="신청" <c:if test="${del.deleteCd=='신청'}">selected</c:if>>신청</option>
+									<option value="" <c:if test="${del.deleteCd==''}">selected</c:if>>선택</option>
 									<option value="승인" <c:if test="${del.deleteCd=='승인'}">selected</c:if>>승인</option>
 									<option value="거절" <c:if test="${del.deleteCd=='거절'}">selected</c:if>>거절</option>
 								</select>

@@ -18,7 +18,7 @@
       <div class="card">
          <div class="card-body">
             <h4 class="card-title">상세페이지</h4>
-            <form class="forms-sample" action="adminUpdate.do" method="post">
+            <form class="forms-sample" action="managerUpdate.do" method="post">
             
                <div class="form-group">
                   <label for="exampleInputUsername1">ID</label> <input type="text"
@@ -60,9 +60,9 @@
             </form>
             
             <div>
-            	<button style="margin-right:7px;" class="btn btn-gradient-primary me-2" onclick="location.href='admindelete.do?MId=${mana.MId}'">DELETE</button>
+            	<button style="margin-right:7px;" class="btn btn-gradient-primary me-2" onclick="location.href='managerDelete.do?MId=${mana.MId}'">DELETE</button>
             	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button class="btn btn-gradient-primary me-2" onclick="location.href='admin.do'">Cancel</button>
+				<button class="btn btn-gradient-primary me-2" onclick="location.href='manager.do'">Cancel</button>
             </div>
             
          </div>
@@ -72,7 +72,7 @@
    <script type="text/javascript">
    		
    		/* $("#defaults").on('click', function(){
-   			location.href='admindelete.do?MId='+ ${mana.MId};
+   			location.href='managerdelete.do?MId='+ ${mana.MId};
    			console.log(${mana.MId});
    		}); */
    

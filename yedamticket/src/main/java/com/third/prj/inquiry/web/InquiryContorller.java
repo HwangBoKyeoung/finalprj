@@ -32,12 +32,12 @@ public class InquiryContorller {
 	 * return"manager/inquiry/inquiry"; }
 	 */
 
-	@RequestMapping("/inquiry.do")
-	public String inquiryList(Model model, CriteriaVO cri) {
-		model.addAttribute("inquirys", inquiryDao.inquiryList(cri));
-		int total = inquiryDao.countinq(cri);
-		model.addAttribute("pageVO", new PageVO(cri, total));
-		return "manager/inquiry/inquiry";
+	@RequestMapping("/managerInquiryList.do")
+	public String managerInquiryList(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri,inquiryDao.getTotal(cri));
+		model.addAttribute("inquirys", inquiryDao.manaerInquiryList(cri));
+		model.addAttribute("pageVO", pageVO);
+		return "manager/inquiry/managerInquiryList";
 	}
 
 	// 상담상세페이지

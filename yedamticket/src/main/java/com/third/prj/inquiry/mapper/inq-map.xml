@@ -10,22 +10,35 @@
 		<result property="uId" column="u_id" />
 	</resultMap>
 
-	<select id="countinq" resultType="int">
+	<select id="getTotal" resultType="int">
 		SELECT COUNT(*)
 		FROM INQUIRY
+		WHERE
+		<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
+				OR U_ID LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'U_ID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 	
-	<select id="inquiryList" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+	<select id="manaerInquiryList" resultType="com.third.prj.inquiry.service.InquiryVO">
 		<![CDATA[
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 		FROM
 			(
 			SELECT ROWNUM RN, A.*
 			FROM (
 			SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 			FROM INQUIRY
-			ORDER BY IN_NO
-			)A)
+			WHERE
+			]]>
+			<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
+				OR U_ID LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'U_ID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+			<![CDATA[
+			ORDER BY IN_NO )A)
 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
 		]]>
 	</select>
@@ -42,16 +55,6 @@
 		WHERE IN_NO=#{inNo}
 	</select>
 	
-	<select id="inquirySearch" resultType="com.third.prj.inquiry.service.InquiryVO" parameterType="String">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
-		FROM INQUIRY
-		WHERE
-			<if test="key == '전체'">TITLE LIKE '%'||#{val}||'%' 
-									OR U_ID LIKE '%'||#{val}||'%'</if>
-			<if test="key == '제목'">TITLE LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
-		ORDER BY INDT DESC
-	</select>
 
 	<!-- 1:1문의 -->
 	<insert id="inquiryInsert" parameterType="com.third.prj.inquiry.service.InquiryVO">

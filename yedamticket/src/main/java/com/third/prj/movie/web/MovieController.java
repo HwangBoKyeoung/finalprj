@@ -146,8 +146,8 @@ public class MovieController {
 	}
 	  
 		//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
-		@RequestMapping("/cMvSelect.do")
-		public String cMvSelect(MovieVO vo, MovieVideoVO vvo, Model model) {
+		@RequestMapping("/companyMovieUpdateForm.do")
+		public String companyMovieUpdateForm(MovieVO vo, MovieVideoVO vvo, Model model) {
 //			MovieVideoVO vvo = new MovieVideoVO();
 			vo=movieDao.mvSelect(vo);
 			System.out.println("============================"+vo.getMvNo());
@@ -158,12 +158,12 @@ public class MovieController {
 			
 			model.addAttribute("mv", vo);	
 			
-			return "companyMyPage/cmovieUpdate";
+			return "companyMyPage/companyMovieUpdateForm";
 		}
 	
 	//영화 수정 페이지(프로시저 ->rjh(2022/04/05)
-	@RequestMapping("/mvUpdate.do")
-	public String mvUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo) {
+	@RequestMapping("/companyMovieUpdate.do")
+	public String companyMovieUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo) {
 		map.put("vm_vno", vo.getMvNo());
 		map.put("mv_name", vo.getName());
 		map.put("mv_genre", vo.getGenre());
@@ -179,7 +179,7 @@ public class MovieController {
 		movieDao.procedureCall(map);
 		System.out.println(vvo);
 		
-		return "redirect:/CMvList.do";
+		return "redirect:companyMovieList.do";
 	}
 	
 	

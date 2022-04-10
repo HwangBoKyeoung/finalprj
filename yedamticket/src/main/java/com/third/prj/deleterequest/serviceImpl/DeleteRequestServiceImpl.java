@@ -16,63 +16,64 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 	@Autowired
 	private DeleteRequestMapper mapper;
 	@Override
-	public List<DeleteRequestVO> delSelectList(CriteriaVO cri) {
+	public List<DeleteRequestVO> deleteRequestList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.delSelectList(cri);
+		return mapper.deleteRequestList(cri);
 	}
 
 	@Override
-	public DeleteRequestVO delSelect(DeleteRequestVO vo) {
+	public DeleteRequestVO deleteRequestSelect(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delSelect(vo);
+		return mapper.deleteRequestSelect(vo);
 	}
 
 	@Override
-	public int delInsert(DeleteRequestVO vo) {
+	public int deletePerforInsert(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delInsert(vo);
+		return mapper.deletePerforInsert(vo);
 	}
 
 	@Override
-	public int delUpdate(DeleteRequestVO vo) {
+	public int deleteRequestUpdate(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delUpdate(vo);
+		return mapper.deleteRequestUpdate(vo);
+	}
+
+
+	@Override
+	public DeleteRequestVO deleteRequestPerforSelect(DeleteRequestVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.deleteRequestPerforSelect(vo);
 	}
 
 	@Override
-	public int delDelete(DeleteRequestVO vo) {
+	public int deleteMovieInsert(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delDelete(vo);
+		return mapper.deleteMovieInsert(vo);
 	}
 
 	@Override
-	public List<DeleteRequestVO> delSearch(String key, String val) {
+	public DeleteRequestVO deleteRequestMovieSelect(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delSearch(key, val);
+		return mapper.deleteRequestMovieSelect(vo);
 	}
 
 	@Override
-	public DeleteRequestVO updatedel(DeleteRequestVO vo) {
+	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.updatedel(vo);
+		return mapper.getTotal(cri);
 	}
 
 	@Override
-	public int mvDelInsert(DeleteRequestVO vo) {
+	public List<DeleteRequestVO> companyMyDeletePerforList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.mvDelInsert(vo);
+		return mapper.companyMyDeletePerforList(cri);
 	}
 
 	@Override
-	public DeleteRequestVO mvUpdel(DeleteRequestVO vo) {
+	public List<DeleteRequestVO> companyMyDeleteMovieList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.mvUpdel(vo);
-	}
-
-	@Override
-	public int countdelreqest(CriteriaVO cri) {
-		// TODO Auto-generated method stub
-		return mapper.countdelreqest(cri);
+		return mapper.companyMyDeleteMovieList(cri);
 	}
 
 }

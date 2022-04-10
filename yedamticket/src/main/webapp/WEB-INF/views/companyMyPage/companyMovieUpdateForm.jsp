@@ -14,7 +14,7 @@
 				<div class="card-body">
 					<h4 class="card-title">Movie Update</h4>
 					<p class="card-description"></p>
-					<form class="forms-sample" action="mvUpdate.do"method="post">
+					<form class="forms-sample" action="companyMovieUpdate.do"method="post">
 						<div class="form-group row">
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">영화번호</label>
@@ -89,7 +89,7 @@
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>
-						<button class="btn btn-gradient-primary me-2" onclick="location.href='mvDel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
+						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyMoviedel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
 				</div>
 			</div>
 		</div>

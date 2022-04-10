@@ -24,76 +24,90 @@ public class DeleteRequestController {
 	
 	
 	//삭제요청 페이지
-		@RequestMapping("/pserDel.do")
-		public String pserDel(DeleteRequestVO vo, Model model, PerformanceVO pvo, @RequestParam("PNo") int PNo) {
+		@RequestMapping("/companyPerforDel.do")
+		public String companyPerforDel(DeleteRequestVO vo, Model model, PerformanceVO pvo, @RequestParam("PNo") int PNo) {
 			vo.setPNo(PNo);
 			System.out.println("----------------------"+PNo);
 			System.out.println("----------------------"+vo.getPNo());
-			vo = delDao.delSelect(vo);
+			vo = delDao.deleteRequestPerforSelect(vo);
 			model.addAttribute("del", PNo);
-			return "companyMyPage/perDeleteform";
+			model.addAttribute("CId", pvo.getCId());
+			return "companyMyPage/companyPerforDel";
 		}
 	
 	//삭제요청리스트 추가
-		@RequestMapping("/deleInsert.do")
-		public String deleInsert(DeleteRequestVO vo, @RequestParam("PNo") int PNo) {
+		@RequestMapping("/deletePerforInsert.do")
+		public String deletePerforInsert(DeleteRequestVO vo, @RequestParam("PNo") int PNo) {
 			System.out.println(PNo);
-			delDao.delInsert(vo);
-			return "redirect:companyMovieList.do";
+			delDao.deletePerforInsert(vo);
+			return "redirect:companyPerforList.do";
 		}
 
 	//삭제요청 리스트
-		@RequestMapping("/deleteRe.do")
-		public String deleteRe(Model model,CriteriaVO cri) {
-			model.addAttribute("dels",delDao.delSelectList(cri));
-			int total = delDao.countdelreqest(cri);
-			model.addAttribute("pageVO", new PageVO(cri, total));			
-			return "manager/deleteRequest/deleteList";
+		@RequestMapping("/deleteRequestList.do")
+		public String deleteRequestList(Model model,CriteriaVO cri) {
+			PageVO pageVO = new PageVO(cri, delDao.getTotal(cri));
+			model.addAttribute("dels",delDao.deleteRequestList(cri));
+			model.addAttribute("pageVO", pageVO);			
+			return "manager/deleteRequest/deleteRequestList";
 		}
 	
 	//삭제 처리리스트
-		@RequestMapping("/delUpdate.do")
-		public String delUpdate(DeleteRequestVO vo, Model model) {
-			delDao.delUpdate(vo);
+		@RequestMapping("/deleteRequestUpdate.do")
+		public String deleteRequestUpdate(DeleteRequestVO vo, Model model) {
+			delDao.deleteRequestUpdate(vo);
 			model.addAttribute("CId", vo.getCId());
-			return "redirect:deleteRe.do";
+			return "redirect:deleteRequestList.do";
 		}
 		//삭제요청 상세히 보기
-	      @RequestMapping("/delSelect.do")
-	      public String delSelect(Model model, DeleteRequestVO vo) {
-	         System.out.println("황보경입니다.ㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎㅎ");
-	         vo = delDao.delSelect(vo);
-	         System.out.println("kkkkkkkkkkkkkkkkkkkk" + vo);
+	      @RequestMapping("/deleteRequestSelect.do")
+	      public String deleteRequestSelect(Model model, DeleteRequestVO vo) {
+	         vo = delDao.deleteRequestSelect(vo);
 	         
 	         if(vo.getPNo()!=0) {
-	            vo = delDao.updatedel(vo);
+	            vo = delDao.deleteRequestPerforSelect(vo);
 	         } else if(vo.getMvNo()!=0) {
-	            vo = delDao.mvUpdel(vo);
+	            vo = delDao.deleteRequestMovieSelect(vo);
 	         }
 	         model.addAttribute("del", vo);
 
-	         return "manager/deleteRequest/delSelect";
+	         return "manager/deleteRequest/deleteRequestSelect";
 	      }
 	      
 	//삭제요청페이지
-		@RequestMapping("/mvDel.do")
-		public String mvDel(HttpServletRequest request, DeleteRequestVO vo, MovieVO mvo, Model model, @RequestParam("mvNo") int mvNo) {
+		@RequestMapping("/companyMoviedel.do")
+		public String companyMoviedel(HttpServletRequest request, DeleteRequestVO vo, MovieVO mvo, Model model, @RequestParam("mvNo") int mvNo) {
 			
 			vo.setMvNo(mvNo);
 			System.out.println("==============================mvo=="+mvo);
-			vo= delDao.delSelect(vo);
+			vo= delDao.deleteRequestSelect(vo);
 			model.addAttribute("del", mvNo);
 			model.addAttribute("CId", mvo.getCId());
-			return "companyMyPage/cmoviedel";
+			return "companyMyPage/companyMoviedel";
 		}
 	//영화삭제요청 등록
-		@RequestMapping("/mvdeleInsert.do")
-		public String mvdeleInsert(DeleteRequestVO vo, @RequestParam("mvNo") int mvNo) {
-			delDao.mvDelInsert(vo);
+		@RequestMapping("/deleteMovieInsert.do")
+		public String deleteMovieInsert(DeleteRequestVO vo, @RequestParam("mvNo") int mvNo) {
+			delDao.deleteMovieInsert(vo);
 			return "redirect:companyMovieList.do";
 			
 		}
-		
+//		//기업회원 마이페이지- 삭제 신청현황(공연)
+//		@RequestMapping("/companyMyDeletePerforList.do")
+//		public String companyMyDeletePerforList(Model model,CriteriaVO cri) {
+//			PageVO pageVO = new PageVO(cri, delDao.getTotal(cri));
+//			model.addAttribute("dels",delDao.companyMyDeletePerforList(cri));
+//			model.addAttribute("pageVO", pageVO);
+//			return "companyMyPage/companyMyDeletePerforList";
+//		}
+//		//기어뵈원 마이페이지- 삭제 신청현황(영화
+//		@RequestMapping("/companyMyDeleteMovieList.do")
+//		public String companyMyDeleteMovieList(Model model,CriteriaVO cri) {
+//			PageVO pageVO = new PageVO(cri, delDao.getTotal(cri));
+//			model.addAttribute("pers",delDao.companyMyDeleteMovieList(cri));
+//			model.addAttribute("pageVO", pageVO);
+//			return "companyMyPage/companyMyDeleteMovieList";
+//		}
 		
 		
 }

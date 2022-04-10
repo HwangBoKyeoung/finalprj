@@ -10,7 +10,7 @@
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
-			<form action="user.do">
+			<form action="managerUser.do">
 				<div class="card-body">
 					<h4 class="card-title">User List</h4>
 					<p class="card-description">사용자 리스트</p>
@@ -25,7 +25,7 @@
 						</thead>
 						<tbody id="body">
 							<c:forEach items="${users}" var="user">
-								<tr onclick="location.href='userSelet.do?uid=${user.uid}'">
+								<tr onclick="location.href='managerUserSelect.do?uid=${user.uid}'">
 									<td>${user.uid}</td>
 									<td>${user.name}</td>
 									<td>${user.email}</td>
@@ -45,12 +45,12 @@
 						<c:forEach var="num" begin="${pageVO.startPage }"
 							end="${pageVO.endPage }">
 							<a class="${pageVO.pageNum == num ? 'active': '' }"
-								href="user.do?pageNum=${num }"> <input type="button"
+								href="managerUser.do?pageNum=${num }"> <input type="button"
 								value="${num }" class="btn btn-secondary"></a>
 						</c:forEach>
 						<!-- 다음버튼 -->
 						<c:if test="${pageVO.next }">
-							<a href="user.do?pageNum=${pageVO.endPage+1 }"> <input
+							<a href="managerUser.do?pageNum=${pageVO.endPage+1 }"> <input
 								type="button" value="다음" class="btn btn-secondary"></a>
 						</c:if>
 					</div>

@@ -8,8 +8,8 @@ import com.third.prj.performance.service.PerformanceVO;
 
 public interface PerformanceMapper {
 
-	List<PerformanceVO> perSelectList(CriteriaVO vo);
-	PerformanceVO perSelect(PerformanceVO vo);
+	List<PerformanceVO> companyPerforSelectList(CriteriaVO vo);
+	PerformanceVO perforSelect(PerformanceVO vo);
 	int perforUpdate(PerformanceVO vo);
 	
 //	프로시저 호출(update에 필요)

@@ -60,20 +60,20 @@ public class CompanyController {
 	}
 	
 	//기업회원 리스트(관리자페이지)
-	@RequestMapping("/company.do")
-	public String company(Model model, CriteriaVO cri) {
-		model.addAttribute("companys", companyDao.companyList(cri));
-		int total = companyDao.countcompany(cri);
-		model.addAttribute("pageVO", new PageVO(cri, total));
-		return "manager/company/company";
+	@RequestMapping("/managerCompany.do")
+	public String managerCompany(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, companyDao.getTotal(cri));
+		model.addAttribute("coms", companyDao.companyList(cri));
+		model.addAttribute("pageVO",pageVO);		
+		return "manager/company/managerCompany";
 	}
 	
 	//기업회원 상세정보(관리자페이지)
-	@RequestMapping("/companySelect.do")
-	public String companySelet(CompanyVO vo, Model model) {
+	@RequestMapping("/managerCompanySelect.do")
+	public String managerCompanySelect(CompanyVO vo, Model model) {
 		vo = companyDao.companySelect(vo);
 		model.addAttribute("com",vo);
-		return "manager/company/companySelect";
+		return "manager/company/managerCompanySelect";
 	}
 
 	//기업회원 로그인폼
@@ -105,5 +105,7 @@ public class CompanyController {
 		}
 		return mv;
 	}
+	
+	
 
 }

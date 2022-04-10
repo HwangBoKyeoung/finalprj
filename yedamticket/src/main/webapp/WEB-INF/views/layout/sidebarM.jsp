@@ -29,13 +29,13 @@
                   <li class="nav-item"><a class="nav-link" href="popularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
-            <li class="nav-item"><a class="nav-link" href="deleteRe.do"> <span class="menu-title">Delete Request</span>
+            <li class="nav-item"><a class="nav-link" href="deleteRequestList.do"> <span class="menu-title">Delete Request</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>
             <li class="nav-item"><a class="nav-link" href="concert.do"> <span class="menu-title">Concert</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>
-            <li class="nav-item"><a class="nav-link" href="inquiry.do"> <span class="menu-title">Inquiry</span>
+            <li class="nav-item"><a class="nav-link" href="managerInquiryList.do"> <span class="menu-title">Inquiry</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>            
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#general-pages"
@@ -46,11 +46,11 @@
               <div class="collapse" id="general-pages">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link"
-                    href="user.do"> User </a></li>
+                    href="managerUser.do"> User </a></li>
                   <li class="nav-item"><a class="nav-link"
-                    href="company.do"> Company </a></li>
+                    href="managerCompany.do"> Company </a></li>
                   <li class="nav-item"><a class="nav-link"
-                    href="admin.do"> Admin </a></li>
+                    href="manager.do"> Manager </a></li>
                   </ul>
               </div></li>
             <li class="nav-item sidebar-actions"><span class="nav-link">

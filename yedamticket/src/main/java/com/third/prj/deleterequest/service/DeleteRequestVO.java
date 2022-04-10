@@ -16,7 +16,7 @@ public class DeleteRequestVO {
 	
 	private int delReqNo;
 	private Date delDt;
-	private String cId;
+	private String CId;
 	private String deleteCd;
 	private String content;
 	private int mvNo;

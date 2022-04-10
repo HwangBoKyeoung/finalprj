@@ -25,13 +25,13 @@ public class PerformanceServiceImpl implements PerformanceService {
 
 
 	@Override
-	public PerformanceVO perSelect(PerformanceVO vo) {
-		return mapper.perSelect(vo);
+	public PerformanceVO perforSelect(PerformanceVO vo) {
+		return mapper.perforSelect(vo);
 	}
 
 	@Override
-	public List<PerformanceVO> perSelectList(CriteriaVO cri) {
-		return mapper.perSelectList(cri);
+	public List<PerformanceVO> companyPerforSelectList(CriteriaVO cri) {
+		return mapper.companyPerforSelectList(cri);
 	}
 
 	@Override

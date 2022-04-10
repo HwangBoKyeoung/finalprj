@@ -17,7 +17,7 @@
 				<div class="card-body">
 					<h4 class="card-title">Performance Update</h4>
 					<p class="card-description"></p>
-					<form class="forms-sample" action="performanceUpdate.do"
+					<form class="forms-sample" action="companyPerforUpdate.do"
 						method="post">
 						<div class="form-group row">
 							<label for="exampleInputUsername2"
@@ -98,7 +98,7 @@
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>
-						<button class="btn btn-gradient-primary me-2" onclick="location.href='pserDel.do?PNo=${pers.PNo}'">삭제요청</button>
+						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyPerforDel.do?PNo=${pers.PNo}&cId=${pers.CId}'">삭제요청</button>
 						<%-- <input type="hidden" name="no" id="no" value="${pers.PNo}"> --%>
 				</div>
 			</div>
