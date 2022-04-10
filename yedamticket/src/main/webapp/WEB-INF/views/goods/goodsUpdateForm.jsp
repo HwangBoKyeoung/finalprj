@@ -25,7 +25,6 @@
 								var filename = $(this).val().split('/').pop()
 										.split('\\').pop();
 							}
-							;
 
 							$(this).siblings('.upload-name').val(filename);
 						});
@@ -210,7 +209,7 @@ label {
 						<div class="filebox bs3-primary preview-image">
 								<br>
 								<label for="input_file">업로드</label>
-								<input class="upload-name" value="파일선택" disabled="disabled" style="width: 200px;">
+								<input class="upload-name" value="${gds.fileCd }" disabled="disabled" style="width: 200px;">
 								<input type="file" id="input_file" class="upload-hidden">
 						</div>
 							<div class="input-group no-border">

@@ -40,7 +40,7 @@
 	</select>
 	
 	<select id="goodsSelect" resultMap="goodsResultMap">
-		SELECT G_NO, NAME, SELLER, PRICE, CONTENT, GOODS_CD
+		SELECT G_NO, NAME, SELLER, PRICE, CONTENT, GOODS_CD, FILE_CD, FILE_RE
 		FROM GOODS
 		WHERE G_NO = #{gNo}
 	</select>
@@ -51,6 +51,8 @@
 			<if test="name != null"> NAME = #{name},</if>
 			<if test="price != null"> PRICE = #{price},</if>
 			<if test="content != null"> CONTENT = #{content},</if>
+			<!-- <if test="fileCd != null"> FILE_CD = #{fileCd},</if>
+			<if test="fileRe != null"> FILE_RE = #{fileRe},</if> -->
 		</set>
 		WHERE G_NO = #{GNo}
 	</update>
