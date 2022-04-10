@@ -74,8 +74,8 @@ textarea {
 								class="form-control"></td>
 						</tr>
 						<tr>
-							<td>파일 구분코드</td>
-							<td><input type="file" id="file" name="file"
+							<td>포스터</td>
+							<td><input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png" 
 								class="form-control"></td>
 						</tr>
 						<tr>

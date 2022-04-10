@@ -9,7 +9,7 @@
 	</bean>
 	
 	<bean class="java.lang.String" id="upLoadPath">
-		<constructor-arg value="C:/DEV/apache-tomcat-9.0.56/webapps/upload"/>
-		
+		<constructor-arg value="C:/DEV/apache-tomcat-9.0.56/webapps/upload"/>		
+								
 	</bean> 
 </beans>

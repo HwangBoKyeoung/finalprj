@@ -52,8 +52,8 @@ public class MovieController {
 	@Autowired
 	private MovieReservService movieReservationDao;
 	
-	
-	  @Autowired private String upLoadPath;
+	@Autowired 
+	private String upLoadPath;
 	 
 
 	@RequestMapping("/movieList.do")
@@ -243,7 +243,7 @@ public class MovieController {
 			
 			e.printStackTrace();
 		}
-		return "redirect:home.do";
+		return "redirect:movieList.do";
 	}
 
 }

@@ -23,6 +23,9 @@ public class PerformanceVO {
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
 	private int price;	//공연가격
+	private String lat;
+	private String lng;
+	private String renames; //변경된 파일이름
 	
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;

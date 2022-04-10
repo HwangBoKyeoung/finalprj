@@ -47,10 +47,11 @@ figure > img{
 #result> .card:hover .caption {
   opacity: 1;
 }
+
 </style>
 </head>
 <body>
-<c:set var="upLoadPath" value="/upload"/>
+<%-- <c:set var="upLoadPath" value="/upload"/> --%>
    <h1>박스오피스 순위</h1>
    <div id="result">
    
@@ -62,7 +63,7 @@ figure > img{
        <header>
        <h3> ${m.name }</h3>
        </header><figure>
-       <img src="${upLoadPath}/${m.renames }">
+         <img src="/upload/${m.renames }" style="max-width: 100%; height: auto;" >
        </figure>
        <p>
        <span>감독: ${m.director }</span>

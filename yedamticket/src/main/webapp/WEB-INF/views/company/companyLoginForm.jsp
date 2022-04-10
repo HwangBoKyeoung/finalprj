@@ -127,14 +127,14 @@
 									</div>
 									<input type="text" class="form-control" name="Cid"
 										placeholder="Id...">
-								</div>
+								</div>Spring Ajax 페이징 처리
 								<div class="input-group no-border input-lg">
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <i
 											class="now-ui-icons objects_key-25"></i>
 										</span>
 									</div>
-									<input type="text" placeholder="Password..." name="pwd"
+									<input type="password" placeholder="Password..." name="pwd"
 										class="form-control" />
 								</div>
 								<div class="card-footer text-center">

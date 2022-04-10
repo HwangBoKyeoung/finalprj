@@ -60,6 +60,13 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 
+	@Override
+	public int perInsert(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.perInsert(vo);
+	}
+
+
 
 
 

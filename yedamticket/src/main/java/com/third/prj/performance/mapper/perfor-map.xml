@@ -90,5 +90,13 @@
     	AND U_ID = #{Uid} ) A ))
 		
 	</select>
+	
+	<insert id="perInsert">
+	<selectKey keyProperty ="pNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(P_NO), 0) + 1 AS PNO 
+			FROM PERFORMANCE
+		</selectKey>
+		INSERT INTO PERFORMANCE VALUES(#{pNo},#{name},#{content},#{cId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
+	</insert> 
 
 </mapper>

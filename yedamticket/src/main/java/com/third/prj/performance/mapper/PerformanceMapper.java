@@ -3,6 +3,7 @@ package com.third.prj.performance.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.third.prj.movie.service.MovieVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.point.service.PointCriteriaVO;
@@ -24,6 +25,9 @@ public interface PerformanceMapper {
 	
 	//공연 예매 리스트 페이징
 	public int pfBuyTotal(PointCriteriaVO cri);
+	
+	//공연 등록
+	int perInsert(PerformanceVO vo);
 	
 	
 

@@ -24,5 +24,8 @@ public interface PerformanceService {
 	//공연 예매 리스트 페이징
 	public int pfBuyTotal(PointCriteriaVO cri);
 	
+	//공연 등록
+	int perInsert(PerformanceVO vo);
+	
 	
 }
