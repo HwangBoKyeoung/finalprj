@@ -21,6 +21,8 @@ import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
+import com.third.prj.user.service.UserService;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class PerformanceContorller {
@@ -33,7 +35,8 @@ public class PerformanceContorller {
 	private PerformanceVideoService pervDao;
 	@Autowired
 	private PerformanceReservationService perRDao;
-
+	@Autowired
+	private UserService userDao;
 	//모두조회
 	@RequestMapping("/conPage.do")
 	public String conPage(Model model) {
@@ -72,9 +75,11 @@ public class PerformanceContorller {
 	}
 	//공연 결제
 	@RequestMapping("/pReservation.do")
-	public String pReservation(Model model,PerformanceReservationVO prvo) {
-		perRDao.pReservation(prvo);
-		return "performance/pPayForm";
+	public String pReservation(Model model,PerformanceReservationVO prvo,UserVO uservo) {
+		model.addAttribute("re",prvo);
+		
+		model.addAttribute("user",userDao.userSelectOne(uservo));
+		return "user/performance/pPayForm";
 	}
 	
 	//황규복 end
