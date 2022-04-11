@@ -23,5 +23,10 @@ public class MovieReservationServiceImpl implements MovieReservService{
 		// TODO Auto-generated method stub
 		return mapper.seatSearch(vo);
 	}
+	@Override
+	public MovieReservationVO movieReservationSelect(MovieReservationVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.movieReservationSelect(vo);
+	}
 	
 }

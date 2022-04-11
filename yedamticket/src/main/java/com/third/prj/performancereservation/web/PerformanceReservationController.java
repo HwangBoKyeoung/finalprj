@@ -41,6 +41,7 @@ public class PerformanceReservationController {
 	@RequestMapping("/ticketassignment_1.do")
 	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session, Model model) {
 		String Uid = (String) session.getAttribute("sessionId");
+
 		performancereservationviewVO.setUid(Uid);
 		performancereservationDao.userTicket(performancereservationviewVO);
 		model.addAttribute("prInfo", performancereservationDao.userTicket(performancereservationviewVO));

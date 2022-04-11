@@ -106,9 +106,9 @@
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="./index.html"> <i
 								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
-							</a> <a class="dropdown-item" target="_blank"
+							</a> <a class="dropdown-item" 
 								href="pList.do">
-								<i class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
+								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"

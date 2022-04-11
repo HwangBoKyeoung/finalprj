@@ -17,7 +17,7 @@ public interface UserMapper {
 	List<UserVO> userList();
 
 	UserVO userSelect(UserVO vo);
-
+	UserVO userSelectOne(UserVO vo);
 	int userInsert(UserVO vo);
 
 	int userUpdate(UserVO vo);

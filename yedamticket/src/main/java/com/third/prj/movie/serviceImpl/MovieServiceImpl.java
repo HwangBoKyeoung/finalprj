@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.movie.mapper.MovieMapper;
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
+import com.third.prj.movie.service.movieCriteria;
 
 @Repository("movieDao")
 public class MovieServiceImpl implements MovieService {
@@ -28,11 +29,23 @@ public class MovieServiceImpl implements MovieService {
 		// TODO Auto-generated method stub
 		return mapper.procedureCall(map);
   }
-  
 	@Override
 	public List<MovieVO> movieList() {
 		// TODO Auto-generated method stub
 		return mapper.movieList();
 	}
+
+	@Override
+	public List<MovieVO> mList() {
+		// TODO Auto-generated method stub
+		return mapper.mList();
+	}
+
+	@Override
+	public MovieVO mDetail(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mDetail(vo);
+	}
+
 	
 }

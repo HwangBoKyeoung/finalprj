@@ -89,9 +89,9 @@
       	<![CDATA[
 			SELECT * 
 			FROM (
-	    		SELECT ROWNUM RN
-	    			 , A.*
-	    		FROM (
+	    		SELECT ROWNUM RN, A.*
+	    		FROM (	 
+	    		
 	    			SELECT * 
 	          		FROM NOTICE 
 	          		WHERE

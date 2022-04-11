@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.point.mapper.PointMapper">
+
+<insert id="payInsert" parameterType="com.third.prj.point.service.PointVO">
+	INSERT INTO POINT(PAYDT,
+					  PAY_NO,
+					  U_ID,
+					  PAY,
+					  BUY_CTNT_CD)
+	VALUES(			  
+					  SYSDATE,
+					  #{payNo},
+					  #{UId},
+					  #{pay},
+					  'mv'
+					  )
+
+</insert>
+</mapper>
