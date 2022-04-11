@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.movie.mapper.MovieMapper">
 
-  
+
 
 	<resultMap type="com.third.prj.movie.service.MovieVO"
 		id="movieResultMap">
@@ -20,6 +20,13 @@
 		<result property="actor" column="actor" />
 		<result property="fileCd" column="file_cd" />
 		<result property="docId" column="docId" />
+		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
+	</resultMap>
+	
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="perFormanceMap">
+		<result property="name" column="name"/>
+		<result property="content" column="content"/>
+		<result property="actor" column="actor"/>
 	</resultMap>
 
 	<resultMap type="com.third.prj.movie.service.MovieViewVO"
@@ -40,51 +47,67 @@
 	<resultMap type="hashmap" id="procedureCall" />
 
 	<update id="procedureCall" statementType="CALLABLE">
-		{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
+		{CALL
+		movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
 		#{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_director, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
+		#{mv_genre,
+		mode=IN, jdbcType=VARCHAR, javaType=STRING},
+		#{mv_director, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_rating, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_country, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_content, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_actor, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_iname, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_vname, mode=IN,
+		jdbcType=VARCHAR, javaType=STRING},
+		#{mv_cd, mode=IN, jdbcType=VARCHAR,
+		javaType=STRING},
+		#{mv_message, mode=OUT, jdbcType=VARCHAR,
+		javaType=STRING})
 	</update>
-	
+
 	<!-- 영화상영예정작 -->
-   <select id="mList" resultMap="movieResultMap">
-      SELECT * FROM MOVIE
-        WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
-        AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
-   </select>
+	<select id="mList" resultMap="movieResultMap">
+		SELECT * FROM MOVIE
+		WHERE STARTDATE
+		BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd')
+		AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
+	</select>
 
 	<select id="movieList" resultMap="movieResultMap">
-		SELECT * FROM MOVIE
+		SELECT * 
+		FROM MOVIE
 		WHERE
 		STARTDATE
 		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
-		AND TO_CHAR(SYSDATE,'yyyyMMdd')
+		AND
+		TO_CHAR(SYSDATE,'yyyyMMdd')
 	</select>
 
 	<select id="movieDetail" resultMap="movieResultMap">
 		SELECT *
 		FROM MOVIE
-		WHERE NAME=#{name}
+		WHERE
+		NAME=#{name}
 		AND STARTDATE=#{startDate}
 	</select>
 
 	<select id="mvBuyList" resultMap="movieViewMap">
 		SELECT *
 		FROM MOVIEVIEW
-		WHERE BUY_CTNT_CD = 'mv'
+		WHERE
+		BUY_CTNT_CD = 'mv'
 		AND U_ID = #{Uid}
 
 	</select>
 
- 	<select id="mvBuyList2" resultMap="movieViewMap">
+	<select id="mvBuyList2" resultMap="movieViewMap">
       	<![CDATA[
 			SELECT * 
 			FROM (
@@ -95,29 +118,43 @@
 	WHERE BUY_CTNT_CD = 'mv'
 	AND U_ID = #{Uid} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY PAYDT DESC
 		]]>
 	</select>
 
 
 	<select id="mvBuyTotal" resultType="int">
-		  SELECT COUNT(*) AS TOTAL 
-			FROM ( SELECT * 
-			FROM (
-	    		SELECT ROWNUM RN ,
-								A.*
-	    		FROM (  SELECT *
-				FROM MOVIEVIEW
-				WHERE BUY_CTNT_CD = 'mv'
-				AND U_ID = #{Uid} ) A ))
-		
+		SELECT COUNT(*) AS TOTAL
+		FROM
+		( SELECT *
+		FROM (
+		SELECT ROWNUM RN ,
+		A.*
+		FROM ( SELECT *
+		FROM MOVIEVIEW
+		WHERE BUY_CTNT_CD = 'mv'
+		AND U_ID = #{Uid} ) A ))
+
 	</select>
-	
-	<insert id = "movieInsert">
-		<selectKey keyProperty ="mvNo" resultType="int" order="BEFORE">
-			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO 
+
+	<insert id="movieInsert">
+		<selectKey keyProperty="mvNo" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO
 			FROM MOVIE
 		</selectKey>
-		INSERT INTO MOVIE VALUES(#{mvNo},#{name},#{genre}, to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{cId},#{actor},#{fileCd},#{docId},#{renames})
+		INSERT INTO MOVIE VALUES(#{mvNo},#{name},#{genre},
+		to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{cId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
+
+	<select id="searchAll" resultMap="movieResultMap">
+		select name, actor, content
+		FROM MOVIE 
+		WHERE NAME LIKE '%'||#{searchName}||'%' or actor like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+		UNION
+		select name, actor, content
+		FROM PERFORMANCE 
+		where name like '%'||#{searchName}||'%' or actor like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+	</select>
 
 </mapper>

@@ -127,7 +127,7 @@
 									</div>
 									<input type="text" class="form-control" name="Cid"
 										placeholder="Id...">
-								</div>Spring Ajax 페이징 처리
+								</div>
 								<div class="input-group no-border input-lg">
 									<div class="input-group-prepend">
 										<span class="input-group-text"> <i

@@ -27,4 +27,6 @@ public interface MovieService {
 	int movieInsert(MovieVO vo);
 	
 	List<MovieVO> mList();
+	//통합검색
+	List<MovieVO> searchAll(String searchName);
 }

@@ -245,5 +245,16 @@ public class MovieController {
 		}
 		return "redirect:movieList.do";
 	}
+	
+	@RequestMapping("/searchAll.do")
+	public String searchAll(MovieVO vo, Model model) {
+		
+		String SearchName = vo.getSearchName();
+		model.addAttribute("searchName", movieDao.searchAll(SearchName));
+		
+		return "user/searchList";
+	}
+	
+	
 
 }

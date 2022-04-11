@@ -22,5 +22,9 @@
         where s.p_no = p.p_no
         ORDER BY P_NO
 	</select>
+	
+	<insert id = "pScheduleInsert">    
+		INSERT INTO PERFORMANCE_SCHEDULE(P_SCH_NO,FRDT,TIME,P_NO,TRDT,ENDTIME) VALUES(PERSCH_SEQ.nextval,#{frDt},#{time},#{pNo},#{trDt},#{endTime})
+	</insert>
 
 </mapper>

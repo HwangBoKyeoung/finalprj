@@ -217,8 +217,9 @@
 				FROM
 				MOVIE_RESERVATION R JOIN MOVIE M
 				ON R.DOCID = M.DOCID
-				WHERE U_ID = #{Uid} ) A )
+				WHERE U_ID = #{Uid} ) A ) 
 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		ORDER BY RESERVDT DESC
 		]]>
 	</select>
 
@@ -255,6 +256,7 @@
 		AND Y.P_NO = Z.P_NO
 		AND X.U_ID = #{Uid} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY RESERVE_DTTM DESC
 		]]>
 	</select>
 
@@ -272,7 +274,7 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID ='micol1234' ) A ) )
+		AND X.U_ID =#{Uid} ) A ) )
 		
 	</select>
 	
@@ -285,8 +287,9 @@
 								A.*
 	    		FROM (  select *
 		from userPointView
-		where u_id = #{Uid} ) A ) 	 
+		where u_id = #{Uid} ) A )  
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY CHARGEDT DESC
 		]]> 
 	</select>
 	
@@ -300,6 +303,12 @@
 	    		FROM (  select *
 		from userPointView
 		where u_id = #{Uid} ) A ) )
+	</select>
+	
+	<select id="userPoint" resultMap="userPointMap">
+	SELECT SUM(CHARGE)-SUM(PAY) AS POINT
+	FROM POINT
+	WHERE U_ID=#{Uid}
 	</select>
 	
 	

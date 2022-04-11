@@ -65,4 +65,12 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.mList();
 	}
 
+	@Override
+	public List<MovieVO> searchAll(String searchName) {
+		// TODO Auto-generated method stub
+		return mapper.searchAll(searchName);
+	}
+
+
+
 }

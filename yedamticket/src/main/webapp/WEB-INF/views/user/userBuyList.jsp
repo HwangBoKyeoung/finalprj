@@ -28,7 +28,7 @@
 				<ul class="list-unstyled components mb-5">
 					<li>
 						<h6>${sessionId }님은회원입니다</h6>
-						<h6>보유 포인트${user.point }P</h6> <br>
+						<h6>보유 포인트${userPoint.point }P</h6> <br>
 					</li>
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>

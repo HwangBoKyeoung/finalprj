@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +19,8 @@ import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleService;
+import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
 
@@ -26,6 +29,9 @@ public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceService perDao;
+	
+	@Autowired
+	private PerformanceScheduleService persDao;
 
 	@Autowired
 	private PerformanceImageService periDao;
@@ -122,8 +128,10 @@ public class PerformanceContorller {
 	}
 
 	@RequestMapping("/perInsert.do")
-	public String perInsert(PerformanceVO vo, MultipartFile file) {
-
+	public String perInsert(PerformanceVO vo, MultipartFile file,PerformanceScheduleVO pvo) {
+		
+		System.out.println("==============="+vo);
+		
 		String fileName = file.getOriginalFilename(); // 원본파일명
 		String id = UUID.randomUUID().toString();// 고유한 아이디 생성
 		System.out.println("fileName: " + fileName);
@@ -139,7 +147,10 @@ public class PerformanceContorller {
 
 			vo.setFileCd(fileName);
 			vo.setRenames(targetFile);
+			
 			perDao.perInsert(vo);
+			pvo.setPNo(vo.getPNo());
+			persDao.pScheduleInsert(pvo);
 			System.out.println("insert suss");
 
 		} catch (Exception e) {

@@ -74,6 +74,7 @@
 		WHERE BUY_CTNT_CD = 'pf'
     	AND U_ID = #{Uid} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY PAYDT DESC
 		]]>
 	</select>
 

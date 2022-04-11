@@ -179,9 +179,11 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri) {
+	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
 		cri.setUid((String)session.getAttribute("sessionId"));
 		vo.setUid((String)session.getAttribute("sessionId"));
+		pvo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("userPoint", userDao.userPoint(pvo));
 		model.addAttribute("mvList", userDao.mvRList(cri));
 		model.addAttribute("pfList", userDao.pfRList(cri));
 		model.addAttribute("user", userDao.userSelectOne(vo));
@@ -230,8 +232,10 @@ public class UserController {
 		cri.setUid((String)session.getAttribute("sessionId"));
 		System.out.println("=============== cri userid"+cri.getUid() + "===============");
 		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
+		
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
 		model.addAttribute("mvList", userDao.mvRList(cri));
+		
 		vo.setUid((String)session.getAttribute("sessionId"));
 		model.addAttribute("user", userDao.userSelectOne(vo));
 		
@@ -252,12 +256,16 @@ public class UserController {
 	}
 	
 	@RequestMapping("/userBuyList.do")
-	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo,UserVO vo) {
-		vo.setUid((String)session.getAttribute("sessionId"));	
+	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo) {
+		
 		mvo.setUid((String)session.getAttribute("sessionId"));
 		pvo.setUid((String)session.getAttribute("sessionId"));
 		uvo.setUid((String)session.getAttribute("sessionId"));	
-		model.addAttribute("user", userDao.userSelectOne(vo));
+		
+		
+		model.addAttribute("userPoint", userDao.userPoint(uvo));
+		
+		
 		model.addAttribute("list3", userDao.pointBuyList(uvo));
 		model.addAttribute("list2",movieDao.mvBuyList(mvo));
 		model.addAttribute("list1", perDao.pfBuyList(pvo));

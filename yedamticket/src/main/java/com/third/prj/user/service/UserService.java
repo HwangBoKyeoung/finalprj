@@ -69,5 +69,8 @@ public interface UserService {
 	//포인트 충전내역 페이징
 	public int pointBuyTotal(PointCriteriaVO cri);
 	
+	//유저 포인트 확인
+	UserPointViewVo userPoint(UserPointViewVo vo);
+	
 
 }

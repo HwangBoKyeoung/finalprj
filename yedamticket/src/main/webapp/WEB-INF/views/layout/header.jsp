@@ -9,7 +9,7 @@
 <style>
 .login-css-add {
 	position: absolute;
-    left: 92%;
+	left: 92%;
 }
 
 .nav-css-add {
@@ -26,25 +26,23 @@
 	margin-left: auto;
 }
 
-@media screen and (max-width: 1430px){
+@media screen and (max-width: 1430px) {
 	.login-css-add {
 		position: absolute;
-   		left: 100%;
+		left: 100%;
 	}
 }
 
-@media screen and (max-width: 991px){
+@media screen and (max-width: 991px) {
 	.menu-css-add {
 		align-items: flex-start;
 		margin-right: 0;
 		margin-left: 20px;
 		line-height: 70px;
 	}
-	
 	.dropdown-menu {
 		min-width: 20rem;
 	}
-	
 	.dropdown-item {
 		line-height: 50px;
 	}
@@ -106,9 +104,8 @@
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="./index.html"> <i
 								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
-							</a> <a class="dropdown-item" target="_blank"
-								href="pList.do">
-								<i class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
+							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
+								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
@@ -151,26 +148,27 @@
 								class="fa-regular fa-comment-dots fa-2x"></i> 공연정보
 							</a> <a class="dropdown-item" href="goodsPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈정보
-							</a>
-							 <a class="dropdown-item" href="movieInsertForm.do"> <i
+							</a> <a class="dropdown-item" href="movieInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 영화등록
-							</a>
-							<a class="dropdown-item" href="perInsertForm.do"> <i
+							</a> <a class="dropdown-item" href="perInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
 							</a>
 						</div></li>
 					<li>
+						<form class="d-flex" action="searchAll.do">
+							<input class="form-control me-2" type="search" id="searchName" name="searchName"
+								placeholder="Search" aria-label="Search">
+							<button class="btn btn-outline-primary" type="submit">Search</button>
+						</form>
 						<div align="right">
 							<c:choose>
 								<c:when test="${empty sessionId}">
-									<li class="login-css-add"><a
-										href="userLoginForm.do" > <i
-											class="fa-solid fa-headset fa-2x"></i> 로그인
+									<li class="login-css-add"><a href="userLoginForm.do">
+											<i class="fa-solid fa-headset fa-2x"></i> 로그인
 									</a></li>
 								</c:when>
 								<c:otherwise>
-									<li class="login-css-add"><a
-										href="kakaoLogout.do" > <i
+									<li class="login-css-add"><a href="kakaoLogout.do"> <i
 											class="fa-solid fa-headset fa-2x"></i> 로그아웃
 									</a></li>
 								</c:otherwise>

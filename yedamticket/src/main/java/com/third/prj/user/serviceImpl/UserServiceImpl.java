@@ -159,6 +159,12 @@ public class UserServiceImpl implements UserService {
 		return mapper.pointBuyTotal(cri);
 	}
 
+	@Override
+	public UserPointViewVo userPoint(UserPointViewVo vo) {
+		// TODO Auto-generated method stub
+		return mapper.userPoint(vo);
+	}
+
 
 
 

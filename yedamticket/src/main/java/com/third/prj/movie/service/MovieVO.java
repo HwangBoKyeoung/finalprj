@@ -2,6 +2,7 @@ package com.third.prj.movie.service;
 
 
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.performance.service.PerformanceVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +30,11 @@ public class MovieVO {
 	private String docId; //영화코드
 	private String renames; //변경된 파일명
 	
+	
+	private String searchName; //검색
+	
 	private MovieReservVO movieReservVO;
+	private PerformanceVO performanceVO;
+	
 
 }

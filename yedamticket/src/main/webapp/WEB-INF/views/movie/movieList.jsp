@@ -20,7 +20,7 @@
 }
 figure > img{
   display: block;
-  width: 100%;
+ /*  width: 100%; */
   height: auto;   
 }
 .caption {
@@ -51,6 +51,7 @@ figure > img{
 </style>
 </head>
 <body>
+${movies}
 <%-- <c:set var="upLoadPath" value="/upload"/> --%>
    <h1>박스오피스 순위</h1>
    <div id="result">
@@ -62,9 +63,8 @@ figure > img{
        <div class="card">
        <header>
        <h3> ${m.name }</h3>
-       </header><figure>
-         <img src="/upload/${m.renames }" style="max-width: 100%; height: auto;" >
-       </figure>
+       </header>
+       <figure><img src="/upload/${m.renames }"></figure>
        <p>
        <span>감독: ${m.director }</span>
        <span>배우: ${m.actor }</span>
