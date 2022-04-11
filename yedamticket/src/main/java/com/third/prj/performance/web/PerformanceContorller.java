@@ -1,5 +1,6 @@
 package com.third.prj.performance.web;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PageVO;
@@ -15,34 +17,60 @@ import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
 
+import com.third.prj.performancereservation.service.PerformanceReservationService;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
+
 @Controller
 public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceService perDao;
-
 	@Autowired
 	private PerformanceImageService periDao;
+	@Autowired
+	private PerformanceReservationService perRDao;
 
-
-//	//모두조회
-//	@RequestMapping("/companyPerforList.do")
-//	public String conPage(Model model,CriteriaVO cri) {
-//		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
-//		model.addAttribute("pers", perDao.companyPerforSelectList(cri));
-//		model.addAttribute("pageVO", pageVO);
-//		return "companyMyPage/companyMyPerforList";
-//	}
-
+	//황규복 start
+	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
-	public String pList() {
-		
+	public String pList(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달
+		model.addAttribute("performance",perDao.pList(cri));
+		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
 	}
+	//공연 상세페이지 + 예약	
+	@RequestMapping("/pBookingForm.do")
+	public String pBookingForm(Model model,PerformanceVO vo) {
+		System.out.println("name"+vo.getName());
+		System.out.println("pNo"+vo.getPNo());
+		
+		vo = perDao.pSelect(vo);
+		
+		PerformanceScheduleVO pvo = new PerformanceScheduleVO();
+		System.out.println("+++++++++++++++++++++++++++++++++++++++" + pvo);
+		
+		model.addAttribute("performance",perDao.pSelect(vo));
+		
+		return "performance/pBookingForm";
+	}
 	
-//	@RequestMapping("/pserSelect.do")
-//	public String perSelect(PerformanceVO vo, Model model) {
-
+	@RequestMapping("/searchSeatNo.do")
+	@ResponseBody
+	public List<PerformanceReservationVO> searchSeatNo(PerformanceReservationVO prvo) {
+		return perRDao.searchSeatNo(prvo);
+	}
+	
+	//공연 결제
+	@RequestMapping("/pReservation.do")
+	public String pReservation(Model model,PerformanceReservationVO prvo) {
+		perRDao.pReservation(prvo);
+		return "performance/pPayForm";
+	}
+	
+	//황규복 end
 	//한건조회
 	@RequestMapping("/companyPerforUpdateForm.do")
 	public String companyPerforUpdateForm(PerformanceVO vo, Model model) {

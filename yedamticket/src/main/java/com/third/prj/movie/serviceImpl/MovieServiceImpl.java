@@ -12,6 +12,7 @@ import com.third.prj.movie.mapper.MovieMapper;
 import com.third.prj.movie.service.CriteriaVO;
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
+import com.third.prj.movie.service.movieCriteria;
 
 import lombok.extern.java.Log;
 
@@ -32,7 +33,6 @@ public class MovieServiceImpl implements MovieService {
 		// TODO Auto-generated method stub
 		return mapper.procedureCall(map);
   }
-  
 	@Override
 	public List<MovieVO> movieList() {
 		// TODO Auto-generated method stub
@@ -59,6 +59,16 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.getTotal(cri);
 	}
 
-	
-	
+	@Override
+	public List<MovieVO> mList() {
+		// TODO Auto-generated method stub
+		return mapper.mList();
+	}
+
+	@Override
+	public MovieVO mDetail(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mDetail(vo);
+	}
+
 }

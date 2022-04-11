@@ -1,6 +1,7 @@
 package com.third.prj.user.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -61,48 +62,40 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int emailCheck(String email) {
-		// TODO Auto-generated method stub
 		return mapper.emailCheck(email);
 	}
 
 	@Override
 	public int kakaoInsert(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.kakaoInsert(vo);
 	}
 
 	@Override
 	public int userUpdate(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.userUpdate(vo);
 	}
 
 	@Override
 	public int userDelete(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.userDelete(vo);
 	}
 
 	@Override
 	public List<MovieReservVO> MvReservList(MovieReservVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.MvReservList(vo);
 	}
 
 	@Override
 	public List<PerformanceVO> pfReservList(PerformanceReservationVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.pfReservList(vo);
 	}
 
-	@Override
-	public int userCharge(UserVO vo) {
-		return mapper.userCharge(vo);
-	}
+	/*
+	 * @Override public int userCharge(UserVO vo) { return mapper.userCharge(vo); }
+	 */
 
 	@Override
 	public int userPointUpdate(int point, String id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -120,5 +113,15 @@ public class UserServiceImpl implements UserService {
 	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
+	}
+	
+	public int userCharge(Map<String, Object> map) {
+		return mapper.userCharge(map);
+	}
+
+	@Override
+	public UserVO userSelectOne(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userSelectOne(vo);
 	}
 }

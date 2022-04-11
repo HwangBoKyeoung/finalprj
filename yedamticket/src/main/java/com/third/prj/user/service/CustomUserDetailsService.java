@@ -17,7 +17,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		단건조회 return
 		UserVO vo = new UserVO();
-		vo.setUid(username);
+		vo.setUId(username);
 		UserVO userVO = userDao.userSelect(vo);
 		
 //		아이디가 없으면?

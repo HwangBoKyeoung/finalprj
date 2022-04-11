@@ -28,14 +28,16 @@
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
+	
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
 		<result column="P_RESERV_NO" property="PReservNo" />
 		<result column="RESERVE_DTTM" property="reserveDttm" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
+	
 	<resultMap
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
@@ -45,8 +47,8 @@
 		<collection property="performanceScheduleVO"
 			resultMap="pfScheduleMap"></collection>
 	</resultMap>
-
-
+	
+	<resultMap type="hashmap" id="procedureCall"/>
 
 
 	<insert id="userInsert"
@@ -71,18 +73,20 @@
 		SELECT COUNT(*)
 		FROM users
 		WHERE
-		u_id = #{Uid}
+		u_id = #{UId}
 	</select>
 
 	<select id="userSelect"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM   USERS
-		WHERE  U_ID = #{Uid}
+		<!-- WHERE  U_ID = #{UId} -->
+		WHERE  U_ID = #{UId}
+		AND	   PWD  = #{pwd}
 	</select>
 	
 	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
-		<id column="u_id" property="Uid"/>
+		<id column="u_id" property="UId"/>
 		<result column="pwd" property="pwd"/>
 		<result column="name" property="name"/>
 		<result column="email" property="email"/>
@@ -122,7 +126,7 @@
 		, {noop}PWD
 		, ROLE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select>
 
 
@@ -135,7 +139,7 @@
 		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
 		VALUES
-		(#{name}, #{Uid}, #{email} , #{loginCd} )
+		(#{name}, #{UId}, #{email} , #{loginCd} )
 
 	</insert>
 
@@ -150,14 +154,13 @@
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
 		WHERE U_ID = #{Uid}
-
 	</update>
 
 	<delete id="userDelete"
 		parameterType="com.third.prj.user.service.UserVO">
 		DELETE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</delete>
 
@@ -169,10 +172,15 @@
 		MOVIE_RESERVATION
 		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 
 	</select>
-
+	<select id="userSelectOne"
+	      resultType="com.third.prj.user.service.UserVO">
+	      SELECT *
+	      FROM USERS
+      WHERE U_ID = #{UId}
+   </select>
 	<select id="pfReservList" resultMap="performanceMap">
 		SELECT X.P_RESERV_NO,
 		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
@@ -184,18 +192,27 @@
 		AND X.U_ID = #{uId}
 	</select>
 	
-	<update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
+	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
 		UPDATE users
 		SET    point = (SELECT point
 		             	FROM   users
 		             	WHERE  u_id = #{Uid}) + #{point}
 		WHERE  u_id = #{Uid}
+	</update> -->
+	
+	<update id="userCharge" statementType="CALLABLE" >
+		{CALL 
+		insertPoint(#{p1, mode=IN, jdbcType=INTEGER, javaType=INT},
+					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+					)
+		}
+
 	</update>
 	
 	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM   users
-		WHERE  u_id = #{Uid}
+		WHERE  u_id = #{UId}
 	</select>
 	
 	<select id="getTotal" resultType="int">

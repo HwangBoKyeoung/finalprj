@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -125,7 +126,7 @@ public class UserController {
 		if (login != null && pwdChk) {
 			msg = "로그인 성공";
 			url = "home.do";
-			session.setAttribute("sessionId", vo.getUid());
+			session.setAttribute("sessionId", vo.getUId());
 			session.setAttribute("sessionEmail", vo.getEmail());
 			session.setAttribute("sessionName", vo.getName());
 			session.setAttribute("sessionAddr", vo.getAddr());
@@ -150,10 +151,10 @@ public class UserController {
 	@RequestMapping("/userSelect.do")
 	public String userSelect(HttpSession session, UserVO vo) {
 		userDao.userSelect(vo);
-		session.setAttribute("sessionId", vo.getUid());
+		session.setAttribute("sessionId", vo.getUId());
 		session.setAttribute("sessionPwd", vo.getPwd());
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println("id :" + vo.getUid());
+		System.out.println("id :" + vo.getUId());
 		System.out.println("pwd :" + vo.getPwd());
 		System.out.println("name :" + vo.getName());
 		System.out.println("email :" + vo.getEmail());
@@ -226,6 +227,15 @@ public class UserController {
 		return "user/userBuyList";
 	}
 
+	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String loginChk(UserVO userVO, @RequestParam("Uid") String Uid) {
+		userVO = userDao.loginChk(userVO);
+		String address = userVO.getAddr();
+		System.out.println(address);
+		return address;
+	}
+	
 //	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
 //		return "user/userUpdateForm";
 //	}

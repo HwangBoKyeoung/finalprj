@@ -39,10 +39,27 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return mapper.procedureCall(map);
 	}
 
-
 	@Override
 	public int getTotal(CriteriaVO cri) {
 		return mapper.getTotal(cri);
+	}
+
+	//황규복
+	@Override
+	public List<PerformanceVO> pList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pList(cri);
+	}
+	@Override
+	public List<PerformanceVO> epList() {
+		// TODO Auto-generated method stub
+		return mapper.epList();
+	}
+
+	@Override
+	public PerformanceVO pSelect(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pSelect(vo);
 	}
 
 

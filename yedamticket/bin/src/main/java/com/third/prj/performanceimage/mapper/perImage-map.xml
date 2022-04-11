@@ -3,13 +3,22 @@
 
 <mapper	namespace="com.third.prj.performanceimage.mapper.PerformanceImageMapper">
 
-	<update id="PImageUpdate" parameterType="com.third.prj.performanceimage.service.PerformanceImageVO">
-		UPDATE PERFORMANCE_IMAGE
-		<set>
-			<if test="name != null">name = #{name},</if>
-			<if test="renames != null">RENAMES = #{rename},</if>
-		</set>
-		WHERE P_IMG_NO = #{pImgNo}
-	</update>
+	<select id="periSelect" resultType="com.third.prj.performanceimage.service.PerformanceImageVO">
+		SELECT P_IMG_NO, INAME,IRENAMES,FILE_CD
+		FROM PERFORMANCE_IMAGE
+		WHERE FILE_CD = #{fileCd}
+	</select>
+	
+
+<!-- 	<update id="PImageUpdate" parameterType="com.third.prj.performanceimage.service.PerformanceImageVO"> -->
+<!-- 		UPDATE PERFORMANCE_IMAGE -->
+<!-- 		<set> -->
+<!-- 			<if test="name != null">name = #{name},</if> -->
+<!-- 			<if test="renames != null">RENAMES = #{rename},</if> -->
+<!-- 		</set> -->
+<!-- 		WHERE P_IMG_NO = #{pImgNo} -->
+<!-- 	</update> -->
+	
+	
 	
 </mapper>

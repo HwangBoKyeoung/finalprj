@@ -1,6 +1,7 @@
 package com.third.prj.user.service;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -13,7 +14,7 @@ public interface UserService {
 	List<UserVO> userList(CriteriaVO cri);
 
 	UserVO userSelect(UserVO vo);
-
+	UserVO userSelectOne(UserVO vo);
 	int userInsert(UserVO vo);
 
 	int userUpdate(UserVO vo);
@@ -33,7 +34,7 @@ public interface UserService {
 	int emailCheck(String email);
 
 //  카카오 회원가입	
-	int kakaoInsert(UserVO vo);
+	int kakaoInsert(UserVO vo); 
 	
 //  영화 예매 내역	
 	List<MovieReservVO> MvReservList(MovieReservVO vo);
@@ -42,12 +43,14 @@ public interface UserService {
 	List<PerformanceVO> pfReservList(PerformanceReservationVO vo);
 
 	// 포인트 충전
-	int userCharge(UserVO vo);
+	int userCharge(Map<String, Object> map);
 	
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
+
 	//페이징(관리자-회원리스트 파트)
-		 int getTotal(CriteriaVO cri);
+	int getTotal(CriteriaVO cri);
 	
+
 }

@@ -62,7 +62,7 @@ public class KakaoController {
         
         //받아온 이메일이 DB에 있으면 바로 로그인 없으면 DB에 저장
          if(userDao.emailCheck(email) != 1) { 
-            vo.setUid(id);
+            vo.setUId(id);
             vo.setEmail(email);
             vo.setLoginCd("kakao");
             userDao.kakaoInsert(vo);

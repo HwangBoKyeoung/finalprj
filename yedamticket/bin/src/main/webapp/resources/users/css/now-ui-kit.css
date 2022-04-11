@@ -3681,7 +3681,7 @@ p {
 
 body {
   color: #2c2c2c;
-  font-size: 14px;
+  font-size: 100%;
   font-family: "Montserrat", "Helvetica Neue", Arial, sans-serif;
   overflow-x: hidden;
   -moz-osx-font-smoothing: grayscale;
@@ -4517,7 +4517,7 @@ Created using IcoMoon - icomoon.io
   padding-top: 0.625rem;
   padding-bottom: 0.625rem;
   min-height: 53px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   box-shadow: 0px 0px 20px 0px rgba(0, 0, 0, 0.15);
 }
 
@@ -4743,14 +4743,14 @@ Created using IcoMoon - icomoon.io
   -moz-transform: translate3d(0, 0px, 0) !important;
   -o-transform: translate3d(0, 0px, 0) !important;
   -ms-transform: translate3d(0, 0px, 0) !important;
-  transform: translate3d(0, 0px, 0) !important;
+  transform: translate3d(-23px, 25px, 0px) !important;
 }
 
 .dropdown-menu .dropdown-item,
 .bootstrap-select .dropdown-menu.inner li a {
   font-size: 0.8571em;
-  padding-top: .6rem;
-  padding-bottom: .6rem;
+  padding-top: .8rem;
+  padding-bottom: .8rem;
   margin-top: 5px;
   -webkit-transition: all 150ms linear;
   -moz-transition: all 150ms linear;
@@ -5439,7 +5439,7 @@ img {
 }
 
 .footer {
-  padding: 24px 0;
+  padding: 10px 0;
 }
 
 .footer.footer-default {
@@ -6272,7 +6272,7 @@ img {
 }
 
 [data-background-color]:not([data-background-color="gray"]) {
-  color: #FFFFFF;
+  /* color: #FFFFFF; */
 }
 
 [data-background-color]:not([data-background-color="gray"]) .title,
@@ -6504,18 +6504,18 @@ img {
     transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   }
   .sidebar-collapse .navbar-collapse:before {
-    background: #f96332;
+    background: #cfc5e9;
     /* For browsers that do not support gradients */
-    background: -webkit-linear-gradient(#f96332 0%, #000 80%);
+    background: -webkit-linear-gradient(#6f42c1 0%, #b9b9cf 80%);
     /* For Safari 5.1 to 6.0 */
-    background: -o-linear-gradient(#f96332 0%, #000 80%);
+    background: -o-linear-gradient(#6f42c1 0%, #b9b9cf 80%);
     /* For Opera 11.1 to 12.0 */
-    background: -moz-linear-gradient(#f96332 0%, #000 80%);
+    background: -moz-linear-gradient(#6f42c1 0%, #b9b9cf 80%);
     /* For Firefox 3.6 to 15 */
-    background: linear-gradient(#f96332 0%, #000 80%);
+    background: linear-gradient(#6f42c1 0%, #b9b9cf 80%);
     /* Standard syntax (must be last) */
     opacity: 0.76;
-    filter: alpha(opacity=76);
+    filter: alpha(opacity=78);
     display: block;
     content: "";
     position: absolute;
@@ -6560,7 +6560,6 @@ img {
     margin: 0 1rem;
     margin-bottom: 15px;
     padding-top: 0;
-    height: 125px;
     overflow-y: scroll;
   }
   .sidebar-collapse .navbar .dropdown.show .dropdown-menu:before,
@@ -7161,7 +7160,7 @@ img {
     margin: 0;
   }
   .navbar-nav .nav-item:not(:last-child) {
-    margin-right: 5px;
+    margin-right: 20px;
   }
   .section-nucleo-icons .icons-container {
     margin: 0 0 0 auto;
