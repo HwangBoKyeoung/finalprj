@@ -17,6 +17,22 @@
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
 		
+		
+	<!-- per -->	
+		<definition name="my.p" template="/WEB-INF/views/layout/layoutP.jsp">
+			<put-attribute name="title" value="MyWebSite" />
+		
+	
+			<put-attribute name="body" value="" />
+	
+		</definition>
+	
+		<definition name="p/*/*" extends="my.p">
+			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
+		
+		
+		
 		<definition name="my.user" template="/WEB-INF/views/layout/layoutO.jsp">
 			<put-attribute name="title" value="MyWebSite" />
 			<put-attribute name="body" value="" />
@@ -35,6 +51,15 @@
 		</definition>
 	
 		<definition name="manager/*/*" extends="manager.home">
+			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
+		
+		<definition name="company.home" template="/WEB-INF/views/layout/layoutC.jsp">
+			<put-attribute name="title" value="CompanySite" />
+			<put-attribute name="body" value="" />
+		</definition>
+	
+		<definition name="company/*/*" extends="company.home">
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
 		

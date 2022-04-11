@@ -43,6 +43,7 @@ body {
 <body>
 <h1>티켓양도</h1>
 <h3>${sessionId }님이 보유중인 티켓입니다!</h3>
+
 	<div align="center">
 		<c:if test="${empty prInfo }">
 			<div>
@@ -53,10 +54,12 @@ body {
  		<div id="widthslider" align="center">
 			<ul class="widthlist">
 				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.status != 'W'}">
 				<li class="widthitem">
 					<div class="card" style="width: 20rem;">
 					  <div class="card-body">
 					    <p class="card-title" >공연 명 : ${pr.name }</p>
+					  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
 					    <p class="card-text">공연일정 : ${pr.frDt }</p>
 					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
 					    <p class="card-text">좌석구역 : ${pr.loc }</p>
@@ -65,6 +68,26 @@ body {
 					  </div>
 					</div>
 				</li>
+				</c:if>
+				</c:forEach>
+				
+				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.status == 'W'}">
+				<li class="widthitem">
+					<div class="card" style="width: 20rem;">
+					  <div class="card-body" style="background-color : gray">
+					    <p class="card-title" >공연 명 : ${pr.name }</p>
+					  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+					    <p class="card-text">공연일정 : ${pr.frDt }</p>
+					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+					    <p class="card-text">좌석구역 : ${pr.loc }</p>
+					    <p class="card-text">가  격 : ${pr.price }</p>
+					    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="거래를 예정중인 티켓입니다!">선택</button>
+					    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
+					  </div>
+					</div>
+				</li>
+				</c:if>
 				</c:forEach>
 			</ul>
 			<input type="button" onclick="resetPosition()" value="원위치로" />
@@ -80,8 +103,12 @@ body {
 			      </div>
 			      <form action="ticketassignment_2.do" method="POST">
 			      <div class="modal-body">
+								      
 			      	<h5 class="modal-title" id="Mname"></h5>
 			      	<input type="hidden" id="name" name="name">
+			      	
+			      	<p id="MPReservNo"></p>
+			      	<input type="hidden" id="PReservNo" name="PReservNo">
 			      	
 			      	<p id="Mdate"></p>
 			      	<input type="hidden" id="date" name="date">
@@ -95,8 +122,8 @@ body {
 			      	<p id="Mprice" ></p>
 			      	<input type="hidden" id="price" name="price">
 			      </div>
-			      <div class="modal-footer">
-			      	<p>맞으시면 확인 버튼을 눌러주세요.</p>
+			      <div class="modal-footer" style="display:block">
+			      	<p>맞으시면 확인 버튼을 눌러주세요.         </p><br>
 			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
 			        <input type="submit" class="btn btn-primary" value="확인">
 			      </div>
@@ -106,10 +133,109 @@ body {
 			</div>
 			<!-- Modal End -->
 			
+			<!-- Modal2 -->
+			<div class="modal fade" id="prInfoModal2">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <form action="ticketassignment_cancel.do" method="POST">
+			      <div class="modal-body">
+								      
+			      	<h5 class="modal-title" id="M2name"></h5>
+			      	<input type="hidden" id="name" name="name">
+			      	
+			      	<p id="M2PReservNo"></p>
+			      	<input type="hidden" id="PReservNo2" name="PReservNo2">
+			      	
+			      	<p id="M2date"></p>
+			      	<input type="hidden" id="date" name="date">
+			      	
+			      	<p id="M2seat" ></p>
+			      	<input type="hidden" id="seatNo" name="seatNo">
+			      	
+			      	<p id="M2loc" ></p>
+			      	<input type="hidden" id="loc" name="loc">
+			      	
+			      	<p id="M2price" ></p>
+			      	<input type="hidden" id="price" name="price">
+			      </div>
+			      <div class="modal-footer" style="display:block">
+			      	<p>예약을 취소하시려면 버튼을 눌러주세요.</p>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			        <input type="submit" class="btn btn-primary" value="확인">
+			      </div>
+			      </form>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal2 End -->
+			
 		</div>
 	</div>
 	
 	<script>
+	function selectedFnc(){
+		var name = 		$(event.target).prev().prev().prev().prev().prev().prev().text();
+		var PReservNo = $(event.target).prev().prev().prev().prev().prev().text();
+		var date = 		$(event.target).prev().prev().prev().prev().text();
+		var seat = 		$(event.target).prev().prev().prev().text();
+		var loc =		$(event.target).prev().prev().text();
+		var price = 	$(event.target).prev().text();
+		
+		$('#Mname').html(name);
+		$('#MPReservNo').html(PReservNo);
+		$('#Mdate').html(date);
+		$('#Mseat').html(seat);
+		$('#Mloc').html(loc);
+		$('#Mprice').html(price);
+		
+		$("#name").val(name.substring(7,))
+		$("#PReservNo").val(PReservNo.substring(7,))
+		$("#date").val(date.substring(7,))
+		$("#seatNo").val(seat.substring(7,))
+		$("#loc").val(loc.substring(7,))
+		$("#price").val(price.substring(7,))
+	}
+	
+	function selectedFnc2(){
+		var name = 		$(event.target).prev().prev().prev().prev().prev().prev().prev().text();
+		var PReservNo2= $(event.target).prev().prev().prev().prev().prev().prev().text();
+		var date = 		$(event.target).prev().prev().prev().prev().prev().text();
+		var seat = 		$(event.target).prev().prev().prev().prev().text();
+		var loc =		$(event.target).prev().prev().prev().text();
+		var price = 	$(event.target).prev().prev().text();
+		
+		console.log('예약번호===');
+		console.log(PReservNo);
+		
+		$('#M2name').html(name);
+		$('#M2PReservNo').html(PReservNo2);
+		$('#M2date').html(date);
+		$('#M2seat').html(seat);
+		$('#M2loc').html(loc);
+		$('#M2price').html(price);
+		
+		let prn = parseInt(PReservNo2.substring(7,));
+		console.log('====================');
+		console.log(typeof(prn));
+		
+		$("#name").val(name.substring(7,))
+		$("#PReservNo2").val(prn);
+		$("#date").val(date.substring(7,))
+		$("#seatNo").val(seat.substring(7,))
+		$("#loc").val(loc.substring(7,))
+		$("#price").val(price.substring(7,))
+		
+		console.log('------------------');
+		console.log(parseInt(PReservNo2.substring(7,)));
+	}
+	
+	// 슬라이더----------------
+	
 	// 요소
 	const list = document.querySelector(".widthlist")
 
@@ -215,27 +341,6 @@ body {
 	}
 	
 	bindEvents()
-	
-	function selectedFnc(){
-		var name = $(event.target).prev().prev().prev().prev().prev().text();
-		var date = $(event.target).prev().prev().prev().prev().text();
-		var seat = $(event.target).prev().prev().prev().text();
-		var price = $(event.target).prev().prev().text();
-		var loc = $(event.target).prev().text();
-		
-		$('#Mname').html(name);
-		$('#Mdate').html(date);
-		$('#Mseat').html(seat);
-		$('#Mprice').html(price);
-		$('#Mloc').html(loc);
-		
-		$("#name").val(name.substring(7,))
-		$("#date").val(date.substring(7,))
-		$("#seatNo").val(seat.substring(7,))
-		$("#price").val(price.substring(7,))
-		$("#loc").val(loc.substring(7,))
-	}
-	
 	</script>
 
 </body>

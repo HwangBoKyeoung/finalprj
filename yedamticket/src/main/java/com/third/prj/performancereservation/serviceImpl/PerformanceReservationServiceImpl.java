@@ -21,4 +21,9 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		return map.userTicket(performancereservationviewVO);
 	}
 
+	@Override
+	public int cancelReserv(PerformanceReservationVO performanceReservationVO) {
+		return map.cancelReserv(performanceReservationVO);
+	}
+
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 
 public interface PerformanceMapper {
 
@@ -13,5 +14,4 @@ public interface PerformanceMapper {
 	
 //	프로시저 호출(update에 필요)
 	int procedureCall(Map<String, Object> map);
-	
 }

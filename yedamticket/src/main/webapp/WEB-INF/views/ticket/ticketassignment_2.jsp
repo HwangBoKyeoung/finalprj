@@ -60,6 +60,18 @@
         word-break: break-all;
       }
 
+	  .inner{
+	  	height : 100%;
+	  }
+	
+	  #lfrm{
+	  	height : 100%;
+	  }
+	
+		#rfrm{
+	  	height : 100%;
+	  }
+	
       .button-48 {
         appearance: none;
         background-color: #ffffff;
@@ -142,6 +154,7 @@
           	<form id="lfrm" action="ticketassignment_personal_1.do" method="POST">
 		  	<input name="name" type="hidden" value="${name }">
 		  	<input name="date" type="hidden" value="${date }">
+		  	<input name="PReservNo" type="hidden" value="${PReservNo }">
 		  	<input name="seatNo" type="hidden" value="${seatNo }">
 		  	<input name="loc" type="hidden" value="${loc }">
 		  	<input name="price" type="hidden" value="${price }">
@@ -154,13 +167,14 @@
         
         <div class="item right">
           <div class="inner">
-          <form id="lfrm" action="ticketassignment_personal_2.do" method="POST">
+          <form id="rfrm" action="ticketassignment_market_1.do" method="POST">
 		  	<input name="name" type="hidden" value="${name }">
 		  	<input name="date" type="hidden" value="${date }">
+		  	<input name="PReservNo" type="hidden" value="${PReservNo }">
 		  	<input name="seatNo" type="hidden" value="${seatNo }">
 		  	<input name="loc" type="hidden" value="${loc }">
 		  	<input name="price" type="hidden" value="${price }">
-	  	  	<button id="btnl" class="button-48" role="button" onclick="submitright();" style="background-color:#E6E6FA">
+	  	  	<button id="btnr" class="button-48" role="button" onclick="submitright();" style="background-color:#E6E6FA">
               <span class="text">자유 거래</span>
             </button>
 	  	  	</form>

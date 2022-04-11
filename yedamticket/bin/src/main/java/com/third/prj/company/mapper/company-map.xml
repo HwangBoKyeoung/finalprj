@@ -52,4 +52,12 @@
 		ORDER BY C_ID DESC
 	</select>
 	
+	<select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
+		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
+		FROM COMPANY
+		WHERE C_ID = #{Cid}
+		AND PWD = #{pwd}
+	</select>
+
+	
 </mapper>

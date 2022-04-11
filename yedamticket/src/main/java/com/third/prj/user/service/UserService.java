@@ -51,5 +51,4 @@ public interface UserService {
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
-	
 }

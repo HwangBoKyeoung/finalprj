@@ -13,11 +13,11 @@ public class PerformanceReservationVO {
 	
 	private int PReservNo;
 	private Date reserveDttm;
-	private String cancelCd;
+	private String status;
 	private String Uid;
 	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
-	
+	private String Rid;
 	
 }

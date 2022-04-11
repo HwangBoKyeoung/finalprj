@@ -14,11 +14,12 @@ import lombok.ToString;
 public class PerformanceReservationViewVO {
 	private int PReservNo;
 	private Date reserveDttm;
-	private String cancelCd;
+	private String status;
 	private String Uid;
 	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
+	private String Rid;
 	@JsonFormat(pattern = "YYYY-DD-MM")
 	private Date frDt;
 	private String time;

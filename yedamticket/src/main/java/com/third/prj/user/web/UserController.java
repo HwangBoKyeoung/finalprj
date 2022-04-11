@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -221,6 +222,15 @@ public class UserController {
 		return "user/userBuyList";
 	}
 
+	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String loginChk(UserVO userVO, @RequestParam("Uid") String Uid) {
+		userVO = userDao.loginChk(userVO);
+		String address = userVO.getAddr();
+		System.out.println(address);
+		return address;
+	}
+	
 //	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
 //		return "user/userUpdateForm";
 //	}
