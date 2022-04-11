@@ -25,7 +25,10 @@ import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
+import com.third.prj.point.service.PointService;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.user.service.UserService;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class MovieController {
@@ -44,13 +47,19 @@ public class MovieController {
 	
 	@Autowired
 	private MovieReservService movieReservationDao;
-
+	@Autowired
+	private UserService userDao;
+	
+	@Autowired
+	private PointService pointDao;
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		//상영예정작 넘김
-		model.addAttribute("m",movieDao.mList());
+		model.addAttribute("movies",movieDao.mList());
 		return "movie/movieList";
 	}
+	
+	
 	//select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
 	@Autowired
 	private PerformanceImageService periDao;
@@ -109,7 +118,7 @@ public class MovieController {
 	@RequestMapping("/movieBooking.do")
 	public String movieBooking(Model model) {
 		model.addAttribute("movies",movieDao.movieList());
-		return "movie/movieBookingForm";
+		return "movie/movieBookingForm1";
 	
 	}
 
@@ -182,14 +191,25 @@ public class MovieController {
   
 	//결제페이지로
 	@RequestMapping("/movieReservation.do")
-	public String movieReservation(Model model,	MovieReservationVO vo) {
-		/*
-		 * System.out.println("hall"+vo.getReservHall());
-		 * System.out.println("loc"+vo.getReservLoc());
-		 */
-		 movieReservationDao.movieReservationInsert(vo);
-		 model.addAttribute("re",vo);
-		return "movie/movieReservationForm";
+	public String movieReservation(Model model,	MovieReservationVO vo,UserVO uvo) {
+		MovieVO detailvo=new MovieVO();		
+		detailvo.setDocId(vo.getDocId());
+		model.addAttribute("re",vo);
+		model.addAttribute("user",userDao.userSelectOne(uvo));
+		model.addAttribute("movie",movieDao.mDetail(detailvo));
+		return "user/movie/movieReservationForm";
+	}
+	//결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
+	@RequestMapping("/moviePay.do")
+	public String moviePay(MovieReservationVO vo,PointVO pointVO) {
+		movieReservationDao.movieReservationInsert(vo);
+		vo=movieReservationDao.movieReservationSelect(vo);
+		System.out.println("reservno==============================="+vo.getMvReservNo());
+		System.out.println("u_id==================================="+vo.getUId());
+		pointVO.setPayNo(vo.getMvReservNo());
+		pointVO.setUId(vo.getUId());
+		pointDao.payInsert(pointVO);
+		return "home/home";
 	}
 
 }

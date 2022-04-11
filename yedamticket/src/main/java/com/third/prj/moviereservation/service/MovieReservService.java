@@ -5,4 +5,5 @@ import java.util.List;
 public interface MovieReservService {
 	int movieReservationInsert(MovieReservationVO vo);
 	List<MovieReservationVO> seatSearch(MovieReservationVO vo);
+	MovieReservationVO movieReservationSelect(MovieReservationVO vo);
 }

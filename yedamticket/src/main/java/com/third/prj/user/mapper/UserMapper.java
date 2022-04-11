@@ -2,6 +2,8 @@ package com.third.prj.user.mapper;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
@@ -14,7 +16,7 @@ public interface UserMapper {
 	List<UserVO> userList();
 
 	UserVO userSelect(UserVO vo);
-
+	UserVO userSelectOne(UserVO vo);
 	int userInsert(UserVO vo);
 
 	int userUpdate(UserVO vo);
@@ -47,5 +49,8 @@ public interface UserMapper {
 
 	// 포인트 충전
 	int userCharge(UserVO vo);
-
+	
+	// 로그인 체크용 메서드
+	public UserVO loginChk(UserVO vo);
+	public UserVO loginChk(UserVO vo, HttpSession session);
 }

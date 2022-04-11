@@ -7,5 +7,17 @@
 			FROM   performance_reservation
 			WHERE  u_id = #{Uid}
 	</select>
-
+	
+	<!-- 황규복 -->
+	<insert id="pReservation" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">
+			INSERT INTO PERFORMANCE_RESERVATION
+			(P_RESERV_NO,RESERVE_DTTM,U_ID,P_SCH_NO,LOC,SEATNO)
+			VALUES(RESERV_SEQ.NEXTVAL,SYSDATE,#{UId},#{PSchNo},#{loc},SUBSTR(#{seatNo},0,length(#{seatNo})-1))
+	</insert>
+	<select id="searchSeatNo" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO"
+							  resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
+			SELECT SEATNO FROM PERFORMANCE_RESERVATION
+			WHERE P_SCH_NO=#{PSchNo}
+			AND LOC=#{loc}
+	</select>
 </mapper>

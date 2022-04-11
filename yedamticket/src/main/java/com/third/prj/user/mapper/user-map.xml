@@ -33,7 +33,7 @@
 		id="pfReservMap">
 		<result column="P_RESERV_NO" property="PReservNo" />
 		<result column="RESERVE_DTTM" property="reserveDttm" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
 	<resultMap
@@ -71,19 +71,19 @@
 		SELECT COUNT(*)
 		FROM users
 		WHERE
-		u_id = #{Uid}
+		u_id = #{UId}
 	</select>
 
 	<select id="userSelect"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM   USERS
-		WHERE  U_ID = #{Uid}
+		WHERE  U_ID = #{UId}
 		AND	   PWD  = #{pwd}
 	</select>
 	
 	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
-		<id column="u_id" property="Uid"/>
+		<id column="u_id" property="UId"/>
 		<result column="pwd" property="pwd"/>
 		<result column="name" property="name"/>
 		<result column="email" property="email"/>
@@ -119,7 +119,7 @@
 		, {noop}PWD
 		, ROLE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select>
 
 
@@ -132,7 +132,7 @@
 		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
 		VALUES
-		(#{name}, #{Uid}, #{email} , #{loginCd} )
+		(#{name}, #{UId}, #{email} , #{loginCd} )
 
 	</insert>
 
@@ -146,7 +146,7 @@
 			<if test="addr != null"> ADDR = #{addr},</if>
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 
 	</update>
 
@@ -154,7 +154,7 @@
 		parameterType="com.third.prj.user.service.UserVO">
 		DELETE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</delete>
 
@@ -166,10 +166,15 @@
 		MOVIE_RESERVATION
 		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 
 	</select>
-
+	<select id="userSelectOne"
+	      resultType="com.third.prj.user.service.UserVO">
+	      SELECT *
+	      FROM USERS
+      WHERE U_ID = #{UId}
+   </select>
 	<select id="pfReservList" resultMap="performanceMap">
 		SELECT X.P_RESERV_NO,
 		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
@@ -185,7 +190,14 @@
 		UPDATE users
 		SET    point = (SELECT point
 		             	FROM   users
-		             	WHERE  u_id = #{Uid}) + #{point}
-		WHERE  u_id = #{Uid}
+		             	WHERE  u_id = #{UId}) + #{point}
+		WHERE  u_id = #{UId}
 	</update>
+	
+	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id = #{UId}
+	</select>
+	
 </mapper>

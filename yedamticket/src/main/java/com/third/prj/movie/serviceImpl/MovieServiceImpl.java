@@ -41,5 +41,11 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.mList();
 	}
 
+	@Override
+	public MovieVO mDetail(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mDetail(vo);
+	}
+
 	
 }

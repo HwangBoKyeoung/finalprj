@@ -1,19 +1,23 @@
 package com.third.prj.performance.web;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.third.prj.performance.service.CriteriaVO;
+import com.third.prj.performance.service.PageVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
-import com.third.prj.performanceschedule.service.PerformanceScheduleService;
+import com.third.prj.performancereservation.service.PerformanceReservationService;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
@@ -23,12 +27,12 @@ public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceService perDao;
-
 	@Autowired
 	private PerformanceImageService periDao;
 	@Autowired
 	private PerformanceVideoService pervDao;
-
+	@Autowired
+	private PerformanceReservationService perRDao;
 
 	//모두조회
 	@RequestMapping("/conPage.do")
@@ -36,21 +40,44 @@ public class PerformanceContorller {
 		model.addAttribute("pers", perDao.perSelectList());
 		return "performance/perforList";
 	}
-
+	//황규복 start
+	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
-	public String pList(Model model) {
-		model.addAttribute("performance",perDao.pList());
+	public String pList(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달
+		model.addAttribute("performance",perDao.pList(cri));
+		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
 	}
-	@RequestMapping("/pSearch.do")
-	public String pSearch(PerformanceVO vo, Model model) {
-		System.out.println("날짜"+vo.getFrDt());
-		System.out.println("지역"+vo.getLoc());
-		System.out.println("행사"+vo.getName());
+	//공연 상세페이지 + 예약	
+	@RequestMapping("/pBookingForm.do")
+	public String pBookingForm(Model model,PerformanceVO vo) {
+		System.out.println("name"+vo.getName());
+		System.out.println("pNo"+vo.getPNo());
 		
-		perDao.pSearch(vo);
-		return "";
+		vo = perDao.pSelect(vo);
+		
+		PerformanceScheduleVO pvo = new PerformanceScheduleVO();
+		System.out.println("+++++++++++++++++++++++++++++++++++++++" + pvo);
+		
+		model.addAttribute("performance",perDao.pSelect(vo));
+		
+		return "performance/pBookingForm";
 	}
+	@RequestMapping("/searchSeatNo.do")
+	@ResponseBody
+	public List<PerformanceReservationVO> searchSeatNo(PerformanceReservationVO prvo) {
+		return perRDao.searchSeatNo(prvo);
+	}
+	//공연 결제
+	@RequestMapping("/pReservation.do")
+	public String pReservation(Model model,PerformanceReservationVO prvo) {
+		perRDao.pReservation(prvo);
+		return "performance/pPayForm";
+	}
+	
+	//황규복 end
 	//한건조회
 	@RequestMapping("/pserSelect.do")
 	public String perSelect(PerformanceVO vo, Model model) {
