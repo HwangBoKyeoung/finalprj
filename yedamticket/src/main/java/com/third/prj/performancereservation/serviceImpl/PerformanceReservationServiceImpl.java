@@ -14,28 +14,34 @@ import com.third.prj.performancereservation.service.PerformanceReservationViewVO
 public class PerformanceReservationServiceImpl implements PerformanceReservationService{
 
 	@Autowired
-	private PerformanceReservationMapper map;
+	private PerformanceReservationMapper mapper;
 
 	@Override
 	public List<PerformanceReservationViewVO> userTicket(PerformanceReservationViewVO performancereservationviewVO) {
-		return map.userTicket(performancereservationviewVO);
+		return mapper.userTicket(performancereservationviewVO);
 	}
 
 	@Override
 	public int cancelReserv(PerformanceReservationVO performanceReservationVO) {
-		return map.cancelReserv(performanceReservationVO);
+		return mapper.cancelReserv(performanceReservationVO);
 	}
 
 	@Override
 	public int pReservation(PerformanceReservationVO prvo) {
 		// TODO Auto-generated method stub
-		return map.pReservation(prvo);
+		return mapper.pReservation(prvo);
 	}
 
 	@Override
 	public List<PerformanceReservationVO> searchSeatNo(PerformanceReservationVO prvo) {
 		// TODO Auto-generated method stub
-		return map.searchSeatNo(prvo);
+		return mapper.searchSeatNo(prvo);
+	}
+
+	@Override
+	public List<PerformanceReservationVO> userTicket(PerformanceReservationVO performancereservationVO) {
+		// TODO Auto-generated method stub
+		return mapper.userTicket(performancereservationVO);
 	}
 
 }

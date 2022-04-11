@@ -147,8 +147,8 @@
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="userPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
-							</a> <a class="dropdown-item" href="conPage.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 공연정보
+							</a> <a class="dropdown-item" href="companyMyPage.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 기업회원 페이지
 							</a> <a class="dropdown-item" href="goodsPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈정보
 							</a>

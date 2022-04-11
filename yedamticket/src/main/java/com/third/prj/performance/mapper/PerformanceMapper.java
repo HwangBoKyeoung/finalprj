@@ -10,12 +10,15 @@ import com.third.prj.performancereservation.service.PerformanceReservationVO;
 
 public interface PerformanceMapper {
 
-	List<PerformanceVO> perSelectList();
-	PerformanceVO perSelect(PerformanceVO vo);
+	List<PerformanceVO> companyPerforSelectList(CriteriaVO vo);
+	PerformanceVO perforSelect(PerformanceVO vo);
 	int perforUpdate(PerformanceVO vo);
 	
 //	프로시저 호출(update에 필요)
 	int procedureCall(Map<String, Object> map);
+	
+	//기업회원 마이페이지
+	int getTotal(CriteriaVO cri);
 
 	//황규복
 	//그냥 공연전체리스트
@@ -24,6 +27,5 @@ public interface PerformanceMapper {
 	List<PerformanceVO> epList();
 	//공연선택
 	PerformanceVO pSelect(PerformanceVO vo);
-	// 전체 게시글수
-	public int getTotal(CriteriaVO cri);
+
 }

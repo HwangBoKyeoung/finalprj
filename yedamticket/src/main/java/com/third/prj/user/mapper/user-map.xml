@@ -80,6 +80,7 @@
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM   USERS
+		<!-- WHERE  U_ID = #{UId} -->
 		WHERE  U_ID = #{UId}
 		AND	   PWD  = #{pwd}
 	</select>
@@ -92,26 +93,30 @@
 		<result column="phone" property="phone"/>
 		<result column="addr" property="addr"/>
 	</resultMap>
-	
 	<select id="userList" resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM USERS
-		ORDER BY U_ID DESC
-	</select>
-
-	<select id="userSearch"
-		resultType="com.third.prj.user.service.UserVO" parameterType="String">
-		SELECT *
-		FROM USERS
-		WHERE
-		<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%'
-			OR NAME LIKE '%'||#{val}||'%'
-			OR
-			EMAIL LIKE '%'||#{val}||'%'</if>
-		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
-		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
-		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
-		ORDER BY U_ID DESC
+	<![CDATA[
+		SELECT U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
+		FROM
+			(
+			SELECT ROWNUM RN,A.* 
+			FROM (
+			SELECT 
+				U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
+			FROM USERS
+			WHERE
+			]]>
+			<if test="searchType == 'ALL'">(U_ID LIKE '%'||#{searchName}||'%'
+				OR NAME LIKE '%'||#{searchName}||'%'
+				OR EMAIL LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+			ORDER BY U_ID DESC ) A )
+			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		
+		]]>
 	</select>
 
 	<select id="getUser"
@@ -210,4 +215,17 @@
 		WHERE  u_id = #{UId}
 	</select>
 	
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM USERS
+		WHERE
+		<if test="searchType == 'ALL'">U_ID LIKE '%'||#{searchName}||'%'
+			OR NAME LIKE '%'||#{searchName}||'%'
+			OR
+			EMAIL LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
 </mapper>

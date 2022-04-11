@@ -8,7 +8,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.movie.service.MovieService;
@@ -22,11 +21,13 @@ import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
-import com.third.prj.performanceimage.service.PerformanceImageVO;
-import com.third.prj.performancevideo.service.PerformanceVideoService;
-import com.third.prj.performancevideo.service.PerformanceVideoVO;
+
+import com.third.prj.movievideo.service.MovieVideoService;
+import com.third.prj.movievideo.service.MovieVideoVO;
+
 import com.third.prj.point.service.PointService;
 import com.third.prj.point.service.PointVO;
+
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -47,11 +48,16 @@ public class MovieController {
 	
 	@Autowired
 	private MovieReservService movieReservationDao;
+	
+	@Autowired
+	private MovieVideoService mvvDao;
+
 	@Autowired
 	private UserService userDao;
 	
 	@Autowired
 	private PointService pointDao;
+
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		//상영예정작 넘김
@@ -64,7 +70,7 @@ public class MovieController {
 	@Autowired
 	private PerformanceImageService periDao;
 	@Autowired
-	private PerformanceVideoService pervDao;
+	private MovieVideoService pervDao;
 
 	// 영화상세
 	@RequestMapping("/movieDetail.do")
@@ -142,45 +148,45 @@ public class MovieController {
 	public List<MovieScheduleVO> movieSchdtList(Model model, MovieScheduleVO vo) {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
+
+	  
+		//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
+		@RequestMapping("/companyMovieUpdateForm.do")
+		public String companyMovieUpdateForm(MovieVO vo, MovieVideoVO vvo, Model model) {
+//			MovieVideoVO vvo = new MovieVideoVO();
+			vo=movieDao.mvSelect(vo);
+			System.out.println("============================"+vo.getMvNo());
+			vvo.setMvNo(vo.getMvNo());
+			vvo = mvvDao.mvvSelect(vvo);
+			System.out.println("============================"+vvo);
+			model.addAttribute("videos", vvo);
+			
+			model.addAttribute("mv", vo);	
+			
+			return "companyMyPage/companyMovieUpdateForm";
+		}
 	
 	//영화 수정 페이지(프로시저 ->rjh(2022/04/05)
-	@RequestMapping("/mvUpdate.do")
-	public String mvUpdate(Model model,@RequestParam("iname") String iname,@RequestParam("vname")String vname,Map<String, Object>map, MovieVO vo) {
-//		PerformanceVideoVO vvo = new PerformanceVideoVO();
-//		PerformanceImageVO ivo = new PerformanceImageVO();
-				
+	@RequestMapping("/companyMovieUpdate.do")
+	public String companyMovieUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo) {
 		map.put("vm_vno", vo.getMvNo());
-		map.put("p_name", vo.getName());
+		map.put("mv_name", vo.getName());
 		map.put("mv_genre", vo.getGenre());
 		map.put("mv_director", vo.getDirector());
 		map.put("mv_rating", vo.getRating());
 		map.put("mv_country", vo.getCountry());
 		map.put("mv_content", vo.getContent());
+		map.put("mv_cid", vo.getCId());
 		map.put("mv_actor", vo.getActor());
-		map.put("mv_iname", iname);
-		map.put("mv_vname", vname);
+		map.put("mv_vname", vvo.getVname());
 		map.put("mv_cd", vo.getFileCd());
 		
 		movieDao.procedureCall(map);
+		System.out.println(vvo);
 		
-		return "redirect:/movieDetail.do";
+		return "redirect:companyMovieList.do";
 	}
-  
-	//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
-	@RequestMapping("/mvSelect.do")
-	public String mvSelect(MovieVO vo, Model model) {
-		PerformanceVideoVO vvo = new PerformanceVideoVO();
-		PerformanceImageVO ivo = new PerformanceImageVO();
-		vo=movieDao.movieDetail(vo);
-		vvo.setFileCd(vo.getFileCd());
-		ivo.setFileCd(vo.getFileCd());
-		
-		model.addAttribute("images", ivo);
-		model.addAttribute("videos", vvo);
-		model.addAttribute("mv", vo);	
-		
-		return "movie/movieUpdate";
-	}
+	
 	
 	//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
 	@RequestMapping("/seatSearch.do")

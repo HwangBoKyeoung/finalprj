@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface CompanyService {
 
-	List<CompanyVO> companyList();
+	List<CompanyVO> companyList(CriteriaVO cri);
 
 	CompanyVO companySelect(CompanyVO vo);
 
@@ -13,9 +13,9 @@ public interface CompanyService {
 //	company 아이디 체크
 	int cidChk(CompanyVO vo);
 
-//	company 검색
-	List<CompanyVO> companySearch(String key, String val);
 
 //  company 로그인
 	CompanyVO companyLogin(CompanyVO vo);
+	
+	int getTotal(CriteriaVO cri);
 }

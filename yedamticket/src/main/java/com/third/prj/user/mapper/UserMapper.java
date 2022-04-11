@@ -10,11 +10,12 @@ import org.apache.ibatis.annotations.Param;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.user.service.CriteriaVO;
 import com.third.prj.user.service.UserVO;
 
 public interface UserMapper {
 
-	List<UserVO> userList();
+	List<UserVO> userList(CriteriaVO cri);
 
 	UserVO userSelect(UserVO vo);
 	UserVO userSelectOne(UserVO vo);
@@ -27,8 +28,6 @@ public interface UserMapper {
 
 	int userPointUpdate(@Param("point")int point, @Param("id") String id);
 
-//	검색
-	List<UserVO> userSearch(@Param("key") String key, @Param("val") String val);
 
 //	아이디체크
 	int idChk(UserVO vo);
@@ -54,4 +53,7 @@ public interface UserMapper {
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
+	
+	//페이징(관리자 - 회원리스트페이지)
+	 int getTotal(CriteriaVO cri);
 }

@@ -21,6 +21,8 @@ import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
+import com.third.prj.user.service.CriteriaVO;
+import com.third.prj.user.service.PageVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -95,17 +97,20 @@ public class UserController {
 		return "user/user/userLoginForm";
 	}
 
-	@RequestMapping("/user.do")
-	public String user(Model model) {
-		model.addAttribute("users", userDao.userList());
-		return "manager/user/user";
+	@RequestMapping("/managerUser.do")
+	public String managerUser(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
+		model.addAttribute("users", userDao.userList(cri));
+		model.addAttribute("pageVO", pageVO);//전체게시글 기준으로가지고옴
+		return "manager/user/managerUser";
 	}
 
-	@RequestMapping("/userSelet.do")
-	public String userSelet(UserVO vo, Model model) {
+	@RequestMapping("/managerUserSelect.do")
+	public String managerUserSelect(UserVO vo, Model model) {
 		vo = userDao.userSelect(vo);
+		
 		model.addAttribute("users", vo);
-		return "manager/user/userSelect";
+		return "manager/user/managerUserSelect";
 	}
 
 	@RequestMapping("/userLogin.do")
@@ -212,7 +217,7 @@ public class UserController {
 
 	@RequestMapping("pfReservList.do")
 	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, PerformanceVO vo) {
-		pvo.setUId((String) session.getAttribute("sessionId"));
+		pvo.setUid((String) session.getAttribute("sessionId"));
 		model.addAttribute("pfList", userDao.pfReservList(pvo));
 		return "user/pfReservList";
 	}
@@ -234,5 +239,11 @@ public class UserController {
 //	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
 //		return "user/userUpdateForm";
 //	}
+	@RequestMapping("/companyMyPage.do")
+	public String companyMyPage() {
+		return "companyMyPage/companyMyPage";
+	}
+	
+	
 
 }
