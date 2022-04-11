@@ -55,17 +55,20 @@ public class MovieController {
 	@Autowired 
 	private String upLoadPath;
 	 
-
-	@RequestMapping("/movieList.do")
-	public String movieList(Model model) {
-		model.addAttribute("movies", movieDao.mList());
-		return "movie/movieList";
-	}
 	//select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
 	@Autowired
 	private PerformanceImageService periDao;
+	
 	@Autowired
 	private PerformanceVideoService pervDao;
+	
+	@RequestMapping("/movieList.do")
+	public String movieList(Model model) {
+		model.addAttribute("movies", movieDao.mList());
+		System.out.println("==================="+movieDao.mList());
+		return "movie/movieList";
+	}
+	
 
 	// 영화상세
 	@RequestMapping("/movieDetail.do")

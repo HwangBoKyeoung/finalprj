@@ -20,6 +20,7 @@
 		<result property="actor" column="actor" />
 		<result property="fileCd" column="file_cd" />
 		<result property="docId" column="docId" />
+		<result property="renames" column="renames"/>
 		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
 	</resultMap>
 	
