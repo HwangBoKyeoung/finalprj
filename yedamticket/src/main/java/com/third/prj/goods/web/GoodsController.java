@@ -24,7 +24,8 @@ public class GoodsController {
 	private GoodsService goodsDao;
 	
 	
-	@Autowired private String upLoadPath;
+	@Autowired
+	private String upLoadPath;
 	 
 	
 	@RequestMapping("/cGoodsList.do")
@@ -53,11 +54,13 @@ public class GoodsController {
 		 String fileName = file.getOriginalFilename(); 
 		 String id = UUID.randomUUID().toString(); // 고유한 유니크 아이디 생성
 		 // 파일명 치환 
-		 String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
+		 //String targetFile = id + fileName;
+		 String targetFile = id + fileName.substring(fileName.lastIndexOf('.'));
+		 System.out.println(targetFile);
 		 File target = new File(upLoadPath, targetFile); // 파일 경로객체생성 
 		 try {
 			 FileCopyUtils.copy(file.getBytes(), target); // 파일전송 
-			 targetFile = upLoadPath+ File.separator + targetFile; // 실제 경로를 포함해서
+			 targetFile = File.separator + targetFile; // 실제 경로를 포함해서
 		   // DB 
 			 vo.setFileCd(fileName);
 			 vo.setFileRe(targetFile); 
@@ -66,25 +69,22 @@ public class GoodsController {
 		}
 		 
 		int u = goodsDao.goodsUpdate(vo);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(vo);
-		System.out.println(u);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		if (u != 0) {
 			return "redirect:goodsPage.do";
 		}
 		return "goods/goodsErr";
 	}
+	
 	@RequestMapping("/goodsDelete.do")
 	public String goodsDelete(GoodsVO vo) {
-		int u = goodsDao.goodsDelete(vo);
+		int d = goodsDao.goodsDelete(vo);
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println(vo);
-		System.out.println(u);
+		System.out.println("vo : " + vo);
+		System.out.println("d : " + d);
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
-		if (u != 0) {
+		if (d != 0) {
 			return "redirect:goodsPage.do";
 		}
 			return "goods/goodsErr";
@@ -104,10 +104,10 @@ public class GoodsController {
 	@RequestMapping("/goodsSelect.do")
 	public String goodsSelect(GoodsVO vo, Model model) {
 		vo = goodsDao.goodsSelect(vo);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println("goodsSelect run");
-		System.out.println(vo);
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		//System.out.println("goodsSelect run");
+		//System.out.println(vo);
+		//System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		model.addAttribute("gds", vo);
 			return "goods/goodsUpdateForm";
 	}

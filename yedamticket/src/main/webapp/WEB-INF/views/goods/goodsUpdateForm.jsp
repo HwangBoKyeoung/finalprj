@@ -219,7 +219,7 @@ label {
 							</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
-						<button class="btn btn-gradient-primary me-2" onclick="location.href='goodsDelete.do?gNo=${gds.GNo}'">삭제</button>
+						<button class="btn btn-gradient-primary me-2" onclick="location.href='goodsDelete.do?gNo=${gds.GNo}'">Delete</button>
 					</form>
 				</div>
 			</div>

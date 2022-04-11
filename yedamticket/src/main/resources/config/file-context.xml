@@ -9,6 +9,6 @@
 	</bean>
 	
 	<bean class="java.lang.String" id="upLoadPath">
-		<constructor-arg value="c:/DEV/fileTest"/>
+		<constructor-arg value="C:/DEV/fileTest"/>
 	</bean>
 </beans>
