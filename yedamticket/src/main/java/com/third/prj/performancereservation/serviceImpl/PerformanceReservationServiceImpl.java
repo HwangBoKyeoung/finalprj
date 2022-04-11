@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 import com.third.prj.performancereservation.mapper.PerformanceReservationMapper;
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
 
 @Repository("performanceReservationDao")
 public class PerformanceReservationServiceImpl implements PerformanceReservationService{
@@ -16,8 +17,13 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 	private PerformanceReservationMapper map;
 
 	@Override
-	public List<PerformanceReservationVO> userTicket(PerformanceReservationVO performancereservationVO) {
-		return map.userTicket(performancereservationVO);
+	public List<PerformanceReservationViewVO> userTicket(PerformanceReservationViewVO performancereservationviewVO) {
+		return map.userTicket(performancereservationviewVO);
+	}
+
+	@Override
+	public int cancelReserv(PerformanceReservationVO performanceReservationVO) {
+		return map.cancelReserv(performanceReservationVO);
 	}
 
 	@Override

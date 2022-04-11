@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 
 
 public interface PerformanceMapper {
@@ -15,7 +16,7 @@ public interface PerformanceMapper {
 	
 //	프로시저 호출(update에 필요)
 	int procedureCall(Map<String, Object> map);
-	
+
 	//황규복
 	//그냥 공연전체리스트
 	List<PerformanceVO> pList(CriteriaVO cri);

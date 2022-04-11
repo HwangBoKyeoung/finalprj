@@ -3,7 +3,56 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<insert id="userInsert" parameterType="com.third.prj.user.service.UserVO">
+	<resultMap type="com.third.prj.movie.service.MovieVO"
+		id="MovieMap">
+		<result column="name" property="name" />
+		<collection property="movieReservVO"
+			resultMap="MovieReservMap" />
+	</resultMap>
+
+	<resultMap
+		type="com.third.prj.moviereservation.service.MovieReservVO"
+		id="MovieReservMap">
+		<result column="MV_RESERV_NO" property="mvReservNo" />
+		<result column="RESERVDT" property="reservDt" />
+		<result column="SEAT_NAME" property="seatName" />
+		<result column="DOCID" property="docId" />
+		<result column="SCH_DATE" property="schDate" />
+		<result column="SCHTIME" property="schTime" />
+		<result column="U_ID" property="Uid" />
+	</resultMap>
+
+	<resultMap
+		type="com.third.prj.performanceschedule.service.PerformanceScheduleVO"
+		id="pfScheduleMap">
+		<result column="FRDT" property="frDt" />
+		<result column="TIME" property="time" />
+	</resultMap>
+	
+	<resultMap
+		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
+		id="pfReservMap">
+		<result column="P_RESERV_NO" property="PReservNo" />
+		<result column="RESERVE_DTTM" property="reserveDttm" />
+		<result column="U_ID" property="Uid" />
+		<result column="SEATNO" property="seatNo" />
+	</resultMap>
+	
+	<resultMap
+		type="com.third.prj.performance.service.PerformanceVO"
+		id="performanceMap">
+		<result column="NAME" property="name" />
+		<collection property="performanceReservationVO"
+			resultMap="pfReservMap"></collection>
+		<collection property="performanceScheduleVO"
+			resultMap="pfScheduleMap"></collection>
+	</resultMap>
+	
+	<resultMap type="hashmap" id="procedureCall"/>
+
+
+	<insert id="userInsert"
+		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO users(name
 						, u_id
 						, pwd
@@ -11,61 +60,148 @@
 						, addr
 						, phone
 						, birthdt)
-		VALUES (#{name}
-			  , #{Uid}
-			  , #{pwd}
-			  , #{email}
-			  , #{addr}
-			  , #{phone}
-			  , #{birthDt})
+				   VALUES(#{name}
+		  			    , #{Uid}
+					    , #{pwd}
+					    , #{email}
+					    , #{addr}
+					    , #{phone}
+					    , #{birthDt})
 	</insert>
 
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*)
 		FROM users
-		WHERE u_id = #{Uid}
-	</select>
-	
-	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM USERS
-		WHERE U_ID= #{Uid}
-		<if test="pwd!=null">
-			AND pwd = #{pwd}
-		</if>
+		WHERE
+		u_id = #{Uid}
 	</select>
 
+	<select id="userSelect"
+		resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   USERS
+		WHERE  U_ID = #{Uid}
+		AND	   PWD  = #{pwd}
+	</select>
+	
+	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
+		<id column="u_id" property="Uid"/>
+		<result column="pwd" property="pwd"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="addr" property="addr"/>
+	</resultMap>
+	
 	<select id="userList" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="userSearch" resultType="com.third.prj.user.service.UserVO" parameterType="String">
+	<select id="userSearch"
+		resultType="com.third.prj.user.service.UserVO" parameterType="String">
 		SELECT *
 		FROM USERS
 		WHERE
-			<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%' 
-									OR NAME LIKE '%'||#{val}||'%'
-									OR EMAIL LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
+		<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%'
+			OR NAME LIKE '%'||#{val}||'%'
+			OR
+			EMAIL LIKE '%'||#{val}||'%'</if>
+		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
+		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="getUser" parameterType="com.third.prj.user.service.UserVO" resultType="com.third.prj.user.service.UserVO">
+	<select id="getUser"
+		parameterType="com.third.prj.user.service.UserVO"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT U_ID
-			 , {noop}PWD
-			 , ROLE
+		, {noop}PWD
+		, ROLE
 		FROM USERS
 		WHERE U_ID = #{Uid}
 	</select>
 
-	<select id="emailCheck" resultType="com.third.prj.user.service.UserVO">
-		SELECT COUNT(*)
-		FROM USERS
+
+	<select id="emailCheck" resultType="int">
+		SELECT COUNT(*) FROM USERS
 		WHERE EMAIL = #{email}
 	</select>
 
+	<insert id="kakaoInsert"
+		parameterType="com.third.prj.user.service.UserVO">
+		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
+		VALUES
+		(#{name}, #{Uid}, #{email} , #{loginCd} )
+
+	</insert>
+
+
+	<update id="userUpdate"
+		parameterType="com.third.prj.user.service.UserVO">
+		UPDATE USERS
+		<set>
+			<if test="pwd != null"> PWD = #{pwd},</if>
+			<if test="email != null"> EMAIL = #{email},</if>
+			<if test="addr != null"> ADDR = #{addr},</if>
+			<if test="phone != null"> PHONE = #{phone},</if>
+		</set>
+		WHERE U_ID = #{Uid}
+	</update>
+
+	<delete id="userDelete"
+		parameterType="com.third.prj.user.service.UserVO">
+		DELETE
+		FROM USERS
+		WHERE U_ID = #{Uid}
+		AND PWD = #{pwd}
+	</delete>
+
+	<select id="MvReservList" resultMap="MovieReservMap">
+		SELECT R.MV_RESERV_NO ,
+		R.RESERVDT,
+		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
+		FROM
+		MOVIE_RESERVATION
+		R JOIN MOVIE M
+		ON R.DOCID = M.DOCID
+		WHERE U_ID = #{Uid}
+
+	</select>
+
+	<select id="pfReservList" resultMap="performanceMap">
+		SELECT X.P_RESERV_NO,
+		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
+		FROM
+		PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
+		WHERE
+		X.P_SCH_NO = Y.P_SCH_NO
+		AND Y.P_NO = Z.P_NO
+		AND X.U_ID = #{uId}
+	</select>
+	
+	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
+		UPDATE users
+		SET    point = (SELECT point
+		             	FROM   users
+		             	WHERE  u_id = #{Uid}) + #{point}
+		WHERE  u_id = #{Uid}
+	</update> -->
+	
+	<update id="userCharge" statementType="CALLABLE" >
+		{CALL 
+		insertPoint(#{p1, mode=IN, jdbcType=INTEGER, javaType=INT},
+					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+					)
+		}
+	</update>
+	
+	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id = #{Uid}
+	</select>
+	
 </mapper>

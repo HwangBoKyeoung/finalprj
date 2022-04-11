@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.performancereservation.mapper.PerformanceReservationMapper">
+
+	<!-- <select id="userTicket" resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
+			SELECT *
+			FROM   performance_reservation
+			WHERE  u_id = #{Uid}
+	</select> -->
+
+	<resultMap type="com.third.prj.performancereservation.service.PerformanceReservationViewVO" id="prvMap">
+		<result property="PReservNo" column="p_reserv_no"/>
+		<result property="reserveDttm" column="reserve_dttm"/>
+		<result property="cancelCd" column="cancel_cd"/>
+		<result property="Uid" column="u_id"/>
+		<result property="PSchNo" column="p_sch_no"/>
+		<result property="seatStatCd" column="seat_stat_cd"/>
+		<result property="seatNo" column="seatno"/>
+		<result property="frDt" column="frdt"/>
+		<result property="time" column="time"/>
+		<result property="Pno" column="p_no"/>
+		<result property="name" column="name"/>
+		<result property="content" column="content"/>
+		<result property="Cid" column="c_id"/>
+		<result property="actor" column="actor"/>
+		<result property="fileCd" column="file_cd"/>
+		<result property="loc" column="loc"/>
+		<result property="addr" column="addr"/>
+		<result property="price" column="price"/>
+	</resultMap>
+	
+	<select id="userTicket" resultMap="prvMap">
+		SELECT *
+		FROM   usersticket
+		WHERE  u_id = #{Uid}
+	</select>
+
+</mapper>
