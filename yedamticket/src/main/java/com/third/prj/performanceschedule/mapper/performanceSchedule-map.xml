@@ -3,7 +3,7 @@
 <mapper namespace="com.third.prj.performanceschedule.mapper.PerformanceScheduleMapper">
 
 	<resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pfmcMap">
-		<id property="pSchNo" column="P_SCH_NO" />
+		<id property="PSchNo" column="P_SCH_NO" />
 		<result property="frDt" column="FRDT"/>
 		<result property="trDt" column="TRDT"/>
 		<result property="no" column="NO"/>

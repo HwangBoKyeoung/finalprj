@@ -118,4 +118,10 @@ public class UserServiceImpl implements UserService {
 	public UserVO loginChk(UserVO vo, HttpSession session) {
 		return dao.loginChk(vo);
 	}
+
+	@Override
+	public UserVO userSelectOne(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userSelectOne(vo);
+	}
 }

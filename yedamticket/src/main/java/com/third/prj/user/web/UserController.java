@@ -120,7 +120,7 @@ public class UserController {
 		if (login != null && pwdChk) {
 			msg = "로그인 성공";
 			url = "home.do";
-			session.setAttribute("sessionId", vo.getUid());
+			session.setAttribute("sessionId", vo.getUId());
 			session.setAttribute("sessionEmail", vo.getEmail());
 			session.setAttribute("sessionName", vo.getName());
 			session.setAttribute("sessionAddr", vo.getAddr());
@@ -145,10 +145,10 @@ public class UserController {
 	@RequestMapping("/userSelect.do")
 	public String userSelect(HttpSession session, UserVO vo) {
 		userDao.userSelect(vo);
-		session.setAttribute("sessionId", vo.getUid());
+		session.setAttribute("sessionId", vo.getUId());
 		session.setAttribute("sessionPwd", vo.getPwd());
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println("id :" + vo.getUid());
+		System.out.println("id :" + vo.getUId());
 		System.out.println("pwd :" + vo.getPwd());
 		System.out.println("name :" + vo.getName());
 		System.out.println("email :" + vo.getEmail());
@@ -211,7 +211,7 @@ public class UserController {
 
 	@RequestMapping("pfReservList.do")
 	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, PerformanceVO vo) {
-		pvo.setUid((String) session.getAttribute("sessionId"));
+		pvo.setUId((String) session.getAttribute("sessionId"));
 		model.addAttribute("pfList", userDao.pfReservList(pvo));
 		return "user/pfReservList";
 	}

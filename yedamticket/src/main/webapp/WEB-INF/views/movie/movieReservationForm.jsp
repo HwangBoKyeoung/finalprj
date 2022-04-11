@@ -7,6 +7,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+	crossorigin="anonymous">
+	<script src="https://kit.fontawesome.com/84d54512c7.js"
+	crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <style>
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
@@ -16,8 +22,8 @@ body {
 
 .container {
   background: #ffffff;
-  width: 540px;
-  height: 420px;
+  width: 700px;
+  height: 500px;
   margin: 0 auto;
   position: relative;
   margin-top: 10%;
@@ -112,7 +118,7 @@ nav a:first-child {
 h1 {
   font-family: "Montserrat", sans-serif;
   color: #7ed386;
-  font-size: 1em;
+  font-size: 1.2em;
   margin-top: 40px;
   margin-bottom: 35px;
 }
@@ -122,7 +128,7 @@ h2 {
   font-family: "Roboto", sans-serif;
   width: 80%;
   text-transform: uppercase;
-  font-size: 8px;
+  font-size: 20px;
   letter-spacing: 1px;
   margin-left: 2px;
 }
@@ -134,7 +140,7 @@ p {
   border-top: 0;
   width: 80%;
   font-family: "Montserrat", sans-serif;
-  font-size: 0.7em;
+  font-size: 0.9em;
   padding: 7px 0;
   color: #070707;
 }
@@ -177,28 +183,7 @@ input {
   opacity: 0;
 }
 
-footer {
-  position: absolute;
-  width: 20%;
-  bottom: 0;
-  right: -20px;
-  text-align: right;
-  font-size: 0.8em;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  font-family: "Roboto", sans-serif;
-}
-footer p {
-  border: none;
-  padding: 0;
-}
-footer a {
-  color: #ffffff;
-  text-decoration: none;
-}
-footer a:hover {
-  color: #7d7d7d;
-}
+
 
         
     </style>
@@ -207,10 +192,29 @@ footer a:hover {
 
 ${re }
 ${movie }
+${user }
     <div class="container">
         <div id="logo"><h1 class="logo">YEDAM</h1>
           <div class="CTA">
-            <h1 id="price"></h1>
+          <form action="moviePay.do" method="post">
+         		<!-- 무비넘버 -->
+				<input type="hidden" id="docId" name="docId" value="${movie.docId }">
+				<!-- 지역 -->
+				<input type="hidden" id="reservLoc" name="reservLoc" value="${re.reservLoc }">
+				<!-- 영화관 -->
+				<input type="hidden" id="reservHall" name="reservHall"  value="${re.reservHall }">
+				<!-- 사용자 -->
+				<input type="hidden" id="UId" name="UId" value="micol1234">
+				<!-- 날짜-->
+				<input type="hidden" id="schDate" name="schDate"  value="${re.schDate }">
+				<!-- 시간 -->
+				<input type="hidden" id="schTime" name="schTime" value="${re.schTime }">
+				<!-- 좌석이름 -->
+				<input type="hidden" id="seatName" name="seatName" value="${re.seatName }">
+				<!-- 영화 가격 -->
+				<input type="hidden" id="pay" name="pay">
+				<button type="submit" class="btn">결제하기</button>
+			</form>
             </div>
         </div>
         <div class="leftbox">
@@ -226,38 +230,33 @@ ${movie }
           <div class="profile noshow">
             <h1>Personal Info</h1>
             <h2>Full Name</h2>
-            <p>Julie Park </p>
+            <p>${user.name } </p>
             <h2>Birthday</h2>
-            <p>July 21</p>
+            <p>${user.birthDt }</p>
            
             <h2>Email</h2>
-            <p>example@example.com <button class="btn">update</button></p>
+            <p>${user.email} <button class="btn" >update</button></p>
             <h2>Password </h2>
             <p>••••••• <button class="btn">Change</button></p>
           </div>
           
           <div class="payment noshow">
-            <h1>Payment Info</h1>
-            <h2>Payment Method</h2>
-            <p>Mastercard •••• •••• •••• 0000 <button class="btn">update</button></p>
-            <h2>Billing Address</h2>
-            <p>1234 Example Ave | Seattle, WA <button class="btn">change</button></p>
-            <h2>Zipcode</h2>
-            <p>999000</p>
-            <h2>Billing History</h2>
-            <p>2018<button class="btn">view</button></p>
-            <h2>Redeem Gift Subscription </h2>
-            <p><input type="text" placeholder="Enter Gift Code"></input> <button class="btn">Redeem</button></p>
+            <h1>MemberShip</h1>
+            <h2>${user.membership }</h2>
+            <p>${user.point }원<button class="btn">충전하러가기</button></p>
+           
           </div>
       
           <div class="subscription ">
             <h1>영수증</h1>
             <h2>영화제목</h2>
-            <p>${movie.name } <button class="btn">pay now</button></p>
+            <h2>${movie.name } <button class="btn">pay now</button></h2>
             <h2>${re.reservLoc } ${re.reservHall }영화관</h2>
             <h2>${re.schDate } ${re.schTime }</h2>
             <h2>좌석</h2>
-            <p>${re.seatName } <button class="btn">change plan</button></p>
+            <h2>${re.seatName } <button class="btn">change plan</button></h2>
+            <h2>가격</h2>
+            <h2 id="price"><button class="btn">change plan</button></h2>
             <!--  <img src="resources/users/img/eva.jpg">-->
           </div>
       
@@ -294,7 +293,7 @@ ${movie }
 (function (){
 	let fileCd=('${movie.fileCd}').split('|');
 	let poster=fileCd[0];	
-	$('.container').css({"background":"url(" + poster + ")"});
+	//$('.container').css({"background":"url(" + poster + ")"});
 	let seatName='${re.seatName }';
 	let cnt=0;
 	let price=13000;
@@ -304,6 +303,7 @@ ${movie }
 		}
 	}
 	$('#price').text(price*cnt+'원');
+	$('#pay').val(price*cnt);
 })();
 
 /*active button class onclick*/
