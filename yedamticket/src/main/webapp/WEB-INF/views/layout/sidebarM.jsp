@@ -29,9 +29,6 @@
                   <li class="nav-item"><a class="nav-link" href="moviePopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
-            <li class="nav-item"><a class="nav-link" href="deleteRequestList.do"> <span class="menu-title">Delete Request</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-            </a></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
               aria-controls="ui-basic"> 
               <span class="menu-title">Performance</span> <i class="menu-arrow"></i> 
