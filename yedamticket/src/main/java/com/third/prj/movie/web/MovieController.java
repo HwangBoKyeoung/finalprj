@@ -136,14 +136,7 @@ public class MovieController {
 	public List<MovieScheduleVO> movieSchdtList(Model model, MovieScheduleVO vo) {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
-	//기업회원페이지에서 리스트르 출력
-	@RequestMapping("/companyMovieList.do")
-	public String companyMovieList(CriteriaVO cri, Model model) {
-		PageVO pageVO = new PageVO(cri, movieDao.getTotal(cri));
-		model.addAttribute("mvs",movieDao.mvListPaging(cri));	
-		model.addAttribute("pageVO", pageVO);
-		return "companyMyPage/companyMovieList";
-	}
+
 	  
 		//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
 		@RequestMapping("/companyMovieUpdateForm.do")

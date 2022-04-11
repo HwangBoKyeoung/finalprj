@@ -301,6 +301,8 @@ iframe {
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
 					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
+					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
 				<div class="form-group d-flex">
 					<div class="icon">

@@ -20,7 +20,7 @@
 						<tr>
 							<th>삭제 사유</th>
 							<td><input type="text" name="content" id="content"></td>
-							<th><input type="text" name="mvNo" id="mvNo" value="${del}"></th>
+							<th><input type="hidden" name="mvNo" id="mvNo" value="${del}"></th>
 							 	
 						</tr>
 						<tr>

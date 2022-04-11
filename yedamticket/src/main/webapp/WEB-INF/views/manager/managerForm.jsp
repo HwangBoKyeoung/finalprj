@@ -11,10 +11,11 @@
 <body>
 	<div class="col-md-10 grid-margin stretch-card">
 		<div class="card">
+		
 			<div class="card-body">
 				<h4 class="card-title">Admin Insert</h4>
 				<p class="card-description">Horizontal form layout</p>
-				<form class="forms-sample" action="adminInsert.do" method="post" onsubmit="return chec_id();">
+				<form class="forms-sample" action="managerInsert.do" method="post" onsubmit="return chec_id();">
 				
 					<div class="form-group row">
 						<label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
@@ -81,6 +82,7 @@
 				alert('아이디중복체크를 하세요');
 				return false;
 			}
+			return true;
 		}
 
 		function fn_idCheck() {
@@ -95,7 +97,7 @@
 					if (data >= 1) {
 						alert('중복');
 					} else if (data == 0) {
-						$("#idChk").val('Y');
+						$("#idCheck").val('Y');
 						alert("사용가능한 아이디 입니다");
 					}
 				}

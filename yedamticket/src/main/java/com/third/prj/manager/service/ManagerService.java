@@ -2,6 +2,8 @@ package com.third.prj.manager.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 public interface ManagerService {
 
 	List<ManagerVO> managerSelectList(CriteriaVO cri);
@@ -17,4 +19,5 @@ public interface ManagerService {
 	
 	//로그인
 	ManagerVO manaLogin(ManagerVO vo);
+	ManagerVO manaLogin(ManagerVO vo, HttpSession session);
 }

@@ -2,7 +2,6 @@ package com.third.prj.deleterequest.service;
 
 import java.util.List;
 
-import com.third.prj.performance.service.PerformanceVO;
 
 public interface DeleteRequestService {
 
@@ -28,6 +27,17 @@ public interface DeleteRequestService {
 	
 	//기업마이페이지 삭제 현황(공연)
 	List<DeleteRequestVO> companyMyDeletePerforList(CriteriaVO cri);
+	int getTotalDeletePerfor(CriteriaVO cri);
 	//기업마이페이지 삭제 현황(영화)
 	List<DeleteRequestVO> companyMyDeleteMovieList(CriteriaVO cri);
+	int getTotalDeleteMovie(CriteriaVO cri);
+	
+	//기업회원 마이페이지 공연 목록
+	List<DeleteRequestVO> companyPerforSelectList(CriteriaVO cri);
+	int getTotalPerfor(CriteriaVO cri);
+	
+	//기업회원 마이페이지 영화목록
+	List<DeleteRequestVO> companyMovieSelectList(CriteriaVO cri);
+	int getTotalMovie(CriteriaVO cri);
+	
 }

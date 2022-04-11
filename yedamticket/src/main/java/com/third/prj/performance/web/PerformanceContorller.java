@@ -25,14 +25,14 @@ public class PerformanceContorller {
 	private PerformanceImageService periDao;
 
 
-	//모두조회
-	@RequestMapping("/companyPerforList.do")
-	public String conPage(Model model,CriteriaVO cri) {
-		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
-		model.addAttribute("pers", perDao.companyPerforSelectList(cri));
-		model.addAttribute("pageVO", pageVO);
-		return "companyMyPage/companyMyPerforList";
-	}
+//	//모두조회
+//	@RequestMapping("/companyPerforList.do")
+//	public String conPage(Model model,CriteriaVO cri) {
+//		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+//		model.addAttribute("pers", perDao.companyPerforSelectList(cri));
+//		model.addAttribute("pageVO", pageVO);
+//		return "companyMyPage/companyMyPerforList";
+//	}
 
 	@RequestMapping("/pList.do")
 	public String pList() {
@@ -71,13 +71,6 @@ public class PerformanceContorller {
 	public String companyPerforUpdate(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
 
 		PerformanceImageVO ivo = new PerformanceImageVO();
-
-//		vo = perDao.perSelect(vo);
-//		model.addAttribute("pers",vo);
-//		svo = persDao.persSelect(svo);
-//		model.addAttribute("perse",svo);
-//		ivo = periDao.periSelect(ivo);
-//		model.addAttribute("persi",ivo);
 
 		map.put("vp_no", vo.getPNo());
 		map.put("p_name", vo.getName());

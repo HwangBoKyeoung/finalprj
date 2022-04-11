@@ -17,7 +17,7 @@
 		<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
 				OR U_ID LIKE '%'||#{searchName}||'%')</if>
 			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'U_ID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
 			<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 	
@@ -35,7 +35,7 @@
 			<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
 				OR U_ID LIKE '%'||#{searchName}||'%')</if>
 			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'U_ID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
 			<if test="searchType == null or searchType ==''"> 1 = 1</if>
 			<![CDATA[
 			ORDER BY IN_NO )A)

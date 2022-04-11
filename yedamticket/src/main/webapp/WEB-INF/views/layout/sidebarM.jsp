@@ -24,17 +24,26 @@
             </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="movie.do">Management</a></li>
-                  <li class="nav-item"><a class="nav-link" href="sales.do">Sales</a></li>
-                  <li class="nav-item"><a class="nav-link" href="popularitychart.do">Popularity Chart</a></li>
+                  <li class="nav-item"><a class="nav-link" href="managerMovieDeleteList.do">Management</a></li>
+                  <li class="nav-item"><a class="nav-link" href="movieSales.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="moviePopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
             <li class="nav-item"><a class="nav-link" href="deleteRequestList.do"> <span class="menu-title">Delete Request</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>
-            <li class="nav-item"><a class="nav-link" href="concert.do"> <span class="menu-title">Concert</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-            </a></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">Performance</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-chart-areaspline"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="managerPerforDeleteList.do">Management</a></li>
+                  <li class="nav-item"><a class="nav-link" href="concertsales.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="concertpopularitychart.do">Popularity Chart</a></li>
+                </ul>
+              </div></li>
             <li class="nav-item"><a class="nav-link" href="managerInquiryList.do"> <span class="menu-title">Inquiry</span>
                 <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a></li>            

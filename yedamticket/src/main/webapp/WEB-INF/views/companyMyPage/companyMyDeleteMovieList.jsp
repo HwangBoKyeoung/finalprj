@@ -317,7 +317,7 @@ iframe {
 				<div class="card-body">
 					<h4 class="card-title">Movie Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
-					<form action="companyPerforList.do">
+					<form action="companyMyDeleteMovieList.do">
 						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
@@ -325,10 +325,8 @@ iframe {
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 									<option value="NAME"
 										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
-									<option value="ATCOR"
-										${pageVO.cri.searchType eq 'ATCOR' ? 'selected' : '' }>출연진</option>
-									<option value="LOC"
-										${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>공연지역</option>
+									<option value="DELETECD"
+										${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>삭제처리</option>
 								</select> <input type="text" name="searchName"
 									value="${pageVO.cri.searchName }">
 								<button type="submit" class="btn btn-primary">검색</button>
@@ -351,9 +349,9 @@ iframe {
 					<tbody id="body">
 						<c:forEach items="${dels }" var="del">
 							<tr>
-								<td>${del.name}</td>
-								<td>${del.actor}</td>
-								<td>${del.content}</td>
+								<td>${del.movieVO.name}</td>
+								<td>${del.movieVO.actor}</td>
+								<td>${del.movieVO.content}</td>
 								<td>${del.deleteCd}</td>
 							</tr>
 						</c:forEach>

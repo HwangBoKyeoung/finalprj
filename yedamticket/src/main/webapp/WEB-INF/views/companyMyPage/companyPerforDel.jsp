@@ -16,7 +16,7 @@
 					<p class="card-description">Performance</p>
 					<table class="table">
 						<tr>
-							<th><input type="text" name="CId" id="CId" value="${CId }"></th>
+							<th><input type="hidden" name="CId" id="CId" value="${CId }"></th>
 							<th>삭제 사유</th>
 							<td><input type="text" name="content" id="content"></td>
 							<th><input type="hidden" name="PNo" id="PNo" value="${del}"></th>

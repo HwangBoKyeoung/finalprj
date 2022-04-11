@@ -76,4 +76,41 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 		return mapper.companyMyDeleteMovieList(cri);
 	}
 
+	//기업회원마이페이지 - 영화 목록
+	@Override
+	public List<DeleteRequestVO> companyPerforSelectList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.companyPerforSelectList(cri);
+	}
+
+	@Override
+	public int getTotalPerfor(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalPerfor(cri);
+	}
+
+	@Override
+	public int getTotalDeletePerfor(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalDeletePerfor(cri);
+	}
+
+	@Override
+	public int getTotalDeleteMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalDeleteMovie(cri);
+	}
+
+	@Override
+	public List<DeleteRequestVO> companyMovieSelectList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.companyMovieSelectList(cri);
+	}
+
+	@Override
+	public int getTotalMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalMovie(cri);
+	}
+
 }

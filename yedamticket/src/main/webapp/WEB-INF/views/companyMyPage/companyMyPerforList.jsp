@@ -325,15 +325,13 @@ iframe {
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 									<option value="NAME"
 										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
-									<option value="ATCOR"
-										${pageVO.cri.searchType eq 'ATCOR' ? 'selected' : '' }>출연진</option>
 									<option value="LOC"
 										${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>공연지역</option>
 								</select> <input type="text" name="searchName"
 									value="${pageVO.cri.searchName }">
 								<button type="submit" class="btn btn-primary">검색</button>
 								<input type="hidden" name="pageNum" value="1">
-								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
+<!-- 								검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
 							</div>
 						</div>
@@ -342,19 +340,17 @@ iframe {
 				<table class="table table-hover">
 					<thead>
 						<tr>
+							<th>공연 번호</th>
 							<th>공연 이름</th>
-							<th>출연진</th>
 							<th>공연지역</th>
-							<th>공연가격</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
 							<tr onclick="location.href='companyPerforUpdateForm.do?PNo=${per.PNo}' ">
-								<td>${per.name}</td>
-								<td>${per.actor}</td>
-								<td>${per.loc}</td>
-								<td>${per.price}</td>
+								<td>${per.performanceVO.PNo}</td>
+								<td>${per.performanceVO.name}</td>
+								<td>${per.performanceVO.loc}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

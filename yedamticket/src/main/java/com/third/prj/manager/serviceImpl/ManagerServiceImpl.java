@@ -2,6 +2,8 @@ package com.third.prj.manager.serviceImpl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,6 +18,9 @@ public class ManagerServiceImpl implements ManagerService{
 	@Autowired
 	private ManagerMapper mapper;
 
+	@Autowired
+	private ManagerService dao;
+	
 	@Override
 	public List<ManagerVO> managerSelectList(CriteriaVO cri) {
 		return mapper.managerSelectList(cri);
@@ -58,6 +63,11 @@ public class ManagerServiceImpl implements ManagerService{
 	public ManagerVO manaLogin(ManagerVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.manaLogin(vo);
+	}
+
+	@Override
+	public ManagerVO manaLogin(ManagerVO vo, HttpSession session) {
+		return dao.manaLogin(vo);
 	}
 	
 	

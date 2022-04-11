@@ -315,7 +315,7 @@ iframe {
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">Movie List</h4>
-					<p class="card-description">영화 리스트</p>
+					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMovieList.do">
 					<div class="col-10">					
 						<div class="searchBar" align="right">
@@ -348,12 +348,12 @@ iframe {
 							</tr>
 						</thead>
 						<tbody id="body">
-							<c:forEach items="${mvs }" var="mv">
+							<c:forEach items="${dels }" var="mv">
 								<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
-									<td>${mv.name}</td>
-									<td>${mv.genre}</td>
-									<td>${mv.rating}</td>
-									<td>${mv.director}</td>
+									<td>${mv.movieVO.name}</td>
+									<td>${mv.movieVO.genre}</td>
+									<td>${mv.movieVO.rating}</td>
+									<td>${mv.movieVO.director}</td>
 								</tr>
 							</c:forEach>
 						</tbody>

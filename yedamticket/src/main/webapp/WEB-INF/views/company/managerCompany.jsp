@@ -10,6 +10,7 @@
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
+		<form action="managerCompany.do">
 			<div class="card-body">
 				<h4 class="card-title">Company List</h4>
 				<p class="card-description">기업회원 리스트</p>
@@ -59,11 +60,11 @@
 							<option value="ALL"
 								${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 							<option value="DEPART"
-								${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>부서</option>
+								${pageVO.cri.searchType eq 'DEPART' ? 'selected' : '' }>부서</option>
 							<option value="NAME"
-								${pageVO.cri.searchType eq 'ATCOR' ? 'selected' : '' }>이름</option>
-							<option value="M_ID"
-								${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>아이디</option>
+								${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>이름</option>
+							<option value="MID"
+								${pageVO.cri.searchType eq 'MID' ? 'selected' : '' }>아이디</option>
 						</select> <input type="text" name="searchName"
 							value="${pageVO.cri.searchName }" class="form-control"
 							aria-label="Text input with dropdown button">
@@ -74,6 +75,7 @@
 					</div>
 				</div>
 			</div>
+			</form>
 		</div>
 	</div>
 

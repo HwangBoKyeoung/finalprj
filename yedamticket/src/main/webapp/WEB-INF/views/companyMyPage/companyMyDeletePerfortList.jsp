@@ -317,7 +317,7 @@ iframe {
 				<div class="card-body">
 					<h4 class="card-title">Performance Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
-					<form action="companyMyDeleteMovieList.do">
+					<form action="companyMyDeletePerforList.do">
 						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
@@ -325,10 +325,8 @@ iframe {
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 									<option value="NAME"
 										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
-									<option value="ATCOR"
-										${pageVO.cri.searchType eq 'ATCOR' ? 'selected' : '' }>출연진</option>
-									<option value="LOC"
-										${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>공연지역</option>
+									<option value="DELETECD"
+										${pageVO.cri.searchType eq 'DELETECD' ? 'selected' : '' }>처리결과</option>
 								</select> <input type="text" name="searchName"
 									value="${pageVO.cri.searchName }">
 								<button type="submit" class="btn btn-primary">검색</button>
@@ -351,10 +349,10 @@ iframe {
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
 							<tr>
-								<td>${per.name}</td>
-								<td>${per.actor}</td>
-								<td>${per.loc}</td>
-								<td>${per.price}</td>
+								<td>${per.performanceVO.name}</td>
+								<td>${per.performanceVO.actor}</td>
+								<td>${per.performanceVO.content}</td>
+								<td>${per.deleteCd}</td>
 							</tr>
 						</c:forEach>
 					</tbody>

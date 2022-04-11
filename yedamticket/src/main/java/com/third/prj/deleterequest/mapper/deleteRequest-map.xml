@@ -124,41 +124,152 @@
 		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,MV_NO,C_ID)
 		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{mvNo},#{CId})		
 	</insert>
+	<!-- 삭제신청 현황 -->
+	<select id="companyMyDeletePerforList" resultMap="delrequestMap">
+	<![CDATA[
+		SELECT *
+		FROM ( 
+			SELECT ROWNUM RN, A.*
+			FROM (
+				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+				FROM PERFORMANCE P, DELETE_REQUEST D
+				WHERE P.P_NO = D.P_NO
+				AND
+ 		]]>
+		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DELETECD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+				ORDER BY P.P_NO DESC )A) 
+ 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]> 
+	</select>
+	<select id="getTotalDeletePerfor"  resultType="int">
+		SELECT COUNT(*) 
+		FROM PERFORMANCE P, DELETE_REQUEST D
+		WHERE P.P_NO = D.P_NO
+		AND
+		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'DELETECD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
 	
-<!-- 	<select id="companyMyDeletePerforList" resultMap="delrequestMap"> -->
-<!-- 	<![CDATA[ -->
-<!-- 		SELECT M.NAME, M.ACTOR, D.CONTENT, D.DELETE_CD -->
-<!-- 		FROM ( -->
-<!-- 		SELECT M.NAME, M.ACTOR, D.CONTENT, D.DELETE_CD -->
-<!-- 		FROM MOVIE M, DELETE_REQUEST D -->
-<!-- 		WHERE M.C_ID = #{CId} -->
-<!-- 		AND ]]> -->
-<!-- 		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%' -->
-<!-- 			OR DELETE_CD LIKE '%'||#{searchName}||'%')</if> -->
-<!-- 		<if test="searchType == 'NAME'">M.NAME LIKE '%'||#{searchName}||'%'</if> -->
-<!-- 		<if test="searchType == 'DELETE_CD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if> -->
-<!-- 		<if test="searchType == null or searchType ==''"> 1 = 1</if> -->
-<!-- 		<![CDATA[ -->
-<!-- 		ORDER BY M.NAME )A) -->
-<!-- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} -->
-<!-- 		]]> -->
-<!-- 	</select> -->
+	<!-- 기업회원마이페이지 - 공연목록('신청','승인'제외) -->
+	<select id="companyPerforSelectList" resultMap="delrequestMap">
+		<![CDATA[
+		SELECT *
+		FROM ( 
+			SELECT ROWNUM RN, A.*
+			FROM (
+				SELECT P.P_NO,P.NAME,P.LOC,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+				FROM PERFORMANCE P
+				LEFT OUTER JOIN DELETE_REQUEST D
+				ON P.P_NO = D.P_NO
+				WHERE DELETE_CD IS NULL
+				OR DELETE_CD = '거절'
+				AND
+ 		]]>
+		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+				ORDER BY P.P_NO DESC )A) 
+ 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]> 
+	</select>
+	<select id="getTotalPerfor" resultType="int">
+		SELECT COUNT(*)
+		FROM PERFORMANCE P
+		LEFT OUTER JOIN DELETE_REQUEST D
+		ON P.P_NO = D.P_NO
+		WHERE DELETE_CD IS NULL
+		OR DELETE_CD = '거절'
+		AND 
+		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+					OR DELETE_CD LIKE '%'||#{searchName}||'%')</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
 	
-<!-- 	<select id="companyMyDeletePerforList" resultMap="delrequestMap"> -->
-<!-- 	<![CDATA[ -->
-<!-- 		SELECT P.NAME, P.ACTOR, D.CONTENT, D.DELETE_CD -->
-<!-- 		FROM PERFORMANCE P, DELETE_REQUEST D -->
-<!-- 		WHERE P.C_ID = #{CId} -->
-<!-- 		AND ]]> -->
-<!-- 		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%' -->
-<!-- 			OR DELETE_CD LIKE '%'||#{searchName}||'%')</if> -->
-<!-- 		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if> -->
-<!-- 		<if test="searchType == 'DELETE_CD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if> -->
-<!-- 		<if test="searchType == null or searchType ==''"> 1 = 1</if> -->
-<!-- 		<![CDATA[ -->
-<!-- 		ORDER BY P.NAME )A) -->
-<!-- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} -->
-<!-- 		]]> -->
-<!-- 	</select> -->
+	<select id="companyMyDeleteMovieList" resultMap="delrequestMap">
+	<![CDATA[
+		SELECT *
+		FROM ( 
+			SELECT ROWNUM RN, A.*
+			FROM (
+			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+				FROM MOVIE M, DELETE_REQUEST D
+				WHERE M.MV_NO = D.MV_NO
+				AND
+ 		]]>
+		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DELETECD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+ 				ORDER BY M.MV_NO DESC )A)
+		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} 
+ 		]]>
+	</select>
+	
+	<select id="getTotalDeleteMovie" resultType="int">
+		SELECT COUNT(*)
+		FROM MOVIE M, DELETE_REQUEST D
+		WHERE M.MV_NO = D.MV_NO
+		AND
+		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DELETECD'">DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
+	
+	<select id="companyMovieSelectList" resultMap="delrequestMap">
+		<![CDATA[
+		SELECT *
+		FROM ( 
+			SELECT ROWNUM RN, A.*
+			FROM (
+				SELECT M.MV_NO,M.NAME,M.RATING,M.GENRE,M.DIRECTOR 
+				FROM MOVIE M
+				LEFT OUTER JOIN DELETE_REQUEST D
+				ON M.MV_NO = D.MV_NO
+				WHERE DELETE_CD IS NULL
+				OR DELETE_CD = '거절'
+				AND
+ 		]]>
+ 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+			ORDER BY M.MV_NO DESC )A)
+			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]>
+	</select>
+	<select id="getTotalMovie" resultType="int">
+		SELECT COUNT(*)
+		FROM MOVIE M
+				LEFT OUTER JOIN DELETE_REQUEST D
+				ON M.MV_NO = D.MV_NO
+				WHERE DELETE_CD IS NULL
+				OR DELETE_CD = '거절'
+				AND
+				<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+				
+	</select>
 	
 </mapper>

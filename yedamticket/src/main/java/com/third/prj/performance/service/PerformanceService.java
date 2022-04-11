@@ -11,6 +11,7 @@ public interface PerformanceService {
 	
 //	프로시저 호출(update에 필요)
 	int procedureCall(Map<String, Object> map);
+	
 	//리스트 페이징처리
 	int getTotal(CriteriaVO cri);
 }

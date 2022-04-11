@@ -1,8 +1,10 @@
 package com.third.prj.manager.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -24,6 +26,9 @@ public class ManagerController {
 
 	@Autowired
 	private ManagerService managerDao;
+	
+	@Inject
+	private BCryptPasswordEncoder pwdEncoder;
 
 	// 관리자 리스트 페이지
 	@RequestMapping("/manager.do")
@@ -43,6 +48,9 @@ public class ManagerController {
 	// 관리자 등록
 	@RequestMapping("/managerInsert.do")
 	public String managerInsert(ManagerVO vo) {
+		String encodedPwd = vo.getPwd();
+		String decodedPwd = pwdEncoder.encode(encodedPwd);
+		vo.setPwd(decodedPwd);
 		int n = managerDao.managerInsert(vo);
 		if (n != 0) {
 			return "redirect:manager.do";
@@ -90,7 +98,7 @@ public class ManagerController {
 	
 	@RequestMapping("/managerLoginForm.do")
 	public String managerLoginForm() {
-		return "manager/managerLoginForm";
+		return "company/manager/managerLoginForm";
 	}
 	  
 		//관리자회원 로그인
@@ -98,18 +106,22 @@ public class ManagerController {
 		public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
 			String msg = "";
 	        String url = "";
-			vo = managerDao.manaLogin(vo);
-			if(vo == null) {
-				msg = "아이디가 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-				url = "managerLoginForm.do";
-				mv.addObject("msg", msg);
-				mv.addObject("url", url);
-				mv.setViewName("company/alert");
-			}else {
+			ManagerVO login = managerDao.manaLogin(vo, session);
+			boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+			
+			if(login != null && pwdChk) {
 				msg = "로그인 성공";
 				url = "homeM.do";	
 				session.setAttribute("sessionId", vo.getMId());
-				session.setAttribute("pwd", vo.getPwd());
+				session.setAttribute("sessionName", vo.getName());
+				session.setAttribute("sessionAuthCd", vo.getAuthCd());
+				mv.addObject("msg", msg);
+				mv.addObject("url", url);
+				mv.setViewName("company/alert");
+				
+			}else {
+				msg = "아이디가 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+				url = "managerLoginForm.do";
 				mv.addObject("msg", msg);
 				mv.addObject("url", url);
 				mv.setViewName("company/alert");
