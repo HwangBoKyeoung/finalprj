@@ -110,6 +110,10 @@
 								href="pList.do">
 								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 							</a>
+							<a class="dropdown-item" 
+								href="concertSch.do">
+								<i class="fa-solid fa-calendar-days fa-2x"></i>공연 일정
+							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
 						class="dropdown-toggle" id="navbarDropdownMenuLink1"

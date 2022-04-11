@@ -174,7 +174,7 @@ label {
 				<div class="card-body">
 					<h4 class="card-title">Goods Update</h4>
 					<p class="card-description"></p>
-					<form class="forms-sample" id="frm" action="goodsUpdate.do" method="post"> <!--  enctype="multipart/form-data" -->
+					<form class="forms-sample" id="frm" action="goodsUpdate.do" method="post" enctype="multipart/form-data"> <!--  enctype="multipart/form-data" -->
 						<input type="hidden" value="${gds.GNo}" id="GNo" name="GNo">
 						<div class="form-group row">
 							<label for="exampleInputUsername2"
@@ -210,7 +210,7 @@ label {
 								<br>
 								<label for="input_file">업로드</label>
 								<input class="upload-name" value="${gds.fileCd }" disabled="disabled" style="width: 200px;">
-								<input type="file" id="input_file" class="upload-hidden">
+								<input type="file" name="file" id="input_file" class="upload-hidden">
 						</div>
 							<div class="input-group no-border">
 								<input type="hidden" class="form-control" id="goodsCd"

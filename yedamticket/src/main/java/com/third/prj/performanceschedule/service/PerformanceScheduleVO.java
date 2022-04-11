@@ -18,8 +18,10 @@ public class PerformanceScheduleVO {
 	private Date frDt;
 	private int no;
 	private String time;
+	private String loc;
+	private String addr;
+	//private String location;
 	private int pNo;
-	@JsonFormat(pattern = "YYYY-DD-MM")
-	private Date start;
+	private String start;
 	String title;
 }

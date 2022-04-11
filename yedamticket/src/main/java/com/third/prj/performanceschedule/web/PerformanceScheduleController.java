@@ -45,7 +45,7 @@ public class PerformanceScheduleController {
 	@ResponseBody
 	public List<PerformanceScheduleVO> ajaxModalForm(PerformanceScheduleVO vo) {
 		System.out.println("---------"+vo.getStart());
-		vo.setFrDt(vo.getStart());
+		//vo.setFrDt(vo.getStart());
 		System.out.println("*********"+vo);
 		List<PerformanceScheduleVO> list = pfmcDao.PerformanceScheduleList2(vo);
 		return list;

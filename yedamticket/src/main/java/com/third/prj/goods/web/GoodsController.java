@@ -1,9 +1,13 @@
 package com.third.prj.goods.web;
 
 
+import java.io.File;
+import java.util.UUID;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -19,9 +23,9 @@ public class GoodsController {
 	@Autowired
 	private GoodsService goodsDao;
 	
-	/*
-	 * @Autowired private String upLoadPath;
-	 */
+	
+	@Autowired private String upLoadPath;
+	 
 	
 	@RequestMapping("/cGoodsList.do")
 	public String cGoodsList(Model model) {
@@ -44,18 +48,28 @@ public class GoodsController {
 	}
 	
 	@RequestMapping("/goodsUpdate.do")
-	public String goodsUpdate(GoodsVO vo, MultipartFile file) {
-		/*
-		 * String fileName = file.getOriginalFilename(); String id =
-		 * UUID.randomUUID().toString(); // 고유한 유니크 아이디 생성 // 파일명 치환 String targetFile =
-		 * id + fileName.substring(fileName.lastIndexOf("."));
-		 * 
-		 * File target = new File(upLoadPath, targetFile); // 파일 경로객체생성 try {
-		 * FileCopyUtils.copy(file.getBytes(), target); // 파일전송 targetFile = upLoadPath
-		 * + File.separator + targetFile; // 실제 경로를 포함해서 // DB vo.setFileCd(fileName);
-		 * vo.setFileRe(targetFile); } catch(Exception e) { e.printStackTrace(); }
-		 */
+	public String goodsUpdate(GoodsVO vo, MultipartFile file) { //, MultipartFile file
+		
+		 String fileName = file.getOriginalFilename(); 
+		 String id = UUID.randomUUID().toString(); // 고유한 유니크 아이디 생성
+		 // 파일명 치환 
+		 String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
+		 File target = new File(upLoadPath, targetFile); // 파일 경로객체생성 
+		 try {
+			 FileCopyUtils.copy(file.getBytes(), target); // 파일전송 
+			 targetFile = upLoadPath+ File.separator + targetFile; // 실제 경로를 포함해서
+		   // DB 
+			 vo.setFileCd(fileName);
+			 vo.setFileRe(targetFile); 
+		} catch(Exception e) {
+			 e.printStackTrace(); 
+		}
+		 
 		int u = goodsDao.goodsUpdate(vo);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(vo);
+		System.out.println(u);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		if (u != 0) {
 			return "redirect:goodsPage.do";
@@ -65,11 +79,16 @@ public class GoodsController {
 	@RequestMapping("/goodsDelete.do")
 	public String goodsDelete(GoodsVO vo) {
 		int u = goodsDao.goodsDelete(vo);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+		System.out.println(vo);
+		System.out.println(u);
+		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
 		
 		if (u != 0) {
 			return "redirect:goodsPage.do";
 		}
-		return "goods/goodsErr";
+			return "goods/goodsErr";
+		
 	}
 	
 	//전체 조회

@@ -12,6 +12,7 @@
 		<result property="sellNo" column="sellno"/>
 		<result property="fileCd" column="file_cd"/>
 		<result property="goodsCd" column="goods_cd"/>
+		<result property="fileRe" column="file_re"/>
 	</resultMap>
 	
 	<!-- CDATA로 검색조건 쿼리 생성 -->
@@ -51,8 +52,8 @@
 			<if test="name != null"> NAME = #{name},</if>
 			<if test="price != null"> PRICE = #{price},</if>
 			<if test="content != null"> CONTENT = #{content},</if>
-			<!-- <if test="fileCd != null"> FILE_CD = #{fileCd},</if>
-			<if test="fileRe != null"> FILE_RE = #{fileRe},</if> -->
+			<if test="fileCd != null"> FILE_CD = #{fileCd},</if>
+			<if test="fileRe != null"> FILE_RE = #{fileRe},</if>
 		</set>
 		WHERE G_NO = #{GNo}
 	</update>
@@ -76,7 +77,6 @@
          <if test="searchType =='name'"> NAME LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType =='goodsCd'"> GOODS_CD LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
-          			
         <![CDATA[  			
           		ORDER BY G_NO DESC ) A ) 
          WHERE RN > (#{pageNum}-1) * #{amount} 

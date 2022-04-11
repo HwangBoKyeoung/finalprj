@@ -12,9 +12,9 @@
 	
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
 		SELECT
-			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "DTTM",
-			S.FRDT AS "START",
-			S.TIME AS "TIME",
+			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "start",
+			S.FRDT,
+			S.TIME as "time",
 			S.P_SCH_NO,
 			S.P_NO,
 			P.NAME AS "title",
@@ -30,14 +30,15 @@
 	
 	<select id="PerformanceScheduleList2" resultMap="pfmcMap">
 		SELECT
-			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "DTTM",
-			S.FRDT AS "START",
-			S.TIME AS "TIME",
+			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "start",
+			S.FRDT,
+			S.TIME AS "time",
 			S.P_SCH_NO,
 			S.P_NO,
 			P.NAME AS "title",
 			P.ACTOR,
 			P.CONTENT,
+			P.LOC || ' ' || P.ADDR as "location",
 			P.LOC,
 			P.ADDR,
 			P.PRICE

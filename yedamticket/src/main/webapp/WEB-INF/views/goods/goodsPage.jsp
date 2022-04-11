@@ -11,7 +11,7 @@
 <div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-			<form action="goodsPage.do">
+			<form action="goodsPage.do" enctype="multipart/form-data">
 				<h4 class="card-title">Goods List</h4>
 				<p class="card-description">굿즈 리스트</p>
 				<div class="searchBar" align="right">
@@ -39,7 +39,7 @@
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${gods }" var="gds">
-							<tr onclick="location.href='goodsSelect.do?gNo=${gds.GNo}&goodsCd=${gds.goodsCd }' ">
+							<tr onclick="location.href='goodsSelect.do?gNo=${gds.GNo}' ">
 								<td>${gds.name}</td>
 								<td>${gds.seller}</td>
 								<td>&nbsp;&nbsp;&nbsp;<c:set var="goodsCd" value="" />
