@@ -91,10 +91,9 @@
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label">공연이미지</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="lname" name="lname" value="${images.iname }">
+								<input type="file" class="form-control" id="fileCd" name="fileCd" value="${pers.fileCd }">
 							</div>
 						</div>
-						<input type="hidden" id="fileCd" name="fileCd" value="${images.fileCd }">
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>

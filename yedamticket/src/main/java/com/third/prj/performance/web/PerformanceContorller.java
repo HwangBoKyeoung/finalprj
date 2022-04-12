@@ -88,17 +88,13 @@ public class PerformanceContorller {
 	//한건조회
 	@RequestMapping("/companyPerforUpdateForm.do")
 	public String companyPerforUpdateForm(PerformanceVO vo, Model model) {
-		PerformanceImageVO ivo = new PerformanceImageVO();
 
 		vo = perDao.perforSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
 		//vvo.setPNo(vo.getPNo());
 
-		ivo.setFileCd(vo.getFileCd());
 
-		ivo = periDao.periSelect(ivo);
 
-		model.addAttribute("images", ivo);
 		model.addAttribute("pers", vo);
 		return "companyMyPage/companyPerforUpdateForm";
 	}
@@ -109,35 +105,36 @@ public class PerformanceContorller {
 	 * return "redirect:/conPage.do"; } return "manager/admin/managerError"; }
 	 */
 
-	// 프로시저 수정
+	// 기업회원 공연수정
 	@RequestMapping("/performanceUpdate.do")
-	public String perSelect() {
-		return "";
-	}
-	
-	//프로시저 수정
-	@RequestMapping("/companyPerforUpdate.do")
-	public String companyPerforUpdate(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
-
-		PerformanceImageVO ivo = new PerformanceImageVO();
-
-		map.put("vp_no", vo.getPNo());
-		map.put("p_name", vo.getName());
-		map.put("p_content", vo.getContent());
-		map.put("p_actor", vo.getActor());
-		map.put("p_loc", vo.getLoc());
-		map.put("p_addr", vo.getAddr());
-		map.put("p_price", vo.getPrice());
-		map.put("p_lname", lname);
-		map.put("p_cd", vo.getFileCd());
-
-//		perDao.procedureCall(map);
-		System.out.println(vo);
-		System.out.println(ivo);
-		System.out.println("프로시저콜 : ");
-
+	public String perSelect(Model model, PerformanceVO vo) {
+		model.addAttribute("pers", perDao.performanceUpdate(vo));
 		return "redirect:/companyPerforList.do";
 	}
+	
+//	//프로시저 수정
+//	@RequestMapping("/companyPerforUpdate.do")
+//	public String companyPerforUpdate(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
+//
+//		PerformanceImageVO ivo = new PerformanceImageVO();
+//
+//		map.put("vp_no", vo.getPNo());
+//		map.put("p_name", vo.getName());
+//		map.put("p_content", vo.getContent());
+//		map.put("p_actor", vo.getActor());
+//		map.put("p_loc", vo.getLoc());
+//		map.put("p_addr", vo.getAddr());
+//		map.put("p_price", vo.getPrice());
+//		map.put("p_lname", lname);
+//		map.put("p_cd", vo.getFileCd());
+//
+////		perDao.procedureCall(map);
+//		System.out.println(vo);
+//		System.out.println(ivo);
+//		System.out.println("프로시저콜 : ");
+//
+//		return "redirect:/companyPerforList.do";
+//	}
 
 	@RequestMapping("/perInsertForm.do")
 	public String perForInsertForm() {
