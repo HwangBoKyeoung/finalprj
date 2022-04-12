@@ -4,12 +4,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.third.prj.inquiry.service.CriteriaVO;
 import com.third.prj.inquiry.service.InquiryVO;
-import com.third.prj.notice.service.CriteriaVO;
 
 public interface InquiryMapper {
 
 	List<InquiryVO> inquirySelectList();
+	//관리자 페이지- 상담 페이징처리
+	List<InquiryVO> manaerInquiryList(CriteriaVO cri);
+	
 	InquiryVO inquirySelect(InquiryVO vo);
 	int inquiryInsert(InquiryVO vo);
 	int inquiryUpdate(InquiryVO vo);

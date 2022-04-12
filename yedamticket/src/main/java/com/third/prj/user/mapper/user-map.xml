@@ -30,14 +30,16 @@
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
+	
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
 		<result column="P_RESERV_NO" property="PReservNo" />
 		<result column="RESERVE_DTTM" property="reserveDttm" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
+	
 	<resultMap
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
@@ -48,6 +50,7 @@
 			resultMap="pfScheduleMap"></collection>
 	</resultMap>
 
+
 	<resultMap type="com.third.prj.user.service.UserPointViewVo"
 		id="userPointMap">
 		<result property="charge" column="CHARGE" />
@@ -55,6 +58,10 @@
 		<result property="Uid" column="U_ID" />
 		<result property="point" column="POINT" />
 	</resultMap>
+
+
+	
+	<resultMap type="hashmap" id="procedureCall"/>
 
 
 
@@ -82,7 +89,7 @@
 		SELECT COUNT(*)
 		FROM users
 		WHERE
-		u_id = #{Uid}
+		u_id = #{UId}
 	</select>
 
 	<select id="userSelect"
@@ -102,7 +109,7 @@
 
 	<resultMap type="com.third.prj.user.service.UserVO"
 		id="userMap">
-		<id column="u_id" property="Uid" />
+		<id column="u_id" property="UId" />
 		<result column="pwd" property="pwd" />
 		<result column="name" property="name" />
 		<result column="email" property="email" />
@@ -119,19 +126,38 @@
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="userSearch"
-		resultType="com.third.prj.user.service.UserVO" parameterType="String">
-		SELECT *
-		FROM USERS
-		WHERE
-		<if test="key == '전체'">U_ID LIKE '%'||#{val}||'%'
-			OR NAME LIKE '%'||#{val}||'%'
-			OR
-			EMAIL LIKE '%'||#{val}||'%'</if>
-		<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
-		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
-		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
-		ORDER BY U_ID DESC
+	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
+		<id column="u_id" property="UId"/>
+		<result column="pwd" property="pwd"/>
+		<result column="name" property="name"/>
+		<result column="email" property="email"/>
+		<result column="phone" property="phone"/>
+		<result column="addr" property="addr"/>
+	</resultMap>
+	<select id="userList" resultType="com.third.prj.user.service.UserVO">
+	<![CDATA[
+		SELECT U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
+		FROM
+			(
+			SELECT ROWNUM RN,A.* 
+			FROM (
+			SELECT 
+				U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
+			FROM USERS
+			WHERE
+			]]>
+			<if test="searchType == 'ALL'">(U_ID LIKE '%'||#{searchName}||'%'
+				OR NAME LIKE '%'||#{searchName}||'%'
+				OR EMAIL LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+			ORDER BY U_ID DESC ) A )
+			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		
+		]]>
 	</select>
 
 	<select id="getUser"
@@ -141,7 +167,7 @@
 		, {noop}PWD
 		, ROLE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select>
 
 
@@ -154,7 +180,7 @@
 		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
 		VALUES
-		(#{name}, #{Uid}, #{email} , #{loginCd} )
+		(#{name}, #{UId}, #{email} , #{loginCd} )
 
 	</insert>
 
@@ -169,17 +195,26 @@
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
 		WHERE U_ID = #{Uid}
-
 	</update>
 
 	<delete id="userDelete"
 		parameterType="com.third.prj.user.service.UserVO">
 		DELETE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</delete>
 
+	<!-- <select id="MvReservList" resultMap="MovieReservMap">
+		SELECT R.MV_RESERV_NO ,
+		R.RESERVDT,
+		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
+		FROM
+		MOVIE_RESERVATION
+		R JOIN MOVIE M
+		ON R.DOCID = M.DOCID
+		WHERE U_ID = #{UId}
+		</select> -->
 
 
 	<update id="userCharge"
@@ -259,6 +294,27 @@
          ORDER BY RESERVE_DTTM DESC
 		]]>
 	</select>
+	
+	<select id="userSelectOne"
+	      resultType="com.third.prj.user.service.UserVO">
+	      SELECT *
+	      FROM USERS
+      WHERE U_ID = #{UId}
+   </select>
+   
+	<!-- <select id="pfReservList" resultMap="performanceMap">
+		<![CDATA[SELECT X.P_RESERV_NO,
+		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
+		FROM
+		PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
+		WHERE
+		X.P_SCH_NO = Y.P_SCH_NO
+		AND Y.P_NO = Z.P_NO
+		AND X.U_ID = #{Uid} ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY RESERVE_DTTM DESC
+		]]>
+	</select> -->
 
 	<!-- 검색조건에 맞춰서 total변경 -->
 	<select id="getFTotal" resultType="int">
@@ -277,7 +333,7 @@
 		AND X.U_ID =#{Uid} ) A ) )
 		
 	</select>
-	
+
 	<select id="pointBuyList2"
 		resultMap="userPointMap">
       	<![CDATA[
@@ -311,10 +367,41 @@
 	WHERE U_ID=#{Uid}
 	</select>
 	
+
+	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
+		UPDATE users
+		SET    point = (SELECT point
+		             	FROM   users
+		             	WHERE  u_id = #{Uid}) + #{point}
+		WHERE  u_id = #{Uid}
+	</update> -->
 	
+	<update id="userCharge" statementType="CALLABLE" >
+		{CALL 
+		insertPoint(#{p1, mode=IN, jdbcType=INTEGER, javaType=INT},
+					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+					)
+		}
 
-
-
-
-
+	</update>
+	
+	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id = #{UId}
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM USERS
+		WHERE
+		<if test="searchType == 'ALL'">U_ID LIKE '%'||#{searchName}||'%'
+			OR NAME LIKE '%'||#{searchName}||'%'
+			OR
+			EMAIL LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
 </mapper>

@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -26,6 +27,8 @@ import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.UserCriteriaVO;
 import com.third.prj.user.service.UserPageVO;
 import com.third.prj.user.service.UserPointViewVo;
+import com.third.prj.user.service.CriteriaVO;
+import com.third.prj.user.service.PageVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -107,17 +110,20 @@ public class UserController {
 		return "user/user/userLoginForm";
 	}
 
-	@RequestMapping("/user.do")
-	public String user(Model model) {
-		model.addAttribute("users", userDao.userList());
-		return "manager/user/user";
+	@RequestMapping("/managerUser.do")
+	public String managerUser(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
+		model.addAttribute("users", userDao.userList(cri));
+		model.addAttribute("pageVO", pageVO);//전체게시글 기준으로가지고옴
+		return "manager/user/managerUser";
 	}
 
-	@RequestMapping("/userSelet.do")
-	public String userSelet(UserVO vo, Model model) {
+	@RequestMapping("/managerUserSelect.do")
+	public String managerUserSelect(UserVO vo, Model model) {
 		vo = userDao.userSelect(vo);
+		
 		model.addAttribute("users", vo);
-		return "manager/user/userSelect";
+		return "manager/user/managerUserSelect";
 	}
 
 	@RequestMapping("/userLogin.do")
@@ -133,7 +139,7 @@ public class UserController {
 		if (login != null && pwdChk) {
 			msg = "로그인 성공";
 			url = "home.do";
-			session.setAttribute("sessionId", vo.getUid());
+			session.setAttribute("sessionId", vo.getUId());
 			session.setAttribute("sessionEmail", vo.getEmail());
 			session.setAttribute("sessionName", vo.getName());
 			session.setAttribute("sessionAddr", vo.getAddr());
@@ -158,10 +164,10 @@ public class UserController {
 	@RequestMapping("/userSelect.do")
 	public String userSelect(HttpSession session, UserVO vo) {
 		userDao.userSelect(vo);
-		session.setAttribute("sessionId", vo.getUid());
+		session.setAttribute("sessionId", vo.getUId());
 		session.setAttribute("sessionPwd", vo.getPwd());
 		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println("id :" + vo.getUid());
+		System.out.println("id :" + vo.getUId());
 		System.out.println("pwd :" + vo.getPwd());
 		System.out.println("name :" + vo.getName());
 		System.out.println("email :" + vo.getEmail());
@@ -181,7 +187,7 @@ public class UserController {
 	@RequestMapping("/userPage.do")
 	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
 		cri.setUid((String)session.getAttribute("sessionId"));
-		vo.setUid((String)session.getAttribute("sessionId"));
+		vo.setUId((String)session.getAttribute("sessionId"));
 		pvo.setUid((String)session.getAttribute("sessionId"));
 		model.addAttribute("userPoint", userDao.userPoint(pvo));
 		model.addAttribute("mvList", userDao.mvRList(cri));
@@ -193,7 +199,7 @@ public class UserController {
 
 	@RequestMapping("/userUpdateForm.do")
 	public String userUpdateForm(Model model, UserVO vo, HttpSession session) {
-		vo.setUid((String)session.getAttribute("sessionId"));
+		vo.setUId((String)session.getAttribute("sessionId"));
 		model.addAttribute("user", userDao.userSelectOne(vo));
 		return "user/userUpdateForm";
 	}
@@ -236,7 +242,7 @@ public class UserController {
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
 		model.addAttribute("mvList", userDao.mvRList(cri));
 		
-		vo.setUid((String)session.getAttribute("sessionId"));
+		vo.setUId((String)session.getAttribute("sessionId"));
 		model.addAttribute("user", userDao.userSelectOne(vo));
 		
 		return "user/mvReservList";
@@ -250,7 +256,7 @@ public class UserController {
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
 		model.addAttribute("pfList", userDao.pfRList(cri));
 		
-		vo.setUid((String)session.getAttribute("sessionId"));
+		vo.setUId((String)session.getAttribute("sessionId"));
 		model.addAttribute("user", userDao.userSelectOne(vo));
 		return "user/pfReservList";
 	}
@@ -271,6 +277,7 @@ public class UserController {
 		model.addAttribute("list1", perDao.pfBuyList(pvo));
 		return "user/userBuyList";
 	}
+
 	
 //	@RequestMapping("/userBuyList.do")
 //	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
@@ -289,7 +296,26 @@ public class UserController {
 //		vo.setUid((String)session.getAttribute("sessionId"));
 //		model.addAttribute("user", userDao.userSelectOne(vo));
 //		return "user/userBuyList";
+
+	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String loginChk(UserVO userVO, @RequestParam("Uid") String Uid) {
+		userVO = userDao.loginChk(userVO);
+		String address = userVO.getAddr();
+		System.out.println(address);
+		return address;
+	}
+	
+//	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
+//		return "user/userUpdateForm";
+
 //	}
+	@RequestMapping("/companyMyPage.do")
+	public String companyMyPage() {
+		return "companyMyPage/companyMyPage";
+	}
+	
+	
 
 
 

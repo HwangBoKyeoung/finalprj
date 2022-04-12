@@ -154,6 +154,7 @@
 							</a>
 						</div></li>
 					<li>
+<<<<<<< HEAD
 						<div align="right">
 							<c:choose>
 								<c:when test="${empty sessionId}">
@@ -169,6 +170,23 @@
 									</a></li>
 								</c:otherwise>
 							</c:choose>
+=======
+						<div class="login-css-add" align="right">
+							<c:choose>
+                        <c:when test="${empty sessionId}">
+                           <li class="login-css-add"><a
+                              href="userLoginForm.do" > <i
+                                 class="fa-solid fa-headset fa-2x"></i> 로그인
+                           </a></li>
+                        </c:when>
+                        <c:otherwise>
+                           <li class="login-css-add"><a
+                              href="kakaoLogout.do" > <i
+                                 class="fa-solid fa-headset fa-2x"></i> 로그아웃
+                           </a></li>
+                        </c:otherwise>
+                     </c:choose>
+>>>>>>> develop
 						</div>
 					</li>
 				</ul>

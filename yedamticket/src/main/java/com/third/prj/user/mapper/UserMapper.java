@@ -1,6 +1,7 @@
 package com.third.prj.user.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +9,14 @@ import org.apache.ibatis.annotations.Param;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
+
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointVO;
 import com.third.prj.user.service.UserCriteriaVO;
 import com.third.prj.user.service.UserPointViewVo;
+
+import com.third.prj.user.service.CriteriaVO;
+
 import com.third.prj.user.service.UserVO;
 
 public interface UserMapper {
@@ -22,6 +27,9 @@ public interface UserMapper {
 //	유저 검색
 	UserVO userSelectOne(UserVO vo);
 //	회원가입
+
+	List<UserVO> userList(CriteriaVO cri);
+
 	int userInsert(UserVO vo);
 //	회원정보 수정
 	int userUpdate(UserVO vo);
@@ -31,8 +39,6 @@ public interface UserMapper {
 
 	int userPointUpdate(@Param("point")int point, @Param("id") String id);
 
-//	검색
-	List<UserVO> userSearch(@Param("key") String key, @Param("val") String val);
 
 //	아이디체크
 	int idChk(UserVO vo);
@@ -48,12 +54,12 @@ public interface UserMapper {
 	
 
 	// 포인트 충전
-	int userCharge(UserVO vo);
+	int userCharge(Map<String, Object> map);
 	
 	// 로그인 체크용 메서드
 	public UserVO loginChk(UserVO vo);
 	public UserVO loginChk(UserVO vo, HttpSession session);
-	
+
 	//유저포인트리스트
 	List<UserPointViewVo> pointBuyList(UserPointViewVo vo);
 	
@@ -77,8 +83,7 @@ public interface UserMapper {
 	
 	//유저 포인트 확인
 	UserPointViewVo userPoint(UserPointViewVo vo);
-	
 
-	
-	
+	//페이징(관리자 - 회원리스트페이지)
+	 int getTotal(CriteriaVO cri);
 }

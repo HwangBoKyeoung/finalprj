@@ -1,6 +1,7 @@
 package com.third.prj.user.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import com.third.prj.point.service.PointVO;
 import com.third.prj.user.mapper.UserMapper;
 import com.third.prj.user.service.UserCriteriaVO;
 import com.third.prj.user.service.UserPointViewVo;
+import com.third.prj.user.service.CriteriaVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -46,8 +48,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserVO> userList() {
-		return mapper.userList();
+	public List<UserVO> userList(CriteriaVO cri) {
+		return mapper.userList(cri);
 	}
 
 	@Override
@@ -55,10 +57,6 @@ public class UserServiceImpl implements UserService {
 		return mapper.userSelect(vo);
 	}
 
-	@Override
-	public List<UserVO> userSearch(String key, String val) {
-		return mapper.userSearch(key, val);
-	}
 
 	@Override
 	public UserVO getUser(UserVO vo) {
@@ -67,36 +65,32 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int emailCheck(String email) {
-		// TODO Auto-generated method stub
 		return mapper.emailCheck(email);
 	}
 
 	@Override
 	public int kakaoInsert(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.kakaoInsert(vo);
 	}
 
 	@Override
 	public int userUpdate(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.userUpdate(vo);
 	}
 
 	@Override
 	public int userDelete(UserVO vo) {
-		// TODO Auto-generated method stub
 		return mapper.userDelete(vo);
 	}
 
-	@Override
-	public int userCharge(UserVO vo) {
-		return mapper.userCharge(vo);
-	}
+
+	/*
+	 * @Override public int userCharge(UserVO vo) { return mapper.userCharge(vo); }
+	 */
+
 
 	@Override
 	public int userPointUpdate(int point, String id) {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
@@ -165,9 +159,19 @@ public class UserServiceImpl implements UserService {
 		return mapper.userPoint(vo);
 	}
 
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
+	}
+	
+	public int userCharge(Map<String, Object> map) {
+		return mapper.userCharge(map);
+	}
 
-
-
-
+	@Override
+	public List<UserVO> userList() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

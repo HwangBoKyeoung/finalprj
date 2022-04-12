@@ -7,12 +7,18 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.movie.mapper.MovieMapper;
+import com.third.prj.movie.service.CriteriaVO;
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
+
 import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.point.service.PointCriteriaVO;
 
+
+import lombok.extern.java.Log;
+
 @Repository("movieDao")
+@Log
 public class MovieServiceImpl implements MovieService {
 	
 	@Autowired
@@ -28,7 +34,6 @@ public class MovieServiceImpl implements MovieService {
 		// TODO Auto-generated method stub
 		return mapper.procedureCall(map);
   }
-  
 	@Override
 	public List<MovieVO> movieList() {
 		// TODO Auto-generated method stub
@@ -58,6 +63,25 @@ public class MovieServiceImpl implements MovieService {
 		// TODO Auto-generated method stub
 		return mapper.movieInsert(vo);
 	}
+	
+	@Override
+	public MovieVO mvSelect(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mvSelect(vo);
+	}
+
+	@Override
+	public List<MovieVO> mvListPaging(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		log.info("movielist" + cri);
+		return mapper.mvListPaging(cri);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
+	}
 
 	@Override
 	public List<MovieVO> mList() {
@@ -71,6 +95,8 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.searchAll(searchName);
 	}
 
-
-
+	public MovieVO mDetail(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.mDetail(vo);
+	}
 }

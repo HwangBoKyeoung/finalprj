@@ -137,6 +137,7 @@ border-radius: 30px;
 								<div class="pull-right">
 									<h6>
 										<a href="companyLoginForm.do" class="link">기업회원이신가요?</a>
+										<a href="managerLoginForm.do" class="link">관리자입니까?</a>
 									</h6>
 								</div>
 								</div>

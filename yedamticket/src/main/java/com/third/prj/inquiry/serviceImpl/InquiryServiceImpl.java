@@ -6,16 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.inquiry.mapper.InquiryMapper;
+import com.third.prj.inquiry.service.CriteriaVO;
 import com.third.prj.inquiry.service.InquiryService;
 import com.third.prj.inquiry.service.InquiryVO;
-import com.third.prj.notice.service.CriteriaVO;
 
 @Repository("inquiryDao")
 public class InquiryServiceImpl implements InquiryService {
 
 	@Autowired
 	private InquiryMapper mapper;
-	
+
 	@Override
 	public List<InquiryVO> inquirySelectList() {
 		return mapper.inquirySelectList();
@@ -26,11 +26,7 @@ public class InquiryServiceImpl implements InquiryService {
 		return mapper.inquirySelect(vo);
 	}
 
-	@Override
-	public List<InquiryVO> inquirySearch(String key, String val) {
-		return mapper.inquirySearch(key, val);
-	}
-	
+
 	@Override
 	public int inquiryInsert(InquiryVO vo) {
 		return mapper.inquiryInsert(vo);
@@ -57,5 +53,10 @@ public class InquiryServiceImpl implements InquiryService {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
-	
+
+	@Override
+	public List<InquiryVO> manaerInquiryList(CriteriaVO cri) {
+		return mapper.manaerInquiryList(cri);
+	}
+
 }

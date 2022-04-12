@@ -13,14 +13,22 @@ import lombok.ToString;
 @ToString
 public class PerformanceScheduleVO {
 	
-	private int pSchNo;
+	private int PSchNo;
+	//행사시작일자
 	@JsonFormat(pattern = "YYYY-DD-MM")
 	private Date frDt;
-	private int no;
-	private String time;
-	private int pNo;
-	private String start;
+	//행사종료일자
+	@JsonFormat(pattern = "YYYY-DD-MM")
 	private Date trDt;
+	
+	private int no;
+	//행사시작 시간
+	private String time;
+	//행사종료 시간
 	private String endTime;
-	String title;
+	private int pNo;
+	
+	private String start;
+	private String title;
+
 }

@@ -104,8 +104,14 @@
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="./index.html"> <i
 								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
+
 							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
+
+							</a> <a class="dropdown-item" 
+								href="pList.do">
+								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
+
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
@@ -144,8 +150,8 @@
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="userPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
-							</a> <a class="dropdown-item" href="conPage.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 공연정보
+							</a> <a class="dropdown-item" href="companyMyPage.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 기업회원 페이지
 							</a> <a class="dropdown-item" href="goodsPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈정보
 							</a> <a class="dropdown-item" href="movieInsertForm.do"> <i

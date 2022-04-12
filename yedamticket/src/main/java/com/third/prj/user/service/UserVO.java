@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 public class UserVO implements UserDetails{
 	
-	private String Uid; // not null
+	private String UId; // not null
 	private String email;
 	private String pwd;
 	private String addr;

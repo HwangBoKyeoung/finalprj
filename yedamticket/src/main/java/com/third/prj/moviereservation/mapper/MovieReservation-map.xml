@@ -29,11 +29,18 @@
 	<select id="seatSearch"  parameterType="com.third.prj.moviereservation.service.MovieReservationVO" resultType="com.third.prj.moviereservation.service.MovieReservationVO">
 		SELECT SEAT_NAME
 		FROM MOVIE_RESERVATION
-		WHERE DOCID=#{docId} AND
+		WHERE 
+		DOCID=#{docId} AND
         RESERVLOC=#{reservLoc} AND
         RESERVHALL=#{reservHall} AND
         SCH_DATE=#{schDate} AND
         SCHTIME=#{schTime}
 	</select>
-	
+	<select id="movieReservationSelect" parameterType="com.third.prj.moviereservation.service.MovieReservationVO"
+										resultType="com.third.prj.moviereservation.service.MovieReservationVO">
+		SELECT MAX(MV_RESERV_NO) AS MV_RESERV_NO,U_id
+		FROM MOVIE_RESERVATION
+		WHERE U_ID = #{UId}
+		group by u_id
+	</select>
 </mapper>
