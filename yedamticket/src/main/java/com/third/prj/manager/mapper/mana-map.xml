@@ -10,16 +10,15 @@
  			(
  			SELECT ROWNUM RN,A.*
  			FROM(
- 			SELECT 
- 			M_ID,NAME,PWD,DEPART,PHONE,AUTH_CD,MANAGERSTAT
-			FROM 
-				MANAGER
-			WHERE M_ID != 'micol'
-			AND 
+	 			SELECT 
+	 			M_ID,NAME,PWD,DEPART,PHONE,AUTH_CD,MANAGERSTAT
+				FROM MANAGER
+				WHERE M_ID != 'micol'
+				AND 
 		]]>
-		<if test="searchType == 'ALL'">DEPART LIKE '%'||#{searchName}||'%'
+		<if test="searchType == 'ALL'">(DEPART LIKE '%'||#{searchName}||'%'
 			OR NAME LIKE '%'||#{searchName}||'%'
-			OR M_ID LIKE '%'||#{searchName}||'%'</if>
+			OR M_ID LIKE '%'||#{searchName}||'%')</if>
 		<if test="searchType == 'DEPART'">DEPART LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'MID'">M_ID LIKE '%'||#{searchName}||'%'</if>
@@ -30,12 +29,12 @@
 	]]>
  	</select>
  	<select id="getTotal" resultType="int">
- 		SELECT COUNT(*) AS TOTAL
+ 		SELECT COUNT(*)
 		FROM MANAGER
 		WHERE
 		<if test="searchType == 'ALL'">DEPART LIKE '%'||#{searchName}||'%'
-			OR NAME LIKE '%'||#{searchName}||'%'
-			OR M_ID LIKE '%'||#{searchName}||'%'</if>
+					OR NAME LIKE '%'||#{searchName}||'%'
+					OR M_ID LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'DEPART'">DEPART LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'MID'">M_ID LIKE '%'||#{searchName}||'%'</if>

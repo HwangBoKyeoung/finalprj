@@ -174,7 +174,7 @@
 				AND
  		]]>
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
@@ -191,8 +191,8 @@
 		WHERE DELETE_CD IS NULL
 		OR DELETE_CD = '거절'
 		AND 
-		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-					OR DELETE_CD LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>

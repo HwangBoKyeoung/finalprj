@@ -80,9 +80,9 @@
 						</div>
 						<div class="form-group row">
 							<label for="exampleInputConfirmPassword2"
-								class="col-sm-3 col-form-label">공연영상</label>
+								class="col-sm-3 col-form-label">포스터</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="vname" name="vname" value="${videos.vname }">
+								<input type="file" class="form-control" accept="image/gif, imag/jpeg, image/png" id="vname" name="vname" value="${videos.vname }">
 								</div>
 						</div>
 						<input type="hidden" name="fileCd" id="fileCd" value="${videos.fileCd }">

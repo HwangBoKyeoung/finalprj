@@ -73,7 +73,7 @@
 		,
 		birthdt)
 		VALUES(#{name}
-		, #{Uid}
+		, #{UId}
 		, #{pwd}
 		, #{email}
 		, #{addr}
@@ -93,7 +93,7 @@
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</select>
 <!-- 황보경 -->

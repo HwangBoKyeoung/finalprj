@@ -17,7 +17,6 @@
 		<result property="Uid" column="U_ID" />
 	</resultMap>
 
-	<resultMap id="procedureCall" type="hashmap" />
 
 
 	<select id="companyPerforSelectList"
@@ -44,21 +43,8 @@
 		ORDER BY P_NO DESC ) A )
 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
 	]]>
-
-
 	</select>
-	<!-- <select id="getTotal" resultType="int">
-		SELECT COUNT(*) AS TOTAL
-		FROM PERFORMANCE
-		WHERE
-		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-			OR ACTOR LIKE '%'||#{searchName}||'%'
-			OR LOC LIKE '%'||#{searchName}||'%')</if>
-		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == 'ACTOR'">ACTOR LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == null or searchType ==''"> 1 = 1</if>
-	</select> -->
+
 
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
@@ -76,17 +62,13 @@
 
 
 
-	<update id="procedureCall" statementType="CALLABLE">
-		{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
-						#{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_price, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						#{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
+	<update id="performanceUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">
+		UPDATE PERFORMANCE
+		<set>
+		<if test="name != null"> NAME = #{name},</if>
+		<if test=""></if>
+		</set>
+		WHERE P_NO = #{PNo}
 	</update>
 	
 	<!-- 황규복 -->

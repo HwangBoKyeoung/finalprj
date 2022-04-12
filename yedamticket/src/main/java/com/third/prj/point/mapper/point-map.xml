@@ -17,4 +17,12 @@
 					  )
 
 </insert>
+
+	<select id="managerMovieSaleList" resultType="com.third.prj.point.service.PointVO">
+		SELECT TO_CHAR(PAYDT,'YY/MM/DD') dayDate,
+			   SUM(PAY) sales
+		FROM POINT
+		WHERE BUY_CTNT_CD = 'mv'
+		GROUP BY TO_CHAR(PAYDT,'YY/MM/DD')
+	</select>
 </mapper>

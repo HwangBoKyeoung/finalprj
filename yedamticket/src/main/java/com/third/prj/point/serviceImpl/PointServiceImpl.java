@@ -1,5 +1,8 @@
 package com.third.prj.point.serviceImpl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -15,6 +18,11 @@ public class PointServiceImpl implements PointService{
 	public int payInsert(PointVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.payInsert(vo);
+	}
+	@Override
+	public List<PointVO> managerMovieSaleList() {
+		// TODO Auto-generated method stub
+		return mapper.managerMovieSaleList();
 	}
 	
 	

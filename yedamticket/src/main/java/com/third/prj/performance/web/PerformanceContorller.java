@@ -47,22 +47,14 @@ public class PerformanceContorller {
 	//황규복 start
 	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
-	public String pList() {
-
-		return "performance/pList";
+	   public String pList(Model model,CriteriaVO cri) {
+	      PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+	      model.addAttribute("pageVO", pageVO); //페이지네이션전달
+	      model.addAttribute("performance",perDao.pList(cri));
+	      model.addAttribute("Eperformance",perDao.epList());
+	      return "performance/pList";
 	}
-
-//	@RequestMapping("/pserSelect.do")
-//	public String perSelect(PerformanceVO vo, Model model) {
 	
-	@RequestMapping("/pserSelect.do")
-	public String pList(Model model,CriteriaVO cri) {
-		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
-		model.addAttribute("pageVO", pageVO); //페이지네이션전달
-		model.addAttribute("performance",perDao.pList(cri));
-		model.addAttribute("Eperformance",perDao.epList());
-		return "performance/pList";
-	}
 	//공연 상세페이지 + 예약	
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
@@ -139,7 +131,7 @@ public class PerformanceContorller {
 		map.put("p_lname", lname);
 		map.put("p_cd", vo.getFileCd());
 
-		perDao.procedureCall(map);
+//		perDao.procedureCall(map);
 		System.out.println(vo);
 		System.out.println(ivo);
 		System.out.println("프로시저콜 : ");
