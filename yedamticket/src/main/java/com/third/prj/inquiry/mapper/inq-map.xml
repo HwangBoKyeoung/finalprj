@@ -103,8 +103,8 @@
 	</select>
 	
 	<!-- 검색조건에 맞춰서 total변경 -->
-	<select id="getTotal" resultType="int">
+	<!-- <select id="getTotal" resultType="int">
 		SELECT COUNT(*) AS TOTAL FROM INQUIRY 
-	</select>
+	</select> -->
 	
 </mapper>

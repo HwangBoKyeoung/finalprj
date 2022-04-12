@@ -71,11 +71,11 @@ public class InquiryContorller {
 	//한건조회
 
 	// 1:1문의
-	@RequestMapping("/inqList.do")
-	public String inqList(Model model) {
-		model.addAttribute("inqs", inquiryDao.inquirySelectList());
-		return "inquiry/inqList";
-	}
+//	@RequestMapping("/inqList.do")
+//	public String inqList(Model model) {
+//		model.addAttribute("inqs", inquiryDao.inquirySelectList());
+//		return "inquiry/inqList";
+//	}
 
 	// 한건조회
 	@RequestMapping("/inqSelect.do")

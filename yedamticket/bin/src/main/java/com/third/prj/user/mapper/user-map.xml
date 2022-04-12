@@ -3,17 +3,15 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-<<<<<<< HEAD
 	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
 		<result column="name" property="name" />
 		<collection property="movieReservVO" resultMap="MovieReservMap" />
-=======
+	</resultMap>
 	<resultMap type="com.third.prj.movie.service.MovieVO"
 		id="MovieMap">
 		<result column="name" property="name" />
 		<collection property="movieReservVO"
 			resultMap="MovieReservMap" />
->>>>>>> develop
 	</resultMap>
 
 	<resultMap
@@ -34,10 +32,7 @@
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
-<<<<<<< HEAD
-=======
-	
->>>>>>> develop
+
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
@@ -46,10 +41,7 @@
 		<result column="U_ID" property="Uid" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
-<<<<<<< HEAD
-=======
-	
->>>>>>> develop
+
 	<resultMap
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
@@ -59,18 +51,12 @@
 		<collection property="performanceScheduleVO"
 			resultMap="pfScheduleMap"></collection>
 	</resultMap>
-<<<<<<< HEAD
 
-=======
-	
 	<resultMap type="hashmap" id="procedureCall"/>
->>>>>>> develop
-
 
 	<insert id="userInsert"
 		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO users(name
-<<<<<<< HEAD
 		, u_id
 		, pwd
 		, email
@@ -84,7 +70,6 @@
 		, #{addr}
 		, #{phone}
 		, #{birthDt})
-=======
 						, u_id
 						, pwd
 						, email
@@ -98,13 +83,11 @@
 					    , #{addr}
 					    , #{phone}
 					    , #{birthDt})
->>>>>>> develop
 	</insert>
 
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*)
 		FROM users
-<<<<<<< HEAD
 		WHERE
 		u_id = #{Uid}
 	</select>
@@ -120,7 +103,6 @@
 	<select id="userSelectOne"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
-=======
 		WHERE
 		u_id = #{Uid}
 	</select>
@@ -134,7 +116,7 @@
 	</select>
 	
 	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
-		<id column="u_id" property="Uid"/>
+		<id column="u_id" property="UId"/>
 		<result column="pwd" property="pwd"/>
 		<result column="name" property="name"/>
 		<result column="email" property="email"/>
@@ -148,7 +130,7 @@
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="userSearch"
+	<!-- <select id="userSearch"
 		resultType="com.third.prj.user.service.UserVO" parameterType="String">
 		SELECT *
 		FROM USERS
@@ -161,7 +143,7 @@
 		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
 		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
 		ORDER BY U_ID DESC
-	</select>
+	</select> -->
 
 	<select id="getUser"
 		parameterType="com.third.prj.user.service.UserVO"
@@ -169,15 +151,13 @@
 		SELECT U_ID
 		, {noop}PWD
 		, ROLE
->>>>>>> develop
 		FROM USERS
 		WHERE U_ID = #{Uid}
 	</select>
 
-<<<<<<< HEAD
 	<resultMap type="com.third.prj.user.service.UserVO"
 		id="userMap">
-		<id column="u_id" property="Uid" />
+		<id column="u_id" property="UId" />
 		<result column="pwd" property="pwd" />
 		<result column="name" property="name" />
 		<result column="email" property="email" />
@@ -194,7 +174,7 @@
 		ORDER BY U_ID DESC
 	</select>
 
-	<select id="userSearch"
+<!-- 	<select id="userSearch"
 		resultType="com.third.prj.user.service.UserVO" parameterType="String">
 		SELECT *
 		FROM USERS
@@ -207,7 +187,7 @@
 		<if test="key == '이름'">NAME LIKE '%'||#{val}||'%'</if>
 		<if test="key == '이메일'">EMAIL LIKE '%'||#{val}||'%'</if>
 		ORDER BY U_ID DESC
-	</select>
+	</select> -->
 
 	<select id="getUser"
 		parameterType="com.third.prj.user.service.UserVO"
@@ -218,9 +198,6 @@
 		FROM USERS
 		WHERE U_ID = #{Uid}
 	</select>
-
-=======
->>>>>>> develop
 
 	<select id="emailCheck" resultType="int">
 		SELECT COUNT(*) FROM USERS
@@ -246,10 +223,7 @@
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
 		WHERE U_ID = #{Uid}
-<<<<<<< HEAD
 
-=======
->>>>>>> develop
 	</update>
 
 	<delete id="userDelete"
@@ -260,20 +234,13 @@
 		AND PWD = #{pwd}
 	</delete>
 
-<<<<<<< HEAD
-
-
-=======
->>>>>>> develop
-	<select id="MvReservList" resultMap="MovieReservMap">
+	<!-- <select id="MvReservList" resultMap="MovieReservMap">
 		SELECT R.MV_RESERV_NO ,
 		R.RESERVDT,
 		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
-<<<<<<< HEAD
 		FROM MOVIE_RESERVATION R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
 		WHERE U_ID = #{Uid}
-=======
 		FROM
 		MOVIE_RESERVATION
 		R JOIN MOVIE M
@@ -281,9 +248,9 @@
 		WHERE U_ID = #{Uid}
 
 >>>>>>> develop
-	</select>
+	</select> -->
 
-	<select id="pfReservList" resultMap="performanceMap">
+	<!-- <select id="pfReservList" resultMap="performanceMap">
 		SELECT X.P_RESERV_NO,
 		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
 		FROM
@@ -293,7 +260,7 @@
 		AND Y.P_NO = Z.P_NO
 <<<<<<< HEAD
 		AND X.U_ID = #{Uid}
-	</select>
+	</select> -->
 
 	<update id="userCharge"
 		parameterType="com.third.prj.user.service.UserVO">
@@ -312,7 +279,7 @@
 		WHERE u_id = #{Uid}
 	</select>
 
-	<select id="mNameSelect" resultMap="MovieMap">
+	<!-- <select id="mNameSelect" resultMap="MovieMap">
 		select x.name
 		from movie x join movie_reservation y
 		on x.docid = y.docid
@@ -333,12 +300,8 @@
 		WHERE U_ID = #{Uid}
 	</select>
 
-
-
-
-=======
 		AND X.U_ID = #{uId}
-	</select>
+	</select> -->
 	
 	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
 		UPDATE users
@@ -361,6 +324,5 @@
 		FROM   users
 		WHERE  u_id = #{Uid}
 	</select>
-	
->>>>>>> develop
+
 </mapper>

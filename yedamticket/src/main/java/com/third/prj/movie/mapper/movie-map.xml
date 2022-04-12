@@ -2,8 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.movie.mapper.MovieMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO"
-		id="movieResultMap">
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
 		<id property="mvNo" column="mv_no" />
 		<result property="name" column="name" />
 		<result property="genre" column="genre" />
@@ -36,6 +35,7 @@
 		FROM MOVIE
 		WHERE MV_NO = #{mvNo}
 	</select>
+	
 	<select id="mvListPaging" resultType="com.third.prj.movie.service.MovieVO">
 	<![CDATA[
 		SELECT MV_NO,NAME,GENRE,RATING,DIRECTOR
@@ -64,27 +64,14 @@
 			]]>	
 	</select>
 	
-	<update id="procedureCall" statementType="CALLABLE">
-	{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
-	                #{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_director, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_cid, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
-	</update>
+	
 	<!-- 황규복 -->
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
+	<!-- <resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
 		<id property="mvNo" column="mv_no"/>
 		<result property="name" column="name"/>
 		<result property="content" column="content"/>
 		<result property="actor" column="actor"/>
-	</resultMap>
+	</resultMap> -->
 
 	<resultMap type="com.third.prj.movie.service.MovieViewVO"
 		id="movieViewMap">
@@ -98,35 +85,21 @@
 		<result property="Uid" column="U_ID" />
 	</resultMap>
 
-	<!-- 프로시저 -->
-	<resultMap type="hashmap" id="procedureCall" />
 
-	<update id="procedureCall" statementType="CALLABLE">
-		{CALL
-		movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
-		#{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_genre,
-		mode=IN, jdbcType=VARCHAR, javaType=STRING},
-		#{mv_director, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_rating, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_country, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_content, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_actor, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_iname, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_vname, mode=IN,
-		jdbcType=VARCHAR, javaType=STRING},
-		#{mv_cd, mode=IN, jdbcType=VARCHAR,
-		javaType=STRING},
-		#{mv_message, mode=OUT, jdbcType=VARCHAR,
-		javaType=STRING})
+<update id="procedureCall" statementType="CALLABLE">
+	{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
+	                #{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_director, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_cid, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
-
 	
 	<!-- 페이징 
 	<select id="getListWithPaging" resultMap="movieResultMap">
@@ -153,13 +126,6 @@
 	</select>
 	
 	<!-- 영화리스트 -->
-	<select id="movieList" resultMap="movieResultMap">
-		SELECT * FROM MOVIE
-		WHERE STARTDATE
-		BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd')
-		AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
-	</select>
-
 	<select id="movieList" resultMap="movieResultMap">
 		SELECT * 
 		FROM MOVIE

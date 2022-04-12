@@ -3,12 +3,9 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO"
-		id="MovieMap">
-
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
 		<result column="name" property="name" />
-		<collection property="movieReservVO"
-			resultMap="MovieReservMap" />
+		<collection property="movieReservVO" resultMap="MovieReservMap" />
 	</resultMap>
 
 	<resultMap
@@ -99,13 +96,13 @@
 		WHERE U_ID = #{Uid}
 		AND PWD = #{pwd}
 	</select>
-
-	<select id="userSelectOne"
+<!-- 황보경 -->
+	<!-- <select id="userSelectOne"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		WHERE U_ID = #{Uid}
-	</select>
+	</select> -->
 
 	<resultMap type="com.third.prj.user.service.UserVO"
 		id="userMap">
@@ -118,22 +115,14 @@
 	</resultMap>
 
 
-
-	<select id="userList"
+<!-- 황보경 -->
+	<!-- <select id="userList"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
 		ORDER BY U_ID DESC
-	</select>
+	</select> -->
 
-	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
-		<id column="u_id" property="UId"/>
-		<result column="pwd" property="pwd"/>
-		<result column="name" property="name"/>
-		<result column="email" property="email"/>
-		<result column="phone" property="phone"/>
-		<result column="addr" property="addr"/>
-	</resultMap>
 	<select id="userList" resultType="com.third.prj.user.service.UserVO">
 	<![CDATA[
 		SELECT U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
@@ -216,8 +205,8 @@
 		WHERE U_ID = #{UId}
 		</select> -->
 
-
-	<update id="userCharge"
+<!-- 황보경 -->
+	<!-- <update id="userCharge"
 		parameterType="com.third.prj.user.service.UserVO">
 		UPDATE users
 		SET 
@@ -226,14 +215,15 @@
 		WHERE u_id
 		= #{Uid}) + #{point}
 		WHERE u_id = #{Uid}
-	</update>
+	</update> -->
 
-	<select id="loginChk"
+<!-- 황보경 -->
+	<!-- <select id="loginChk"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM users
 		WHERE u_id = #{Uid}
-	</select>
+	</select> -->
 
 	<select id="pointBuyList" resultMap="userPointMap">
 		select *
@@ -367,7 +357,7 @@
 	WHERE U_ID=#{Uid}
 	</select>
 	
-
+<!-- 황보경 -->
 	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
 		UPDATE users
 		SET    point = (SELECT point

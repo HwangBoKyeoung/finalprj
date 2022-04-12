@@ -3,6 +3,19 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper
 	namespace="com.third.prj.performance.mapper.PerformanceMapper">
+	
+	<resultMap
+		type="com.third.prj.performance.service.PerformanceViewVO"
+		id="performanceViewMap">
+		<result property="pReservNo" column="P_RESERV_NO" />
+		<result property="name" column="NAME" />
+		<result property="charge" column="CHARGE" />
+		<result property="payDt" column="PAYDT" />
+		<result property="pay" column="PAY" />
+		<result property="point" column="POINT" />
+		<result property="buyCtntCd" column="BUY_CTNT_CD" />
+		<result property="Uid" column="U_ID" />
+	</resultMap>
 
 	<resultMap id="procedureCall" type="hashmap" />
 
@@ -34,7 +47,7 @@
 
 
 	</select>
-	<select id="getTotal" resultType="int">
+	<!-- <select id="getTotal" resultType="int">
 		SELECT COUNT(*) AS TOTAL
 		FROM PERFORMANCE
 		WHERE
@@ -45,7 +58,7 @@
 		<if test="searchType == 'ACTOR'">ACTOR LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
-	</select>
+	</select> -->
 
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
@@ -194,5 +207,50 @@
 			P.P_NO = PS.P_NO
 	        WHERE P.P_NO = #{PNo}
 	</select>
+	
+	<select id="pfBuyList" resultMap="performanceViewMap">
+		SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+		AND U_ID = #{Uid}
+	</select>
+
+	<select id="pfBuyList2"
+		resultMap="performanceViewMap">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+    	AND U_ID = #{Uid} ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY PAYDT DESC
+		]]>
+	</select>
+
+	<!-- 검색조건에 맞춰서 total변경 -->
+	<select id="pfBuyTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL 
+		FROM (SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+    	AND U_ID = #{Uid} ) A ))
+		
+	</select>
+	
+	<insert id="perInsert">
+	<selectKey keyProperty ="pNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(P_NO), 0) + 1 AS PNO 
+			FROM PERFORMANCE
+		</selectKey>
+		INSERT INTO PERFORMANCE VALUES(#{pNo},#{name},#{content},#{cId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
+	</insert> 
 
 </mapper>

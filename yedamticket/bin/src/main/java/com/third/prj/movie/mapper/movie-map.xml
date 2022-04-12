@@ -10,7 +10,7 @@
 		<result property="startDate" column="startDate"/>
 		<result property="director" column="director"/>
 		<result property="rating" column="rating"/>
-		<result property="distibutor" column="distibutor"/>
+		<result property="distributor" column="distibutor"/>
 		<result property="country" column="country"/>
 		<result property="runtime" column="runtime"/>
 		<result property="content" column="content"/>
