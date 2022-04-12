@@ -5,6 +5,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+textarea {
+	resize: none;
+}
+</style>
 </head>
 <body>
 <div class="container">
@@ -44,7 +49,7 @@
 						</tr>
 						<tr>
 							<td>상세정보</td>
-							<td><textarea rows="10" cols="75" id="content" name="content"
+							<td><textarea rows="10" cols="90" id="content" name="content"
 								></textarea></td>
 						</tr>
 					</table>

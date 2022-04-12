@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="./resources/users/css/practice.css" rel="stylesheet" />
+
 <style>
 .login-css-add {
 	position: absolute;
@@ -48,8 +50,11 @@
 	}
 }
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
+
 	<nav class="navbar navbar-expand-lg nav-css-add">
 		<div class="container-fluid">
 			<div class="navbar-translate" id="titleLogo">
@@ -108,9 +113,8 @@
 							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 
-							</a> <a class="dropdown-item" 
-								href="pList.do">
-								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
+							</a> <a class="dropdown-item" href="pList.do"> <i
+								class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 
 							</a>
 						</div></li>
@@ -158,16 +162,25 @@
 								class="fa-regular fa-comment-dots fa-2x"></i> 영화등록
 							</a> <a class="dropdown-item" href="perInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
-							</a>
-							</a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
+							</a> </a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈등록
 							</a>
 						</div></li>
 					<li>
 						<form class="d-flex" action="searchAll.do">
-							<input class="form-control me-2" type="search" id="searchName" name="searchName"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-primary" type="submit">Search</button>
+							<div class="search" style="margin-left: 30px;">
+								<div class="icon">
+									<span> <svg viewBox="0 0 40 40">
+                                   <path d="M3,3 L37,37"></path>
+                               </svg>
+									</span>
+								</div>
+
+								<div class="field">
+									<input type="text" id="searchName" name="searchName"
+										width="80%" placeholder="Search for something...">
+								</div>
+							</div>
 						</form>
 						<div align="right">
 							<c:choose>
@@ -188,5 +201,7 @@
 			</div>
 		</div>
 	</nav>
+
+	<script src="resources/users/js/practice.js"></script>
 </body>
 </html>

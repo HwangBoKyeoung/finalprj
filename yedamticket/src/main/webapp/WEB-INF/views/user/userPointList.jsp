@@ -49,54 +49,44 @@
 		</nav>
 		<div class="container">
 			<h2>거래내역</h2><br>
-				<table class="table">
-					<thead>
-						<tr>
-							<th scope="col">결제일자</th>
-							<th scope="col">사용처</th>
-							<th scope="col">포인트 사용</th>
-							<th scope="col">총포인트</th>
+			<table class="table">
+				<thead>
+					<tr>
+						<th scope="col">결제일자</th>
+						<th scope="col">사용처</th>
+						<th scope="col">포인트 충전</th>
+						<th scope="col">총포인트</th>
+					</tr>
+				</thead>
+				<tbody>
+					<c:forEach items="${list3 }" var="point">
+						<tr class="plist">
+							<td>${point.chargeDt }</td>
+							<td>포인트충전</td>
+							<td>+ ${point.charge }</td>
+							<td>${point.point }</td>
 						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${list1 }" var="pf">
-							<tr class="blist">
-								<td>${pf.payDt }</td>
-								<td>${pf.name }</td>
-								<td>- ${pf.pay }</td>
-								<td>${pf.point }</td>
-							</tr>
-						</c:forEach>
-						<c:forEach items="${list2 }" var="mv">
-							<tr class="blist">
-								<td>${mv.payDt }</td>
-								<td>${mv.name }</td>
-								<td>- ${mv.pay }</td>
-								<td>${mv.point }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<div id="content" align="center">
+					</c:forEach>
+				</tbody>
+			</table>
+			<div id="content" align="center">
 				<c:if test="${pageVO.prev }">
 					<!-- 이전버튼 활성화 여부 -->
-					<a href="userBuyList.do?pageNum=${pageVO.startPage-1 }"> <input
+					<a href="userPointList.do?pageNum=${pageVO.startPage-1 }"> <input
 						type="button" value="이전" class="btn btn-secondary"></a>
 				</c:if>
 				<!-- pageNum -->
 				<c:forEach var="num" begin="${pageVO.startPage }"
 					end="${pageVO.endPage }">
 					<a class="${pageVO.pageNum == num ? 'active': '' }"
-						href="userBuyList.do?pageNum=${num }"> <input type="button"
+						href="userPointList.do?pageNum=${num }"> <input type="button"
 						value="${num }" class="btn btn-secondary"></a>
 				</c:forEach>
 				<!-- 다음버튼 -->
 				<c:if test="${pageVO.next }">
-					<a href="userBuyList.do?pageNum=${pageVO.endPage+1 }"> <input
+					<a href="userPointList.do?pageNum=${pageVO.endPage+1 }"> <input
 						type="button" value="다음" class="btn btn-secondary"></a>
 				</c:if>
-			</div>
-				<br>
 			</div>
 		</div>
 	</div>

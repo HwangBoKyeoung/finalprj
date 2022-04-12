@@ -17,18 +17,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.movie.service.MovieService;
-import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
-import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.point.service.PointCriteriaVO;
+import com.third.prj.point.service.PointPageVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
+import com.third.prj.user.service.CriteriaVO;
+import com.third.prj.user.service.PageVO;
 import com.third.prj.user.service.UserCriteriaVO;
 import com.third.prj.user.service.UserPageVO;
 import com.third.prj.user.service.UserPointViewVo;
-import com.third.prj.user.service.CriteriaVO;
-import com.third.prj.user.service.PageVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -263,41 +263,48 @@ public class UserController {
 		return "user/pfReservList";
 	}
 	
-	@RequestMapping("/userBuyList.do")
-	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo) {
-		
-		mvo.setUId((String)session.getAttribute("sessionId"));
-		pvo.setUId((String)session.getAttribute("sessionId"));
-		uvo.setUId((String)session.getAttribute("sessionId"));	
-		
-		
-		model.addAttribute("userPoint", userDao.userPoint(uvo));
-		
-		
-		model.addAttribute("list3", userDao.pointBuyList(uvo));
-		model.addAttribute("list2",movieDao.mvBuyList(mvo));
-		model.addAttribute("list1", perDao.pfBuyList(pvo));
-		return "user/userBuyList";
-	}
+//	@RequestMapping("/userBuyList.do")
+//	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo) {
+//		
+//		mvo.setUId((String)session.getAttribute("sessionId"));
+//		pvo.setUId((String)session.getAttribute("sessionId"));
+//		uvo.setUId((String)session.getAttribute("sessionId"));	
+//		
+//		
+//		model.addAttribute("userPoint", userDao.userPoint(uvo));
+//		
+//		
+//		model.addAttribute("list3", userDao.pointBuyList(uvo));
+//		model.addAttribute("list2",movieDao.mvBuyList(mvo));
+//		model.addAttribute("list1", perDao.pfBuyList(pvo));
+//		return "user/userBuyList";
+//	}
 
 	
-//	@RequestMapping("/userBuyList.do")
-//	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
-//		cri.setUid((String)session.getAttribute("sessionId"));
-//		PointPageVO pVO = new PointPageVO(cri,movieDao.mvBuyTotal(cri));
-//		model.addAttribute("pVO", pVO);
-//		model.addAttribute("list1", perDao.pfBuyList2(cri));
-//		model.addAttribute("list2", movieDao.mvBuyList2(cri));
-//		
-//		
-//		
-//		PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
-//		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
-//		model.addAttribute("list3", userDao.pointBuyList2(cri));
-//		
-//		vo.setUid((String)session.getAttribute("sessionId"));
-//		model.addAttribute("user", userDao.userSelectOne(vo));
-//		return "user/userBuyList";
+	@RequestMapping("/userBuyList.do")
+	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
+		cri.setUId((String)session.getAttribute("sessionId"));
+		PointPageVO pageVO = new PointPageVO(cri,perDao.pfBuyTotal(cri));
+		model.addAttribute("pageVO", pageVO);
+		model.addAttribute("list1", perDao.pfBuyList2(cri));
+		model.addAttribute("list2", movieDao.mvBuyList2(cri));
+		
+		vo.setUId((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+		
+		return "user/userBuyList"; 
+	}
+	@RequestMapping("/userPointList.do")
+	public String userPointList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
+		cri.setUId((String)session.getAttribute("sessionId"));
+		PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("list3", userDao.pointBuyList2(cri));
+		
+		vo.setUId((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+		return "user/userPointList";
+	}
 
 	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
 	@ResponseBody
