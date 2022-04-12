@@ -716,7 +716,15 @@ function selectSeat(){
 $('#backBtn').on('click',function(){
 	$('#svg').css('display', 'block');
 	$('#detailSeat').css('display','none');
+	let selectedSeat = document.getElementById('selectedSeat');
+	let tdList=selectedSeat.getElementsByTagName('td');
+	console.log(tdList);
+	for(let i =0;i<tdList.length;i++){
+		tdList[i].classList.remove('seatGray');
+		tdList[i].innerText='+';
+	}
 	seatArry=[];
+	$('#cnt').text(0);
 	
 });
 	
