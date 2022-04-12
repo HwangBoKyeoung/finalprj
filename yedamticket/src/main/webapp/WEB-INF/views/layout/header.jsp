@@ -159,6 +159,9 @@
 							</a> <a class="dropdown-item" href="perInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
 							</a>
+							</a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈등록
+							</a>
 						</div></li>
 					<li>
 						<form class="d-flex" action="searchAll.do">

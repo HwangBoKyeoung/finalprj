@@ -15,5 +15,6 @@ public class GoodsVO {
 	private String sellNo;
 	private String fileCd;
 	private String goodsCd;
+	private String fileRe;
 	
 }

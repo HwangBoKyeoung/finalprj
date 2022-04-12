@@ -5,14 +5,14 @@
 	<!-- <select id="userTicket" resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
 			SELECT *
 			FROM   performance_reservation
-			WHERE  u_id = #{Uid}
+			WHERE  u_id = #{UId}
 	</select> -->
 
 	<resultMap type="com.third.prj.performancereservation.service.PerformanceReservationViewVO" id="prvMap">
 		<result property="PReservNo" column="p_reserv_no"/>
 		<result property="reserveDttm" column="reserve_dttm"/>
 		<result property="status" column="status"/>
-		<result property="Uid" column="u_id"/>
+		<result property="UId" column="u_id"/>
 		<result property="PSchNo" column="p_sch_no"/>
 		<result property="seatStatCd" column="seat_stat_cd"/>
 		<result property="seatNo" column="seatno"/>
@@ -33,7 +33,7 @@
 	<select id="userTicket" resultMap="prvMap">
 		SELECT *
 		FROM   usersticket
-		WHERE  u_id = #{Uid}
+		WHERE  u_id = #{UId}
 	</select>
 
 	<!-- <select id="selectReservOne" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">

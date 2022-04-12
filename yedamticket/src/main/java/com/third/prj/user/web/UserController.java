@@ -186,12 +186,14 @@ public class UserController {
 
 	@RequestMapping("/userPage.do")
 	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
-		cri.setUid((String)session.getAttribute("sessionId"));
+		cri.setUId((String)session.getAttribute("sessionId"));
 		vo.setUId((String)session.getAttribute("sessionId"));
-		pvo.setUid((String)session.getAttribute("sessionId"));
+		pvo.setUId((String)session.getAttribute("sessionId"));
+		
 		model.addAttribute("userPoint", userDao.userPoint(pvo));
 		model.addAttribute("mvList", userDao.mvRList(cri));
 		model.addAttribute("pfList", userDao.pfRList(cri));
+		
 		model.addAttribute("user", userDao.userSelectOne(vo));
 	
 		return "user/userPage";
@@ -235,8 +237,8 @@ public class UserController {
 	@RequestMapping("/mvReservList.do")
 	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
 		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
-		cri.setUid((String)session.getAttribute("sessionId"));
-		System.out.println("=============== cri userid"+cri.getUid() + "===============");
+		cri.setUId((String)session.getAttribute("sessionId"));
+		System.out.println("=============== cri userid"+cri.getUId() + "===============");
 		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
 		
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
@@ -250,7 +252,7 @@ public class UserController {
 
 	@RequestMapping("pfReservList.do")
 	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo,UserVO vo, UserCriteriaVO cri ) {
-		cri.setUid((String)session.getAttribute("sessionId"));
+		cri.setUId((String)session.getAttribute("sessionId"));
 		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
 		
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
@@ -264,9 +266,9 @@ public class UserController {
 	@RequestMapping("/userBuyList.do")
 	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo) {
 		
-		mvo.setUid((String)session.getAttribute("sessionId"));
-		pvo.setUid((String)session.getAttribute("sessionId"));
-		uvo.setUid((String)session.getAttribute("sessionId"));	
+		mvo.setUId((String)session.getAttribute("sessionId"));
+		pvo.setUId((String)session.getAttribute("sessionId"));
+		uvo.setUId((String)session.getAttribute("sessionId"));	
 		
 		
 		model.addAttribute("userPoint", userDao.userPoint(uvo));

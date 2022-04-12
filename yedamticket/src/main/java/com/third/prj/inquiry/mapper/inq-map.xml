@@ -7,7 +7,7 @@
 		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="inDt" column="indt" />
-		<result property="uId" column="u_id" />
+		<result property="UId" column="u_id" />
 	</resultMap>
 
 	<select id="getTotal" resultType="int">

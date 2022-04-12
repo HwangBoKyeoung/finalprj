@@ -16,8 +16,14 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsMapper mapper;
 
 	@Override
-	public List<GoodsVO> goodsList(String goodsCd) {
-		return mapper.goodsList(goodsCd);
+	public List<GoodsVO> goodsList() {
+		return mapper.goodsList();
+	}
+
+	@Override
+	public int goodsInsert(GoodsVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.goodsInsert(vo);
 	}
 	
 }

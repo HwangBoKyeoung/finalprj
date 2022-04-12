@@ -18,7 +18,7 @@
 		<result column="DOCID" property="docId" />
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" /> 
 	</resultMap>
 
 	<resultMap
@@ -52,7 +52,7 @@
 		id="userPointMap">
 		<result property="charge" column="CHARGE" />
 		<result property="chargeDt" column="CHARGEDT" />
-		<result property="Uid" column="U_ID" />
+		<result property="UId" column="U_ID" />  
 		<result property="point" column="POINT" />
 	</resultMap>
 
@@ -73,7 +73,7 @@
 		,
 		birthdt)
 		VALUES(#{name}
-		, #{Uid}
+		, #{UId}
 		, #{pwd}
 		, #{email}
 		, #{addr}
@@ -93,7 +93,7 @@
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</select>
 <!-- 황보경 -->
@@ -183,7 +183,7 @@
 			<if test="addr != null"> ADDR = #{addr},</if>
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</update>
 
 	<delete id="userDelete"
@@ -228,7 +228,7 @@
 	<select id="pointBuyList" resultMap="userPointMap">
 		select *
 		from userPointView
-		where u_id = #{Uid}
+		where u_id = #{UId}
 	</select>
 
 	<select id="mvRList" resultMap="MovieReservMap">
@@ -242,7 +242,7 @@
 				FROM
 				MOVIE_RESERVATION R JOIN MOVIE M
 				ON R.DOCID = M.DOCID
-				WHERE U_ID = #{Uid} ) A ) 
+				WHERE U_ID = #{UId} ) A ) 
 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		ORDER BY RESERVDT DESC
 		]]>
@@ -261,7 +261,7 @@
 		FROM MOVIE_RESERVATION
 		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid} ) A ) )
+		WHERE U_ID = #{UId} ) A ) )
 	</select>
 
 
@@ -279,7 +279,7 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID = #{Uid} ) A ) 	 
+		AND X.U_ID = #{UId} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY RESERVE_DTTM DESC
 		]]>
@@ -289,7 +289,7 @@
 	      resultType="com.third.prj.user.service.UserVO">
 	      SELECT *
 	      FROM USERS
-      WHERE U_ID = #{UId}
+     	 WHERE U_ID = #{UId}
    </select>
    
 	<!-- <select id="pfReservList" resultMap="performanceMap">
@@ -320,7 +320,7 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID =#{Uid} ) A ) )
+		AND X.U_ID =#{UId} ) A ) )
 		
 	</select>
 
@@ -333,7 +333,7 @@
 								A.*
 	    		FROM (  select *
 		from userPointView
-		where u_id = #{Uid} ) A )  
+		where u_id = #{UId} ) A )  
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY CHARGEDT DESC
 		]]> 
@@ -348,13 +348,13 @@
 								A.*
 	    		FROM (  select *
 		from userPointView
-		where u_id = #{Uid} ) A ) )
+		where u_id = #{UId} ) A ) )
 	</select>
 	
 	<select id="userPoint" resultMap="userPointMap">
 	SELECT SUM(CHARGE)-SUM(PAY) AS POINT
 	FROM POINT
-	WHERE U_ID=#{Uid}
+	WHERE U_ID=#{UId}
 	</select>
 	
 <!-- 황보경 -->
@@ -377,8 +377,8 @@
 	
 	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
-		FROM   users
-		WHERE  u_id = #{UId}
+		FROM   USERS
+		WHERE  U_ID = #{UId}
 	</select>
 	
 	<select id="getTotal" resultType="int">

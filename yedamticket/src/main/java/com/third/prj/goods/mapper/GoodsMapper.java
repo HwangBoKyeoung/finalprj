@@ -6,6 +6,8 @@ import com.third.prj.goods.service.GoodsVO;
 
 public interface GoodsMapper {
 	
-	List<GoodsVO> goodsList(String goodsCd);
+	List<GoodsVO> goodsList();
+	//굿즈등록
+	int goodsInsert(GoodsVO vo);
 	
 }

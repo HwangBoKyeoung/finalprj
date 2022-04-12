@@ -13,7 +13,7 @@
 						   , BIZNO
 						   , DEAL_AGREE_CD)
 		VALUES (#{name}
-			  , #{Cid}
+			  , #{CId}
 			  , #{pwd}
 			  , #{email}
 			  , #{addr}
@@ -22,10 +22,10 @@
 			  , #{dealAgreeCd})
 	</insert>
 	
-	<select id="cidChk" resultType="int">
+	<select id="cidChk" resultType="int"> 
 		SELECT COUNT(*)
 		FROM   COMPANY
-		WHERE  C_ID = #{Cid}
+		WHERE  C_ID = #{CId}
 	</select>
 	<select id="getTotal" resultType="int">
 		SELECT COUNT(*)
@@ -36,7 +36,7 @@
 					OR C_ID LIKE '%'||#{searchName}||'%')</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'CID'">C_ID LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'CId'">C_ID LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
@@ -55,7 +55,7 @@
 					OR C_ID LIKE '%'||#{searchName}||'%')</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'CID'">C_ID LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'CId'">C_ID LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 			<![CDATA[
 			ORDER BY C_ID )A)
@@ -66,14 +66,14 @@
 	<select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">
 		SELECT * 
 		FROM COMPANY
-		WHERE C_ID = #{cid}
+		WHERE C_ID = #{CId}
 	</select>
 	
 	
 	<select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
 		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
 		FROM COMPANY
-		WHERE C_ID = #{Cid}
+		WHERE C_ID = #{CId}
 		AND PWD = #{pwd}
 	</select>
 

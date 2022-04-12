@@ -17,7 +17,15 @@
 	<select id="goodsList" resultMap="goodsResultMap">
 		SELECT * 
 		FROM GOODS 
-		WHERE GOODS_CD = #{goodsCd}
 	</select>
+	
+	<insert id="goodsInsert">
+		<selectKey keyProperty="gNo" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(G_NO), 0) + 1 AS gNo
+			FROM GOODS
+		</selectKey>
+			INSERT INTO GOODS VALUES(#{gNo},#{name},#{seller},#{price},#{content},sellno_SEQ.nextval,#{fileCd},#{goodsCd},#{fileRe})
+	</insert>
 
 </mapper>

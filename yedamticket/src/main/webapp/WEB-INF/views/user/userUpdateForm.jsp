@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-flUId">
   <nav class="col-sm-3 sidenav">
       <ul class="nav nav-pills nav-stacked">
         <li><a href="userUpdateForm.do">회원정보수정</a></li>
@@ -39,9 +39,9 @@
 					
 					<div class="row g-3">
 						<div class="col-12" align="left">
-							<label for="Uid" class="form-label">아이디</label>
+							<label for="UId" class="form-label">아이디</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="Uid" id="Uid" value="${sessionId}" placeholder="Id" readonly="readonly">
+								<input type="text" class="form-control" name="UId" id="UId" value="${sessionId}" placeholder="Id" readonly="readonly">
 							</div>
 						</div>
 						<div class="col-6" align="left">
@@ -92,7 +92,7 @@
 	<script>
 
 /* 	let data = {
-			Uid: $("#Uid").val(),
+			UId: $("#UId").val(),
 			pwd: $("#pwd").val(),
 			name:$("#name").val(),
 			addr: $("#addr").val(),

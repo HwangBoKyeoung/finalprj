@@ -17,7 +17,7 @@ public class PerformanceVO {
 	private int pNo;  //공연번호
 	private String name; //공연이름
 	private String content; //공연설명
-	private String cId; //기업회원
+	private String CId; //기업회원
 	private String actor; //출연자
 	private String fileCd; // 파일번호
 	private String loc;  //공연지역

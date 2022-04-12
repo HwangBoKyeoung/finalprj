@@ -15,7 +15,7 @@ public class PerformanceReservationViewVO {
 	private int PReservNo;
 	private Date reserveDttm;
 	private String status;
-	private String Uid;
+	private String UId;
 	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
