@@ -11,6 +11,8 @@
     <script type="text/javascript" src="resources/js/korea.js"></script>
     <body>
         <div id="container"></div>
-        <input id="result">
+        <input type="text" id="result">
+        <input type="text" id="region">
+        <div id="demo"></div>
     </body>
 </html>
