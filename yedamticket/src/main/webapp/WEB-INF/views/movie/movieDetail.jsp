@@ -223,7 +223,7 @@ function aJaxCall() {
     $.ajax({
        url : "movieReplyInsert.do",
        type : "post",
-       data : {"Uid" : "test", "mvNo" : ${movie.mvNo},"content" : $("#content").val(),"star" : $("#star").val()},
+       data : {"UId" : "test", "mvNo" : ${movie.mvNo},"content" : $("#content").val(),"star" : $("#star").val()},
        dataType : "json",
        success : function(data){
            htmlConvert(data);

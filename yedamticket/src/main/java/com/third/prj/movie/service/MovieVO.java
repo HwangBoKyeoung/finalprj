@@ -24,7 +24,7 @@ public class MovieVO {
 	private String country; //영화국가
 	private String runtime; //영화상영시간
 	private String content; //영화설명
-	private String cId; //기업회원아이디
+	private String CId; //기업회원아이디
 	private String actor; //출연자이름
 	private String fileCd; //파일구분코드
 	private String docId; //영화코드

@@ -10,6 +10,6 @@ import lombok.Setter;
 public class UserPointViewVo {
 	private int charge;
 	private Date chargeDt;
-	private String Uid;
+	private String UId;
 	private int point;
 }

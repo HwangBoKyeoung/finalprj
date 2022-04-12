@@ -345,16 +345,18 @@ iframe {
 								<th>장르</th>
 								<th>관람등금</th>
 								<th>감독</th>
+								<th>기업</th>
 							</tr>
 						</thead>
 						<tbody id="body">
 							<c:forEach items="${dels }" var="mv">
-								<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
-									<td>${mv.movieVO.name}</td>
-									<td>${mv.movieVO.genre}</td>
-									<td>${mv.movieVO.rating}</td>
-									<td>${mv.movieVO.director}</td>
-								</tr>
+									<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
+										<td>${mv.movieVO.name}</td>
+										<td>${mv.movieVO.genre}</td>
+										<td>${mv.movieVO.rating}</td>
+										<td>${mv.movieVO.director}</td>
+										<td>${mv.movieVO.CId}</td>
+									</tr>
 							</c:forEach>
 						</tbody>
 					</table>

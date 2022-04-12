@@ -100,7 +100,7 @@ public class MovieController {
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
 	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
-		System.out.println(vo.getUid());
+		System.out.println(vo.getUId());
 		System.out.println(vo.getMvNo());
 		System.out.println(vo.getContent());
 		System.out.println("스타**************************" + vo.getStar());
@@ -224,7 +224,7 @@ public class MovieController {
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
 		pointVO.setPayNo(vo.getMvReservNo());
-		pointVO.setUid(vo.getUId());
+		pointVO.setUId(vo.getUId());
 		pointDao.payInsert(pointVO);
 		return "home/home";
 	}

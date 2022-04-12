@@ -14,7 +14,7 @@
 		<result property="pay" column="PAY" />
 		<result property="point" column="POINT" />
 		<result property="buyCtntCd" column="BUY_CTNT_CD" />
-		<result property="Uid" column="U_ID" />
+		<result property="UId" column="U_ID" />
 	</resultMap>
 
 	<resultMap id="procedureCall" type="hashmap" />
@@ -212,7 +212,7 @@
 		SELECT *
 		FROM PERFORMANCEVIEW
 		WHERE BUY_CTNT_CD = 'pf'
-		AND U_ID = #{Uid}
+		AND U_ID = #{UId}
 	</select>
 
 	<select id="pfBuyList2"
@@ -225,7 +225,7 @@
 	    		FROM (  SELECT *
 		FROM PERFORMANCEVIEW
 		WHERE BUY_CTNT_CD = 'pf'
-    	AND U_ID = #{Uid} ) A ) 	 
+    	AND U_ID = #{UId} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY PAYDT DESC
 		]]>
@@ -241,7 +241,7 @@
 	    		FROM (  SELECT *
 		FROM PERFORMANCEVIEW
 		WHERE BUY_CTNT_CD = 'pf'
-    	AND U_ID = #{Uid} ) A ))
+    	AND U_ID = #{UId} ) A ))
 		
 	</select>
 	
