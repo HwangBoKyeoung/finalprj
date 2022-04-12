@@ -91,6 +91,7 @@ function drawMap(target) {
 			
 		}
 		console.log(region);
+		$('#region').val(region);
         $.ajax({
             url:"locPlist.do",
             type:"post",
@@ -100,6 +101,20 @@ function drawMap(target) {
             }
 
         });
+
+		 $('#region').val(region);
+        var i = 0;
+        var speed = 200;
+        document.getElementById("demo").innerHTML="";
+        typeWriter();
+        function typeWriter() {
+          if (i < region.length) {
+            document.getElementById("demo").innerHTML += region.charAt(i);
+            i++;
+            setTimeout(typeWriter, speed);
+          }
+
+        }
       });
 
     var states = svg
