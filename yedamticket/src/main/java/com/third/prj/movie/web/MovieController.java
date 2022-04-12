@@ -1,14 +1,22 @@
 package com.third.prj.movie.web;
 
-import java.util.List;
+import java.io.File;
+import java.util.List; 
 import java.util.Map;
+import java.util.UUID;
+
+import javax.servlet.ServletRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
@@ -21,6 +29,7 @@ import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
 import com.third.prj.performanceimage.service.PerformanceImageService;
+import com.third.prj.performanceimage.service.PerformanceImageVO;
 
 import com.third.prj.movievideo.service.MovieVideoService;
 import com.third.prj.movievideo.service.MovieVideoVO;
@@ -49,6 +58,9 @@ public class MovieController {
 	@Autowired
 	private MovieReservService movieReservationDao;
 	
+	@Autowired 
+	private String upLoadPath;
+	 
 	@Autowired
 	private MovieVideoService mvvDao;
 
@@ -58,20 +70,19 @@ public class MovieController {
 	@Autowired
 	private PointService pointDao;
 
-	@RequestMapping("/movieList.do")
-	public String movieList(Model model) {
-		//상영예정작 넘김
-		model.addAttribute("movies",movieDao.mList());
-		return "movie/movieList";
-	}
-	
-	
 	//select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
 	@Autowired
 	private PerformanceImageService periDao;
-	@Autowired
+	
 	private MovieVideoService pervDao;
 
+	@RequestMapping("/movieList.do")
+	public String movieList(Model model) {
+		model.addAttribute("movies", movieDao.mList());
+		System.out.println("==================="+movieDao.mList());
+		return "movie/movieList";
+	}
+	
 	// 영화상세
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
@@ -213,9 +224,64 @@ public class MovieController {
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
 		pointVO.setPayNo(vo.getMvReservNo());
-		pointVO.setUId(vo.getUId());
+		pointVO.setUid(vo.getUId());
 		pointDao.payInsert(pointVO);
 		return "home/home";
 	}
+	
+	@RequestMapping("/movieInsertForm.do")
+	public String movieInsertForm() {
+		return "movie/movieInsertForm";
+	}
+	
+	@RequestMapping("/movieInsert.do")
+	public String movieInsert(MovieVO vo, MultipartFile file, HttpServletRequest request) {
+		
+		String fileName = file.getOriginalFilename(); //원본파일명
+		String id = UUID.randomUUID().toString(); //고유한 유니크 아이디 생성
+		System.out.println("fileName : " + fileName);
+		System.out.println("id : " + id);
+		
+		String load = "C/DEV/apache-tomcat-9.0.56/webapps/upload";
+		
+		String targetFile = id + fileName.substring(fileName.lastIndexOf(".")); //마지막으로 만나느 .을 출력, 업로드시 같은 이름의 파일을 덮어써 버리는 현상 방지
+		System.out.println("targetFile : " + targetFile);
+		
+		//File target = new File(request.getSession().getServletContext().getRealPath("upload"),targetFile);
+		//File target = new File(request.getServletContext().getRealPath("upload"),targetFile);
+		File target = new File(upLoadPath,targetFile);
+		
+		System.out.println("---------------------------------------------------------");
+		System.out.println(request.getSession().getServletContext().getRealPath(load));
+		System.out.println("---------------------------------------------------------");
+		System.out.println("target :" + target);
+		
+		try { 
+			FileCopyUtils.copy(file.getBytes(), target);
+			System.out.println("copy suss");
+			
+			vo.setFileCd(fileName);
+			vo.setRenames(targetFile);
+			movieDao.movieInsert(vo);
+			System.out.println("insert suss");
+			
+		}catch(Exception e) {
+			System.out.println("error");
+			
+			e.printStackTrace();
+		}
+		return "redirect:movieList.do";
+	}
+	
+	@RequestMapping("/searchAll.do")
+	public String searchAll(MovieVO vo, Model model) {
+		
+		String SearchName = vo.getSearchName();
+		model.addAttribute("searchName", movieDao.searchAll(SearchName));
+		
+		return "user/searchList";
+	}
+	
+	
 
 }

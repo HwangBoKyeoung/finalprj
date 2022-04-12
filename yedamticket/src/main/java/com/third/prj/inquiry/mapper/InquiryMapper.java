@@ -1,6 +1,6 @@
 package com.third.prj.inquiry.mapper;
 
-import java.util.List;
+import java.util.List; 
 
 import org.apache.ibatis.annotations.Param;
 
@@ -18,7 +18,11 @@ public interface InquiryMapper {
 	int inquiryUpdate(InquiryVO vo);
 	int inquiryDelete(InquiryVO vo);
 	
+	List<InquiryVO> inquirySearch(@Param("key") String key, @Param("val") String val);
 	
-	int getTotal(CriteriaVO cri);
+	public List<InquiryVO> getList(CriteriaVO cri);
+	
+	// 전체 게시글수
+	public int getTotal(CriteriaVO cri);
 
 }

@@ -1,6 +1,7 @@
 package com.third.prj.inquiry.web;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Autowired; 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -52,6 +53,22 @@ public class InquiryContorller {
 		model.addAttribute("inqReply", replyvo);
 		return "manager/inquiry/inquirySelect";
 	}
+	
+	//1:1문의
+//	@RequestMapping("/inqList.do")
+//	public String inqList(Model model) {
+//		model.addAttribute("inqs", inquiryDao.inquirySelectList());
+//		return"inquiry/inqList";
+//	}
+	@RequestMapping("/inqList.do")
+	public String inqList(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, inquiryDao.getTotal(cri)); //(기준, 토탈)
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("inqs", inquiryDao.getList(cri));
+		return"inquiry/inqList";
+	}
+	
+	//한건조회
 
 	// 1:1문의
 	@RequestMapping("/inqList.do")

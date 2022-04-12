@@ -2,6 +2,8 @@ package com.third.prj.performance.service;
 
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
+import com.third.prj.point.service.PointVO;
+import com.third.prj.user.service.UserVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -21,10 +23,10 @@ public class PerformanceVO {
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
 	private String price;	//공연가격
-
-	private double lat; //위도
-	private double lng;//경도
-
+	private String lat;
+	private String lng;
+	private String renames; //변경된 파일이름
+	
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;
 	

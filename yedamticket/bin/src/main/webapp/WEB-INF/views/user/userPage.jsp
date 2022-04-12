@@ -37,17 +37,27 @@ footer {
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
 				<h1>
+<<<<<<< HEAD
+=======
 
+>>>>>>> develop
 					<a href="#" class="logo">MyPage</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li>
 						<h6>${sessionId }님은 회원 입니다</h6>
+<<<<<<< HEAD
+						<h6>보유 포인트${user.point }P</h6> <br>
+=======
 						<h6>포인트 원</h6> <br>
+>>>>>>> develop
 					</li>
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
+<<<<<<< HEAD
+					<li><a href="userBuyList.do">거래내역</a></li>
+=======
 					<li><a href="userBuyList.do">포인트사용내역</a></li>
 
 					<a href="myPage.do" class="logo">MyPage</a>
@@ -61,6 +71,7 @@ footer {
 					<li><a href="pfReserv.do">공연예매내역</a></li>
 					<li><a href="mvReserv.do">영화예매내역</a></li>
 
+>>>>>>> develop
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
@@ -152,6 +163,17 @@ footer {
 			</div>
 		</div>
 	</div>
+<<<<<<< HEAD
+
+	<script type="text/javascript">
+		$(".que").click(function() {
+			$(this).next(".anw").stop().slideToggle(300);
+			$(this).toggleClass('on').siblings().removeClass('on');
+			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
+		});
+	</script>
+=======
+>>>>>>> develop
 
 	<script type="text/javascript">
 		$(".que").click(function() {
@@ -161,6 +183,8 @@ footer {
 		});
 	</script>
 
+<<<<<<< HEAD
+=======
 	<script type="text/javascript">
 		$(".que").click(function() {
 			$(this).next(".anw").stop().slideToggle(300);
@@ -169,6 +193,7 @@ footer {
 		});
 	</script>
 
+>>>>>>> develop
 </body>
 
 </html>

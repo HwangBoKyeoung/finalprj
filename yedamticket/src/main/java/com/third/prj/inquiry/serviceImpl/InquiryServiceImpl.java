@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 
 import com.third.prj.inquiry.mapper.InquiryMapper;
 import com.third.prj.inquiry.service.CriteriaVO;
@@ -44,7 +43,14 @@ public class InquiryServiceImpl implements InquiryService {
 	}
 
 	@Override
+	public List<InquiryVO> getList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getList(cri);
+	}
+
+	@Override
 	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
 

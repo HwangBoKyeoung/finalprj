@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>  
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,8 +21,8 @@
 }
 figure > img{
   display: block;
-  width: 100%;
-  height: auto;	
+ /*  width: 100%; */
+  height: auto;   
 }
 .caption {
   position: absolute;
@@ -47,9 +48,39 @@ figure > img{
 #result> .card:hover .caption {
   opacity: 1;
 }
+
 </style>
 </head>
 <body>
+<<<<<<< HEAD
+${movies}
+<%-- <c:set var="upLoadPath" value="/upload"/> --%>
+   <h1>박스오피스 순위</h1>
+   <div id="result">
+   
+   </div>
+   <h1>상영 예정작</h1>
+        <div id="wrapper">
+   <c:forEach items="${movies }" var="m">
+       <div class="card">
+       <header>
+       <h3> ${m.name }</h3>
+       </header>
+       <figure><img src="/upload/${m.renames }"></figure>
+       <p>
+       <span>감독: ${m.director }</span>
+       <span>배우: ${m.actor }</span>
+       </p>
+       <p>
+       <span>장르: ${m.genre } </span>
+       <span>연령: ${m.rating } 상영시간: ${m.runtime }</span>
+       </p>
+       <p>
+       <span>개봉예정일: ${m.startDate }</span>
+       </p>
+       </div> 
+</c:forEach>
+</div>
 	<h1>박스오피스 순위</h1>
 	<div id="result">
 	
@@ -75,6 +106,7 @@ figure > img{
 	    <span>개봉예정일: ${m.startDate }</span>
 	    </p>
     	</div> 
+
 </c:forEach>
     </div>
 </body>

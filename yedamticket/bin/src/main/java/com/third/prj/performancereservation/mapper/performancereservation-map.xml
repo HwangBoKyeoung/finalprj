@@ -2,6 +2,12 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.performancereservation.mapper.PerformanceReservationMapper">
 
+<<<<<<< HEAD
+	<select id="userTicket" resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
+			SELECT *
+			FROM   performance_reservation
+			WHERE  u_id = #{Uid}
+=======
 	<!-- <select id="userTicket" resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
 			SELECT *
 			FROM   performance_reservation
@@ -33,6 +39,7 @@
 		SELECT *
 		FROM   usersticket
 		WHERE  u_id = #{Uid}
+>>>>>>> develop
 	</select>
 
 </mapper>

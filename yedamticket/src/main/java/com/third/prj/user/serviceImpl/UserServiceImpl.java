@@ -11,8 +11,11 @@ import org.springframework.stereotype.Repository;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
-import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.point.service.PointCriteriaVO;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.user.mapper.UserMapper;
+import com.third.prj.user.service.UserCriteriaVO;
+import com.third.prj.user.service.UserPointViewVo;
 import com.third.prj.user.service.CriteriaVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
@@ -80,19 +83,11 @@ public class UserServiceImpl implements UserService {
 		return mapper.userDelete(vo);
 	}
 
-	@Override
-	public List<MovieReservVO> MvReservList(MovieReservVO vo) {
-		return mapper.MvReservList(vo);
-	}
-
-	@Override
-	public List<PerformanceVO> pfReservList(PerformanceReservationVO vo) {
-		return mapper.pfReservList(vo);
-	}
 
 	/*
 	 * @Override public int userCharge(UserVO vo) { return mapper.userCharge(vo); }
 	 */
+
 
 	@Override
 	public int userPointUpdate(int point, String id) {
@@ -100,6 +95,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
+
+	public UserVO userSelectOne(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.userSelectOne(vo);
+	}
+
 	public UserVO loginChk(UserVO vo) {
 		return sqlSession.selectOne("loginChk", vo);
 	}
@@ -107,9 +108,57 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public UserVO loginChk(UserVO vo, HttpSession session) {
 		return dao.loginChk(vo);
+
 	}
 
 	@Override
+	public List<UserPointViewVo> pointBuyList(UserPointViewVo vo) {
+		// TODO Auto-generated method stub
+		return mapper.pointBuyList(vo);
+	}
+
+	@Override
+	public List<MovieReservVO> mvRList(UserCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.mvRList(cri);
+	}
+
+	@Override
+	public int getMTotal(UserCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getMTotal(cri);
+	}
+
+	@Override
+	public List<PerformanceVO> pfRList(UserCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pfRList(cri);
+	}
+
+	@Override
+	public int getFTotal(UserCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getFTotal(cri);
+	}
+
+	@Override
+	public List<PointVO> pointBuyList2(PointCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pointBuyList2(cri);
+	}
+
+	@Override
+	public int pointBuyTotal(PointCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pointBuyTotal(cri);
+	}
+
+	@Override
+	public UserPointViewVo userPoint(UserPointViewVo vo) {
+		// TODO Auto-generated method stub
+		return mapper.userPoint(vo);
+	}
+
 	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
@@ -120,8 +169,9 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO userSelectOne(UserVO vo) {
+	public List<UserVO> userList() {
 		// TODO Auto-generated method stub
-		return mapper.userSelectOne(vo);
+		return null;
 	}
+
 }

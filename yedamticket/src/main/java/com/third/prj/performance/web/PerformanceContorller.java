@@ -1,13 +1,18 @@
 package com.third.prj.performance.web;
 
+import java.io.File;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.performance.service.CriteriaVO;
@@ -19,6 +24,7 @@ import com.third.prj.performanceimage.service.PerformanceImageVO;
 
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleService;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 
 @Controller
@@ -26,14 +32,30 @@ public class PerformanceContorller {
 
 	@Autowired
 	private PerformanceService perDao;
+	
+	@Autowired
+	private PerformanceScheduleService persDao;
+
 	@Autowired
 	private PerformanceImageService periDao;
+
 	@Autowired
+	private String upLoadPath;
+
 	private PerformanceReservationService perRDao;
 
 	//황규복 start
 	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
+	public String pList() {
+
+		return "performance/pList";
+	}
+
+//	@RequestMapping("/pserSelect.do")
+//	public String perSelect(PerformanceVO vo, Model model) {
+	
+	@RequestMapping("/pserSelect.do")
 	public String pList(Model model,CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달
@@ -78,22 +100,29 @@ public class PerformanceContorller {
 
 		vo = perDao.perforSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
-		
+		//vvo.setPNo(vo.getPNo());
+
 		ivo.setFileCd(vo.getFileCd());
-		
+
 		ivo = periDao.periSelect(ivo);
 
 		model.addAttribute("images", ivo);
 		model.addAttribute("pers", vo);
 		return "companyMyPage/companyPerforUpdateForm";
 	}
-  
+
 	/*
 	 * @PostMapping("/performanceUpdate.do") public String performanceUpdate(Model
 	 * model, PerformanceVO vo) { int n = perDao.perforUpdate(vo); if(n !=0) {
 	 * return "redirect:/conPage.do"; } return "manager/admin/managerError"; }
 	 */
 
+	// 프로시저 수정
+	@RequestMapping("/performanceUpdate.do")
+	public String perSelect() {
+		return "";
+	}
+	
 	//프로시저 수정
 	@RequestMapping("/companyPerforUpdate.do")
 	public String companyPerforUpdate(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
@@ -117,6 +146,44 @@ public class PerformanceContorller {
 
 		return "redirect:/companyPerforList.do";
 	}
-	
-	
+
+	@RequestMapping("/perInsertForm.do")
+	public String perForInsertForm() {
+		return "performance/perInsertForm";
+	}
+
+	@RequestMapping("/perInsert.do")
+	public String perInsert(PerformanceVO vo, MultipartFile file,PerformanceScheduleVO pvo) {
+		
+		System.out.println("==============="+vo);
+		
+		String fileName = file.getOriginalFilename(); // 원본파일명
+		String id = UUID.randomUUID().toString();// 고유한 아이디 생성
+		System.out.println("fileName: " + fileName);
+		System.out.println("id: " + id);
+
+		String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
+
+		File target = new File(upLoadPath, targetFile);
+
+		try {
+			FileCopyUtils.copy(file.getBytes(), target);
+			System.out.println("copy suss");
+
+			vo.setFileCd(fileName);
+			vo.setRenames(targetFile);
+			
+			perDao.perInsert(vo);
+			pvo.setPNo(vo.getPNo());
+			persDao.pScheduleInsert(pvo);
+			System.out.println("insert suss");
+
+		} catch (Exception e) {
+			System.out.println("error");
+
+			e.printStackTrace();
+		}
+		return "redirect:home.do";
+	}
+
 }

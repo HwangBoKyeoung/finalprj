@@ -28,5 +28,11 @@ public class PerformanceScheduleServiceImpl implements PerformanceScheduleServic
 		return 0;
 	}
 
+	@Override
+	public int pScheduleInsert(PerformanceScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pScheduleInsert(vo);
+	}
+
 
 }

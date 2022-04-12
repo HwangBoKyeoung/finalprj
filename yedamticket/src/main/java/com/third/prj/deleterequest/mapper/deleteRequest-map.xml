@@ -31,7 +31,7 @@
 		<result column="GENRE" property="startDate"/>
 		<result column="DIRECTOR" property="director"/>
 		<result column="RATING" property="rating"/>
-		<result column="DISTRIBUTOR" property="distibutor"/>
+		<result column="DISTRIBUTOR" property="distributor"/>
 		<result column="COUNTRY" property="country"/>
 		<result column="RUNTIME" property="runtime"/>
 		<result column="CONTENT" property="content"/>

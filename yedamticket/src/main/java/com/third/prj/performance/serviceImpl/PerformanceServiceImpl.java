@@ -11,7 +11,8 @@ import com.third.prj.performance.mapper.PerformanceMapper;
 import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
-
+import com.third.prj.performance.service.PerformanceViewVO;
+import com.third.prj.point.service.PointCriteriaVO;
 @Repository("perDao")
 public class PerformanceServiceImpl implements PerformanceService {
 
@@ -40,6 +41,33 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 	@Override
+	public List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pfBuyList(vo);
+	}
+
+
+	@Override
+	public List<PerformanceVO> pfBuyList2(PointCriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.pfBuyList2(cri);
+	}
+
+
+	@Override
+	public int pfBuyTotal(PointCriteriaVO cri) { 
+		// TODO Auto-generated method stub
+		return mapper.pfBuyTotal(cri);
+	}
+
+
+	@Override
+	public int perInsert(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.perInsert(vo);
+	}
+	
+	@Override
 	public int getTotal(CriteriaVO cri) {
 		return mapper.getTotal(cri);
 	}
@@ -61,7 +89,4 @@ public class PerformanceServiceImpl implements PerformanceService {
 		// TODO Auto-generated method stub
 		return mapper.pSelect(vo);
 	}
-
-
-
 }

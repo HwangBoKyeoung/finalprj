@@ -2,6 +2,7 @@ package com.third.prj.inquiry.service;
 
 import java.util.List;
 
+
 public interface InquiryService {
 
 	List<InquiryVO> inquirySelectList();
@@ -13,6 +14,10 @@ public interface InquiryService {
 	int inquiryUpdate(InquiryVO vo);
 	int inquiryDelete(InquiryVO vo);
 
+
+	public List<InquiryVO> getList(CriteriaVO cri);
 	
-	int getTotal(CriteriaVO cri);
+	// 전체 게시글수
+	public int getTotal(CriteriaVO cri);
+	
 }
