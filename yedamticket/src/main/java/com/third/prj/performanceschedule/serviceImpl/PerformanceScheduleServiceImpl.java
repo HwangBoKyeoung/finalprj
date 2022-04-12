@@ -35,6 +35,13 @@ public class PerformanceScheduleServiceImpl implements PerformanceScheduleServic
 	}
 
 
+	@Override
+	public PerformanceScheduleVO pSchSelect(PerformanceScheduleVO psvo) {
+		// TODO Auto-generated method stub
+		return mapper.pSchSelect(psvo);
+	}
+
+
 
 
 }

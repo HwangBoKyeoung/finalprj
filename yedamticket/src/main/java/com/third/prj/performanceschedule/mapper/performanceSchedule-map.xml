@@ -10,8 +10,17 @@
 		<result property="pNo" column="P_NO"/>
 		<result property="time" column="TIME"/>
 		<result property="endTime" column="ENDTIME"/>
+		<collection property="performanceVO" resultMap="pMap"/>
 	</resultMap>
-	
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
+		<id property="pNo" column="p_No"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="renames" column="renames"/>
+		<result property="content" column="content"/>
+		<result property="actor" column="actor"/>
+		<result property="addr" column="addr"/>
+	</resultMap>
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
 		SELECT TO_CHAR(s.FRDT, 'YYYY-MM-DD') || 'T' || s.TIME AS "start",
 				s.FRDT,
@@ -29,6 +38,11 @@
 	<insert id = "pScheduleInsert">    
 		INSERT INTO PERFORMANCE_SCHEDULE(P_SCH_NO,FRDT,TIME,P_NO,TRDT,ENDTIME) VALUES(PERSCH_SEQ.nextval,#{frDt},#{time},#{pNo},#{trDt},#{endTime})
 	</insert>
-
+	<select id="pSchSelect" resultMap="pfmcMap">
+		SELECT *
+        FROM PERFORMANCE A JOIN PERFORMANCE_SCHEDULE B
+        ON A.P_NO = B.P_NO
+        WHERE P_SCH_NO = #{PSchNo}
+	</select>
 
 </mapper>

@@ -191,10 +191,10 @@ input {
 <body>
 
 ${re }
-${movie }
+${sch }
 ${user }
     <div class="container">
-        <div id="logo"><h1 class="logo">YEDAM</h1>
+        <div id="logo"><h1 class="logo"><a href='goBack();'>뒤로가기</a></h1>
           <div class="CTA">
           <form action="moviePay.do" method="post">
          		
@@ -235,11 +235,12 @@ ${user }
       
           <div class="subscription ">
             <h1>영수증</h1>
-            <h2>영화제목</h2>
-            <h2>  <button class="btn">pay now</button></h2>
-            <h2> </h2>
-            <h2> </h2>
+            <h2>제목</h2>
+            <h2>${sch.performanceVO.name }<button class="btn">pay now</button></h2>
+            <h2>구역 </h2>
+            <p>${re.loc }</p>
             <h2>좌석</h2>
+            <p>${re.seatNo }</p>      
             <h2> <button class="btn">change plan</button></h2>
             <h2>가격</h2>
             <h2 id="price"><button class="btn">change plan</button></h2>
@@ -276,11 +277,14 @@ ${user }
       </div>
 </body>
 <script>
+function goBack(){
+	window.history.back();
+}
 (function (){
 	
 	let seatName='${re.seatNo }';
 	let cnt=0;
-	let price=13000;
+	let price=${sch.performanceVO.price};
 	for(var i =0;i<seatName.length;i++){
 		if(i%3==0){
 			cnt++;

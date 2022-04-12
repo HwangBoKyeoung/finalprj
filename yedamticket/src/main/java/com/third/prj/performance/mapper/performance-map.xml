@@ -242,9 +242,16 @@
 		FROM PERFORMANCEVIEW
 		WHERE BUY_CTNT_CD = 'pf'
     	AND U_ID = #{Uid} ) A ))
-		
 	</select>
-	
+	<!-- 지역에 맞게 -->
+	<select id="locPlist" resultMap="pMap">
+		<![CDATA[  
+		SELECT * FROM PERFORMANCE
+		WHERE ADDR LIKE  '%'||#{addr}||'%' 
+		AND ROWNUM <6
+		]]>
+	</select>
+	<!-- end 황규복ㄴ -->
 	<insert id="perInsert">
 	<selectKey keyProperty ="pNo" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(P_NO), 0) + 1 AS PNO 

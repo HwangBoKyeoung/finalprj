@@ -39,4 +39,6 @@ public interface PerformanceMapper {
 	List<PerformanceVO> epList();
 	//공연선택
 	PerformanceVO pSelect(PerformanceVO vo);
+	//지역별 공연리스트
+	List<PerformanceVO> locPlist(PerformanceVO vo);
 }

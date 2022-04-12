@@ -694,13 +694,13 @@ $(".seat").click(function() {
     	});
     	
 });
-function selectSeat(){  		
-	$(event.target).addClass('occupied');
+function selectSeat(){  			
 	console.log(this.innerText);
 	console.log($('#selectedSeat .seatGray').length);
 	let selectedSeat = document.getElementById('selectedSeat');
 	let tdList=selectedSeat.getElementsByTagName('td');
 	if($('#selectedSeat .seatGray').length > cnt){
+		$(event.target).addClass('occupied');
 		tdList[cnt].innerText=$(event.target).text();
 		event.target.removeEventListener("click",selectSeat);
 		event.target.classList.add('occupied');

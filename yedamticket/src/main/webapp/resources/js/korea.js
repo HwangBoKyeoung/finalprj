@@ -4,10 +4,10 @@ window.onload = function() {
 
 //지도 그리기
 function drawMap(target) {
-    var width = 400; //지도의 넓이
-    var height = 400; //지도의 높이
-    var initialScale = 5800; //확대시킬 값
-    var initialX = -12700; //초기 위치값 X
+    var width = 700; //지도의 넓이
+    var height = 700; //지도의 높이
+    var initialScale = 5500; //확대시킬 값
+    var initialX = -11900; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
     var labels;
 
@@ -31,17 +31,76 @@ function drawMap(target) {
         .attr('id', 'map')
         .attr('class', 'map')
         .on("click", function(){
-              var eid=event.target.id;
+            var eid=event.target.id;
             result.value=eid.substr(eid.indexOf('-')+1,eid.length);
-/*            $.ajax({
-                url:"",
-                type:"get",
-                data:{loc:"${'#result.'}.val()"},
-                success:function(data){
-                    console.log(data);
-                }
-            });
-*/        });
+		switch(result.value){
+			case "Seoul":
+			var region = "서울";
+            break;
+			case "Gyeongsangbuk-do":
+			var region = "경상북도";
+            break;
+            case "Gyeonggi-do":
+            var region = "경기도";
+            break;
+            case "Incheon":
+            var region = "인천";
+            break;
+            case "Gangwon-do":
+            var region = "강원도";
+            break;
+            case "Gyeonggi-do":
+            var region = "경기도";
+            break;
+            case "Chungcheongnam-do":
+            var region = "충청남도";
+            break;
+            case "Chungcheongbuk-do":
+            var region = "충청북도";
+            break;
+            case "Sejong":
+            var region = "세종";
+            break;
+            case "Daejeon":
+            var region = "대전";
+            break;
+            case "Jeollabuk-do":
+            var region = "전라북도";
+            break;
+            case "Jeollanam-do":
+            var region = "전라남도";
+            break;
+            case "Gwangju":
+            var region = "광주";
+            break;
+            case "Daegu":
+            var region = "대구";
+            break;
+            case "Gwangju":
+            var region = "광주";
+            break;
+            case "Gyeongsangnam-do":
+            var region = "경상남도";
+            break;
+            case "Ulsan":
+            var region = "울산";
+            break;
+            case "Busan":
+            var region = "부산";
+            break;
+			
+		}
+		console.log(region);
+        $.ajax({
+            url:"locPlist.do",
+            type:"post",
+            data:{"addr":region},
+            success:function(result){
+                console.log(result);
+            }
+
+        });
+      });
 
     var states = svg
         .append('g')

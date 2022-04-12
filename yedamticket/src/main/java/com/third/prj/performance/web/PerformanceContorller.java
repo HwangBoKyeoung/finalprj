@@ -45,8 +45,9 @@ public class PerformanceContorller {
 
 	@Autowired
 	private String upLoadPath;
-
-	private PerformanceReservationService perRDao;
+	
+	@Autowired
+	private PerformanceReservationService performanceReservationDao;
 
 	@Autowired
 	private PerformanceScheduleService perSDao;
@@ -55,15 +56,6 @@ public class PerformanceContorller {
 
 	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
-	public String pList() {
-
-		return "performance/pList";
-	}
-
-//	@RequestMapping("/pserSelect.do")
-//	public String perSelect(PerformanceVO vo, Model model) {
-	
-	@RequestMapping("/pserSelect.do")
 	public String pList(Model model,CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달
@@ -90,21 +82,28 @@ public class PerformanceContorller {
 	@RequestMapping("/searchSeatNo.do")
 	@ResponseBody
 	public List<PerformanceReservationVO> searchSeatNo(PerformanceReservationVO prvo) {
-		return perRDao.searchSeatNo(prvo);
+		System.out.println("pschNO"+prvo.getPSchNo());
+		System.out.println("LOC"+prvo.getLoc());
+		System.out.println(prvo);
+		System.out.println("===============" + performanceReservationDao.searchSeatNo(prvo));
+		return performanceReservationDao.searchSeatNo(prvo);
 	}
 	
 	//공연 결제
 	@RequestMapping("/pReservation.do")
 	public String pReservation(Model model,PerformanceReservationVO prvo,UserVO uservo,PerformanceScheduleVO psvo) {
-		/*
-		 * psvo.setPSchNo(prvo.getPSchNo());
-		 * model.addAttribute("schedule",perSDao.toPayPschedule(psvo));
-		 */
+		
+		model.addAttribute("sch",perSDao.pSchSelect(psvo));
 		model.addAttribute("re",prvo);
 		model.addAttribute("user",userDao.userSelectOne(uservo));
 		return "user/performance/pPayForm";
 	}
-	
+	//지역별 공연리스트
+	@RequestMapping("/locPlist.do")
+	@ResponseBody
+	public List<PerformanceVO> locPlist(PerformanceVO vo){
+		return perDao.locPlist(vo);
+	}
 	//황규복 end
 	//한건조회
 	@RequestMapping("/companyPerforUpdateForm.do")
@@ -123,13 +122,6 @@ public class PerformanceContorller {
 		model.addAttribute("pers", vo);
 		return "companyMyPage/companyPerforUpdateForm";
 	}
-
-	/*
-	 * @PostMapping("/performanceUpdate.do") public String performanceUpdate(Model
-	 * model, PerformanceVO vo) { int n = perDao.perforUpdate(vo); if(n !=0) {
-	 * return "redirect:/conPage.do"; } return "manager/admin/managerError"; }
-	 */
-
 	// 프로시저 수정
 	@RequestMapping("/performanceUpdate.do")
 	public String perSelect() {

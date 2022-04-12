@@ -12,6 +12,8 @@ public interface PerformanceScheduleMapper {
 
 	//공연스케쥴 등록
 	int pScheduleInsert (PerformanceScheduleVO vo);
+	//공연 테이블과 공연스케쥴테이블 조인
+		PerformanceScheduleVO pSchSelect(PerformanceScheduleVO psvo);
 
 
 }
