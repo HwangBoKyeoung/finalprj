@@ -18,6 +18,7 @@ import com.third.prj.performanceimage.service.PerformanceImageService;
 import com.third.prj.performanceimage.service.PerformanceImageVO;
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performanceschedule.service.PerformanceScheduleService;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
 import com.third.prj.performancevideo.service.PerformanceVideoService;
 import com.third.prj.performancevideo.service.PerformanceVideoVO;
@@ -35,6 +36,8 @@ public class PerformanceContorller {
 	private PerformanceVideoService pervDao;
 	@Autowired
 	private PerformanceReservationService perRDao;
+	@Autowired
+	private PerformanceScheduleService perSDao;
 	@Autowired
 	private UserService userDao;
 	//모두조회
@@ -75,9 +78,12 @@ public class PerformanceContorller {
 	}
 	//공연 결제
 	@RequestMapping("/pReservation.do")
-	public String pReservation(Model model,PerformanceReservationVO prvo,UserVO uservo) {
+	public String pReservation(Model model,PerformanceReservationVO prvo,UserVO uservo,PerformanceScheduleVO psvo) {
+		/*
+		 * psvo.setPSchNo(prvo.getPSchNo());
+		 * model.addAttribute("schedule",perSDao.toPayPschedule(psvo));
+		 */
 		model.addAttribute("re",prvo);
-		
 		model.addAttribute("user",userDao.userSelectOne(uservo));
 		return "user/performance/pPayForm";
 	}

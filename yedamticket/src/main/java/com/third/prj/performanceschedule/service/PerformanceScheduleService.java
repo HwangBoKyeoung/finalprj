@@ -6,5 +6,6 @@ public interface PerformanceScheduleService {
 	
 	List<PerformanceScheduleVO> PerformanceScheduleList();
 	int PSchedulUpdate(PerformanceScheduleVO vo);
+	PerformanceScheduleVO toPayPschedule(PerformanceScheduleVO vo);
 	
 }

@@ -203,8 +203,8 @@ public class UserController {
 
 	@RequestMapping("/mvReservList.do")
 	public String mvReservList(Model model, MovieReservVO vo, HttpSession session) {
-		vo.setUid((String) session.getAttribute("sessionId"));
-		System.out.println(vo.getUid());
+		vo.setUId((String) session.getAttribute("sessionId"));
+		System.out.println(vo.getUId());
 		model.addAttribute("mvList", userDao.MvReservList(vo));
 		return "user/mvReservList";
 	}

@@ -118,7 +118,7 @@ public class MovieController {
 	@RequestMapping("/movieBooking.do")
 	public String movieBooking(Model model) {
 		model.addAttribute("movies",movieDao.movieList());
-		return "movie/movieBookingForm1";
+		return "movie/movieBookingForm";
 	
 	}
 

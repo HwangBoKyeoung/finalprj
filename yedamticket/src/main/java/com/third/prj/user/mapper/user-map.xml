@@ -19,7 +19,7 @@
 		<result column="DOCID" property="docId" />
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 	</resultMap>
 
 	<resultMap
@@ -59,7 +59,7 @@
 						, phone
 						, birthdt)
 				   VALUES(#{name}
-		  			    , #{Uid}
+		  			    , #{UId}
 					    , #{pwd}
 					    , #{email}
 					    , #{addr}
@@ -183,7 +183,7 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID = #{uId}
+		AND X.U_ID = #{UId}
 	</select>
 	
 	<update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >

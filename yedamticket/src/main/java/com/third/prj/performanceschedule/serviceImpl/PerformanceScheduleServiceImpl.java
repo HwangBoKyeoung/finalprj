@@ -29,4 +29,11 @@ public class PerformanceScheduleServiceImpl implements PerformanceScheduleServic
 	}
 
 
+	@Override
+	public PerformanceScheduleVO toPayPschedule(PerformanceScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.toPayPschedule(vo);
+	}
+	
+
 }

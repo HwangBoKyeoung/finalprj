@@ -725,7 +725,7 @@ $('#backBtn').on('click',function(){
 	}
 	seatArry=[];
 	$('#cnt').text(0);
-	
+	cnt=0;
 });
 	
 	

@@ -24,5 +24,11 @@
         where s.p_no = p.p_no
         ORDER BY P_NO
 	</select>
+	<select id="toPayPschedule" resultMap="pfmcMap">
+		SELECT B.*
+        FROM PERFORMANCE A JOIN PERFORMANCE_SCHEDULE B
+        ON A.P_NO = B.P_NO
+        WHERE P_SCH_NO=#{PSchNo} ;
+	</select>
 
 </mapper>
