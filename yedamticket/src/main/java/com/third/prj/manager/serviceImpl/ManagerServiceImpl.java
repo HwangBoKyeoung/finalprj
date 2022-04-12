@@ -2,10 +2,13 @@ package com.third.prj.manager.serviceImpl;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.manager.mapper.ManagerMapper;
+import com.third.prj.manager.service.CriteriaVO;
 import com.third.prj.manager.service.ManagerService;
 import com.third.prj.manager.service.ManagerVO;
 
@@ -15,9 +18,12 @@ public class ManagerServiceImpl implements ManagerService{
 	@Autowired
 	private ManagerMapper mapper;
 
+	@Autowired
+	private ManagerService dao;
+	
 	@Override
-	public List<ManagerVO> managerSelectList() {
-		return mapper.managerSelectList();
+	public List<ManagerVO> managerSelectList(CriteriaVO cri) {
+		return mapper.managerSelectList(cri);
 	}
 
 	@Override
@@ -40,15 +46,28 @@ public class ManagerServiceImpl implements ManagerService{
 		return mapper.managerDelete(vo);
 	}
 
-	@Override
-	public List<ManagerVO> managerSearch(String key, String val) {
-		return mapper.managerSearch(key, val);
-	}
-
+	
 	
 	@Override
 	public int idCheck(String MId) {
 		return mapper.idCheck(MId);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
+	}
+
+	@Override
+	public ManagerVO manaLogin(ManagerVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.manaLogin(vo);
+	}
+
+	@Override
+	public ManagerVO manaLogin(ManagerVO vo, HttpSession session) {
+		return dao.manaLogin(vo);
 	}
 	
 	

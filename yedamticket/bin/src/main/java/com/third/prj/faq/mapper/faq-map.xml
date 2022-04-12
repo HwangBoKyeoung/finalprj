@@ -11,13 +11,13 @@
 	</resultMap>
 
 	<select id="faqSelectList" resultMap="faqResultMap">
-		SELECT * 
+		SELECT F_NO, QST_CD,TITLE,CONTENT 
 		FROM FAQ 
 		ORDER BY F_NO DESC
 	</select>
 
 	<select id="faqSelect" parameterType="com.third.prj.faq.service.FaqVO" resultMap="faqResultMap">
-		SELECT * 
+		SELECT F_NO, QST_CD,TITLE,CONTENT 
 		FROM FAQ 
 		WHERE F_NO = #{fNo}	
 	</select>

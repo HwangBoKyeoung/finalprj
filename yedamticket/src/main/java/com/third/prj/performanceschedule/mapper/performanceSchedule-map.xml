@@ -24,11 +24,11 @@
         where s.p_no = p.p_no
         ORDER BY P_NO
 	</select>
-	<select id="toPayPschedule" resultMap="pfmcMap">
-		SELECT B.*
-        FROM PERFORMANCE A JOIN PERFORMANCE_SCHEDULE B
-        ON A.P_NO = B.P_NO
-        WHERE P_SCH_NO=#{PSchNo} ;
-	</select>
+
+	
+	<insert id = "pScheduleInsert">    
+		INSERT INTO PERFORMANCE_SCHEDULE(P_SCH_NO,FRDT,TIME,P_NO,TRDT,ENDTIME) VALUES(PERSCH_SEQ.nextval,#{frDt},#{time},#{pNo},#{trDt},#{endTime})
+	</insert>
+
 
 </mapper>

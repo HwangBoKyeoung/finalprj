@@ -6,9 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.deleterequest.mapper.DeleteRequestMapper;
+import com.third.prj.deleterequest.service.CriteriaVO;
 import com.third.prj.deleterequest.service.DeleteRequestService;
 import com.third.prj.deleterequest.service.DeleteRequestVO;
-import com.third.prj.performance.service.PerformanceVO;
 
 @Repository("delDao")
 public class DeleteRequestServiceImpl implements DeleteRequestService{
@@ -16,45 +16,101 @@ public class DeleteRequestServiceImpl implements DeleteRequestService{
 	@Autowired
 	private DeleteRequestMapper mapper;
 	@Override
-	public List<DeleteRequestVO> delSelectList() {
+	public List<DeleteRequestVO> deleteRequestList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.delSelectList();
+		return mapper.deleteRequestList(cri);
 	}
 
 	@Override
-	public DeleteRequestVO delSelect(DeleteRequestVO vo) {
+	public DeleteRequestVO deleteRequestSelect(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delSelect(vo);
+		return mapper.deleteRequestSelect(vo);
 	}
 
 	@Override
-	public int delInsert(DeleteRequestVO vo) {
+	public int deletePerforInsert(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delInsert(vo);
+		return mapper.deletePerforInsert(vo);
 	}
 
 	@Override
-	public int delUpdate(DeleteRequestVO vo) {
+	public int deleteRequestUpdate(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delUpdate(vo);
+		return mapper.deleteRequestUpdate(vo);
+	}
+
+
+	@Override
+	public DeleteRequestVO deleteRequestPerforSelect(DeleteRequestVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.deleteRequestPerforSelect(vo);
 	}
 
 	@Override
-	public int delDelete(DeleteRequestVO vo) {
+	public int deleteMovieInsert(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delDelete(vo);
+		return mapper.deleteMovieInsert(vo);
 	}
 
 	@Override
-	public List<DeleteRequestVO> delSearch(String key, String val) {
+	public DeleteRequestVO deleteRequestMovieSelect(DeleteRequestVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.delSearch(key, val);
+		return mapper.deleteRequestMovieSelect(vo);
 	}
 
 	@Override
-	public DeleteRequestVO updatedel(DeleteRequestVO vo) {
+	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
-		return mapper.updatedel(vo);
+		return mapper.getTotal(cri);
+	}
+
+	@Override
+	public List<DeleteRequestVO> companyMyDeletePerforList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.companyMyDeletePerforList(cri);
+	}
+
+	@Override
+	public List<DeleteRequestVO> companyMyDeleteMovieList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.companyMyDeleteMovieList(cri);
+	}
+
+	//기업회원마이페이지 - 영화 목록
+	@Override
+	public List<DeleteRequestVO> companyPerforSelectList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.companyPerforSelectList(cri);
+	}
+
+	@Override
+	public int getTotalPerfor(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalPerfor(cri);
+	}
+
+	@Override
+	public int getTotalDeletePerfor(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalDeletePerfor(cri);
+	}
+
+	@Override
+	public int getTotalDeleteMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalDeleteMovie(cri);
+	}
+
+	@Override
+	public List<DeleteRequestVO> companyMovieSelectList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.companyMovieSelectList(cri);
+	}
+
+	@Override
+	public int getTotalMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalMovie(cri);
 	}
 
 }

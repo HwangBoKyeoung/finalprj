@@ -14,7 +14,7 @@
 			<div class="card-body">
 				<h4 class="card-title">Admin Insert</h4>
 				<p class="card-description">Horizontal form layout</p>
-				<form class="forms-sample" action="adminInsert.do" onsubmit="return check();">
+				<form class="forms-sample" action="adminInsert.do" method="post" onsubmit="return chec_id();">
 				
 					<div class="form-group row">
 						<label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
@@ -76,13 +76,12 @@
 		let selected = $("#selected option:selected").val();
 		console.log(selected);
 		
-		/* 아이디 중복체크 */
-		/* function check(){
-			if(!fn_idCheck()){
-				console.log("중복값있음")
+		function chec_id(){
+			if($("#idCheck").val() == 'N'){
+				alert('아이디중복체크를 하세요');
+				return false;
 			}
-			
-		} */
+		}
 
 		function fn_idCheck() {
 			$.ajax({
@@ -96,7 +95,7 @@
 					if (data >= 1) {
 						alert('중복');
 					} else if (data == 0) {
-						$("idCheck").attr("value", "Y");
+						$("#idChk").val('Y');
 						alert("사용가능한 아이디 입니다");
 					}
 				}

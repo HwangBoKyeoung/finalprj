@@ -12,6 +12,8 @@ public class CriteriaVO {
 	private String searchType; //작성자,제목
 	private String searchName; //검색할 이름
 	
+	
+	
 	public CriteriaVO() {
 		this(1,10);
 	}

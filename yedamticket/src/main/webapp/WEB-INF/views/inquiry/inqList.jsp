@@ -354,8 +354,29 @@ iframe {
 				</tbody>
 			</table>
 			<br>
+			<div id="content" align="center">
+				<c:if test="${pageVO.prev }">
+					<!-- 이전버튼 활성화 여부 -->
+					<a href="inqList.do?pageNum=${pageVO.startPage-1 }"> <input
+						type="button" value="이전" class="btn btn-secondary"></a>
+				</c:if>
+				<!-- pageNum -->
+				<c:forEach var="num" begin="${pageVO.startPage }"
+					end="${pageVO.endPage }">
+					<a class="${pageVO.pageNum == num ? 'active': '' }"
+						href="inqList.do?pageNum=${num }"> <input type="button"
+						value="${num }" class="btn btn-secondary"></a>
+				</c:forEach>
+				<!-- 다음버튼 -->
+				<c:if test="${pageVO.next }">
+					<a href="inqList.do?pageNum=${pageVO.endPage+1 }"> <input
+						type="button" value="다음" class="btn btn-secondary"></a>
+				</c:if>
+			</div>
+
 			<div align="right">
-				<button type="button" class="btn btn-primary" onclick="location.href='inqWriteForm.do'">글등록</button>
+				<button type="button" class="btn btn-primary"
+					onclick="location.href='inqWriteForm.do'">글등록</button>
 			</div>
 		</div>
 	</div>

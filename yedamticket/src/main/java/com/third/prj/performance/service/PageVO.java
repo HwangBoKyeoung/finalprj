@@ -1,5 +1,6 @@
 package com.third.prj.performance.service;
 
+
 import lombok.Data;
 
 @Data
@@ -56,5 +57,9 @@ public class PageVO {
 		this.next = realEnd > this.endPage;
 		
 	}
-	
+
 }
+
+	
+
+

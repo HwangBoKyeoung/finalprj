@@ -3,13 +3,5 @@
 
 <mapper namespace="com.third.prj.performancevideo.mapper.PerformanceVideoMapper">
 
-	<update id="PVideoUpdate">
-		UPDATE PERFORMANCE_VIDEO
-		<set>
-			<if test="name != null">name = #{name},</if>
-			<if test="renames != null">RENAMES = #{renames}</if>
-		</set>
-		WHERE P_VIDEO_NO = #{pVideoNo}
-	</update>
-	
+		
 </mapper>

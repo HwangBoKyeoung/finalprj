@@ -116,7 +116,7 @@ border-radius: 30px;
 										<i class="now-ui-icons objects_key-25"></i>
 										</span>
 									</div>
-									<input type="text" placeholder="Password..." name = "pwd" class="form-control" />
+									<input type="password" placeholder="Password..." name = "pwd" class="form-control" />
 								</div><br>
 								<div class="card-footer text-center">
 									<input type="submit" class="btn btn-primary btn-round btn-lg btn-block" value="LOGIN">
@@ -137,6 +137,7 @@ border-radius: 30px;
 								<div class="pull-right">
 									<h6>
 										<a href="companyLoginForm.do" class="link">기업회원이신가요?</a>
+										<a href="managerLoginForm.do" class="link">관리자입니까?</a>
 									</h6>
 								</div>
 								</div>

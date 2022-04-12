@@ -12,20 +12,19 @@
 	</resultMap>
 
 	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT * 
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 		FROM INQUIRY
 		ORDER BY INDT DESC
-		<!-- ORDER BY IN_NO DESC -->
 	</select>
 	
 	<select id="inquirySelect" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT * 
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID 
 		FROM INQUIRY
 		WHERE IN_NO=#{inNo}
 	</select>
 	
 	<select id="inquirySearch" resultType="com.third.prj.inquiry.service.InquiryVO" parameterType="String">
-		SELECT *
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 		FROM INQUIRY
 		WHERE
 			<if test="key == '전체'">TITLE LIKE '%'||#{val}||'%' 

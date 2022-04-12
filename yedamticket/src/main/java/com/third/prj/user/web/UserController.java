@@ -11,15 +11,24 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.faq.service.FaqService;
+import com.third.prj.movie.service.MovieService;
+import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
-import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performance.service.PerformanceService;
+import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
+import com.third.prj.user.service.UserCriteriaVO;
+import com.third.prj.user.service.UserPageVO;
+import com.third.prj.user.service.UserPointViewVo;
+import com.third.prj.user.service.CriteriaVO;
+import com.third.prj.user.service.PageVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -34,6 +43,13 @@ public class UserController {
 
 	@Autowired
 	private NoticeService noticeDao;
+	
+	@Autowired
+	private PerformanceService perDao;
+	
+	@Autowired
+	private MovieService movieDao;
+	
 
 	@Inject
 	private BCryptPasswordEncoder pwdEncoder;
@@ -94,17 +110,20 @@ public class UserController {
 		return "user/user/userLoginForm";
 	}
 
-	@RequestMapping("/user.do")
-	public String user(Model model) {
-		model.addAttribute("users", userDao.userList());
-		return "manager/user/user";
+	@RequestMapping("/managerUser.do")
+	public String managerUser(Model model,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
+		model.addAttribute("users", userDao.userList(cri));
+		model.addAttribute("pageVO", pageVO);//전체게시글 기준으로가지고옴
+		return "manager/user/managerUser";
 	}
 
-	@RequestMapping("/userSelet.do")
-	public String userSelet(UserVO vo, Model model) {
+	@RequestMapping("/managerUserSelect.do")
+	public String managerUserSelect(UserVO vo, Model model) {
 		vo = userDao.userSelect(vo);
+		
 		model.addAttribute("users", vo);
-		return "manager/user/userSelect";
+		return "manager/user/managerUserSelect";
 	}
 
 	@RequestMapping("/userLogin.do")
@@ -166,19 +185,31 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-	public String userPage() {
+	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
+		cri.setUid((String)session.getAttribute("sessionId"));
+		vo.setUId((String)session.getAttribute("sessionId"));
+		pvo.setUid((String)session.getAttribute("sessionId"));
+		model.addAttribute("userPoint", userDao.userPoint(pvo));
+		model.addAttribute("mvList", userDao.mvRList(cri));
+		model.addAttribute("pfList", userDao.pfRList(cri));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+	
 		return "user/userPage";
 	}
 
 	@RequestMapping("/userUpdateForm.do")
-	public String userUpdateForm() {
+	public String userUpdateForm(Model model, UserVO vo, HttpSession session) {
+		vo.setUId((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
 		return "user/userUpdateForm";
 	}
 
 	@RequestMapping("/userUpdate.do")
 	public String userUpdate(UserVO vo) {
+		String pwd = vo.getPwd();
+		String encryptedPwd = pwdEncoder.encode(pwd);
+		vo.setPwd(encryptedPwd);
 		int n = userDao.userUpdate(vo);
-
 		if (n != 0) {
 			return "redirect:userUpdateForm.do";
 		}
@@ -201,28 +232,92 @@ public class UserController {
 		return "user/errorPage";
 	}
 
-	@RequestMapping("/mvReservList.do")
-	public String mvReservList(Model model, MovieReservVO vo, HttpSession session) {
-		vo.setUId((String) session.getAttribute("sessionId"));
-		System.out.println(vo.getUId());
-		model.addAttribute("mvList", userDao.MvReservList(vo));
+
+	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
+		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
+		cri.setUid((String)session.getAttribute("sessionId"));
+		System.out.println("=============== cri userid"+cri.getUid() + "===============");
+		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
+		
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("mvList", userDao.mvRList(cri));
+		
+		vo.setUId((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+		
+
 		return "user/mvReservList";
 	}
 
 	@RequestMapping("pfReservList.do")
-	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, PerformanceVO vo) {
-		pvo.setUId((String) session.getAttribute("sessionId"));
-		model.addAttribute("pfList", userDao.pfReservList(pvo));
+	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo,UserVO vo, UserCriteriaVO cri ) {
+		cri.setUid((String)session.getAttribute("sessionId"));
+		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
+		
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+		model.addAttribute("pfList", userDao.pfRList(cri));
+		
+		vo.setUId((String)session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
 		return "user/pfReservList";
 	}
-
+	
 	@RequestMapping("/userBuyList.do")
-	public String userBuyList() {
+	public String userBuyList(Model model,HttpSession session, PerformanceViewVO pvo,MovieViewVO mvo,UserPointViewVo uvo) {
+		
+		mvo.setUid((String)session.getAttribute("sessionId"));
+		pvo.setUid((String)session.getAttribute("sessionId"));
+		uvo.setUid((String)session.getAttribute("sessionId"));	
+		
+		
+		model.addAttribute("userPoint", userDao.userPoint(uvo));
+		
+		
+		model.addAttribute("list3", userDao.pointBuyList(uvo));
+		model.addAttribute("list2",movieDao.mvBuyList(mvo));
+		model.addAttribute("list1", perDao.pfBuyList(pvo));
 		return "user/userBuyList";
 	}
 
+	
+//	@RequestMapping("/userBuyList.do")
+//	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
+//		cri.setUid((String)session.getAttribute("sessionId"));
+//		PointPageVO pVO = new PointPageVO(cri,movieDao.mvBuyTotal(cri));
+//		model.addAttribute("pVO", pVO);
+//		model.addAttribute("list1", perDao.pfBuyList2(cri));
+//		model.addAttribute("list2", movieDao.mvBuyList2(cri));
+//		
+//		
+//		
+//		PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
+//		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+//		model.addAttribute("list3", userDao.pointBuyList2(cri));
+//		
+//		vo.setUid((String)session.getAttribute("sessionId"));
+//		model.addAttribute("user", userDao.userSelectOne(vo));
+//		return "user/userBuyList";
+
+	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String loginChk(UserVO userVO, @RequestParam("Uid") String Uid) {
+		userVO = userDao.loginChk(userVO);
+		String address = userVO.getAddr();
+		System.out.println(address);
+		return address;
+	}
+	
 //	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
 //		return "user/userUpdateForm";
+
 //	}
+	@RequestMapping("/companyMyPage.do")
+	public String companyMyPage() {
+		return "companyMyPage/companyMyPage";
+	}
+	
+	
+
+
 
 }

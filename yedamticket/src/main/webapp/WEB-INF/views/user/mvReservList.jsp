@@ -386,6 +386,7 @@ html, body {
 </style>
 </head>
 <body>
+
 <div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
@@ -395,12 +396,12 @@ html, body {
 				<ul class="list-unstyled components mb-5">
 					<li>
 						<h6>${sessionId }님은 회원 입니다</h6>
-						<h6>포인트 원</h6> <br>
+						<h6>보유 포인트${user.point }P</h6> <br>
 					</li>
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
-					<li><a href="userBuyList.do">포인트사용내역</a></li>
+					<li><a href="userBuyList.do">거래내역</a></li>
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
@@ -417,7 +418,6 @@ html, body {
 		<h2>영화예매내역</h2>
 		<div class="main-content">
 			<div class="cols-12">
-				<c:forEach items="${mvList}" var="mv">
 					<table class="table table-sm">
 						<thead>
 							<tr>
@@ -426,24 +426,46 @@ html, body {
 								<th scope="col">영화명</th>
 								<th scope="col">관람일</th>
 								<th scope="col">상영시간</th>
-								<th scope="col">좌석이름</th>
+								<th scope="col">좌석번호</th>
 								<th scope="col">모바일티켓</th>
 							</tr>
 						</thead>
 						<tbody>
-							<tr>
-								<td scope="row">${mv.mvReservNo}</td>
-								<td>${mv.reservDt}</td>
-								<td>${mv.name}</td>
-								<td>${mv.schDate}</td>
-								<td>${mv.schTime}</td>
-								<td>${mv.seatName}</td>
-								<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
-								<td><button type="button" id="MBTN" class="checkBtn btn-xs btn-primary">보기</button></td>
-							</tr>
+							<c:forEach items="${mvList}" var="mv">
+								<tr>
+									<td scope="row">${mv.mvReservNo}</td>
+									<td>${mv.reservDt}</td>
+									<td>${mv.name}</td>
+									<td>${mv.schDate}</td>
+									<td>${mv.schTime}</td>
+									<td>${mv.seatName}</td>
+									<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
+									<td><button type="button" id="MBTN"
+											class="checkBtn btn-xs btn-primary">보기</button></td>
+								</tr>
+							</c:forEach>
 						</tbody>
 					</table>
-				</c:forEach>
+					<br>
+					<div id="content" align="center">
+						<c:if test="${pageVO.prev }">
+							<!-- 이전버튼 활성화 여부 -->
+							<a href="mvReservList.do?pageNum=${pageVO.startPage-1 }"> <input
+								type="button" value="이전" class="btn btn-secondary"></a>
+						</c:if>
+						<!-- pageNum -->
+						<c:forEach var="num" begin="${pageVO.startPage }"
+							end="${pageVO.endPage }">
+							<a class="${pageVO.pageNum == num ? 'active': '' }"
+								href="mvReservList.do?pageNum=${num }"> <input type="button"
+								value="${num }" class="btn btn-secondary"></a>
+						</c:forEach>
+						<!-- 다음버튼 -->
+						<c:if test="${pageVO.next }">
+							<a href="mvReservList.do?pageNum=${pageVO.endPage+1 }"> <input
+								type="button" value="다음" class="btn btn-secondary"></a>
+						</c:if>
+					</div>
 			</div>
 		</div>
 	</div>

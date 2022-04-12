@@ -9,6 +9,9 @@ public interface PerformanceScheduleMapper {
 
 	List<PerformanceScheduleVO> PerformanceScheduleList();
 	int PSchedulUpdate(PerformanceScheduleVO vo);
-	PerformanceScheduleVO toPayPschedule(PerformanceScheduleVO vo);
+
+	//공연스케쥴 등록
+	int pScheduleInsert (PerformanceScheduleVO vo);
+
 
 }

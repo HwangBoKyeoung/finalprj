@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.third.prj.inquiry.mapper.InquiryMapper">
-
 	<resultMap type="com.third.prj.inquiry.service.InquiryVO" id="inquiryResultMap">
 		<id property="inNo" column="in_no" />
 		<result property="title" column="title" />
@@ -11,6 +10,39 @@
 		<result property="uId" column="u_id" />
 	</resultMap>
 
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM INQUIRY
+		WHERE
+		<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
+				OR U_ID LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
+	
+	<select id="manaerInquiryList" resultType="com.third.prj.inquiry.service.InquiryVO">
+		<![CDATA[
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+		FROM
+			(
+			SELECT ROWNUM RN, A.*
+			FROM (
+			SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+			FROM INQUIRY
+			WHERE
+			]]>
+			<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
+				OR U_ID LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+			<![CDATA[
+			ORDER BY IN_NO )A)
+		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		]]>
+	</select>
+	
 	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
 		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
 		FROM INQUIRY
@@ -23,16 +55,6 @@
 		WHERE IN_NO=#{inNo}
 	</select>
 	
-	<select id="inquirySearch" resultType="com.third.prj.inquiry.service.InquiryVO" parameterType="String">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
-		FROM INQUIRY
-		WHERE
-			<if test="key == '전체'">TITLE LIKE '%'||#{val}||'%' 
-									OR U_ID LIKE '%'||#{val}||'%'</if>
-			<if test="key == '제목'">TITLE LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">U_ID LIKE '%'||#{val}||'%'</if>
-		ORDER BY INDT DESC
-	</select>
 
 	<!-- 1:1문의 -->
 	<insert id="inquiryInsert" parameterType="com.third.prj.inquiry.service.InquiryVO">
@@ -65,5 +87,24 @@
 		DELETE FROM INQUIRY 
 		WHERE IN_NO = #{inNo}
 	</delete>
+	
+	<select id="getList"
+		resultType="com.third.prj.inquiry.service.InquiryVO">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT * 
+	          			FROM INQUIRY 
+	          			ORDER BY IN_NO DESC ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<!-- 검색조건에 맞춰서 total변경 -->
+	<!-- <select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL FROM INQUIRY 
+	</select> -->
 	
 </mapper>

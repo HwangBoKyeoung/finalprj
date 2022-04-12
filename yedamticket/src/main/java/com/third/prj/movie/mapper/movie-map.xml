@@ -1,14 +1,92 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.third.prj.movie.mapper.MovieMapper">
 
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
+		<id property="mvNo" column="mv_no" />
+		<result property="name" column="name" />
+		<result property="genre" column="genre" />
+		<result property="startDate" column="startDate" />
+		<result property="director" column="director" />
+		<result property="rating" column="rating" />
+		<result property="distributor" column="distributor" />
+		<result property="country" column="country" />
+		<result property="runtime" column="runtime" />
+		<result property="content" column="content" />
+		<result property="CId" column="c_id" />
+		<result property="actor" column="actor" />
+		<result property="fileCd" column="file_cd" />
+		<result property="docId" column="docId" />
+		<result property="renames" column="renames"/>
+		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
+	</resultMap>
 	
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="perFormanceMap">
+		<result property="name" column="name"/>
+		<result property="content" column="content"/>
+		<result property="actor" column="actor"/>
+	</resultMap>
 
 	<!-- 프로시저 -->
 	<resultMap type="hashmap" id="procedureCall"/>
 	
-	<update id="procedureCall" statementType="CALLABLE">
+	<select id="mvSelect" resultType="com.third.prj.movie.service.MovieVO">
+		SELECT 	MV_NO,NAME,GENRE,STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY,RUNTIME,CONTENT,C_ID,ACTOR,FILE_CD,DOCID
+		FROM MOVIE
+		WHERE MV_NO = #{mvNo}
+	</select>
+	
+	<select id="mvListPaging" resultType="com.third.prj.movie.service.MovieVO">
+	<![CDATA[
+		SELECT MV_NO,NAME,GENRE,RATING,DIRECTOR
+		FROM 
+			(
+			SELECT ROWNUM RN,A.* 
+			FROM (
+			SELECT 
+				MV_NO,NAME,GENRE,RATING,DIRECTOR
+			FROM
+				MOVIE
+			WHERE
+			]]>
+			<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+				OR GENRE LIKE '%'||#{searchName}||'%'
+				OR RATING LIKE '%'||#{searchName}||'%'
+				OR DIRECTOR LIKE '%'||#{searchName}||'%')</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+			<![CDATA[
+			ORDER BY MV_NO DESC )A)
+			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+			]]>	
+	</select>
+	
+	
+	<!-- 황규복 -->
+	<!-- <resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
+		<id property="mvNo" column="mv_no"/>
+		<result property="name" column="name"/>
+		<result property="content" column="content"/>
+		<result property="actor" column="actor"/>
+	</resultMap> -->
+
+	<resultMap type="com.third.prj.movie.service.MovieViewVO"
+		id="movieViewMap">
+		<result property="mvReservNo" column="MV_RESERV_NO" />
+		<result property="name" column="NAME" />
+		<result property="payDt" column="PAYDT" />
+		<result property="pay" column="PAY" />
+		<result property="charge" column="CHARGE" />
+		<result property="point" column="POINT" />
+		<result property="buyCtntCd" column="BUY_CTNT_CD" />
+		<result property="Uid" column="U_ID" />
+	</resultMap>
+
+
+<update id="procedureCall" statementType="CALLABLE">
 	{CALL movie_pro(#{vm_vno, mode=IN, jdbcType=INTEGER, javaType=INT},
 	                #{mv_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_genre, mode=IN, jdbcType=VARCHAR, javaType=STRING},
@@ -16,29 +94,12 @@
 	                #{mv_rating, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_country, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_cid, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_iname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
-	<!-- 황규복 -->
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap">
-		<id property="mvNo" column="mv_no"/>
-		<result property="name" column="name"/>
-		<result property="genre" column="genre"/>
-		<result property="startDate" column="startDate"/>
-		<result property="director" column="director"/>
-		<result property="rating" column="rating"/>
-		<result property="distibutor" column="distibutor"/>
-		<result property="country" column="country"/>
-		<result property="runtime" column="runtime"/>
-		<result property="content" column="content"/>
-		<result property="CId" column="c_id"/>
-		<result property="actor" column="actor"/>
-		<result property="fileCd" column="file_cd"/>
-		<result property="docId" column="docId"/>
-	</resultMap>
 	
 	<!-- 페이징 
 	<select id="getListWithPaging" resultMap="movieResultMap">
@@ -56,26 +117,107 @@
 			where rn > (#{pageNum}-1)*#{amount}
 			]]>
 	</select>-->
+	
 	<!-- 영화상영예정작 -->
 	<select id="mList" resultMap="movieResultMap">
 		SELECT * FROM MOVIE
         WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
         AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
 	</select>
+	
 	<!-- 영화리스트 -->
 	<select id="movieList" resultMap="movieResultMap">
-		SELECT * FROM MOVIE
-		WHERE STARTDATE 
-		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd') 
-		AND TO_CHAR(SYSDATE,'yyyyMMdd')
+		SELECT * 
+		FROM MOVIE
+		WHERE
+		STARTDATE
+		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
+		AND
+		TO_CHAR(SYSDATE,'yyyyMMdd')
 	</select>
 	<!-- 영화상세 -->
 	<select id="movieDetail" resultMap="movieResultMap">
-		SELECT * 
-		FROM MOVIE 
-		WHERE NAME=#{name} 
+		SELECT *
+		FROM MOVIE
+		WHERE
+		NAME=#{name}
 		AND STARTDATE=#{startDate}
 	</select>
+
+	<select id="mvBuyList" resultMap="movieViewMap">
+		SELECT *
+		FROM MOVIEVIEW
+		WHERE
+		BUY_CTNT_CD = 'mv'
+		AND U_ID = #{Uid}
+
+	</select>
+
+	<select id="mvBuyList2" resultMap="movieViewMap">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.* 
+	    		FROM (  SELECT *
+	FROM MOVIEVIEW
+	WHERE BUY_CTNT_CD = 'mv'
+	AND U_ID = #{Uid} ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY PAYDT DESC
+		]]>
+	</select>
+
+
+	<select id="mvBuyTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM
+		( SELECT *
+		FROM (
+		SELECT ROWNUM RN ,
+		A.*
+		FROM ( SELECT *
+		FROM MOVIEVIEW
+		WHERE BUY_CTNT_CD = 'mv'
+		AND U_ID = #{Uid} ) A ))
+
+	</select>
+
+	<insert id="movieInsert">
+		<selectKey keyProperty="mvNo" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO
+			FROM MOVIE
+		</selectKey>
+		INSERT INTO MOVIE VALUES(#{mvNo},#{name},#{genre},
+		to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{cId},#{actor},#{fileCd},#{docId},#{renames})
+	</insert>
+
+	<select id="searchAll" resultMap="movieResultMap">
+		select name, actor, content
+		FROM MOVIE 
+		WHERE NAME LIKE '%'||#{searchName}||'%' or actor like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+		UNION
+		select name, actor, content
+		FROM PERFORMANCE 
+		where name like '%'||#{searchName}||'%' or actor like '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+	</select>
+	
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM MOVIE
+		WHERE
+		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+				OR GENRE LIKE '%'||#{searchName}||'%'
+				OR RATING LIKE '%'||#{searchName}||'%'
+				OR DIRECTOR LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
+
 	<!--결제페이지로갈 영화상세 -->
 	<select id="mDetail" resultMap="movieResultMap">
 		SELECT * 
@@ -83,4 +225,5 @@
 		WHERE DOCID=#{docId} 
 		
 	</select>
+
 </mapper>

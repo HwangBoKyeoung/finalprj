@@ -20,4 +20,6 @@ public interface NoticeMapper {
 	// 전체 게시글수
 	public int getTotal(CriteriaVO cri);
 	
+	
+	
 }
