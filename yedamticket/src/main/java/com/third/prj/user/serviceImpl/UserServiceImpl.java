@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointVO;
 import com.third.prj.user.mapper.UserMapper;
@@ -125,42 +126,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int getMTotal(UserCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.getMTotal(cri);
 	}
 
 	@Override
 	public List<PerformanceVO> pfRList(UserCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.pfRList(cri);
 	}
 
 	@Override
 	public int getFTotal(UserCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.getFTotal(cri);
 	}
 
 	@Override
 	public List<PointVO> pointBuyList2(PointCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.pointBuyList2(cri);
 	}
 
 	@Override
 	public int pointBuyTotal(PointCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.pointBuyTotal(cri);
 	}
 
 	@Override
 	public UserPointViewVo userPoint(UserPointViewVo vo) {
-		// TODO Auto-generated method stub
 		return mapper.userPoint(vo);
 	}
 
 	public int getTotal(CriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
 	
@@ -170,8 +164,22 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserVO> userList() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int reservChk(UserVO userVO) {
+		return mapper.reservChk(userVO);
+	}
+
+	@Override
+	public List<PerformanceReservationVO> getprList(UserCriteriaVO cri) {
+		return mapper.getprList(cri);
+	}
+
+	@Override
+	public List<PerformanceReservationVO> prList(UserCriteriaVO cri) {
+		return mapper.prList(cri);
 	}
 
 }

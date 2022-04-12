@@ -197,7 +197,7 @@
 	
 	// id가 비어있을 때 중복확인 버튼 비활성화
 	function idbtnC(){
-		if($('#Uid').val().length < 1){
+		if($('#UId').val().length < 1){
 			$('#idChk').attr("disabled", true)
 		}else{
 			$('#idChk').attr("disabled", false)

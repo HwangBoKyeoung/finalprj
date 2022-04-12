@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!doctype html>
 <html>
@@ -7,8 +6,8 @@
 <head>
 <title>Sidebar 02</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <style>
 
@@ -37,7 +36,6 @@
 						<div class="icon">
 							<span class="icon-paper-plane"></span>
 						</div>
-
 					</div>
 				</div>
 			</div>
@@ -102,30 +100,43 @@
 			</div>
 			<br>
 			<br>
-			<span>티켓거래내역</span>
-			<button class="btn btn-primary btn-sm">더보기</button>
+			<form action="reservedticket_1.do" method="POST">
+			<input type="hidden" id="name" name="name">
+			<input type="hidden" id="PReservNo" name="PReservNo">
+			<input type="hidden" id="frDt" name="frDt">
+			<input type="hidden" id="seatNo" name="seatNo">
+			<input type="hidden" id="loc" name="loc">
+			<input type="hidden" id="price" name="price">
+			<span>결제대기티켓</span>
 			<div class="cols-12">
 				<table class="table table-sm">		
 					<thead >
 						<tr>
+							<th scope="col">공연제목</th>
 							<th scope="col">예매번호</th>
-							<th scope="col">예매일</th>
-							<th scope="col">영화명</th>
-							<th scope="col">관람일</th>
-							<th scope="col">티켓상태</th>
+							<th scope="col">공연일자</th>
+							<th scope="col">좌석번호</th>
+							<th scope="col">좌석구역</th>
+							<th scope="col">가격</th>
+							<th scope="col">결제</th>
 						</tr>
 					</thead>
 					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>2022.02.20</td>
-							<td>스파이더맨</td>
-							<td>2022.02.22</td>
-							<td>Y</td>
-						</tr>
+						<c:forEach items="${prList}" var="pr" begin="0" end="2">
+								<tr>
+									<td id="Lname" scope="row">${pr.name}</td>
+									<td id="LPReservNo" >${pr.PReservNo}</td>
+									<td id="LfrDt" >${pr.frDt}</td>
+									<td id="LseatNo" >${pr.seatNo}</td>
+									<td id="Lloc">${pr.loc}</td>
+									<td id="Lprice">${pr.price}</td>
+									<td><button class="btn btn-primary" onclick="selectedFnc();">결제</button></td>
+								</tr>
+						</c:forEach>
 					</tbody>
 				</table>
 			</div>
+			</form>
 		</div>
 	</div>
 
@@ -135,6 +146,21 @@
 			$(this).toggleClass('on').siblings().removeClass('on');
 			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
 		});
+		function selectedFnc(){
+		var Lname = $(event.target).parent().parent().children().eq(0).text();
+		var LPReservNo = $(event.target).parent().parent().children().eq(1).text();
+		var LfrDt = $(event.target).parent().parent().children().eq(2).text();
+		var LseatNo = $(event.target).parent().parent().children().eq(3).text();
+		var Lloc = $(event.target).parent().parent().children().eq(4).text();
+		var Lprice = $(event.target).parent().parent().children().eq(5).text();
+		
+		$("#name").val(Lname)
+		$("#PReservNo").val(LPReservNo)
+		$("#frDt").val(LfrDt)
+		$("#seatNo").val(LseatNo)
+		$("#loc").val(Lloc)
+		$("#price").val(Lprice)
+		}
 	</script>
 
 

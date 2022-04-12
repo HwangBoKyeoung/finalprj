@@ -9,6 +9,7 @@ import com.third.prj.performancereservation.mapper.PerformanceReservationMapper;
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
+import com.third.prj.user.service.UserCriteriaVO;
 
 @Repository("performanceReservationDao")
 public class PerformanceReservationServiceImpl implements PerformanceReservationService{
@@ -24,6 +25,11 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 	@Override
 	public int cancelReserv(PerformanceReservationVO performanceReservationVO) {
 		return mapper.cancelReserv(performanceReservationVO);
+	}
+
+	@Override
+	public int ticketReserv(PerformanceReservationVO performanceReservationVO) {
+		return mapper.ticketReserv(performanceReservationVO);
 	}
 
 	@Override
@@ -43,5 +49,8 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		// TODO Auto-generated method stub
 		return mapper.userTicket(performancereservationVO);
 	}
+
+	
+
 
 }

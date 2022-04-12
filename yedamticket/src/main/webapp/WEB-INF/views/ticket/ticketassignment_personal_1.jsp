@@ -21,7 +21,7 @@
 				<p class="card-text">공연명 : ${name }</p>
 				<input id="name" type="hidden" name="name">
 				
-				<p class="card-text">양도할 아이디 : <input name="Uid" id="Uid" type="text">
+				<p class="card-text">양도할 아이디 : <input name="RId" id="RId" type="text">
 				<button type="button" class="idChk" id="idChk" value="N" onclick="fn_idChk(); ">중복체크</button>
 				</p>
 				
@@ -76,7 +76,7 @@
 			type: "post",
 			dataType: "json",
 			data: {
-				"Uid": $("#Uid").val()
+				"UId": $("#RId").val()
 			},
 			success: function(data) {
 				if (data == 1) {
@@ -89,7 +89,7 @@
 						type: "post",
 						dataType: "text",
 						data: {
-							"Uid": $("#Uid").val()
+							"UId": $("#RId").val()
 						},
 						success: function(data) {
 							console.log(data)
@@ -114,7 +114,7 @@
 		type: "post",
 		dataType: "text",
 		data: {
-			"Uid": '${sessionId}'
+			"UId": '${sessionId}'
 		},
 		success: function(data) {
 			console.log(data)

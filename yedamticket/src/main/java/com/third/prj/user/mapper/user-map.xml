@@ -8,38 +8,29 @@
 		<collection property="movieReservVO" resultMap="MovieReservMap" />
 	</resultMap>
 
-	<resultMap
-		type="com.third.prj.moviereservation.service.MovieReservVO"
-		id="MovieReservMap">
-
+	<resultMap type="com.third.prj.moviereservation.service.MovieReservVO" id="MovieReservMap">
 		<result column="MV_RESERV_NO" property="mvReservNo" />
 		<result column="RESERVDT" property="reservDt" />
 		<result column="SEAT_NAME" property="seatName" />
 		<result column="DOCID" property="docId" />
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 	</resultMap>
-
-	<resultMap
-		type="com.third.prj.performanceschedule.service.PerformanceScheduleVO"
-		id="pfScheduleMap">
+ 
+	<resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pfScheduleMap">
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
 	
-	<resultMap
-		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
-		id="pfReservMap">
+	<resultMap type="com.third.prj.performancereservation.service.PerformanceReservationVO" id="pfReservMap">
 		<result column="P_RESERV_NO" property="PReservNo" />
 		<result column="RESERVE_DTTM" property="reserveDttm" />
 		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
 	
-	<resultMap
-		type="com.third.prj.performance.service.PerformanceVO"
-		id="performanceMap">
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="performanceMap">
 		<result column="NAME" property="name" />
 		<collection property="performanceReservationVO"
 			resultMap="pfReservMap"></collection>
@@ -48,22 +39,16 @@
 	</resultMap>
 
 
-	<resultMap type="com.third.prj.user.service.UserPointViewVo"
-		id="userPointMap">
+	<resultMap type="com.third.prj.user.service.UserPointViewVo" id="userPointMap">
 		<result property="charge" column="CHARGE" />
 		<result property="chargeDt" column="CHARGEDT" />
-		<result property="Uid" column="U_ID" />
+		<result property="UId" column="U_ID" />
 		<result property="point" column="POINT" />
 	</resultMap>
-
-
 	
 	<resultMap type="hashmap" id="procedureCall"/>
 
-
-
-	<insert id="userInsert"
-		parameterType="com.third.prj.user.service.UserVO">
+	<insert id="userInsert" parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO users(name
 		, u_id
 		, pwd
@@ -73,7 +58,7 @@
 		,
 		birthdt)
 		VALUES(#{name}
-		, #{Uid}
+		, #{UId}
 		, #{pwd}
 		, #{email}
 		, #{addr}
@@ -85,15 +70,19 @@
 	<select id="idChk" resultType="int">
 		SELECT COUNT(*)
 		FROM users
-		WHERE
-		u_id = #{UId}
+		WHERE u_id = #{UId}
 	</select>
 
-	<select id="userSelect"
-		resultType="com.third.prj.user.service.UserVO">
+	<select id="reservChk" resultType="int">
+		SELECT COUNT(*)
+		FROM   performance_reservation
+		WHERE  r_id = #{UId}
+	</select>
+
+	<select id="userSelect" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</select>
 <!-- 황보경 -->
@@ -101,11 +90,10 @@
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select> -->
 
-	<resultMap type="com.third.prj.user.service.UserVO"
-		id="userMap">
+	<resultMap type="com.third.prj.user.service.UserVO" id="userMap">
 		<id column="u_id" property="UId" />
 		<result column="pwd" property="pwd" />
 		<result column="name" property="name" />
@@ -149,9 +137,7 @@
 		]]>
 	</select>
 
-	<select id="getUser"
-		parameterType="com.third.prj.user.service.UserVO"
-		resultType="com.third.prj.user.service.UserVO">
+	<select id="getUser" parameterType="com.third.prj.user.service.UserVO" resultType="com.third.prj.user.service.UserVO">
 		SELECT U_ID
 		, {noop}PWD
 		, ROLE
@@ -165,8 +151,7 @@
 		WHERE EMAIL = #{email}
 	</select>
 
-	<insert id="kakaoInsert"
-		parameterType="com.third.prj.user.service.UserVO">
+	<insert id="kakaoInsert" parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
 		VALUES
 		(#{name}, #{UId}, #{email} , #{loginCd} )
@@ -174,8 +159,7 @@
 	</insert>
 
 
-	<update id="userUpdate"
-		parameterType="com.third.prj.user.service.UserVO">
+	<update id="userUpdate" parameterType="com.third.prj.user.service.UserVO">
 		UPDATE USERS
 		<set>
 			<if test="pwd != null"> PWD = #{pwd},</if>
@@ -183,11 +167,10 @@
 			<if test="addr != null"> ADDR = #{addr},</if>
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</update>
 
-	<delete id="userDelete"
-		parameterType="com.third.prj.user.service.UserVO">
+	<delete id="userDelete" parameterType="com.third.prj.user.service.UserVO">
 		DELETE
 		FROM USERS
 		WHERE U_ID = #{UId}
@@ -213,8 +196,8 @@
 		point = (SELECT point
 		FROM users
 		WHERE u_id
-		= #{Uid}) + #{point}
-		WHERE u_id = #{Uid}
+		= #{UId}) + #{point}
+		WHERE u_id = #{UId}
 	</update> -->
 
 <!-- 황보경 -->
@@ -222,13 +205,13 @@
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM users
-		WHERE u_id = #{Uid}
+		WHERE u_id = #{UId}
 	</select> -->
 
 	<select id="pointBuyList" resultMap="userPointMap">
 		select *
 		from userPointView
-		where u_id = #{Uid}
+		where u_id = #{UId}
 	</select>
 
 	<select id="mvRList" resultMap="MovieReservMap">
@@ -242,10 +225,29 @@
 				FROM
 				MOVIE_RESERVATION R JOIN MOVIE M
 				ON R.DOCID = M.DOCID
-				WHERE U_ID = #{Uid} ) A ) 
+				WHERE U_ID = #{UId} ) A ) 
 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		ORDER BY RESERVDT DESC
 		]]>
+	</select>
+
+	<select id="getprList" resultType="com.third.prj.performancereservation.service.PerformanceReservationViewVO">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT * 
+	          			FROM usersticket 
+	          			ORDER BY IN_NO DESC ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+
+	<select id="prList" resultType="com.third.prj.performancereservation.service.PerformanceReservationViewVO">
+		SELECT *
+		FROM   usersticket
+		WHERE  r_id = #{UId}
 	</select>
 
 	<!-- 검색조건에 맞춰서 total변경 -->
@@ -261,12 +263,11 @@
 		FROM MOVIE_RESERVATION
 		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid} ) A ) )
+		WHERE U_ID = #{UId} ) A ) )
 	</select>
 
 
-	<select id="pfRList"
-		resultMap="performanceMap">
+	<select id="pfRList" resultMap="performanceMap">
       	<![CDATA[
 			SELECT * 
 			FROM (
@@ -279,14 +280,13 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID = #{Uid} ) A ) 	 
+		AND X.U_ID = #{UId} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY RESERVE_DTTM DESC
 		]]>
 	</select>
 	
-	<select id="userSelectOne"
-	      resultType="com.third.prj.user.service.UserVO">
+	<select id="userSelectOne" resultType="com.third.prj.user.service.UserVO">
 	      SELECT *
 	      FROM USERS
       WHERE U_ID = #{UId}
@@ -300,7 +300,7 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID = #{Uid} ) A ) 	 
+		AND X.U_ID = #{UId} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY RESERVE_DTTM DESC
 		]]>
@@ -320,12 +320,11 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID =#{Uid} ) A ) )
+		AND X.U_ID =#{UId} ) A ) )
 		
 	</select>
 
-	<select id="pointBuyList2"
-		resultMap="userPointMap">
+	<select id="pointBuyList2" resultMap="userPointMap">
       	<![CDATA[
 			SELECT * 
 			FROM (
@@ -333,7 +332,7 @@
 								A.*
 	    		FROM (  select *
 		from userPointView
-		where u_id = #{Uid} ) A )  
+		where u_id = #{UId} ) A )  
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY CHARGEDT DESC
 		]]> 
@@ -348,22 +347,25 @@
 								A.*
 	    		FROM (  select *
 		from userPointView
-		where u_id = #{Uid} ) A ) )
+		where u_id = #{UId} ) A ) )
 	</select>
 	
 	<select id="userPoint" resultMap="userPointMap">
 	SELECT SUM(CHARGE)-SUM(PAY) AS POINT
 	FROM POINT
-	WHERE U_ID=#{Uid}
+	WHERE U_ID=#{UId}
 	</select>
+	
+	
+	
 	
 <!-- 황보경 -->
 	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
 		UPDATE users
 		SET    point = (SELECT point
 		             	FROM   users
-		             	WHERE  u_id = #{Uid}) + #{point}
-		WHERE  u_id = #{Uid}
+		             	WHERE  u_id = #{UId}) + #{point}
+		WHERE  u_id = #{UId}
 	</update> -->
 	
 	<update id="userCharge" statementType="CALLABLE" >
