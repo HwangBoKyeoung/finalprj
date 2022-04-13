@@ -24,4 +24,8 @@ public interface PerformanceReservationService {
 	
 	// 자유시장으로 올리기
 	int ticketToMarket(int PReservNo);
+	
+	// 자유시장 리스트
+	List<PerformanceReservationViewVO> TicketMarket(PerformanceReservationViewVO performanceReservationViewVO);
+	
 }

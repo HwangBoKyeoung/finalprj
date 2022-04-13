@@ -96,4 +96,7 @@ public interface UserService {
 	
 	// 개인 양수
 	int reservedBuy(Map<String, Object> map);
+	
+	// 자유시장 구매
+	int marketBuy(Map<String, Object> map);
 }

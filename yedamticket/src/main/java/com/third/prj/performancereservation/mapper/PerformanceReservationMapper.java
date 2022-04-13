@@ -7,8 +7,8 @@ import com.third.prj.performancereservation.service.PerformanceReservationViewVO
 import com.third.prj.user.service.UserCriteriaVO;
 
 public interface PerformanceReservationMapper {
+	
 	// 보유 티켓
-
 	List<PerformanceReservationViewVO> userTicket(PerformanceReservationViewVO performancereservationviewVO);
 	
 	// 예약상태 취소
@@ -28,5 +28,6 @@ public interface PerformanceReservationMapper {
 	// 자유시장으로 올리기
 	int ticketToMarket(int PReservNo);	
 	
-	
+	// 자유시장 리스트
+	List<PerformanceReservationViewVO> TicketMarket(PerformanceReservationViewVO performanceReservationViewVO);
 }

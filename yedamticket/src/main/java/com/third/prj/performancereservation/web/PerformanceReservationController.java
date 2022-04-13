@@ -1,6 +1,7 @@
 package com.third.prj.performancereservation.web;
 
 import java.time.LocalDate;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -26,6 +27,64 @@ public class PerformanceReservationController {
 	@Autowired
 	private UserService userDao;
 
+	@RequestMapping("/ticketmarket_1.do")
+	public String ticketMarket_1(PerformanceReservationViewVO performancereservationViewVO, Model model) {
+		List<PerformanceReservationViewVO> tic = performancereservationDao.TicketMarket(performancereservationViewVO);
+		model.addAttribute("list", tic);
+		
+		return "ticket/ticketmarket_1";
+	}
+	
+	@RequestMapping("/ticketmarket_2.do")
+	public String ticketMarket_2(HttpServletRequest httpServletRequest, Model model) {
+		String name = httpServletRequest.getParameter("name");
+		String pReservNo = httpServletRequest.getParameter("PReservNo");
+		String date = httpServletRequest.getParameter("date");
+		String seat = httpServletRequest.getParameter("seatNo");
+		String price = httpServletRequest.getParameter("price");
+		int price2 = Integer.parseInt(price);
+		price2 *= 1.1;
+		String loc = httpServletRequest.getParameter("loc");
+		String buyerAddr = httpServletRequest.getParameter("buyerAddr");
+		String ownerAddr = httpServletRequest.getParameter("ownerAddr");
+		String UId = httpServletRequest.getParameter("UId");
+		
+		model.addAttribute("name", name);
+		model.addAttribute("PReservNo", pReservNo);
+		model.addAttribute("date", date);
+		model.addAttribute("seatNo", seat);
+		model.addAttribute("price", price2);
+		model.addAttribute("loc", loc);
+		model.addAttribute("buyerAddr", buyerAddr);
+		model.addAttribute("ownerAddr", ownerAddr);
+		model.addAttribute("UId", UId);
+		return "ticket/ticketmarket_2";
+	}
+	
+	@RequestMapping("/ticketmarket_3.do")
+	public String ticketMarket_3(HttpServletRequest httpServletRequest, Model model) {
+		String name = httpServletRequest.getParameter("name");
+		String pReservNo = httpServletRequest.getParameter("PReservNo");
+		String date = httpServletRequest.getParameter("date");
+		String seat = httpServletRequest.getParameter("seatNo");
+		String price = httpServletRequest.getParameter("price");
+		String loc = httpServletRequest.getParameter("loc");
+		String buyerAddr = httpServletRequest.getParameter("buyerAddr");
+		String ownerAddr = httpServletRequest.getParameter("ownerAddr");
+		String UId = httpServletRequest.getParameter("UId");
+		
+		model.addAttribute("name", name);
+		model.addAttribute("PReservNo", pReservNo);
+		model.addAttribute("date", date);
+		model.addAttribute("seatNo", seat);
+		model.addAttribute("price", price);
+		model.addAttribute("loc", loc);
+		model.addAttribute("buyerAddr", buyerAddr);
+		model.addAttribute("ownerAddr", ownerAddr);
+		model.addAttribute("UId", UId);
+		return "ticket/ticketmarket_3";
+	}
+	
 	@RequestMapping("/ticketassignment_1.do")
 	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session,
 			Model model) {
@@ -175,21 +234,30 @@ public class PerformanceReservationController {
 	}
 
 	@RequestMapping("/ticketassignment_market_3.do")
-	public String TicketAssignment_Market_3(HttpServletRequest httpServletRequest, Model model, HttpSession session) {
+	public String TicketAssignment_Market_3(HttpServletRequest httpServletRequest, Model model, HttpSession session, UserVO userVO) {
+		String name = httpServletRequest.getParameter("name");
 		String PReservNo = httpServletRequest.getParameter("PReservNo");
-		String price = httpServletRequest.getParameter("price");
+		String frDt = httpServletRequest.getParameter("frDt");
+		String seatNo = httpServletRequest.getParameter("seatNo");
 		String loc = httpServletRequest.getParameter("loc");
-		String ownerAddr = httpServletRequest.getParameter("ownerAddr");
+		String price = httpServletRequest.getParameter("price");
+		String UId = httpServletRequest.getParameter("UId");
+		int price2 = Integer.parseInt(price);
+		price2 *= 1.1;
+
 		String sessionId = (String) session.getAttribute("sessionId");
-		int PReservNo2 = Integer.parseInt(PReservNo);
 
+		userVO = userDao.getUser2(sessionId);
+		int point = userVO.getPoint();
+
+		model.addAttribute("point", point);
+		model.addAttribute("name", name);
 		model.addAttribute("PReservNo", PReservNo);
-		model.addAttribute("price", price);
+		model.addAttribute("frDt", frDt);
+		model.addAttribute("seatNo", seatNo);
 		model.addAttribute("loc", loc);
-		model.addAttribute("ownerAddr", ownerAddr);
-		model.addAttribute("sessionId", sessionId);
-
-		performancereservationDao.ticketToMarket(PReservNo2);
+		model.addAttribute("price", price2);
+		model.addAttribute("UId", UId);
 
 		return "ticket/ticketassignment_market_3";
 	}
@@ -207,6 +275,26 @@ public class PerformanceReservationController {
 		return "ticket/ticketassignment_error";
 	}
 
+	@RequestMapping("/ticketmarket_4.do")
+	public String TicketMarket_4(HttpServletRequest httpServletRequest, Model model, HttpSession session, Map<String, Object> map) {
+		String PReservNo = httpServletRequest.getParameter("PReservNo");
+		String point = httpServletRequest.getParameter("point");
+		String price = httpServletRequest.getParameter("price");
+		String UId = httpServletRequest.getParameter("UId");
+		String sessionId = (String) session.getAttribute("sessionId");
+
+		int price2 = Integer.parseInt(price);
+		int PReservNo2 = Integer.parseInt(PReservNo);
+
+		map.put("p1", sessionId);
+		map.put("p2", UId);
+		map.put("p3", price2);
+		map.put("p4", PReservNo2);
+
+		userDao.reservedBuy(map);
+		return "redirect:userPage.do";
+	}
+	
 	@RequestMapping("/reservedticket_1.do")
 	public String ReservedTicket_1(HttpServletRequest httpServletRequest, Model model, UserVO userVO,
 			HttpSession session) {
@@ -221,8 +309,6 @@ public class PerformanceReservationController {
 		price2 *= 1.1;
 
 		String sessionId = (String) session.getAttribute("sessionId");
-		System.out.println("sessionId=========================");
-		System.out.println(UId);
 
 		userVO = userDao.getUser2(sessionId);
 		int point = userVO.getPoint();

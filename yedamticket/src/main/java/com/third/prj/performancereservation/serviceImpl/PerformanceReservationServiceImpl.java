@@ -55,7 +55,8 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		return mapper.ticketToMarket(PReservNo);
 	}
 
-	
-
-
+	@Override
+	public List<PerformanceReservationViewVO> TicketMarket(PerformanceReservationViewVO performanceReservationViewVO) {
+		return mapper.TicketMarket(performanceReservationViewVO);
+	}
 }

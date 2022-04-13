@@ -192,4 +192,9 @@ public class UserServiceImpl implements UserService {
 		return mapper.reservedBuy(map);
 	}
 
+	@Override
+	public int marketBuy(Map<String, Object> map) {
+		return mapper.marketBuy(map);
+	}
+
 }
