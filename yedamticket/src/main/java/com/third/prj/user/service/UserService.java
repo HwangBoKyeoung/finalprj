@@ -90,4 +90,10 @@ public interface UserService {
 	
 	// 양수 내역 리스트
 	public List<PerformanceReservationVO> prList(UserCriteriaVO cri);
+	
+	// 유저정보 불러오기
+	public UserVO getUser2(String Uid);
+	
+	// 개인 양수
+	int reservedBuy(Map<String, Object> map);
 }

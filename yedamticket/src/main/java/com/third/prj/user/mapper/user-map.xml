@@ -145,6 +145,11 @@
 		WHERE U_ID = #{UId}
 	</select>
 
+	<select id = "getUser2" parameterType="String" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM   users
+		WHERE  u_id = #{UId}
+	</select>
 
 	<select id="emailCheck" resultType="int">
 		SELECT COUNT(*) FROM USERS
@@ -374,7 +379,16 @@
 					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
 					)
 		}
-
+	</update>
+	
+	<update id="reservedBuy" statementType="CALLABLE" >
+		{CALL 
+		reservedBuy(#{p1, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+					#{p3, mode=IN, jdbcType=INTEGER, javaType=INT},
+					#{p4, mode=IN, jdbcType=INTEGER, javaType=INT}
+					)
+		}
 	</update>
 	
 	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">

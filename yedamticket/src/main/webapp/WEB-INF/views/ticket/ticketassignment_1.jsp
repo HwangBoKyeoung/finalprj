@@ -54,7 +54,7 @@ body {
  		<div id="widthslider" align="center">
 			<ul class="widthlist">
 				<c:forEach items="${prInfo }" var="pr">
-				<c:if test="${pr.status != 'W'}">
+				<c:if test="${pr.status == 'P'}">
 				<li class="widthitem">
 					<div class="card" style="width: 20rem;">
 					  <div class="card-body">
@@ -65,6 +65,25 @@ body {
 					    <p class="card-text">좌석구역 : ${pr.loc }</p>
 					    <p class="card-text">가  격 : ${pr.price }</p>
 					    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
+					  </div>
+					</div>
+				</li>
+				</c:if>
+				</c:forEach>
+				
+				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.status == 'F'}">
+				<li class="widthitem">
+					<div class="card" style="width: 20rem;">
+					  <div class="card-body" style="background-color : #add8e6">
+					    <p class="card-title" >공연 명 : ${pr.name }</p>
+					  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+					    <p class="card-text">공연일정 : ${pr.frDt }</p>
+					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+					    <p class="card-text">좌석구역 : ${pr.loc }</p>
+					    <p class="card-text">가  격 : ${pr.price }</p>
+					    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="자유시장에 올라가있는 티켓입니다!">선택</button>
+					    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
 					  </div>
 					</div>
 				</li>

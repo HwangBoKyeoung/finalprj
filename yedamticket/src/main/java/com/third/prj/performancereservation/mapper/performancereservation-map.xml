@@ -54,6 +54,12 @@
 		WHERE  p_reserv_no = #{PReservNo}
 	</update>
 
+	<update id="ticketToMarket" parameterType="int">
+		UPDATE performance_reservation
+		SET    status = 'F'
+		WHERE  p_reserv_no = #{PRservNo}
+	</update>
+
 	<!-- 황규복 -->
 	<insert id="pReservation" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">
 			INSERT INTO PERFORMANCE_RESERVATION

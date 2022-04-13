@@ -182,4 +182,14 @@ public class UserServiceImpl implements UserService {
 		return mapper.prList(cri);
 	}
 
+	@Override
+	public UserVO getUser2(String Uid) {
+		return mapper.getUser2(Uid);
+	}
+
+	@Override
+	public int reservedBuy(Map<String, Object> map) {
+		return mapper.reservedBuy(map);
+	}
+
 }

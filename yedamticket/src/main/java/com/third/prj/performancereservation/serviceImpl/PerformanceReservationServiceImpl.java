@@ -50,6 +50,11 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		return mapper.userTicket(performancereservationVO);
 	}
 
+	@Override
+	public int ticketToMarket(int PReservNo) {
+		return mapper.ticketToMarket(PReservNo);
+	}
+
 	
 
 

@@ -1,6 +1,7 @@
 package com.third.prj.performancereservation.web;
 
 import java.time.LocalDate;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -11,15 +12,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.third.prj.performancereservation.mapper.PerformanceReservationMapper;
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
+import com.third.prj.user.service.UserService;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class PerformanceReservationController {
 	@Autowired
 	private PerformanceReservationService performancereservationDao;
+
+	@Autowired
+	private UserService userDao;
 
 	@RequestMapping("/ticketassignment_1.do")
 	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session,
@@ -35,7 +40,6 @@ public class PerformanceReservationController {
 	@RequestMapping("/ticketassignment_cancel.do")
 	public String ticketCancel(PerformanceReservationVO performanceReservationVO,
 			@RequestParam("PReservNo2") int PReservNo2) {
-		System.out.println("===============================" + PReservNo2);
 		performanceReservationVO.setPReservNo(PReservNo2);
 		int i = performancereservationDao.cancelReserv(performanceReservationVO);
 		if (i != 0) {
@@ -43,7 +47,7 @@ public class PerformanceReservationController {
 		}
 		return "ticket/ticketassignment_error";
 	}
-
+	
 	@RequestMapping("/ticketassignment_error.do")
 	public String ticketAssignmentError() {
 		return "ticket/ticketassignment_error";
@@ -86,6 +90,24 @@ public class PerformanceReservationController {
 		return "ticket/ticketassignment_personal_1";
 	}
 
+	@RequestMapping("/ticketassignment_market_1.do")
+	public String TicketAssignment_Market_1(Model model, HttpServletRequest httpServletRequest) {
+		String name = httpServletRequest.getParameter("name");
+		String pReservNo = httpServletRequest.getParameter("PReservNo");
+		String date = httpServletRequest.getParameter("date");
+		String seat = httpServletRequest.getParameter("seatNo");
+		String price = httpServletRequest.getParameter("price");
+		String loc = httpServletRequest.getParameter("loc");
+
+		model.addAttribute("name", name);
+		model.addAttribute("PReservNo", pReservNo);
+		model.addAttribute("date", date);
+		model.addAttribute("seatNo", seat);
+		model.addAttribute("price", price);
+		model.addAttribute("loc", loc);
+		return "ticket/ticketassignment_market_1";
+	}
+
 	@RequestMapping("/ticketassignment_personal_2.do")
 	public String TicketAssignment_Personal_2(HttpServletRequest httpServletRequest, Model model, LocalDate now) {
 		String name = httpServletRequest.getParameter("name");
@@ -112,6 +134,28 @@ public class PerformanceReservationController {
 		return "ticket/ticketassignment_personal_2";
 	}
 
+	@RequestMapping("/ticketassignment_market_2.do")
+	public String TicketAssignment_Market_2(HttpServletRequest httpServletRequest, Model model, LocalDate now) {
+		String name = httpServletRequest.getParameter("name");
+		String pReservNo = httpServletRequest.getParameter("PReservNo");
+		String date = httpServletRequest.getParameter("date");
+		String today = httpServletRequest.getParameter("today");
+		String seat = httpServletRequest.getParameter("seatNo");
+		String price = httpServletRequest.getParameter("price");
+		String loc = httpServletRequest.getParameter("loc");
+		String ownerAddr = httpServletRequest.getParameter("ownerAddr");
+
+		model.addAttribute("name", name);
+		model.addAttribute("PReservNo", pReservNo);
+		model.addAttribute("date", date);
+		model.addAttribute("today", today);
+		model.addAttribute("seatNo", seat);
+		model.addAttribute("price", price);
+		model.addAttribute("loc", loc);
+		model.addAttribute("ownerAddr", ownerAddr);
+		return "ticket/ticketassignment_market_2";
+	}
+
 	@RequestMapping("/ticketassignment_personal_3.do")
 	public String TicketAssignment_Personal_3(HttpServletRequest httpServletRequest, Model model) {
 		String RId = httpServletRequest.getParameter("RId");
@@ -130,36 +174,90 @@ public class PerformanceReservationController {
 		return "ticket/ticketassignment_personal_3";
 	}
 
+	@RequestMapping("/ticketassignment_market_3.do")
+	public String TicketAssignment_Market_3(HttpServletRequest httpServletRequest, Model model, HttpSession session) {
+		String PReservNo = httpServletRequest.getParameter("PReservNo");
+		String price = httpServletRequest.getParameter("price");
+		String loc = httpServletRequest.getParameter("loc");
+		String ownerAddr = httpServletRequest.getParameter("ownerAddr");
+		String sessionId = (String) session.getAttribute("sessionId");
+		int PReservNo2 = Integer.parseInt(PReservNo);
+
+		model.addAttribute("PReservNo", PReservNo);
+		model.addAttribute("price", price);
+		model.addAttribute("loc", loc);
+		model.addAttribute("ownerAddr", ownerAddr);
+		model.addAttribute("sessionId", sessionId);
+
+		performancereservationDao.ticketToMarket(PReservNo2);
+
+		return "ticket/ticketassignment_market_3";
+	}
+
 	@RequestMapping("/ticketassignment_personal_4.do")
-	public String TicketAssignment_Personal_4(HttpServletRequest httpServletRequest, PerformanceReservationVO performanceReservationVO, Model model) {
+	public String TicketAssignment_Personal_4(HttpServletRequest httpServletRequest,
+			PerformanceReservationVO performanceReservationVO, Model model) {
 		String RId = httpServletRequest.getParameter("RId");
 		System.out.println(RId);
 		System.out.println("====================" + performanceReservationVO);
 		int i = performancereservationDao.ticketReserv(performanceReservationVO);
-		if(i!=0) {
+		if (i != 0) {
 			return "ticket/ticketassignment_personal_4";
 		}
 		return "ticket/ticketassignment_error";
 	}
-	
+
 	@RequestMapping("/reservedticket_1.do")
-	public String ReservedTicket_1(HttpServletRequest httpServletRequest, Model model) {
+	public String ReservedTicket_1(HttpServletRequest httpServletRequest, Model model, UserVO userVO,
+			HttpSession session) {
 		String name = httpServletRequest.getParameter("name");
 		String PReservNo = httpServletRequest.getParameter("PReservNo");
 		String frDt = httpServletRequest.getParameter("frDt");
 		String seatNo = httpServletRequest.getParameter("seatNo");
 		String loc = httpServletRequest.getParameter("loc");
 		String price = httpServletRequest.getParameter("price");
-		
+		String UId = httpServletRequest.getParameter("UId");
+		int price2 = Integer.parseInt(price);
+		price2 *= 1.1;
+
+		String sessionId = (String) session.getAttribute("sessionId");
+		System.out.println("sessionId=========================");
+		System.out.println(UId);
+
+		userVO = userDao.getUser2(sessionId);
+		int point = userVO.getPoint();
+
+		model.addAttribute("point", point);
 		model.addAttribute("name", name);
-		model.addAttribute("PReservNo",PReservNo);
+		model.addAttribute("PReservNo", PReservNo);
 		model.addAttribute("frDt", frDt);
 		model.addAttribute("seatNo", seatNo);
 		model.addAttribute("loc", loc);
-		model.addAttribute("price", price);
-		
+		model.addAttribute("price", price2);
+		model.addAttribute("UId", UId);
+
 		return "ticket/reservedticket_1";
 	}
-	
-	
+
+	@RequestMapping("/reservedticket_2.do")
+	public String ReservedTicket_2(HttpServletRequest httpServletRequest, Model model, HttpSession session,
+			Map<String, Object> map) {
+		String PReservNo = httpServletRequest.getParameter("PReservNo");
+		String point = httpServletRequest.getParameter("point");
+		String price = httpServletRequest.getParameter("price");
+		String UId = httpServletRequest.getParameter("UId");
+		String sessionId = (String) session.getAttribute("sessionId");
+
+		int price2 = Integer.parseInt(price);
+		int PReservNo2 = Integer.parseInt(PReservNo);
+
+		map.put("p1", sessionId);
+		map.put("p2", UId);
+		map.put("p3", price2);
+		map.put("p4", PReservNo2);
+
+		userDao.reservedBuy(map);
+		return "redirect:userPage.do";
+	}
+
 }

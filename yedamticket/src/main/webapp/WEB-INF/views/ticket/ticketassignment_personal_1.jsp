@@ -70,6 +70,12 @@
 	
 	// id 중복확인
 	function fn_idChk() {
+		var sessionid = '${sessionId}'
+			if($("#RId").val() == sessionid){
+				alert("자신에게 양도할 수 없습니다.");
+				return false;
+			}
+		
 		var chk = 0;
 		$.ajax({
 			url: "idChk",
@@ -103,8 +109,6 @@
 					alert("없는 아이디입니다!");
 					idCnum = 0;
 					$("#inpBtn").attr("disabled", true);
-				} else {
-					alert("아이디를 입력해주세요.");
 				}
 			}
 		})
