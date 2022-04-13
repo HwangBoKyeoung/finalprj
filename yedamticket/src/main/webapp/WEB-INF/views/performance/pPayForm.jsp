@@ -196,9 +196,19 @@ ${user }
     <div class="container">
         <div id="logo"><h1 class="logo"><a href='goBack();'>뒤로가기</a></h1>
           <div class="CTA">
-          <form action="moviePay.do" method="post">
-         		
-				<input type="hidden" id="pay" name="pay">
+          <form action="pPay.do" method="post">
+          		<!-- 구역 -->
+          		<input type="hidden" id="loc" name="loc" value="${re.loc }">
+          		<!-- 좌석이름 -->
+          		<input type="hidden" id="seatNo" name="seatNo" value="${re.seatNo }">
+          		<!-- 공연 스케쥴 넘버 -->
+          		<input type="hidden" id="PSchNo" name="PSchNo" value="${re.PSchNo }">
+          		<!--아이디 -->
+          		<input type="hidden" id="UId" name="UId" value="micol1234">
+         		<!--차감될금액-->
+				<input type="hidden" id="pay" name="pay" >
+				<!-- 영화인지 공연인지 코드 -->
+				<input type="hidden" id="buyCtntCd" name="buyCtntCd" value="pf">
 				<button type="submit" class="btn">결제하기</button>
 			</form>
             </div>

@@ -109,15 +109,12 @@ public class MovieController {
 		System.out.println(n);
 		//select key 사용 바꾸기
 		if (n != 0) {
-//			vo = movieReplyDao.selectReplyNo();
-			
 			System.out.println(Integer.toString(vo.getMvReNo()));
 			return movieReplyDao.movieReplyList(vo);
 		} else {
 			return null;
 		}
 	}
-
 	// 댓글삭제
 	@RequestMapping("/movieReplyDelete.do")
 	@ResponseBody
@@ -224,7 +221,7 @@ public class MovieController {
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
 		pointVO.setPayNo(vo.getMvReservNo());
-		pointVO.setUid(vo.getUId());
+		pointVO.setUId(vo.getUId());
 		pointDao.payInsert(pointVO);
 		return "home/home";
 	}

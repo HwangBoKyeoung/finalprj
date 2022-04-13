@@ -26,7 +26,8 @@ import com.third.prj.performancereservation.service.PerformanceReservationServic
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleService;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
-
+import com.third.prj.point.service.PointService;
+import com.third.prj.point.service.PointVO;
 import com.third.prj.user.service.UserService;
 import com.third.prj.user.service.UserVO;
 
@@ -53,6 +54,8 @@ public class PerformanceContorller {
 	private PerformanceScheduleService perSDao;
 	@Autowired
 	private UserService userDao;
+	@Autowired
+	private PointService pointDao;
 
 	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
@@ -89,7 +92,7 @@ public class PerformanceContorller {
 		return performanceReservationDao.searchSeatNo(prvo);
 	}
 	
-	//공연 결제
+	//공연 결제폼으로
 	@RequestMapping("/pReservation.do")
 	public String pReservation(Model model,PerformanceReservationVO prvo,UserVO uservo,PerformanceScheduleVO psvo) {
 		
@@ -97,6 +100,13 @@ public class PerformanceContorller {
 		model.addAttribute("re",prvo);
 		model.addAttribute("user",userDao.userSelectOne(uservo));
 		return "user/performance/pPayForm";
+	}
+	//공연 결제하기
+	@RequestMapping("/pPay.do")
+	public String pPay(PerformanceReservationVO vo,PointVO pointVO) {
+		performanceReservationDao.pReservation(vo);
+		pointDao.payInsert(pointVO);
+		return "home/home";
 	}
 	//지역별 공연리스트
 	@RequestMapping("/locPlist.do")
@@ -109,7 +119,6 @@ public class PerformanceContorller {
 	@RequestMapping("/companyPerforUpdateForm.do")
 	public String companyPerforUpdateForm(PerformanceVO vo, Model model) {
 		PerformanceImageVO ivo = new PerformanceImageVO();
-
 		vo = perDao.perforSelect(vo);
 		System.out.println("==================================" + vo.getPNo());
 		//vvo.setPNo(vo.getPNo());

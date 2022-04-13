@@ -213,6 +213,8 @@ ${user }
 				<input type="hidden" id="seatName" name="seatName" value="${re.seatName }">
 				<!-- 영화 가격 -->
 				<input type="hidden" id="pay" name="pay">
+				<!-- 영화인지 공연인지 코드 -->
+				<input type="hidden" id="buyCtntCd" name="buyCtntCd" value="mv">
 				<button type="submit" class="btn">결제하기</button>
 			</form>
             </div>

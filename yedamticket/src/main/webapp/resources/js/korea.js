@@ -4,8 +4,8 @@ window.onload = function() {
 
 //지도 그리기
 function drawMap(target) {
-    var width = 700; //지도의 넓이
-    var height = 700; //지도의 높이
+    var width = 600; //지도의 넓이
+    var height = 600; //지도의 높이
     var initialScale = 5500; //확대시킬 값
     var initialX = -11900; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
@@ -98,6 +98,14 @@ function drawMap(target) {
             data:{"addr":region},
             success:function(result){
                 console.log(result);
+				$('#locList').empty();
+				for(var i =0; i<result.length;i++){
+					let divName=document.createElement('div');
+					console.log(result[i].name);
+					divName.innerText=result[i].name+result[i].content;
+					locList.append(divName);
+				}
+				
             }
 
         });

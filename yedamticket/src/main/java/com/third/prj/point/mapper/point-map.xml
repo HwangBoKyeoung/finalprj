@@ -10,10 +10,10 @@
 					  BUY_CTNT_CD)
 	VALUES(			  
 					  SYSDATE,
-					  #{payNo},
+					  POINT_SEQ.NEXTVAL,
 					  #{UId},
 					  #{pay},
-					  'mv'
+					  #{buyCtntCd}
 					  )
 
 </insert>

@@ -51,7 +51,7 @@
 
 </style>
 
-<!--통통  <style>
+ <!-- <style>
 h1 {
   height: 130px;
 }
@@ -99,8 +99,8 @@ h1 span:nth-child(8) { animation-delay: .7s; }
                  0 50px 25px rgba(0, 0, 0, .2);
   }
 }
-</style>-->
-<style> 
+</style>
+ <style> 
 
 h1 {
   position: relative;
@@ -137,15 +137,15 @@ h1 {
 }
 
 
-</style>
+</style>-->
 </head>
 <body>
 	<nav class="navbar navbar-expand-lg nav-css-add">
 		<div class="container-fluid">
 			<div class="navbar-translate" id="titleLogo">
-				<!--  <a class="navbar-brand" href="home.do" title="Designed by 1석3조"
+				  <a class="navbar-brand" href="home.do" title="Designed by 1석3조"
 					data-placement="bottom"> <img width="200"
-					src="resources/users/img/logo8.png"></a>-->
+					src="resources/users/img/logo8.png"></a>
 					<!-- <h1>
 					  <span>y</span>
 					  <span>e</span>
@@ -160,7 +160,7 @@ h1 {
 					  <span>t</span>
 					</h1> -->
 					
-					<h1>YEDAM TICKET</h1>
+				<!--	<h1>YEDAM TICKET</h1>
 				<button class="navbar-toggler navbar-toggler" type="button"
 					data-toggle="collapse" data-target="#navigation"
 					aria-controls="navigation-index" aria-expanded="false"
@@ -168,7 +168,7 @@ h1 {
 					<span class="navbar-toggler-bar top-bar"></span> <span
 						class="navbar-toggler-bar middle-bar"></span> <span
 						class="navbar-toggler-bar bottom-bar"></span>
-				</button>
+				</button>-->
 			</div>
 
 			<div class="collapse navbar-collapse" id="navigation"
@@ -207,10 +207,7 @@ h1 {
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="./index.html"> <i
-								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
-
-							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
+							 <a class="dropdown-item" target="_blank" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 
 							</a> <a class="dropdown-item" 

@@ -97,6 +97,8 @@
 		<result property="trDt" column="TRDT"/>
 		<result property="time" column="TIME"/>
 		<result property="endTime" column="ENDTIME"/>
+		
+		
 	</resultMap>
 	<!-- performance resultMap -->
 	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
@@ -183,7 +185,7 @@
 		</if>
 		<!-- 날짜만 입력받은 경우 -->
 		<if test="frDt != null and frDt !=''">
-		AND PS.FRDT = #{frDt}
+		AND PS. BETWEEN #{starDate} AND #{endDate}
 		</if>
 		<!-- 날짜 + 이벤트 -->
 		<if test="name != null and name !=''" >
@@ -206,8 +208,16 @@
 			ON 
 			P.P_NO = PS.P_NO
 	        WHERE P.P_NO = #{PNo}
+	</select>	
+	<!-- 지역에 맞게 -->
+	<select id="locPlist" resultMap="pMap">
+		<![CDATA[  
+		SELECT * FROM PERFORMANCE
+		WHERE ADDR LIKE  '%'||#{addr}||'%' 
+		AND ROWNUM <6
+		]]>
 	</select>
-	
+	<!-- end 황규복ㄴ -->
 	<select id="pfBuyList" resultMap="performanceViewMap">
 		SELECT *
 		FROM PERFORMANCEVIEW
@@ -230,7 +240,7 @@
          ORDER BY PAYDT DESC
 		]]>
 	</select>
-
+	
 	<!-- 검색조건에 맞춰서 total변경 -->
 	<select id="pfBuyTotal" resultType="int">
 		SELECT COUNT(*) AS TOTAL 
@@ -243,15 +253,6 @@
 		WHERE BUY_CTNT_CD = 'pf'
     	AND U_ID = #{Uid} ) A ))
 	</select>
-	<!-- 지역에 맞게 -->
-	<select id="locPlist" resultMap="pMap">
-		<![CDATA[  
-		SELECT * FROM PERFORMANCE
-		WHERE ADDR LIKE  '%'||#{addr}||'%' 
-		AND ROWNUM <6
-		]]>
-	</select>
-	<!-- end 황규복ㄴ -->
 	<insert id="perInsert">
 	<selectKey keyProperty ="pNo" resultType="int" order="BEFORE">
 			SELECT NVL(MAX(P_NO), 0) + 1 AS PNO 
