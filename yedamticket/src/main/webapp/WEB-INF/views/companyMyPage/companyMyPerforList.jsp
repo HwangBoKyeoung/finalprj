@@ -304,7 +304,7 @@ iframe {
 				<ul class="list-unstyled components mb-5">
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
