@@ -81,5 +81,11 @@ public class NoticeController {
 		}
 		return "notice/noticeError";
 	}
+	
+	//관리자페이지
+	@RequestMapping("/managerNotice.do")
+	public String managerNotice() {
+		return "manager/manager/managerNoticeList";
+	}
 
 }

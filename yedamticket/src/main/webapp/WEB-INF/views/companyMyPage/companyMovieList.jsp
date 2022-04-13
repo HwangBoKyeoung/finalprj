@@ -351,7 +351,6 @@ iframe {
 							<c:forEach items="${dels }" var="mv">
 								<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
 									<td>${mv.movieVO.name}</td>
-									<td>${mv.movieVO.genre}</td>
 									<td>${mv.movieVO.rating}</td>
 									<td>${mv.movieVO.director}</td>
 								</tr>

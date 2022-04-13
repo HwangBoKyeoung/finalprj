@@ -9,7 +9,8 @@
 		<result column="C_ID" property="CId"/>
 		<result column="DELETE_CD" property="deleteCd"/>
 		<result column="MV_NO" property="mvNo"/>
-		<result column="P_NO" property="PNo"/>		
+		<result column="P_NO" property="PNo"/>
+		<result column="REFUSAL" property="refusal"/>		
 		<collection property="performanceVO" resultMap="performanceMap"></collection>
 		<collection property="movieVO" resultMap="movieMap"></collection>
 	</resultMap>
@@ -70,7 +71,7 @@
 		<![CDATA[
 			ORDER BY DEL_REQ_NO
 			)A)
-		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	
@@ -98,13 +99,14 @@
 		UPDATE DELETE_REQUEST
 		<set>
 			<if test="deleteCd != null">DELETE_CD = #{deleteCd},</if>
+			<if test="refusal != null"> REFUSAL = #{refusal},</if>
 		</set>
 		WHERE DEL_REQ_NO = #{delReqNo}
 	</update>
 	
 	
 	<select id="deleteRequestPerforSelect" resultMap="delrequestMap">
-		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO,D.C_ID
+		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO,P.C_ID
 		FROM DELETE_REQUEST D,PERFORMANCE P
 		WHERE P.P_NO=D.P_NO
 		AND D.DEL_REQ_NO=#{delReqNo}
@@ -131,7 +133,7 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,P.C_ID
 				FROM PERFORMANCE P, DELETE_REQUEST D
 				WHERE P.P_NO = D.P_NO
 				AND
@@ -143,7 +145,7 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 				ORDER BY P.P_NO DESC )A) 
- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+ 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]> 
 	</select>
 	<select id="getTotalDeletePerfor"  resultType="int">
@@ -165,13 +167,11 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT P.P_NO,P.NAME,P.LOC,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
-				FROM PERFORMANCE P
-				LEFT OUTER JOIN DELETE_REQUEST D
-				ON P.P_NO = D.P_NO
-				WHERE DELETE_CD IS NULL
-				OR DELETE_CD = '거절'
-				AND
+				SELECT *
+			    FROM PERFORMANCE P
+			    LEFT OUTER JOIN DELETE_REQUEST D
+			    ON (P.P_NO = D.P_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
+			    WHERE
  		]]>
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
@@ -180,17 +180,15 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 				ORDER BY P.P_NO DESC )A) 
- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+ 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]> 
 	</select>
 	<select id="getTotalPerfor" resultType="int">
 		SELECT COUNT(*)
 		FROM PERFORMANCE P
 		LEFT OUTER JOIN DELETE_REQUEST D
-		ON P.P_NO = D.P_NO
-		WHERE DELETE_CD IS NULL
-		OR DELETE_CD = '거절'
-		AND 
+		ON (P.P_NO = D.P_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
+		WHERE
 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
@@ -204,7 +202,7 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,M.C_ID
 				FROM MOVIE M, DELETE_REQUEST D
 				WHERE M.MV_NO = D.MV_NO
 				AND
@@ -216,7 +214,7 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
  				ORDER BY M.MV_NO DESC )A)
-		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} 
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
  		]]>
 	</select>
 	
@@ -238,13 +236,11 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT M.MV_NO,M.NAME,M.RATING,M.GENRE,M.DIRECTOR 
+				SELECT *
 				FROM MOVIE M
 				LEFT OUTER JOIN DELETE_REQUEST D
-				ON M.MV_NO = D.MV_NO
-				WHERE DELETE_CD IS NULL
-				OR DELETE_CD = '거절'
-				AND
+				ON (M.MV_NO = D.MV_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
+				WHERE
  		]]>
  		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR GENRE LIKE '%'||#{searchName}||'%'</if>
@@ -253,22 +249,20 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 			ORDER BY M.MV_NO DESC )A)
-			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+			WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	<select id="getTotalMovie" resultType="int">
 		SELECT COUNT(*)
 		FROM MOVIE M
-				LEFT OUTER JOIN DELETE_REQUEST D
-				ON M.MV_NO = D.MV_NO
-				WHERE DELETE_CD IS NULL
-				OR DELETE_CD = '거절'
-				AND
-				<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-					OR GENRE LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		LEFT OUTER JOIN DELETE_REQUEST D
+		ON (M.MV_NO = D.MV_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
+		WHERE
+			<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+				OR GENRE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
 				
 	</select>
 	

@@ -93,10 +93,14 @@ public class PerformanceContorller {
 		System.out.println("==================================" + vo.getPNo());
 		//vvo.setPNo(vo.getPNo());
 
-
-
 		model.addAttribute("pers", vo);
 		return "companyMyPage/companyPerforUpdateForm";
+	}
+	
+	@RequestMapping("/managerPerforSelect.do")
+	public String managerPerforSelect(PerformanceVO vo, Model model) {
+		model.addAttribute("pers", perDao.perforSelect(vo));
+		return "manager/manager/managerPerforSelect";
 	}
 
 	/*
@@ -106,10 +110,26 @@ public class PerformanceContorller {
 	 */
 
 	// 기업회원 공연수정
-	@RequestMapping("/performanceUpdate.do")
-	public String perSelect(Model model, PerformanceVO vo) {
-		model.addAttribute("pers", perDao.performanceUpdate(vo));
-		return "redirect:/companyPerforList.do";
+	@RequestMapping("/companyPerforUpdate.do")
+	public String perSelect(PerformanceVO vo) {
+//		String fileName = file.getOriginalFilename();
+//		String id = UUID.randomUUID().toString();
+//		String targetFile = id + fileName.substring(fileName.lastIndexOf('.'));
+//		System.out.println(targetFile);
+//		File target = new File(upLoadPath, targetFile);
+//		try {
+//			FileCopyUtils.copy(file.getBytes(), target);
+//			targetFile = File.separator + targetFile;
+//			vo.setFileCd(fileName);
+//			vo.setRenames(targetFile);
+//		}catch (Exception e) {
+//			e.printStackTrace();
+//		}
+		int p = perDao.performanceUpdate(vo);
+		if(p != 0) {
+			return "redirect:/companyPerforList.do";
+		}
+		return "manager/error";
 	}
 	
 //	//프로시저 수정
@@ -174,5 +194,7 @@ public class PerformanceContorller {
 		}
 		return "redirect:home.do";
 	}
+	//관리자페이지-공연정보 자세히 보기
+	
 
 }

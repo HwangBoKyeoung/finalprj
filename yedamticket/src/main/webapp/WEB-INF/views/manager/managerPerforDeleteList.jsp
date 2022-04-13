@@ -17,8 +17,8 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>공연 번호</th>
 							<th>공연 이름</th>
+							<th>기업 아이디</th>
 							<th>삭제 사유</th>
 							<th>신청 현황</th>
 						</tr>
@@ -27,8 +27,8 @@
 						<c:forEach items="${pers }" var="per">
 							<tr
 								onclick="location.href='deleteRequestSelect.do?delReqNo=${per.delReqNo }'">
-								<td>${per.performanceVO.PNo}</td>
 								<td>${per.performanceVO.name}</td>
+								<td>${per.performanceVO.CId}</td>
 								<td>${per.performanceVO.content}</td>
 								<td>${per.deleteCd}</td>
 							</tr>

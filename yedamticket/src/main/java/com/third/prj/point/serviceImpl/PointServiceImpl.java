@@ -24,6 +24,11 @@ public class PointServiceImpl implements PointService{
 		// TODO Auto-generated method stub
 		return mapper.managerMovieSaleList();
 	}
+	@Override
+	public List<PointVO> managerPerforSaleList() {
+		// TODO Auto-generated method stub
+		return mapper.managerPerforSaleList();
+	}
 	
 	
 }

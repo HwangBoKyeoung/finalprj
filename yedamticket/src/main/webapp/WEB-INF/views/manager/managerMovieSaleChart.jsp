@@ -9,7 +9,7 @@
 
 <body>
    <!--Div that will hold the pie chart-->
-   <div id="barchart_values" style="width: 80%; height: 50%;"></div>
+   <div id="barchart_values" style="width: 100%; height: 100%;"></div>
    
    <script type="text/javascript">
       google.charts.load("current", {
@@ -52,12 +52,6 @@
             }
          });
       }
-
-  </script>
-  </head>
-
-  <body>
-    <!--Div that will hold the pie chart-->
-    <div id="barchart_values" style="width: 80%; height: 50%;"></div>
-  </body>
+</script>
+</body>
 </html>

@@ -15,7 +15,6 @@ public interface PerformanceMapper {
 	int performanceUpdate(PerformanceVO vo);
 	
 
-
 	//공연 구매내역
 	List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo);
 	

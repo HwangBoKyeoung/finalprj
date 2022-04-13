@@ -31,7 +31,7 @@ public class ManagerController {
 	public String manager(Model model, CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, managerDao.getTotal(cri));
 		model.addAttribute("manas", managerDao.managerSelectList(cri));
-		model.addAttribute("pagaVO",pageVO);
+		model.addAttribute("pageVO",pageVO);
 		return "manager/manager/manager";
 	}
 

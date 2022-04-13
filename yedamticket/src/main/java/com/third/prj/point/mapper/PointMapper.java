@@ -11,4 +11,6 @@ public interface PointMapper {
 	
 	//관리자페이지 - 매출관련 -2022/04/12(RJH)
 	List<PointVO> managerMovieSaleList();
+	
+	List<PointVO> managerPerforSaleList();
 }

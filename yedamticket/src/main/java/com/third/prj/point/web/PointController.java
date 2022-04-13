@@ -57,7 +57,7 @@ public class PointController {
 
 	@RequestMapping("/movieSalesChart.do")
 	public String movieSalesChart() {
-		return "manager/manager/managerSaleChart";
+		return "manager/manager/managerMovieSaleChart";
 	}
 
 	@RequestMapping("/movieSales.do")
@@ -67,6 +67,17 @@ public class PointController {
 		List<PointVO> list = pointDao.managerMovieSaleList();
 		System.out.println("----------------------"+list);
 		
+		return list;
+	}
+	@RequestMapping("/perforSalesChart.do")
+	public String perforSalesChart() {
+		return "manager/manager/managerPerforSaleChart";
+	}
+	
+	@RequestMapping("/perforSales.do")
+	@ResponseBody
+	public List<PointVO> perforSales(PointVO vo){
+		List<PointVO> list = pointDao.managerPerforSaleList();
 		return list;
 	}
 }

@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.faq.mapper.FaqMapper;
+import com.third.prj.faq.service.CriteriaVO;
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.faq.service.FaqVO;
 
@@ -38,6 +39,18 @@ public class FaqServiceImpl implements FaqService {
 	@Override
 	public int faqDelete(FaqVO vo) {
 		return mapper.faqDelete(vo);
+	}
+
+	@Override
+	public List<FaqVO> managerFaqList(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.managerFaqList(cri);
+	}
+
+	@Override
+	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal(cri);
 	}
 
 }

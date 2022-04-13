@@ -394,4 +394,6 @@
 		<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
+	
+	
 </mapper>

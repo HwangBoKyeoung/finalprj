@@ -59,7 +59,7 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 			<![CDATA[
 			ORDER BY C_ID )A)
-			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+			WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	

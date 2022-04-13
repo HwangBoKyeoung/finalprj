@@ -17,8 +17,8 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>영화 번호</th>
 							<th>영화 이름</th>
+							<th>기업 아이디</th>
 							<th>삭제 사유</th>
 							<th>삭제 처리</th>
 						</tr>
@@ -26,8 +26,8 @@
 					<tbody id="body">
 						<c:forEach items="${dels }" var="del">
 							<tr onclick="location.href='deleteRequestSelect.do?delReqNo=${del.delReqNo }'">
-								<td>${del.movieVO.mvNo}</td>
 								<td>${del.movieVO.name}</td>
+								<td>${del.movieVO.CId}</td>
 								<td>${del.movieVO.content}</td>
 								<td>${del.deleteCd}</td>
 							</tr>

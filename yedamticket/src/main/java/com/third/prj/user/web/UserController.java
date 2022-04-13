@@ -120,7 +120,7 @@ public class UserController {
 
 	@RequestMapping("/managerUserSelect.do")
 	public String managerUserSelect(UserVO vo, Model model) {
-		vo = userDao.userSelect(vo);
+		vo = userDao.userSelectOne(vo);
 		
 		model.addAttribute("users", vo);
 		return "manager/user/managerUserSelect";

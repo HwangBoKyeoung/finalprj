@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/users/js/core/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 <body>
 	<div>
@@ -35,7 +37,8 @@
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">공연이름</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="name" name="name" value="${del.performanceVO.name}" readonly="readonly">
+								<input type="text" class="form-control" id="name" name="name" value="${del.performanceVO.name}" readonly="readonly"
+								onclick="location.href='managerPerforSelect.do?=${del.performanceVO.name}'">
 							</div>
 						</div>						
 						<div class="form-group row">
@@ -47,16 +50,30 @@
 									<option value="승인" <c:if test="${del.deleteCd=='승인'}">selected</c:if>>승인</option>
 									<option value="거절" <c:if test="${del.deleteCd=='거절'}">selected</c:if>>거절</option>
 								</select>
+								<div id="show">
+									<input type="text" placeholder="삭제사유" id="refusal" name="refusal" value="${del.refusal }" style="display:none">
+								</div>
 							</div>
 						</div>
 						
 						<button type="submit" class="btn btn-gradient-primary me-2">요청처리</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>
-					<%-- <input type="hidden" name="no" id="no" value="${pers.PNo}"> --%>
+					<input type="hidden" value="${del.deleteCd}" id="del">
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+		console.log($("#selectedval").data("loc"));
+		$("#selectedval").change(function() {
+			/* alert($(this).val()); */
+			if($(this).val()=='거절'){
+				$("#refusal").show();
+			} else{
+				$("#show").empty();
+			}
+			});
+	</script>
 </body>
 </html>
