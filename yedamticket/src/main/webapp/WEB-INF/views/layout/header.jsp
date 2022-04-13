@@ -125,7 +125,7 @@
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="./index.html"> <i
+							<a class="dropdown-item" href="noticeList.do"> <i
 								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항
 							</a> <a class="dropdown-item" target="_blank"
 								href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
@@ -182,7 +182,9 @@
 								</div>
 							</div>
 						</form>
-						<div align="right">
+						<!-- <input type="text" name="searchName" id="searchName">
+						<input type="button" id="btnSearch" value="검색"> -->
+						 <div align="right">
 							<c:choose>
 								<c:when test="${empty sessionId}">
 									<li class="login-css-add"><a href="userLoginForm.do">
@@ -203,5 +205,24 @@
 	</nav>
 
 	<script src="resources/users/js/practice.js"></script>
+	<script>
+		/* $("#btnSearch").on("click", function(){
+			$.ajax({
+				url: "ajaxFileCd.do",
+				type: "post",
+				data: {"searchName":$("#searchName").val()},
+				dataType: "json",
+				success: function(result){
+					console.log(result);
+					locationMove(result);
+				}
+			});
+		}); */
+		
+		/* function locationMove(item){
+			location.href="searchAll.do?list="+item;
+		} */
+		
+	</script>
 </body>
 </html>

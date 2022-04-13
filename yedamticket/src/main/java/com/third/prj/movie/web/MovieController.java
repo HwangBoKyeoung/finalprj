@@ -196,6 +196,22 @@ public class MovieController {
 		return "redirect:companyMovieList.do";
 	}
 	
+//	@RequestMapping("/searchAll.do")
+//	public String searchAll(Model model, Map<String, Object>map, MovieVO vo) {
+//		map.put("p_search", vo.getSearchName());
+////		map.put("namess", vo.getName());
+////		map.put("actorss", vo.getActor());
+////		map.put("contentss", vo.getContent());
+////		map.put("filecdss", vo.getFileCd());
+//		String SearchName = vo.getSearchName();
+////		List<MovieVO> list = movieDao.searchAll(SearchName);
+//		model.addAttribute("searchName", movieDao.searchAll(SearchName));
+//		movieDao.searchProcedure(map);
+//		
+//		
+//		return "user/searchList";
+//	}
+//	
 	
 	//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
 	@RequestMapping("/seatSearch.do")
@@ -273,11 +289,25 @@ public class MovieController {
 	
 	@RequestMapping("/searchAll.do")
 	public String searchAll(MovieVO vo, Model model) {
-		
+		System.out.println("안녕하세요.");
 		String SearchName = vo.getSearchName();
-		model.addAttribute("searchName", movieDao.searchAll(SearchName));
+		System.out.println(movieDao.popularSearch(vo));
+		movieDao.popularSearch(vo);
+		System.out.println("-------------------------"+SearchName);
+		System.out.println("=========================="+vo);
+		System.out.println("**************************"+movieDao.searchAll(SearchName));
+		
+		List<MovieVO> list = movieDao.searchAll(SearchName);
+		model.addAttribute("searchName", list);
 		
 		return "user/searchList";
+	}
+	
+	@RequestMapping("/ajaxFileCd.do")
+	@ResponseBody
+	public List<MovieVO> ajaxFileCd(MovieVO vo){
+		List<MovieVO> list = movieDao.searchAll(vo.getSearchName());
+		return list;
 	}
 	
 	

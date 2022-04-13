@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,17 +12,19 @@ textarea {
 </style>
 </head>
 <body>
-<div class="container">
+	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
 			<div class="col-md-9">
 				<br>
 				<h2 class="text-center">굿즈 등록</h2>
-				<form id="frm" action="goodsInsert.do" method="post" enctype="multipart/form-data">
+				<form id="frm" action="goodsInsert.do" method="post"
+					enctype="multipart/form-data">
 					<table class="table">
 						<tr>
 							<td>기업명</td>
-							<td><input type="text" id="seller" name="seller" value="${sessionName }"class="form-control" readonly="readonly"></td>
+							<td><input type="text" id="seller" name="seller"
+								value="${sessionName }" class="form-control" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td>굿즈 분류</td>
@@ -44,13 +46,13 @@ textarea {
 						<tr>
 						<tr>
 							<td>사진</td>
-							<td><input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png" 
-								class="form-control"></td>
+							<td><input type="file" id="file" name="file"
+								accept="image/gif, image/jpeg, image/png" class="form-control"></td>
 						</tr>
 						<tr>
 							<td>상세정보</td>
-							<td><textarea rows="10" cols="90" id="content" name="content"
-								></textarea></td>
+							<td><textarea rows="10" cols="90" id="content"
+									name="content"></textarea></td>
 						</tr>
 					</table>
 					<button type="submit" class="form-control">등록</button>

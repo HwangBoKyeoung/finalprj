@@ -15,6 +15,9 @@ public interface MovieService {
 		List<MovieVO> mList();
 		//프로시저수정쓸것들..?-(rjh-2022/04/05)
 		int procedureCall(Map<String, Object> map);
+		
+		//검색프로시저
+		int searchProcedure(Map<String,Object> map);
 
 		
 		//공연 구매내역
@@ -40,4 +43,7 @@ public interface MovieService {
 		MovieVO mvSelect(MovieVO vo);
 		//검색
 		int getTotal(CriteriaVO cri);
+		
+		//인기검색어
+		int popularSearch(MovieVO vo);
 }

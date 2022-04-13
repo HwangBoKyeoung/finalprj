@@ -337,22 +337,27 @@ iframe {
 				<thead>
 					<tr>
 						<th>NO</th>
+						<th>문의유형</th>
 						<th>제목</th>
 						<th>일자</th>
-						<th>아이디</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${inqs }" var="inq">
 						<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
 							<td>${inq.inNo }</td>
+							<td>${inq.kind }</td>
 							<td>${inq.title}</td>
 							<td>${inq.inDt }</td>
-							<td>${inq.UId }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
 			</table>
+			<br>
+			<div align="right">
+				<button type="button" class="btn btn-primary"
+					onclick="location.href='inqWriteForm.do'">글등록</button>
+			</div>
 			<br>
 			<div id="content" align="center">
 				<c:if test="${pageVO.prev }">
@@ -372,11 +377,6 @@ iframe {
 					<a href="inqList.do?pageNum=${pageVO.endPage+1 }"> <input
 						type="button" value="다음" class="btn btn-secondary"></a>
 				</c:if>
-			</div>
-
-			<div align="right">
-				<button type="button" class="btn btn-primary"
-					onclick="location.href='inqWriteForm.do'">글등록</button>
 			</div>
 		</div>
 	</div>

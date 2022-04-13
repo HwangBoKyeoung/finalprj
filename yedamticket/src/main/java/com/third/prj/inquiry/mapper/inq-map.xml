@@ -8,6 +8,7 @@
 		<result property="content" column="content" />
 		<result property="inDt" column="indt" />
 		<result property="UId" column="u_id" />
+		<result property="kind" column="kind"/>
 	</resultMap>
 
 	<select id="getTotal" resultType="int">
@@ -23,20 +24,20 @@
 	
 	<select id="manaerInquiryList" resultType="com.third.prj.inquiry.service.InquiryVO">
 		<![CDATA[
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND
 		FROM
 			(
 			SELECT ROWNUM RN, A.*
 			FROM (
-			SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+			SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND
 			FROM INQUIRY
 			WHERE
 			]]>
-			<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
-				OR U_ID LIKE '%'||#{searchName}||'%')</if>
-			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
+		OR U_ID LIKE '%'||#{searchName}||'%')</if>
+	<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+	<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+	<if test="searchType == null or searchType ==''"> 1 = 1</if>
 			<![CDATA[
 			ORDER BY IN_NO )A)
 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
@@ -44,13 +45,13 @@
 	</select>
 	
 	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND
 		FROM INQUIRY
 		ORDER BY INDT DESC
 	</select>
 	
 	<select id="inquirySelect" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID 
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND 
 		FROM INQUIRY
 		WHERE IN_NO=#{inNo}
 	</select>
@@ -66,12 +67,14 @@
 						  , INDT
 						  , TITLE
 						  , CONTENT
-						  , U_ID)
+						  , U_ID
+						  , KIND)
 		VALUES(#{inNo}
 			 , #{inDt}
 			 , #{title}
 		     , #{content}
-		     , #{UId})
+		     , #{UId}
+		     , #{kind})
 	</insert>
 	
 	<update id="inquiryUpdate" parameterType="com.third.prj.inquiry.service.InquiryVO">

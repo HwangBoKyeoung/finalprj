@@ -33,6 +33,9 @@
 
 	<!-- 프로시저 -->
 	<resultMap type="hashmap" id="procedureCall" />
+	
+	<!-- 검색프로시저 -->
+	<resultMap type="hashmap" id="searchProcedure"/>
 
 	<select id="mvSelect"
 		resultType="com.third.prj.movie.service.MovieVO">
@@ -105,6 +108,15 @@
 		#{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 		#{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
+	
+	<insert id ="searchProcedure" statementType="CALLABLE"> 
+		{CALL popular_search(#{p_search, mode=IN, jdbcType=VARCHAR, javaType=String})}
+	</insert>
+	
+	<insert id="popularSearch">
+	    INSERT INTO search values(#{searchName}, ((select count(*) from search where keyword = #{searchName}) + 1))
+	</insert>
+	
 
 	<!-- 페이징 <select id="getListWithPaging" resultMap="movieResultMap"> <![CDATA[ 
 		SELECT * FROM ( select /*+INDEX_DESC(tbl_board pk_board)*/ rownum rn, from 
@@ -186,13 +198,13 @@
 		to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
 
-	<select id="searchAll" resultMap="movieResultMap">
-		select name, actor, content
+	<select id="searchAll" resultMap="movieResultMap" parameterType="string">
+		SELECT NAME, ACTOR, CONTENT,FILE_CD
 		FROM MOVIE
 		WHERE NAME LIKE '%'||#{searchName}||'%' or actor like
 		'%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
 		UNION
-		select name, actor, content
+		SELECT NAME, ACTOR, CONTENT,FILE_CD
 		FROM PERFORMANCE
 		where name like '%'||#{searchName}||'%' or actor like
 		'%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
