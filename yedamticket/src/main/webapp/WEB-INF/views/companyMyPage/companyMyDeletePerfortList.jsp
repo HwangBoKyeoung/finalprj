@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
+.card {
+    width: 85%;
+}
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -318,7 +321,6 @@ iframe {
 					<h4 class="card-title">Performance Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMyDeletePerforList.do">
-						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
@@ -333,27 +335,30 @@ iframe {
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
-							</div>
+								<input type="hidden" name="sessionId" value="${sessionId}">
 						</div>
-					</form>
-				</div>
+					
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>공연 이름</th>
 							<th>출연자</th>
 							<th>삭제 사유</th>
+							<th>기업</th>
 							<th>신청 현황</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
-							<tr>
-								<td>${per.performanceVO.name}</td>
-								<td>${per.performanceVO.actor}</td>
-								<td>${per.performanceVO.content}</td>
-								<td>${per.deleteCd}</td>
-							</tr>
+							<c:if test="${per.performanceVO.CId eq sessionId}">
+								<tr>
+									<td>${per.performanceVO.name}</td>
+									<td>${per.performanceVO.actor}</td>
+									<td>${per.performanceVO.content}</td>
+									<td>${per.performanceVO.CId}</td>
+									<td>${per.deleteCd}</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -375,6 +380,8 @@ iframe {
 						<a href="companyMyDeletePerforList.do?pageNum=${pageVO.endPage+1 }"> <input
 							type="button" value="다음" class="btn btn-secondary"></a>
 					</c:if>
+				</div>
+				</form>
 				</div>
 			</div>
 		</div>

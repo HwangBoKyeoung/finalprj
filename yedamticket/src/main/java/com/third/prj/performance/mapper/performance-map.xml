@@ -110,6 +110,7 @@
 		<result column="PRICE" property="price"/>
 		<result column="LAT" property="lat"/>
 		<result column="LNG" property="lng"/>
+		<result column="C_ID" property="CId"/>
 		<collection property="performanceScheduleVO" resultMap="pScheduleMap"/>
 	</resultMap>
 	<!-- 공연 전체리스트  -->

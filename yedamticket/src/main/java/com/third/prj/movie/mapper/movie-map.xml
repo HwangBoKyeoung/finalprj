@@ -13,7 +13,7 @@
 		<result property="country" column="country" />
 		<result property="runtime" column="runtime" />
 		<result property="content" column="content" />
-		<result property="CId" column="c_id" />
+		<result property="CId" column="C_ID" />
 		<result property="actor" column="actor" />
 		<result property="fileCd" column="file_cd" />
 		<result property="docId" column="docId" />
