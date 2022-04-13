@@ -61,7 +61,10 @@ public class PerformanceContorller {
 	@RequestMapping("/pList.do")
 	public String pList(Model model,CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+		System.out.println("pList");
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달
+		System.out.println("start"+cri.getStartDate());
+		System.out.println("end"+cri.getEndDate());
 		model.addAttribute("performance",perDao.pList(cri));
 		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";

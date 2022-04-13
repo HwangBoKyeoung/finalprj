@@ -662,10 +662,6 @@
             childNodes[i].classList.remove('selectedList');
          }
          event.target.setAttribute('class', 'selectedList');
-       
-        
-        
-        
          $('#hallList').empty();
          $.ajax({
             url : "movieHallList.do",
@@ -674,7 +670,6 @@
                docId : $(event.target).data("cd")
             },
             success : function(data) {
-               console.log(data);
                for (var i = 0; i < data.length; i++) {
                   let li = document.createElement('li');
                   li.setAttribute("data-loc", data[i].loc);
@@ -702,7 +697,6 @@
                loc : $(event.target).data("loc")
             },
             success : function(data) {
-               console.log(data);
                for (var i = 0; i < data.length; i++) {
                   let li = document.createElement('li');
                   li.setAttribute("data-docid", data[i].docId);
@@ -718,9 +712,6 @@
       /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       $('#locList').on('click','li',selectedHall);
       function selectedHall() {
-         console.log(event.target);
-         console.log($(event.target).data("hallno"));
-         console.log($(event.target).data("docid"));
          $('#reservHall').val($(event.target).data("name"));
          //버튼누르면 색바뀜
          let childNodes = event.target.parentNode.childNodes;
@@ -735,14 +726,12 @@
                docId : $(event.target).data("docid")
             },
             success : function(data) {
-            	console.log(data);
                $("#datepicker").datepicker({
                   minDate : 0,
                   maxDate : data[0].schDt,
                   onSelect : function() {
                      date = $("#datepicker").val();
                      var sDate = date.split('/');
-                     console.log('date' + sDate[0]);
                      let mm = sDate[0];
                      let yy = sDate[2];
                      let dd = sDate[1];
@@ -769,12 +758,7 @@
           }
           event.target.setAttribute('class', 'selectedList');
           $('#schTime').val($(event.target).text());
-          //영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름을 가져옴
-          console.log($('#docId').val());
-          console.log($('#reservLoc').val());
-          console.log($('#reservHall').val());
-          console.log($('#schDate').val());
-          console.log($('#schTime').val());                     
+          //영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름을 가져옴                  
           // 황보경수정
           
           let divLoc = $("<div>");
@@ -834,8 +818,8 @@
                       }
                       $('#seat').append(table);
                       var cnt = 0;
+                      console.log("처음 cnt"+cnt);
                       var seatTd = $('#seat td');
-                      console.log(seatTd);
                   	////////////////////////////
                       for (i = 0; i < seatTd.length; i++) {
                     	  seatTd.eq(i).on('click',selectSeat);
@@ -843,27 +827,23 @@
                       function selectSeat() {
                    	//선택된 좌석을 좌석표 밑에 표시하기
 								let selectedSeat = document.getElementById('selectedSeat');
-								let tdList = selectedSeat.getElementsByTagName('td');
-								
+								let tdList = selectedSeat.getElementsByTagName('td');								
 								//seatGray class의 수 만큼만 좌석을 선택가능 
-								if ($('#selectedSeat .seatGray').length > cnt) {
-									
+								if ($('#selectedSeat .seatGray').length > cnt) {									
 									if($(event.target).hasClass("selectedSeat")){
-									$(event.target).removeClass("selectedSeat");
-									tdList[cnt-1].innerText = "-";
-									cnt--;
+										$(event.target).removeClass("selectedSeat");
+										tdList[cnt-1].innerText = "-";
+										cnt--;
 									}else{
-									tdList[cnt].innerText = $(event.target).text();
-									//클릭한 td class 추가 
-									this.setAttribute('class','selectedSeat');
-									//input name 에 값넣기 누적
-									seatName.value += $(event.target).text();
-									++cnt;
-									console.log("좌석을 선택하고 cnt ==="+ cnt);
+										tdList[cnt].innerText = $(event.target).text();
+										//클릭한 td class 추가 
+										this.setAttribute('class','selectedSeat');
+										//input name 에 값넣기 누적
+										seatName.value += $(event.target).text();
+										console.log('자리더한후 seatName'+seatName.value);
+										++cnt;
 									}
-									
-									
-									
+								console.log("좌석을 선택후cnt"+cnt);
 								} else if ($('#selectedSeat .seatGray').length == 0) {//seatGray class의 수가 0이면
 									alert("인원선택을 먼저해주세요!!!");
 								} else if ($('#selectedSeat .seatGray').length < cnt) {
@@ -871,7 +851,6 @@
 								};				
                       }//end selectseat
                       let seatNameArry = [];
-							console.log(result);
 							//예약된 좌석문자열을(ex.F-5F-6F-7) 하나의단일 좌석으로 쪼갠다.	    	
 							if (result.length == 0) {
 								console.log("result is null");
@@ -884,12 +863,10 @@
 									}
 								}
 							}
-							console.log(seatNameArry);
+
                       ///예약된좌석 이벤트 없애기
                       for (var i = 0; i < seatNameArry.length; i++) {                      
                          var a = "#seat td:contains("+ seatNameArry[i]+ ")";
-                         console.log($($(a)[0]));
-                         //$(a)[0].removeEventListener('click', selectSeat);
                          $($(a)[0]).off('click');
                          $(a).css("backgroundColor","black");
                       }
@@ -900,6 +877,7 @@
       
      //인원추가하는 버튼
      	$('#plus').on("click", function() {
+     		
      		var cnt = $('#cnt').text();
      		if ($('#cnt').text() == 6) {
      			$('#cnt').text(6);
@@ -911,24 +889,38 @@
      			let tdList = selectedSeat.getElementsByTagName('td');
      			tdList[cnt].setAttribute('class', 'seatGray');
      			cnt++;
+     			console.log("+++++++++++++버튼 누른후 seatGray 수"+$('#selectedSeat .seatGray').length);
+     			console.log("+++++++++++++버튼을 누를때마다 cnt값"+cnt);
      			$('#cnt').text(cnt);
      		}
      	});
      	//인원다운하는 버튼
      	$('#minus').on("click", function() {
      		var cnt = $('#cnt').text();
+     		
      		if ($('#cnt').text() <= 0) {
      			$('#cnt').text(0);
      			cnt = 0;
-     		} else {
+     		}else {
      			--cnt;
      			//예약인원을 줄일 때 마다 seatGray class없애기
      			let selectedSeat = document.getElementById('selectedSeat');
      			let tdList = selectedSeat.getElementsByTagName('td');
-     			tdList[cnt].innerText = '+';
+     			tdList[cnt].innerText = '-';
      			tdList[cnt].classList.remove('seatGray');
+     			//결제폼으로 넘겨줄 #seatName값 하나씩자르기
+     			let str=seatName.value;
+     			let a=str.substring(0,str.length-3);
+     			seatName.value=a;
+     			let b= str.substring(str.length-3,str.length);
+     			var c = "#seat td:contains("+ b + ")";
+     			console.log($($(c)[0]));
+     			$($(c)[0]).removeClass();
      			$('#cnt').text(cnt);
-     		}
+     			console.log("---------버튼 누른후 seatGray 수"+$('#selectedSeat .seatGray').length);
+     			console.log("---------버튼을 누를때마다cnt값"+cnt);
+     		} 
+     		
      	});
    </script>
 </body>

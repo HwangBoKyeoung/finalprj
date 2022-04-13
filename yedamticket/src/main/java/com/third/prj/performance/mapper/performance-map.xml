@@ -47,18 +47,7 @@
 
 
 	</select>
-	<!-- <select id="getTotal" resultType="int">
-		SELECT COUNT(*) AS TOTAL
-		FROM PERFORMANCE
-		WHERE
-		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-			OR ACTOR LIKE '%'||#{searchName}||'%'
-			OR LOC LIKE '%'||#{searchName}||'%')</if>
-		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == 'ACTOR'">ACTOR LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == null or searchType ==''"> 1 = 1</if>
-	</select> -->
+
 
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
@@ -66,15 +55,6 @@
 		FROM PERFORMANCE
 		WHERE p_no = #{PNo}
 	</select>
-
-
-	<!-- <update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">UPDATE 
-		PERFORMANCE<set><if test="name != null">NAME = #{name},</if><if test="content 
-		!= null">CONTENT = #{content},</if><if test="actor != null"> ACTOR = #{actor},</if><if 
-		test="loc != null">LOC = #{loc},</if><if test="addr != null">ADDR = #{addr},</if><if 
-		test="price != null"> PRICE = #{price},</if></set>WHERE P_NO = #{PNo}</update> -->
-
-
 
 	<update id="procedureCall" statementType="CALLABLE">
 		{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
@@ -134,8 +114,8 @@
 		AND 1=1
 		</if>
 		<!-- 날짜만 입력받은 경우 -->
-		<if test="frDt != null and frDt !=''">
-		AND PS.FRDT = #{frDt}
+		<if test="startDate != null and startDate !='' and endDate != null and endDate !=''">
+		AND PS.FRDT BETWEEN #{startDate} AND #{endDate}
 		</if>
 		<!-- 날짜 + 이벤트 -->
 		<if test="name != null and name !=''" >

@@ -32,8 +32,6 @@ public class PerformanceScheduleVO {
 	private String start;
 	private String title;
 	
-	//검색기간
-	private String starDate;
-	private String endDate;
+	
 	private PerformanceVO performanceVO;
 }
