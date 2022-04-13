@@ -87,8 +87,6 @@
 						#{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
 	</update>
 	
-	
-	
 	<!-- 황규복 -->
 	<!-- performanceSch resultMap -->
 	<resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pScheduleMap">

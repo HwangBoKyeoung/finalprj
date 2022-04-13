@@ -75,7 +75,6 @@
 			$("#ownerAddr").val(data)
 		}
 	})
-	
 	</script>
 </body>
 </html>

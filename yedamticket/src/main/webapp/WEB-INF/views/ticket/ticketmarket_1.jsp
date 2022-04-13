@@ -129,7 +129,11 @@ body {
 		var loc =		$(event.target).prev().prev().text();
 		var price = 	$(event.target).prev().text();
 		
-		console.log(name)
+		if(UId == '${sessionId}'){
+			alert("자신의 티켓을 선택할 수 없습니다.")
+			document.location.href='ticketmarket_1.do';
+			return false;
+		}
 		
 		$('#Mname').html(name);
 		$('#MPReservNo').html(PReservNo);
@@ -146,6 +150,9 @@ body {
 		$("#loc").val(loc.substring(7,))
 		$("#price").val(price.substring(7,))
 		$("#UId").val(UId)
+		
+		
+		
 		
 		$.ajax({
 		url: "loginChk",
