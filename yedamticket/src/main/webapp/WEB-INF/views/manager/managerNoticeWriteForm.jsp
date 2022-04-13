@@ -24,7 +24,7 @@ textarea {
 					<tr>
 						<td>작성자</td>
 						<td><input type="text" id="writer" name="writer" 
-							value="${sessionId }" readonly="readonly"></td>
+							value="관리자" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<td>작성일자</td>
