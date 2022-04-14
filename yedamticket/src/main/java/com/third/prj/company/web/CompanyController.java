@@ -1,6 +1,7 @@
 package com.third.prj.company.web;
 
 import javax.inject.Inject;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,7 +42,11 @@ public class CompanyController {
 	}
 	
 	@PostMapping("/signupB_3.do")
-	public String signUpB_3(CompanyVO companyVO, Model model) {
+	public String signUpB_3(CompanyVO companyVO, Model model, HttpServletRequest httpServletRequest) {
+		String addr = httpServletRequest.getParameter("addr");
+		String addr2 = httpServletRequest.getParameter("addr2");
+		String addr3 = addr + " " + addr2;
+		companyVO.setAddr(addr3);
 		String encodedPwd = companyVO.getPwd();
 		String decodedPwd = pwdEncoder.encode(encodedPwd);
 		companyVO.setPwd(decodedPwd);

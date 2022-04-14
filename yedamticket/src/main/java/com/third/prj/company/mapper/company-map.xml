@@ -12,14 +12,14 @@
 						   , PHONE
 						   , BIZNO
 						   , DEAL_AGREE_CD)
-		VALUES (#{name}
-			  , #{Cid}
-			  , #{pwd}
-			  , #{email}
-			  , #{addr}
-			  , #{phone}
-			  , #{bizno}
-			  , #{dealAgreeCd})
+					VALUES  (#{name}
+						  , #{Cid}
+						  , #{pwd}
+						  , #{email}
+						  , #{addr}
+						  , #{phone}
+						  , #{bizno}
+						  , #{dealAgreeCd})
 	</insert>
 	
 	<select id="cidChk" resultType="int">

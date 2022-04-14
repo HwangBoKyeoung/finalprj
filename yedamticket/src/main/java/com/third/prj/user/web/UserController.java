@@ -22,7 +22,6 @@ import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceViewVO;
-import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
@@ -67,9 +66,13 @@ public class UserController {
 	}
 
 	@PostMapping("/signup_4.do")
-	public String signUp_4(UserVO userVO, Model model) {
+	public String signUp_4(UserVO userVO, Model model, HttpServletRequest httpServletRequest) {
 		String pwd = userVO.getPwd();
 		String encryptedPwd = pwdEncoder.encode(pwd);
+		String addr = httpServletRequest.getParameter("addr");
+		String addr2 = httpServletRequest.getParameter("addr2");
+		String addr3 = addr + " " + addr2;
+		userVO.setAddr(addr3);
 		userVO.setPwd(encryptedPwd);
 		int n = userDao.userInsert(userVO);
 		if (n != 0) {

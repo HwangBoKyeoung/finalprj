@@ -97,7 +97,7 @@
 										<i class="now-ui-icons business_badge"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="사업자등록번호('-'기호 제거후 입력)" required="required" id="bizno" name="bizno">
+								<input type="text" class="form-control" placeholder="사업자등록번호('-'기호 제거후 입력)" id="bizno" name="bizno">
 								<button type="button" class="bizChk" id="bizChk" value="N" onclick="biznoConfirm()">중복체크</button>
 							</div>
 
@@ -253,6 +253,8 @@
 				var bnum = result.data[0].b_stt_cd
 				if (bnum == 1) {
 					$('#bizChk').val("Y")
+					$('#bizno').attr("disabled", true)
+					
 					alert("확인되었습니다.")
 
 				} else {
