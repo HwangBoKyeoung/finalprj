@@ -224,7 +224,7 @@ public class MovieController {
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
 		pointVO.setPayNo(vo.getMvReservNo());
-		pointVO.setUid(vo.getUId());
+		pointVO.setUId(vo.getUId());
 		pointDao.payInsert(pointVO);
 		return "home/home";
 	}

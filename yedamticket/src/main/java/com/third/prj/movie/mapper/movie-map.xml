@@ -82,7 +82,7 @@
 		<result property="charge" column="CHARGE" />
 		<result property="point" column="POINT" />
 		<result property="buyCtntCd" column="BUY_CTNT_CD" />
-		<result property="Uid" column="U_ID" />
+		<result property="UId" column="U_ID" />
 	</resultMap>
 
 

@@ -61,7 +61,7 @@ body {
 					    <p class="card-text">좌석구역 : ${t.loc }</p>
 					    <p class="card-text">가  격 : ${t.price }</p>
 					    
-					    <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#prInfoModal" onclick="selectedFnc();">선택</button>
+					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" onclick="selectedFnc();">선택</button>
 					  </div>
 					</div>
 				</li>
