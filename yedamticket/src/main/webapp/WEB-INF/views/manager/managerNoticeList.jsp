@@ -11,8 +11,8 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">FAQ List</h4>
-				<p class="card-description">FAQ 관리</p>
+				<h4 class="card-title">Notice List</h4>
+				<p class="card-description">공지사항 관리</p>
 				<table class="table table-hover" id="contents">
 					<thead>
 						<tr>
@@ -24,7 +24,7 @@
 					</thead>
 					<c:forEach items="${list }" var="list">
 						<tr
-							onclick="location.href='noticeSelect.do?noticeNo=${list.noticeNo }'">
+							onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'">
 							<td>${list.noticeNo}</td>
 							<td>${list.title }</td>
 							<td>${list.wrDt }</td>
