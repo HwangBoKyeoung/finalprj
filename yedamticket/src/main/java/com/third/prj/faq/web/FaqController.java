@@ -23,12 +23,12 @@ public class FaqController {
 		return "faq/faqList";
 	}
 
-	@RequestMapping("/faqWriteForm.do")
+	@RequestMapping("/managerFaqWriteForm.do")
 	public String faqWriteForm() {
-		return "manager/faq/faqWriteForm";
+		return "manager/faq/managerFaqWriteForm";
 	}
 
-	@RequestMapping("/faqWrite.do")
+	@RequestMapping("/managerFaqWrite.do")
 	public String faqWrite(FaqVO vo) {
 		int n = faqDao.faqInsert(vo);
 
@@ -52,11 +52,11 @@ public class FaqController {
 
 	}
 
-	@RequestMapping("/faqUpdateForm.do")
+	@RequestMapping("/managerFaqUpdateForm.do")
 	public String faqUpdate(FaqVO vo, Model model) {
 		vo = faqDao.faqSelect(vo);
 		model.addAttribute("faqs", vo);
-		return "manager/faq/faqUpdateForm";
+		return "manager/faq/managerFaqUpdateForm";
 	}
 
 	

@@ -14,7 +14,7 @@
 				<div class="card-body">
 					<h4 class="card-title">Movie Update</h4>
 					<p class="card-description"></p>
-					<form class="forms-sample" action="companyMovieUpdate.do"method="post">
+					<form class="forms-sample" action="companyMovieUpdate.do" method="post" enctype="multipart/form-data">
 						<div class="form-group row">
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">영화번호</label>
@@ -78,13 +78,17 @@
 								<input type="text" class="form-control" id="actor" name="actor" value="${mv.actor }">
 							</div>
 						</div>
-						<div class="form-group row">
+						<div>
 							<label for="exampleInputConfirmPassword2"
-								class="col-sm-3 col-form-label">포스터</label>
-							<div class="col-sm-9">
-								<input type="file" class="form-control" accept="image/gif, imag/jpeg, image/png" id="vname" name="vname" value="${videos.vname }">
-								</div>
+								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">영상</label>
+							<input type="file" accept="image/gif, image/jpeg, image/png, video/mp4,video/mkv, video/x-m4v,video/*" id="file" name="file">
 						</div>
+						<div>
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">포스터</label>
+							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
+						</div>
+						
 						<input type="hidden" name="fileCd" id="fileCd" value="${videos.fileCd }">
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>

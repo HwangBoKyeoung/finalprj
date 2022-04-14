@@ -26,10 +26,10 @@
 		GROUP BY TO_CHAR(PAYDT,'YY/MM/DD')
 	</select>
 	<select id="managerPerforSaleList" resultType="com.third.prj.point.service.PointVO">
-		SELECT TO_CHAR(PAYDT,'YY/MM/DD') dayDate,
+		SELECT NVL2(PAYDT, TO_CHAR(PAYDT,'YY/MM/DD'), 0) DAYDATE,
 			   SUM(PAY) sales
 		FROM POINT
-		WHERE BUY_CTNT_CD = 'PF'
-		GROUP BY TO_CHAR(PAYDT,'YY/MM/DD')
+		WHERE BUY_CTNT_CD = 'pf'
+		GROUP BY NVL2(PAYDT, TO_CHAR(PAYDT,'YY/MM/DD'), 0)
 	</select>
 </mapper>

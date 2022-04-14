@@ -75,7 +75,7 @@ public class NoticeController {
 		return "manager/manager/managerNoticeWriteForm";
 	}
 	
-	@RequestMapping("/noticeWrite.do")
+	@RequestMapping("/managerNoticeWrite.do")
 	public String noticeWrite(NoticeVO vo) {
 		int n = noticeDao.noticeInsert(vo);
 
@@ -85,7 +85,7 @@ public class NoticeController {
 		return "notice/noticeError";
 	}
 	
-	@RequestMapping("/noticeDelete.do")
+	@RequestMapping("/managerNoticeDel.do")
 	public String noticeDelete(NoticeVO vo) {
 		int n = noticeDao.noticeDelete(vo);
 

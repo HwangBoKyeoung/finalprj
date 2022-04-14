@@ -111,51 +111,32 @@ public class PerformanceContorller {
 
 	// 기업회원 공연수정
 	@RequestMapping("/companyPerforUpdate.do")
-	public String perSelect(PerformanceVO vo) {
-//		String fileName = file.getOriginalFilename();
-//		String id = UUID.randomUUID().toString();
-//		String targetFile = id + fileName.substring(fileName.lastIndexOf('.'));
-//		System.out.println(targetFile);
-//		File target = new File(upLoadPath, targetFile);
-//		try {
-//			FileCopyUtils.copy(file.getBytes(), target);
-//			targetFile = File.separator + targetFile;
-//			vo.setFileCd(fileName);
-//			vo.setRenames(targetFile);
-//		}catch (Exception e) {
-//			e.printStackTrace();
-//		}
-		int p = perDao.performanceUpdate(vo);
-		if(p != 0) {
-			return "redirect:/companyPerforList.do";
+	public String perSelect(PerformanceVO vo,MultipartFile file) {
+		String fileName = file.getOriginalFilename();
+		String id = UUID.randomUUID().toString();
+		System.out.println("fileName" + fileName);
+		System.out.println("id :" + id);
+ 
+		if(fileName != "") {
+		String targetFile = id + fileName.substring(fileName.lastIndexOf('.'));
+		System.out.println(targetFile);
+		File target = new File(upLoadPath, targetFile);
+		
+		try {
+			FileCopyUtils.copy(file.getBytes(), target);
+			System.out.println("copy suss");
+			
+			vo.setFileCd(fileName);
+			vo.setRenames(targetFile);
+
+			perDao.performanceUpdate(vo);
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		return "manager/error";
+		}
+			return "redirect:/companyPerforList.do";
 	}
 	
-//	//프로시저 수정
-//	@RequestMapping("/companyPerforUpdate.do")
-//	public String companyPerforUpdate(Model model, @RequestParam("lname") String lname, Map<String, Object> map, PerformanceVO vo) {
-//
-//		PerformanceImageVO ivo = new PerformanceImageVO();
-//
-//		map.put("vp_no", vo.getPNo());
-//		map.put("p_name", vo.getName());
-//		map.put("p_content", vo.getContent());
-//		map.put("p_actor", vo.getActor());
-//		map.put("p_loc", vo.getLoc());
-//		map.put("p_addr", vo.getAddr());
-//		map.put("p_price", vo.getPrice());
-//		map.put("p_lname", lname);
-//		map.put("p_cd", vo.getFileCd());
-//
-////		perDao.procedureCall(map);
-//		System.out.println(vo);
-//		System.out.println(ivo);
-//		System.out.println("프로시저콜 : ");
-//
-//		return "redirect:/companyPerforList.do";
-//	}
-
 	@RequestMapping("/perInsertForm.do")
 	public String perForInsertForm() {
 		return "performance/perInsertForm";

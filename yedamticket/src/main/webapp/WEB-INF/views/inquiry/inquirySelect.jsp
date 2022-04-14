@@ -45,8 +45,8 @@
 									<th>답변내용</th>
 									<c:choose>
 										<c:when test="${empty inqReply}">
-											<td id="answer"><textarea name="ans" id="ans"></textarea>
-											<button id="btnAns" onclick="aJaxCall()">등록</button></td>
+											<td id="answer"><textarea name="ans" id="ans"></textarea></td>
+											<button id="btnAns" onclick="aJaxCall()">등록</button>
 										</c:when>
 										<c:otherwise>
 											<td id="answer">${inqReply.ans}</td>

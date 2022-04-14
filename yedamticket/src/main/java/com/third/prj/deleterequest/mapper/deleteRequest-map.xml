@@ -168,10 +168,10 @@
 			SELECT ROWNUM RN, A.*
 			FROM (
 				SELECT *
-			    FROM PERFORMANCE P
-			    LEFT OUTER JOIN DELETE_REQUEST D
-			    ON (P.P_NO = D.P_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
-			    WHERE
+				FROM PERFORMANCE P
+				LEFT OUTER JOIN DELETE_REQUEST D
+				ON (P.P_NO = D.P_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
+				WHERE
  		]]>
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
@@ -239,13 +239,18 @@
 				SELECT *
 				FROM MOVIE M
 				LEFT OUTER JOIN DELETE_REQUEST D
-				ON (M.MV_NO = D.MV_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
-				WHERE
+				ON (M.MV_NO=D.MV_NO)
+				WHERE (D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL)
+				AND
  		]]>
  		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-					OR GENRE LIKE '%'||#{searchName}||'%'</if>
+					OR GENRE LIKE '%'||#{searchName}||'%'
+					OR RATING LIKE '%'||#{searchName}||'%'
+					OR DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 			ORDER BY M.MV_NO DESC )A)
@@ -259,10 +264,14 @@
 		ON (M.MV_NO = D.MV_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
 		WHERE
 			<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-				OR GENRE LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+					OR GENRE LIKE '%'||#{searchName}||'%'
+					OR RATING LIKE '%'||#{searchName}||'%'
+					OR DIRECTOR LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 				
 	</select>
 	
