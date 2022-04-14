@@ -346,7 +346,20 @@ iframe {
 					<c:forEach items="${inqs }" var="inq">
 						<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
 							<td>${inq.inNo }</td>
-							<td>${inq.kind }</td>
+							<c:choose>
+								<c:when test="${inq.kind == 'mv'}">
+									<td>영화</td>
+								</c:when>
+								<c:when test="${inq.kind == 'pf'}">
+									<td>공연</td>
+								</c:when>
+								<c:when test="${inq.kind == 'pt'}">
+									<td>포인트</td>
+								</c:when>
+								<c:when test="${inq.kind == 'de'}">
+									<td>배송</td>
+								</c:when>
+							</c:choose>
 							<td>${inq.title}</td>
 							<td>${inq.inDt }</td>
 						</tr>

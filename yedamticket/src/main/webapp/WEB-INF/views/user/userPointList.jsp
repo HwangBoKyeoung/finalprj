@@ -7,13 +7,17 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.blist td:nth-child(4) {
+.plist td:nth-child(4) {
 	color: purple;
 	font-weight: bold;
 }
 
 .plist td:nth-child(3) {
 	color: green;
+	font-weight: bold;
+}
+
+.plist td:nth-child(5) {
 	font-weight: bold;
 }
 </style>
@@ -48,23 +52,43 @@
 			</div>
 		</nav>
 		<div class="container">
-			<h2>거래내역</h2><br>
+			<h2>거래내역</h2>
+			<br>
 			<table class="table">
 				<thead>
 					<tr>
 						<th scope="col">결제일자</th>
 						<th scope="col">사용처</th>
 						<th scope="col">포인트 충전</th>
-						<th scope="col">총포인트</th>
+						<th scope="col">포인트 사용</th>
+						<th scope="col">포인트잔액</th>
 					</tr>
 				</thead>
 				<tbody>
 					<c:forEach items="${list3 }" var="point">
 						<tr class="plist">
-							<td>${point.chargeDt }</td>
-							<td>포인트충전</td>
+							<c:choose>
+								<c:when test="${point.chargeDt == null}">
+									<td>${point.payDt }</td>
+								</c:when>
+								<c:otherwise>
+									<td>${point.chargeDt }</td>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${point.buyCtntCd == 'mv' }">
+									<td>영화결제</td>
+								</c:when>
+								<c:when test="${point.buyCtntCd == 'pf' }">
+									<td>공연결제</td>
+								</c:when>
+								<c:when test="${point.buyCtntCd == 'pt' }">
+									<td>포인트충전</td>
+								</c:when>
+							</c:choose>
 							<td>+ ${point.charge }</td>
-							<td>${point.point }</td>
+							<td>- ${point.pay }</td>
+							<td>${point.tempPoint }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

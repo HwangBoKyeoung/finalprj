@@ -32,6 +32,16 @@ textarea {
                             <td><input type="date" id="inDt" name="inDt" readonly="readonly"  class="form-control"value=""></td>
                         </tr>
                         <tr>
+							<th>문의유형</th>
+							<td><select name="kind" id="kind" class="form-control">
+									<option value="mv" selected="selected">영화</option>
+									<option value="pf">공연</option>
+									<option value="gs">굿즈</option>
+									<option value="pt">포인트</option>
+									<option value="de">배송</option>
+							</select></td>
+						</tr>
+                        <tr>
                             <td>제목</td>
                             <td><input type="text" size="75" id="title" name="title" value="${inqs.title }" class="form-control" required="required"></td>
                         </tr>

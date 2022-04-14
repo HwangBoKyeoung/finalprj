@@ -12,6 +12,7 @@ import com.third.prj.performance.service.PerformanceVO;
 
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointVO;
+import com.third.prj.search.service.SearchVO;
 import com.third.prj.user.service.UserCriteriaVO;
 import com.third.prj.user.service.UserPointViewVo;
 
@@ -86,4 +87,5 @@ public interface UserMapper {
 
 	//페이징(관리자 - 회원리스트페이지)
 	 int getTotal(CriteriaVO cri);
+	
 }

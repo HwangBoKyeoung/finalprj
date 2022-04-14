@@ -36,6 +36,8 @@ public interface MovieService {
 		List<MovieVO> searchAll(String searchName);
 
 
+		//인기검색어
+		int popularSearch(MovieVO vo);
 
 		//페이징
 		List<MovieVO> mvListPaging(CriteriaVO cri);
@@ -44,6 +46,4 @@ public interface MovieService {
 		//검색
 		int getTotal(CriteriaVO cri);
 		
-		//인기검색어
-		int popularSearch(MovieVO vo);
 }

@@ -9,6 +9,8 @@
 <style>
 textarea {
 	resize: none;
+	 color: transparent;
+ text-shadow: 0 0 0 black;
 }
 
 th {
@@ -41,15 +43,12 @@ th {
 						<tr>
 							<th>내용</th>
 							<td><textarea rows="10" cols="90" id="content"
-									name="content">${notice.content }</textarea></td>
+									name="content" readonly="readonly" disabled>${notice.content }</textarea></td>
 						</tr>
 					</table>
 					<div align="center">
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='noticeList.do'">목록가기</button>
-						<button type="submit" class="btn btn-success">수정</button>
-						<button type="button" class="btn btn-warning"
-							onclick="location.href='noticeDelete.do?noticeNo=${notice.noticeNo}'">삭제</button>
 					</div>
 				</form>
 			</div>

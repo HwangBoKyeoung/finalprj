@@ -3,9 +3,11 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
+	<resultMap type="com.third.prj.movie.service.MovieVO"
+		id="MovieMap">
 		<result column="name" property="name" />
-		<collection property="movieReservVO" resultMap="MovieReservMap" />
+		<collection property="movieReservVO"
+			resultMap="MovieReservMap" />
 	</resultMap>
 
 	<resultMap
@@ -18,7 +20,7 @@
 		<result column="DOCID" property="docId" />
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
-		<result column="U_ID" property="UId" /> 
+		<result column="U_ID" property="UId" />
 	</resultMap>
 
 	<resultMap
@@ -27,7 +29,7 @@
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
-	
+
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
@@ -36,7 +38,7 @@
 		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
-	
+
 	<resultMap
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
@@ -52,13 +54,17 @@
 		id="userPointMap">
 		<result property="charge" column="CHARGE" />
 		<result property="chargeDt" column="CHARGEDT" />
-		<result property="UId" column="U_ID" />  
+		<result property="UId" column="U_ID" />
 		<result property="point" column="POINT" />
+		<result property="pay" column="PAY" />
+		<result property="payDt" column="PAYDT" />
+		<result property="tempPoint" column="TEMP_POINT" />
+		<result property="buyCtntCd" column="BUY_CTNT_CD" />
 	</resultMap>
 
 
-	
-	<resultMap type="hashmap" id="procedureCall"/>
+
+	<resultMap type="hashmap" id="procedureCall" />
 
 
 
@@ -96,13 +102,9 @@
 		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</select>
-<!-- 황보경 -->
-	<!-- <select id="userSelectOne"
-		resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM USERS
-		WHERE U_ID = #{Uid}
-	</select> -->
+	<!-- 황보경 -->
+	<!-- <select id="userSelectOne" resultType="com.third.prj.user.service.UserVO"> 
+		SELECT * FROM USERS WHERE U_ID = #{Uid} </select> -->
 
 	<resultMap type="com.third.prj.user.service.UserVO"
 		id="userMap">
@@ -115,15 +117,12 @@
 	</resultMap>
 
 
-<!-- 황보경 -->
-	<!-- <select id="userList"
-		resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM USERS
-		ORDER BY U_ID DESC
-	</select> -->
+	<!-- 황보경 -->
+	<!-- <select id="userList" resultType="com.third.prj.user.service.UserVO"> 
+		SELECT * FROM USERS ORDER BY U_ID DESC </select> -->
 
-	<select id="userList" resultType="com.third.prj.user.service.UserVO">
+	<select id="userList"
+		resultType="com.third.prj.user.service.UserVO">
 	<![CDATA[
 		SELECT U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
 		FROM
@@ -135,13 +134,13 @@
 			FROM USERS
 			WHERE
 			]]>
-			<if test="searchType == 'ALL'">(U_ID LIKE '%'||#{searchName}||'%'
-				OR NAME LIKE '%'||#{searchName}||'%'
-				OR EMAIL LIKE '%'||#{searchName}||'%')</if>
-			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<if test="searchType == 'ALL'">(U_ID LIKE '%'||#{searchName}||'%'
+			OR NAME LIKE '%'||#{searchName}||'%'
+			OR EMAIL LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 			ORDER BY U_ID DESC ) A )
 			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
@@ -194,36 +193,18 @@
 		AND PWD = #{pwd}
 	</delete>
 
-	<!-- <select id="MvReservList" resultMap="MovieReservMap">
-		SELECT R.MV_RESERV_NO ,
-		R.RESERVDT,
-		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
-		FROM
-		MOVIE_RESERVATION
-		R JOIN MOVIE M
-		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{UId}
-		</select> -->
+	<!-- <select id="MvReservList" resultMap="MovieReservMap"> SELECT R.MV_RESERV_NO 
+		, R.RESERVDT, R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME FROM MOVIE_RESERVATION 
+		R JOIN MOVIE M ON R.DOCID = M.DOCID WHERE U_ID = #{UId} </select> -->
 
-<!-- 황보경 -->
-	<!-- <update id="userCharge"
-		parameterType="com.third.prj.user.service.UserVO">
-		UPDATE users
-		SET 
-		point = (SELECT point
-		FROM users
-		WHERE u_id
-		= #{Uid}) + #{point}
-		WHERE u_id = #{Uid}
-	</update> -->
+	<!-- 황보경 -->
+	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO"> 
+		UPDATE users SET point = (SELECT point FROM users WHERE u_id = #{Uid}) + 
+		#{point} WHERE u_id = #{Uid} </update> -->
 
-<!-- 황보경 -->
-	<!-- <select id="loginChk"
-		resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM users
-		WHERE u_id = #{Uid}
-	</select> -->
+	<!-- 황보경 -->
+	<!-- <select id="loginChk" resultType="com.third.prj.user.service.UserVO"> 
+		SELECT * FROM users WHERE u_id = #{Uid} </select> -->
 
 	<select id="pointBuyList" resultMap="userPointMap">
 		select *
@@ -251,22 +232,24 @@
 	<!-- 검색조건에 맞춰서 total변경 -->
 	<select id="getMTotal" resultType="int">
 		SELECT COUNT(*) AS TOTAL
-		FROM (SELECT *
+		FROM
+		(SELECT *
 		FROM (
 		SELECT ROWNUM RN ,
 		A.*
 		FROM ( SELECT R.MV_RESERV_NO ,
 		R.RESERVDT,
 		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
-		FROM MOVIE_RESERVATION
+		FROM
+		MOVIE_RESERVATION
 		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{UId} ) A ) )
+		WHERE U_ID = #{UId}
+		) A ) )
 	</select>
 
 
-	<select id="pfRList"
-		resultMap="performanceMap">
+	<select id="pfRList" resultMap="performanceMap">
       	<![CDATA[
 			SELECT * 
 			FROM (
@@ -284,48 +267,40 @@
          ORDER BY RESERVE_DTTM DESC
 		]]>
 	</select>
-	
+
 	<select id="userSelectOne"
-	      resultType="com.third.prj.user.service.UserVO">
-	      SELECT *
-	      FROM USERS
-     	 WHERE U_ID = #{UId}
-   </select>
-   
-	<!-- <select id="pfReservList" resultMap="performanceMap">
-		<![CDATA[SELECT X.P_RESERV_NO,
-		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
-		FROM
-		PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
-		WHERE
-		X.P_SCH_NO = Y.P_SCH_NO
-		AND Y.P_NO = Z.P_NO
-		AND X.U_ID = #{Uid} ) A ) 	 
-         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
-         ORDER BY RESERVE_DTTM DESC
-		]]>
-	</select> -->
+		resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM USERS
+		WHERE U_ID = #{UId}
+	</select>
+
+	<!-- <select id="pfReservList" resultMap="performanceMap"> <![CDATA[SELECT 
+		X.P_RESERV_NO, X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME FROM PERFORMANCE_RESERVATION 
+		X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z WHERE X.P_SCH_NO = Y.P_SCH_NO AND 
+		Y.P_NO = Z.P_NO AND X.U_ID = #{Uid} ) A ) WHERE RN > (#{pageNum}-1) * #{amount} 
+		AND RN <= #{pageNum} * #{amount} ORDER BY RESERVE_DTTM DESC ]]> </select> -->
 
 	<!-- 검색조건에 맞춰서 total변경 -->
 	<select id="getFTotal" resultType="int">
-		SELECT COUNT(*) AS TOTAL 
-		FROM( SELECT * 
-			FROM (
-	    		SELECT ROWNUM RN ,
-								A.*
-	    		FROM (  SELECT X.P_RESERV_NO,
+		SELECT COUNT(*) AS TOTAL
+		FROM( SELECT *
+		FROM (
+		SELECT ROWNUM RN ,
+		A.*
+		FROM ( SELECT X.P_RESERV_NO,
 		X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
 		FROM
 		PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-		AND X.U_ID =#{UId} ) A ) )
-		
+		AND X.U_ID =#{UId} ) A
+		) )
+
 	</select>
 
-	<select id="pointBuyList2"
-		resultMap="userPointMap">
+	<select id="pointBuyList2" resultMap="userPointMap">
       	<![CDATA[
 			SELECT * 
 			FROM (
@@ -336,57 +311,55 @@
 		where u_id = #{UId} ) A )  
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY CHARGEDT DESC
-		]]> 
+		]]>
 	</select>
-	
+
 	<!-- 검색조건에 맞춰서 total변경 -->
 	<select id="pointBuyTotal" resultType="int">
-		SELECT COUNT(*) AS TOTAL 
-		FROM (SELECT * 
-			FROM (
-	    		SELECT ROWNUM RN ,
-								A.*
-	    		FROM (  select *
+		SELECT COUNT(*) AS TOTAL
+		FROM (SELECT *
+		FROM (
+		SELECT ROWNUM RN ,
+		A.*
+		FROM ( select *
 		from userPointView
 		where u_id = #{UId} ) A ) )
 	</select>
-	
+
 	<select id="userPoint" resultMap="userPointMap">
-	SELECT SUM(CHARGE)-SUM(PAY) AS POINT
-	FROM POINT
-	WHERE U_ID=#{UId}
+		SELECT SUM(CHARGE)-SUM(PAY) AS POINT
+		FROM POINT
+		WHERE U_ID=#{UId}
 	</select>
-	
-<!-- 황보경 -->
-	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
-		UPDATE users
-		SET    point = (SELECT point
-		             	FROM   users
-		             	WHERE  u_id = #{Uid}) + #{point}
-		WHERE  u_id = #{Uid}
-	</update> -->
-	
-	<update id="userCharge" statementType="CALLABLE" >
-		{CALL 
+
+	<!-- 황보경 -->
+	<!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" 
+		> UPDATE users SET point = (SELECT point FROM users WHERE u_id = #{Uid}) 
+		+ #{point} WHERE u_id = #{Uid} </update> -->
+
+	<update id="userCharge" statementType="CALLABLE">
+		{CALL
 		insertPoint(#{p1, mode=IN, jdbcType=INTEGER, javaType=INT},
-					#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
-					)
+		#{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+		)
 		}
 
 	</update>
-	
-	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+
+	<select id="loginChk"
+		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
-		FROM   USERS
-		WHERE  U_ID = #{UId}
+		FROM USERS
+		WHERE U_ID = #{UId}
 	</select>
-	
+
 	<select id="getTotal" resultType="int">
 		SELECT COUNT(*) AS TOTAL
 		FROM USERS
 		WHERE
 		<if test="searchType == 'ALL'">U_ID LIKE '%'||#{searchName}||'%'
-			OR NAME LIKE '%'||#{searchName}||'%'
+			OR NAME LIKE
+			'%'||#{searchName}||'%'
 			OR
 			EMAIL LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
@@ -394,4 +367,7 @@
 		<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
+
+	
+
 </mapper>

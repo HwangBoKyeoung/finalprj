@@ -9,6 +9,8 @@
 <style>
 textarea {
 	resize: none;
+	color: transparent;
+	text-shadow: 0 0 0 black;
 }
 
 th {
@@ -32,7 +34,7 @@ th {
 						</tr>
 						<tr>
 							<th>문의유형</th>
-							<td>${inqs.kind }</td> 
+							<td>${inqs.kind }</td>
 						</tr>
 						<tr>
 							<th>제목</th>
@@ -41,7 +43,7 @@ th {
 						<tr>
 							<th>내용</th>
 							<td><textarea rows="10" cols="90" id="content"
-									name="content">${inqs.content }</textarea></td>
+									name="content" disabled>${inqs.content }</textarea></td>
 						</tr>
 					</table>
 					<div align="center">
@@ -64,8 +66,8 @@ th {
 					<table class="table">
 						<tr>
 							<th>답변</th>
-							<td colspan="3"><textarea rows="4" cols="80"
-									readonly="readonly" id="txt"></textarea></td>
+							<td colspan="3"><textarea rows="4" cols="87"
+									readonly="readonly" id="txt" disabled></textarea></td>
 					</table>
 				</div>
 			</div>

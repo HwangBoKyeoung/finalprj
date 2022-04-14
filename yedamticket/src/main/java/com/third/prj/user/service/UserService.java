@@ -11,6 +11,7 @@ import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointVO;
+import com.third.prj.search.service.SearchVO;
 
 public interface UserService {
 	List<UserVO> userList();
@@ -78,5 +79,7 @@ public interface UserService {
 
 	//페이징(관리자 - 회원리스트페이지)
 	 int getTotal(CriteriaVO cri);
+	 
+	
 
 }

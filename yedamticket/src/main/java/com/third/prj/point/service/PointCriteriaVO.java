@@ -15,7 +15,7 @@ public class PointCriteriaVO {
 	
 	
 	public PointCriteriaVO() {
-		this(1,10);
+		this(1,4);
 	}
 	
 	public PointCriteriaVO(int pageNum, int amount) {
