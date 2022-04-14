@@ -325,8 +325,8 @@ iframe {
 								${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 						<option value="NAME"
 							${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>이름</option>
-						<option value="GOODSCD"
-							${pageVO.cri.searchType eq 'GOODSCD' ? 'selected' : '' }>영화/공연 구분</option>
+						<option value="CONTENT"
+							${pageVO.cri.searchType eq 'CONTENT' ? 'selected' : '' }>내용</option>
 					</select> <input type="text" name="searchName"
 						value="${pageVO.cri.searchName }">
 					<button type="submit" class="btn btn-primary">검색</button>
@@ -339,27 +339,31 @@ iframe {
 					<thead>
 						<tr>
 							<th>굿즈 이름</th>
-							<th>기업명</th>
+							<th>판매자</th>
+							<th>기업</th>
 							<th>상품 구분</th>
 							<th>가 격</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${gods }" var="gds">
-							<tr onclick="location.href='goodsSelect.do?gNo=${gds.GNo}' ">
-								<td>${gds.name}</td>
-								<td>${gds.seller}</td>
-								<td>&nbsp;&nbsp;&nbsp;<c:set var="goodsCd" value="" />
-								<c:if test="${gds.goodsCd eq'mv'}">
-									<c:out value="영화"/>
-								</c:if>
-								<c:set var="goodsCd" value="" />
-								<c:if test="${gds.goodsCd eq'pf'}">
-									<c:out value="공연"/>
-								</c:if></td>
-								<%-- <td>${gds.goodsCd}</td> --%>
-								<td>${gds.price}원</td>
-							</tr>
+							<c:if test="${gds.CId eq sessionId}">
+								<tr onclick="location.href='goodsSelect.do?gNo=${gds.GNo}' ">
+									<td>${gds.name}</td>
+									<td>${gds.seller}</td>
+									<td>${gds.CId }</td>
+									<td>&nbsp;&nbsp;&nbsp;<c:set var="goodsCd" value="" />
+									<c:if test="${gds.goodsCd eq'mv'}">
+										<c:out value="영화"/>
+									</c:if>
+									<c:set var="goodsCd" value="" />
+									<c:if test="${gds.goodsCd eq'pf'}">
+										<c:out value="공연"/>
+									</c:if></td>
+									<%-- <td>${gds.goodsCd}</td> --%>
+									<td>${gds.price}원</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>

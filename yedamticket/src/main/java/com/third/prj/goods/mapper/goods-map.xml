@@ -13,6 +13,7 @@
 		<result property="fileCd" column="file_cd"/>
 		<result property="goodsCd" column="goods_cd"/>
 		<result property="fileRe" column="file_re"/>
+		<result property="CId" column="c_id"/>
 	</resultMap>
 	
 	<!-- CDATA로 검색조건 쿼리 생성 -->
@@ -23,7 +24,7 @@
 			 AND 
 				( 
 				NAME like concat('%',#{searchKeyword},'%') 
-				OR GOODS_CD like concat('%',#{searchKeyword},'%') 
+				OR CONTENT like concat('%',#{searchKeyword},'%') 
 				 )  
 			 ]]>
 		</if>
@@ -75,9 +76,9 @@
 	          		WHERE
          ]]>
          <if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-               OR GOODS_CD LIKE '%'||#{searchName}||'%'</if>
+               OR CONTENT LIKE '%'||#{searchName}||'%'</if>
          <if test="searchType =='NAME'"> NAME LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType =='GOODSCD'"> GOODS_CD LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType =='CONTENT'"> CONTENT LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
         <![CDATA[  			
           		ORDER BY G_NO DESC ) A ) 
@@ -91,9 +92,9 @@
 		FROM GOODS
 		WHERE
 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-               OR GOODS_CD LIKE '%'||#{searchName}||'%'</if>
+               OR CONTENT LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType =='NAME'"> NAME LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType =='GOODSCD'"> GOODS_CD LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType =='CONTENT'"> CONTENT LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 	

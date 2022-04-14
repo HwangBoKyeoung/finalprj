@@ -18,6 +18,7 @@ public class GoodsVO {
 	private String fileCd;
 	private String goodsCd;
 	private String fileRe;
+	private String CId;
 	
 	//검색
 	private String searchKeyword;
