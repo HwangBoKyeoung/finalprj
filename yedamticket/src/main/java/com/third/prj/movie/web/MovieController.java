@@ -79,7 +79,7 @@ public class MovieController {
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		model.addAttribute("movies", movieDao.mList());
-		System.out.println("==================="+movieDao.mList());
+		
 		return "movie/movieList";
 	}
 	
@@ -100,7 +100,7 @@ public class MovieController {
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
 	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
-		System.out.println(vo.getUid());
+		System.out.println(vo.getUId());
 		System.out.println(vo.getMvNo());
 		System.out.println(vo.getContent());
 		System.out.println("스타**************************" + vo.getStar());

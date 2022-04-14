@@ -245,283 +245,7 @@
       background-color : #7c807d;
       border-radius: 50%;
    }
-   
-   .airline {
-      position: absolute;
-      top: 10px;
-      left: 6%;
-      font-family: Arial;
-      font-size: 15px;
-      font-weight: bold;
-      color: rgba(0, 0, 102, 1);
-   }
-   
-   .barcode{
-      position: absolute;
-      left: 8px;
-      bottom: 6px;
-      height: 30px;
-      width: 90px;
-      background: #222;
-      box-shadow: inset 0 1px 0 #f8475b, inset -2px 0 0 #f8475b, inset -4px 0
-         0 #222, inset -5px 0 0 #f8475b, inset -6px 0 0 #222, inset -9px 0 0
-         #f8475b, inset -12px 0 0 #222, inset -13px 0 0 #f8475b, inset -14px 0
-         0 #222, inset -15px 0 0 #f8475b, inset -16px 0 0 #222, inset -17px 0 0
-         #f8475b, inset -19px 0 0 #222, inset -20px 0 0 #f8475b, inset -23px 0
-         0 #222, inset -25px 0 0 #f8475b, inset -26px 0 0 #222, inset -26px 0 0
-         #f8475b, inset -27px 0 0 #222, inset -30px 0 0 #f8475b, inset -31px 0
-         0 #222, inset -33px 0 0 #f8475b, inset -35px 0 0 #222, inset -37px 0 0
-         #f8475b, inset -40px 0 0 #222, inset -43px 0 0 #f8475b, inset -44px 0
-         0 #222, inset -45px 0 0 #f8475b, inset -46px 0 0 #222, inset -48px 0 0
-         #f8475b, inset -49px 0 0 #222, inset -50px 0 0 #f8475b, inset -52px 0
-         0 #222, inset -54px 0 0 #f8475b, inset -55px 0 0 #222, inset -57px 0 0
-         #f8475b, inset -59px 0 0 #222, inset -61px 0 0 #f8475b, inset -64px 0
-         0 #222, inset -66px 0 0 #f8475b, inset -67px 0 0 #222, inset -68px 0 0
-         #f8475b, inset -69px 0 0 #222, inset -71px 0 0 #f8475b, inset -72px 0
-         0 #222, inset -73px 0 0 #f8475b, inset -75px 0 0 #222, inset -77px 0 0
-         #f8475b, inset -80px 0 0 #222, inset -82px 0 0 #f8475b, inset -83px 0
-         0 #222, inset -84px 0 0 #f8475b, inset -86px 0 0 #222, inset -88px 0 0
-         #f8475b, inset -89px 0 0 #222, inset -90px 0 0 #f8475b;
-   }
 
-   .slip {
-      left: 455px;
-   }
-
-   .jfkslip {
-      font-size: 30px;
-      top: 10px;
-      left: 420px;
-   }
-   
-   .jfk {
-      position: absolute;
-      top: 32px;
-      left: 25px;
-      font-family: Arial;
-      font-size: 45px;
-      color: #222;
-   }
-   
-   .airlineslip {
-      left: 450px;
-   }
-
-   .wrapper {
-      height: auto;
-      min-height: 100%;
-      padding-bottom: 60px;
-   }
-
-   .modal{ 
-     position:absolute; width:160%; height:160%; background: rgba(0,0,0,0.8); top:0; left:0; display:none;
-   }
-   
-   .modal_content{
-     width:400px; 
-     height:200px;
-     background:#fff; 
-     border-radius:10px;
-     position:relative; 
-     top:50%; 
-     left:33%;
-     margin-top:-100px; 
-     margin-left:-200px;
-     text-align:center;
-     box-sizing:border-box; 
-     padding:74px 0;
-     line-height:23px; 
-     cursor:pointer;
-   }
-   
-   .box {
-      position: absolute;
-      top: calc(50% - 125px);
-      top: -webkit-calc(50% - 125px);
-      left: calc(50% - 300px);
-      left: -webkit-calc(50% - 300px);
-   }
-   
-   .ticket {
-      width: 600px;
-      height: 250px;
-      background: #f8475b;
-      border-radius: 3px;
-      box-shadow: 0 0 100px #aaa;
-      border-top: 1px solid #f8475b;
-      border-bottom: 1px solid #f8475b;
-   }
-   
-   .left {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      position: absolute;
-      top: 0px;
-      left: -5px;
-   }
-   
-   .left li {
-      width: 0px;
-      height: 0px;
-   }
-   
-   .left li:nth-child(-n+2) {
-      margin-top: 8px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #f8475b;
-   }
-   
-   .left li:nth-child(3), .left li:nth-child(6) {
-      margin-top: 8px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #EEEEEE;
-   }
-   
-   .left li:nth-child(4) {
-      margin-top: 8px;
-      margin-left: 2px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #EEEEEE;
-   }
-   
-   .left li:nth-child(5) {
-      margin-top: 8px;
-      margin-left: -1px;
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
-      border-right: 6px solid #EEEEEE;
-   }
-   
-   .left li:nth-child(7), .left li:nth-child(9), .left li:nth-child(11),
-      .left li:nth-child(12) {
-      margin-top: 7px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #E5E5E5;
-   }
-   
-   .left li:nth-child(8) {
-      margin-top: 7px;
-      margin-left: 2px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #E5E5E5;
-   }
-   
-   .left li:nth-child(10) {
-      margin-top: 7px;
-      margin-left: 1px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #E5E5E5;
-   }
-   
-   .left li:nth-child(13) {
-      margin-top: 7px;
-      margin-left: 2px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #f8475b;
-   }
-   
-   .left li:nth-child(14) {
-      margin-top: 7px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-right: 5px solid #f8475b;
-   }
-   
-   .right {
-      margin: 0;
-      padding: 0;
-      list-style: none;
-      position: absolute;
-      top: 0px;
-      right: -5px;
-   }
-   
-   .right li:nth-child(-n+2) {
-      margin-top: 8px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #f8475b;
-   }
-   
-   .right li:nth-child(3), .right li:nth-child(4), .right li:nth-child(6) {
-      margin-top: 8px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #EEEEEE;
-   }
-   
-   .right li:nth-child(5) {
-      margin-top: 8px;
-      margin-left: -2px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #EEEEEE;
-   }
-   
-   .right li:nth-child(8), .right li:nth-child(9), .right li:nth-child(11)
-      {
-      margin-top: 7px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #E5E5E5;
-   }
-   
-   .right li:nth-child(7) {
-      margin-top: 7px;
-      margin-left: -3px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #E5E5E5;
-   }
-   
-   .right li:nth-child(10) {
-      margin-top: 7px;
-      margin-left: -2px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #E5E5E5;
-   }
-   
-   .right li:nth-child(12) {
-      margin-top: 7px;
-      border-top: 6px solid transparent;
-      border-bottom: 6px solid transparent;
-      border-left: 6px solid #E5E5E5;
-   }
-   
-   .right li:nth-child(13), .right li:nth-child(14) {
-      margin-top: 7px;
-      border-top: 5px solid transparent;
-      border-bottom: 5px solid transparent;
-      border-left: 5px solid #f8475b;
-   }
-   
-   .ticket:after {
-      content: '';
-      position: absolute;
-      right: 200px;
-      top: 0px;
-      width: 2px;
-      height: 250px;
-      box-shadow: inset 0 0 0 #f8475b, inset 0 -10px 0 #B56E0A, inset 0 -20px
-         0 #f8475b, inset 0 -30px 0 #B56E0A, inset 0 -40px 0 #f8475b, inset 0
-         -50px 0 #999999, inset 0 -60px 0 #E5E5E5, inset 0 -70px 0 #999999,
-         inset 0 -80px 0 #E5E5E5, inset 0 -90px 0 #999999, inset 0 -100px 0
-         #E5E5E5, inset 0 -110px 0 #999999, inset 0 -120px 0 #E5E5E5, inset 0
-         -130px 0 #999999, inset 0 -140px 0 #E5E5E5, inset 0 -150px 0 #B0B0B0,
-         inset 0 -160px 0 #EEEEEE, inset 0 -170px 0 #B0B0B0, inset 0 -180px 0
-         #EEEEEE, inset 0 -190px 0 #B0B0B0, inset 0 -200px 0 #EEEEEE, inset 0
-         -210px 0 #B0B0B0, inset 0 -220px 0 #f8475b, inset 0 -230px 0 #B56E0A,
-         inset 0 -240px 0 #f8475b, inset 0 -250px 0 #B56E0A;
-   }
 </style>
 </head>
 <body>
@@ -818,6 +542,7 @@
                       }
                       $('#seat').append(table);
                       var cnt = 0;
+
                       console.log("처음 cnt"+cnt);
                       var seatTd = $('#seat td');
                   	////////////////////////////
@@ -835,13 +560,17 @@
 										tdList[cnt-1].innerText = "-";
 										cnt--;
 									}else{
+										console.log('tdList에 들어가는 cnt'+cnt);
+										
 										tdList[cnt].innerText = $(event.target).text();
+										
 										//클릭한 td class 추가 
 										this.setAttribute('class','selectedSeat');
 										//input name 에 값넣기 누적
 										seatName.value += $(event.target).text();
-										console.log('자리더한후 seatName'+seatName.value);
+										console.log('자리더한후 seatName'+seatName.value);									
 										++cnt;
+										console.log("tdList에 좌석이름을 넣고 cnt"+cnt);
 									}
 								console.log("좌석을 선택후cnt"+cnt);
 								} else if ($('#selectedSeat .seatGray').length == 0) {//seatGray class의 수가 0이면
@@ -863,7 +592,6 @@
 									}
 								}
 							}
-
                       ///예약된좌석 이벤트 없애기
                       for (var i = 0; i < seatNameArry.length; i++) {                      
                          var a = "#seat td:contains("+ seatNameArry[i]+ ")";
@@ -897,11 +625,14 @@
      	//인원다운하는 버튼
      	$('#minus').on("click", function() {
      		var cnt = $('#cnt').text();
+
+     		
      		
      		if ($('#cnt').text() <= 0) {
      			$('#cnt').text(0);
      			cnt = 0;
      		}else {
+
      			--cnt;
      			//예약인원을 줄일 때 마다 seatGray class없애기
      			let selectedSeat = document.getElementById('selectedSeat');

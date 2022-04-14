@@ -134,6 +134,7 @@
 	</select>
 	<!-- 예정공연  -->
 	<select id="epList"  resultMap="pMap">
+	<![CDATA[
 			SELECT 
 			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
 			PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
@@ -141,8 +142,9 @@
 			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
 			ON 
 			P.P_NO = PS.P_NO
-	        where FRDT > TO_CHAR(SYSDATE,'YY/MM/DD')
-	        
+	        WHERE FRDT > TO_CHAR(SYSDATE,'YY/MM/DD') 
+	        AND ROWNUM < 4
+	     ]]>	   
 	</select>
 	
 	<select id="getTotal" resultType="int">

@@ -4,8 +4,8 @@ window.onload = function() {
 
 //지도 그리기
 function drawMap(target) {
-    var width = 600; //지도의 넓이
-    var height = 600; //지도의 높이
+    var width = 550; //지도의 넓이
+    var height = 550; //지도의 높이
     var initialScale = 5500; //확대시킬 값
     var initialX = -11900; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
@@ -32,8 +32,8 @@ function drawMap(target) {
         .attr('class', 'map')
         .on("click", function(){
             var eid=event.target.id;
-            result.value=eid.substr(eid.indexOf('-')+1,eid.length);
-		switch(result.value){
+            let value=eid.substr(eid.indexOf('-')+1,eid.length);
+		switch(value){
 			case "Seoul":
 			var region = "서울";
             break;
@@ -88,6 +88,10 @@ function drawMap(target) {
             case "Busan":
             var region = "부산";
             break;
+			case "Jeju-do":
+			var region = "제주도";
+			break;
+			
 			
 		}
 		console.log(region);
@@ -99,17 +103,42 @@ function drawMap(target) {
             success:function(result){
                 console.log(result);
 				$('#locList').empty();
+				let tbody=document.createElement('tbody');
 				for(var i =0; i<result.length;i++){
-					let divName=document.createElement('div');
-					console.log(result[i].name);
-					divName.innerText=result[i].name+result[i].content;
-					locList.append(divName);
+					let tr=document.createElement('tr');
+					
+					let loc=document.createElement('td');
+					loc.classList.add('col-2');					
+					loc.innerText=result[i].loc;
+					
+					let name=document.createElement('td');
+					name.classList.add('col-3');
+					name.innerText=result[i].name;
+					
+					let btnTd=document.createElement('td');
+					
+					btnTd.classList.add('col-1');
+					let reservBtn=document.createElement('button');
+					reservBtn.type="button";
+					reservBtn.innerText="예매하기";
+					reservBtn.classList.add("btn","btn-primary");
+					reservBtn.setAttribute("onclick","pBookingForm("+result[i].pno+")");
+					///////////////////////////
+					
+					btnTd.append(reservBtn);					
+					tr.append(name,loc,btnTd);
+					tbody.append(tr);
+
 				}
+				$('#locList').append(tbody);
+				
 				
             }
 
+
         });
 
+///////////////////////////
 		 $('#region').val(region);
         var i = 0;
         var speed = 200;
@@ -189,3 +218,47 @@ function drawMap(target) {
         labels.attr('transform', translateTolabel);
     }
 }
+$(document).ready(function(){
+  var zindex = 10;
+  
+  $("div.card").click(function(e){
+    e.preventDefault();
+
+    var isShowing = false;
+
+    if ($(this).hasClass("show")) {
+      isShowing = true
+    }
+
+    if ($("div.cards").hasClass("showing")) {
+      // a card is already in view
+      $("div.card.show")
+        .removeClass("show");
+
+      if (isShowing) {
+        // this card was showing - reset the grid
+        $("div.cards")
+          .removeClass("showing");
+      } else {
+        // this card isn't showing - get in with it
+        $(this)
+          .css({zIndex: zindex})
+          .addClass("show");
+
+      }
+
+      zindex++;
+
+    } else {
+      // no cards in view
+      $("div.cards")
+        .addClass("showing");
+      $(this)
+        .css({zIndex:zindex})
+        .addClass("show");
+
+      zindex++;
+    }
+    
+  });
+});

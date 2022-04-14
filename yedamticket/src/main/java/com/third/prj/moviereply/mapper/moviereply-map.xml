@@ -9,21 +9,23 @@
 		<result property="content" column="content"/>
 		<result property="star" column="star"/>
 		<result property="wrDt" column="wrdt"/>
-		<result property="Uid" column="u_id"/>
+		<result property="UId" column="u_id"/>
+		<result property="docId" column="docid"/>
 	</resultMap>
 
 	<insert id="movieReplyInsert" parameterType="com.third.prj.moviereply.service.MovieReplyVO">
 	   INSERT INTO MOVIE_REPLY(MV_RE_NO
-	   						 , MV_NO,CONTENT
+	   						 , DOCID
+	   						 , CONTENT
 	   						 , STAR
 	   						 , WRDT
 	   						 , U_ID)
 	   VALUES (MOVIEREPLY_SEQ.NEXTVAL
-	   		 , #{mvNo}
+	   		 , #{docId}
 	   		 , #{content}
 	   		 , #{star}
 	   		 , SYSDATE
-	   		 , #{Uid})
+	   		 , #{UId})
 	</insert>
 	
 	<delete id="movieReplyDelete">
@@ -39,7 +41,7 @@
 	<select id="movieReplyList" resultMap="movieReplyResultMap">
 		SELECT *
 		FROM MOVIE_REPLY
-		WHERE MV_NO=#{mvNo}
+		WHERE MV_NO=#{docId}
 	</select>
 	
 </mapper>
