@@ -141,8 +141,7 @@ public class PerformanceReservationController {
 	}
 	
 	@RequestMapping("/ticketassignment_cancel.do")
-	public String ticketCancel(PerformanceReservationVO performanceReservationVO,
-			@RequestParam("PReservNo2") int PReservNo2) {
+	public String ticketCancel(PerformanceReservationVO performanceReservationVO, @RequestParam("PReservNo2") int PReservNo2) {
 		performanceReservationVO.setPReservNo(PReservNo2);
 		int i = performancereservationDao.cancelReserv(performanceReservationVO);
 		if (i != 0) {
@@ -307,8 +306,7 @@ public class PerformanceReservationController {
 	// ReservedTicket -----------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/reservedticket_1.do")
-	public String ReservedTicket_1(HttpServletRequest httpServletRequest, Model model, UserVO userVO,
-			HttpSession session) {
+	public String ReservedTicket_1(HttpServletRequest httpServletRequest, Model model, UserVO userVO, HttpSession session) {
 		String name = httpServletRequest.getParameter("name");
 		String PReservNo = httpServletRequest.getParameter("PReservNo");
 		String frDt = httpServletRequest.getParameter("frDt");
@@ -358,5 +356,21 @@ public class PerformanceReservationController {
 	}
 
 	// ReservedTicket END--------------------------------------------------------------------------------------------------
+
+	// CancelReservedTicket --------------------------------------------------------------------------------------------------
+	@RequestMapping("/cancelticket_1.do")
+	public String CancelTicket_1(PerformanceReservationVO performanceReservationVO, HttpServletRequest httpServletRequest, @RequestParam("CPReservNo") int CPReservNo) {
+		performanceReservationVO.setPReservNo(CPReservNo);
+		int i = performancereservationDao.cancelReserv(performanceReservationVO); 
+		if(i != 0) {
+			return "redirect:userPage.do";
+		} else {
+		return "user/errorPage";
+		}
+	}
+	
+	
+	// CancelReservedTicket END-----------------------------------------------------------------------------------------------
+	
 	
 }

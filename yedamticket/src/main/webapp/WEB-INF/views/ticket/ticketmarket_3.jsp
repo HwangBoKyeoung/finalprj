@@ -13,7 +13,6 @@
 <input type="hidden" id="price" name="price" value=${price }>
 <input type="hidden" id="UId" name="UId" value=${UId }>
 <input type="hidden" id="date" name="date" value=${date }>
-<h2 >보유 포인트 : ${point }</h2>
 	<div align="center">
 		<div class="card"  style="width: 20rem;">
 			<div class="card-body">
@@ -29,8 +28,8 @@
 		</div>
 	</div>
 </form>
+
 	<script>
-	//$(document).ready(function(){})
 	var point = parseInt($("#point").val())
 	var price = parseInt($("#price").val())
 	

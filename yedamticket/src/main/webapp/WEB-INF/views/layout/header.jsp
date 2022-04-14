@@ -122,11 +122,11 @@
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="./index.html"> <i
-								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항
-							</a> <a class="dropdown-item" target="_blank"
-								href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
-								<i class="fa-solid fa-handshake fa-2x "></i> 양도거래
-							</a>
+								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항</a> 
+								<c:if test="${not empty sessionId}">
+									<a class="dropdown-item" onclick="sessionChk();">
+									<i class="fa-solid fa-handshake fa-2x "></i> 자유거래</a>
+								</c:if>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
 						class="dropdown-toggle" id="navbarDropdownMenuLink1"
@@ -185,5 +185,11 @@
 			</div>
 		</div>
 	</nav>
+	<script>
+			function sessionChk(){
+				alert('로그인하세요');
+				location.href="userLoginForm.do";
+			}
+	</script>
 </body>
 </html>

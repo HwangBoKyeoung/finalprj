@@ -185,8 +185,7 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-	public String userPage(Model model, UserVO vo, HttpSession session, UserCriteriaVO cri, UserPointViewVo pvo,
-			PerformanceReservationViewVO performanceReservationViewVO) {
+	public String userPage(Model model, UserVO vo, HttpSession session, UserCriteriaVO cri, UserPointViewVo pvo, PerformanceReservationViewVO performanceReservationViewVO) {
 		cri.setUId((String) session.getAttribute("sessionId"));
 		vo.setUId((String) session.getAttribute("sessionId"));
 		pvo.setUId((String) session.getAttribute("sessionId"));
