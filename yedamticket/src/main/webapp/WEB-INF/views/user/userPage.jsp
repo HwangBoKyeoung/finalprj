@@ -38,7 +38,7 @@
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="userBuyList.do">거래내역</a></li>
-					<li><a href="ticketassignment_1.do">내 티켓 보기 / 티켓 거래</a></li>
+					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
 				</ul>
 				<div class="mb-5">
 					<div class="form-group d-flex">

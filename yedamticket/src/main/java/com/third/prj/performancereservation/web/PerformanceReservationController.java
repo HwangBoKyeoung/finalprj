@@ -111,8 +111,7 @@ public class PerformanceReservationController {
 	// TicketAssignment ---------------------------------------------------------------------------------------------------
 	
 	@RequestMapping("/ticketassignment_1.do")
-	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session,
-			Model model) {
+	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session, Model model) {
 		String UId = (String) session.getAttribute("sessionId");
 
 		performancereservationviewVO.setUId(UId);

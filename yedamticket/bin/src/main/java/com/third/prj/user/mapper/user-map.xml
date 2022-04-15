@@ -23,7 +23,7 @@
 		<result column="DOCID" property="docId" />
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 	</resultMap>
 
 	<resultMap
