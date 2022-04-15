@@ -13,7 +13,7 @@
 						   , BIZNO
 						   , DEAL_AGREE_CD)
 		VALUES (#{name}
-			  , #{Cid}
+			  , #{CId}
 			  , #{pwd}
 			  , #{email}
 			  , #{addr}
@@ -25,7 +25,7 @@
 	<select id="cidChk" resultType="int">
 		SELECT COUNT(*)
 		FROM   COMPANY
-		WHERE  C_ID = #{Cid}
+		WHERE  C_ID = #{CId}
 	</select>
 	<select id="getTotal" resultType="int">
 		SELECT COUNT(*)
@@ -66,16 +66,27 @@
 	<select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">
 		SELECT * 
 		FROM COMPANY
-		WHERE C_ID = #{cid}
+		WHERE C_ID = #{CId}
 	</select>
 	
 	
 	<select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
 		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
 		FROM COMPANY
-		WHERE C_ID = #{Cid}
+		WHERE C_ID = #{CId}
 		AND PWD = #{pwd}
 	</select>
-
+	
+	<update id="companyUpdate" parameterType="com.third.prj.company.service.CompanyVO">
+		UPDATE COMPANY
+		<set>
+			<if test="email != null"> EMAIL = #{email},</if>
+			<if test="pwd != null"> PWD = #{pwd},</if>
+			<if test="name != null"> NAME = #{name},</if>
+			<if test="phone != null"> PHONE = #{phone},</if>
+			<if test="addr != null"> ADDR = #{addr},</if>
+		</set>
+		WHERE C_ID = #{CId}
+	</update>
 	
 </mapper>

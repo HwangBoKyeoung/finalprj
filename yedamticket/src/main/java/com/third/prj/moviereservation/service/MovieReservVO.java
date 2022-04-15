@@ -18,6 +18,6 @@ public class MovieReservVO {
 	private String seatName; // 영화 좌석번호
 	private String docId; // 영화 코드
 	private String name; // 영화 이름
-	private String Uid;
+	private String UId;
 
 }

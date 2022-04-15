@@ -14,7 +14,7 @@ public class PointVO {
 	private int pay;
 	private String cancelCd;
 	private int payNo;
-	private String Uid;
+	private String UId;
 	private String buyCtntCd;
 	
 }

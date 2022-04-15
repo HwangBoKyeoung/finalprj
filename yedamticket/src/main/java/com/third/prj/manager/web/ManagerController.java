@@ -113,8 +113,9 @@ public class ManagerController {
 				msg = "로그인 성공";
 				url = "homeM.do";	
 				session.setAttribute("sessionId", vo.getMId());
-				session.setAttribute("sessionName", vo.getName());
-				session.setAttribute("sessionAuthCd", vo.getAuthCd());
+				session.setAttribute("sessionName", login.getName());
+				session.setAttribute("sessionDp", login.getDepart());
+				session.setAttribute("sessionAuthCd", login.getAuthCd());
 				mv.addObject("msg", msg);
 				mv.addObject("url", url);
 				mv.setViewName("company/alert");

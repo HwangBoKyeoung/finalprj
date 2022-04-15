@@ -14,13 +14,13 @@ public class PerformanceReservationVO {
 	private int PReservNo;
 	private Date reserveDttm;
 	private String status;
-	private String Uid;
+	private String UId;
 	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
 	private String Rid;
 	private String cancelCd;
-	private String UId;
+	//private String UId;
 	private String loc;//구역
 
 }

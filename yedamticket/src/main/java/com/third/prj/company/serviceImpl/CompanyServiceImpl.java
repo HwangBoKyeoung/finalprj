@@ -49,5 +49,11 @@ public class CompanyServiceImpl implements CompanyService {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
+
+	@Override
+	public int companyUpdate(CompanyVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.companyUpdate(vo);
+	}
 	
 }
