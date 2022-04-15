@@ -12,13 +12,13 @@
 		<div class="card">
 			<div class="card-body">
 				<h4 class="card-title">Performance Delete List</h4>
-				<p class="card-description">기업회원마이페이지</p>
+				<p class="card-description">공연 삭제요청 페이지</p>
 
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>공연 번호</th>
 							<th>공연 이름</th>
+							<th>기업 아이디</th>
 							<th>삭제 사유</th>
 							<th>신청 현황</th>
 						</tr>
@@ -26,9 +26,9 @@
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
 							<tr
-								onclick="location.href='deleteRequestSelect.do?delReqNo=${per.delReqNo }'">
-								<td>${per.performanceVO.PNo}</td>
+								onclick="location.href='deleteRequestPFSelect.do?delReqNo=${per.delReqNo }'">
 								<td>${per.performanceVO.name}</td>
+								<td>${per.performanceVO.CId}</td>
 								<td>${per.performanceVO.content}</td>
 								<td>${per.deleteCd}</td>
 							</tr>

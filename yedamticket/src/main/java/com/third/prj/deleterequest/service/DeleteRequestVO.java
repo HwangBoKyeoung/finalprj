@@ -21,6 +21,7 @@ public class DeleteRequestVO {
 	private String content;
 	private int mvNo;
 	private int pNo;
+	private String refusal;
 	
 	private PerformanceVO performanceVO;
 	private MovieVO movieVO;

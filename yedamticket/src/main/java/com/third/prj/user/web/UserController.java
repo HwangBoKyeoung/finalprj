@@ -309,10 +309,10 @@ public class UserController {
 
 //	}
 
-	@RequestMapping("/companyMyPage.do")
-	public String companyMyPage() {
-		return "companyMyPage/companyMyPage";
-	}
+//	@RequestMapping("/companyMyPage.do")
+//	public String companyMyPage() {
+//		return "companyMyPage/companyMyPage";
+//	}
 
 	// 아이디 찾기
 	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)

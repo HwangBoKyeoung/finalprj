@@ -14,7 +14,7 @@ public class HomeController {
 	private MovieService movieDao;
   
   @Autowired 
-	SearchService searchDao; 
+	private SearchService searchDao; 
 
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {

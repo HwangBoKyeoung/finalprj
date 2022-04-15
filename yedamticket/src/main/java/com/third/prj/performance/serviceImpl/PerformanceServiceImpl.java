@@ -20,8 +20,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public PerformanceMapper mapper;
 	
 	@Override
-	public int perforUpdate(PerformanceVO vo) {
-		return mapper.perforUpdate(vo);
+	public int performanceUpdate(PerformanceVO vo) {
+		return mapper.performanceUpdate(vo);
 	}
 
 
@@ -35,10 +35,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return mapper.companyPerforSelectList(cri);
 	}
 
-	@Override
-	public int procedureCall(Map map) {
-		return mapper.procedureCall(map);
-	}
 
 	@Override
 	public List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo) {
@@ -89,7 +85,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 		// TODO Auto-generated method stub
 		return mapper.pSelect(vo);
 	}
-
 
 	@Override
 	public List<PerformanceVO> locPlist(PerformanceVO vo) {

@@ -25,7 +25,7 @@
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link" href="managerMovieDeleteList.do">Management</a></li>
-                  <li class="nav-item"><a class="nav-link" href="movieSales.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="movieSalesChart.do">Sales</a></li>
                   <li class="nav-item"><a class="nav-link" href="moviePopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
@@ -37,13 +37,22 @@
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link" href="managerPerforDeleteList.do">Management</a></li>
-                  <li class="nav-item"><a class="nav-link" href="concertsales.do">Sales</a></li>
-                  <li class="nav-item"><a class="nav-link" href="concertpopularitychart.do">Popularity Chart</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforSalesChart.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforpopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
-            <li class="nav-item"><a class="nav-link" href="managerInquiryList.do"> <span class="menu-title">Inquiry</span>
-                <i class="mdi mdi-format-list-bulleted menu-icon"></i>
-            </a></li>            
+             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">Inquiry</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="managerInquiryList.do">Inquiry</a></li>
+                  <li class="nav-item"><a class="nav-link" href="managerFaq.do">FAQ</a></li>
+                   <li class="nav-item"><a class="nav-link" href="managerNotice.do">Notice</a></li>
+                </ul>
+              </div></li>           
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#general-pages"
               aria-expanded="false" aria-controls="general-pages"> 
               <span class="menu-title">Member</span> <i class="menu-arrow"></i> 

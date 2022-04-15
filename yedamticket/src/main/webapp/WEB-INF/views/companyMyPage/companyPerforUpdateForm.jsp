@@ -7,8 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="./resources/users/js/core/jquery.min.js"
-	type="text/javascript"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 	<div>
@@ -18,7 +17,7 @@
 					<h4 class="card-title">Performance Update</h4>
 					<p class="card-description"></p>
 					<form class="forms-sample" action="companyPerforUpdate.do"
-						method="post">
+						method="post" enctype="multipart/form-data">
 						<div class="form-group row">
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">공연번호</label>
@@ -87,14 +86,11 @@
 								<input type="text" class="form-control" id="price" name="price" value="${pers.price }">
 							</div>
 						</div>
-						<div class="form-group row">
+					 <div>
 							<label for="exampleInputConfirmPassword2"
-								class="col-sm-3 col-form-label">공연이미지</label>
-							<div class="col-sm-9">
-								<input type="text" class="form-control" id="lname" name="lname" value="${images.iname }">
-							</div>
+								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">포스터</label>
+							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
 						</div>
-						<input type="hidden" id="fileCd" name="fileCd" value="${images.fileCd }">
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>

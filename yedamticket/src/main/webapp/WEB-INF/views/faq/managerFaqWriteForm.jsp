@@ -13,7 +13,7 @@
 			<div class="col-md-8">
 				<br>
 				<h2 class="text-center">FAQ 작성</h2>
-				<form id="frm" action="faqWrite.do" method="post">
+				<form id="frm" action="managerFaqWrite.do" method="post">
 					<table class="table">
 						<tbody>
 							<tr>

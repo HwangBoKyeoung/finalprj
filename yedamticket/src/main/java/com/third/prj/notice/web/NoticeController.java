@@ -26,20 +26,8 @@ public class NoticeController {
 		return "notice/noticeList";
 	}
 
-	@RequestMapping("/noticeWriteForm.do")
-	public String noticeWriteForm() {
-		return "notice/noticeWriteForm";
-	}
-
-	@RequestMapping("/noticeWrite.do")
-	public String noticeWrite(NoticeVO vo) {
-		int n = noticeDao.noticeInsert(vo);
-
-		if (n != 0) {
-			return "redirect:noticeList.do";
-		}
-		return "notice/noticeError";
-	}
+	
+	
 
 	@RequestMapping("/noticeSelect.do")
 	public String noticeSelect(NoticeVO vo, Model model) { // model객체는 처리된 결과를 실어서 페이지로 보낸다
@@ -55,29 +43,54 @@ public class NoticeController {
 
 	}
 
-	@RequestMapping("/noticeUpdateForm.do")
+	@RequestMapping("/managerNoticeUpdateForm.do")
 	public String noticeUpdateForm(NoticeVO vo, Model model) {
 		vo = noticeDao.noticeSelect(vo);
 		model.addAttribute("notice", vo);
-		return "notice/noticeUpdateForm";
+		return "manager/manager/managerNoticeUpdateForm";
 	}
 
-	@RequestMapping("/noticeUpdate.do")
+	@RequestMapping("/managerNoticeUpdate.do")
 	public String noticeUpdate(NoticeVO vo) {
 		int n = noticeDao.noticeUpdate(vo);
 
 		if (n != 0) {
-			return "redirect:noticeList.do";
+			return "redirect:managerNotice.do";
 		}
 		return "notice/noticeError";
 	}
 
-	@RequestMapping("/noticeDelete.do")
+
+	
+	//관리자페이지
+	@RequestMapping("/managerNotice.do")
+	public String managerNotice(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, noticeDao.getTotal(cri)); //(기준, 토탈)
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달		
+		model.addAttribute("list", noticeDao.getList(cri)); //게시글전달
+		return "manager/manager/managerNoticeList";
+	}
+	@RequestMapping("/managerNoticeWriteForm.do")
+	public String noticeWriteForm() {
+		return "manager/manager/managerNoticeWriteForm";
+	}
+	
+	@RequestMapping("/managerNoticeWrite.do")
+	public String noticeWrite(NoticeVO vo) {
+		int n = noticeDao.noticeInsert(vo);
+
+		if (n != 0) {
+			return "redirect:managerNotice.do";
+		}
+		return "notice/noticeError";
+	}
+	
+	@RequestMapping("/managerNoticeDel.do")
 	public String noticeDelete(NoticeVO vo) {
 		int n = noticeDao.noticeDelete(vo);
 
 		if (n != 0) {
-			return "redirect:noticeList.do";
+			return "redirect:managerNotice.do";
 		}
 		return "notice/noticeError";
 	}

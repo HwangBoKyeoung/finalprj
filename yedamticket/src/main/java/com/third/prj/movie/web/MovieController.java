@@ -166,7 +166,22 @@ public class MovieController {
 	
 	//영화 수정 페이지(프로시저 ->rjh(2022/04/05)
 	@RequestMapping("/companyMovieUpdate.do")
-	public String companyMovieUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo) {
+	public String companyMovieUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo, MultipartFile file) {
+		
+		String fileName = file.getOriginalFilename();
+		String id = UUID.randomUUID().toString();
+		String load = upLoadPath;
+		String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
+		File target = new File(load,targetFile);
+		try {
+			FileCopyUtils.copy(file.getBytes(), target);
+			vo.setFileCd("PF_VIDEO");
+			vvo.setVname(fileName);
+			vvo.setVrenames(targetFile);
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
 		map.put("vm_vno", vo.getMvNo());
 		map.put("mv_name", vo.getName());
 		map.put("mv_genre", vo.getGenre());
@@ -177,10 +192,10 @@ public class MovieController {
 		map.put("mv_cid", vo.getCId());
 		map.put("mv_actor", vo.getActor());
 		map.put("mv_vname", vvo.getVname());
+		map.put("mv_vrname", vvo.getVrenames());
 		map.put("mv_cd", vo.getFileCd());
 		
 		movieDao.procedureCall(map);
-		System.out.println(vvo);
 		
 		return "redirect:companyMovieList.do";
 	}

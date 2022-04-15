@@ -79,8 +79,8 @@ public interface UserService {
 	// 유저 포인트 확인
 	UserPointViewVo userPoint(UserPointViewVo vo);
 
-	// 페이징(관리자 - 회원리스트페이지)
-	int getTotal(CriteriaVO cri);
+	//페이징(관리자 - 회원리스트페이지)
+	 int getTotal(CriteriaVO cri);
 	
 
 	// 아이디 찾기

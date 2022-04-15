@@ -18,7 +18,7 @@
 		<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
 				OR U_ID LIKE '%'||#{searchName}||'%')</if>
 			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
-			<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'KIND'">KIND LIKE '%'||#{searchName}||'%'</if>
 			<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
 	
@@ -33,14 +33,14 @@
 			FROM INQUIRY
 			WHERE
 			]]>
-	<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
-		OR U_ID LIKE '%'||#{searchName}||'%')</if>
-	<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
-	<if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
-	<if test="searchType == null or searchType ==''"> 1 = 1</if>
+			<if test="searchType == 'ALL'">(TITLE LIKE '%'||#{searchName}||'%'
+				OR U_ID LIKE '%'||#{searchName}||'%')</if>
+			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'KIND'">KIND LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
 			<![CDATA[
 			ORDER BY IN_NO )A)
-		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	
@@ -51,7 +51,7 @@
 	</select>
 	
 	<select id="inquirySelect" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND 
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND
 		FROM INQUIRY
 		WHERE IN_NO=#{inNo}
 	</select>

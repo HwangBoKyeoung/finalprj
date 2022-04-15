@@ -36,31 +36,32 @@
 					</table>
 					<br>
 					<div id="content" align="center">
-						<c:if test="${pageVO.prev }">
-							<!-- 이전버튼 활성화 여부 -->
-							<a href="manager.do?pageNum=${pageVO.startPage-1 }"> <input
-								type="button" value="이전" class="btn btn-secondary"></a>
-						</c:if>
-						<!-- pageNum -->
-						<c:forEach var="num" begin="${pageVO.startPage }"
-							end="${pageVO.endPage }">
-							<a class="${pageVO.pageNum == num ? 'active': '' }"
-								href="manager.do?pageNum=${num }"> <input type="button"
-								value="${num }" class="btn btn-secondary"></a>
-						</c:forEach>
-						<!-- 다음버튼 -->
-						<c:if test="${pageVO.next }">
-							<a href="manager.do?pageNum=${pageVO.endPage+1 }"> <input
-								type="button" value="다음" class="btn btn-secondary"></a>
-						</c:if>
-					</div>
+					<c:if test="${pageVO.prev }">
+						<!-- 이전버튼 활성화 여부 -->
+						<a href="manager.do?pageNum=${pageVO.startPage-1 }"> <input
+							type="button" value="이전" class="btn btn-secondary"></a>
+					</c:if>
+					<!-- pageNum -->
+					<c:forEach var="num" begin="${pageVO.startPage }"
+						end="${pageVO.endPage }">
+						<a class="${pageVO.pageNum == num ? 'active': '' }"
+							href="manager.do?pageNum=${num }"> <input type="button"
+							value="${num }" class="btn btn-secondary"></a>
+					</c:forEach>
+					<!-- 다음버튼 -->
+					<c:if test="${pageVO.next }">
+						<a href="manager.do?pageNum=${pageVO.endPage+1 }"> <input
+							type="button" value="다음" class="btn btn-secondary"></a>
+					</c:if>
+					<input type="button" class="btn btn-gradient-primary me-2" onclick="location.href='managerForm.do'" value="등록">
+				</div>
 					<div class="col-3">
 						<div class="input-group mb-3" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
 								<option value="ALL" ${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-								<option value="DEPART" ${pageVO.cri.searchType eq 'DEPART' ? 'selected' : '' }>아이디</option>
+								<option value="DEPART" ${pageVO.cri.searchType eq 'DEPART' ? 'selected' : '' }>부서</option>
 								<option value="NAME" ${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>이름</option>
-								<option value="MID" ${pageVO.cri.searchType eq 'MID' ? 'selected' : '' }>이메일</option>
+								<option value="MID" ${pageVO.cri.searchType eq 'MID' ? 'selected' : '' }>아이디</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }" class="form-control"
 								aria-label="Text input with dropdown button">

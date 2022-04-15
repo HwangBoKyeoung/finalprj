@@ -19,12 +19,12 @@ textarea {
 		<div class="col-md-2"></div>
 		<div class="col-md-8"><br>
 			<h2 class="text-center">공지사항 작성</h2>
-			<form id="frm" action="noticeWrite.do" method="post">
+			<form id="frm" action="managerNoticeWrite.do" method="post">
 				<table class="table">
 					<tr>
 						<td>작성자</td>
 						<td><input type="text" id="writer" name="writer" 
-							value="${sessionId }" readonly="readonly"></td>
+							value="관리자" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<td>작성일자</td>
@@ -46,7 +46,7 @@ textarea {
 						<td colspan="2" class="text-center"><input type="submit"
 							value="등록" class="btn btn-success"> <input type="reset"
 							value="취소" class="btn btn-warning"> <input type="button"
-							onclick="location.href='noticeList.do'" value="목록"
+							onclick="location.href='managerNotice.do'" value="목록"
 							class="btn btn-primary"></td>
 					</tr>
 

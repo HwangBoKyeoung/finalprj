@@ -17,7 +17,6 @@ public class InquiryVO {
 	private String UId;
 	@JsonFormat(pattern = "yyyy-MM-dd", timezone="Asia/Seoul")
 	private Date inDt;
-	private String kind;
-
+	private String kind;//문의유형(RJH)
 	
 }

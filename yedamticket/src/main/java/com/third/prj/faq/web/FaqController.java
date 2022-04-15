@@ -6,8 +6,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.third.prj.faq.service.CriteriaVO;
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.faq.service.FaqVO;
+import com.third.prj.faq.service.PageVO;
 
 @Controller
 public class FaqController {
@@ -21,19 +23,19 @@ public class FaqController {
 		return "faq/faqList";
 	}
 
-	@RequestMapping("/faqWriteForm.do")
+	@RequestMapping("/managerFaqWriteForm.do")
 	public String faqWriteForm() {
-		return "faq/faqWriteForm";
+		return "manager/faq/managerFaqWriteForm";
 	}
 
-	@RequestMapping("/faqWrite.do")
+	@RequestMapping("/managerFaqWrite.do")
 	public String faqWrite(FaqVO vo) {
 		int n = faqDao.faqInsert(vo);
 
 		if (n != 0) {
-			return "redirect:faqList.do";
+			return "redirect:managerFaq.do";
 		} else {
-			return "faq/faqError";
+			return "manager/faq/faqError";
 		}
 	}
 	
@@ -50,29 +52,43 @@ public class FaqController {
 
 	}
 
-	@RequestMapping("/faqUpdateForm.do")
+	@RequestMapping("/managerFaqUpdateForm.do")
 	public String faqUpdate(FaqVO vo, Model model) {
 		vo = faqDao.faqSelect(vo);
 		model.addAttribute("faqs", vo);
-		return "faq/faqUpdateForm";
+		return "manager/faq/managerFaqUpdateForm";
 	}
 
-	@RequestMapping("/faqUpdate.do")
-	public String faqUpdate(FaqVO vo) {
-		int n = faqDao.faqUpdate(vo);
-
-		if (n != 0) {
-			return "redirect:faqList.do";
-		}
-		return "faq/faqError";
-	}
+	
 	
 	@RequestMapping("/faqDelete.do")
 	public String faqDelete(FaqVO vo) {
 		int n = faqDao.faqDelete(vo);
 
 		if(n !=0) {
-			return "redirect:faqList.do";
+			return "redirect:managerFaq.do";
+		}
+		return "faq/faqError";
+	}
+	//관리자페이지
+	@RequestMapping("/managerFaq.do")
+	public String managerFaq(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, faqDao.getTotal(cri));
+		model.addAttribute("faqs", faqDao.managerFaqList(cri));
+		model.addAttribute("pageVO",pageVO);
+		return "manager/manager/managerFaqList";
+	}
+	@RequestMapping("/managerFaqSelect.do")
+	public String managerFaqSelect(Model model, FaqVO vo) {
+		model.addAttribute("faqs", faqDao.faqSelect(vo));
+		return "manager/manager/managerFaqUpdateForm";
+	}
+	@RequestMapping("/managerFaqUpdate.do")
+	public String faqUpdate(FaqVO vo) {
+		int n = faqDao.faqUpdate(vo);
+
+		if (n != 0) {
+			return "redirect:managerFaq.do";
 		}
 		return "faq/faqError";
 	}
