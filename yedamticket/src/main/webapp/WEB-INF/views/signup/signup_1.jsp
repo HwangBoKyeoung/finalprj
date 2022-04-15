@@ -5,7 +5,6 @@
 <meta charset="UTF-8">
 <link rel="apple-touch-icon" sizes="76x76" href="./resources/users/img/apple-icon.png">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-<link rel="image_src" href="./resources/users/img/bg11.jpg"/>
 <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
 <link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
@@ -13,7 +12,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 </head>
-<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+<div class="section section-signup">
 	<div class="container">
 		<div class="row">
 			<div class="card card-signup" data-background-color="orange">

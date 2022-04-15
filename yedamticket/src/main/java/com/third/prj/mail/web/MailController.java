@@ -22,6 +22,7 @@ public class MailController {
 		return "signup/signup_2";
 	}
 	
+	// 일반회원 메일전송
 	@RequestMapping(value = "mailSending.do")
 	public String mailSending(HttpServletRequest request, HttpSession session) {
 		
@@ -48,6 +49,7 @@ public class MailController {
 		return "forward:/mailChk.do"; 
 	}
 	
+	// 기업회원 메일전송
 	@RequestMapping(value = "mailSending2.do")
 	public String mailSending2(HttpServletRequest request, HttpSession session) {
 		
