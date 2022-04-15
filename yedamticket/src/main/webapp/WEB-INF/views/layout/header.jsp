@@ -140,20 +140,19 @@ h1 {
 
 </style>-->
 
-/* #show p {
+<!--  #show p {
 	position: relative;
 	width: 100px;
 	height: 100px;
 	background-color: red;
-} */
+} 
 
-/* 
+
 #showDetail {border:2px solid yellowgreen; width:200px; height:40px; margin:100px; position:relative;  }
 #box {width:200px; height:200px;position:absolute; top:0; left:0;}
-#box p {text-align:center;height:40px;line-height:40px;} */
+#box p {text-align:center;height:40px;line-height:40px;} 
 
-
-</style>
+ -->
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
@@ -251,6 +250,12 @@ h1 {
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
+							<a class="dropdown-item" href="./index.html"> <i
+								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항</a> 
+								<c:if test="${not empty sessionId}">
+									<a class="dropdown-item" onclick="sessionChk();" href='ticketmarket_1.do'>
+									<i class="fa-solid fa-handshake fa-2x "></i> 자유거래</a>
+								</c:if>
 							<a class="dropdown-item" href="noticeList.do"> <i
 								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항
 							</a> <a class="dropdown-item" target="_blank"
@@ -333,7 +338,9 @@ h1 {
 			</div>
 		</div>
 	</nav>
+	
 	<div id="show"></div>
+	
 	<script src="resources/users/js/practice.js"></script>
 	<script>
 		$("#icon").on("click", function() {

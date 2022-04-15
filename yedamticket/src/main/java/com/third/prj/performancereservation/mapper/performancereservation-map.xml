@@ -18,7 +18,7 @@
 		<result property="seatNo" column="seatno"/>
 		<result property="frDt" column="frdt"/>
 		<result property="time" column="time"/>
-		<result property="Pno" column="p_no"/>
+		<result property="Pno" column="p_no"/> 
 		<result property="name" column="name"/>
 		<result property="content" column="content"/>
 		<result property="CId" column="c_id"/>
@@ -27,13 +27,19 @@
 		<result property="loc" column="loc"/>
 		<result property="addr" column="addr"/>
 		<result property="price" column="price"/>
-		<result property="Rid" column="r_id"/>
+		<result property="RId" column="r_id"/>
 	</resultMap>
 	
 	<select id="userTicket" resultMap="prvMap">
 		SELECT *
 		FROM   usersticket
 		WHERE  u_id = #{UId}
+	</select>
+
+	<select id="TicketMarket" resultType="com.third.prj.performancereservation.service.PerformanceReservationViewVO">
+		SELECT *
+		FROM   usersticket
+		WHERE  status = 'F'
 	</select>
 
 	<!-- <select id="selectReservOne" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">
@@ -46,6 +52,18 @@
 		UPDATE performance_reservation
 		SET    status = 'P', r_id = null
 		WHERE  p_reserv_no = #{PReservNo}
+	</update>
+
+	<update id="ticketReserv" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">
+		UPDATE performance_reservation
+		SET    status = 'W', r_id = #{RId}
+		WHERE  p_reserv_no = #{PReservNo}
+	</update>
+
+	<update id="ticketToMarket" parameterType="int">
+		UPDATE performance_reservation
+		SET    status = 'F'
+		WHERE  p_reserv_no = #{PRservNo}
 	</update>
 
 	<!-- 황규복 -->

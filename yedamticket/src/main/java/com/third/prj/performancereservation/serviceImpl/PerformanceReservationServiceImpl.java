@@ -27,6 +27,11 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 	}
 
 	@Override
+	public int ticketReserv(PerformanceReservationVO performanceReservationVO) {
+		return mapper.ticketReserv(performanceReservationVO);
+	}
+
+	@Override
 	public int pReservation(PerformanceReservationVO prvo) {
 		// TODO Auto-generated method stub
 		return mapper.pReservation(prvo);
@@ -44,4 +49,13 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 		return mapper.userTicket(performancereservationVO);
 	}
 
+	@Override
+	public int ticketToMarket(int PReservNo) {
+		return mapper.ticketToMarket(PReservNo);
+	}
+
+	@Override
+	public List<PerformanceReservationViewVO> TicketMarket(PerformanceReservationViewVO performanceReservationViewVO) {
+		return mapper.TicketMarket(performanceReservationViewVO);
+	}
 }

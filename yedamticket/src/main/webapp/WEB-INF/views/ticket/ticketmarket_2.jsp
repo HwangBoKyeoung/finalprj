@@ -22,17 +22,26 @@
       }
 </style>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"> 
 </head>
 <body>
-	<form action="ticketassignment_personal_4.do" method="POST">
+	<form action="ticketmarket_3.do" method="POST">
 	<input type="hidden" name="PReservNo" id="PReservNo" value="${PReservNo }">
 	<input type="hidden" name="RId" id="RId" value="${RId }">
+	<input type="hidden" name="name" id="name" value="${name }">
+	<input type="hidden" name="seatNo" id="seatNo" value="${seatNo }">
+	<input type="hidden" id="loc" name="loc" value=${loc }>
+	<input type="hidden" name="price" id="price" value="${price }">
+	<input type="hidden" name="buyerAddr" id="buyerAddr" value="${buyerAddr }">
+	<input type="hidden" name="ownerAddr" id="ownerAddr" value="${ownerAddr }">
+	<input type="hidden" name="UId" id="UId" value="${UId }">
+	<input type="hidden" name="date" id="date" value="${date }">
 	<div class="no-drag" style="margin:auto; max-width: 30%;">
 	  <h2>
 	    채 권 양 도 통 지 서<br />
 	    ----------------------------
 	  </h2>
-      <p>수신인 : ${RId }</p>
+      <p>수신인 : ${sessionId }</p>
       <p>주 소 : ${buyerAddr }</p>
       <br />
       
@@ -42,11 +51,12 @@
       <p class="pctr">${today }</p>
       <br />
       
-      <p class="pctr">발신인(채권양도인) : ${sessionId }</p>
+      <p class="pctr">발신인(채권양도인) : ${UId }</p>
       <p id="ownerAdd" class="pctr">주소 : ${ownerAddr }</p>
       <br>
 	</div>
 	<div align="right" style="margin:auto; max-width: 30%;">
+		<i class="fas fa-exclamation-circle" title="10% 수수료가 부가된 가격입니다." style="cursor:pointer;" aria-hidden="true"></i>
 		<input type="submit" class="btn" value="확인">
 		<input type="button" class="btn btn-danger" onclick="location.href='ticketassignment_1.do'" value="취소">
 	</div>

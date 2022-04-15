@@ -9,54 +9,54 @@ import org.apache.ibatis.annotations.Param;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointVO;
-import com.third.prj.search.service.SearchVO;
 
 public interface UserService {
 	List<UserVO> userList();
 
 //	로그인
-	UserVO userSelect(UserVO vo);
+	UserVO userSelect(UserVO userVO);
 
 //	유저 검색
-	UserVO userSelectOne(UserVO vo);
+	UserVO userSelectOne(UserVO userVO);
 //	회원가입
 
 	List<UserVO> userList(CriteriaVO cri);
 
-	int userInsert(UserVO vo);
+	int userInsert(UserVO userVO);
 
 //	회원정보 수정
-	int userUpdate(UserVO vo);
+	int userUpdate(UserVO userVO);
 
 //	 회원 탈퇴
-	int userDelete(UserVO vo);
+	int userDelete(UserVO userVO);
 
 	int userPointUpdate(@Param("point") int point, @Param("id") String id);
 
 //	아이디체크
-	int idChk(UserVO vo);
+	int idChk(UserVO userVO);
 
 //	security
-	UserVO getUser(UserVO vo);
+	UserVO getUser(UserVO userVO);
 
 //	이메일체크
 	int emailCheck(String email);
 
 //  카카오 회원가입	
-	int kakaoInsert(UserVO vo);
+	int kakaoInsert(UserVO userVO);
 
 	// 포인트 충전
 	int userCharge(Map<String, Object> map);
 
 	// 로그인 체크용 메서드
-	public UserVO loginChk(UserVO vo);
+	public UserVO loginChk(UserVO userVO);
 
-	public UserVO loginChk(UserVO vo, HttpSession session);
+	public UserVO loginChk(UserVO userVO, HttpSession session);
 
 	// 유저포인트리스트
-	List<UserPointViewVo> pointBuyList(UserPointViewVo vo);
+	List<UserPointViewVo> pointBuyList(UserPointViewVo userVO);
 
 	// 영화 예매 내역 리스트
 	public List<MovieReservVO> mvRList(UserCriteriaVO cri);
@@ -79,20 +79,39 @@ public interface UserService {
 	// 유저 포인트 확인
 	UserPointViewVo userPoint(UserPointViewVo vo);
 
-	//페이징(관리자 - 회원리스트페이지)
-	 int getTotal(CriteriaVO cri);
-	
+	// 페이징(관리자 - 회원리스트페이지)
+	int getTotal(CriteriaVO cri);
 
+	// 로그인 시 예약중인 공연 있는지 확인
+	int reservChk(UserVO userVO);
+
+	// 양수 내역 리스트화
+	public List<PerformanceReservationVO> getprList(UserCriteriaVO cri);
+	
+	// 양수 내역 리스트
+	public List<PerformanceReservationVO> prList(UserCriteriaVO cri);
+	
+	// 유저정보 불러오기
+	public UserVO getUser2(String Uid);
+	
+	// 개인 양수
+	int reservedBuy(Map<String, Object> map);
+	
+	// 자유시장 구매
+	int marketBuy(Map<String, Object> map);
+	
 	// 아이디 찾기
 	String searchId(@Param("name") String name, @Param("phone") String phone);
 	
-	
+	//비밀번호 찾기
+	boolean findPw(UserVO vo); 
 	
 	//이메일발송
 	void sendEmail(UserVO vo, String pw, String div);
 	
-	// 비밀번호찾기
-	boolean findPw(UserVO vo);
-
-
+	// 마이페이지 회원정보
+    UserVO selectByMemberId(@Param("UId") String UId);
+    
+    // 비밀번호 찾기 시 회원 권한 변경
+    int updatePassword2(UserVO vo);
 }

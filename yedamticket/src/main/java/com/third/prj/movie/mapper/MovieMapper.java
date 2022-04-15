@@ -9,7 +9,6 @@ import com.third.prj.movie.service.MovieVO;
 import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.point.service.PointCriteriaVO;
 
-import com.third.prj.movie.service.movieCriteria;
 
 public interface MovieMapper {
 	//황규복

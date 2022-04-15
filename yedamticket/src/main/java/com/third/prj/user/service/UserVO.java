@@ -35,7 +35,6 @@ public class UserVO implements UserDetails{
 	private Date rdt;
 	private String role;
 	
-	//private UserCriteriaVO cri;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

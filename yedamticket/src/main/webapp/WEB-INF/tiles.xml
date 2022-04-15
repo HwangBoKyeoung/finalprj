@@ -18,20 +18,24 @@
 		</definition>
 		
 		
-	<!-- per -->	
+	<!-- per -->
+		<definition name="signup" template="/WEB-INF/views/layout/layoutMail.jsp">
+			<put-attribute name="title" value="MyWebSite"/>
+			<put-attribute name="body" value=""/>
+		</definition>
+	
+	    <definition name="signup/*/*" extends="signup">
+      		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+    	</definition>
+	
 		<definition name="my.p" template="/WEB-INF/views/layout/layoutP.jsp">
 			<put-attribute name="title" value="MyWebSite" />
-		
-	
 			<put-attribute name="body" value="" />
-	
 		</definition>
 	
 		<definition name="p/*/*" extends="my.p">
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
-		
-		
 		
 		<definition name="my.user" template="/WEB-INF/views/layout/layoutO.jsp">
 			<put-attribute name="title" value="MyWebSite" />

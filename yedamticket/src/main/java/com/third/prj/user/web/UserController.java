@@ -1,6 +1,6 @@
 package com.third.prj.user.web;
 
-import javax.inject.Inject; 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -18,9 +18,11 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.movie.service.MovieService;
+import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
+import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointPageVO;
@@ -50,7 +52,6 @@ public class UserController {
 
 	@Autowired
 	private MovieService movieDao;
- 
 
 	@Inject
 	private BCryptPasswordEncoder pwdEncoder;
@@ -59,7 +60,7 @@ public class UserController {
 
 	@RequestMapping("/signup_1.do")
 	public String signUp_1() {
-		return "signup/signup_1";
+		return "signup/signup/signup_1";
 	}
 
 	@RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)
@@ -69,9 +70,13 @@ public class UserController {
 	}
 
 	@PostMapping("/signup_4.do")
-	public String signUp_4(UserVO userVO, Model model) {
+	public String signUp_4(UserVO userVO, Model model, HttpServletRequest httpServletRequest) {
 		String pwd = userVO.getPwd();
 		String encryptedPwd = pwdEncoder.encode(pwd);
+		String addr = httpServletRequest.getParameter("addr");
+		String addr2 = httpServletRequest.getParameter("addr2");
+		String addr3 = addr + " " + addr2;
+		userVO.setAddr(addr3);
 		userVO.setPwd(encryptedPwd);
 		int n = userDao.userInsert(userVO);
 		if (n != 0) {
@@ -140,8 +145,11 @@ public class UserController {
 		boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
 
 		if (login != null && pwdChk) {
-			msg = "로그인 성공";
+			int i = userDao.reservChk(vo);
+			msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
+
 			url = "home.do";
+
 			session.setAttribute("sessionId", vo.getUId());
 			session.setAttribute("sessionEmail", vo.getEmail());
 			session.setAttribute("sessionName", vo.getName());
@@ -157,10 +165,6 @@ public class UserController {
 			mv.addObject("url", url);
 			mv.setViewName("user/alert");
 		}
-
-		System.out.println("======================================");
-		System.out.println(vo);
-		System.out.println("======================================");
 		return mv;
 	}
 
@@ -188,8 +192,8 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-
 	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
+		
 		cri.setUId((String)session.getAttribute("sessionId"));
 		vo.setUId((String)session.getAttribute("sessionId"));
 		pvo.setUId((String)session.getAttribute("sessionId"));
@@ -238,7 +242,7 @@ public class UserController {
 		return "user/errorPage";
 	}
 
-
+	@RequestMapping("/mvReservList.do")
 	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
 		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
 		cri.setUId((String)session.getAttribute("sessionId"));
@@ -256,7 +260,9 @@ public class UserController {
 	}
 
 	@RequestMapping("pfReservList.do")
-	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo,UserVO vo, UserCriteriaVO cri ) {
+	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, UserVO vo,
+			UserCriteriaVO cri) {
+
 		cri.setUId((String)session.getAttribute("sessionId"));
 		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
 		
@@ -268,20 +274,57 @@ public class UserController {
 		model.addAttribute("user", userDao.userSelectOne(vo));
 		return "user/pfReservList";
 	}
+
+	
+//	userBuyList.do 경로의 메소드가 3개 존재. (협의해서 하나로 줄이기)
+	
+	@RequestMapping("/userBuyList.do")
+	public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
+			UserPointViewVo uvo) {
+
+		mvo.setUId((String) session.getAttribute("sessionId"));
+		pvo.setUId((String) session.getAttribute("sessionId"));
+		uvo.setUId((String) session.getAttribute("sessionId"));
+
+		model.addAttribute("userPoint", userDao.userPoint(uvo));
+
+		model.addAttribute("list3", userDao.pointBuyList(uvo));
+		model.addAttribute("list2", movieDao.mvBuyList(mvo));
+		model.addAttribute("list1", perDao.pfBuyList(pvo));
+		return "user/userBuyList";
+	}
+
+//	@RequestMapping("/userBuyList.do")
+//	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
+//		cri.setUId((String)session.getAttribute("sessionId"));
+//		PointPageVO pVO = new PointPageVO(cri,movieDao.mvBuyTotal(cri));
+//		model.addAttribute("pVO", pVO);
+//		model.addAttribute("list1", perDao.pfBuyList2(cri));
+//		model.addAttribute("list2", movieDao.mvBuyList2(cri));
+//		
+//		
+//		
+//		PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
+//		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+//		model.addAttribute("list3", userDao.pointBuyList2(cri));
+//		
+//		vo.setUId((String)session.getAttribute("sessionId"));
+//		model.addAttribute("user", userDao.userSelectOne(vo));
+//		return "user/userBuyList";
   
-@RequestMapping("/userBuyList.do")
-   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
-      cri.setUId((String) session.getAttribute("sessionId"));
-      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
-      model.addAttribute("pageVO", pageVO);
-      model.addAttribute("list1", perDao.pfBuyList2(cri));
-      model.addAttribute("list2", movieDao.mvBuyList2(cri));
-
-      vo.setUId((String) session.getAttribute("sessionId"));
-      model.addAttribute("user", userDao.userSelectOne(vo));
-
-      return "user/userBuyList";
-   }
+//@RequestMapping("/userBuyList.do")
+//   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+//      cri.setUId((String) session.getAttribute("sessionId"));
+//      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
+//      model.addAttribute("pageVO", pageVO);
+//      model.addAttribute("list1", perDao.pfBuyList2(cri));
+//      model.addAttribute("list2", movieDao.mvBuyList2(cri));
+//
+//      vo.setUId((String) session.getAttribute("sessionId"));
+//      model.addAttribute("user", userDao.userSelectOne(vo));
+//
+//      return "user/userBuyList";
+//   }
 
 	@RequestMapping("/userPointList.do")
 	public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
@@ -323,7 +366,7 @@ public class UserController {
 
 		return result;
 	}
-	
+
 	// 비밀번호 찾기 메일 발송
 	
     @RequestMapping(value = "/findpw.do", produces = "application/x-www-form-urlencoded; charset=UTF-8")

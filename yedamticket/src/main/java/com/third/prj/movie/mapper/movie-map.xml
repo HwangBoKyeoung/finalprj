@@ -93,7 +93,6 @@
 		<result property="buyCtntCd" column="BUY_CTNT_CD" />
 		<result property="UId" column="U_ID" />
 		<result property="tempPoint" column="TEMP_POINT"/>
-
 	</resultMap>
 
 

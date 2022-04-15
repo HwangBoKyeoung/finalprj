@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,52 +43,84 @@ body {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<h1>티켓양도</h1>
-<h3>${sessionId }님이 보유중인 티켓입니다!</h3>
-
+<c:set var="now" value="<%=new java.util.Date()%>" />
+<c:set var="sysdate"><fmt:formatDate value="${now}" pattern="yyyy-MM-dd" /></c:set> 
+${sessionId }
+<input type="button" value="공연" onclick="pffold();">
+<input type="button" value="영화" onclick="mvfold();" >
+	
+	<!-- ticket assginment  style="visibility: hidden"-->
+	<div id="pf_container">
+	
 	<div align="center">
 		<c:if test="${empty prInfo }">
 			<div>
-				<h1>보유중인 티켓이 없습니다..!</h1>
+				<h1>공연 예약 / 거래 현황이 없습니다.</h1>
 			</div>
 		</c:if>
- 
+ 		
  		<div id="widthslider" align="center">
+ 		<h1>공연 예약 / 거래 현황</h1>
 			<ul class="widthlist">
 				<c:forEach items="${prInfo }" var="pr">
-				<c:if test="${pr.status != 'W'}">
-				<li class="widthitem">
-					<div class="card" style="width: 20rem;">
-					  <div class="card-body">
-					    <p class="card-title" >공연 명 : ${pr.name }</p>
-					  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
-					    <p class="card-text">공연일정 : ${pr.frDt }</p>
-					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
-					    <p class="card-text">좌석구역 : ${pr.loc }</p>
-					    <p class="card-text">가  격 : ${pr.price }</p>
-					    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
-					  </div>
-					</div>
-				</li>
+				<c:if test="${pr.frDt > sysdate }">
+					<c:if test="${pr.status == 'P'}">
+					<li class="widthitem">
+						<div class="card" style="width: 20rem;">
+						  <div class="card-body">
+						    <p class="card-title" >공연 명 : ${pr.name }</p>
+						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+						    <p class="card-text">공연일정 : ${pr.frDt }</p>
+						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+						    <p class="card-text">좌석구역 : ${pr.loc }</p>
+						    <p class="card-text">가  격 : ${pr.price }</p>
+						    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
+						  </div>
+						</div>
+					</li>
+					</c:if>
+				</c:if>
+					</c:forEach>
+					
+				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.frDt > sysdate }">
+					<c:if test="${pr.status == 'F'}">
+					<li class="widthitem">
+						<div class="card" style="width: 20rem;">
+						  <div class="card-body" style="background-color : #add8e6">
+						    <p class="card-title" >공연 명 : ${pr.name }</p>
+						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+						    <p class="card-text">공연일정 : ${pr.frDt }</p>
+						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+						    <p class="card-text">좌석구역 : ${pr.loc }</p>
+						    <p class="card-text">가  격 : ${pr.price }</p>
+						    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="자유시장에 올라가있는 티켓입니다!">선택</button>
+						    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
+						  </div>
+						</div>
+					</li>
+					</c:if>
 				</c:if>
 				</c:forEach>
 				
 				<c:forEach items="${prInfo }" var="pr">
-				<c:if test="${pr.status == 'W'}">
-				<li class="widthitem">
-					<div class="card" style="width: 20rem;">
-					  <div class="card-body" style="background-color : gray">
-					    <p class="card-title" >공연 명 : ${pr.name }</p>
-					  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
-					    <p class="card-text">공연일정 : ${pr.frDt }</p>
-					    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
-					    <p class="card-text">좌석구역 : ${pr.loc }</p>
-					    <p class="card-text">가  격 : ${pr.price }</p>
-					    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="거래를 예정중인 티켓입니다!">선택</button>
-					    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
-					  </div>
-					</div>
-				</li>
+				<c:if test="${pr.frDt > sysdate }">
+					<c:if test="${pr.status == 'W'}">
+					<li class="widthitem">
+						<div class="card" style="width: 20rem;">
+						  <div class="card-body" style="background-color : gray">
+						    <p class="card-title" >공연 명 : ${pr.name }</p>
+						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+						    <p class="card-text">공연일정 : ${pr.frDt }</p>
+						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+						    <p class="card-text">좌석구역 : ${pr.loc }</p>
+						    <p class="card-text">가  격 : ${pr.price }</p>
+						    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="거래를 예정중인 티켓입니다!">선택</button>
+						    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
+						  </div>
+						</div>
+					</li>
+					</c:if>
 				</c:if>
 				</c:forEach>
 			</ul>
@@ -175,9 +209,183 @@ body {
 			<!-- Modal2 End -->
 			
 		</div>
+		</div>
 	</div>
 	
+	<!-- movie assignment -->
+	<div id="mv_container">
+	<div align="center">
+		<c:if test="${empty prInfo }">
+			<div>
+				<h1>영화 예약 현황이 없습니다.</h1>
+			</div>
+		</c:if>
+ 		
+ 		<div id="widthslider" align="center">
+ 		<h1>공연 예약 / 거래 현황</h1>
+			<ul class="widthlist">
+				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.frDt > sysdate }">
+					<c:if test="${pr.status == 'P'}">
+					<li class="widthitem">
+						<div class="card" style="width: 20rem;">
+						  <div class="card-body">
+						    <p class="card-title" >공연 명 : ${pr.name }</p>
+						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+						    <p class="card-text">공연일정 : ${pr.frDt }</p>
+						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+						    <p class="card-text">좌석구역 : ${pr.loc }</p>
+						    <p class="card-text">가  격 : ${pr.price }</p>
+						    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
+						  </div>
+						</div>
+					</li>
+					</c:if>
+				</c:if>
+					</c:forEach>
+					
+				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.frDt > sysdate }">
+					<c:if test="${pr.status == 'F'}">
+					<li class="widthitem">
+						<div class="card" style="width: 20rem;">
+						  <div class="card-body" style="background-color : #add8e6">
+						    <p class="card-title" >공연 명 : ${pr.name }</p>
+						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+						    <p class="card-text">공연일정 : ${pr.frDt }</p>
+						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+						    <p class="card-text">좌석구역 : ${pr.loc }</p>
+						    <p class="card-text">가  격 : ${pr.price }</p>
+						    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="자유시장에 올라가있는 티켓입니다!">선택</button>
+						    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
+						  </div>
+						</div>
+					</li>
+					</c:if>
+				</c:if>
+				</c:forEach>
+				
+				<c:forEach items="${prInfo }" var="pr">
+				<c:if test="${pr.frDt > sysdate }">
+					<c:if test="${pr.status == 'W'}">
+					<li class="widthitem">
+						<div class="card" style="width: 20rem;">
+						  <div class="card-body" style="background-color : gray">
+						    <p class="card-title" >공연 명 : ${pr.name }</p>
+						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
+						    <p class="card-text">공연일정 : ${pr.frDt }</p>
+						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
+						    <p class="card-text">좌석구역 : ${pr.loc }</p>
+						    <p class="card-text">가  격 : ${pr.price }</p>
+						    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="거래를 예정중인 티켓입니다!">선택</button>
+						    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
+						  </div>
+						</div>
+					</li>
+					</c:if>
+				</c:if>
+				</c:forEach>
+			</ul>
+			<input type="button" onclick="resetPosition()" value="원위치로" />
+			
+			<!-- Modal -->
+			<div class="modal fade" id="prInfoModal">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <form action="ticketassignment_2.do" method="POST">
+			      <div class="modal-body">
+								      
+			      	<h5 class="modal-title" id="Mname"></h5>
+			      	<input type="hidden" id="name" name="name">
+			      	
+			      	<p id="MPReservNo"></p>
+			      	<input type="hidden" id="PReservNo" name="PReservNo">
+			      	
+			      	<p id="Mdate"></p>
+			      	<input type="hidden" id="date" name="date">
+			      	
+			      	<p id="Mseat" ></p>
+			      	<input type="hidden" id="seatNo" name="seatNo">
+			      	
+			      	<p id="Mloc" ></p>
+			      	<input type="hidden" id="loc" name="loc">
+			      	
+			      	<p id="Mprice" ></p>
+			      	<input type="hidden" id="price" name="price">
+			      </div>
+			      <div class="modal-footer" style="display:block">
+			      	<p>맞으시면 확인 버튼을 눌러주세요.         </p><br>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			        <input type="submit" class="btn btn-primary" value="확인">
+			      </div>
+			      </form>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal End -->
+			
+			<!-- Modal2 -->
+			<div class="modal fade" id="prInfoModal2">
+			  <div class="modal-dialog">
+			    <div class="modal-content">
+			      <div class="modal-header">
+			        <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+			          <span aria-hidden="true">&times;</span>
+			        </button>
+			      </div>
+			      <form action="ticketassignment_cancel.do" method="POST">
+			      <div class="modal-body">
+								      
+			      	<h5 class="modal-title" id="M2name"></h5>
+			      	<input type="hidden" id="name" name="name">
+			      	
+			      	<p id="M2PReservNo"></p>
+			      	<input type="hidden" id="PReservNo2" name="PReservNo2">
+			      	
+			      	<p id="M2date"></p>
+			      	<input type="hidden" id="date" name="date">
+			      	
+			      	<p id="M2seat" ></p>
+			      	<input type="hidden" id="seatNo" name="seatNo">
+			      	
+			      	<p id="M2loc" ></p>
+			      	<input type="hidden" id="loc" name="loc">
+			      	
+			      	<p id="M2price" ></p>
+			      	<input type="hidden" id="price" name="price">
+			      </div>
+			      <div class="modal-footer" style="display:block">
+			      	<p>예약을 취소하시려면 버튼을 눌러주세요.</p>
+			        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+			        <input type="submit" class="btn btn-primary" value="확인">
+			      </div>
+			      </form>
+			    </div>
+			  </div>
+			</div>
+			<!-- Modal2 End -->
+			
+		</div>
+		</div>
+	</div>
+	
+	
 	<script>
+	function pffold(){
+		$("#pf_container").css("visibility","visibility")
+		$("#mv_container").css("visibility", "hidden")
+	}	
+	
+	function mvfold(){
+		$("#mv_container").css("visibility","visibility")
+		$("#pf_container").css("visibility", "hidden")
+	}
+	
 	function selectedFnc(){
 		var name = 		$(event.target).prev().prev().prev().prev().prev().prev().text();
 		var PReservNo = $(event.target).prev().prev().prev().prev().prev().text();

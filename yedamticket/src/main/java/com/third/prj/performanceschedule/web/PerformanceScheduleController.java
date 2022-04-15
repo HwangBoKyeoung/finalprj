@@ -29,7 +29,7 @@ public class PerformanceScheduleController {
 	
 	@RequestMapping("/concertCalender.do")
 	@ResponseBody
-	public List consertCalender(HttpServletRequest req, HttpServletResponse res) {
+	public List<PerformanceScheduleVO> consertCalender(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("text/json; charset=utf-8");
 		List<PerformanceScheduleVO> list = pfmcDao.PerformanceScheduleList();
 //		model.addAttribute("schs", list);

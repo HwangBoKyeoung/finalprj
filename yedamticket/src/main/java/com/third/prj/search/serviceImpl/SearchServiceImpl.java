@@ -5,7 +5,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.third.prj.movie.service.MovieVO;
 import com.third.prj.search.mapper.SearchMapper;
 import com.third.prj.search.service.SearchService;
 import com.third.prj.search.service.SearchVO;

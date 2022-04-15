@@ -2,7 +2,6 @@ package com.third.prj.performance.web;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 import java.util.UUID;
 
 
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -19,8 +17,6 @@ import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PageVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
-import com.third.prj.performanceimage.service.PerformanceImageService;
-import com.third.prj.performanceimage.service.PerformanceImageVO;
 
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
@@ -41,8 +37,8 @@ public class PerformanceContorller {
 	@Autowired
 	private PerformanceScheduleService persDao;
 
-	@Autowired
-	private PerformanceImageService periDao;
+//	@Autowired
+//	private PerformanceImageService periDao;
 
 	@Autowired
 	private String upLoadPath;
@@ -74,7 +70,7 @@ public class PerformanceContorller {
 
 //	@RequestMapping("/pserSelect.do")
 //	public String perSelect(PerformanceVO vo, Model model) {
-	
+
 	//공연 상세페이지 + 예약	
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
@@ -222,4 +218,6 @@ public class PerformanceContorller {
 	//관리자페이지-공연정보 자세히 보기
 	
 
+	
+	
 }

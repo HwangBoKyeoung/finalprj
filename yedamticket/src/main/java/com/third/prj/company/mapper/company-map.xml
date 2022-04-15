@@ -27,6 +27,7 @@
 		FROM   COMPANY
 		WHERE  C_ID = #{CId}
 	</select>
+	
 	<select id="getTotal" resultType="int">
 		SELECT COUNT(*)
 		FROM COMPANY
@@ -39,6 +40,7 @@
 				<if test="searchType == 'CId'">C_ID LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
+	
 	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
 		<![CDATA[
 		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT 
@@ -68,7 +70,6 @@
 		FROM COMPANY
 		WHERE C_ID = #{CId}
 	</select>
-	
 	
 	<select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
 		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT

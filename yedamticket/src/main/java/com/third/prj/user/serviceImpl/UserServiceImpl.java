@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
+import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointVO;
 import com.third.prj.user.mapper.UserMapper;
@@ -134,42 +135,35 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int getMTotal(UserCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.getMTotal(cri);
 	}
 
 	@Override
 	public List<PerformanceVO> pfRList(UserCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.pfRList(cri);
 	}
 
 	@Override
 	public int getFTotal(UserCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.getFTotal(cri);
 	}
 
 	@Override
 	public List<PointVO> pointBuyList2(PointCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.pointBuyList2(cri);
 	}
 
 	@Override
 	public int pointBuyTotal(PointCriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.pointBuyTotal(cri);
 	}
 
 	@Override
 	public UserPointViewVo userPoint(UserPointViewVo vo) {
-		// TODO Auto-generated method stub
 		return mapper.userPoint(vo);
 	}
 
 	public int getTotal(CriteriaVO cri) {
-		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
 
@@ -179,8 +173,37 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public List<UserVO> userList() {
-		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public int reservChk(UserVO userVO) {
+		return mapper.reservChk(userVO);
+	}
+
+	@Override
+	public List<PerformanceReservationVO> getprList(UserCriteriaVO cri) {
+		return mapper.getprList(cri);
+	}
+
+	@Override
+	public List<PerformanceReservationVO> prList(UserCriteriaVO cri) {
+		return mapper.prList(cri);
+	}
+
+	@Override
+	public UserVO getUser2(String Uid) {
+		return mapper.getUser2(Uid);
+	}
+
+	@Override
+	public int reservedBuy(Map<String, Object> map) {
+		return mapper.reservedBuy(map);
+	}
+
+	@Override
+	public int marketBuy(Map<String, Object> map) {
+		return mapper.marketBuy(map);
 	}
 
 	@Override
@@ -218,7 +241,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public void sendEmail(UserVO vo, String pw, String div) {
 		// Mail Server 설정
-		
+
 		System.out.println("진짜왔니?");
 		System.out.println(vo);
 		String charSet = "utf-8";
@@ -245,7 +268,7 @@ public class UserServiceImpl implements UserService {
 
 		// 받는 사람 E-Mail 주소
 		//String mail = vo.getUId();mail
-		
+
 		try {
 			HtmlEmail email = new HtmlEmail();
 			System.out.println("1");
@@ -273,12 +296,24 @@ public class UserServiceImpl implements UserService {
 			System.out.println("12");
 			email.send();
 			email.setTLS(false);
-			
+
 			System.out.println("13");
 		} catch (Exception e) {
 			System.out.println("메일발송 실패 : " + e);
 		}
 
+	}
+
+	@Override
+	public UserVO selectByMemberId(String UId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public int updatePassword2(UserVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
 	}
 
 }

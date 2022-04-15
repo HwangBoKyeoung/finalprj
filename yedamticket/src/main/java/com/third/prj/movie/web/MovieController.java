@@ -1,7 +1,7 @@
 package com.third.prj.movie.web;
 
 import java.io.File;
-import java.util.List; 
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -26,8 +26,6 @@ import com.third.prj.moviereservation.service.MovieReservService;
 import com.third.prj.moviereservation.service.MovieReservationVO;
 import com.third.prj.movieschedule.service.MovieScheduleService;
 import com.third.prj.movieschedule.service.MovieScheduleVO;
-import com.third.prj.performanceimage.service.PerformanceImageService;
-import com.third.prj.performanceimage.service.PerformanceImageVO;
 
 import com.third.prj.movievideo.service.MovieVideoService;
 import com.third.prj.movievideo.service.MovieVideoVO;
@@ -52,39 +50,40 @@ public class MovieController {
 
 	@Autowired
 	private MovieScheduleService movieScheduleDao;
-	
+
 	@Autowired
 	private MovieReservService movieReservationDao;
-	
-	@Autowired 
+
+	@Autowired
 	private String upLoadPath;
-	 
+
 	@Autowired
 	private MovieVideoService mvvDao;
 
 	@Autowired
 	private UserService userDao;
-	
+
 	@Autowired
 	private PointService pointDao;
 
-	//select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
-	@Autowired
-	private PerformanceImageService periDao;
-	
-	private MovieVideoService pervDao;
+	// select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
+//	@Autowired
+//	private PerformanceImageService periDao;
+
+//	@Autowired
+//	private MovieVideoService pervDao;
 
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		model.addAttribute("movies", movieDao.mList());
-		model.addAttribute("movie",movieDao.movieList());
+		model.addAttribute("movie", movieDao.movieList());
 		return "movie/movieList";
 	}
-	
+
 	// 영화상세
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
-		System.out.println("*****************************docid************************************"+rvo.getDocId());
+		System.out.println("*****************************docid************************************" + rvo.getDocId());
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
 		model.addAttribute("movie", vo);
@@ -97,7 +96,7 @@ public class MovieController {
 	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
 
 		int n = movieReplyDao.movieReplyInsert(vo);
-		//select key 사용 바꾸기
+		// select key 사용 바꾸기
 		if (n != 0) {
 			System.out.println(Integer.toString(vo.getMvReNo()));
 			return movieReplyDao.movieReplyList(vo);
@@ -105,12 +104,13 @@ public class MovieController {
 			return null;
 		}
 	}
+
 	// 댓글삭제
 	@RequestMapping("/movieReplyDelete.do")
 	@ResponseBody
 	public String movieReplyDelete(MovieReplyVO vo) {
 		int n = movieReplyDao.movieReplyDelete(vo);
-		System.out.println("삭제된건수"+n);
+		System.out.println("삭제된건수" + n);
 		if (n > 0) {
 			return "success";
 		} else {
@@ -121,9 +121,9 @@ public class MovieController {
 	// 영화 예약페이지로
 	@RequestMapping("/movieBooking.do")
 	public String movieBooking(Model model) {
-		model.addAttribute("movies",movieDao.movieList());
+		model.addAttribute("movies", movieDao.movieList());
 		return "movie/movieBookingForm";
-	
+
 	}
 
 	// 영화예약페이지에서 영화를 클릭하면 해당영화를 상영하는 영화관리스트호출
@@ -147,41 +147,41 @@ public class MovieController {
 		return movieScheduleDao.movieSchdtList(vo);
 	}
 
-	  
-		//기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
-		@RequestMapping("/companyMovieUpdateForm.do")
-		public String companyMovieUpdateForm(MovieVO vo, MovieVideoVO vvo, Model model) {
+	// 기업회원페이지에서 상세보기할때 사용할 예정(rjh(2022/04/05)
+	@RequestMapping("/companyMovieUpdateForm.do")
+	public String companyMovieUpdateForm(MovieVO vo, MovieVideoVO vvo, Model model) {
 //			MovieVideoVO vvo = new MovieVideoVO();
-			vo=movieDao.mvSelect(vo);
-			System.out.println("============================"+vo.getMvNo());
-			vvo.setMvNo(vo.getMvNo());
-			vvo = mvvDao.mvvSelect(vvo);
-			System.out.println("============================"+vvo);
-			model.addAttribute("videos", vvo);
-			
-			model.addAttribute("mv", vo);	
-			
-			return "companyMyPage/companyMovieUpdateForm";
-		}
-	
-	//영화 수정 페이지(프로시저 ->rjh(2022/04/05)
+		vo = movieDao.mvSelect(vo);
+		System.out.println("============================" + vo.getMvNo());
+		vvo.setMvNo(vo.getMvNo());
+		vvo = mvvDao.mvvSelect(vvo);
+		System.out.println("============================" + vvo);
+		model.addAttribute("videos", vvo);
+
+		model.addAttribute("mv", vo);
+
+		return "companyMyPage/companyMovieUpdateForm";
+	}
+
+	// 영화 수정 페이지(프로시저 ->rjh(2022/04/05)
 	@RequestMapping("/companyMovieUpdate.do")
-	public String companyMovieUpdate(Model model, Map<String, Object>map, MovieVO vo, MovieVideoVO vvo, MultipartFile file) {
-		
+	public String companyMovieUpdate(Model model, Map<String, Object> map, MovieVO vo, MovieVideoVO vvo,
+			MultipartFile file) {
+
 		String fileName = file.getOriginalFilename();
 		String id = UUID.randomUUID().toString();
 		String load = upLoadPath;
 		String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
-		File target = new File(load,targetFile);
+		File target = new File(load, targetFile);
 		try {
 			FileCopyUtils.copy(file.getBytes(), target);
 			vo.setFileCd("PF_VIDEO");
 			vvo.setVname(fileName);
 			vvo.setVrenames(targetFile);
-		}catch (Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 		map.put("vm_vno", vo.getMvNo());
 		map.put("mv_name", vo.getName());
 		map.put("mv_genre", vo.getGenre());
@@ -194,100 +194,103 @@ public class MovieController {
 		map.put("mv_vname", vvo.getVname());
 		map.put("mv_vrname", vvo.getVrenames());
 		map.put("mv_cd", vo.getFileCd());
-		
+
 		movieDao.procedureCall(map);
-		
+
 		return "redirect:companyMovieList.do";
 	}
-	
-	
-	//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
+
+	// 영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
 	@RequestMapping("/seatSearch.do")
 	@ResponseBody
 	public List<MovieReservationVO> seatSearch(MovieReservationVO vo) {
 		return movieReservationDao.seatSearch(vo);
 	}
-  
-	//결제페이지로
+
+	// 결제페이지로
 	@RequestMapping("/movieReservation.do")
-	public String movieReservation(Model model,	MovieReservationVO vo,UserVO uvo) {
-		
-		  MovieVO detailvo=new MovieVO(); 
-		  detailvo.setDocId(vo.getDocId());
-		 
-		model.addAttribute("re",vo);
-		
-		 model.addAttribute("user",userDao.userSelectOne(uvo)); 
-		  model.addAttribute("movie",movieDao.mDetail(detailvo));
-		 
+	public String movieReservation(Model model, MovieReservationVO vo, UserVO uvo) {
+
+		MovieVO detailvo = new MovieVO();
+		detailvo.setDocId(vo.getDocId());
+
+		model.addAttribute("re", vo);
+
+		model.addAttribute("user", userDao.userSelectOne(uvo));
+		model.addAttribute("movie", movieDao.mDetail(detailvo));
+
 		return "user/movie/movieReservationForm";
 	}
-	//결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
+
+	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
 	@RequestMapping("/moviePay.do")
 	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO) {
 		movieReservationDao.movieReservationInsert(vo);
 		vo=movieReservationDao.movieReservationSelect(vo);
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
+		
 		pointVO.setPayNo(vo.getMvReservNo());
 		pointVO.setUId(vo.getUId());
+		
 		movieDao.audienceInsert(movieVO);
 		pointDao.payInsert(pointVO);
+		
 		return "redirect:home.do";
 	}
-	
+
 	@RequestMapping("/movieInsertForm.do")
 	public String movieInsertForm() {
 		return "movie/movieInsertForm";
 	}
-	
+
 	@RequestMapping("/movieInsert.do")
 	public String movieInsert(MovieVO vo, MultipartFile file, HttpServletRequest request) {
-		
-		String fileName = file.getOriginalFilename(); //원본파일명
-		String id = UUID.randomUUID().toString(); //고유한 유니크 아이디 생성
+
+		String fileName = file.getOriginalFilename(); // 원본파일명
+		String id = UUID.randomUUID().toString(); // 고유한 유니크 아이디 생성
 		System.out.println("fileName : " + fileName);
 		System.out.println("id : " + id);
-		
+
 		String load = "C/DEV/apache-tomcat-9.0.56/webapps/upload";
-		
-		String targetFile = id + fileName.substring(fileName.lastIndexOf(".")); //마지막으로 만나느 .을 출력, 업로드시 같은 이름의 파일을 덮어써 버리는 현상 방지
+
+		String targetFile = id + fileName.substring(fileName.lastIndexOf(".")); // 마지막으로 만나느 .을 출력, 업로드시 같은 이름의 파일을 덮어써
+																				// 버리는 현상 방지
 		System.out.println("targetFile : " + targetFile);
-		
-		//File target = new File(request.getSession().getServletContext().getRealPath("upload"),targetFile);
-		//File target = new File(request.getServletContext().getRealPath("upload"),targetFile);
-		File target = new File(upLoadPath,targetFile);
-		
+
+		// File target = new
+		// File(request.getSession().getServletContext().getRealPath("upload"),targetFile);
+		// File target = new
+		// File(request.getServletContext().getRealPath("upload"),targetFile);
+		File target = new File(upLoadPath, targetFile);
+
 		System.out.println("---------------------------------------------------------");
 		System.out.println(request.getSession().getServletContext().getRealPath(load));
 		System.out.println("---------------------------------------------------------");
 		System.out.println("target :" + target);
-		
-		try { 
+
+		try {
 			FileCopyUtils.copy(file.getBytes(), target);
 			System.out.println("copy suss");
-			
+
 			vo.setFileCd(fileName);
 			vo.setRenames(targetFile);
 			movieDao.movieInsert(vo);
 			System.out.println("insert suss");
-			
-		}catch(Exception e) {
+
+		} catch (Exception e) {
 			System.out.println("error");
-			
+
 			e.printStackTrace();
 		}
 		return "redirect:movieList.do";
 	}
-	
-	
+
 	@RequestMapping("/ajaxFileCd.do")
 	@ResponseBody
-	public List<MovieVO> ajaxFileCd(MovieVO vo){
+	public List<MovieVO> ajaxFileCd(MovieVO vo) {
 		List<MovieVO> list = movieDao.searchAll(vo.getSearchName());
 		return list;
 	}
-	
-	
 
 }
