@@ -18,4 +18,5 @@ public class PerformanceViewVO {
 	private int point;
 	private String buyCtntCd;
 	private String UId;
+	private int tempPoint;
 }

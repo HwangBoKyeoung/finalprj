@@ -412,6 +412,7 @@ html, body {
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="userBuyList.do">거래내역</a></li>
+					<li><a href="userPointList.do">포인트충전내역</a></li>
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">

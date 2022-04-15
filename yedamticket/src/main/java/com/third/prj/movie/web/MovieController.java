@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -273,13 +271,12 @@ public class MovieController {
 		return "redirect:movieList.do";
 	}
 	
-	@RequestMapping("/searchAll.do")
-	public String searchAll(MovieVO vo, Model model) {
-		
-		String SearchName = vo.getSearchName();
-		model.addAttribute("searchName", movieDao.searchAll(SearchName));
-		
-		return "user/searchList";
+	
+	@RequestMapping("/ajaxFileCd.do")
+	@ResponseBody
+	public List<MovieVO> ajaxFileCd(MovieVO vo){
+		List<MovieVO> list = movieDao.searchAll(vo.getSearchName());
+		return list;
 	}
 	
 	

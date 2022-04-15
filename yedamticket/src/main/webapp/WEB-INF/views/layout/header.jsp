@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<link href="./resources/users/css/practice.css" rel="stylesheet" />
+
 <style>
 .login-css-add {
 	position: absolute;
@@ -47,10 +49,28 @@
 		line-height: 50px;
 	}
 }
+
+/* #show p {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	background-color: red;
+} */
+
+/* 
+#showDetail {border:2px solid yellowgreen; width:200px; height:40px; margin:100px; position:relative;  }
+#box {width:200px; height:200px;position:absolute; top:0; left:0;}
+#box p {text-align:center;height:40px;line-height:40px;} */
+
+
 </style>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
-<body>
-	<nav class="navbar navbar-expand-lg nav-css-add">
+<body id="searchShow">
+
+	<nav class="navbar navbar-expand-lg nav-css-add"
+		style="margin-bottom: 0px; box-shadow: none;">
 		<div class="container-fluid">
 			<div class="navbar-translate" id="titleLogo">
 				<a class="navbar-brand" href="home.do" title="Designed by 1석3조"
@@ -108,6 +128,10 @@
 							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 
+
+							</a> <a class="dropdown-item" href="pList.do"> <i
+								class="fa-solid fa-list-ul fa-2x"></i>공연리스트
+
 							</a> <a class="dropdown-item" 
 								href="pList.do">
 								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
@@ -124,7 +148,7 @@
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="./index.html"> <i
+							<a class="dropdown-item" href="noticeList.do"> <i
 								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항
 							</a> <a class="dropdown-item" target="_blank"
 								href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
@@ -161,14 +185,32 @@
 							</a> 
 							<a class="dropdown-item" href="perInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
+							</a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈등록
+							</a> <a class="dropdown-item" href="searchList.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 검색어
 							</a>
 						</div></li>
 					<li>
 						<form class="d-flex" action="searchAll.do">
-							<input class="form-control me-2" type="search" id="searchName" name="searchName"
-								placeholder="Search" aria-label="Search">
-							<button class="btn btn-outline-primary" type="submit">Search</button>
-						</form>
+							<div class="search" style="margin-left: 30px;">
+								<div class="icon" id="icon">
+									<span> <svg viewBox="0 0 40 40">
+                                   <path d="M3,3 L37,37"></path>
+                               </svg>
+									</span>
+								</div>
+								<div class="field">
+									<input type="text" id="searchName" name="searchName"
+										width="80%" placeholder="Search for something...">
+								</div>
+							</div>
+						</form> <!-- <input type="text" name="searchName" id="searchName">
+						<input type="button" id="btnSearch" value="검색"> -->
+
+
+
+
 						<div align="right">
 							<c:choose>
 								<c:when test="${empty sessionId}">
@@ -188,5 +230,196 @@
 			</div>
 		</div>
 	</nav>
+	<div id="show"></div>
+	<script src="resources/users/js/practice.js"></script>
+	<script>
+		$("#icon").on("click", function() {
+			$.ajax({
+				url : "searchList.do",
+				type : "post",
+				dataType : "json",
+				async : false,
+				success : function(result) {
+					console.log(result);
+					searchPopular(result);
+				}
+			});
+			/* if($("#showDetail")){
+				$("#showDetail").empty();
+			} else { */
+
+			function searchPopular(data) {
+				let div = $("<div style='width:100%; height: 300px;'>");
+				div.attr("id", "showDetail");
+				div.css("backgroundColor", "#cec5e9");
+
+				let div2 = $("<div id='box'>");
+
+				$.each(data, function(idx, item) {
+					let p = $("<p>").text(item.keyword);
+					p.css("padding-left", "50px");
+
+					/* $(function ccc(){
+						p.animate({
+							top:0,
+							bottom:0
+							},10000,function(){
+								p.animate({
+							top:0,
+							bottom:200
+							},10000,ccc);
+							});
+							});*/
+
+					div2.append(p);
+				});
+
+				div.append(div2);
+				$("#show").append(div);
+				
+				  setInterval( "play()", 800);
+				  
+				  function play() {
+					  $("#box").delay(1000).animate({top:-40}, function(){
+					    $("#box p:first").appendTo("#box");
+					     $("#box").css({top:0});
+					    });
+					}
+				  
+				  
+				  
+				  
+				  
+				  
+
+				/* function play() {
+					$("#box").delay(1000).animate({
+						top : -40
+					}, function() {
+						$("#box p:first").appendTo("#box");
+						$("#box").css({
+							top : 0
+						});
+					});
+				} */
+			}
+
+			/* 	} */
+		});
+		/*
+		
+		setInterval("play()", 800);
+			function play() {
+				$("#box").delay(1000).animate({
+					top : -40
+				}, function() {
+					$("#box p:first").appendTo("#box");
+					$("#box").css({
+						top : 0
+					});
+				});
+			}
+		 */
+
+		/* $("#btnSearch").on("click", function(){
+			$.ajax({
+				url: "ajaxFileCd.do",
+				type: "post",
+				data: {"searchName":$("#searchName").val()},
+				dataType: "json",
+				success: function(result){
+					console.log(result);
+					locationMove(result);
+				}
+			});
+		}); */
+
+		/* function locationMove(item){
+			location.href="searchAll.do?list="+item;
+		} */
+
+		/* jQuery(function($)
+				{
+				    var ticker = function()
+				    {
+				        timer = setTimeout(function(){
+				            $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+				            {
+				                $(this).detach().appendTo('ul#ticker').removeAttr('style');
+				            });
+				            ticker();
+				        }, 2000);         
+				      };
+				// 0번 이전 기능
+				      $(document).on('click','.prev',function(){
+				        $('#ticker li:last').hide().prependTo($('#ticker')).slideDown();
+				        clearTimeout(timer);
+				        ticker();
+				        if($('#pause').text() == 'Unpause'){
+				          $('#pause').text('Pause');
+				        };
+				      }); // 0번 기능 끝
+				  
+				// 1. 클릭하면 다음 요소 보여주기... 클릭할 경우 setTimeout 을 clearTimeout 해줘야 하는데 어떻게 하지..
+				      $(document).on('click','.next',function(){
+				            $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+				                    {
+				                        $(this).detach().appendTo('ul#ticker').removeAttr('style');
+				                    });
+				            clearTimeout(timer);
+				            ticker();
+				            //3 함수와 연계 시작
+				            if($('#pause').text() == 'Unpause'){
+				              $('#pause').text('Pause');
+				            }; //3 함수와 연계
+				          }); // next 끝. timer 를 전연변수보다 지역변수 사용하는게 나을 것 같은데 방법을 모르겠네요.
+
+				  //2. 재생정지기능 시작, 아직 다음 기능과 연동은 안됨...그래서 3을 만듦
+				  var autoplay = true;
+				      $(document).on('click','.pause',function(){
+				            if(autoplay==true){
+				              clearTimeout(timer);
+				              $(this).text('재생');
+				              autoplay=false;
+				            }else{
+				              autoplay=true;
+				              $(this).text('정지');
+				              ticker();
+				            }
+				          }); // 재생정지기능 끝  
+				  // 3. 재생정지 함수 시작. 2와 기능 동일함.
+				    var tickerpause = function()
+				  {
+				    $('#pause').click(function(){
+				      $this = $(this);
+				      if($this.text() == 'Pause'){
+				        $this.text('Unpause');
+				        clearTimeout(timer);
+				      }
+				      else {
+				        ticker();
+				        $this.text('Pause');
+				      }
+				    });
+				   
+				  };
+				  tickerpause();
+				  //3 재생정지 함수 끝
+				  //4 마우스를 올렸을 때 기능 정지
+				  var tickerover = function()
+				  {
+				    $('#ticker').mouseover(function(){
+				      clearTimeout(timer);
+				    });
+				    $('#ticker').mouseout(function(){
+				      ticker();
+				    });  
+				  };
+				  tickerover();
+				  // 4 끝
+				    ticker();
+				    
+				}); */
+	</script>
 </body>
 </html>

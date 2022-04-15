@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+textarea {
+	resize: none;
+}
+</style>
 <body>
 	<div align="center"></div>
 	<div>
@@ -39,12 +44,7 @@
 			</div>
 		</c:if>
 		<br>
-		
-		<div>
-			<button type="button" onclick="location.href='faqList.do'">목록가기</button>
-			<button type="submit" >수정</button>
-			<button type="button" onclick="location.href='faqDelete.do?FNo=${faqs.FNo}'">삭제</button>
-		</div>
+
 		
 	</form>
 </body>

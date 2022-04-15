@@ -46,13 +46,15 @@ public class PerformanceContorller {
 
 	//황규복 start
 	@RequestMapping("/pList.do")
-	   public String pList(Model model,CriteriaVO cri) {
-	      PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
-	      model.addAttribute("pageVO", pageVO); //페이지네이션전달
-	      model.addAttribute("performance",perDao.pList(cri));
-	      model.addAttribute("Eperformance",perDao.epList());
-	      return "performance/pList";
-	   }
+	public String pList(Model model , CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달
+		model.addAttribute("performance",perDao.pList(cri));
+		model.addAttribute("Eperformance",perDao.epList());
+		return "performance/pList";
+
+	}
+
 
 //	@RequestMapping("/pserSelect.do")
 //	public String perSelect(PerformanceVO vo, Model model) {

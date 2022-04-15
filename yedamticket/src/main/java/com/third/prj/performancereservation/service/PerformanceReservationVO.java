@@ -20,7 +20,6 @@ public class PerformanceReservationVO {
 	private String seatNo;
 	private String Rid;
 	private String cancelCd;
-	//private String UId;
 	private String loc;//구역
 
 }

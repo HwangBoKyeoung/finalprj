@@ -5,13 +5,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+	<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <style>
     /* 사이드바 */
     .sidenav {
       position: absolute;
       width: 200px;
       height: 100%;
-      margin-left: -20px;
+      margin-left: 20px;
       margin-top:50px
     }
     /* 본문 */
@@ -19,10 +20,11 @@
      margin-top:50px;
      margin-left: 250px;
     }
+    
 </style>
 </head>
 <body>
-<div class="container-fluid">
+<div class="container-flUId">
   <nav class="col-sm-3 sidenav">
       <ul class="nav nav-pills nav-stacked">
         <li><a href="userUpdateForm.do">회원정보수정</a></li>
@@ -76,8 +78,9 @@
 						</div>
 						<div class="col-12" align="left">
 							<label for="addr" class="form-label">주소</label>
-							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="addr" id="addr" value="${user.addr }"placeholder="daegu..." required>
+							<div class="form-group form-group-sm">
+								<input type="text" class="form-control" name="addr" id="addr" value="${user.addr }"placeholder="address..." requireds>
+								<button type="button"onclick="execDaumPostcode()" class="btn">주소찾기</button>
 							</div>
 							<div align="right">
 								<button id="updateBtn" type="submit" class="btn btn-primary">수정</button>
@@ -120,6 +123,7 @@
 		
 
 		$("#updateBtn").attr('disabled',true);
+		
 		$('.pw').keyup(function(){
 	    	let pass1 = $("#pwd1").val();
 	        let pass2 = $("#pwd2").val();
@@ -142,6 +146,20 @@
 			alert("회원정보가 수정되었습니다.")
 		}
 	    
+		
+	
+		function execDaumPostcode() {
+			daum.postcode.load(function() {
+				new daum.Postcode({
+					oncomplete : function(data) {
+						$("#addr").val(data.roadAddress);
+					}
+				}).open();
+			});
+		}
+	
+		
+		
 		
 	
 	</script>

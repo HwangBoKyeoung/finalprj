@@ -97,6 +97,8 @@ public class CompanyController {
 		}else {
 			msg = "로그인 성공";
 			url = "home.do";	
+
+			session.setAttribute("sessionName", vo.getName());
 			session.setAttribute("sessionId", vo.getCId());
 			session.setAttribute("pwd", vo.getPwd());
 			mv.addObject("msg", msg);

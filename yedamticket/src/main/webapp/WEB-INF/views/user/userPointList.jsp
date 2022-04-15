@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-.blist td:nth-child(4) {
+.plist td:nth-child(4) {
 	color: purple;
 	font-weight: bold;
 }
@@ -16,9 +16,13 @@
 	color: green;
 	font-weight: bold;
 }
+
+.plist td:nth-child(5) {
+	font-weight: bold;
+}
 </style>
 </head>
-<body >
+<body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
@@ -55,25 +59,36 @@
 					<tr>
 						<th scope="col">결제일자</th>
 						<th scope="col">사용처</th>
+						<th scope="col">포인트 충전</th>
 						<th scope="col">포인트 사용</th>
-						<th scope="col">총포인트</th>
+						<th scope="col">포인트잔액</th>
 					</tr>
 				</thead>
 				<tbody>
-					<c:forEach items="${list1 }" var="pf">
-						<tr class="blist">
-							<td>${pf.payDt }</td>
-							<td>${pf.name }</td>
-							<td>- ${pf.pay }</td>
-							<td>${pf.tempPoint }</td>
-						</tr>
-					</c:forEach>
-					<c:forEach items="${list2 }" var="mv">
-						<tr class="blist">
-							<td>${mv.payDt }</td>
-							<td>${mv.name }</td>
-							<td>- ${mv.pay }</td>
-							<td>${mv.tempPoint  }</td>
+					<c:forEach items="${list3 }" var="point">
+						<tr class="plist">
+							<c:choose>
+								<c:when test="${point.chargeDt == null}">
+									<td>${point.payDt }</td>
+								</c:when>
+								<c:otherwise>
+									<td>${point.chargeDt }</td>
+								</c:otherwise>
+							</c:choose>
+							<c:choose>
+								<c:when test="${point.buyCtntCd == 'mv' }">
+									<td>영화결제</td>
+								</c:when>
+								<c:when test="${point.buyCtntCd == 'pf' }">
+									<td>공연결제</td>
+								</c:when>
+								<c:when test="${point.buyCtntCd == 'pt' }">
+									<td>포인트충전</td>
+								</c:when>
+							</c:choose>
+							<td>+ ${point.charge }</td>
+							<td>- ${point.pay }</td>
+							<td>${point.tempPoint }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -81,23 +96,22 @@
 			<div id="content" align="center">
 				<c:if test="${pageVO.prev }">
 					<!-- 이전버튼 활성화 여부 -->
-					<a href="userBuyList.do?pageNum=${pageVO.startPage-1 }"> <input
+					<a href="userPointList.do?pageNum=${pageVO.startPage-1 }"> <input
 						type="button" value="이전" class="btn btn-secondary"></a>
 				</c:if>
 				<!-- pageNum -->
 				<c:forEach var="num" begin="${pageVO.startPage }"
 					end="${pageVO.endPage }">
 					<a class="${pageVO.pageNum == num ? 'active': '' }"
-						href="userBuyList.do?pageNum=${num }"> <input type="button"
+						href="userPointList.do?pageNum=${num }"> <input type="button"
 						value="${num }" class="btn btn-secondary"></a>
 				</c:forEach>
 				<!-- 다음버튼 -->
 				<c:if test="${pageVO.next }">
-					<a href="userBuyList.do?pageNum=${pageVO.endPage+1 }"> <input
+					<a href="userPointList.do?pageNum=${pageVO.endPage+1 }"> <input
 						type="button" value="다음" class="btn btn-secondary"></a>
 				</c:if>
 			</div>
-			<br>
 		</div>
 	</div>
 </body>

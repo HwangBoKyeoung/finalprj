@@ -13,7 +13,7 @@
 	position: absolute;
 	width: 200px;
 	height: 100%;
-	margin-left: -20px;
+	margin-left: 20px;
 	margin-top: 50px
 }
 /* 본문 */
@@ -23,7 +23,7 @@
 }
 </style>
 <body>
-	<div class="container-fluid">
+	<div class="container-flUId">
 		<nav class="col-sm-3 sidenav">
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="userUpdateForm.do">회원정보수정</a></li>
