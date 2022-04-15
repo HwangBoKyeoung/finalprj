@@ -18,7 +18,7 @@ public class PerformanceReservationVO {
 	private int PSchNo;
 	private String seatStatCd;
 	private String seatNo;
-	private String Rid;
+	private String RId;
 	private String cancelCd;
 	private String loc;//구역
 

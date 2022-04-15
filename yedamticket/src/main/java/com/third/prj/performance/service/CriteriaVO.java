@@ -16,7 +16,9 @@ public class CriteriaVO {
 	private String name; //검색할 이름
 	private String loc;
 	private String key;
-
+	//검색기간
+		private String startDate;
+		private String endDate;
 	public CriteriaVO() {
 		this(1,10);
 	}

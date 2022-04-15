@@ -238,7 +238,7 @@ public class UserController {
 		return "user/errorPage";
 	}
 
-	@RequestMapping("/mvReservList.do")
+
 	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
 		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
 		cri.setUId((String)session.getAttribute("sessionId"));

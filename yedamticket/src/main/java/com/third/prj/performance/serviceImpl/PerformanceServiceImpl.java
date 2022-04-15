@@ -89,4 +89,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 		// TODO Auto-generated method stub
 		return mapper.pSelect(vo);
 	}
+
+
+	@Override
+	public List<PerformanceVO> locPlist(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.locPlist(vo);
+	}
 }

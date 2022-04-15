@@ -7,18 +7,21 @@ import com.third.prj.point.service.PointCriteriaVO;
 
 
 public interface MovieService {
-	//황규복
+		//황규복
 		MovieVO movieDetail(MovieVO vo);
-		List<MovieVO> movieList();
+		//결제하면 관객수 늘리기
+		int audienceInsert(MovieVO vo);
 		//결제페이지로갈 영화상세정보
 		MovieVO mDetail(MovieVO vo);
+		List<MovieVO> movieList();
 		List<MovieVO> mList();
+		
+		//end
 		//프로시저수정쓸것들..?-(rjh-2022/04/05)
 		int procedureCall(Map<String, Object> map);
 		
 		//검색프로시저
 		int searchProcedure(Map<String,Object> map);
-
 		
 		//공연 구매내역
 		List<MovieViewVO> mvBuyList(MovieViewVO vo);

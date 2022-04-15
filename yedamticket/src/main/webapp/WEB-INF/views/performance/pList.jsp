@@ -21,15 +21,18 @@
 <form class="events-search" action="pList.do" method="post">
     <div class="container">
         <div class="row">
-            <div class="col-12 col-md-3">
-                <input type="date" id="frDt" name="frDt" placeholder="날짜" required>
+            <div class="col-12 col-md-2">
+                <input type="date" id="startDate" name="startDate" placeholder="시작날짜" >
+            </div>
+            <div class="col-12 col-md-2">
+                <input type="date" id="endDate" name="endDate" placeholder="종료날짜" >
             </div>
 
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-2">
                 <input type="text" id="name" name="name"placeholder="행사명" >
             </div>
 
-            <div class="col-12 col-md-3">
+            <div class="col-12 col-md-2">
                 <input type="text" id="loc" name="loc" placeholder="지역">
             </div>
 
@@ -143,27 +146,31 @@
     </div>
 
 <script>
-
-//달력에 현재 날짜입력 yyyy-mm-dd
-let date=new Date();
-let year=date.getFullYear();
-let day=date.getDate();
-var month = date.getMonth() + 1;
-if(day < 10 ) {
-    day='0'+ day
-} else{
-    day='' + day
-}; 
-if(month < 10 ) {
-    month='0'+ month
-} else{
-    month='' + month
-}; 
-let now=String(year)+'-'+String(month)+'-'+String(day);
-console.log(now);
-$('#frDt').val(now);
-
-//
+$( function() {
+    var availableTags = [
+      "서울특별시",
+      "인청광역시",
+      "경기도",
+      "강원도",
+      "세종특별자치시",
+      "충청남도",
+      "충청북도",
+      "대전광역시",
+      "전라북도",
+      "광주광역시",
+      "전라남도",
+      "경상북도",
+      "대구광역시",
+      "경상남도",
+      "울산광역시",
+      "부산광역시",
+      "제주측별자치도",
+     
+    ];
+    $( "#loc" ).autocomplete({
+      source: availableTags
+    });
+  } );
 </script>
 
 <script type='text/javascript' src='resources/performance/js/jquery.js'></script>

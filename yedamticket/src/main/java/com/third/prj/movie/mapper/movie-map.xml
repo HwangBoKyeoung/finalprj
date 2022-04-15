@@ -18,9 +18,9 @@
 		<result property="actor" column="actor" />
 		<result property="fileCd" column="file_cd" />
 		<result property="docId" column="docId" />
-		<result property="renames" column="renames" />
-		<collection property="performanceVO"
-			resultMap="perFormanceMap"></collection>
+		<result property="renames" column="renames"/>
+		<result property="audience" column="audience"/>
+		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
 	</resultMap>
 
 	<resultMap
@@ -76,13 +76,14 @@
 
 
 	<!-- 황규복 -->
+
 	<!-- <resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap"> 
 		<id property="mvNo" column="mv_no"/> <result property="name" column="name"/> 
 		<result property="content" column="content"/> <result property="actor" column="actor"/> 
 		</resultMap> -->
 
-	<resultMap type="com.third.prj.movie.service.MovieViewVO"
-		id="movieViewMap">
+
+	<resultMap type="com.third.prj.movie.service.MovieViewVO" id="movieViewMap">
 		<result property="mvReservNo" column="MV_RESERV_NO" />
 		<result property="name" column="NAME" />
 		<result property="payDt" column="PAYDT" />
@@ -111,6 +112,7 @@
 		#{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
 	
+
 	<insert id ="searchProcedure" statementType="CALLABLE"> 
 		{CALL popular_search(#{p_search, mode=IN, jdbcType=VARCHAR, javaType=String})}
 	</insert>
@@ -118,6 +120,7 @@
 	<insert id="popularSearch">
 	    INSERT INTO search values(#{searchName}, ((select count(*) from search where keyword = #{searchName}) + 1))
 	</insert>
+
 	
 
 	<!-- 페이징 <select id="getListWithPaging" resultMap="movieResultMap"> <![CDATA[ 
@@ -127,28 +130,36 @@
 
 	<!-- 영화상영예정작 -->
 	<select id="mList" resultMap="movieResultMap">
+		<![CDATA[
 		SELECT * FROM MOVIE
-		WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd')
-		AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
+        WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
+        AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
+        AND ROWNUM < 11  
+        ]]>
 	</select>
 
 	<!-- 영화리스트 -->
 	<select id="movieList" resultMap="movieResultMap">
-		SELECT *
-		FROM MOVIE
-		WHERE
-		STARTDATE
-		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
-		AND
-		TO_CHAR(SYSDATE,'yyyyMMdd')
+		<![CDATA[
+      SELECT ROWNUM, A.*
+        FROM(
+        SELECT NAME,AUDIENCE,STARTDATE,CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
+        RANK() OVER (ORDER BY AUDIENCE ASC) RANK
+        FROM MOVIE
+        WHERE
+      STARTDATE
+      BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
+      AND TO_CHAR(SYSDATE,'yyyyMMdd') ) A
+        WHERE ROWNUM BETWEEN 1 AND 10
+         ]]>
 	</select>
+  
 	<!-- 영화상세 -->
 	<select id="movieDetail" resultMap="movieResultMap">
 		SELECT *
 		FROM MOVIE
 		WHERE
-		NAME=#{name}
-		AND STARTDATE=#{startDate}
+		DOCID = #{docId}
 	</select>
 
 	<select id="mvBuyList" resultMap="movieViewMap">
@@ -234,5 +245,10 @@
 		WHERE DOCID=#{docId}
 
 	</select>
+	<update id="audienceInsert" >
+		 UPDATE MOVIE 
+		 SET AUDIENCE = (AUDIENCE + #{audience}) 
+		 WHERE DOCID =#{docId}
+	</update>
 
 </mapper>

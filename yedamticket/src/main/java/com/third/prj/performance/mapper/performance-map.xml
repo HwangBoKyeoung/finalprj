@@ -77,6 +77,7 @@
 
 
 	</select>
+
 	<!-- <select id="getTotal" resultType="int"> SELECT COUNT(*) AS TOTAL FROM 
 		PERFORMANCE WHERE <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%' 
 		OR ACTOR LIKE '%'||#{searchName}||'%' OR LOC LIKE '%'||#{searchName}||'%')</if> 
@@ -85,21 +86,13 @@
 		test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if> <if test="searchType 
 		== null or searchType ==''"> 1 = 1</if> </select> -->
 
+
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
 		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
 		FROM PERFORMANCE
 		WHERE p_no = #{PNo}
 	</select>
-
-
-	<!-- <update id="perforUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">UPDATE 
-		PERFORMANCE<set><if test="name != null">NAME = #{name},</if><if test="content 
-		!= null">CONTENT = #{content},</if><if test="actor != null"> ACTOR = #{actor},</if><if 
-		test="loc != null">LOC = #{loc},</if><if test="addr != null">ADDR = #{addr},</if><if 
-		test="price != null"> PRICE = #{price},</if></set>WHERE P_NO = #{PNo}</update> -->
-
-
 
 	<update id="procedureCall" statementType="CALLABLE">
 		{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
@@ -125,6 +118,8 @@
 		<result property="trDt" column="TRDT"/>
 		<result property="time" column="TIME"/>
 		<result property="endTime" column="ENDTIME"/>
+		
+		
 	</resultMap>
 	<!-- performance resultMap -->
 	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
@@ -141,9 +136,9 @@
 		<result column="C_ID" property="CId"/>
 		<collection property="performanceScheduleVO" resultMap="pScheduleMap"/>
 	</resultMap>
-	<!-- 공연 전체리스트  -->
-
-	<select id="pList" resultMap="pMap">
+	
+  <!-- 공연 전체리스트  -->
+   <select id="pList" resultMap="pMap">
         <![CDATA[
          SELECT * 
          FROM (
@@ -151,49 +146,51 @@
              FROM (
              
               SELECT 
-             P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,P.RENAMES,
+             P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
              PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
              FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
              ON 
              P.P_NO = PS.P_NO 
-      ]]>
-		<where>
-			<if test="frDt == null and name == null and loc == null">
-				AND 1=1
-			</if>
-			<!-- 날짜만 입력받은 경우 -->
-			<if test="frDt != null and frDt !=''">
-				AND PS.FRDT = #{frDt}
-			</if>
-			<!-- 날짜 + 이벤트 -->
-			<if test="name != null and name !=''">
-				AND P.NAME LIKE '%' || #{name} || '%'
-			</if>
-			<!-- 날짜 + 지역 -->
-			<if test="loc != null and loc !=''">
-				AND P.LOC LIKE '%' || #{loc} || '%'
-			</if>
-		</where>
+      ]]>   
+      <where>
+      <if test="frDt == null and name == null and loc == null">
+      AND 1=1
+      </if>
+      <!-- 날짜만 입력받은 경우 -->
+      <if test="startDate != null and startDate !='' and endDate != null and endDate !=''">
+      AND PS.FRDT BETWEEN #{startDate} AND #{endDate}
+      </if>
+      <!-- 날짜 + 이벤트 -->
+      <if test="name != null and name !=''" >
+      AND P.NAME LIKE '%' || #{name} || '%'
+      </if>
+      <!-- 날짜 + 지역 -->
+      <if test="loc != null and loc !=''">
+      AND P.LOC  LIKE '%' || #{loc} || '%'
+      </if>
+   </where>
       <![CDATA[
               ) A ) 
                WHERE RN > (#{pageNum}-1) * #{amount} 
                AND RN <= #{pageNum} * #{amount}
-      ]]>
-	</select>
-	<!-- 예정-->
-	<select id="epList" resultMap="pMap">
-		SELECT
-		P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,P.RENAMES,
-		PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME
-		FROM
-		PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
-		ON
-		P.P_NO = PS.P_NO
-		where FRDT > TO_CHAR(SYSDATE,'YY/MM/DD')
+      ]]>   
+   </select>
+   <!-- 예정공연  -->
+   <select id="epList"  resultMap="pMap">
+   <![CDATA[
+         SELECT 
+         P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,P.RENAMES,
+		     PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME
+         FROM 
+         PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+         ON 
+         P.P_NO = PS.P_NO
+           WHERE FRDT > TO_CHAR(SYSDATE,'YY/MM/DD') 
+           AND ROWNUM < 4
+        ]]>      
+   </select>
 
-	</select>
-
-	<select id="getTotal" resultType="int">
+     <select id="getTotal" resultType="int">
       <![CDATA[
          SELECT COUNT(*) AS TOTAL 
          FROM (
@@ -206,37 +203,46 @@
              FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
              ON 
              P.P_NO = PS.P_NO     
+      ]]>   
+      <where>
+      <if test="frDt == null and name == null and loc == null">
+      AND 1=1
+      </if>
+      <!-- 날짜만 입력받은 경우 -->
+      <if test="frDt != null and frDt !=''">
+      AND PS. BETWEEN #{starDate} AND #{endDate}
+      </if>
+      <!-- 날짜 + 이벤트 -->
+      <if test="name != null and name !=''" >
+      AND P.NAME LIKE '%' || #{name} || '%'
+      </if>
+      <!-- 날짜 + 지역 -->
+      <if test="loc != null and loc !=''">
+      AND P.LOC  LIKE '%' || #{loc} || '%'
+      </if>
+   </where>
+       ) A )
+   </select>
+   <!-- 공연선택 -->
+   <select id="pSelect" resultMap="pMap">
+      SELECT 
+         P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+         PS.P_SCH_NO,PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
+         FROM 
+         PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+         ON 
+         P.P_NO = PS.P_NO
+           WHERE P.P_NO = #{PNo}
+   </select>   
+   <!-- 지역에 맞게 -->
+   <select id="locPlist" resultMap="pMap">
+      <![CDATA[  
+      SELECT * FROM PERFORMANCE
+      WHERE ADDR LIKE  '%'||#{addr}||'%' 
+      AND ROWNUM <6
       ]]>
-		<where>
-			<if test="frDt == null and name == null and loc == null">
-				AND 1=1
-			</if>
-			<!-- 날짜만 입력받은 경우 -->
-			<if test="frDt != null and frDt !=''">
-				AND PS.FRDT = #{frDt}
-			</if>
-			<!-- 날짜 + 이벤트 -->
-			<if test="name != null and name !=''">
-				AND P.NAME LIKE '%' || #{name} || '%'
-			</if>
-			<!-- 날짜 + 지역 -->
-			<if test="loc != null and loc !=''">
-				AND P.LOC LIKE '%' || #{loc} || '%'
-			</if>
-		</where>
-		) A )
-	</select>
-	<!-- 공연선택 -->
-	<select id="pSelect" resultMap="pMap">
-		SELECT
-		P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
-		PS.P_SCH_NO,PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME
-		FROM
-		PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
-		ON
-		P.P_NO = PS.P_NO
-		WHERE P.P_NO = #{PNo}
-	</select>
+   </select>
+   <!-- end 황규복ㄴ -->
 
 	<select id="pfBuyList" resultMap="performanceViewMap">
 		SELECT *
@@ -261,8 +267,21 @@
          ORDER BY PAYDT DESC
       ]]>
 	</select>
-
+	
 	<!-- 검색조건에 맞춰서 total변경 -->
+
+	<select id="pfBuyTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL 
+		FROM (SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+    	AND U_ID = #{Uid} ) A ))
+	</select>
+
    <select id="pfBuyTotal" resultType="int">
       SELECT COUNT(*) + (SELECT COUNT(*) AS TOTAL
       FROM (
@@ -289,7 +308,6 @@
       GROUP BY BUY_ctnt_cd
 
    </select>
-
 
 	<insert id="perInsert">
 		<selectKey keyProperty="pNo" resultType="int" order="BEFORE">

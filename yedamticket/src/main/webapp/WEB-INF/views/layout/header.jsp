@@ -50,6 +50,96 @@
 	}
 }
 
+</style>
+
+ <!-- <style>
+h1 {
+  height: 130px;
+}
+
+h1 span {
+  position: relative;
+  top: 20px;
+  display: inline-block;
+  animation: bounce .3s ease infinite alternate;
+  font-family: 'Titan One', cursive;
+  font-size: 80px;
+  color: 217, 215, 141;
+  text-shadow: 0 1px 0 #CCC,
+               0 2px 0 #CCC,
+               0 3px 0 #CCC,
+               0 4px 0 #CCC,
+               0 5px 0 #CCC,
+               0 6px 0 transparent,
+               0 7px 0 transparent,
+               0 8px 0 transparent,
+               0 9px 0 transparent,
+               0 10px 10px rgba(0, 0, 0, .4);
+}
+
+h1 span:nth-child(2) { animation-delay: .1s; }
+h1 span:nth-child(3) { animation-delay: .2s; }
+h1 span:nth-child(4) { animation-delay: .3s; }
+h1 span:nth-child(5) { animation-delay: .4s; }
+h1 span:nth-child(6) { animation-delay: .5s; }
+h1 span:nth-child(7) { animation-delay: .6s; }
+h1 span:nth-child(8) { animation-delay: .7s; }
+
+@keyframes bounce {
+  100% {
+    top: -20px;
+    text-shadow: 0 1px 0 #CCC,
+                 0 2px 0 #CCC,
+                 0 3px 0 #CCC,
+                 0 4px 0 #CCC,
+                 0 5px 0 #CCC,
+                 0 6px 0 #CCC,
+                 0 7px 0 #CCC,
+                 0 8px 0 #CCC,
+                 0 9px 0 #CCC,
+                 0 50px 25px rgba(0, 0, 0, .2);
+  }
+}
+</style>
+ <style> 
+
+h1 {
+  position: relative;
+  text-transform: uppercase;
+  letter-spacing: 6px;
+  font-weight: 900;
+  text-decoration: none;
+  color: white;
+  display: inline-block;
+  background-size: 120% 100%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -moz-background-clip: text;
+  -moz-text-fill-color: transparent;
+  -ms-background-clip: text;
+  -ms-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  background-image: linear-gradient(45deg, 
+                    #7794ff, 
+                    #44107A,
+                    #FF1361,
+                    #FFF800);
+  animation: .8s shake infinite alternate;
+}
+
+@keyframes shake {
+  0% { transform: skewX(-15deg); }
+  5% { transform: skewX(15deg); }
+  10% { transform: skewX(-15deg); }
+  15% { transform: skewX(15deg); }
+  20% { transform: skewX(0deg); }
+  100% { transform: skewX(0deg); }  
+}
+
+
+</style>-->
+
 /* #show p {
 	position: relative;
 	width: 100px;
@@ -66,6 +156,7 @@
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 </head>
 <body id="searchShow">
 
@@ -73,9 +164,24 @@
 		style="margin-bottom: 0px; box-shadow: none;">
 		<div class="container-fluid">
 			<div class="navbar-translate" id="titleLogo">
-				<a class="navbar-brand" href="home.do" title="Designed by 1석3조"
+				  <a class="navbar-brand" href="home.do" title="Designed by 1석3조"
 					data-placement="bottom"> <img width="200"
 					src="resources/users/img/logo8.png"></a>
+					<!-- <h1>
+					  <span>y</span>
+					  <span>e</span>
+					  <span>d</span>
+					  <span>a</span>
+					  <span>m</span><br>
+					  <span>t</span>
+					  <span>i</span>
+					  <span>c</span>
+					  <span>k</span>
+					  <span>e</span>
+					  <span>t</span>
+					</h1> -->
+					
+				<!--	<h1>YEDAM TICKET</h1>
 				<button class="navbar-toggler navbar-toggler" type="button"
 					data-toggle="collapse" data-target="#navigation"
 					aria-controls="navigation-index" aria-expanded="false"
@@ -83,7 +189,7 @@
 					<span class="navbar-toggler-bar top-bar"></span> <span
 						class="navbar-toggler-bar middle-bar"></span> <span
 						class="navbar-toggler-bar bottom-bar"></span>
-				</button>
+				</button>-->
 			</div>
 
 			<div class="collapse navbar-collapse" id="navigation"
@@ -122,10 +228,7 @@
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="./index.html"> <i
-								class="fa-solid fa-ticket-simple fa-2x"></i> 공연예매
-
-							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
+							 <a class="dropdown-item" target="_blank" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 
 
