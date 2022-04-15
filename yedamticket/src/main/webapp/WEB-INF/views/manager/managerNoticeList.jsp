@@ -23,13 +23,11 @@
 						</tr>
 					</thead>
 					<c:forEach items="${list }" var="list">
-						<tr
-							onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'">
-							<td>${list.noticeNo}</td>
-							<td>${list.title }</td>
-							<td>${list.wrDt }</td>
-							<td><button
-									onclick="location.href='managerNoticeDel.do?noticeNo=${list.noticeNo}'">삭제</button></td>
+						<tr>
+							<td onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'" >${list.noticeNo}</td>
+							<td onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'">${list.title }</td>
+							<td onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'">${list.wrDt }</td>
+							<td> <button onclick="location.href='managerNoticeDel.do?noticeNo=${list.noticeNo}'">삭제</button></td>
 						</tr>
 					</c:forEach>
 					</tbody>

@@ -16,8 +16,9 @@
 				<div class="card-body">
 					<h4 class="card-title">삭제처리페이지</h4>
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }">
-					<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
+					<input type="button" name="mvNo" id="mvNo" value="공연정보" onclick="location.href='movieDetail.do?mvNo=${del.mvNo}'">
 					<input type="hidden" name="mvNo" id="mvNo" value="${del.mvNo }">
+					
 					<p class="card-description"></p>
 					<form class="forms-sample" action="deleteRequestUpdate.do" method="post">
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }" >
@@ -34,13 +35,18 @@
 							</div>
 						</div>
 						<div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">기업 회원 아이디</label>
+							<div class="col-sm-6">
+						 	<input type="text" class="form-control" id="CId" name="CId" value="${del.CId }" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
 							<label for="exampleInputUsername2"
 								class="col-sm-3 col-form-label">공연이름</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="name" name="name" value="${del.performanceVO.name}" readonly="readonly"
-								onclick="location.href='managerPerforSelect.do?=${del.performanceVO.name}'">
+								<input type="text" class="form-control" id="name" name="name" value="${del.performanceVO.name}" readonly="readonly">
 							</div>
-						</div>						
+						</div>				
 						<div class="form-group row">
 							<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">신청상태</label>
 							<div class="col-sm-9">

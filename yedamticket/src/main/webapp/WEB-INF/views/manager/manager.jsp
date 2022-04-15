@@ -53,6 +53,7 @@
 						<a href="manager.do?pageNum=${pageVO.endPage+1 }"> <input
 							type="button" value="다음" class="btn btn-secondary"></a>
 					</c:if>
+					<input type="button" class="btn btn-gradient-primary me-2" onclick="location.href='managerForm.do'" value="등록">
 				</div>
 					<div class="col-3">
 						<div class="input-group mb-3" align="right">

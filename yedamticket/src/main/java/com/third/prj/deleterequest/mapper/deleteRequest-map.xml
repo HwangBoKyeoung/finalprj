@@ -78,7 +78,7 @@
 	<select id="deleteRequestSelect" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
 		FROM DELETE_REQUEST
-		WHERE DEL_REQ_NO = #{delReqNo} 
+		WHERE DEL_REQ_NO=#{delReqNo} 
 	</select>
 	
 	
@@ -115,7 +115,7 @@
 		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,M.NAME,M.CONTENT,M.ACTOR,M.MV_NO,D.C_ID
 		FROM DELETE_REQUEST D,MOVIE M
 		WHERE M.MV_NO=D.MV_NO
-		AND D.DEL_REQ_NO=#{delReqNo}
+		AND M.MV_NO=#{mvNo}
 	</select>
 	
 	<insert id="deleteMovieInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
@@ -170,8 +170,9 @@
 				SELECT *
 				FROM PERFORMANCE P
 				LEFT OUTER JOIN DELETE_REQUEST D
-				ON (P.P_NO = D.P_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
-				WHERE
+				ON (P.P_NO=D.P_NO)
+				WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+				AND 
  		]]>
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
@@ -187,8 +188,9 @@
 		SELECT COUNT(*)
 		FROM PERFORMANCE P
 		LEFT OUTER JOIN DELETE_REQUEST D
-		ON (P.P_NO = D.P_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
-		WHERE
+		ON (P.P_NO=D.P_NO)
+		WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+		AND 
 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
@@ -240,8 +242,8 @@
 				FROM MOVIE M
 				LEFT OUTER JOIN DELETE_REQUEST D
 				ON (M.MV_NO=D.MV_NO)
-				WHERE (D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL)
-				AND
+				WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+				AND 
  		]]>
  		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR GENRE LIKE '%'||#{searchName}||'%'
@@ -254,15 +256,16 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 			ORDER BY M.MV_NO DESC )A)
-			WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+			WHERE RN > (#{pageNum}-1) * #{amount} AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	<select id="getTotalMovie" resultType="int">
-		SELECT COUNT(*)
+		SELECT count(*)
 		FROM MOVIE M
 		LEFT OUTER JOIN DELETE_REQUEST D
-		ON (M.MV_NO = D.MV_NO and DELETE_CD IS NULL and DELETE_CD = '거절')
-		WHERE
+		ON (M.MV_NO=D.MV_NO)
+		WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+		AND 
 			<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR GENRE LIKE '%'||#{searchName}||'%'
 					OR RATING LIKE '%'||#{searchName}||'%'
@@ -272,7 +275,6 @@
 				<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
-				
 	</select>
 	
 </mapper>

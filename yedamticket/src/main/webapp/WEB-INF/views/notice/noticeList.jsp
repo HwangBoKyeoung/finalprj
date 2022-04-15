@@ -364,10 +364,6 @@ iframe {
 						</c:forEach>
 						</tbody>
 					</table>
-					<div align="right" class="subBtn">
-					<button type="button" class="btn btn-primary"
-						onclick="location.href='noticeWriteForm.do'">글등록</button>
-				</div>
 					<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->

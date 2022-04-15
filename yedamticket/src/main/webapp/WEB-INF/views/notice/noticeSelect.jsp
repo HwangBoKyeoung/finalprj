@@ -18,7 +18,6 @@ textarea {
 			<div class="col-md-2"></div>
 			<div class="col-md-8">
 				<br>
-				<form id="frm" action="noticeUpdateForm.do">
 					<input type="hidden" name="noticeNo" id="noticeNo"
 						value="${notice.noticeNo}">
 					<table class="table">
@@ -40,9 +39,7 @@ textarea {
 					<div align="center">
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='noticeList.do'">목록가기</button>
-						<button type="submit" class="btn btn-success">수정</button>
 					</div>
-				</form>
 			</div>
 		</div>
 	</div>

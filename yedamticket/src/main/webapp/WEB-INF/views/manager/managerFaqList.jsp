@@ -24,12 +24,11 @@
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${faqs}" var="faq">
-							<tr onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">
-								<td>${faq.FNo}</td>
-								<td>${faq.title }</td>
-								<td>${faq.qstCd}</td>
-								<td><button
-										onclick="location.href='faqDelete.do?FNo=${faq.FNo}'">삭제</button></td>
+							<tr>
+								<td onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">${faq.FNo}</td>
+								<td onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">${faq.title }</td>
+								<td onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">${faq.qstCd}</td>
+								<td><button onclick="location.href='faqDelete.do?FNo=${faq.FNo}'">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>

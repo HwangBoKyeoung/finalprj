@@ -46,7 +46,7 @@
 						<c:forEach items="${dels}" var="del">
 							<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
 							<tr
-								onclick="location.href='deleteRequestSelect.do?delReqNo=${del.delReqNo }'">
+								onclick="location.href='deleteRequestMVSelect.do?mvNo=${del.mvNo }'">
 								<td><input type="hidden" value="${del.delReqNo }"
 									name="delReqNo">${del.delReqNo }</td>
 								<td><input type="hidden" value="${del.CId }" name="CId">${del.CId }</td>

@@ -8,29 +8,28 @@
 <title>Insert title here</title>
 </head>
 <body>
+
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Performance Delete List</h4>
-				<p class="card-description">기업회원마이페이지</p>
-
+				<h4 class="card-title">Movie Delete List</h4>
+				<p class="card-description">영화 삭제요청 페이지</p>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>공연 이름</th>
+							<th>영화 이름</th>
 							<th>기업 아이디</th>
 							<th>삭제 사유</th>
-							<th>신청 현황</th>
+							<th>삭제 처리</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="${pers }" var="per">
-							<tr
-								onclick="location.href='deleteRequestSelect.do?delReqNo=${per.delReqNo }'">
-								<td>${per.performanceVO.name}</td>
-								<td>${per.performanceVO.CId}</td>
-								<td>${per.performanceVO.content}</td>
-								<td>${per.deleteCd}</td>
+						<c:forEach items="${dels }" var="del">
+							<tr onclick="location.href='deleteRequestMVSelect.do?mvNo=${del.mvNo }'">
+								<td>${del.movieVO.name}</td>
+								<td>${del.movieVO.CId}</td>
+								<td>${del.movieVO.content}</td>
+								<td>${del.deleteCd}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -39,8 +38,7 @@
 				<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
-						<a
-							href="managerPerforDeleteList.do?pageNum=${pageVO.startPage-1 }">
+						<a href="managerMovieDeleteList.do?pageNum=${pageVO.startPage-1 }">
 							<input type="button" value="이전" class="btn btn-secondary">
 						</a>
 					</c:if>
@@ -48,18 +46,18 @@
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="managerPerforDeleteList.do?pageNum=${num }"> <input
+							href="managerMovieDeleteList.do?pageNum=${num }"> <input
 							type="button" value="${num }" class="btn btn-secondary"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
-						<a href="managerPerforDeleteList.do?pageNum=${pageVO.endPage+1 }">
+						<a href="managerMovieDeleteList.do?pageNum=${pageVO.endPage+1 }">
 							<input type="button" value="다음" class="btn btn-secondary">
 						</a>
 					</c:if>
 				</div>
 				<br>
-				<form action="managerPerforDeleteList.do">
+				<form action="managerMovieDeleteList.do">
 					<div class="col-10">
 						<div class="searchBar" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
@@ -68,7 +66,7 @@
 								<option value="NAME"
 									${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
 								<option value="DELETECD"
-									${pageVO.cri.searchType eq 'DELETECD' ? 'selected' : '' }>처리결과</option>
+									${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>삭제처리</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }">
 							<button type="submit" class="btn btn-primary">검색</button>
@@ -77,7 +75,6 @@
 							<input type="hidden" name="amount" value="${pageVO.amount }">
 						</div>
 					</div>
-					
 				</form>
 			</div>
 		</div>
