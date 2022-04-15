@@ -13,7 +13,7 @@
 						   , BIZNO
 						   , DEAL_AGREE_CD)
 		VALUES (#{name}
-			  , #{Cid}
+			  , #{CId}
 			  , #{pwd}
 			  , #{email}
 			  , #{addr}
@@ -25,7 +25,7 @@
 	<select id="cidChk" resultType="int">
 		SELECT COUNT(*)
 		FROM   COMPANY
-		WHERE  C_ID = #{Cid}
+		WHERE  C_ID = #{CId}
 	</select>
 	
 	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
@@ -55,7 +55,7 @@
 	<select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
 		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
 		FROM COMPANY
-		WHERE C_ID = #{Cid}
+		WHERE C_ID = #{CId}
 		AND PWD = #{pwd}
 	</select>
 

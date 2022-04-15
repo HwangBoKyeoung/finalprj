@@ -9,6 +9,8 @@ public interface CompanyService {
 	CompanyVO companySelect(CompanyVO vo);
 
 	int companyInsert(CompanyVO vo);
+	
+	int companyUpdate(CompanyVO vo);
 
 //	company 아이디 체크
 	int cidChk(CompanyVO vo);

@@ -3,6 +3,7 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
+
 	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
 		<result column="name" property="name" />
 		<collection property="movieReservVO" resultMap="MovieReservMap" />
@@ -381,3 +382,397 @@
 		WHERE U_ID = #{UId}
 	</update>
 </mapper>
+=======
+   <resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
+      <result column="name" property="name" />
+      <collection property="movieReservVO" resultMap="MovieReservMap" />
+   </resultMap>
+
+   <resultMap
+      type="com.third.prj.moviereservation.service.MovieReservVO"
+      id="MovieReservMap">
+
+      <result column="MV_RESERV_NO" property="mvReservNo" />
+      <result column="RESERVDT" property="reservDt" />
+      <result column="SEAT_NAME" property="seatName" />
+      <result column="DOCID" property="docId" />
+      <result column="SCH_DATE" property="schDate" />
+      <result column="SCHTIME" property="schTime" />
+      <result column="U_ID" property="UId" /> 
+   </resultMap>
+
+   <resultMap
+      type="com.third.prj.performanceschedule.service.PerformanceScheduleVO"
+      id="pfScheduleMap">
+      <result column="FRDT" property="frDt" />
+      <result column="TIME" property="time" />
+   </resultMap>
+   
+   <resultMap
+      type="com.third.prj.performancereservation.service.PerformanceReservationVO"
+      id="pfReservMap">
+      <result column="P_RESERV_NO" property="PReservNo" />
+      <result column="RESERVE_DTTM" property="reserveDttm" />
+      <result column="U_ID" property="UId" />
+      <result column="SEATNO" property="seatNo" />
+   </resultMap>
+   
+   <resultMap
+      type="com.third.prj.performance.service.PerformanceVO"
+      id="performanceMap">
+      <result column="NAME" property="name" />
+      <collection property="performanceReservationVO"
+         resultMap="pfReservMap"></collection>
+      <collection property="performanceScheduleVO"
+         resultMap="pfScheduleMap"></collection>
+   </resultMap>
+
+
+   <resultMap type="com.third.prj.user.service.UserPointViewVo"
+      id="userPointMap">
+      <result property="charge" column="CHARGE" />
+      <result property="chargeDt" column="CHARGEDT" />
+      <result property="UId" column="U_ID" />
+      <result property="point" column="POINT" />
+   </resultMap>
+
+
+   
+   <resultMap type="hashmap" id="procedureCall"/>
+
+
+
+   <insert id="userInsert"
+      parameterType="com.third.prj.user.service.UserVO">
+      INSERT INTO users(name
+      , u_id
+      , pwd
+      , email
+      , addr
+      , phone
+      ,
+      birthdt)
+      VALUES(#{name}
+      , #{UId}
+      , #{pwd}
+      , #{email}
+      , #{addr}
+      , #{phone}
+      ,
+      #{birthDt})
+   </insert>
+
+   <select id="idChk" resultType="int">
+      SELECT COUNT(*)
+      FROM users
+      WHERE
+      u_id = #{UId}
+   </select>
+
+   <select id="userSelect"
+      resultType="com.third.prj.user.service.UserVO">
+      SELECT *
+      FROM USERS
+      WHERE U_ID = #{UId}
+      AND PWD = #{pwd}
+   </select>
+<!-- 황보경 -->
+   <!-- <select id="userSelectOne"
+      resultType="com.third.prj.user.service.UserVO">
+      SELECT *
+      FROM USERS
+      WHERE U_ID = #{UId}
+   </select> -->
+
+   <resultMap type="com.third.prj.user.service.UserVO"
+      id="userMap">
+      <id column="u_id" property="UId" />
+      <result column="pwd" property="pwd" />
+      <result column="name" property="name" />
+      <result column="email" property="email" />
+      <result column="phone" property="phone" />
+      <result column="addr" property="addr" />
+   </resultMap>
+
+
+<!-- 황보경 -->
+   <!-- <select id="userList"
+      resultType="com.third.prj.user.service.UserVO">
+      SELECT *
+      FROM USERS
+      ORDER BY U_ID DESC
+   </select> -->
+
+   <select id="userList" resultType="com.third.prj.user.service.UserVO">
+   <![CDATA[
+      SELECT U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
+      FROM
+         (
+         SELECT ROWNUM RN,A.* 
+         FROM (
+         SELECT 
+            U_ID,EMAIL,PWD,ADDR,BIRTHDT,PHONE,NAME,POINT,MEMBERSHIP,RDT
+         FROM USERS
+         WHERE
+         ]]>
+         <if test="searchType == 'ALL'">(U_ID LIKE '%'||#{searchName}||'%'
+            OR NAME LIKE '%'||#{searchName}||'%'
+            OR EMAIL LIKE '%'||#{searchName}||'%')</if>
+         <if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+         <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+         <if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+         <if test="searchType == null or searchType ==''"> 1 = 1</if>
+      <![CDATA[
+         ORDER BY U_ID DESC ) A )
+         WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+      
+      ]]>
+   </select>
+
+   <select id="getUser"
+      parameterType="com.third.prj.user.service.UserVO"
+      resultType="com.third.prj.user.service.UserVO">
+      SELECT U_ID
+      , {noop}PWD
+      , ROLE
+      FROM USERS
+      WHERE U_ID = #{UId}
+   </select>
+
+
+   <select id="emailCheck" resultType="int">
+      SELECT COUNT(*) FROM USERS
+      WHERE EMAIL = #{email}
+   </select>
+
+   <insert id="kakaoInsert"
+      parameterType="com.third.prj.user.service.UserVO">
+      INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
+      VALUES
+      (#{name}, #{UId}, #{email} , #{loginCd} )
+
+   </insert>
+
+
+   <update id="userUpdate"
+      parameterType="com.third.prj.user.service.UserVO">
+      UPDATE USERS
+      <set>
+         <if test="pwd != null"> PWD = #{pwd},</if>
+         <if test="email != null"> EMAIL = #{email},</if>
+         <if test="addr != null"> ADDR = #{addr},</if>
+         <if test="phone != null"> PHONE = #{phone},</if>
+      </set>
+      WHERE U_ID = #{UId}
+   </update>
+
+   <delete id="userDelete"
+      parameterType="com.third.prj.user.service.UserVO">
+      DELETE
+      FROM USERS
+      WHERE U_ID = #{UId}
+      AND PWD = #{pwd}
+   </delete>
+
+   <!-- <select id="MvReservList" resultMap="MovieReservMap">
+      SELECT R.MV_RESERV_NO ,
+      R.RESERVDT,
+      R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
+      FROM
+      MOVIE_RESERVATION
+      R JOIN MOVIE M
+      ON R.DOCID = M.DOCID
+      WHERE U_ID = #{UId}
+      </select> -->
+
+<!-- 황보경 -->
+   <!-- <update id="userCharge"
+      parameterType="com.third.prj.user.service.UserVO">
+      UPDATE users
+      SET 
+      point = (SELECT point
+      FROM users
+      WHERE u_id
+      = #{UId}) + #{point}
+      WHERE u_id = #{UId}
+   </update> -->
+
+<!-- 황보경 -->
+   <!-- <select id="loginChk"
+      resultType="com.third.prj.user.service.UserVO">
+      SELECT *
+      FROM users
+      WHERE u_id = #{UId}
+   </select> -->
+
+   <select id="pointBuyList" resultMap="userPointMap">
+      select *
+      from userPointView
+      where u_id = #{UId}
+   </select>
+
+   <select id="mvRList" resultMap="MovieReservMap">
+   <![CDATA[
+         SELECT * 
+         FROM (
+             SELECT ROWNUM RN ,A.*
+            FROM             
+             ( 
+             SELECT R.MV_RESERV_NO,R.RESERVDT,R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
+            FROM
+            MOVIE_RESERVATION R JOIN MOVIE M
+            ON R.DOCID = M.DOCID
+            WHERE U_ID = #{UId} ) A ) 
+      WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+      ORDER BY RESERVDT DESC
+      ]]>
+   </select>
+
+   <!-- 검색조건에 맞춰서 total변경 -->
+   <select id="getMTotal" resultType="int">
+      SELECT COUNT(*) AS TOTAL
+      FROM (SELECT *
+      FROM (
+      SELECT ROWNUM RN ,
+      A.*
+      FROM ( SELECT R.MV_RESERV_NO ,
+      R.RESERVDT,
+      R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
+      FROM MOVIE_RESERVATION
+      R JOIN MOVIE M
+      ON R.DOCID = M.DOCID
+      WHERE U_ID = #{UId} ) A ) )
+   </select>
+
+
+   <select id="pfRList"
+      resultMap="performanceMap">
+         <![CDATA[
+         SELECT * 
+         FROM (
+             SELECT ROWNUM RN ,
+                        A.*
+             FROM (  SELECT X.P_RESERV_NO,
+      X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
+      FROM
+      PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
+      WHERE
+      X.P_SCH_NO = Y.P_SCH_NO
+      AND Y.P_NO = Z.P_NO
+      AND X.U_ID = #{UId} ) A )     
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY RESERVE_DTTM DESC
+      ]]>
+   </select>
+   
+   <select id="userSelectOne"
+         resultType="com.third.prj.user.service.UserVO">
+         SELECT *
+         FROM USERS
+         WHERE U_ID = #{UId}
+   </select>
+   
+   <!-- <select id="pfReservList" resultMap="performanceMap">
+      <![CDATA[SELECT X.P_RESERV_NO,
+      X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
+      FROM
+      PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
+      WHERE
+      X.P_SCH_NO = Y.P_SCH_NO
+      AND Y.P_NO = Z.P_NO
+      AND X.U_ID = #{UId} ) A )     
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY RESERVE_DTTM DESC
+      ]]>
+   </select> -->
+
+   <!-- 검색조건에 맞춰서 total변경 -->
+   <select id="getFTotal" resultType="int">
+      SELECT COUNT(*) AS TOTAL 
+      FROM( SELECT * 
+         FROM (
+             SELECT ROWNUM RN ,
+                        A.*
+             FROM (  SELECT X.P_RESERV_NO,
+      X.RESERVE_DTTM,X.SEATNO,Y.FRDT,Y.TIME,Z.NAME
+      FROM
+      PERFORMANCE_RESERVATION X, PERFORMANCE_SCHEDULE Y, PERFORMANCE Z
+      WHERE
+      X.P_SCH_NO = Y.P_SCH_NO
+      AND Y.P_NO = Z.P_NO
+      AND X.U_ID =#{UId} ) A ) )
+      
+   </select>
+
+   <select id="pointBuyList2"
+      resultMap="userPointMap">
+         <![CDATA[
+         SELECT * 
+         FROM (
+             SELECT ROWNUM RN ,
+                        A.*
+             FROM (  select *
+      from userPointView
+      where u_id = #{UId} ) A )  
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY CHARGEDT DESC
+      ]]> 
+   </select>
+   
+   <!-- 검색조건에 맞춰서 total변경 -->
+   <select id="pointBuyTotal" resultType="int">
+      SELECT COUNT(*) AS TOTAL 
+      FROM (SELECT * 
+         FROM (
+             SELECT ROWNUM RN ,
+                        A.*
+             FROM (  select *
+      from userPointView
+      where u_id = #{UId} ) A ) )
+   </select>
+   
+   <select id="userPoint" resultMap="userPointMap">
+   SELECT SUM(CHARGE)-SUM(PAY) AS POINT
+   FROM POINT
+   WHERE U_ID=#{UId}
+   </select>
+   
+<!-- 황보경 -->
+   <!-- <update id="userCharge" parameterType="com.third.prj.user.service.UserVO" >
+      UPDATE users
+      SET    point = (SELECT point
+                      FROM   users
+                      WHERE  u_id = #{UId}) + #{point}
+      WHERE  u_id = #{UId}
+   </update> -->
+   
+   <update id="userCharge" statementType="CALLABLE" >
+      {CALL 
+      insertPoint(#{p1, mode=IN, jdbcType=INTEGER, javaType=INT},
+               #{p2, mode=IN, jdbcType=VARCHAR, javaType=STRING}
+               )
+      }
+
+   </update>
+   
+   <select id="loginChk" resultType="com.third.prj.user.service.UserVO">
+      SELECT *
+      FROM   USERS
+      WHERE  U_ID = #{UId}
+   </select>
+   
+   <select id="getTotal" resultType="int">
+      SELECT COUNT(*) AS TOTAL
+      FROM USERS
+      WHERE
+      <if test="searchType == 'ALL'">U_ID LIKE '%'||#{searchName}||'%'
+         OR NAME LIKE '%'||#{searchName}||'%'
+         OR
+         EMAIL LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == 'UID'">U_ID LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+</mapper>
+

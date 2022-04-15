@@ -45,7 +45,6 @@ public class PerformanceContorller {
 	private PerformanceReservationService perRDao;
 
 	//황규복 start
-	//공연 리스트+예정 공연 리스트
 	@RequestMapping("/pList.do")
 	public String pList(Model model , CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
@@ -55,6 +54,7 @@ public class PerformanceContorller {
 		return "performance/pList";
 
 	}
+
 
 //	@RequestMapping("/pserSelect.do")
 //	public String perSelect(PerformanceVO vo, Model model) {

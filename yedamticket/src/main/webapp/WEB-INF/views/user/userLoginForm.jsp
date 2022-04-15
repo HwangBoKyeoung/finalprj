@@ -154,8 +154,9 @@
 											class="now-ui-icons users_circle-08"></i>
 										</span>
 									</div>
-									<input type="text" class="form-control" name="UId"
-										placeholder="Id...">
+
+									<input type="text" class="form-control" name = "UId" placeholder="Id...">
+
 								</div>
 								<div class="input-group no-border input-lg">
 									<div class="input-group-prepend">

@@ -104,7 +104,7 @@ public class PerformanceReservationController {
 	@RequestMapping("/ticketassignment_personal_2.do")
 	public String TicketAssignment_Personal_2(HttpServletRequest httpServletRequest, Model model, LocalDate now) {
 		String name = httpServletRequest.getParameter("name");
-		String Uid = httpServletRequest.getParameter("Uid");
+		String UId = httpServletRequest.getParameter("UId");
 		String pReservNo = httpServletRequest.getParameter("PReservNo");
 		String date = httpServletRequest.getParameter("date");
 		String today = httpServletRequest.getParameter("today");
@@ -115,7 +115,7 @@ public class PerformanceReservationController {
 		String buyerAddr = httpServletRequest.getParameter("buyerAddr");
 		
 		model.addAttribute("name", name);
-		model.addAttribute("Uid", Uid);
+		model.addAttribute("UId", UId);
 		model.addAttribute("PReservNo", pReservNo);
 		model.addAttribute("date", date);
 		model.addAttribute("today", today);
@@ -129,14 +129,14 @@ public class PerformanceReservationController {
 
 	@RequestMapping("/ticketassignment_personal_3.do")
 	public String TicketAssignment_Personal_3(HttpServletRequest httpServletRequest, Model model) {
-		String Uid = httpServletRequest.getParameter("Uid");
+		String UId = httpServletRequest.getParameter("UId");
 		String pReservNo = httpServletRequest.getParameter("PReservNo");
 		String price = httpServletRequest.getParameter("price");
 		String loc = httpServletRequest.getParameter("loc");
 		String ownerAddr = httpServletRequest.getParameter("ownerAddr");
 		String buyerAddr = httpServletRequest.getParameter("buyerAddr");
 		
-		model.addAttribute("Uid", Uid);
+		model.addAttribute("UId", UId);
 		model.addAttribute("PReservNo", pReservNo);
 		model.addAttribute("price", price);
 		model.addAttribute("loc", loc);
@@ -147,7 +147,7 @@ public class PerformanceReservationController {
 	
 	@RequestMapping("/ticketassignment_personal_4.do")
 	public String TicketAssignment_Personal_4(HttpServletRequest httpServletRequest) {
-		String Uid = httpServletRequest.getParameter("Uid");
+		String UId = httpServletRequest.getParameter("UId");
 		String pReservNo = httpServletRequest.getParameter("PReservNo");
 		String price = httpServletRequest.getParameter("price");
 		String loc = httpServletRequest.getParameter("loc");

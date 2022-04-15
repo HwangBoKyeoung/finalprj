@@ -128,9 +128,17 @@
 							</a> <a class="dropdown-item" target="_blank" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
 
+
 							</a> <a class="dropdown-item" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 
+							</a> <a class="dropdown-item" 
+								href="pList.do">
+								<i class="fa-solid fa-list-ul fa-2x"></i>공연리스트
+							</a>
+							<a class="dropdown-item" 
+								href="concertSch.do">
+								<i class="fa-solid fa-calendar-days fa-2x"></i>공연 일정
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
@@ -171,11 +179,11 @@
 								class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
 							</a> <a class="dropdown-item" href="companyMyPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 기업회원 페이지
-							</a> <a class="dropdown-item" href="goodsPage.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈정보
-							</a> <a class="dropdown-item" href="movieInsertForm.do"> <i
+							</a> 
+							 <a class="dropdown-item" href="movieInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 영화등록
-							</a> <a class="dropdown-item" href="perInsertForm.do"> <i
+							</a> 
+							<a class="dropdown-item" href="perInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
 							</a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈등록

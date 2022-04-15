@@ -12,12 +12,29 @@
 		<result property="sellNo" column="sellno"/>
 		<result property="fileCd" column="file_cd"/>
 		<result property="goodsCd" column="goods_cd"/>
+		<result property="fileRe" column="file_re"/>
+		<result property="CId" column="c_id"/>
 	</resultMap>
+	
+	<!-- CDATA로 검색조건 쿼리 생성 -->
+	<sql id="boardtWhere">
+		WHERE 1=1
+		<if test="searchKeyword != null and searchKeyword != ''">
+			<![CDATA[ 
+			 AND 
+				( 
+				NAME like concat('%',#{searchKeyword},'%') 
+				OR CONTENT like concat('%',#{searchKeyword},'%') 
+				 )  
+			 ]]>
+		</if>
+	</sql>
 	
 	<select id="goodsList" resultMap="goodsResultMap">
 		SELECT * 
 		FROM GOODS 
 	</select>
+
 	
 	<insert id="goodsInsert">
 		<selectKey keyProperty="gNo" resultType="int"
@@ -27,5 +44,70 @@
 		</selectKey>
 			INSERT INTO GOODS VALUES(#{gNo},#{name},#{seller},#{price},#{content},sellno_SEQ.nextval,#{fileCd},#{goodsCd},#{fileRe})
 	</insert>
+
+
+	<select id="goodsLi" resultMap="goodsResultMap">
+		SELECT * 
+		FROM GOODS
+		<include refid="boardtWhere" />
+	</select>
+	
+	<select id="goodsSelect" resultMap="goodsResultMap">
+		SELECT G_NO, NAME, SELLER, PRICE, CONTENT, GOODS_CD, FILE_CD, FILE_RE
+		FROM GOODS
+		WHERE G_NO = #{gNo}
+	</select>
+	
+	<update id="goodsUpdate" parameterType="com.third.prj.goods.service.GoodsVO">
+		UPDATE GOODS
+		<set>
+			<if test="name != null"> NAME = #{name},</if>
+			<if test="price != null"> PRICE = #{price},</if>
+			<if test="content != null"> CONTENT = #{content},</if>
+			<if test="fileCd != null"> FILE_CD = #{fileCd},</if>
+			<if test="fileRe != null"> FILE_RE = #{fileRe},</if>
+		</set>
+		WHERE G_NO = #{GNo}
+	</update>
+	
+	<delete id="goodsDelete" parameterType="com.third.prj.goods.service.GoodsVO">
+		DELETE FROM GOODS
+		WHERE G_NO = #{GNo}
+	</delete>
+	
+	<select id="getList" resultType="com.third.prj.goods.service.GoodsVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT * 
+	          		FROM GOODS 
+	          		WHERE
+         ]]>
+         <if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%'</if>
+         <if test="searchType =='NAME'"> NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType =='CONTENT'"> CONTENT LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY G_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	<!-- 검색조건에 맞춰서 total변경 -->
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*) AS TOTAL
+		FROM GOODS
+		WHERE
+		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType =='NAME'"> NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType =='CONTENT'"> CONTENT LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
+	
 
 </mapper>

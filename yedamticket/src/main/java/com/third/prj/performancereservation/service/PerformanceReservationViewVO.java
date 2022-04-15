@@ -26,7 +26,7 @@ public class PerformanceReservationViewVO {
 	private int Pno;
 	private String name; //공연이름
 	private String content; //공연설명
-	private String Cid; //기업회원
+	private String CId; //기업회원
 	private String actor; //출연자
 	private String fileCd; // 파일번호
 	private String loc;  //공연지역

@@ -116,6 +116,33 @@
 
 
 	<!-- 공연 전체리스트 -->
+	
+	<!-- 황규복 -->
+	<!-- performanceSch resultMap -->
+	<resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pScheduleMap">
+		<result property="PSchNo" column="P_SCH_NO"/>
+		<result property="frDt" column="FRDT"/>
+		<result property="trDt" column="TRDT"/>
+		<result property="time" column="TIME"/>
+		<result property="endTime" column="ENDTIME"/>
+	</resultMap>
+	<!-- performance resultMap -->
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
+		<result column="P_NO" property="pNo"/>
+		<result column="NAME" property="name"/>
+		<result column="CONTENT" property="content"/>
+		<result column="ACTOR" property="actor"/>
+		<result column="FILE_CD" property="fileCd"/>
+		<result column="LOC" property="loc"/>
+		<result column="ADDR" property="addr"/>
+		<result column="PRICE" property="price"/>
+		<result column="LAT" property="lat"/>
+		<result column="LNG" property="lng"/>
+		<result column="C_ID" property="CId"/>
+		<collection property="performanceScheduleVO" resultMap="pScheduleMap"/>
+	</resultMap>
+	<!-- 공연 전체리스트  -->
+
 	<select id="pList" resultMap="pMap">
         <![CDATA[
          SELECT * 
@@ -153,7 +180,7 @@
                AND RN <= #{pageNum} * #{amount}
       ]]>
 	</select>
-	<!-- 예정공연 -->
+	<!-- 예정-->
 	<select id="epList" resultMap="pMap">
 		SELECT
 		P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,P.RENAMES,
@@ -218,48 +245,51 @@
 		AND U_ID = #{UId}
 	</select>
 
-	<select id="pfBuyList2" resultMap="performanceViewMap"> 
-         <![CDATA[
-         SELECT * 
-         FROM (
-             SELECT ROWNUM RN ,
-                        A.*
-             FROM (  SELECT *
-      FROM PERFORMANCEVIEW
-      WHERE BUY_CTNT_CD = 'pf'
-       AND U_ID = #{UId} ) A )     
+
+	<select id="pfBuyList2"
+		resultMap="performanceViewMap">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+    	AND U_ID = #{UId} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY PAYDT DESC
       ]]>
 	</select>
 
 	<!-- 검색조건에 맞춰서 total변경 -->
-	<select id="pfBuyTotal" resultType="int">
-		SELECT COUNT(*) + (SELECT COUNT(*) AS TOTAL
-		FROM (
-		SELECT *
-		FROM (
-		SELECT ROWNUM RN , B.*
-		FROM ( SELECT *
-		FROM PERFORMANCEVIEW
-		WHERE BUY_CTNT_CD = 'pf'
-		AND U_ID = #{UId} ) B )
-		)
-		) as totalcnt
-		FROM (
-		SELECT *
-		FROM (
-		SELECT ROWNUM RN , A.*
-		FROM (
-		SELECT *
-		FROM MOVIEVIEW
-		WHERE BUY_CTNT_CD = 'mv'
-		AND U_ID = #{UId} ) A
-		)
-		)
-		GROUP BY BUY_ctnt_cd
+   <select id="pfBuyTotal" resultType="int">
+      SELECT COUNT(*) + (SELECT COUNT(*) AS TOTAL
+      FROM (
+      SELECT *
+      FROM (
+      SELECT ROWNUM RN , B.*
+      FROM ( SELECT *
+      FROM PERFORMANCEVIEW
+      WHERE BUY_CTNT_CD = 'pf'
+      AND U_ID = #{UId} ) B )
+      )
+      ) as totalcnt
+      FROM (
+      SELECT *
+      FROM (
+      SELECT ROWNUM RN , A.*
+      FROM (
+      SELECT *
+      FROM MOVIEVIEW
+      WHERE BUY_CTNT_CD = 'mv'
+      AND U_ID = #{UId} ) A
+      )
+      )
+      GROUP BY BUY_ctnt_cd
 
-	</select>
+   </select>
+
 
 	<insert id="perInsert">
 		<selectKey keyProperty="pNo" resultType="int" order="BEFORE">

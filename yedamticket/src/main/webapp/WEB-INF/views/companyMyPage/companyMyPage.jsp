@@ -24,7 +24,7 @@
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
-@font-face {
+/*@font-face {
 	font-family: Poppins-Regular;
 	src:
 		url(https://colorlib.com/etc/tb/Table_Responsive_v2/fonts/poppins/Poppins-Regular.ttf)
@@ -203,13 +203,13 @@ iframe {
 
 .table, .row {
 	width: 100% !important
-}
+}*/
 
 /* .row:hover {
     background-color: #ececff;
     cursor: pointer
 } */
-@media ( max-width :768px) {
+/* @media ( max-width :768px) {
 	.row {
 		border-bottom: 1px solid #f2f2f2;
 		padding-bottom: 18px;
@@ -282,7 +282,21 @@ iframe {
 	font-weight: bold;
 	color: #666;
 	margin-right: 5px;
-}
+} */
+
+/* 사이드바 */
+    .sidenav {
+      position: absolute;
+      width: 200px;
+      height: 100%;
+      margin-left: -20px;
+      margin-top:50px
+    }
+    /* 본문 */
+    .page {
+     margin-top:50px;
+     margin-left: 250px;
+    }
 </style>
 
 <body>
@@ -300,7 +314,7 @@ iframe {
 				<ul class="list-unstyled components mb-5">
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -311,7 +325,93 @@ iframe {
 				</div>
 			</div>
 		</nav>
+		
+		<div class="col-sm-9 page">
+			<div class="col-6">
+				<h4 class="mb-3" align="left">기업회원정보</h4>
+				<form class="frm" action="companyUpdate.do" method="POST" onsubmit="alertt();" id="frms">
+					
+					<div class="row g-3">
+						<div class="col-12" align="left">
+							<label for="email" class="form-label">이메일</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="email" id="email" value="${cmp.email }"placeholder="your@email.com.." required>
+							</div>
+						</div>
+						<div class="col-12" align="left">
+							<label for="CId" class="form-label">아이디</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="CId" id="CId" value="${sessionId}" placeholder="Id" readonly="readonly">
+							</div>
+						</div>
+						<div class="col-6" align="left">
+							<label for="password" class="form-label">비밀번호</label>
+							<div class="input-group has-validation">
+								<input type="password" class="form-control pw" name="pwd" id="pwd1" value="" placeholder="password" required>
+							</div>
+						</div>
+						<div class="col-6" align="left">
+							<label for="password" class="form-label">비밀번호확인</label>&nbsp;&nbsp;<font id = "checkPw" size = "2"></font>
+							<div class="input-group has-validation">
+								<input type="password" class="form-control pw" name="pwd2" id="pwd2" value="" placeholder="password" >
+							</div>
+						</div>
+						<div class="col-12" align="left">
+							<label for="companyName" class="form-label">기업명</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" id="name" name="name" value="${cmp.name }"placeholder="CompanyName">
+							</div>
+						</div>
+						<div class="col-12" align="left">
+							<label for="phone" class="form-label">전화번호</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="phone" id="phone" value="${cmp.phone }"placeholder="phone" required>
+							</div>
+						</div>
+						<div class="col-12" align="left">
+							<label for="bizno" class="form-label">사업자등록번호</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" id="bizno" name="bizno" value="${cmp.bizno }" readonly="readonly">
+							</div>
+						</div>
+						<div class="col-12" align="left">
+							<label for="addr" class="form-label">주소</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="addr" id="addr" value="${cmp.addr }"placeholder="daegu..." required>
+							</div>
+							<div align="right">
+								<button id="updateBtn" type="submit" class="btn btn-primary" style="margin-right: 50%">수정</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
 	</div>
+	<script type="text/javascript">
+	
+	$("#updateBtn").attr('disabled',true);
+	$('.pw').keyup(function(){
+    	let pass1 = $("#pwd1").val();
+        let pass2 = $("#pwd2").val();
+        
+        if (pass1 != "" || pass2 != ""){
+        	if (pass1 == pass2){
+            	$("#checkPw").html('일치');
+            	$("#checkPw").attr('color','green');
+            	$("#updateBtn").attr('disabled',false);
+            } else {
+            	$("#checkPw").html('불일치');
+                $("#checkPw").attr('color','red');
+                $("#updateBtn").attr('disabled',true);
+            }
+        }
+    })
+	   
+    function alertt(){
+		alert("회원정보가 수정되었습니다.")
+	}
+	</script>
 </body>
 
 </html>

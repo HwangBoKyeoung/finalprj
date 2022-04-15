@@ -31,11 +31,11 @@ public class PointController {
 	 */
 	
 	@RequestMapping(value = "/point_2.do", method = RequestMethod.POST)
-	public String point_2(UserVO userVO, Map<String, Object> map, @RequestParam int point, @RequestParam String Uid) {
+	public String point_2(UserVO userVO, Map<String, Object> map, @RequestParam int point, @RequestParam String UId) {
 		//model.addAttribute("p1", point);
-		//model.addAttribute("p2", Uid);
+		//model.addAttribute("p2", UId);
 		map.put("p1", point);
-		map.put("p2", Uid);
+		map.put("p2", UId);
 		userDao.userCharge(map);
 		return "user/userPage";
 	}

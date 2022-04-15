@@ -21,7 +21,7 @@
 		<result property="Pno" column="p_no"/>
 		<result property="name" column="name"/>
 		<result property="content" column="content"/>
-		<result property="Cid" column="c_id"/>
+		<result property="CId" column="c_id"/>
 		<result property="actor" column="actor"/>
 		<result property="fileCd" column="file_cd"/>
 		<result property="loc" column="loc"/>

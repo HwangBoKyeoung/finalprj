@@ -26,6 +26,8 @@ public class PerformanceVO {
 	private String lat;
 	private String lng;
 	private String renames; //변경된 파일이름
+	private String confirm; //관리자 승인여부
+	private String refuseRs; //거부사유
 	
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;
