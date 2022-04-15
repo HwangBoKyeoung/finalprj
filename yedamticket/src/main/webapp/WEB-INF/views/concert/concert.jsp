@@ -24,7 +24,7 @@ body {
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var request = $.ajax({
-			url : "consertCalender.do",
+			url : "concertCalender.do",
 			method : "GET",
 			dataType : "json"
 		});

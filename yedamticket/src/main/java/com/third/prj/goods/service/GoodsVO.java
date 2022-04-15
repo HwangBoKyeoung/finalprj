@@ -19,6 +19,8 @@ public class GoodsVO {
 	private String goodsCd;
 	private String fileRe;
 	private String CId;
+	private String confirm; //관리자 승인여부
+	private String refuseRs; //거부사유
 	
 	//검색
 	private String searchKeyword;

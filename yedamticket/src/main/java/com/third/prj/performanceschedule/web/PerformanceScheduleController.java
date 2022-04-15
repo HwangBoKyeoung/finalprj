@@ -24,10 +24,10 @@ public class PerformanceScheduleController {
 	public String concertSch(Model model) {
 //		List<PerformanceScheduleVO> list = pfmcDao.PerformanceScheduleList();
 //		model.addAttribute("schs", list);
-		return "consert/concert";
+		return "concert/concert";
 	}
 	
-	@RequestMapping("/consertCalender.do")
+	@RequestMapping("/concertCalender.do")
 	@ResponseBody
 	public List consertCalender(HttpServletRequest req, HttpServletResponse res) {
 		res.setContentType("text/json; charset=utf-8");
@@ -38,7 +38,7 @@ public class PerformanceScheduleController {
 	
 	@RequestMapping("/consertSchedule.do")
 	public String consertSchedule() {
-		return "consert/consertSchedule";
+		return "concert/consertSchedule";
 	}
 	
 	@RequestMapping("/ajaxModalForm.do")
@@ -53,6 +53,6 @@ public class PerformanceScheduleController {
 	
 	@RequestMapping("/modalForm.do")
 	public String modalForm(Model model, PerformanceScheduleVO vo) {
-		return "u/consert/modalForm";
+		return "u/concert/modalForm";
 	}
 }
