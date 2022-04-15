@@ -62,5 +62,11 @@ public class GoodsServiceImpl implements GoodsService {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
+
+	@Override
+	public List<GoodsVO> goodsList(String goodsCd) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 	
 }
