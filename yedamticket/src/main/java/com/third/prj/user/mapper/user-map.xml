@@ -3,11 +3,9 @@
 
 <mapper namespace="com.third.prj.user.mapper.UserMapper">
 
-	<resultMap type="com.third.prj.movie.service.MovieVO"
-		id="MovieMap">
+	<resultMap type="com.third.prj.movie.service.MovieVO" id="MovieMap">
 		<result column="name" property="name" />
-		<collection property="movieReservVO"
-			resultMap="MovieReservMap" />
+		<collection property="movieReservVO" resultMap="MovieReservMap" />
 	</resultMap>
 
 	<resultMap
@@ -20,7 +18,7 @@
 		<result column="DOCID" property="docId" />
 		<result column="SCH_DATE" property="schDate" />
 		<result column="SCHTIME" property="schTime" />
-		<result column="U_ID" property="UId" />
+		<result column="U_ID" property="UId" /> 
 	</resultMap>
 
 	<resultMap
@@ -29,7 +27,7 @@
 		<result column="FRDT" property="frDt" />
 		<result column="TIME" property="time" />
 	</resultMap>
-
+	
 	<resultMap
 		type="com.third.prj.performancereservation.service.PerformanceReservationVO"
 		id="pfReservMap">
@@ -38,7 +36,7 @@
 		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
-
+	
 	<resultMap
 		type="com.third.prj.performance.service.PerformanceVO"
 		id="performanceMap">
@@ -54,17 +52,13 @@
 		id="userPointMap">
 		<result property="charge" column="CHARGE" />
 		<result property="chargeDt" column="CHARGEDT" />
-		<result property="UId" column="U_ID" />
+		<result property="UId" column="U_ID" />  
 		<result property="point" column="POINT" />
-		<result property="pay" column="PAY" />
-		<result property="payDt" column="PAYDT" />
-		<result property="tempPoint" column="TEMP_POINT" />
-		<result property="buyCtntCd" column="BUY_CTNT_CD" />
 	</resultMap>
 
 
-
-	<resultMap type="hashmap" id="procedureCall" />
+	
+	<resultMap type="hashmap" id="procedureCall"/>
 
 
 
@@ -211,7 +205,7 @@
 		from userPointView
 		where u_id = #{UId}
 	</select>
-
+ 
 	<select id="mvRList" resultMap="MovieReservMap">
 	<![CDATA[
 			SELECT * 
@@ -367,7 +361,23 @@
 		<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
 		<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
-
 	
-
+	<!-- 아이디 찾기 -->
+	<select id="searchId" resultType="String">
+		select nvl(u_id, 0) from users 
+        where name = #{name} and phone = #{phone}
+	</select>
+	
+	<!-- 마이페이지 회원정보 -->
+	<select id="selectByMemberId" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM USERS
+		WHERE U_ID = #{UId}
+	</select>
+	
+	<update id="updatePassword2" parameterType="com.third.prj.user.service.UserVO">
+		UPDATE USERS
+		SET PWD = #{pwd}
+		WHERE U_ID = #{UId}
+	</update>
 </mapper>

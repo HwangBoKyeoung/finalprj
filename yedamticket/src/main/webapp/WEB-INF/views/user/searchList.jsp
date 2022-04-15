@@ -90,6 +90,11 @@
 	font-weight: bold;
 	font-family: fantasy;
 }
+
+#posterA{
+height:390px;
+width:300px;
+}
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -123,13 +128,15 @@
    </table> --%>
 	<div id="show"></div>
 	<div class="container">
+	<br><br>
+	<h2>전체영화</h2>
 		<div class="row">
 			<c:forEach items="${searchName}" var="sN" varStatus="status">
 				<div class="col-3">
 					<div class="card">
 						<div class="poster" id="poster">
 							<input id="imgTag${status.index }" class="imgInfo" type="hidden"
-								value="${sN.fileCd}"> <img class="">
+								value="${sN.fileCd}"> <img id="posterA"class="">
 						</div>
 						<div class="details">
 							<br> <br>
