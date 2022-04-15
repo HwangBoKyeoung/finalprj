@@ -256,7 +256,10 @@
             <div class="col-lg-2">
                <h5>영화선택</h5>
                <div id="movieList">
+              
                   <c:forEach var="m" items="${movies}">
+                   <input type="hidden" id="runtime" value="${m.runtime }">
+                  
                      <div data-cd="${m.docId}" data-poster="${m.fileCd}">
                         ${m.name}
                         <c:choose>
@@ -361,8 +364,8 @@
          <!-- 날짜-->
          <input type="hidden" id="schTime" name="schTime">
          <!-- 시간 -->
-         <input type="hidden" id="seatName" name="seatName">
-         <!-- 좌석이름 -->
+         <input type="hidden" id="seatName" name="seatName">       
+         <!-- 관객수 -->
          <button type="submit" id="payBtn" style="display:none;" class="btn btn-warning">결제하기</button>
   		 </form>
           <input type="hidden" id="name" name="name">
@@ -382,7 +385,7 @@
          docId.value = event.target.getAttribute('data-cd');
          //버튼누르면 색바뀜
          let childNodes = event.target.parentNode.children;
-         for (var i = 1; i < childNodes.length; i++) {
+         for (var i = 0; i < childNodes.length; i++) {
             childNodes[i].classList.remove('selectedList');
          }
          event.target.setAttribute('class', 'selectedList');
@@ -463,6 +466,7 @@
                      $('#resultDate').val(sumDate);
                      $('#schDate').val(sumDate);
                      showTime.style.display = "block";
+                     console.log(data);
                   }
                });
             }

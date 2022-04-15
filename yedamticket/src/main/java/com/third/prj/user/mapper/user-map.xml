@@ -113,12 +113,7 @@
 		AND PWD = #{pwd}
 	</select>
 <!-- 황보경 -->
-	<!-- <select id="userSelectOne"
-		resultType="com.third.prj.user.service.UserVO">
-		SELECT *
-		FROM USERS
-		WHERE U_ID = #{Uid}
-	</select> -->
+
 
 	<resultMap type="com.third.prj.user.service.UserVO"
 		id="userMap">
@@ -295,14 +290,12 @@
 		WHERE
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
-<<<<<<< HEAD
 		AND X.U_ID = #{UId}
-=======
 		AND X.U_ID = #{Uid} ) A ) 	 
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
          ORDER BY RESERVE_DTTM DESC
 		]]>
->>>>>>> e530a196aac4812cf1fc424358093b1dfeb7f2a5
+
 	</select>
 	
 	<select id="userSelectOne"

@@ -41,7 +41,7 @@
 	<select id="movieReplyList" resultMap="movieReplyResultMap">
 		SELECT *
 		FROM MOVIE_REPLY
-		WHERE MV_NO=#{docId}
+		WHERE DOCID=#{docId}
 	</select>
 	
 </mapper>

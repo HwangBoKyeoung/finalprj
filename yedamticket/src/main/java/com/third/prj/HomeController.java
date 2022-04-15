@@ -14,14 +14,14 @@ public class HomeController {
 	private MovieService movieDao;
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Model model) {
-		
+		model.addAttribute("movie",movieDao.movieList());
 		model.addAttribute("movies", movieDao.mList());
 		return "home/home";
 	}
 	
 	@RequestMapping("/home.do")
 	public String home1(Model model) {
-		
+		model.addAttribute("movie",movieDao.movieList());
 		model.addAttribute("movies",movieDao.mList());
 		return "home/home";
 	

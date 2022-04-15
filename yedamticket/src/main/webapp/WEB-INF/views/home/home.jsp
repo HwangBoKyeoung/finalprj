@@ -52,62 +52,59 @@
                     <div class="movie_chart">
                      <!-- 영화순위-->
                         <div class="swiper-container2">
-                           <div class="chart_cont1 swiper-wrapper">                               
+                           <div class="chart_cont1 swiper-wrapper">  
+                           <c:forEach items="${movie }" var="movie" varStatus="status">                                      
                                <div class="swiper-slide">
                                    <div class="poster">
                                        <figure>
-                                           <img src="resources/home/assets/img/poster08.jpg" srcset="assets/img/poster08@2.jpg 2x" alt="마약왕">
+                                       <input type="hidden" class="rankPoster" value="${movie.fileCd }">
+                                           <img  class="rPoster" >
                                        </figure>
-                                       <div class="rank"><strong>8</strong></div>
+                                       <div class="rank"><strong>${status.count }</strong></div>
                                        <div class="mx">
                                            <span class="icon m ir_pm">MX</span>
                                        </div>
                                    </div>
                                    <div class="infor">
-                                       <h3><span class="icon a15 ir_pm">15세 이상 관람</span> <strong>마약왕</strong></h3>
+                                       <h3>
+                                       <!-- all -->
+                                     	<c:if test="${movie.rating eq '전체관람가능' }">
+                                        <span class="icon all ir_pm">전체관람가능</span>
+                                        </c:if>
+                                        <c:if test="${movie.rating eq '전체관람가' }">
+                                        <span class="icon all ir_pm">전체관람가능</span>
+                                        </c:if>
+                                        <!-- 7세 -->
+                                        <c:if test="${movie.rating eq '7세관람가' }">
+                                        <span class="icon all ir_pm">7세관람가</span>
+                                        </c:if>
+                                        <!-- 12 -->
+                                        <c:if test="${movie.rating eq '12세관람가' }">
+                                        <span class="icon a15 ir_pm">12세관람가</span>
+                                        </c:if>
+                                        <!-- 15 -->
+                                        <c:if test="${movie.rating eq '15세관람가' }">
+                                        <span class="icon a19 ir_pm">15세관람가</span>
+                                        </c:if>
+                                        <!-- 19 -->
+                                        <c:if test="${movie.rating eq '18세관람가' }">
+                                        <span class="icon a12 ir_pm">18세이상관람가</span>
+                                        </c:if>
+                                        <c:if test="${movie.rating eq '18세관람가(청소년관람불가)' }">
+                                        <span class="icon a12 ir_pm">18세이상관람가</span>
+                                        </c:if>   
+                                       
+                                       <strong>${movie.name }</strong>
+                                       
+                                       </h3>
                                        <div class="infor_btn">
                                            <a href="#">상세정보</a>
                                            <a href="#">예매하기</a>
                                        </div>
                                    </div>
                                </div>
-                               <div class="swiper-slide">
-                                   <div class="poster">
-                                       <figure>
-                                           <img src="resources/home/assets/img/poster08.jpg" srcset="assets/img/poster08@2.jpg 2x" alt="마약왕">
-                                       </figure>
-                                       <div class="rank"><strong>8</strong></div>
-                                       <div class="mx">
-                                           <span class="icon m ir_pm">MX</span>
-                                       </div>
-                                   </div>
-                                   <div class="infor">
-                                       <h3><span class="icon a15 ir_pm">15세 이상 관람</span> <strong>마약왕</strong></h3>
-                                       <div class="infor_btn">
-                                           <a href="#">상세정보</a>
-                                           <a href="#">예매하기</a>
-                                       </div>
-                                   </div>
-                               </div>
-                               <div class="swiper-slide">
-                                   <div class="poster">
-                                       <figure>
-                                           <img src="resources/home/assets/img/poster08.jpg" srcset="assets/img/poster08@2.jpg 2x" alt="마약왕">
-                                       </figure>
-                                       <div class="rank"><strong>8</strong></div>
-                                       <div class="mx">
-                                           <span class="icon m ir_pm">MX</span>
-                                       </div>
-                                   </div>
-                                   <div class="infor">
-                                       <h3><span class="icon a15 ir_pm">15세 이상 관람</span> <strong>마약왕</strong></h3>
-                                       <div class="infor_btn">
-                                           <a href="#">상세정보</a>
-                                           <a href="#">예매하기</a>
-                                       </div>
-                                   </div>
-                               </div>
-                           </div>
+                               </c:forEach>
+                            </div>
                         </div>
                         <!-- 상영예정작-->
                         
@@ -177,7 +174,20 @@
     <script src="resources/home/assets/js/iframe_api.js"></script>
     <script src="resources/home/assets/js/movie.js"></script>
     <script>
-    	   
+    //포스터 filecd잘라주기
+ let fileCd=document.getElementsByClassName('rankPoster');
+ console.log(fileCd);
+ let rPoster=document.getElementsByClassName('rPoster');
+ console.log(rPoster);
+ 	for(var i =0;i<fileCd.length;i++){
+ 		
+ 		let split=(fileCd[i].defaultValue).split('|');
+ 		console.log(split[0]);
+ 		rPoster[i].setAttribute('src',split[0]);
+ 	}
+    
+    
+    
     function pBookingForm(pNo){
 		location.href="pBookingForm.do?pNo="+pNo;
 	} 

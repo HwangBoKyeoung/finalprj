@@ -204,7 +204,7 @@ ${user }
 				<!-- 영화관 -->
 				<input type="hidden" id="reservHall" name="reservHall"  value="${re.reservHall }">
 				<!-- 사용자 -->
-				<input type="hidden" id="UId" name="UId" value="micol1234">
+				<input type="hidden" id="UId" name="UId" value="enc1115">
 				<!-- 날짜-->
 				<input type="hidden" id="schDate" name="schDate"  value="${re.schDate }">
 				<!-- 시간 -->
@@ -215,6 +215,8 @@ ${user }
 				<input type="hidden" id="pay" name="pay">
 				<!-- 영화인지 공연인지 코드 -->
 				<input type="hidden" id="buyCtntCd" name="buyCtntCd" value="mv">
+				<!-- 관객수 -->
+				<input type="hidden" id="audience" name="audience">
 				<button type="submit" class="btn">결제하기</button>
 			</form>
             </div>
@@ -292,6 +294,8 @@ ${user }
       </div>
 </body>
 <script>
+
+
 (function (){
 	let fileCd=('${movie.fileCd}').split('|');
 	let poster=fileCd[0];	
@@ -306,6 +310,7 @@ ${user }
 	}
 	$('#price').text(price*cnt+'원');
 	$('#pay').val(price*cnt);
+	$('#audience').val(cnt);
 })();
 
 /*active button class onclick*/

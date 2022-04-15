@@ -150,7 +150,7 @@ head {
                      <table class="table table-hover" id = "rtable" style="margin-top: 120px;">
                         <c:forEach items="${replys}" var="reply">
                            <tr>
-                              <td width="20%">${reply.uid}</td>
+                              <td width="20%">${reply.UId}</td>
                               <td width="20%"> <jsuites-rating value=${reply.star }></jsuites-rating></td>
                                     <td width = "400">${reply.content }</td>
                                     <td width = "45 " align = "center">
@@ -172,16 +172,12 @@ head {
 
 <script>
 let star=$("<jsuites-rating value=4></jsuites-rating>");
-console.log(별);
 //filecd가 여러개 잇는 값 자르기
    let fileCd="${movie.fileCd}";
    console.log(fileCd);
    let splitCd=fileCd.split('|');
    console.log(splitCd[0]);
    $('#poster').attr("src",splitCd[0]);
-   $('#img1').attr("src",splitCd[1]);
-   $('#img2').attr("src",splitCd[2]);
-   $('#img3').attr("src",splitCd[3]);
 //ratingstar
  document.querySelector('jsuites-rating').addEventListener('onchange', function(e) {
     document.getElementById('star').value = this.value;
@@ -190,16 +186,17 @@ function aJaxCall() {
     $.ajax({
        url : "movieReplyInsert.do",
        type : "post",
-       data : {"Uid" : "${sessionId}", "mvNo" : ${movie.mvNo},"content" : $("#content").val(),"star" : $("#star").val()},
+       data : {"UId" : "enc1115", "docId" : "${movie.docId}","content" : $("#content").val(),"star" : $("#star").val()},
        dataType : "json",
        success : function(data){
+    	 console.log(data);
          htmlConvert(data);
          $("#content").val('');
        }
     });
  } 
  
-function htmlConvert(data) {
+ function htmlConvert(data) {
    let tr=document.createElement('tr');
    $("#rtable").empty();
    $.each(data, function(idx, item){
@@ -207,10 +204,10 @@ function htmlConvert(data) {
       
       let tr = $("<tr>");
       tr.append(
-         $("<td>").attr("width", "20%").text(item.uid),
+         $("<td>").attr("width", "20%").text(item.UId),
          $("<td>").attr("width", "20%").append(
             $("<jsuites-rating value='"+item.star+"'>")   
-         ),
+         ).addClass("star"),
          $("<td>").attr("width", "400").text(item.content),
          $("<td>").attr({
             "width" : "45px",
@@ -244,10 +241,6 @@ function deleteReply(n){ // 전달받은 replyId
     });
    
  }
-
+ console.log(document.getElementsByClassName('jrating'));
 </script>
-<script src="resources/table/js/jquery-3.3.1.min.js"></script>
-<script src="resources/table/js/popper.min.js"></script>
-<script src="resources/table/js/bootstrap.min.js"></script>
-<script src="resources/table/js/main.js"></script>
 </html>

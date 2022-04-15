@@ -18,6 +18,7 @@
 		<result property="fileCd" column="file_cd" />
 		<result property="docId" column="docId" />
 		<result property="renames" column="renames"/>
+		<result property="audience" column="audience"/>
 		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
 	</resultMap>
 	
@@ -107,13 +108,18 @@
 	
 	<!-- 영화리스트 -->
 	<select id="movieList" resultMap="movieResultMap">
-		SELECT * 
-		FROM MOVIE
-		WHERE
+		<![CDATA[
+		SELECT ROWNUM, A.*
+        FROM(
+        SELECT NAME,AUDIENCE,STARTDATE,CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
+        RANK() OVER (ORDER BY AUDIENCE ASC) RANK
+        FROM MOVIE
+        WHERE
 		STARTDATE
 		BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
-		AND
-		TO_CHAR(SYSDATE,'yyyyMMdd')
+		AND TO_CHAR(SYSDATE,'yyyyMMdd') ) A
+        WHERE ROWNUM BETWEEN 1 AND 10
+         ]]>
 	</select>
 	<!-- 영화상세 -->
 	<select id="movieDetail" resultMap="movieResultMap">
@@ -128,7 +134,7 @@
 		FROM MOVIEVIEW
 		WHERE
 		BUY_CTNT_CD = 'mv'
-		AND U_ID = #{Uid}
+		AND U_ID = #{UId}
 
 	</select>
 
@@ -204,5 +210,10 @@
 		WHERE DOCID=#{docId} 
 		
 	</select>
+	<update id="audienceInsert" >
+		 UPDATE MOVIE 
+		 SET AUDIENCE = (AUDIENCE + #{audience}) 
+		 WHERE DOCID =#{docId}
+	</update>
 
 </mapper>

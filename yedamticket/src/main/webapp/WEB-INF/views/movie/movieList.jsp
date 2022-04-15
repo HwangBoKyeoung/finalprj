@@ -95,7 +95,6 @@
 </head>
 <body>
 <h1>박스오피스 순위</h1>
-<input type="hidden" name="search" id="search" value="${movie }">
    <div id="show"></div>
    <div class="container">
       <div class="row">
@@ -103,8 +102,8 @@
             <div class="col-3">
                <div class="card">
                   <div class="poster" id="poster">
-                     <input id="imgTag${status.index }" class="imgInfo" type="hidden" value="${movie.fileCd}">
-                     <img class="">
+                     <input class="rankPoster" type="hidden" value="${movie.fileCd}">
+                     <img class="rPoster">
                   </div>
                   <div class="details">
                      <br> <br>
@@ -131,7 +130,6 @@
 	
 	
 <h1>상영 예정작</h1>
-<input type="hidden" name="search" id="search" value="${movies }">
    <div id="show"></div>
    <div class="container">
       <div class="row">
@@ -139,8 +137,8 @@
             <div class="col-3">
                <div class="card">
                   <div class="poster" id="poster">
-                     <input id="imgTag${status.index }" class="imgInfo" type="hidden" value="${m.fileCd}">
-                     <img class="">
+                     <input class="realesePoster" type="hidden" value="${m.fileCd}">
+                     <img class="rePoster">
                   </div>
                   <div class="details">
                      <br> <br>
@@ -162,18 +160,23 @@
     
   </div>
  <script>
-
-      $('.imgInfo').each(function (index, item){
-         var data = item.value;
-         var imgId = item.id;
-         if(data=='' || data == null){
-            $("#"+imgId).next().attr("src", "resources/yedamticket.png");
-         } else{
-            var dataAry = data.split('|');
-            let img = dataAry[0];
-            $("#"+imgId).next().attr("src", img);
-         }
-      });
+ ///박스오피스 포스터 filecd자르기
+ let fileCd=document.getElementsByClassName('rankPoster');
+ let rPoster=document.getElementsByClassName('rPoster');
+ 	for(var i =0;i<fileCd.length;i++){
+ 		
+ 		var split=(fileCd[i].defaultValue).split('|');
+ 		rPoster[i].setAttribute('src',split[0]);
+ 	}
+//
+ let fileCd1=document.getElementsByClassName('realesePoster');
+ let rPoster1=document.getElementsByClassName('rePoster');
+ 	for(var i =0;i<fileCd.length;i++){
+ 		
+ 		var split=(fileCd1[i].defaultValue).split('|');
+ 		rPoster1[i].setAttribute('src',split[0]);
+ 	}
+ 
        
    </script>
 

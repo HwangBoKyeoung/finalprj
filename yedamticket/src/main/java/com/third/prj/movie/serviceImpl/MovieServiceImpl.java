@@ -99,4 +99,10 @@ public class MovieServiceImpl implements MovieService {
 		// TODO Auto-generated method stub
 		return mapper.mDetail(vo);
 	}
+
+	@Override
+	public int audienceInsert(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.audienceInsert(vo);
+	}
 }
