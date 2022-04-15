@@ -7,7 +7,7 @@
 		<result property="title" column="title" />
 		<result property="content" column="content" />
 		<result property="inDt" column="indt" />
-		<result property="uId" column="u_id" />
+		<result property="UId" column="u_id" />
 		<result property="kind" column="kind"/>
 	</resultMap>
 
@@ -45,7 +45,7 @@
 	</select>
 	
 	<select id="inquirySelectList" resultType="com.third.prj.inquiry.service.InquiryVO">
-		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID
+		SELECT IN_NO,TITLE,CONTENT,INDT,U_ID,KIND
 		FROM INQUIRY
 		ORDER BY INDT DESC
 	</select>
@@ -67,12 +67,14 @@
 						  , INDT
 						  , TITLE
 						  , CONTENT
-						  , U_ID)
+						  , U_ID
+						  , KIND)
 		VALUES(#{inNo}
 			 , #{inDt}
 			 , #{title}
 		     , #{content}
-		     , #{UId})
+		     , #{UId}
+		     , #{kind})
 	</insert>
 	
 	<update id="inquiryUpdate" parameterType="com.third.prj.inquiry.service.InquiryVO">
@@ -80,6 +82,7 @@
 		<set>
 			<if test="title != null"> TITLE = #{title},</if>
 			<if test="content != null"> CONTENT = #{content},</if>
+			<if test="kind != null"> KIND = #{kind},</if>
 		</set>
 		WHERE IN_NO = #{inNo}
 	</update>

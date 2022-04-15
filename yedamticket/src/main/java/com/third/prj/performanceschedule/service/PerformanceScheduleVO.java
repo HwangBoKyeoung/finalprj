@@ -3,6 +3,7 @@ package com.third.prj.performanceschedule.service;
 import java.sql.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.third.prj.performance.service.PerformanceVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -20,7 +21,7 @@ public class PerformanceScheduleVO {
 	//행사종료일자
 	@JsonFormat(pattern = "YYYY-DD-MM")
 	private Date trDt;
-	
+	private String addr;
 	private int no;
 	//행사시작 시간
 	private String time;
@@ -30,5 +31,7 @@ public class PerformanceScheduleVO {
 	
 	private String start;
 	private String title;
-
+	
+	
+	private PerformanceVO performanceVO;
 }

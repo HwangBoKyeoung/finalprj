@@ -16,8 +16,9 @@ public class PointVO {
 	private int pay;
 	private String cancelCd;
 	private int payNo;
-	private String Uid;
+	private String UId;
 	private String buyCtntCd;
+	private int tempPoint;
 	
 	//류지희
 	private String dayDate;

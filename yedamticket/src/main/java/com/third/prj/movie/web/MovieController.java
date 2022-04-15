@@ -5,9 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -79,17 +77,14 @@ public class MovieController {
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		model.addAttribute("movies", movieDao.mList());
-		System.out.println("==================="+movieDao.mList());
+		model.addAttribute("movie",movieDao.movieList());
 		return "movie/movieList";
 	}
 	
 	// 영화상세
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
-		System.out.println("무비넘어" + vo.getMvNo());
-		rvo.setMvNo(vo.getMvNo());
-		System.out.println("댓글에준 무비넘버" + rvo.getMvNo());
-
+		System.out.println("*****************************docid************************************"+rvo.getDocId());
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
 		model.addAttribute("movie", vo);
@@ -100,24 +95,16 @@ public class MovieController {
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
 	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
-		System.out.println(vo.getUid());
-		System.out.println(vo.getMvNo());
-		System.out.println(vo.getContent());
-		System.out.println("스타**************************" + vo.getStar());
 
 		int n = movieReplyDao.movieReplyInsert(vo);
-		System.out.println(n);
 		//select key 사용 바꾸기
 		if (n != 0) {
-//			vo = movieReplyDao.selectReplyNo();
-			
 			System.out.println(Integer.toString(vo.getMvReNo()));
 			return movieReplyDao.movieReplyList(vo);
 		} else {
 			return null;
 		}
 	}
-
 	// 댓글삭제
 	@RequestMapping("/movieReplyDelete.do")
 	@ResponseBody
@@ -135,7 +122,7 @@ public class MovieController {
 	@RequestMapping("/movieBooking.do")
 	public String movieBooking(Model model) {
 		model.addAttribute("movies",movieDao.movieList());
-		return "movie/movieBookingForm1";
+		return "movie/movieBookingForm";
 	
 	}
 
@@ -224,24 +211,29 @@ public class MovieController {
 	//결제페이지로
 	@RequestMapping("/movieReservation.do")
 	public String movieReservation(Model model,	MovieReservationVO vo,UserVO uvo) {
-		MovieVO detailvo=new MovieVO();		
-		detailvo.setDocId(vo.getDocId());
+		
+		  MovieVO detailvo=new MovieVO(); 
+		  detailvo.setDocId(vo.getDocId());
+		 
 		model.addAttribute("re",vo);
-		model.addAttribute("user",userDao.userSelectOne(uvo));
-		model.addAttribute("movie",movieDao.mDetail(detailvo));
+		
+		 model.addAttribute("user",userDao.userSelectOne(uvo)); 
+		  model.addAttribute("movie",movieDao.mDetail(detailvo));
+		 
 		return "user/movie/movieReservationForm";
 	}
 	//결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
 	@RequestMapping("/moviePay.do")
-	public String moviePay(MovieReservationVO vo,PointVO pointVO) {
+	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO) {
 		movieReservationDao.movieReservationInsert(vo);
 		vo=movieReservationDao.movieReservationSelect(vo);
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
 		pointVO.setPayNo(vo.getMvReservNo());
-		pointVO.setUid(vo.getUId());
+		pointVO.setUId(vo.getUId());
+		movieDao.audienceInsert(movieVO);
 		pointDao.payInsert(pointVO);
-		return "home/home";
+		return "redirect:home.do";
 	}
 	
 	@RequestMapping("/movieInsertForm.do")
@@ -288,13 +280,12 @@ public class MovieController {
 		return "redirect:movieList.do";
 	}
 	
-	@RequestMapping("/searchAll.do")
-	public String searchAll(MovieVO vo, Model model) {
-		
-		String SearchName = vo.getSearchName();
-		model.addAttribute("searchName", movieDao.searchAll(SearchName));
-		
-		return "user/searchList";
+	
+	@RequestMapping("/ajaxFileCd.do")
+	@ResponseBody
+	public List<MovieVO> ajaxFileCd(MovieVO vo){
+		List<MovieVO> list = movieDao.searchAll(vo.getSearchName());
+		return list;
 	}
 	
 	

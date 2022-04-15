@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
+.card {
+    width: 85%;
+}
 @font-face {
    font-family: Poppins-Regular;
    src:
@@ -336,6 +339,7 @@ iframe {
                         <input type="hidden" name="pageNum" value="${pageVO.cri.pageNum }">
                         <!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
                         <input type="hidden" name="amount" value="${pageVO.cri.amount }">
+                        <input type="hidden" name="sessionId" value="${sessionId}">
                      </div>
                   </div>
                </form>
@@ -350,12 +354,16 @@ iframe {
                   </thead>
                   <tbody id="body">
                      <c:forEach items="${dels }" var="mv">
-                        <tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
-                           <td>${mv.movieVO.name}</td>
-                           <td>${mv.movieVO.rating}</td>
-                           <td>${mv.movieVO.director}</td>
-                        </tr>
-                     </c:forEach>
+								<c:if test="${mv.movieVO.CId eq sessionId}">
+									<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
+										<td>${mv.movieVO.name}</td>
+										<td>${mv.movieVO.CId}</td>
+										<td>${mv.movieVO.rating}</td>
+										<td>${mv.movieVO.director}</td>
+										<td>${mv.movieVO.genre}</td>
+									</tr>
+								</c:if>
+							</c:forEach>
                   </tbody>
                </table>
                
@@ -413,5 +421,6 @@ iframe {
          searchForm.submit();
       })
    </script>
+	
 </body>
 </html>

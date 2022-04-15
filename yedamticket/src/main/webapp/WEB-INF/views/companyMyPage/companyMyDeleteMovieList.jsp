@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
+.card {
+    width: 85%;
+}
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -299,7 +302,7 @@ iframe {
 				<ul class="list-unstyled components mb-5">
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -318,7 +321,6 @@ iframe {
 					<h4 class="card-title">Movie Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMyDeleteMovieList.do">
-						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
@@ -333,27 +335,30 @@ iframe {
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
+								<input type="hidden" name="CId" value="${sessionId}">
 							</div>
-						</div>
-					</form>
-				</div>
+					
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>영화 이름</th>
 							<th>영화 감독</th>
 							<th>삭제 사유</th>
+							<th>기업</th>
 							<th>삭제 처리</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${dels }" var="del">
-							<tr>
-								<td>${del.movieVO.name}</td>
-								<td>${del.movieVO.actor}</td>
-								<td>${del.movieVO.content}</td>
-								<td>${del.deleteCd}</td>
-							</tr>
+							<c:if test="${del.movieVO.CId eq sessionId}">
+								<tr>
+									<td>${del.movieVO.name}</td>
+									<td>${del.movieVO.director}</td>
+									<td>${del.movieVO.content}</td>
+									<td>${del.movieVO.CId}</td>
+									<td>${del.deleteCd}</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -381,6 +386,8 @@ iframe {
                      <a href="${pageVO.endPage+1 }"> <input
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
+				</div>
+				</form>
 				</div>
 			</div>
 		</div>

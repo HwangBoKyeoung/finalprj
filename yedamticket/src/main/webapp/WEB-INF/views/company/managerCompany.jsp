@@ -25,7 +25,7 @@
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${coms }" var="com">
-							<tr onclick="location.href='managerCompanySelect.do?Cid=${com.cid}' ">
+							<tr onclick="location.href='managerCompanySelect.do?CId=${com.cid}' ">
 								<td>${com.cid}</td>
 								<td>${com.name}</td>
 								<td>${com.email}</td>

@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+textarea {
+	resize: none;
+}
+</style>
 <body>
 	<div align="center"></div>
 	<div>

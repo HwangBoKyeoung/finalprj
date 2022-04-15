@@ -5,12 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script
-	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 <style>
-textarea {
-	resize: none;
-}
+
 </style>
 </head>
 <input type="hidden" name="PNo" id="PNo">
@@ -93,7 +90,7 @@ textarea {
 						</tr>
 						<tr>
 							<td>줄거리</td>
-							<td><textarea rows="10" cols="75" id="content"
+							<td><textarea rows="10" cols="90" id="content"
 									name="content"></textarea></td>
 						</tr>
 					</table>

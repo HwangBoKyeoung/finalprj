@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.deleterequest.mapper.DeleteRequestMapper">
 	
-	
 	<resultMap type="com.third.prj.deleterequest.service.DeleteRequestVO" id="delrequestMap">
 		<result column="DEL_REQ_NO" property="delReqNo"/>
 		<result column="DELDT" property="delDt"/>
@@ -42,16 +41,8 @@
 		<result column="DOCID" property="docId"/>
 	</resultMap>
 	
-	<select id="getTotal" resultType="int">
-		SELECT COUNT(*)
-		FROM DELETE_REQUEST
-		WHERE
-		<if test="searchType == 'ALL'">(CONTENT LIKE '%'||#{searchName}||'%'
-			OR C_ID LIKE '%'||#{searchName}||'%')</if>
-		<if test="searchType == 'CONTENT'">CONTENT LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == 'C_ID'">C_ID LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == null or searchType ==''"> 1 = 1</if>
-	</select>
+	
+	
 	<select id="deleteRequestList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		<![CDATA[
 		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
@@ -276,5 +267,18 @@
 				<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 	</select>
-	
+
+   
+   <select id="getTotal" resultType="int">
+      SELECT COUNT(*)
+      FROM DELETE_REQUEST
+      WHERE
+      <if test="searchType == 'ALL'">(CONTENT LIKE '%'||#{searchName}||'%'
+         OR C_ID LIKE '%'||#{searchName}||'%')</if>
+      <if test="searchType == 'CONTENT'">CONTENT LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == 'C_ID'">C_ID LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+
+   
 </mapper>
