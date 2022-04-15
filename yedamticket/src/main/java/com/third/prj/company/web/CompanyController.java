@@ -97,7 +97,9 @@ public class CompanyController {
 		}else {
 			msg = "로그인 성공";
 			url = "home.do";	
-			session.setAttribute("sessionId", vo.getCid());
+
+			session.setAttribute("sessionName", vo.getName());
+			session.setAttribute("sessionId", vo.getCId());
 			session.setAttribute("pwd", vo.getPwd());
 			mv.addObject("msg", msg);
 			mv.addObject("url", url);
@@ -105,7 +107,26 @@ public class CompanyController {
 		}
 		return mv;
 	}
+	//기업 마이페이지 메인 겸 조회/수정
+	@RequestMapping("/companyMyPage.do")
+	public String companyMyPage(Model model, CompanyVO vo, HttpSession session) {
+		vo.setCId((String)session.getAttribute("sessionId"));
+		model.addAttribute("cmp", companyDao.companySelect(vo));
+		return "companyMyPage/companyMyPage";
+	}
 	
+	//기업회원 수정
+	@RequestMapping("/companyUpdate.do")
+	public String companyUpdate(CompanyVO vo) {
+		String pwd = vo.getPwd();
+		String encyPwd = pwdEncoder.encode(pwd);
+		vo.setPwd(encyPwd);
+		int u = companyDao.companyUpdate(vo);
+		if (u != 0) {
+			return "redirect:companyMyPage.do";
+		}
+		return "companyMyPage/companyPageError";
+	}
 	
 
 }

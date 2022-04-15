@@ -9,7 +9,7 @@
 		<result property="content" column="content"/>
 		<result property="star" column="star"/>
 		<result property="wrDt" column="wrdt"/>
-		<result property="Uid" column="u_id"/>
+		<result property="UId" column="u_id"/>
 	</resultMap>
 
 	<insert id="movieReplyInsert" parameterType="com.third.prj.moviereply.service.MovieReplyVO">
@@ -23,7 +23,7 @@
 	   		 , #{content}
 	   		 , #{star}
 	   		 , SYSDATE
-	   		 , #{Uid})
+	   		 , #{UId})
 	</insert>
 	
 	<delete id="movieReplyDelete">

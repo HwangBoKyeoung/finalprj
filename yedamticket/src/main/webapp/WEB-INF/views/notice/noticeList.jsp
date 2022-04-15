@@ -347,7 +347,6 @@ iframe {
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
-								<th>작성자</th>
 								<th>작성일자</th>
 								<th>조회수</th>
 							</tr>
@@ -357,17 +356,12 @@ iframe {
 								onclick="location.href='noticeSelect.do?noticeNo=${list.noticeNo }'">
 								<td>${list.noticeNo}</td>
 								<td>${list.title }</td>
-								<td>${list.writer }</td>
 								<td>${list.wrDt}</td>
 								<td>${list.hit}</td>
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
-					<div align="right" class="subBtn">
-					<button type="button" class="btn btn-primary"
-						onclick="location.href='noticeWriteForm.do'">글등록</button>
-				</div>
 					<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->

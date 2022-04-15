@@ -22,7 +22,9 @@ public interface MovieMapper {
 	List<MovieVO> mList();
 	//프로시저수정쓸것들..?-(rjh-2022/04/05)
 	int procedureCall(Map<String, Object> map);
-
+	
+	//검색프로시저
+	int searchProcedure(Map<String,Object> map);
 	
 	//공연 구매내역
 	List<MovieViewVO> mvBuyList(MovieViewVO vo);
@@ -39,13 +41,14 @@ public interface MovieMapper {
 	//통합검색
 	List<MovieVO> searchAll(String searchName);
 
-
-
 	//페이징
 	List<MovieVO> mvListPaging(CriteriaVO cri);
 	//기업회원페이지 상세페이지겸 수정페이지
 	MovieVO mvSelect(MovieVO vo);
 	//검색
 	int getTotal(CriteriaVO cri);
+	
+	//인기검색어
+	int popularSearch(MovieVO vo);
 		
 }

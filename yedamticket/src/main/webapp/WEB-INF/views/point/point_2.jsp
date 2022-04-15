@@ -9,7 +9,7 @@
 <body>
 	<h1>Pay Test!</h1>
 
-	<h2>아이디 : ${Uid }</h2>
+	<h2>아이디 : ${UId }</h2>
 	<h2>포인트 : ${point }</h2>
 </body>
 </html>

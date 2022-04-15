@@ -19,10 +19,15 @@
          <div class="card-body">
             <h4 class="card-title">상세페이지</h4>
             <form class="forms-sample" action="managerUpdate.do" method="post">
-            
                <div class="form-group">
+               	<c:if test="${sessionId eq mana.MId}">
+                  <label for="exampleInputUsername1">ID</label> <input type="text"
+                     class="form-control" id="MId" name="MId" value="${mana.MId }">
+                </c:if>
+                <c:if test="${sessionId ne mana.MId}">
                   <label for="exampleInputUsername1">ID</label> <input type="text"
                      class="form-control" id="MId" name="MId" readonly="readonly" value="${mana.MId }">
+                </c:if>
                </div>
                
                <div class="form-group">
@@ -31,15 +36,27 @@
                </div>
                
                <div class="form-group">
+               <c:if test="${sessionId eq mana.MId}">
                   <label for="exampleInputUsername1">Name</label> <input type="text"
-                     class="form-control" id="name" name="name" value="${mana.name }" readonly="readonly">
+                     class="form-control" id="name" name="name" value="${mana.name }">
+               </c:if>
+               <c:if test="${sessionId ne mana.MId}">
+                  <label for="exampleInputUsername1">Name</label> <input type="text"
+                     class="form-control" id="name" name="name" readonly="readonly" value="${mana.name }">
+               </c:if>
                </div>
-               
+               <c:if test="${sessionId eq 'micol'}">
                <div class="form-group">
                   <label for="exampleInputUsername1">Depart</label> <input
                      type="text" class="form-control" id="depart" value="${mana.depart }" name="depart">
                </div>
-               
+               </c:if>
+               <c:if test="${sessionId ne 'micol'}">
+               <div class="form-group">
+                  <label for="exampleInputUsername1">Depart</label> <input
+                     type="text" class="form-control" id="depart" value="${mana.depart }" name="depart" readonly="readonly">
+               </div>
+               </c:if>
                <div class="form-group">
                   <label for="exampleInputUsername1">Phone</label> <input
                      type="text" class="form-control" id="phone" name="phone"
@@ -49,18 +66,29 @@
                <div class="form-group">
                   <label for="exampleInputMobile">AuthCode</label>
                   <div class="input-group-prepend">
-                     <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6">
-                        <option value="movie" <c:if test="${mana.authCd=='movie'}"> selected</c:if>> 영화담당자</option>
-                        <option value="consert" <c:if test="${mana.authCd=='consert'}"> selected</c:if>> 공연담당자</option>
-                        <option value="goods" <c:if test="${mana.authCd=='goods'}"> selected</c:if>> 굿즈담당자 </option>
-                     </select>
+                  	<c:if test="${sessionDp eq '대표'}">
+	                     <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6">
+	                        <option value="movie" <c:if test="${mana.authCd=='movie'}"> selected</c:if>> 영화담당자</option>
+	                        <option value="consert" <c:if test="${mana.authCd=='consert'}"> selected</c:if>> 공연담당자</option>
+	                        <option value="goods" <c:if test="${mana.authCd=='goods'}"> selected</c:if>> 굿즈담당자 </option>
+	                     </select>
+                     </c:if>
+                     <c:if test="${sessionDp ne '대표'}">
+	                     <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6" disabled="disabled">
+	                        <option value="movie" <c:if test="${mana.authCd=='movie'}"> selected</c:if>> 영화담당자</option>
+	                        <option value="consert" <c:if test="${mana.authCd=='consert'}"> selected</c:if>> 공연담당자</option>
+	                        <option value="goods" <c:if test="${mana.authCd=='goods'}"> selected</c:if>> 굿즈담당자 </option>
+	                     </select>
+                     </c:if>
                   </div>
                </div>
                   <button type="submit" class="btn btn-gradient-primary me-2">UPDATE</button>
             </form>
             
             <div>
+            	<c:if test="${sessionDp eq '대표'}">
             	<button style="margin-right:7px;" class="btn btn-gradient-primary me-2" onclick="location.href='managerDelete.do?MId=${mana.MId}'">DELETE</button>
+            	</c:if>
             	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<button class="btn btn-gradient-primary me-2" onclick="location.href='manager.do'">Cancel</button>
             </div>

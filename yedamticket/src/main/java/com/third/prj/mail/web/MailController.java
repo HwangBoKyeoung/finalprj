@@ -13,18 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class MailController {
-	
+
 	@Autowired
 	private JavaMailSender mailSender;
-	
-	@RequestMapping(value = "mailChk.do", method=RequestMethod.POST)
+
+	@RequestMapping(value = "mailChk.do", method = RequestMethod.POST)
 	public String mailChk(HttpSession session) {
 		return "signup/signup_2";
 	}
-	
+
 	@RequestMapping(value = "mailSending.do")
 	public String mailSending(HttpServletRequest request, HttpSession session) {
-		
+
 		String setfrom = "qqoxmaos2@gmail.com";
 		String id = request.getParameter("id"); // 받는 사람 아이디
 		String email = request.getParameter("email"); // 받는 사람 이메일
@@ -33,7 +33,7 @@ public class MailController {
 		String content = request.getParameter("content"); // 내용
 		String subject = request.getParameter("subject"); // 제목
 		System.out.println(content);
-		
+
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -45,12 +45,12 @@ public class MailController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "forward:/mailChk.do"; 
+		return "forward:/mailChk.do";
 	}
-	
+
 	@RequestMapping(value = "mailSending2.do")
 	public String mailSending2(HttpServletRequest request, HttpSession session) {
-		
+
 		String setfrom = "qqoxmaos2@gmail.com";
 		String id = request.getParameter("id"); // 받는 사람 아이디
 		String email = request.getParameter("email"); // 받는 사람 이메일
@@ -59,7 +59,7 @@ public class MailController {
 		String content = request.getParameter("content"); // 내용
 		String subject = request.getParameter("subject"); // 제목
 		System.out.println(content);
-		
+
 		try {
 			MimeMessage message = mailSender.createMimeMessage();
 			MimeMessageHelper messageHelper = new MimeMessageHelper(message, true, "UTF-8");
@@ -71,7 +71,7 @@ public class MailController {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
-		return "forward:/mailChk.do"; 
+		return "forward:/mailChk.do";
 	}
-	
+
 }

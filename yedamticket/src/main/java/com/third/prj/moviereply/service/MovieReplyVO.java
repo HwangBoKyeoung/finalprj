@@ -16,4 +16,5 @@ public class MovieReplyVO {
 	private Date wrDt;
 	private String UId;
 	private String docId;
+
 }

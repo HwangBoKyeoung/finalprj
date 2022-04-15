@@ -17,6 +17,7 @@
 
 
 <body class="events-list-page">
+
 <form class="events-search" action="pList.do" method="post">
     <div class="container">
         <div class="row">
@@ -114,7 +115,7 @@
 					<c:forEach items="${Eperformance }" var="ep">
                         <div class="upcoming-event-wrap flex flex-wrap justify-content-between align-items-center">
                             <figure class="events-thumbnail">
-                                <a href="#"><img src="resources/performance/images/upcoming-2.jpg" alt=""></a>
+                                <a href="#"><img src="/upload/${ep.renames }"></a>
                             </figure>
 
                             <div class="entry-meta">

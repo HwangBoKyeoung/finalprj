@@ -104,5 +104,16 @@ public class MovieServiceImpl implements MovieService {
 	public int audienceInsert(MovieVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.audienceInsert(vo);
+  }
+
+	public int searchProcedure(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.searchProcedure(map);
+	}
+
+	@Override
+	public int popularSearch(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.popularSearch(vo);
 	}
 }

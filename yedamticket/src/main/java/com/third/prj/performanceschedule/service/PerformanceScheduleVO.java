@@ -21,7 +21,7 @@ public class PerformanceScheduleVO {
 	//행사종료일자
 	@JsonFormat(pattern = "YYYY-DD-MM")
 	private Date trDt;
-	
+	private String addr;
 	private int no;
 	//행사시작 시간
 	private String time;

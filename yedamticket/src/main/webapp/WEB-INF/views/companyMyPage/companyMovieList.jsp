@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
+.card {
+    width: 85%;
+}
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -299,7 +302,7 @@ iframe {
 				<ul class="list-unstyled components mb-5">
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -317,7 +320,6 @@ iframe {
 					<h4 class="card-title">Movie List</h4>
 					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMovieList.do">
-					<div class="col-10">					
 						<div class="searchBar" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
 								<option value="ALL"
@@ -336,25 +338,29 @@ iframe {
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 							<input type="hidden" name="amount" value="${pageVO.amount }">
+							<input type="hidden" name="sessionId" value="${sessionId}">
 						</div>
-					</div>
 					<table class="table table-hover" id="contents">
 						<thead>
 							<tr>
 								<th>영화 이름</th>
-								<th>장르</th>
+								<th>기업</th>
 								<th>관람등금</th>
 								<th>감독</th>
+								<th>장르</th>
 							</tr>
 						</thead>
 						<tbody id="body">
 							<c:forEach items="${dels }" var="mv">
-								<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
-									<td>${mv.movieVO.name}</td>
-									<td>${mv.movieVO.genre}</td>
-									<td>${mv.movieVO.rating}</td>
-									<td>${mv.movieVO.director}</td>
-								</tr>
+								<c:if test="${mv.movieVO.CId eq sessionId}">
+									<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
+										<td>${mv.movieVO.name}</td>
+										<td>${mv.movieVO.CId}</td>
+										<td>${mv.movieVO.rating}</td>
+										<td>${mv.movieVO.director}</td>
+										<td>${mv.movieVO.genre}</td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>

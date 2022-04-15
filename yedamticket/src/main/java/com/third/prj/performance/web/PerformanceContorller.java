@@ -57,9 +57,9 @@ public class PerformanceContorller {
 	@Autowired
 	private PointService pointDao;
 
-	//공연 리스트+예정 공연 리스트
+	//황규복 start
 	@RequestMapping("/pList.do")
-	public String pList(Model model,CriteriaVO cri) {
+	public String pList(Model model , CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
 		System.out.println("pList");
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달
@@ -68,7 +68,13 @@ public class PerformanceContorller {
 		model.addAttribute("performance",perDao.pList(cri));
 		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
+
 	}
+
+
+//	@RequestMapping("/pserSelect.do")
+//	public String perSelect(PerformanceVO vo, Model model) {
+	
 	//공연 상세페이지 + 예약	
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
