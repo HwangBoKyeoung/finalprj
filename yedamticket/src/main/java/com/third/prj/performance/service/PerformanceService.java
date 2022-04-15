@@ -1,7 +1,6 @@
 package com.third.prj.performance.service;
 
 import java.util.List;
-import java.util.Map;
 
 import com.third.prj.point.service.PointCriteriaVO;
 
@@ -9,17 +8,16 @@ public interface PerformanceService {
 
 	List<PerformanceVO> companyPerforSelectList(CriteriaVO cri);
 	PerformanceVO perforSelect(PerformanceVO vo);
-	int perforUpdate(PerformanceVO vo);
+	int performanceUpdate(PerformanceVO vo);
 
-//	프로시저 호출(update에 필요)
-	int procedureCall(Map<String, Object> map);
+
 	//공연 구매내역
 	List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo);
 	
 	//공연 예매 내역 리스트
 	public List<PerformanceVO> pfBuyList2(PointCriteriaVO cri);
 	
-	//공연 예매 리스트 페이징
+	//공연 구매 리스트 페이징
 	public int pfBuyTotal(PointCriteriaVO cri);
 	
 	//공연 등록
@@ -35,5 +33,6 @@ public interface PerformanceService {
 	List<PerformanceVO> epList();
 	//공연선택
 	PerformanceVO pSelect(PerformanceVO vo);
-
+	//지역별 공연리스트
+	List<PerformanceVO> locPlist(PerformanceVO vo);
 }

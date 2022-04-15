@@ -16,7 +16,7 @@
 					<p class="card-description">Performance</p>
 					<table class="table">
 						<tr>
-							<th><input type="hidden" name="CId" id="CId" value="${CId }"></th>
+							<input type="hidden" name="CId" id="CId" value="${CId }">
 							<th>삭제 사유</th>
 							<td><input type="text" name="content" id="content"></td>
 							<th><input type="hidden" name="PNo" id="PNo" value="${del}"></th>
@@ -28,7 +28,7 @@
 						</tr>
 						<tr>
 							<th>삭제신청날짜</th>
-							<td><input type="date" name="delDt" id="delDt"></td>
+							<td><input type="date" name="delDt" id="delDt" readonly="readonly"></td>
 						</tr>
 					</table>
 					<br>

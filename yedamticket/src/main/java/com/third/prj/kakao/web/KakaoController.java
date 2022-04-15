@@ -29,6 +29,7 @@ public class KakaoController {
 			HttpServletRequest req ,Model model)throws IOException{
 
 		kakao_restapi kr = new kakao_restapi();
+		System.out.println(kr);
 		 // JsonNode트리형태로 토큰받아온다
         JsonNode jsonToken = kakao_restapi.getKakaoAccessToken(code);
         // 여러 json객체 중 access_token을 가져온다

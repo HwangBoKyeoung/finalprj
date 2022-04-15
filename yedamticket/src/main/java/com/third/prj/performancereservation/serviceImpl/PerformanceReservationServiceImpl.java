@@ -9,7 +9,6 @@ import com.third.prj.performancereservation.mapper.PerformanceReservationMapper;
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
-import com.third.prj.user.service.UserCriteriaVO;
 
 @Repository("performanceReservationDao")
 public class PerformanceReservationServiceImpl implements PerformanceReservationService{

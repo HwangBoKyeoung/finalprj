@@ -125,7 +125,7 @@
 											class="now-ui-icons users_circle-08"></i>
 										</span>
 									</div>
-									<input type="text" class="form-control" name="Cid"
+									<input type="text" class="form-control" name="CId"
 										placeholder="Id...">
 								</div>
 								<div class="input-group no-border input-lg">

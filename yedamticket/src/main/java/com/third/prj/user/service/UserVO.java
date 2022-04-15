@@ -13,9 +13,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class UserVO implements UserDetails{
 	
 	private String UId; // not null
@@ -33,7 +35,6 @@ public class UserVO implements UserDetails{
 	private Date rdt;
 	private String role;
 	
-	private UserCriteriaVO cri;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {

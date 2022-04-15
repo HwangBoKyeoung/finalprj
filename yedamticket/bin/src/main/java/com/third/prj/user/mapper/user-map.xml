@@ -38,7 +38,7 @@
 		id="pfReservMap">
 		<result column="P_RESERV_NO" property="PReservNo" />
 		<result column="RESERVE_DTTM" property="reserveDttm" />
-		<result column="U_ID" property="Uid" />
+		<result column="U_ID" property="UId" />
 		<result column="SEATNO" property="seatNo" />
 	</resultMap>
 
@@ -64,7 +64,7 @@
 		, phone
 		, birthdt)
 		VALUES(#{name}
-		, #{Uid}
+		, #{UId}
 		, #{pwd}
 		, #{email}
 		, #{addr}
@@ -77,7 +77,7 @@
 						, phone
 						, birthdt)
 				   VALUES(#{name}
-		  			    , #{Uid}
+		  			    , #{UId}
 					    , #{pwd}
 					    , #{email}
 					    , #{addr}
@@ -89,14 +89,14 @@
 		SELECT COUNT(*)
 		FROM users
 		WHERE
-		u_id = #{Uid}
+		u_id = #{UId}
 	</select>
 
 	<select id="userSelect"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</select>
 
@@ -104,14 +104,14 @@
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		WHERE
-		u_id = #{Uid}
+		u_id = #{UId}
 	</select>
 
 	<select id="userSelect"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM   USERS
-		WHERE  U_ID = #{Uid}
+		WHERE  U_ID = #{UId}
 		AND	   PWD  = #{pwd}
 	</select>
 	
@@ -152,7 +152,7 @@
 		, {noop}PWD
 		, ROLE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select>
 
 	<resultMap type="com.third.prj.user.service.UserVO"
@@ -196,7 +196,7 @@
 		, {noop}PWD
 		, ROLE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select>
 
 	<select id="emailCheck" resultType="int">
@@ -208,7 +208,7 @@
 		parameterType="com.third.prj.user.service.UserVO">
 		INSERT INTO USERS(NAME, U_ID, EMAIL ,LOGIN_CD )
 		VALUES
-		(#{name}, #{Uid}, #{email} , #{loginCd} )
+		(#{name}, #{UId}, #{email} , #{loginCd} )
 
 	</insert>
 
@@ -222,7 +222,7 @@
 			<if test="addr != null"> ADDR = #{addr},</if>
 			<if test="phone != null"> PHONE = #{phone},</if>
 		</set>
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 
 	</update>
 
@@ -230,7 +230,7 @@
 		parameterType="com.third.prj.user.service.UserVO">
 		DELETE
 		FROM USERS
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		AND PWD = #{pwd}
 	</delete>
 
@@ -240,12 +240,12 @@
 		R.SCH_DATE,R.SCHTIME,R.SEAT_NAME,R.DOCID,M.NAME
 		FROM MOVIE_RESERVATION R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 		FROM
 		MOVIE_RESERVATION
 		R JOIN MOVIE M
 		ON R.DOCID = M.DOCID
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 
 >>>>>>> develop
 	</select> -->
@@ -259,7 +259,7 @@
 		X.P_SCH_NO = Y.P_SCH_NO
 		AND Y.P_NO = Z.P_NO
 <<<<<<< HEAD
-		AND X.U_ID = #{Uid}
+		AND X.U_ID = #{UId}
 	</select> -->
 
 	<update id="userCharge"
@@ -268,22 +268,22 @@
 		SET
 		point = (SELECT point
 		FROM users
-		WHERE u_id = #{Uid}) + #{point}
-		WHERE u_id = #{Uid}
+		WHERE u_id = #{UId}) + #{point}
+		WHERE u_id = #{UId}
 	</update>
 
 	<select id="loginChk"
 		resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM users
-		WHERE u_id = #{Uid}
+		WHERE u_id = #{UId}
 	</select>
 
 	<!-- <select id="mNameSelect" resultMap="MovieMap">
 		select x.name
 		from movie x join movie_reservation y
 		on x.docid = y.docid
-		where U_ID = #{Uid}
+		where U_ID = #{UId}
 	</select>
 
 	<select id="pNameSelect" resultMap="performanceMap">
@@ -291,13 +291,13 @@
 		FROM PERFORMANCE X, PERFORMANCE_SCHEDULE Y, PERFORMANCE_RESERVATION Z
 		WHERE X.P_NO = Y.P_NO
 		AND Y.P_SCH_NO = Z.P_SCH_NO
-		AND U_ID = #{Uid}
+		AND U_ID = #{UId}
 	</select>
 
 	<select id="myPoint" resultType="com.third.prj.point.service.PointVO">
 		SELECT PAYDT,PAY,CHARGE
 		FROM POINT
-		WHERE U_ID = #{Uid}
+		WHERE U_ID = #{UId}
 	</select>
 
 		AND X.U_ID = #{uId}
@@ -307,8 +307,8 @@
 		UPDATE users
 		SET    point = (SELECT point
 		             	FROM   users
-		             	WHERE  u_id = #{Uid}) + #{point}
-		WHERE  u_id = #{Uid}
+		             	WHERE  u_id = #{UId}) + #{point}
+		WHERE  u_id = #{UId}
 	</update> -->
 	
 	<update id="userCharge" statementType="CALLABLE" >
@@ -322,7 +322,7 @@
 	<select id="loginChk" resultType="com.third.prj.user.service.UserVO">
 		SELECT *
 		FROM   users
-		WHERE  u_id = #{Uid}
+		WHERE  u_id = #{UId}
 	</select>
 
 </mapper>

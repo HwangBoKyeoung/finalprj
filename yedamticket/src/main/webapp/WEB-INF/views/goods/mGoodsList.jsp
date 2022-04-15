@@ -28,16 +28,17 @@
  <div class="container">
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 				<c:forEach var="i" items="${mGoods }">
+				<c:if test="${i.goodsCd eq 'mv' }">
 					<div class="col-4">
 						<div class="card shadow-sm" >
 						
-						<img src="resources/users/img/bts.jpg" width="100%" height="225">
+						<img src="/upload/${i.fileRe }" width="100%" height="225">
 							<div class="card-body">
 								<p class="card-text">${i.content}</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
 										<button class="btn btn-danger">view</button>
-										<button class="btn btn-danger">Edit</button>
+										<button class="btn btn-danger">edit</button>
 										
 									</div>
 									<p><b>${i.price}원</b></p>
@@ -45,6 +46,7 @@
 							</div>
 						</div>
 					</div>
+					</c:if>
 				</c:forEach>
 			</div>
      </div>

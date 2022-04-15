@@ -107,4 +107,18 @@ public interface UserMapper {
 	// 자유시장 구매
 	int marketBuy(Map<String, Object> map);
 	
+	// 아이디 찾기
+	String searchId(@Param("name") String name, @Param("phone") String phone);
+	
+	//비밀번호 찾기
+	boolean findPw(UserVO vo); 
+	
+	//이메일발송
+	void sendEmail(UserVO vo, String pw, String div);
+	
+	// 마이페이지 회원정보
+    UserVO selectByMemberId(@Param("UId") String UId);
+    
+    // 비밀번호 찾기 시 회원 권한 변경
+    int updatePassword2(UserVO vo);
 }

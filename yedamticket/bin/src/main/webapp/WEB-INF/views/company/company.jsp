@@ -24,7 +24,7 @@
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${companys }" var="com">
-							<tr onclick="location.href='companySelect.do?Cid=${com.cid}' ">
+							<tr onclick="location.href='companySelect.do?CId=${com.cid}' ">
 								<td>${com.cid}</td>
 								<td>${com.name}</td>
 								<td>${com.email}</td>
@@ -71,7 +71,7 @@
 		$.each(result, function(index, item){
 			console.log(item);
 			var tr = $("<tr />").attr({
-				onclick : "location.href='companySelect.do?Cid=" + item.cid + "'"
+				onclick : "location.href='companySelect.do?CId=" + item.cid + "'"
 			}).append(
 					$("<td />").text(item.cid),
 					$("<td />").text(item.name),

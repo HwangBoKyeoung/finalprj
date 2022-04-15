@@ -5,18 +5,18 @@
 	<select id="userTicket" resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
 			SELECT *
 			FROM   performance_reservation
-			WHERE  u_id = #{Uid}
+			WHERE  u_id = #{UId}
 </select>
 	<!-- <select id="userTicket" resultType="com.third.prj.performancereservation.service.PerformanceReservationVO">
 			SELECT *
 			FROM   performance_reservation
-			WHERE  u_id = #{Uid}
+			WHERE  u_id = #{UId}
 	</select> -->
 
 	<resultMap type="com.third.prj.performancereservation.service.PerformanceReservationViewVO" id="prvMap">
 		<result property="PReservNo" column="p_reserv_no"/>
 		<result property="reserveDttm" column="reserve_dttm"/>
-		<result property="Uid" column="u_id"/>
+		<result property="UId" column="u_id"/>
 		<result property="PSchNo" column="p_sch_no"/>
 		<result property="seatStatCd" column="seat_stat_cd"/>
 		<result property="seatNo" column="seatno"/>
@@ -25,7 +25,7 @@
 		<result property="Pno" column="p_no"/>
 		<result property="name" column="name"/>
 		<result property="content" column="content"/>
-		<result property="Cid" column="c_id"/>
+		<result property="CId" column="c_id"/>
 		<result property="actor" column="actor"/>
 		<result property="fileCd" column="file_cd"/>
 		<result property="loc" column="loc"/>
@@ -36,7 +36,7 @@
 	<select id="userTicket" resultMap="prvMap">
 		SELECT *
 		FROM   usersticket
-		WHERE  u_id = #{Uid}
+		WHERE  u_id = #{UId}
 	</select>
 
 </mapper>

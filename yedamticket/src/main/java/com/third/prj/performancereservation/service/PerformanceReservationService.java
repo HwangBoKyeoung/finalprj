@@ -2,7 +2,6 @@ package com.third.prj.performancereservation.service;
 
 import java.util.List;
 
-import com.third.prj.user.service.UserCriteriaVO;
 
 public interface PerformanceReservationService {
 

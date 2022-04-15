@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.deleterequest.mapper.DeleteRequestMapper">
 	
-	
 	<resultMap type="com.third.prj.deleterequest.service.DeleteRequestVO" id="delrequestMap">
 		<result column="DEL_REQ_NO" property="delReqNo"/>
 		<result column="DELDT" property="delDt"/>
 		<result column="C_ID" property="CId"/>
 		<result column="DELETE_CD" property="deleteCd"/>
 		<result column="MV_NO" property="mvNo"/>
-		<result column="P_NO" property="PNo"/>		
+		<result column="P_NO" property="PNo"/>
+		<result column="REFUSAL" property="refusal"/>		
 		<collection property="performanceVO" resultMap="performanceMap"></collection>
 		<collection property="movieVO" resultMap="movieMap"></collection>
 	</resultMap>
@@ -41,16 +41,8 @@
 		<result column="DOCID" property="docId"/>
 	</resultMap>
 	
-	<select id="getTotal" resultType="int">
-		SELECT COUNT(*)
-		FROM DELETE_REQUEST
-		WHERE
-		<if test="searchType == 'ALL'">(CONTENT LIKE '%'||#{searchName}||'%'
-			OR C_ID LIKE '%'||#{searchName}||'%')</if>
-		<if test="searchType == 'CONTENT'">CONTENT LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == 'C_ID'">C_ID LIKE '%'||#{searchName}||'%'</if>
-		<if test="searchType == null or searchType ==''"> 1 = 1</if>
-	</select>
+	
+	
 	<select id="deleteRequestList" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		<![CDATA[
 		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
@@ -70,14 +62,14 @@
 		<![CDATA[
 			ORDER BY DEL_REQ_NO
 			)A)
-		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	
 	<select id="deleteRequestSelect" resultType="com.third.prj.deleterequest.service.DeleteRequestVO">
 		SELECT DEL_REQ_NO, DELDT, C_ID, DELETE_CD, CONTENT, MV_NO, P_NO
 		FROM DELETE_REQUEST
-		WHERE DEL_REQ_NO = #{delReqNo} 
+		WHERE DEL_REQ_NO=#{delReqNo} 
 	</select>
 	
 	
@@ -98,13 +90,14 @@
 		UPDATE DELETE_REQUEST
 		<set>
 			<if test="deleteCd != null">DELETE_CD = #{deleteCd},</if>
+			<if test="refusal != null"> REFUSAL = #{refusal},</if>
 		</set>
 		WHERE DEL_REQ_NO = #{delReqNo}
 	</update>
 	
 	
 	<select id="deleteRequestPerforSelect" resultMap="delrequestMap">
-		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO,D.C_ID
+		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,P.NAME,P.CONTENT,P.ACTOR,D.P_NO,P.C_ID
 		FROM DELETE_REQUEST D,PERFORMANCE P
 		WHERE P.P_NO=D.P_NO
 		AND D.DEL_REQ_NO=#{delReqNo}
@@ -113,7 +106,7 @@
 		SELECT D.DEL_REQ_NO,D.DELDT,D.DELETE_CD,D.CONTENT,M.NAME,M.CONTENT,M.ACTOR,M.MV_NO,D.C_ID
 		FROM DELETE_REQUEST D,MOVIE M
 		WHERE M.MV_NO=D.MV_NO
-		AND D.DEL_REQ_NO=#{delReqNo}
+		AND M.MV_NO=#{mvNo}
 	</select>
 	
 	<insert id="deleteMovieInsert" parameterType="com.third.prj.deleterequest.service.DeleteRequestVO">
@@ -131,7 +124,7 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,P.C_ID
 				FROM PERFORMANCE P, DELETE_REQUEST D
 				WHERE P.P_NO = D.P_NO
 				AND
@@ -143,7 +136,7 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 				ORDER BY P.P_NO DESC )A) 
- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+ 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]> 
 	</select>
 	<select id="getTotalDeletePerfor"  resultType="int">
@@ -165,34 +158,32 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT P.P_NO,P.NAME,P.LOC,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+				SELECT *
 				FROM PERFORMANCE P
 				LEFT OUTER JOIN DELETE_REQUEST D
-				ON P.P_NO = D.P_NO
-				WHERE DELETE_CD IS NULL
-				OR DELETE_CD = '거절'
-				AND
+				ON (P.P_NO=D.P_NO)
+				WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+				AND 
  		]]>
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-					OR DELETE_CD LIKE '%'||#{searchName}||'%'</if>
+					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 				ORDER BY P.P_NO DESC )A) 
- 		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+ 		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
 		]]> 
 	</select>
 	<select id="getTotalPerfor" resultType="int">
 		SELECT COUNT(*)
 		FROM PERFORMANCE P
 		LEFT OUTER JOIN DELETE_REQUEST D
-		ON P.P_NO = D.P_NO
-		WHERE DELETE_CD IS NULL
-		OR DELETE_CD = '거절'
+		ON (P.P_NO=D.P_NO)
+		WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
 		AND 
-		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-					OR DELETE_CD LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
@@ -204,7 +195,7 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO
+			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,M.C_ID
 				FROM MOVIE M, DELETE_REQUEST D
 				WHERE M.MV_NO = D.MV_NO
 				AND
@@ -216,7 +207,7 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
  				ORDER BY M.MV_NO DESC )A)
-		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount} 
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
  		]]>
 	</select>
 	
@@ -238,38 +229,56 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT M.MV_NO,M.NAME,M.RATING,M.GENRE,M.DIRECTOR 
+				SELECT *
 				FROM MOVIE M
 				LEFT OUTER JOIN DELETE_REQUEST D
-				ON M.MV_NO = D.MV_NO
-				WHERE DELETE_CD IS NULL
-				OR DELETE_CD = '거절'
-				AND
+				ON (M.MV_NO=D.MV_NO)
+				WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+				AND 
  		]]>
  		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-					OR GENRE LIKE '%'||#{searchName}||'%'</if>
+					OR GENRE LIKE '%'||#{searchName}||'%'
+					OR RATING LIKE '%'||#{searchName}||'%'
+					OR DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 			ORDER BY M.MV_NO DESC )A)
-			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+			WHERE RN > (#{pageNum}-1) * #{amount} AND RN <= #{pageNum} * #{amount}
 		]]>
 	</select>
 	<select id="getTotalMovie" resultType="int">
-		SELECT COUNT(*)
+		SELECT count(*)
 		FROM MOVIE M
-				LEFT OUTER JOIN DELETE_REQUEST D
-				ON M.MV_NO = D.MV_NO
-				WHERE DELETE_CD IS NULL
-				OR DELETE_CD = '거절'
-				AND
-				<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
-					OR GENRE LIKE '%'||#{searchName}||'%'</if>
+		LEFT OUTER JOIN DELETE_REQUEST D
+		ON (M.MV_NO=D.MV_NO)
+		WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+		AND 
+			<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+					OR GENRE LIKE '%'||#{searchName}||'%'
+					OR RATING LIKE '%'||#{searchName}||'%'
+					OR DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'RATING'">RATING LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'DIRECTOR'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
-				
 	</select>
-	
+
+   
+   <select id="getTotal" resultType="int">
+      SELECT COUNT(*)
+      FROM DELETE_REQUEST
+      WHERE
+      <if test="searchType == 'ALL'">(CONTENT LIKE '%'||#{searchName}||'%'
+         OR C_ID LIKE '%'||#{searchName}||'%')</if>
+      <if test="searchType == 'CONTENT'">CONTENT LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == 'C_ID'">C_ID LIKE '%'||#{searchName}||'%'</if>
+      <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+
+   
 </mapper>

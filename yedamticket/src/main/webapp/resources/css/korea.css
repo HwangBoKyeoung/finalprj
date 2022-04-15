@@ -1,5 +1,13 @@
 @charset "UTF-8";
-
+.hot{
+	fill:red;
+}
+.normal{
+	fill:violet;
+}
+.cool{
+	fill:blue;
+}
 #container {
     width: 400px;
     min-height: 400px;

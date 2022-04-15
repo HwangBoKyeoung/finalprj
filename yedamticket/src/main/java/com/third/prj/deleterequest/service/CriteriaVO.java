@@ -1,5 +1,6 @@
 package com.third.prj.deleterequest.service;
 
+
 import lombok.Data;
 
 @Data
@@ -20,5 +21,6 @@ public class CriteriaVO {
 		this.pageNum = pageNum;
 		this.amount = amount;
 	}
+	
 	
 }

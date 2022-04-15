@@ -10,6 +10,5 @@
 	
 	<bean class="java.lang.String" id="upLoadPath">
 		<constructor-arg value="C:/DEV/apache-tomcat-9.0.56/webapps/upload"/>		
-								
-	</bean> 
+	</bean>
 </beans>

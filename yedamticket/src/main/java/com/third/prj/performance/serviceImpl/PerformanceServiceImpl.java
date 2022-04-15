@@ -1,9 +1,6 @@
 package com.third.prj.performance.serviceImpl;
 
 import java.util.List;
-import java.util.Map;
-
-import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,8 +17,8 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public PerformanceMapper mapper;
 	
 	@Override
-	public int perforUpdate(PerformanceVO vo) {
-		return mapper.perforUpdate(vo);
+	public int performanceUpdate(PerformanceVO vo) {
+		return mapper.performanceUpdate(vo);
 	}
 
 
@@ -35,10 +32,6 @@ public class PerformanceServiceImpl implements PerformanceService {
 		return mapper.companyPerforSelectList(cri);
 	}
 
-	@Override
-	public int procedureCall(Map map) {
-		return mapper.procedureCall(map);
-	}
 
 	@Override
 	public List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo) {
@@ -88,5 +81,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 	public PerformanceVO pSelect(PerformanceVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.pSelect(vo);
+	}
+
+	@Override
+	public List<PerformanceVO> locPlist(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.locPlist(vo);
 	}
 }

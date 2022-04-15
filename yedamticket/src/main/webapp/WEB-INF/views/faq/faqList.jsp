@@ -336,10 +336,6 @@ iframe {
 					</div>
 				</div>
 			</c:forEach>
-			<div class="wbtn">
-				<button type="button" onclick="location.href='faqWriteForm.do'"
-					class="btn btn-primary">글등록</button>
-			</div>
 		</div>
 	</div>
 

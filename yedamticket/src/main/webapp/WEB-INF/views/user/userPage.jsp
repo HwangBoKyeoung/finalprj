@@ -33,12 +33,15 @@
 						<h6>보유 포인트${user.point }P <button class="btn btn-primary btn-sm" onclick="location.href='point_1.do'">충전</button></h6> 
 						
 						<br>
+
 					</li>
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="userBuyList.do">거래내역</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
+					<li><a href="userPointList.do">포인트충전내역</a></li>
+					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
 					<div class="form-group d-flex">
@@ -50,66 +53,6 @@
 			</div>
 		</nav>
 		<div class="container">
-	 		<span>최근 공연 예매내역</span>
-			<button class="btn btn-primary btn-sm" onclick="location.href='pfReservList.do'">더보기</button>
-			<div class="cols-12">
-				<table class="table table-sm tblMemSearch">
-						<thead>
-							<tr>
-								<th scope="col">예매번호</th>
-								<th scope="col">예매일</th>
-								<th scope="col">공연명</th>
-								<th scope="col">관람일</th>
-								<th scope="col">상영시간</th>
-								<th scope="col">좌석번호</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach var="pf" items="${pfList}" begin="0" end="2">
-								<tr>
-									<td>${pf.performanceReservationVO.PReservNo}</td>
-									<td>${pf.performanceReservationVO.reserveDttm}</td>
-									<td>${pf.name}</td>
-									<td>${pf.performanceScheduleVO.frDt}</td>
-									<td>${pf.performanceScheduleVO.time}</td>
-									<td>${pf.performanceReservationVO.seatNo}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-			</div>
-			<br>
-			<span>최근 영화 예매내역</span>
-			<button class="btn btn-primary btn-sm" onclick="location.href='mvReservList.do'">더보기</button>
-			<div class="cols-12">
-				<table class="table table-sm">
-						<thead>
-							<tr>
-								<th scope="col">예매번호</th>
-								<th scope="col">예매일</th>
-								<th scope="col">영화명</th>
-								<th scope="col">관람일</th>
-								<th scope="col">상영시간</th>
-								<th scope="col">좌석번호</th>
-							</tr>
-						</thead>
-						<tbody>
-							<c:forEach items="${mvList}" var="mv" begin="0" end="2">
-								<tr>
-									<td scope="row">${mv.mvReservNo}</td>
-									<td>${mv.reservDt}</td>
-									<td>${mv.name}</td>
-									<td>${mv.schDate}</td>
-									<td>${mv.schTime}</td>
-									<td>${mv.seatName}</td>
-								</tr>
-							</c:forEach>
-						</tbody>
-					</table>
-			</div>
-			<br>
-			<br>
-			
 			<span>결제대기티켓</span>
 			<div class="cols-12">
 				<table class="table table-sm">		

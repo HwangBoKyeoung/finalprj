@@ -43,7 +43,7 @@
 										<i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" placeholder="아이디" class="form-control" required="required" id="Cid" name="Cid" onkeyup="idbtnC();"/>
+								<input type="text" placeholder="아이디" class="form-control" required="required" id="CId" name="CId" onkeyup="idbtnC();"/>
 								<button type="button" class="cidChk" id="cidChk" value="N" onclick="fn_idChk()">중복체크</button>
 							</div>
 
@@ -248,7 +248,7 @@
 			type: "post",
 			dataType: "json",
 			data: {
-				"Cid": $("#Cid").val()
+				"CId": $("#CId").val()
 			},
 			success: function(data) {
 				if (data == 1) {

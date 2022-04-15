@@ -23,6 +23,9 @@
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
+.card {
+    width: 85%;
+}
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -299,7 +302,7 @@ iframe {
 				<ul class="list-unstyled components mb-5">
 					<li><a href="companyMovieList.do">영화목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="companyGoodsList.do">굿즈 목록</a></li>
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제시청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -318,7 +321,6 @@ iframe {
 					<h4 class="card-title">Performance Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMyDeletePerforList.do">
-						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
@@ -333,51 +335,86 @@ iframe {
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
-							</div>
+								<input type="hidden" name="sessionId" value="${sessionId}">
 						</div>
-					</form>
-				</div>
+					
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>공연 이름</th>
 							<th>출연자</th>
 							<th>삭제 사유</th>
+							<th>기업</th>
 							<th>신청 현황</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
-							<tr>
-								<td>${per.performanceVO.name}</td>
-								<td>${per.performanceVO.actor}</td>
-								<td>${per.performanceVO.content}</td>
-								<td>${per.deleteCd}</td>
-							</tr>
+							<c:if test="${per.performanceVO.CId eq sessionId}">
+								<tr>
+									<td>${per.performanceVO.name}</td>
+									<td>${per.performanceVO.actor}</td>
+									<td>${per.performanceVO.content}</td>
+									<td>${per.performanceVO.CId}</td>
+									<td>${per.deleteCd}</td>
+								</tr>
+							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
+				<form id="actionForm" action="companyMyDeletePerforList.do" method="get">
+                  <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+                  <input type="hidden" name="amount" value="${pageVO.amount }">
+                  <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
+                  <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
+               </form>
 				<div id="content" align="center">
-					<c:if test="${pageVO.prev }">
-						<!-- 이전버튼 활성화 여부 -->
-						<a href="companyMyDeletePerforList.do?pageNum=${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn btn-secondary"></a>
-					</c:if>
-					<!-- pageNum -->
-					<c:forEach var="num" begin="${pageVO.startPage }"
-						end="${pageVO.endPage }">
-						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="companyMyDeletePerforList.do?pageNum=${num }"> <input type="button"
-							value="${num }" class="btn btn-secondary"></a>
-					</c:forEach>
-					<!-- 다음버튼 -->
-					<c:if test="${pageVO.next }">
-						<a href="companyMyDeletePerforList.do?pageNum=${pageVO.endPage+1 }"> <input
-							type="button" value="다음" class="btn btn-secondary"></a>
-					</c:if>
+                  <c:if test="${pageVO.prev }">
+                     <!-- 이전버튼 활성화 여부 -->
+                     <a href="${pageVO.startPage-1 }"> <input
+                        type="button" value="이전" class="btn btn-secondary"></a>
+                  </c:if>
+                  <!-- pageNum -->
+                  <c:forEach var="num" begin="${pageVO.startPage }"
+                     end="${pageVO.endPage }">
+                     <a class="${pageVO.pageNum == num ? 'active': '' }"
+                        href="${num }"> <input type="button"
+                        value="${num }" class="btn btn-secondary"></a>
+                  </c:forEach>
+                  <!-- 다음버튼 -->
+                  <c:if test="${pageVO.next }">
+                     <a href="${pageVO.endPage+1 }"> <input
+                        type="button" value="다음" class="btn btn-secondary"></a>
+                  </c:if>
+				</div>
+				</form>
 				</div>
 			</div>
 		</div>
 	</div>
+	<script>
+      let actionForm = $("#actionForm");
+      $("#content a").on("click", function(e){
+         e.preventDefault();
+         console.log("click");
+         console.log($(this).attr("href"));
+         actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+         
+         actionForm.submit();
+      });
+      
+      let searchForm = $("#searchForm");
+      $("#searchForm button").on("click", function(e){
+         if(!searchForm.find("input[name='searchName']").val()){
+            alert('키워드를 입력하세요.');
+            return false;
+         }
+         
+         searchForm.find("input[name='pageNum']").val("1");
+         e.preventDefault();
+         
+         searchForm.submit();
+      })
+   </script>
 </body>
 </html>

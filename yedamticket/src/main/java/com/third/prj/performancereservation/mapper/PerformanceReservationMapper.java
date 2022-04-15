@@ -4,7 +4,6 @@ import java.util.List;
 
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
-import com.third.prj.user.service.UserCriteriaVO;
 
 public interface PerformanceReservationMapper {
 	

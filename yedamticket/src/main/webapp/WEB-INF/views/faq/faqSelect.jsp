@@ -7,12 +7,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
+<style>
+textarea {
+	resize: none;
+}
+</style>
 <body>
 	<div align="center"></div>
 	<div>
 		<h1>게시글 상세</h1>
 	</div>
-	<form id="frm" action="faqUpdateForm.do">
 	<input type="hidden" name="FNo" id="FNo" value="${faqs.FNo}">
 		<c:if test="${empty faqs.FNo }">
 			<h1>선택한 게시글이 존재하지 않습니다</h1>
@@ -43,9 +47,7 @@
 		<div>
 			<button type="button" onclick="location.href='faqList.do'">목록가기</button>
 			<button type="submit" >수정</button>
-			<button type="button" onclick="location.href='faqDelete.do?FNo=${faqs.FNo}'">삭제</button>
 		</div>
 		
-	</form>
 </body>
 </html> 

@@ -43,7 +43,7 @@
 							<td>${com.rdt}</td>
 						</tr>
 						<tr>
-							<th>양도 승인여부</th>
+							<th>개인간의 거래 승인 여부</th>
 							<td>${com.dealAgreeCd}</td>
 						</tr>
 					</tbody>

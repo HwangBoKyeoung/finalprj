@@ -25,7 +25,7 @@
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${coms }" var="com">
-							<tr onclick="location.href='managerCompanySelect.do?Cid=${com.cid}' ">
+							<tr onclick="location.href='managerCompanySelect.do?CId=${com.cid}' ">
 								<td>${com.cid}</td>
 								<td>${com.name}</td>
 								<td>${com.email}</td>
@@ -59,12 +59,12 @@
 						<select name="searchType" class="btn btn-outline-secondary">
 							<option value="ALL"
 								${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-							<option value="DEPART"
-								${pageVO.cri.searchType eq 'DEPART' ? 'selected' : '' }>부서</option>
 							<option value="NAME"
 								${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>이름</option>
-							<option value="MID"
-								${pageVO.cri.searchType eq 'MID' ? 'selected' : '' }>아이디</option>
+							<option value="EMAIL"
+								${pageVO.cri.searchType eq 'EMAIL' ? 'selected' : '' }>이메일</option>
+							<option value="CID"
+								${pageVO.cri.searchType eq 'CID' ? 'selected' : '' }>아이디</option>
 						</select> <input type="text" name="searchName"
 							value="${pageVO.cri.searchName }" class="form-control"
 							aria-label="Text input with dropdown button">

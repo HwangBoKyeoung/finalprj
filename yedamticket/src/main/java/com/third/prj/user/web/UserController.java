@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,7 +24,8 @@ import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
-import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
+import com.third.prj.point.service.PointCriteriaVO;
+import com.third.prj.point.service.PointPageVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
 import com.third.prj.user.service.CriteriaVO;
 import com.third.prj.user.service.PageVO;
@@ -53,6 +55,8 @@ public class UserController {
 
 	@Inject
 	private BCryptPasswordEncoder pwdEncoder;
+	
+	
 
 	@RequestMapping("/signup_1.do")
 	public String signUp_1() {
@@ -188,15 +192,16 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-	public String userPage(Model model, UserVO vo, HttpSession session, UserCriteriaVO cri, UserPointViewVo pvo, PerformanceReservationViewVO performanceReservationViewVO) {
-		cri.setUId((String) session.getAttribute("sessionId"));
-		vo.setUId((String) session.getAttribute("sessionId"));
-		pvo.setUId((String) session.getAttribute("sessionId"));
-		performanceReservationViewVO.setRId((String) session.getAttribute("sessionId"));
+	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
+		
+		cri.setUId((String)session.getAttribute("sessionId"));
+		vo.setUId((String)session.getAttribute("sessionId"));
+		pvo.setUId((String)session.getAttribute("sessionId"));
+
 		model.addAttribute("userPoint", userDao.userPoint(pvo));
 		model.addAttribute("mvList", userDao.mvRList(cri));
 		model.addAttribute("pfList", userDao.pfRList(cri));
-		model.addAttribute("prList", userDao.prList(cri));
+
 		model.addAttribute("user", userDao.userSelectOne(vo));
 
 		return "user/userPage";
@@ -238,14 +243,14 @@ public class UserController {
 	}
 
 	@RequestMapping("/mvReservList.do")
-	public String mvReservList(Model model, UserVO vo, MovieReservVO mvo, HttpSession session, UserCriteriaVO cri) {
-		System.out.println("=============== session userid" + (String) session.getAttribute("sessionId")
-				+ "===========================");
-		cri.setUId((String) session.getAttribute("sessionId"));
-		System.out.println("=============== cri userid" + cri.getUId() + "===============");
-		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); // (기준, 토탈)
+	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
+		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
+		cri.setUId((String)session.getAttribute("sessionId"));
+		System.out.println("=============== cri userid"+cri.getUId() + "===============");
+		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
+		
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
 
-		model.addAttribute("pageVO", pageVO); // 페이지네이션전달
 		model.addAttribute("mvList", userDao.mvRList(cri));
 
 		vo.setUId((String) session.getAttribute("sessionId"));
@@ -257,10 +262,12 @@ public class UserController {
 	@RequestMapping("pfReservList.do")
 	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, UserVO vo,
 			UserCriteriaVO cri) {
-		cri.setUId((String) session.getAttribute("sessionId"));
-		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); // (기준, 토탈)
 
-		model.addAttribute("pageVO", pageVO); // 페이지네이션전달
+		cri.setUId((String)session.getAttribute("sessionId"));
+		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
+		
+		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+
 		model.addAttribute("pfList", userDao.pfRList(cri));
 
 		vo.setUId((String) session.getAttribute("sessionId"));
@@ -268,6 +275,9 @@ public class UserController {
 		return "user/pfReservList";
 	}
 
+	
+//	userBuyList.do 경로의 메소드가 3개 존재. (협의해서 하나로 줄이기)
+	
 	@RequestMapping("/userBuyList.do")
 	public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
 			UserPointViewVo uvo) {
@@ -301,6 +311,32 @@ public class UserController {
 //		vo.setUId((String)session.getAttribute("sessionId"));
 //		model.addAttribute("user", userDao.userSelectOne(vo));
 //		return "user/userBuyList";
+  
+//@RequestMapping("/userBuyList.do")
+//   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+//      cri.setUId((String) session.getAttribute("sessionId"));
+//      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
+//      model.addAttribute("pageVO", pageVO);
+//      model.addAttribute("list1", perDao.pfBuyList2(cri));
+//      model.addAttribute("list2", movieDao.mvBuyList2(cri));
+//
+//      vo.setUId((String) session.getAttribute("sessionId"));
+//      model.addAttribute("user", userDao.userSelectOne(vo));
+//
+//      return "user/userBuyList";
+//   }
+
+	@RequestMapping("/userPointList.do")
+	public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+		cri.setUId((String) session.getAttribute("sessionId"));
+		PointPageVO pageVO = new PointPageVO(cri, userDao.pointBuyTotal(cri)); // (기준, 토탈)
+		model.addAttribute("pageVO", pageVO); // 페이지네이션전달
+		model.addAttribute("list3", userDao.pointBuyList2(cri));
+
+		vo.setUId((String) session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+		return "user/userPointList";
+	}
 
 	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
 	@ResponseBody
@@ -315,9 +351,35 @@ public class UserController {
 //		return "user/userUpdateForm";
 
 //	}
-	@RequestMapping("/companyMyPage.do")
-	public String companyMyPage() {
-		return "companyMyPage/companyMyPage";
+
+//	@RequestMapping("/companyMyPage.do")
+//	public String companyMyPage() {
+//		return "companyMyPage/companyMyPage";
+//	}
+
+	// 아이디 찾기
+	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
+	@ResponseBody
+	public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
+
+		String result = userDao.searchId(name, phone);
+
+		return result;
 	}
+
+	// 비밀번호 찾기 메일 발송
+	
+    @RequestMapping(value = "/findpw.do", produces = "application/x-www-form-urlencoded; charset=UTF-8")
+    @ResponseBody
+    public String findPwPOST(@ModelAttribute UserVO vo, @RequestParam("id") String Id) throws Exception {
+    	System.out.println(Id);
+    	vo.setUId(Id);
+        if (!userDao.findPw(vo)) {
+        	System.out.println(vo);
+            return "해당되는 아이디가 존재하지 않습니다.";
+        }
+        return "해당 메일로 임시 비밀번호가 전송되었습니다.";
+    }
+
 
 }

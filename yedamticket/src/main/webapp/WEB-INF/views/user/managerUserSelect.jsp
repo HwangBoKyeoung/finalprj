@@ -15,7 +15,7 @@
 				<table class="table">
 					<tr>
 						<th>회원 아이디</th>
-						<td>${users.uid}</td>
+						<td>${users.UId}</td>
 					</tr>
 					<tr>
 						<th>회원 이메일</th>
@@ -44,10 +44,6 @@
 					<tr>
 						<th>가입일자</th>
 						<td>${users.rdt}</td>
-					</tr>
-					<tr>
-						<th>양도 승인여부</th>
-						<td>${users.dealAgreeCd}</td>
 					</tr>
 				</table>
 			</div>

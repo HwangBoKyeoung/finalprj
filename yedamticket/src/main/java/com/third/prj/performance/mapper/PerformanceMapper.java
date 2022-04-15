@@ -20,14 +20,14 @@ public interface PerformanceMapper {
 
 //	프로시저 호출(update에 필요)
 	int procedureCall(Map<String, Object> map);
-
+	int performanceUpdate(PerformanceVO vo);
+	
 	// 공연 구매내역
 	List<PerformanceViewVO> pfBuyList(PerformanceViewVO vo);
 
 	// 공연 예매 내역 리스트
 	public List<PerformanceVO> pfBuyList2(PointCriteriaVO cri);
 
-	// 공연 예매 리스트 페이징
 	public int pfBuyTotal(PointCriteriaVO cri);
 
 	// 공연 등록
@@ -48,4 +48,6 @@ public interface PerformanceMapper {
 
 	// 공연선택
 	PerformanceVO pSelect(PerformanceVO vo);
+	//지역별 공연리스트
+	List<PerformanceVO> locPlist(PerformanceVO vo);
 }

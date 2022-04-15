@@ -10,23 +10,64 @@
 		<result property="pNo" column="P_NO"/>
 		<result property="time" column="TIME"/>
 		<result property="endTime" column="ENDTIME"/>
+		<collection property="performanceVO" resultMap="pMap"/>
 	</resultMap>
-	
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
+		<id property="pNo" column="p_No"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="renames" column="renames"/>
+		<result property="content" column="content"/>
+		<result property="actor" column="actor"/>
+		<result property="addr" column="addr"/>
+	</resultMap>
 	<select id="PerformanceScheduleList" resultMap="pfmcMap">
-		SELECT TO_CHAR(s.FRDT, 'YYYY-MM-DD') || 'T' || s.TIME AS "start",
-				s.FRDT,
-				s.TIME as "time",
-				s.no,
-				s.p_sch_no,
-				s.p_no,
-                p.name AS "title"
-		from PERFORMANCE_SCHEDULE s, performance p
-        where s.p_no = p.p_no
-        ORDER BY P_NO
+		SELECT
+			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "start",
+			S.FRDT,
+			S.TIME as "time",
+			S.P_SCH_NO,
+			S.P_NO,
+			P.NAME AS "title",
+			P.ACTOR,
+			P.CONTENT,
+			P.LOC,
+			P.ADDR,
+			P.PRICE
+		FROM PERFORMANCE_SCHEDULE S, 
+			 PERFORMANCE P
+		WHERE P.P_NO = S.P_NO
 	</select>
+	
+	<select id="PerformanceScheduleList2" resultMap="pfmcMap">
+		SELECT
+			TO_CHAR(S.FRDT, 'YYYY-MM-DD') || 'T' || S.TIME AS "start",
+			S.FRDT,
+			S.TIME AS "time",
+			S.P_SCH_NO,
+			S.P_NO,
+			P.NAME AS "title",
+			P.ACTOR,
+			P.CONTENT,
+			P.LOC || ' ' || P.ADDR as "location",
+			P.LOC,
+			P.ADDR,
+			P.PRICE
+		FROM PERFORMANCE_SCHEDULE S, 
+			 PERFORMANCE P
+		WHERE P.P_NO = S.P_NO
+		AND S.FRDT=#{frDt}
+	</select>
+
 	
 	<insert id = "pScheduleInsert">    
 		INSERT INTO PERFORMANCE_SCHEDULE(P_SCH_NO,FRDT,TIME,P_NO,TRDT,ENDTIME) VALUES(PERSCH_SEQ.nextval,#{frDt},#{time},#{pNo},#{trDt},#{endTime})
 	</insert>
+	<select id="pSchSelect" resultMap="pfmcMap">
+		SELECT *
+        FROM PERFORMANCE A JOIN PERFORMANCE_SCHEDULE B
+        ON A.P_NO = B.P_NO
+        WHERE P_SCH_NO = #{PSchNo}
+	</select>
 
 </mapper>

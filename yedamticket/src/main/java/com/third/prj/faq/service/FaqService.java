@@ -10,4 +10,7 @@ public interface FaqService {
 	int faqUpdate(FaqVO vo);
 	int faqDelete(FaqVO vo);
 	
+	//관리자페이지 FAQ
+	List<FaqVO> managerFaqList(CriteriaVO cri);
+	int getTotal(CriteriaVO cri);
 }

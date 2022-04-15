@@ -19,4 +19,5 @@ public class MovieViewVO {
 	private int point;
 	private String buyCtntCd;
 	private String UId;
+	private int tempPoint;
 }

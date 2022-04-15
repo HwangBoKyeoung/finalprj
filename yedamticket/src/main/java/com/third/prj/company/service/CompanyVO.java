@@ -18,7 +18,7 @@ public class CompanyVO {
 	private String bizno;
 	private String dealAgreeCd;
 	private String name;
-	private String Cid;
+	private String CId;
 	@JsonFormat(pattern = "yy-MM-dd", timezone="Asia/Seoul")
 	private Date rdt;
 	
