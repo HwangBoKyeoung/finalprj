@@ -215,81 +215,37 @@ ${sessionId }
 	<!-- movie assignment -->
 	<div id="mv_container">
 	<div align="center">
-		<c:if test="${empty prInfo }">
+		<c:if test="${empty mrInfo }">
 			<div>
 				<h1>영화 예약 현황이 없습니다.</h1>
 			</div>
 		</c:if>
  		
  		<div id="widthslider" align="center">
- 		<h1>공연 예약 / 거래 현황</h1>
+ 		<h1>영화 예약 현황</h1>
 			<ul class="widthlist">
-				<c:forEach items="${prInfo }" var="pr">
-				<c:if test="${pr.frDt > sysdate }">
-					<c:if test="${pr.status == 'P'}">
-					<li class="widthitem">
-						<div class="card" style="width: 20rem;">
-						  <div class="card-body">
-						    <p class="card-title" >공연 명 : ${pr.name }</p>
-						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
-						    <p class="card-text">공연일정 : ${pr.frDt }</p>
-						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
-						    <p class="card-text">좌석구역 : ${pr.loc }</p>
-						    <p class="card-text">가  격 : ${pr.price }</p>
-						    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택">
-						  </div>
-						</div>
-					</li>
+				<c:forEach items="${mrInfo }" var="mr">
+					<c:if test="${mr.schDate > sysdate }">
+						<li class="widthitem">
+							<div class="card" style="width: 20rem;">
+							  <div class="card-body">
+							    <p class="card-title" >영화 명 : ${mr.name }</p>
+							  	<p class="card-text" >예약번호 : ${mr.mvReservNo}</p>
+							    <p class="card-text">공연일정 : ${mr.schDate }</p>
+							    <p class="card-text">좌석번호 : ${mr.seatName }</p>
+							    <p class="card-text">영화관지역 : ${mr.reservHall }</p>
+							    <p class="card-text">가  격 : 13000원</p>
+							    <input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#mrInfoModal" value="선택">
+							  </div>
+							</div>
+						</li>
 					</c:if>
-				</c:if>
-					</c:forEach>
-					
-				<c:forEach items="${prInfo }" var="pr">
-				<c:if test="${pr.frDt > sysdate }">
-					<c:if test="${pr.status == 'F'}">
-					<li class="widthitem">
-						<div class="card" style="width: 20rem;">
-						  <div class="card-body" style="background-color : #add8e6">
-						    <p class="card-title" >공연 명 : ${pr.name }</p>
-						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
-						    <p class="card-text">공연일정 : ${pr.frDt }</p>
-						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
-						    <p class="card-text">좌석구역 : ${pr.loc }</p>
-						    <p class="card-text">가  격 : ${pr.price }</p>
-						    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="자유시장에 올라가있는 티켓입니다!">선택</button>
-						    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
-						  </div>
-						</div>
-					</li>
-					</c:if>
-				</c:if>
-				</c:forEach>
-				
-				<c:forEach items="${prInfo }" var="pr">
-				<c:if test="${pr.frDt > sysdate }">
-					<c:if test="${pr.status == 'W'}">
-					<li class="widthitem">
-						<div class="card" style="width: 20rem;">
-						  <div class="card-body" style="background-color : gray">
-						    <p class="card-title" >공연 명 : ${pr.name }</p>
-						  	<p class="card-text" >예약번호 : ${pr.PReservNo}</p>
-						    <p class="card-text">공연일정 : ${pr.frDt }</p>
-						    <p class="card-text">좌석번호 : ${pr.seatNo }</p>
-						    <p class="card-text">좌석구역 : ${pr.loc }</p>
-						    <p class="card-text">가  격 : ${pr.price }</p>
-						    <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-placement="bottom" title="거래를 예정중인 티켓입니다!">선택</button>
-						    <input type="button" onclick="selectedFnc2()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
-						  </div>
-						</div>
-					</li>
-					</c:if>
-				</c:if>
 				</c:forEach>
 			</ul>
 			<input type="button" onclick="resetPosition()" value="원위치로" />
 			
 			<!-- Modal -->
-			<div class="modal fade" id="prInfoModal">
+			<div class="modal fade" id="mrInfoModal">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">

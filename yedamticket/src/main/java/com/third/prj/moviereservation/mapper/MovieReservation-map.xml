@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper
-	namespace="com.third.prj.moviereservation.mapper.MovieReservMapper">
+<mapper namespace="com.third.prj.moviereservation.mapper.MovieReservMapper">
 	
 	<insert id="movieReservationInsert" parameterType="com.third.prj.moviereservation.service.MovieReservationVO">
 		INSERT INTO MOVIE_RESERVATION
@@ -26,6 +25,7 @@
 				#{reservHall},
 				#{docId})
 	</insert>
+	
 	<select id="seatSearch"  parameterType="com.third.prj.moviereservation.service.MovieReservationVO" resultType="com.third.prj.moviereservation.service.MovieReservationVO">
 		SELECT SEAT_NAME
 		FROM MOVIE_RESERVATION
@@ -36,6 +36,7 @@
         SCH_DATE=#{schDate} AND
         SCHTIME=#{schTime}
 	</select>
+	
 	<select id="movieReservationSelect" parameterType="com.third.prj.moviereservation.service.MovieReservationVO"
 										resultType="com.third.prj.moviereservation.service.MovieReservationVO">
 		SELECT MAX(MV_RESERV_NO) AS MV_RESERV_NO,U_id
@@ -43,4 +44,43 @@
 		WHERE U_ID = #{UId}
 		group by u_id
 	</select>
+	
+	<resultMap type="com.third.prj.moviereservation.service.MovieReservViewVO" id="mrvMap">
+		<result property="mvReservNo" column="mvReservNo" />
+		<result property="reservDt" column="reservDt" />
+		<result property="cancelCd" column="cancelCd" />
+		<result property="mvNo" column="mvNo" />
+		<result property="UId" column="UId" />
+		<result property="schDate" column="schDate" />
+		<result property="seatStatCd" column="seatStatCd" />
+		<result property="seatName" column="seatName" />
+		<result property="reservLoc" column="reservLoc" />
+		<result property="reservHall" column="reservHall" />
+		<result property="docId" column="docId" />
+		<result property="schTime" column="schTime" />
+		<result property="name" column="name" />
+		<result property="genre" column="genre" />
+		<result property="startDate" column="startDate" />
+		<result property="director" column="director" />
+		<result property="rating" column="rating" />
+		<result property="distributor" column="distributor" />
+		<result property="country" column="country" />
+		<result property="runtime" column="runtime" />
+		<result property="content" column="content" />
+		<result property="CId" column="CId" />
+		<result property="actor" column="actor" />
+		<result property="fileCd" column="fileCd" />
+		<result property="renames" column="renames" />
+		<result property="audience" column="audience" />
+		<result property="confirm" column="confirm" />
+		<result property="refuseRs" column="refuseRs" />
+		<result property="searchName" column="searchName" />
+	</resultMap>
+	 
+	<select id="userMovie" resultMap="mrvMap">
+		SELECT *
+		FROM   usersmovie
+		WHERE  u_id = #{UId}
+	</select>
+	
 </mapper>

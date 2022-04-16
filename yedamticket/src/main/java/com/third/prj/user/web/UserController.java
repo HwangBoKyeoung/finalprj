@@ -24,6 +24,7 @@ import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointPageVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
@@ -192,16 +193,18 @@ public class UserController {
 	}
 
 	@RequestMapping("/userPage.do")
-	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
+	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo, PerformanceReservationViewVO performanceReservationViewVO) {
 		
 		cri.setUId((String)session.getAttribute("sessionId"));
 		vo.setUId((String)session.getAttribute("sessionId"));
 		pvo.setUId((String)session.getAttribute("sessionId"));
-
+		performanceReservationViewVO.setRId((String) session.getAttribute("sessionId"));
+		
 		model.addAttribute("userPoint", userDao.userPoint(pvo));
 		model.addAttribute("mvList", userDao.mvRList(cri));
 		model.addAttribute("pfList", userDao.pfRList(cri));
-
+		model.addAttribute("prList", userDao.prList(cri));
+		
 		model.addAttribute("user", userDao.userSelectOne(vo));
 
 		return "user/userPage";

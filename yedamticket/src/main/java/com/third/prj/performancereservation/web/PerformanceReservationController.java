@@ -13,6 +13,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.third.prj.moviereservation.service.MovieReservService;
+import com.third.prj.moviereservation.service.MovieReservViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
@@ -24,6 +26,9 @@ public class PerformanceReservationController {
 	@Autowired
 	private PerformanceReservationService performancereservationDao;
 
+	@Autowired
+	private MovieReservService moviereservDao;
+	
 	@Autowired
 	private UserService userDao;
 
@@ -115,13 +120,16 @@ public class PerformanceReservationController {
 	// ---------------------------------------------------------------------------------------------------
 
 	@RequestMapping("/ticketassignment_1.do")
-	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, HttpSession session,
-			Model model) {
+	public String ticketAssignment_1(PerformanceReservationViewVO performancereservationviewVO, MovieReservViewVO moviereservviewVO,HttpSession session, Model model) {
 		String UId = (String) session.getAttribute("sessionId");
 
 		performancereservationviewVO.setUId(UId);
+		moviereservviewVO.setUId(UId);
 		performancereservationDao.userTicket(performancereservationviewVO);
+		moviereservDao.userMovie(moviereservviewVO);
+		
 		model.addAttribute("prInfo", performancereservationDao.userTicket(performancereservationviewVO));
+		model.addAttribute("mrInfo", moviereservDao.userMovie(moviereservviewVO));
 		return "ticket/ticketassignment_1";
 	}
 
