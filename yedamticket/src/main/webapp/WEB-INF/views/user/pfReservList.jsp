@@ -516,8 +516,8 @@ html, body {
 					<li></li>
 				</ul>
 				<div class="ticket">
-					<span class="airline">YEDAM BOX</span> <span
-						class="airline airlineslip">YEDAM BOX</span>
+					<span class="airline">YEDAM BOX</span> 
+					<span class="airline airlineslip">YEDAM BOX</span>
 					<div class="content">
 						<span class="jfk" id="mvName"></span> <span class="jfk jfkslip">
 							<img

@@ -108,9 +108,11 @@ public class PerformanceContorller {
 	}
 	//공연 결제하기
 	@RequestMapping("/pPay.do")
-	public String pPay(PerformanceReservationVO vo,PointVO pointVO) {
+	public String pPay(PerformanceReservationVO vo,PointVO pointVO, PerformanceVO pvo) {
 		performanceReservationDao.pReservation(vo);
 		pointDao.payInsert(pointVO);
+//		류지희 : performance 테이블의 관객 수 업데이트 (공연 예매완료 시)
+		perDao.updatePerformanceAudience(pvo);
 		return "home/home";
 	}
 	//지역별 공연리스트
@@ -215,9 +217,17 @@ public class PerformanceContorller {
 		}
 		return "redirect:home.do";
 	}
-	//관리자페이지-공연정보 자세히 보기
-	
+	//관리자페이지 공연 인기순위
+	@RequestMapping("/perforpopularitychart.do")
+	public String perforpopularitychart() {
+		return "manager/manager/managerPerfoPoprChart";
+	}
+	@RequestMapping("/perforPop.do")
+	@ResponseBody
+	public List<PerformanceVO> perforPop(PerformanceVO vo){
+		List<PerformanceVO> list = perDao.performancePopChart();
+		return list;
+	}
 
-	
 	
 }

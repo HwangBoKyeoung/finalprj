@@ -209,6 +209,8 @@ ${user }
 				<input type="hidden" id="pay" name="pay" >
 				<!-- 영화인지 공연인지 코드 -->
 				<input type="hidden" id="buyCtntCd" name="buyCtntCd" value="pf">
+				<input type="hidden" id="audience" name="audience">
+				<input type="hidden" value="${sch.performanceVO.PNo }" id="PNo" name="PNo">
 				<button type="submit" class="btn">결제하기</button>
 			</form>
             </div>
@@ -302,6 +304,7 @@ function goBack(){
 	}
 	$('#price').text(price*cnt+'원');
 	$('#pay').val(price*cnt);
+	$("#audience").val(cnt);
 })();
 
 /*active button class onclick*/
