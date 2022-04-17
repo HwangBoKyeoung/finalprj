@@ -459,6 +459,7 @@
 		SELECT *
 		FROM USERS
 		WHERE U_ID = #{UId}
+		AND EMAIL = #{email}
 	</select>
 	
 	<update id="updatePassword2" parameterType="com.third.prj.user.service.UserVO">

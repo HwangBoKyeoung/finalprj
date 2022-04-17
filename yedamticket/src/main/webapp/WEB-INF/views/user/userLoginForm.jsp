@@ -52,7 +52,7 @@
 .modal_content {
 	width: 482px;
 	height: 537px;
-	background: #020409;
+	background: #070810;
 	border-radius: 35px;
 	position: relative;
 	top: 25%;
@@ -64,7 +64,10 @@
 	padding: 74px 0;
 	line-height: 23px;
 	cursor: pointer;
+	color: #ffffff;
 }
+
+
 </style>
 
 <body class="login-page sidebar-collapse">
@@ -256,17 +259,17 @@
 								</div>
 							</form>
 							</div> 
-							<!-- <div class="form-group">
+							 <div class="form-group">
 								<label class="font-weight-bold text-white " for="email">이메일</label>
 								<div>
 									<input type="email" class="form-control" id="email"
 										name="email" placeholder="ex) E-mail@gmail.com">
 								</div>
-							</div> -->
+							</div> 
 							<div class="form-group">
 								<button id="searchBtn2" type="button"
 									class="btn btn-primary btn-block">확인</button>
-								<a class="btn btn-danger btn-block" id="close">취소</a>
+								<a class="btn btn-danger btn-block" id="close2">취소</a>
 							</div>
 						</div>
 					</div>
@@ -282,6 +285,9 @@
 			});
 
 			$("#close").click(function() {
+				$(".modal").fadeOut();
+			});
+			$("#close2").click(function() {
 				$(".modal").fadeOut();
 			});
 
@@ -366,15 +372,30 @@
 					type : "POST",
 					contentType: "application/x-www-form-urlencoded; charset=UTF-8",
 					data : {
-						id : $("#UId").val()
+						id : $("#UId").val(),
+						email : $('#email').val()
 					},
 					success : function(result) {
-						alert(result);
+						alert(result)
+						/* if (window.confirm(result == "해당 메일로 임시 비밀번호가 전송되었습니다.\n메일을 확인해주세요"))
+						{	
+							
+							$(".modal").fadeOut();
+						}
+						else
+						{
+						    // They clicked no
+						} */
+					
+
+						
+						
+						
 					},
 				})
 			});
 		})
-		/* // 비밀번호 찾기 이메일로 보내기
+		/*  비밀번호 찾기 이메일로 보내기
 		$('#searchBtn2').click(function(){
 			console.log("패스워드 찾기 : ajax 들어가기 전");
 			console.log($('#UId').val());

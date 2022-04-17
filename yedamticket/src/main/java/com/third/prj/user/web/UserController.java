@@ -371,15 +371,20 @@ public class UserController {
 	
     @RequestMapping(value = "/findpw.do", produces = "application/x-www-form-urlencoded; charset=UTF-8")
     @ResponseBody
-    public String findPwPOST(@ModelAttribute UserVO vo, @RequestParam("id") String Id) throws Exception {
+    public String findPwPOST(@ModelAttribute UserVO vo, @RequestParam("id") String Id, @RequestParam("email") String email) throws Exception {
     	System.out.println(Id);
+    	System.out.println(email);
     	vo.setUId(Id);
+    	vo.setEmail(email);
         if (!userDao.findPw(vo)) {
         	System.out.println(vo);
-            return "해당되는 아이디가 존재하지 않습니다.";
+      
+            return  "아이디와 이메일이 일치하지 않습니다.\n입력하신 정보를 다시 한번 확인해주세요";
         }
-        return "해당 메일로 임시 비밀번호가 전송되었습니다.";
+        
+        return "해당 이메일로 임시 비밀번호가 전송되었습니다.\n이메일을 확인해주세요";
     }
+    
 
 
 }

@@ -67,7 +67,7 @@
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">이메일</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" name="email" id="email" value="${user.email }0"placeholder="your@email.com.." required>
+								<input type="text" class="form-control" name="email" id="email" value="${user.email }"placeholder="your@email.com.." required>
 							</div>
 						</div>
 						<div class="col-12" align="left">
