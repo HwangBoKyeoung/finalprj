@@ -46,14 +46,14 @@
 	</select>
 	
 	<resultMap type="com.third.prj.moviereservation.service.MovieReservViewVO" id="mrvMap">
-		<result property="mvReservNo" column="mvReservNo" />
+		<result property="mvReservNo" column="mv_reserv_no" />
 		<result property="reservDt" column="reservDt" />
-		<result property="cancelCd" column="cancelCd" />
-		<result property="mvNo" column="mvNo" />
-		<result property="UId" column="UId" />
-		<result property="schDate" column="schDate" />
-		<result property="seatStatCd" column="seatStatCd" />
-		<result property="seatName" column="seatName" />
+		<result property="cancelCd" column="cancel_Cd" />
+		<result property="mvNo" column="mv_No" />
+		<result property="UId" column="U_Id" />
+		<result property="schDate" column="sch_Date" />
+		<result property="seatStatCd" column="seat_Stat_Cd" />
+		<result property="seatName" column="seat_Name" />
 		<result property="reservLoc" column="reservLoc" />
 		<result property="reservHall" column="reservHall" />
 		<result property="docId" column="docId" />
@@ -67,14 +67,13 @@
 		<result property="country" column="country" />
 		<result property="runtime" column="runtime" />
 		<result property="content" column="content" />
-		<result property="CId" column="CId" />
+		<result property="CId" column="C_Id" />
 		<result property="actor" column="actor" />
-		<result property="fileCd" column="fileCd" />
+		<result property="fileCd" column="file_Cd" />
 		<result property="renames" column="renames" />
 		<result property="audience" column="audience" />
 		<result property="confirm" column="confirm" />
-		<result property="refuseRs" column="refuseRs" />
-		<result property="searchName" column="searchName" />
+		<result property="refuseRs" column="refuse_Rs" />
 	</resultMap>
 	 
 	<select id="userMovie" resultMap="mrvMap">

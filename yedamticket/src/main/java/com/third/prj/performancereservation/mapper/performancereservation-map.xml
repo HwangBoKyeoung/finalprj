@@ -28,6 +28,7 @@
 		<result property="addr" column="addr"/>
 		<result property="price" column="price"/>
 		<result property="RId" column="r_id"/>
+		<result property="cancelCd" column="cancel_cd"/>
 	</resultMap>
 	
 	<select id="userTicket" resultMap="prvMap">

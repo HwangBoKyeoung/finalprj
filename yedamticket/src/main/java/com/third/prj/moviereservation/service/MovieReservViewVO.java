@@ -22,7 +22,6 @@ public class MovieReservViewVO {
 	private String schTime; 
 	private String name; //영화이름
 	private String genre; //영화장르
-	//@JsonFormat(pattern = "yyyyMMdd")
 	private String startDate; //영화개봉일
 	private String director; //영화감독
 	private String rating; //영화관람등급
