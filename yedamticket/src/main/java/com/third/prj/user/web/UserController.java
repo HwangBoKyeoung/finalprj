@@ -308,11 +308,13 @@ public class UserController {
 		return address;
 	}
 
-// 아이디 찾기
+	// 아이디 찾기
 	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
+
 		String result = userDao.searchId(name, phone);
+
 		return result;
 	}
 
@@ -327,8 +329,12 @@ public class UserController {
     	vo.setEmail(email);
         if (!userDao.findPw(vo)) {
         	System.out.println(vo);
-        }
+      
             return  "아이디와 이메일이 일치하지 않습니다.\n입력하신 정보를 다시 한번 확인해주세요";
+        }
+        
+        return "해당 이메일로 임시 비밀번호가 전송되었습니다.\n이메일을 확인해주세요";
     }
+    
 
 }
