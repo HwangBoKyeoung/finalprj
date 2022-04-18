@@ -96,7 +96,9 @@ ${performance }
                     <input type="hidden" id="PSchNo" name="PSchNo" value="${performance.performanceScheduleVO.PSchNo }">
                     <input type="hidden" id="UId" name="UId" value="micol1234">
                     <input type="hidden" id="loc" name="loc">
+                    <input type="hidden" id="name" name="name" value="${performance.name }">
                     <input type="hidden" id="seatNo" name="seatNo">
+                    <input type="hidden" id="price" name="price" value="${performance.price }">
                     <div class="buy-tickets flex justify-content-center align-items-center">
                         <button type="submit" class="btn gradient-bg">Buy Tikets</button>
                     </div>
@@ -120,17 +122,11 @@ ${performance }
                 <div class="tabs-container">
                     <div id="tab_details" class="tab-content">
                         <div class="flex flex-wrap justify-content-between">
-                            <div class="single-event-details">
-                            
-                           
+                            <div class="single-event-details">                               
                                 <div class="single-event-details-row">
                                     <label>일자:</label>
                                     <p>${performance.performanceScheduleVO.frDt } ~ ${performance.performanceScheduleVO.trDt }</p>
-                                </div>
-                         
-                             
-                            
-                                
+                                </div>     
                                 <div class="single-event-details-row">
                                     <label>시간:</label>
                                     <p>${performance.performanceScheduleVO.time } ~ ${performance.performanceScheduleVO.endTime }</p>
