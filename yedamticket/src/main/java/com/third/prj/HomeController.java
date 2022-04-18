@@ -10,6 +10,7 @@ import com.third.prj.movie.service.MovieService;
 
 @Controller
 public class HomeController {
+	
 	@Autowired
 	private MovieService movieDao;
 
@@ -21,7 +22,7 @@ public class HomeController {
 		model.addAttribute("movie", movieDao.movieList());
 		model.addAttribute("movies", movieDao.mList());
 		model.addAttribute("popular", searchDao.popularKeywordCnt());
-		return "home/home";
+		return "first/home/firstHome";
 	}
 
 	@RequestMapping("/home.do")

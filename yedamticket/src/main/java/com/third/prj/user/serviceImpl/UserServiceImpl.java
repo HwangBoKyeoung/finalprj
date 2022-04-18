@@ -220,6 +220,7 @@ public class UserServiceImpl implements UserService {
 //		String pw2 = pwdEncoder.encode(pw);
 //		System.out.println(pw2);
 		
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
 		vo.setPwd(pwdEncoder.encode(pw));
 		
 

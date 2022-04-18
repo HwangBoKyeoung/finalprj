@@ -436,11 +436,23 @@
    </update>
 
    <select id="loginChk"
-      resultType="com.third.prj.user.service.UserVO">
-      SELECT *
-      FROM USERS
-      WHERE U_ID = #{UId}
-   </select>
+		resultType="com.third.prj.user.service.UserVO" parameterType="com.third.prj.user.service.UserVO">
+		SELECT U_ID
+		, PWD
+		, EMAIL
+		, ADDR
+		, BIRTHDT
+		, PHONE
+		, NAME
+		, DEAL_AGREE_CD
+		, POINT
+		, MEMBERSHIP
+		, LOGIN_CD
+		, RDT
+		, UPPER('ROLE_'||role) as role
+		FROM USERS
+		WHERE U_ID = #{UId}
+	</select>
 
    <select id="getTotal" resultType="int">
       SELECT COUNT(*) AS TOTAL
