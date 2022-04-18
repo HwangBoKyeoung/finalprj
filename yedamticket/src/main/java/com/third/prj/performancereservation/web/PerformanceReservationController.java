@@ -128,6 +128,7 @@ public class PerformanceReservationController {
 		performancereservationDao.userTicket(performancereservationviewVO);
 		moviereservDao.userMovie(moviereservviewVO);
 		
+		
 		model.addAttribute("prInfo", performancereservationDao.userTicket(performancereservationviewVO));
 		model.addAttribute("mrInfo", moviereservDao.userMovie(moviereservviewVO));
 		return "ticket/ticketassignment_1";
@@ -394,6 +395,23 @@ public class PerformanceReservationController {
 		}
 	}
 
+	@RequestMapping("/cancelPersonalTicket.do")
+	public String cancelPersonalTicket(Map<String, Object> map, HttpServletRequest request, HttpSession session) {
+		String UId = (String) session.getAttribute("sessionId");
+		int reserv = Integer.parseInt(request.getParameter("pr3PReservNo2"));
+		int price = Integer.parseInt(request.getParameter("pr3price"));
+		
+		map.put("p1", UId);
+		map.put("p2", price);
+		map.put("p3", reserv);
+		int i = performancereservationDao.cancelpersonalPerf(map);
+		if(i != 0) {
+			return "user/userPage";			
+		}else {
+			return "user/errorPage";
+		}
+	}
+	
 	// CancelReservedTicket
 	// END-----------------------------------------------------------------------------------------------
 

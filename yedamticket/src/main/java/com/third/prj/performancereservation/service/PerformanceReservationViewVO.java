@@ -33,4 +33,5 @@ public class PerformanceReservationViewVO {
 	private String loc;  //공연지역
 	private String addr; //공연장 상세주소
 	private String price;	//공연가격
+	
 }

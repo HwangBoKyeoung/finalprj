@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.confirmrequest.mapper.ConfirmMapper">
 	<resultMap type="com.third.prj.confirmrequest.service.ConfirmVO" id="confMap">
-		<result column="MV_NO" property="mvNo"/>
+		<id column="MV_NO" property="mvNo"/>
+		<result column="P_NO" property="pNo"/>
+		<result column="G_NO" property="gNo"/>
 		<result column="GENRE" property="genre"/>
 		<result column="RATING" property="rating"/>
 		<result column="DIRECTOR" property="director"/>
 		<result column="COUNTRY" property="country"/>
-		<result column="P_NO" property="pNo"/>
 		<result column="LOC" property="loc"/>
 		<result column="ADDR" property="addr"/>
-		<result column="G_NO" property="gNo"/>
 		<result column="SELLER" property="seller"/>
 		<result column="GOODS_CD" property="goodsCd"/>
 		<result column="C_ID" property="CId"/>
@@ -26,7 +26,7 @@
 	<select id="movieConfirmList" resultMap="confMap">
 		SELECT *
 		FROM MOVIE
-		ORDER BY MV_NO = #{mvNo}
+		ORDER BY MV_NO
 	</select>
 	<select id="movieConfirmSelect" resultMap="confMap">
 		SELECT MV_NO,
@@ -42,13 +42,13 @@
 				CONFIRM,
 				REFUSE_RS
 			FROM MOVIE
-			WHERE MV_NO = #{mvNo}
+			WHERE MV_NO = #{MvNo}
 	</select>
 	
 	<select id="perforConfirmList" resultMap="confMap">
 		SELECT *
 		FROM PERFORMANCE
-		ORDER BY P_NO = #{pNo}
+		ORDER BY P_NO
 	</select>
 	<select id="perforConfirmSelect" resultMap="confMap">
 		SELECT P_NO,
@@ -69,7 +69,7 @@
 	<select id="goodsConfirmList" resultMap="confMap">
 		SELECT *
 		FROM GOODS
-		ORDER BY G_NO = #{gNo}
+		ORDER BY G_NO
 	</select>
 	<select id="goodsConfirmSelect" resultMap="confMap">
 		SELECT G_NO,
@@ -83,7 +83,7 @@
 				CONFIRM, 
 				REFUSE_RS
 		FROM GOODS
-		WHERE G_NO = #{gNo}
+		WHERE G_NO = #{GNo}
 	</select>
 	
 	<update id="movieConfirmUpdate" parameterType="com.third.prj.confirmrequest.service.ConfirmVO">
@@ -113,5 +113,45 @@
 		WHERE G_NO = #{GNo}
 	</update>
 	
+	<select id="CompanyConfirmList" resultMap="confMap">
+		SELECT M.NAME, 
+				P.NAME, 
+				G.NAME, 
+				G.G_NO, 
+				P.P_NO, 
+				M.MV_NO, 
+				M.CONFIRM, 
+				P.CONFIRM, 
+				G.CONFIRM 
+		FROM MOVIE M, PERFORMANCE P, GOODS G
+        ORDER BY M.MV_NO, P.P_NO , G.G_NO
+	</select>
 	
+	<select id="moviceCompanyConfirmSelect">
+		SELECT NAME, 
+				MV_NO,
+				C_ID, 
+				CONFIRM, 
+				REFUSE_RS
+		FROM MOVIE 
+		WHERE MV_NO = #{MvNo}
+	</select>
+	<select id="perforCompanyConfirmSelect">
+		SELECT NAME, 
+				P_NO,
+				C_ID,
+				CONFIRM, 
+				REFUSE_RS
+		FROM PERFORMANCE 
+		WHERE P_NO = #{PNo}
+	</select>
+	<select id="goodsCompanyConfirmSelect">
+		SELECT NAME, 
+				G_NO,
+				C_ID,
+				CONFIRM, 
+				REFUSE_RS
+		FROM GOODS 
+		WHERE G_NO = #{GNo}
+	</select>
 </mapper>

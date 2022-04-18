@@ -1,13 +1,5 @@
 @charset "UTF-8";
-.hot{
-	fill:red;
-}
-.normal{
-	fill:violet;
-}
-.cool{
-	fill:blue;
-}
+
 #container {
     width: 400px;
     min-height: 400px;
@@ -15,13 +7,13 @@
     margin: 15px 35px;
 }
 #states path {
-    fill: #585858;
-    stroke: #000000;
+    fill: transparent;
+    stroke: violet;
     stroke-width: 1.5px;
 }
 
 #states path:hover {
-    fill: #009300;
+    fill: #866ec766;
 }
 
 #states .active {

@@ -67,6 +67,18 @@
 		WHERE  p_reserv_no = #{PRservNo}
 	</update>
 
+	<resultMap type="hashmap" id="procedureCall3"/>
+	
+	<update id="cancelpersonalPerf" statementType="CALLABLE">
+		{CALL 
+		cancelpersonalPerf(#{p1, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						  #{p2, mode=IN, jdbcType=INTEGER, javaType=INT},
+						  #{p3, mode=IN, jdbcType=INTEGER, javaType=INT}
+						  )
+		}
+	</update>
+
+
 	<!-- 황규복 -->
 	<insert id="pReservation" parameterType="com.third.prj.performancereservation.service.PerformanceReservationVO">
 			INSERT INTO PERFORMANCE_RESERVATION

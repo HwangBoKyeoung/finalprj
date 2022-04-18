@@ -96,7 +96,9 @@ ${performance }
                     <input type="hidden" id="PSchNo" name="PSchNo" value="${performance.performanceScheduleVO.PSchNo }">
                     <input type="hidden" id="UId" name="UId" value="micol1234">
                     <input type="hidden" id="loc" name="loc">
+                    <input type="hidden" id="name" name="name" value="${performance.name }">
                     <input type="hidden" id="seatNo" name="seatNo">
+                    <input type="hidden" id="price" name="price" value="${performance.price }">
                     <div class="buy-tickets flex justify-content-center align-items-center">
                         <button type="submit" class="btn gradient-bg">Buy Tikets</button>
                     </div>
@@ -120,17 +122,11 @@ ${performance }
                 <div class="tabs-container">
                     <div id="tab_details" class="tab-content">
                         <div class="flex flex-wrap justify-content-between">
-                            <div class="single-event-details">
-                            
-                           
+                            <div class="single-event-details">                               
                                 <div class="single-event-details-row">
                                     <label>일자:</label>
                                     <p>${performance.performanceScheduleVO.frDt } ~ ${performance.performanceScheduleVO.trDt }</p>
-                                </div>
-                         
-                             
-                            
-                                
+                                </div>     
                                 <div class="single-event-details-row">
                                     <label>시간:</label>
                                     <p>${performance.performanceScheduleVO.time } ~ ${performance.performanceScheduleVO.endTime }</p>
@@ -175,10 +171,10 @@ ${performance }
                                  <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="512px" height="421px" viewBox="0 0 512 421" enable-background="new 0 0 512 421" xml:space="preserve">
                             <g>
                               <rect x="168.201" y="14.816" fill="#48484A" width="175.668" height="77.468" />
-                              <path class="seat" id="A1" fill="#CE9C68" d="M86.914,103.196c0,0-63.831-0.545-63.829,0c5.454-27.823,25-57.828,25-57.828h38.829V103.196z" />
-                              <path class="seat" id="A2" fill="#CE9C68" d="M21.992,110.833h64.375v52.374c0,0-70.922,0.545-71.375,0C14.992,132.656,21.992,110.833,21.992,110.833z" /> 
-                              <path class="seat" id="A3" fill="#CE9C68" d="M21.992,225.471h64.375v-52.858c0,0-70.922-0.551-71.375,0C14.992,203.446,21.992,225.471,21.992,225.471z" />
-                              <path class="seat" id="A4" fill="#CE9C68" d="M86.914,233.178c0,0-63.831,0.551-63.829,0c5.454,28.081,25,58.362,25,58.362h38.829V233.178z" />
+                              <path class="seat" id="A1" fill="#cfc5e9" d="M86.914,103.196c0,0-63.831-0.545-63.829,0c5.454-27.823,25-57.828,25-57.828h38.829V103.196z" />
+                              <path class="seat" id="A2" fill="#cfc5e9" d="M21.992,110.833h64.375v52.374c0,0-70.922,0.545-71.375,0C14.992,132.656,21.992,110.833,21.992,110.833z" /> 
+                              <path class="seat" id="A3" fill="#cfc5e9" d="M21.992,225.471h64.375v-52.858c0,0-70.922-0.551-71.375,0C14.992,203.446,21.992,225.471,21.992,225.471z" />
+                              <path class="seat" id="A4" fill="#cfc5e9" d="M86.914,233.178c0,0-63.831,0.551-63.829,0c5.454,28.081,25,58.362,25,58.362h38.829V233.178z" />
                               <g>
                                 <g>
                                   <line fill="none" stroke="#7D7E81" stroke-miterlimit="10" x1="93.461" y1="44.823" x2="93.461" y2="46.823" />
@@ -195,19 +191,19 @@ ${performance }
                                   <line fill="none" stroke="#7D7E81" stroke-miterlimit="10" x1="174.203" y1="290.504" x2="174.203" y2="292.504" />
                                 </g>
                               </g>
-                              <polygon class="seat" id="G" fill="#CE9C68" points="101.644,125.741 132.741,97.741 132.741,43.186 113.646,43.186 101.644,54.186    " />
-                              <polygon class="seat" id="B1" fill="#CE9C68" points="136.56,104.288 166.02,104.288 166.02,177.938 101.099,237.403 101.099,137.567    " />
-                              <polygon class="seat" id="B2-special" fill="#88543E" points="166.02,189.396 166.02,248.86 101.644,248.86    " />
-                              <polygon class="seat" id="B2" fill="#CE9C68" points="165.474,294.688 140.924,326.329 101.644,286.504 101.644,248.86 166.02,248.86    " />
-                              <path class="seat" id="C1" fill="#CE9C68" d="M210.755,303.963c0,0,0,94.381,0,93.29c-44.19-5.456-80.742-31.643-80.742-31.643l45.827-62.192
+                              <polygon class="seat" id="G" fill="#cfc5e9" points="101.644,125.741 132.741,97.741 132.741,43.186 113.646,43.186 101.644,54.186    " />
+                              <polygon class="seat" id="B1" fill="#cfc5e9" points="136.56,104.288 166.02,104.288 166.02,177.938 101.099,237.403 101.099,137.567    " />
+                              <polygon class="seat" id="B2-special" fill="violet" points="166.02,189.396 166.02,248.86 101.644,248.86    " />
+                              <polygon class="seat" id="B2" fill="#cfc5e9" points="165.474,294.688 140.924,326.329 101.644,286.504 101.644,248.86 166.02,248.86    " />
+                              <path class="seat" id="C1" fill="#cfc5e9" d="M210.755,303.963c0,0,0,94.381,0,93.29c-44.19-5.456-80.742-31.643-80.742-31.643l45.827-62.192
                               L210.755,303.963z" />
-                              <rect class="seat" id="area3" x="182.932" y="192.125" fill="#CE9C68" width="69.285" height="75.833" />
-                              <rect class="seat" id="area1" x="182.932" y="106.019" fill="#CE9C68" width="69.285" height="75.833" />
-                              <path class="seat" id="E1" fill="#CE9C68" d="M425.295,103.196c0,0,63.831-0.545,63.83,0c-5.455-27.823-25-57.828-25-57.828h-38.83V103.196z" />
-                              <path class="seat" id="E2" fill="#CE9C68" d="M490.217,110.833h-64.375v52.374c0,0,70.922,0.545,71.375,0
+                              <rect class="seat" id="area3" x="182.932" y="192.125" fill="#cfc5e9" width="69.285" height="75.833" />
+                              <rect class="seat" id="area1" x="182.932" y="106.019" fill="#cfc5e9" width="69.285" height="75.833" />
+                              <path class="seat" id="E1" fill="#cfc5e9" d="M425.295,103.196c0,0,63.831-0.545,63.83,0c-5.455-27.823-25-57.828-25-57.828h-38.83V103.196z" />
+                              <path class="seat" id="E2" fill="#cfc5e9" d="M490.217,110.833h-64.375v52.374c0,0,70.922,0.545,71.375,0
                               C497.217,132.656,490.217,110.833,490.217,110.833z" />
-                              <path class="seat" id="E4" fill="#CE9C68" d="M425.295,233.178c0,0,63.831,0.551,63.83,0c-5.455,28.081-25,58.362-25,58.362h-38.83V233.178z" />
-                              <path class="seat" id="E3" fill="#CE9C68" d="M490.217,225.471h-64.375v-52.858c0,0,70.922-0.551,71.375,0
+                              <path class="seat" id="E4" fill="#cfc5e9" d="M425.295,233.178c0,0,63.831,0.551,63.83,0c-5.455,28.081-25,58.362-25,58.362h-38.83V233.178z" />
+                              <path class="seat" id="E3" fill="#cfc5e9" d="M490.217,225.471h-64.375v-52.858c0,0,70.922-0.551,71.375,0
                               C497.217,203.446,490.217,225.471,490.217,225.471z" />
                               <g>
                                 <g>
@@ -225,16 +221,16 @@ ${performance }
                                   <line fill="none" stroke="#7D7E81" stroke-miterlimit="10" x1="338.006" y1="290.504" x2="338.006" y2="292.504" />
                                 </g>
                               </g>
-                              <polygon class="seat" id="H" fill="#CE9C68" points="410.564,125.741 379.469,97.741 379.469,43.186 398.563,43.186 410.564,54.186    " />
-                              <polygon class="seat" id="D1" fill="#CE9C68" points="375.649,104.288 346.189,104.288 346.189,177.938 411.11,237.403 411.11,137.567    " />
-                              <polygon class="seat" id="D2-special" fill="#88543E" points="346.189,189.396 346.189,248.86 410.564,248.86    " />
-                              <polygon class="seat" id="D2" fill="#CE9C68" points="346.735,294.688 371.285,326.329 410.564,286.504 410.564,248.86 346.189,248.86    " />
-                              <path class="seat" id="C3" fill="#CE9C68" d="M301.454,303.963c0,0,0,94.381,0,93.29c44.19-5.456,80.742-31.643,80.742-31.643l-45.827-62.192
+                              <polygon class="seat" id="H" fill="#cfc5e9" points="410.564,125.741 379.469,97.741 379.469,43.186 398.563,43.186 410.564,54.186    " />
+                              <polygon class="seat" id="D1" fill="#cfc5e9" points="375.649,104.288 346.189,104.288 346.189,177.938 411.11,237.403 411.11,137.567    " />
+                              <polygon class="seat" id="D2-special" fill="violet" points="346.189,189.396 346.189,248.86 410.564,248.86    " />
+                              <polygon class="seat" id="D2" fill="#cfc5e9" points="346.735,294.688 371.285,326.329 410.564,286.504 410.564,248.86 346.189,248.86    " />
+                              <path class="seat" id="C3" fill="#cfc5e9" d="M301.454,303.963c0,0,0,94.381,0,93.29c44.19-5.456,80.742-31.643,80.742-31.643l-45.827-62.192
                               L301.454,303.963z" />
-                              <rect class="seat" id="area4" x="259.992" y="192.125" fill="#CE9C68" width="69.285" height="75.833" />
-                              <rect class="seat" id="area2" x="259.992" y="106.019" fill="#CE9C68" width="69.285" height="75.833" />
-                              <rect class="seat" id="area2-special" x="259.992" y="116.93" fill="#88543E" width="69.285" height="14.73" />
-                              <path class="seat" id="C2" fill="#CE9C68" d="M293.679,398.891c-40.917,6.547-74.741,0-74.741,0v-95.472h74.741
+                              <rect class="seat" id="area4" x="259.992" y="192.125" fill="#cfc5e9" width="69.285" height="75.833" />
+                              <rect class="seat" id="area2" x="259.992" y="106.019" fill="#cfc5e9" width="69.285" height="75.833" />
+                              <rect class="seat" id="area2-special" x="259.992" y="116.93" fill="violet" width="69.285" height="14.73" />
+                              <path class="seat" id="C2" fill="#cfc5e9" d="M293.679,398.891c-40.917,6.547-74.741,0-74.741,0v-95.472h74.741
                               C293.679,303.419,293.133,398.346,293.679,398.891z" />
                               <rect id="console" x="182.386" y="277.232" fill="#A3A5A8" width="146.754" height="16.912" />
                               <g>
@@ -518,7 +514,8 @@ ${performance }
                            <div>
                               <div id="minus">-</div><div id="cnt">0</div><div id="plus">+</div>
                            </div>
-                              <button id="backBtn" class="btn gradient-bg">뒤로가기</button>
+                              <button id="backBtn" class="btn gradient-bg" style="margin-top: 0;margin-left: 20px;">뒤로가기</button>
+   
                               <div class="seatContainer">
                                 <div class="screen">
                                    <img height="100px" width="290px" src="resources/performance/images/stage.png">
@@ -541,51 +538,7 @@ ${performance }
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-12">
-            <div class="event-tickets">
-                <div class="ticket-row flex flex-wrap justify-content-between align-items-center">
-                    <div class="ticket-type flex justify-content-between align-items-center">
-                        <h3 class="entry-title"><span>Siver Ticket</span> Basic entry</h3>
 
-                        <div class="ticket-price">$89</div>
-                    </div>
-
-                    <div class="flex align-items-center">
-                        <div class="number-of-ticket flex justify-content-between align-items-center">
-                            <span class="decrease-ticket">-</span>
-                            <input type="number" class="ticket-count" value="1" />
-                            <span class="increase-ticket">+</span>
-                        </div>
-
-                        <div class="clear-ticket-count">Clear</div>
-                    </div>
-
-                    <input type="submit" class="btn gradient-bg" value="Buy Ticket">
-                </div>
-
-                <div class="ticket-row flex flex-wrap justify-content-between align-items-center">
-                    <div class="ticket-type flex justify-content-between align-items-center">
-                        <h3 class="entry-title"><span>Gold Ticket</span>Vip entrry</h3>
-
-                        <div class="ticket-price">$199</div>
-                    </div>
-
-                    <div class="flex align-items-center">
-                        <div class="number-of-ticket flex justify-content-between align-items-center">
-                            <span class="decrease-ticket">-</span>
-                            <input type="number" class="ticket-count" value="1" />
-                            <span class="increase-ticket">+</span>
-                        </div>
-
-                        <div class="clear-ticket-count">Clear</div>
-                    </div>
-
-                    <input type="submit" class="btn gradient-bg" value="Buy Ticket">
-                </div>
-            </div>
-        </div>
-    </div>
     <img src="resources/performance/images/공연상세.jpg">
 
 

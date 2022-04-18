@@ -121,4 +121,6 @@ public interface UserMapper {
 
 	// 비밀번호 찾기 시 회원 권한 변경
 	int updatePassword2(UserVO vo);
+	 //결제하면 포인트 변경
+    int payPoint(UserVO vo);
 }

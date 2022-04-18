@@ -31,6 +31,7 @@
 		<result property="name" column="name" />
 		<result property="content" column="content" />
 		<result property="actor" column="actor" />
+		<result property="pNo" column="P_NO"/>
 	</resultMap>
 
 	<!-- 프로시저 -->
@@ -133,7 +134,9 @@
 	<!-- 영화상영예정작 -->
 	<select id="mList" resultMap="movieResultMap">
 		<![CDATA[
-		SELECT * FROM MOVIE
+		SELECT  MV_NO,NAME,GENRE,STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY
+		RUNTIME,SUBSTR(CONTENT,0,100) CONTENT,C_ID,ACTOR,FILE_CD,DOCID,RENAMES,AUDIENCE,CONFIRM,REFUSE_RS
+		FROM MOVIE
         WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
         AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
         AND ROWNUM < 11  
@@ -145,7 +148,7 @@
 		<![CDATA[
       SELECT ROWNUM, A.*
         FROM(
-        SELECT NAME,AUDIENCE,STARTDATE,CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
+        SELECT NAME,AUDIENCE,STARTDATE,SUBSTR(CONTENT,0,100) CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
         RANK() OVER (ORDER BY AUDIENCE ASC) RANK
         FROM MOVIE
         WHERE
@@ -158,7 +161,8 @@
   
 	<!-- 영화상세 -->
 	<select id="movieDetail" resultMap="movieResultMap">
-		SELECT *
+		SELECT MV_NO,NAME,GENRE,TO_DATE(STARTDATE,'yyyy.MM.dd') STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY
+		RUNTIME,CONTENT,C_ID,ACTOR,FILE_CD,DOCID,RENAMES,AUDIENCE,CONFIRM,REFUSE_RS
 		FROM MOVIE
 		WHERE
 		DOCID = #{docId}
@@ -213,7 +217,7 @@
 		to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
 
-	<select id="searchAll" resultMap="movieResultMap" parameterType="string">
+	<!-- <select id="searchAll" resultMap="movieResultMap" parameterType="string">
 		SELECT NAME, ACTOR, CONTENT,FILE_CD
 		FROM MOVIE
 		WHERE NAME LIKE '%'||#{searchName}||'%' or actor like
@@ -223,6 +227,18 @@
 		FROM PERFORMANCE
 		where name like '%'||#{searchName}||'%' or actor like
 		'%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+	</select> -->
+	
+	<select id="movieSearch" resultMap="movieResultMap" parameterType="String">
+	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID
+		FROM MOVIE
+		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+	</select>
+	
+	<select id="perSearch" resultMap="perFormanceMap" parameterType="String">
+		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO
+		FROM PERFORMANCE
+		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
 	</select>
 
 	<select id="getTotal" resultType="int">
@@ -249,7 +265,7 @@
 	</select>
 	<update id="audienceInsert" >
 		 UPDATE MOVIE 
-		 SET AUDIENCE = (AUDIENCE + #{audience}) 
+		 SET AUDIENCE = (NVL(AUDIENCE,0) + #{audience}) 
 		 WHERE DOCID =#{docId}
 	</update>
 

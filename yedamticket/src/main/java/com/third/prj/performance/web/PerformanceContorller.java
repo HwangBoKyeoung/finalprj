@@ -104,16 +104,23 @@ public class PerformanceContorller {
 		model.addAttribute("sch",perSDao.pSchSelect(psvo));
 		model.addAttribute("re",prvo);
 		model.addAttribute("user",userDao.userSelectOne(uservo));
-		return "user/performance/pPayForm";
+		return "performance/pPayForm";
 	}
 	//공연 결제하기
 	@RequestMapping("/pPay.do")
-	public String pPay(PerformanceReservationVO vo,PointVO pointVO, PerformanceVO pvo) {
+	@ResponseBody
+	public String pPay(PerformanceReservationVO vo,PointVO pointVO, PerformanceVO pvo,UserVO userVO) {
 		performanceReservationDao.pReservation(vo);
-		pointDao.payInsert(pointVO);
+		int n=pointDao.payInsert(pointVO);
+		userDao.payPoint(userVO);
 //		류지희 : performance 테이블의 관객 수 업데이트 (공연 예매완료 시)
 		perDao.updatePerformanceAudience(pvo);
-		return "home/home";
+		if(n != 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
 	}
 	//지역별 공연리스트
 	@RequestMapping("/locPlist.do")

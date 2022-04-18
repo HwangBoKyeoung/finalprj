@@ -2,6 +2,7 @@ package com.third.prj.moviereservation.serviceImpl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -33,5 +34,8 @@ public class MovieReservationServiceImpl implements MovieReservService{
 	public List<MovieReservViewVO> userMovie(MovieReservViewVO moviereservviewVO) {
 		return mapper.userMovie(moviereservviewVO);
 	}
-	
+	@Override
+	public int cancelreservMovie(Map<String, Object> map) {
+		return mapper.cancelreservMovie(map);
+	}
 }

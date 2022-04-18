@@ -26,6 +26,8 @@ public class PerformanceVO {
 	private String renames; //변경된 파일이름
 	private String confirm; //관리자 승인여부
 	private String refuseRs; //거부사유
+	private String searchName; //검색어
+	
 	
 	//류지희 컬럼추가
 	private int audience;

@@ -37,7 +37,7 @@
             </div>
 
             <div class="col-12 col-md-3">
-                <input class="btn gradient-bg" type="submit" value="Search Events">
+                <input class="btn btn-lg" style="background:#cfc5e9; margin: 0;" type="submit" value="Search Events">
             </div>
             <!-- hidden으로 숨겨서 들어갈 값 -->
 			<input type="hidden" name="pageNum" value="1">
@@ -53,7 +53,7 @@
     	<form action="pBookingForm.do" method="post">
         <div class="col-12 col-lg-6 single-event">
             <figure class="events-thumbnail">
-                <a href="#"><img src="resources/performance/images/event-1.jpg" alt=""></a>
+                <img src="resources/performance/images/event-1.jpg" alt="">
             </figure>
 
             <div class="event-content-wrap">
@@ -74,7 +74,7 @@
                 </header>
 
                 <footer class="entry-footer">
-                    <button type="submit"  class="btn gradient-bg" >Buy Tikets</button>
+                    <button type="submit"  class="btn btn-lg" style="background:#cfc5e9;" >Buy Tikets</button>
                 </footer>
             </div>
         </div>
@@ -86,19 +86,19 @@
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
 						<a href="pList.do?pageNum=${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn gradient-bg"></a>
+							type="button" value="이전" class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:if>
 					<!-- pageNum -->
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
 							href="pList.do?pageNum=${num }"> <input type="button"
-							value="${num }" class="btn gradient-bg"></a>
+							value="${num }"  class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
 						<a href="pList.do?pageNum=${pageVO.endPage+1 }"> <input
-							type="button" value="다음" class="btn gradient-bg"></a>
+							type="button" value="다음"  class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:if>
 				</div>
 <div class="upcoming-events-outer">

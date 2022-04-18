@@ -21,4 +21,6 @@ public class PerformanceReservationVO {
 	private String RId;
 	private String cancelCd;
 	private String loc;//구역
+	private String name;
+	private String price;
 }

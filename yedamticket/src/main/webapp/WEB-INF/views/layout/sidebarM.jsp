@@ -27,6 +27,7 @@
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link" href="#">영화승인요청</a></li>
                   <li class="nav-item"><a class="nav-link" href="#">공연승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">굿즈승인요청</a></li>
                 </ul>
               </div></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
