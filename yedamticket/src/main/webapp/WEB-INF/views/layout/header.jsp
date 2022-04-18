@@ -420,7 +420,7 @@ h1 {
 				</sec:authorize>
 				
 				<sec:authorize access="isAnonymous()">
-					<li class="login-css-add"><a href="user/userLoginForm.do">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+					<li class="login-css-add"><a href="userLoginForm.do">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				</sec:authorize>
 				<sec:authorize access="isAuthenticated()">
 					<li class="login-css-add"><a href="kakaoLogout.do">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
