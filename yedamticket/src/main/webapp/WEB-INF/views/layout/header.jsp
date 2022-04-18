@@ -468,12 +468,8 @@ h1 {
 
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" target="_blank" href="pList.do"> <i
-								class="fa-solid fa-list-ul fa-2x"></i> 지역별 공연리스트
-
-
-							</a> <a class="dropdown-item" href="pList.do"> <i
+							aria-labelledby="navbarDropdownMenuLink1">					
+							<a class="dropdown-item" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 
 							</a><a class="dropdown-item" href="concertSch.do"> <i

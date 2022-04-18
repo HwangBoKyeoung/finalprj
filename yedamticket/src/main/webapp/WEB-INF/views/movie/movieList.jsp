@@ -156,7 +156,25 @@ figure>img {
 #result>.card:hover .caption {
 	opacity: 1;
 }
-
+/*
+.rPoster{
+	width:100%;
+	height:100%;
+}
+.rank {
+    position: absolute;
+    top: 17px;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #38116a;
+    text-align: center;
+    box-shadow: 3px 3px 8px rgb(0 0 0 / 50%);
+    color: white;
+    font-size:25px;
+  }
+*/
 hr {
 	height: 2.5px;
 	border-color: #7a5ecf;
@@ -273,39 +291,9 @@ hr {
 	       var split=(fileCd1[i].defaultValue).split('|');
 	       rPoster1[i].setAttribute('src',split[0]);
 	    }
-
 		//	content 글자 자르기(이미지 위에 보이는 내용부분)
-
 		$(".pbox").substr(0, 20);
 	</script>
 
-
-	<!--
-	<h1>박스오피스 순위</h1>
-	<div id="result"></div>
-	<h1>상영 예정작</h1>
-	<div id="wrapper">
-		<c:forEach items="${movies }" var="m">
-			<div class="card">
-				<header>
-					<h3>${m.name }</h3>
-				</header>
-				<figure>
-					<img src="/upload/${m.renames }">
-				</figure>
-				<p>
-					<span>감독: ${m.director }</span> <span>배우: ${m.actor }</span>
-				</p>
-				<p>
-					<span>장르: ${m.genre } </span> <span>연령: ${m.rating } 상영시간:
-						${m.runtime }</span>
-				</p>
-				<p>
-					<span>개봉예정일: ${m.startDate }</span>
-				</p>
-			</div>
-		</c:forEach>
-	</div>
--->
 </body>
 </html>

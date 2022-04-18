@@ -353,4 +353,10 @@ public class UserServiceImpl implements UserService {
 		return mapper.selectByMemberId(UId, email);
 	}
 
+	@Override
+	public int payPoint(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.payPoint(vo);
+	}
+
 }

@@ -265,7 +265,7 @@
 	</select>
 	<update id="audienceInsert" >
 		 UPDATE MOVIE 
-		 SET AUDIENCE = (AUDIENCE + #{audience}) 
+		 SET AUDIENCE = (NVL(AUDIENCE,0) + #{audience}) 
 		 WHERE DOCID =#{docId}
 	</update>
 

@@ -28,6 +28,7 @@ public class PerformanceVO {
 	private String refuseRs; //거부사유
 	private String searchName; //검색어
 	
+	
 	//류지희 컬럼추가
 	private int audience;
 	private int pop;

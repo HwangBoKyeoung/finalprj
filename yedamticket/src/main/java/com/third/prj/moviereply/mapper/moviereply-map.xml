@@ -23,7 +23,7 @@
 	   VALUES (MOVIEREPLY_SEQ.NEXTVAL
 	   		 , #{docId}
 	   		 , #{content}
-	   		 , #{star}
+	   		 , (TO_NUMBER(#{star}) * 10)
 	   		 , SYSDATE
 	   		 , #{UId})
 	</insert>
@@ -39,9 +39,15 @@
 	</select>
 	
 	<select id="movieReplyList" resultMap="movieReplyResultMap">
-		SELECT *
+		SELECT MV_RE_NO,CONTENT,TO_char(WRDT,'yyyy-MM-dd hh24:mi:ss')AS wrDt,STAR,U_ID
 		FROM MOVIE_REPLY
 		WHERE DOCID=#{docId}
+	</select>
+	
+	<select id="getStar" resultMap="movieReplyResultMap">
+		SELECT AVG(NVL(STAR,0)) AS STAR
+        FROM MOVIE_REPLY
+        WHERE DOCID = #{docId}
 	</select>
 	
 </mapper>
