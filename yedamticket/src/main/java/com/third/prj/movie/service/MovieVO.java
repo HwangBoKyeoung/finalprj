@@ -33,6 +33,8 @@ public class MovieVO {
 	private String confirm; //관리자 승인여부
 	private String refuseRs; //거부사유
 	
+	private String searchName;
+	
 	private MovieReservVO movieReservVO;
 	private PerformanceVO performanceVO;
 	
