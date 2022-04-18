@@ -23,6 +23,7 @@ import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
+import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointPageVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
