@@ -308,20 +308,11 @@ public class UserController {
 		return address;
 	}
 
-
-
-//	@RequestMapping("/companyMyPage.do")
-//	public String companyMyPage() {
-//		return "companyMyPage/companyMyPage";
-//	}
-
-	// 아이디 찾기
+// 아이디 찾기
 	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
-
 		String result = userDao.searchId(name, phone);
-
 		return result;
 	}
 

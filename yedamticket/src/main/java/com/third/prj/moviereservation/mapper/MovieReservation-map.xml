@@ -82,4 +82,14 @@
 		WHERE  u_id = #{UId}
 	</select>
 	
+	<resultMap type="hashmap" id="procedureCall2"/>
+	
+	<update id="cancelreservMovie" statementType="CALLABLE">
+		{CALL 
+		cancelreservMovie(#{p1, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						  #{p2, mode=IN, jdbcType=INTEGER, javaType=INT}
+						  )
+		}
+	</update>
+	
 </mapper>
