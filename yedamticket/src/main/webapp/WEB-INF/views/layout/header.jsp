@@ -8,11 +8,11 @@
 <title>Insert title here</title>
 <link href="./resources/users/css/practice.css" rel="stylesheet" />
 
-
 <style>
 .login-css-add {
-	position: absolute;
-	left: 92%;
+	/* 	position: absolute; */
+	/* 	left: 92%; */
+	
 }
 
 .nav-css-add {
@@ -36,7 +36,7 @@
 	}
 }
 
-@media screen and (max-width: 991px) {
+/* @media screen and (max-width: 991px) {
 	.menu-css-add {
 		align-items: flex-start;
 		margin-right: 0;
@@ -50,30 +50,15 @@
 		line-height: 50px;
 	}
 }
-
- #box {
-	width: 179px;
-	height: 200px;
-	position: absolute;
-	top: 0;
-	left: 0;
+ */
+#topDiv li {
+	float: right;
 }
 
-#box p {
-	text-align: center;
-	height: 40px;
-	line-height: 40px;
+#topDiv a {
+	color: white;
+	font-size: 110%;
 }
-
-#box2 {
-	border: 6px solid yellowgreen;
-	width: 241px;
-	position: relative;
-	margin-left:25px;
-	height:48px;
-	
-} 
-
 </style>
 
 <!-- <style>
@@ -182,15 +167,14 @@ h1 {
 
 </head>
 <body id="searchShow">
-
 	<nav class="navbar navbar-expand-lg nav-css-add"
-		style="margin-bottom: 0px; box-shadow: none;">
-		<div class="container-fluid">
-			<div class="navbar-translate" id="titleLogo">
-				<a class="navbar-brand" href="home.do" title="Designed by 1석3조"
-					data-placement="bottom"> <img width="200"
-					src="resources/users/img/logo8.png"></a>
-				<!-- <h1>
+		style="height: auto; box-shadow: none; margin-bottom: 1px;">
+		<div class="navbar-translate" id="titleLogo"
+			style="width: 100%; margin-left: 50%;">
+			<a class="navbar-brand" href="home.do" title="Designed by 1석3조"
+				data-placement="bottom"> <img width="200"
+				src="resources/users/img/logo8.png"></a>
+			<!-- <h1>
 					  <span>y</span>
 					  <span>e</span>
 					  <span>d</span>
@@ -204,33 +188,57 @@ h1 {
 					  <span>t</span>
 					</h1> -->
 
-				<!--	<h1>YEDAM TICKET</h1>
-				<button class="navbar-toggler navbar-toggler" type="button"
+			<!--	<h1>YEDAM TICKET</h1> -->
+
+		</div>
+		<div align="right" id="topDiv" style="width: 100%; text-align: right;">
+			<c:choose>
+				<c:when test="${empty sessionId}">
+					<li class="login-css-add"><a href="userLoginForm.do">멤버십등급</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:when>
+				<c:otherwise>
+					<li class="login-css-add">나의 등급 :
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${empty sessionId}">
+					<li class="login-css-add"><a href="userLoginForm.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:when>
+				<c:when test="${sessionId}">
+					<li class="login-css-add"><a href="userLoginForm.do">기업페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:when>
+				<c:otherwise>
+					<li class="login-css-add"><a href="kakaoLogout.do">마이페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:otherwise>
+			</c:choose>
+			<c:choose>
+				<c:when test="${empty sessionId}">
+					<li class="login-css-add"><a href="userLoginForm.do">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:when>
+				<c:otherwise>
+					<li class="login-css-add"><a href="kakaoLogout.do">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+				</c:otherwise>
+			</c:choose>
+		</div>
+	</nav>
+
+	<nav class="navbar navbar-expand-lg nav-css-add"
+		style="margin-bottom: 0px; box-shadow: none;">
+		<div class="container-fluid">
+		<div class="navbar-translate" id="titleLogo">
+		<button class="navbar-toggler navbar-toggler" type="button"
 					data-toggle="collapse" data-target="#navigation"
 					aria-controls="navigation-index" aria-expanded="false"
 					aria-label="Toggle navigation">
 					<span class="navbar-toggler-bar top-bar"></span> <span
 						class="navbar-toggler-bar middle-bar"></span> <span
 						class="navbar-toggler-bar bottom-bar"></span>
-				</button>-->
-			</div>
-
+				</button>
+				</div>
 			<div class="collapse navbar-collapse" id="navigation"
 				data-nav-image="./resources/img/blurred-image-1.jpg">
 				<ul class="navbar-nav menu-css-add">
-					<li class="nav-item dropdown"><a href="#"
-						class="dropdown-toggle" id="navbarDropdownMenuLink1"
-						data-toggle="dropdown"> <i class="fa-solid fa-shop fa-2x"></i>
-							<p>굿즈</p>
-					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="cGoodsList.do"> <i
-								class="fa-solid fa-gift fa-2x"></i> 공연굿즈
-							</a> <a class="dropdown-item" href="mGoodsList.do"> <i
-								class="fa-solid fa-gifts fa-2x"></i>영화굿즈
-							</a>
-						</div></li>
 					<li class="nav-item dropdown"><a href="#"
 						class="dropdown-toggle" id="navbarDropdownMenuLink1"
 						data-toggle="dropdown"> <i class="fa-solid fa-film fa-2x "></i>
@@ -242,6 +250,8 @@ h1 {
 								class="fa-solid fa-ticket fa-2x"></i> 영화예매
 							</a> <a class="dropdown-item" href="movieList.do"> <i
 								class="fa-solid fa-ranking-star fa-2x"></i> 박스오피스 순위
+							</a><a class="dropdown-item" href="mGoodsList.do"> <i
+								class="fa-solid fa-gifts fa-2x"></i>영화굿즈
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
@@ -258,10 +268,10 @@ h1 {
 							</a> <a class="dropdown-item" href="pList.do"> <i
 								class="fa-solid fa-list-ul fa-2x"></i>공연리스트
 
-							</a> <a class="dropdown-item" href="pList.do"> <i
-								class="fa-solid fa-list-ul fa-2x"></i>공연리스트
-							</a> <a class="dropdown-item" href="concertSch.do"> <i
+							</a><a class="dropdown-item" href="concertSch.do"> <i
 								class="fa-solid fa-calendar-days fa-2x"></i>공연 일정
+							</a><a class="dropdown-item" href="cGoodsList.do"> <i
+								class="fa-solid fa-gift fa-2x"></i> 공연굿즈
 							</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
@@ -271,9 +281,6 @@ h1 {
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="./index.html"> <i
-								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항
-							</a>
 							<c:if test="${not empty sessionId}">
 								<a class="dropdown-item" onclick="sessionChk();"
 									href='ticketmarket_1.do'> <i
@@ -282,7 +289,7 @@ h1 {
 							</c:if>
 							<a class="dropdown-item" href="noticeList.do"> <i
 								class="fa-solid fa-circle-exclamation fa-2x"></i> 공지사항
-							</a> <a class="dropdown-item" target="_blank"
+							</a> <a class="dropdown-item"
 								href="https://demos.creative-tim.com/now-ui-kit/docs/1.0/getting-started/introduction.html">
 								<i class="fa-solid fa-handshake fa-2x "></i> 양도거래
 							</a>
@@ -300,26 +307,9 @@ h1 {
 								<i class="fa-solid fa-circle-info fa-2x"></i> 멤버십 안내
 							</a>
 						</div></li>
-					<li class="nav-item dropdown"><a href="#"
-						class="dropdown-toggle" id="navbarDropdownMenuLink1"
-						data-toggle="dropdown"> <i class="fa-solid fa-headset fa-2x"></i>
-							마이페이지
-					</a>
-						<div class="dropdown-menu dropdown-menu-right"
-							aria-labelledby="navbarDropdownMenuLink1">
-							<a class="dropdown-item" href="userPage.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
-							</a> <a class="dropdown-item" href="companyMyPage.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 기업회원 페이지
-
-							</a> 
-							 <a class="dropdown-item" href="searchList.do"> <i
-
-								class="fa-regular fa-comment-dots fa-2x"></i> 검색어
-							</a>
-						</div></li>
-					<li>
-						<form class="d-flex" action="searchAll.do">
+						
+						<li style="float: right;">
+							<form class="d-flex" id="frm">
 							<div class="search" style="margin-left: 30px;">
 								<div class="icon" id="icon">
 									<span> <svg viewBox="0 0 40 40">
@@ -332,32 +322,53 @@ h1 {
 										width="80%" placeholder="Search for something...">
 								</div>
 							</div>
-						</form> <!-- <input type="text" name="searchName" id="searchName">
+						</form>
+					<!-- <input type="text" name="searchName" id="searchName">
 						<input type="button" id="btnSearch" value="검색"> -->
+						</li>
 
-
-
-
-						<div align="right">
-							<c:choose>
-								<c:when test="${empty sessionId}">
-									<li class="login-css-add"><a href="userLoginForm.do">
-											<i class="fa-solid fa-headset fa-2x"></i> 로그인
-									</a></li>
-								</c:when>
-								<c:otherwise>
-									<li class="login-css-add"><a href="kakaoLogout.do"> <i
-											class="fa-solid fa-headset fa-2x"></i> 로그아웃
-									</a></li>
-								</c:otherwise>
-							</c:choose>
-						</div>
-					</li>
+					<!-- <li class="nav-item dropdown"><a href="#"
+						class="dropdown-toggle" id="navbarDropdownMenuLink1"
+						data-toggle="dropdown"> <i class="fa-solid fa-headset fa-2x"></i>
+							마이페이지
+					</a>
+						<div class="dropdown-menu dropdown-menu-right"
+							aria-labelledby="navbarDropdownMenuLink1">
+							<a class="dropdown-item" href="userPage.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 회원정보
+							</a> <a class="dropdown-item" href="companyMyPage.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 기업회원 페이지
+							</a> <a class="dropdown-item" href="movieInsertForm.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 영화등록
+							</a> <a class="dropdown-item" href="perInsertForm.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
+							</a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈등록
+							</a> <a class="dropdown-item" href="searchList.do"> <i
+								class="fa-regular fa-comment-dots fa-2x"></i> 검색어
+							</a>
+						</div></li>
+					<li> -->
+					<!-- <form class="d-flex" action="searchAll.do">
+							<div class="search" style="margin-left: 30px;">
+								<div class="icon" id="icon">
+									<span> <svg viewBox="0 0 40 40">
+                                   <path d="M3,3 L37,37"></path>
+                               </svg>
+									</span>
+								</div>
+								<div class="field">
+									<input type="text" id="searchName" name="searchName"
+										width="80%" placeholder="Search for something...">
+								</div>
+							</div>
+						</form>
+					<input type="text" name="searchName" id="searchName">
+						<input type="button" id="btnSearch" value="검색"> -->
 				</ul>
 			</div>
 		</div>
 	</nav>
-
 	<div id="show"></div>
 
 	<script src="resources/users/js/practice.js"></script>
@@ -373,78 +384,85 @@ h1 {
 					searchPopular(result);
 				}
 			});
+			/* if($("#showDetail")){
+				$("#showDetail").empty();
+			} else { */
 
 			function searchPopular(data) {
+				if($("#frm div:nth-child(1)").hasClass("open")){
+					$("#show").empty();
+					$("#frm div:nth-child(1)").removeClass("open");
+				}
 				let div = $("<div style='width:100%; height: 300px;'>");
 				div.attr("id", "showDetail");
 				div.css("backgroundColor", "#cec5e9");
-				let div3 = $("<div id= 'box2'>")
+
 				let div2 = $("<div id='box'>");
 
 				$.each(data, function(idx, item) {
 					let p = $("<p>").text(item.keyword);
 					p.css("padding-left", "50px");
+
+					/* $(function ccc(){
+						p.animate({
+							top:0,
+							bottom:0
+							},10000,function(){
+								p.animate({
+							top:0,
+							bottom:200
+							},10000,ccc);
+							});
+							});*/
+
 					div2.append(p);
 				});
-				div3.append(div2);
-				div.append(div3);
+
+				div.append(div2);
 				$("#show").append(div);
-			}
-		});
 
-		setInterval("play()", 2000);
-		function play() {
-			$("#box").delay(1000).animate({
-				top : -40
-			}, function() {
-				$("#box p:first").appendTo("#box");
-				$("#box").css({
-					top : 0
-				});
-			});
-		} 
+				/* setInterval("play()", 800);
 
-		/* jQuery(function($) {
-			var ticker = function() {
-				timer = setTimeout(function() {
-					$('#box p:first').animate({
-						marginTop : '-50px'
-					}, 2000, function() {
-						$(this).detach().appendTo('#box').removeAttr('style');
+				function play() {
+					$("#box").delay(1000).animate({
+						top : -40
+					}, function() {
+						$("#box p:first").appendTo("#box");
+						$("#box").css({
+							top : 0
+						});
 					});
-					ticker();
-				}, 2000);
-			};
+				} */
 
-			//2. 재생정지기능 시작, 아직 다음 기능과 연동은 안됨...그래서 3을 만듦
-			var autoplay = true;
-			$(document).on('click', '.pause', function() {
-				if (autoplay == true) {
-					clearTimeout(timer);
-					$(this).text('재생');
-					autoplay = false;
-				} else {
-					autoplay = true;
-					$(this).text('정지');
-					ticker();
-				}
-			}); // 재생정지기능 끝  
+				/* function play() {
+					$("#box").delay(1000).animate({
+						top : -40
+					}, function() {
+						$("#box p:first").appendTo("#box");
+						$("#box").css({
+							top : 0
+						});
+					});
+				} */
+			}
 
-			//4 마우스를 올렸을 때 기능 정지
-			var tickerover = function() {
-				$('#box').mouseover(function() {
-					clearTimeout(timer);
-				});
-				$('#box').mouseout(function() {
-					ticker();
-				});
-			};
-			tickerover();
-			// 4 끝
-			ticker();
-
+			/* 	} */
 		});
- */
+		/*
+		
+		setInterval("play()", 800);
+			function play() {
+				$("#box").delay(1000).animate({
+					top : -40
+				}, function() {
+					$("#box p:first").appendTo("#box");
+					$("#box").css({
+						top : 0
+					});
+				});
+			}
+		 */
+
 		/* $("#btnSearch").on("click", function(){
 			$.ajax({
 				url: "ajaxFileCd.do",
@@ -456,11 +474,94 @@ h1 {
 					locationMove(result);
 				}
 			});
-		}); 
+		}); */
 
-		 function locationMove(item){
+		/* function locationMove(item){
 			location.href="searchAll.do?list="+item;
 		} */
+
+		/* jQuery(function($)
+				{
+				    var ticker = function()
+				    {
+				        timer = setTimeout(function(){
+				            $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+				            {
+				                $(this).detach().appendTo('ul#ticker').removeAttr('style');
+				            });
+				            ticker();
+				        }, 2000);         
+				      };
+				// 0번 이전 기능
+				      $(document).on('click','.prev',function(){
+				        $('#ticker li:last').hide().prependTo($('#ticker')).slideDown();
+				        clearTimeout(timer);
+				        ticker();
+				        if($('#pause').text() == 'Unpause'){
+				          $('#pause').text('Pause');
+				        };
+				      }); // 0번 기능 끝
+				  
+				// 1. 클릭하면 다음 요소 보여주기... 클릭할 경우 setTimeout 을 clearTimeout 해줘야 하는데 어떻게 하지..
+				      $(document).on('click','.next',function(){
+				            $('#ticker li:first').animate( {marginTop: '-20px'}, 400, function()
+				                    {
+				                        $(this).detach().appendTo('ul#ticker').removeAttr('style');
+				                    });
+				            clearTimeout(timer);
+				            ticker();
+				            //3 함수와 연계 시작
+				            if($('#pause').text() == 'Unpause'){
+				              $('#pause').text('Pause');
+				            }; //3 함수와 연계
+				          }); // next 끝. timer 를 전연변수보다 지역변수 사용하는게 나을 것 같은데 방법을 모르겠네요.
+
+				  //2. 재생정지기능 시작, 아직 다음 기능과 연동은 안됨...그래서 3을 만듦
+				  var autoplay = true;
+				      $(document).on('click','.pause',function(){
+				            if(autoplay==true){
+				              clearTimeout(timer);
+				              $(this).text('재생');
+				              autoplay=false;
+				            }else{
+				              autoplay=true;
+				              $(this).text('정지');
+				              ticker();
+				            }
+				          }); // 재생정지기능 끝  
+				  // 3. 재생정지 함수 시작. 2와 기능 동일함.
+				    var tickerpause = function()
+				  {
+				    $('#pause').click(function(){
+				      $this = $(this);
+				      if($this.text() == 'Pause'){
+				        $this.text('Unpause');
+				        clearTimeout(timer);
+				      }
+				      else {
+				        ticker();
+				        $this.text('Pause');
+				      }
+				    });
+				   
+				  };
+				  tickerpause();
+				  //3 재생정지 함수 끝
+				  //4 마우스를 올렸을 때 기능 정지
+				  var tickerover = function()
+				  {
+				    $('#ticker').mouseover(function(){
+				      clearTimeout(timer);
+				    });
+				    $('#ticker').mouseout(function(){
+				      ticker();
+				    });  
+				  };
+				  tickerover();
+				  // 4 끝
+				    ticker();
+				    
+				}); */
 	</script>
 </body>
 </html>
