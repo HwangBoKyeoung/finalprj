@@ -17,6 +17,18 @@
                 <span class="menu-title">Admin Home</span> 
                 <i class="mdi mdi-home menu-icon"></i>
             </a></li>
+            <c:if test="${sessionAuthCd eq 'CEO'}">
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">CONFIRM</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-chart-areaspline"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="#">영화승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="#">공연승인요청</a></li>
+                </ul>
+              </div></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
               aria-controls="ui-basic"> 
               <span class="menu-title">MOVIE</span> <i class="menu-arrow"></i> 
@@ -27,6 +39,54 @@
                   <li class="nav-item"><a class="nav-link" href="managerMovieDeleteList.do">Management</a></li>
                   <li class="nav-item"><a class="nav-link" href="movieSalesChart.do">Sales</a></li>
                   <li class="nav-item"><a class="nav-link" href="moviePopularitychart.do">Popularity Chart</a></li>
+                </ul>
+              </div></li>
+              <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">Performance</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-chart-areaspline"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="managerPerforDeleteList.do">Management</a></li>
+                  <li class="nav-item"><a class="nav-link" href="concertsales.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="concertpopularitychart.do">Popularity Chart</a></li>
+                </ul>
+              </div></li>
+             </c:if> 
+            <c:if test="${sessionAuthCd eq 'movie'}">
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">CONFIRM</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-chart-areaspline"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="#">영화승인요청</a></li>
+                </ul>
+              </div></li>
+            <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">MOVIE</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-chart-areaspline"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="managerMovieDeleteList.do">Management</a></li>
+                  <li class="nav-item"><a class="nav-link" href="movieSales.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="moviePopularitychart.do">Popularity Chart</a></li>
+                </ul>
+              </div></li>
+             </c:if> 
+             <c:if test="${sessionAuthCd eq 'performance'}">
+             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
+              aria-controls="ui-basic"> 
+              <span class="menu-title">CONFIRM</span> <i class="menu-arrow"></i> 
+              <i class="mdi mdi-chart-areaspline"></i>
+            </a>
+              <div class="collapse" id="ui-basic">
+                <ul class="nav flex-column sub-menu">
+                  <li class="nav-item"><a class="nav-link" href="#">공연승인요청</a></li>
                 </ul>
               </div></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
@@ -41,6 +101,7 @@
                   <li class="nav-item"><a class="nav-link" href="perforpopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
+              </c:if>
              <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
               aria-controls="ui-basic"> 
               <span class="menu-title">Inquiry</span> <i class="menu-arrow"></i> 
@@ -53,6 +114,7 @@
                    <li class="nav-item"><a class="nav-link" href="managerNotice.do">Notice</a></li>
                 </ul>
               </div></li>           
+
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#general-pages"
               aria-expanded="false" aria-controls="general-pages"> 
               <span class="menu-title">Member</span> <i class="menu-arrow"></i> 
@@ -68,21 +130,5 @@
                     href="manager.do"> Manager </a></li>
                   </ul>
               </div></li>
-            <li class="nav-item sidebar-actions"><span class="nav-link">
-                <div class="border-bottom">
-                  <h6 class="font-weight-normal mb-3">Projects</h6>
-                </div>
-                <button class="btn btn-block btn-lg btn-gradient-primary mt-4">+
-                  MY Page</button>
-                <div class="mt-4">
-                  <div class="border-bottom">
-                    <p class="text-secondary">Categories</p>
-                  </div>
-                  <ul class="gradient-bullet-list mt-4">
-                    <li>Free</li>
-                    <li>Pro</li>
-                  </ul>
-                </div>
-            </span></li>
           </ul>
         </nav>
