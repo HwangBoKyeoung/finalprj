@@ -20,6 +20,8 @@
 		<result property="docId" column="docId" />
 		<result property="renames" column="renames"/>
 		<result property="audience" column="audience"/>
+		<result property="confirm" column="confirm"/>
+		<result property="refuseRs" column="refuse_rs"/>
 		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
 	</resultMap>
 
@@ -41,7 +43,7 @@
 	<select id="mvSelect"
 		resultType="com.third.prj.movie.service.MovieVO">
 		SELECT
-		MV_NO,NAME,GENRE,STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY,RUNTIME,CONTENT,C_ID,ACTOR,FILE_CD,DOCID
+		MV_NO,NAME,GENRE,STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY,RUNTIME,CONTENT,C_ID,ACTOR,FILE_CD,DOCID,CONFIRM,REFUSE_RS
 		FROM MOVIE
 		WHERE MV_NO = #{mvNo}
 	</select>

@@ -221,6 +221,13 @@ label {
 						</div>
 						<div class="form-group row">
 							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">요청 상태</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="confirm" name="confirm" value="${gds.confirm}" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label">굿즈 설명</label>
 							<div class="col-sm-9">
 								<textarea rows="7" cols="20" class="form-control"

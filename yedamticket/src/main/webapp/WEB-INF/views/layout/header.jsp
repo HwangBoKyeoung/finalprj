@@ -414,7 +414,7 @@ h1 {
 					<li class="login-css-add"><a href="userLoginForm.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				</c:when>
 				<c:when test="${sessionId}">
-					<li class="login-css-add"><a href="userLoginForm.do">기업페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+					<li class="login-css-add"><a href="companyMyPage.do">기업페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				</c:when>
 				<c:otherwise>
 					<li class="login-css-add"><a href="kakaoLogout.do">마이페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>

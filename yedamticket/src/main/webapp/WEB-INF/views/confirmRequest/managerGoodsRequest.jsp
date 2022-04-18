@@ -11,8 +11,8 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Performance Request List</h4>
-				<p class="card-description">공연등록요청</p>
+				<h4 class="card-title">Goods Request List</h4>
+				<p class="card-description">굿즈등록요청 리스트</p>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -31,7 +31,7 @@
 				<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
-						<a href="managerMovieDeleteList.do?pageNum=${pageVO.startPage-1 }">
+						<a href="#?pageNum=${pageVO.startPage-1 }">
 							<input type="button" value="이전" class="btn btn-secondary">
 						</a>
 					</c:if>
@@ -39,18 +39,18 @@
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="managerMovieDeleteList.do?pageNum=${num }"> <input
+							href="#?pageNum=${num }"> <input
 							type="button" value="${num }" class="btn btn-secondary"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
-						<a href="managerMovieDeleteList.do?pageNum=${pageVO.endPage+1 }">
+						<a href="#?pageNum=${pageVO.endPage+1 }">
 							<input type="button" value="다음" class="btn btn-secondary">
 						</a>
 					</c:if>
 				</div>
 				<br>
-				<form action="managerMovieDeleteList.do">
+				<form action="#">
 					<div class="col-10">
 						<div class="searchBar" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">

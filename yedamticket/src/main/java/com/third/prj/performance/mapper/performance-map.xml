@@ -44,6 +44,8 @@
 		<result column="LNG" property="lng" />
 		<result column="RENAMES" property="renames" />
 		<result column="AUDIENCE" property="audience" />
+		<result column="CONFIRM" property="confirm"/>
+		<result column="REFUSE_RS" property="refuseRs"/>
 		<collection property="performanceScheduleVO"
 			resultMap="pScheduleMap" />
 	</resultMap>
@@ -84,7 +86,7 @@
 
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,CONFIRM,REFUSE_RS
 		FROM PERFORMANCE
 		WHERE p_no = #{PNo}
 	</select>
