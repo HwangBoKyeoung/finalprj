@@ -1,6 +1,7 @@
 package com.third.prj.movie.service;
 
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.performance.service.PerformanceVO;
 
@@ -16,7 +17,7 @@ public class MovieVO {
 	private int mvNo; //영화번호
 	private String name; //영화이름
 	private String genre; //영화장르
-	//@JsonFormat(pattern = "yyyyMMdd")
+	@JsonFormat(pattern = "yyyy.MM.dd")
 	private String startDate; //영화개봉일
 	private String director; //영화감독
 	private String rating; //영화관람등급
