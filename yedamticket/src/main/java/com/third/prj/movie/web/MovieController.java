@@ -298,11 +298,10 @@ public class MovieController {
 	
 	
 
-	@RequestMapping("/ajaxFileCd.do")
-	@ResponseBody
-	public List<MovieVO> ajaxFileCd(MovieVO vo) {
-		List<MovieVO> list = movieDao.searchAll(vo.getSearchName());
-		return list;
-	}
-
+	/*
+	 * @RequestMapping("/ajaxFileCd.do")
+	 * 
+	 * @ResponseBody public List<MovieVO> ajaxFileCd(MovieVO vo) { List<MovieVO>
+	 * list = movieDao.searchAll(vo.getSearchName()); return list; }
+	 */
 }

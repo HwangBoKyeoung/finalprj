@@ -3,10 +3,16 @@
        "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 
-	
-
-
 	<tiles-definitions>
+	
+		<definition name="first" template="/WEB-INF/views/layout/layoutFirst.jsp">
+			<put-attribute name="title" value="예담티켓" />
+			<put-attribute name="body" value="" />
+		</definition>
+	
+		<definition name="first/*/*" extends="first">
+			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
 	
 		<definition name="my.home" template="/WEB-INF/views/layout/layout.jsp">
 			<put-attribute name="title" value="MyWebSite" />

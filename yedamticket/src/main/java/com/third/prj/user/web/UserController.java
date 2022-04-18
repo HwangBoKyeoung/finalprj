@@ -130,40 +130,40 @@ public class UserController {
       return "manager/user/managerUserSelect";
    }
 
-   @RequestMapping("/userLogin.do")
-   public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
-//      userDao.userSelect(vo);
-//      session.setAttribute("sessionId", vo.getUId());
-//      session.setAttribute("sessionPwd", vo.getPwd());
-      String msg = "";
-      String url = "";
-      UserVO login = userDao.loginChk(vo, session);
-      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
-
-      if (login != null && pwdChk) {
-         int i = userDao.reservChk(vo);
-         msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
-
-         url = "home.do";
-
-         session.setAttribute("sessionId", vo.getUId());
-         session.setAttribute("sessionEmail", vo.getEmail());
-         session.setAttribute("sessionName", vo.getName());
-         session.setAttribute("sessionAddr", vo.getAddr());
-         session.setAttribute("sessionPhone", vo.getPhone());
-         mv.addObject("msg", msg);
-         mv.addObject("url", url);
-         mv.setViewName("user/alert");
-      } else {
-         msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-         url = "userLoginForm.do";
-         mv.addObject("msg", msg);
-         mv.addObject("url", url);
-         mv.setViewName("user/alert");
-      }
-      return mv;
-   }
+//   @RequestMapping("/userLogin.do")
+//   public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
+////      userDao.userSelect(vo);
+////      session.setAttribute("sessionId", vo.getUId());
+////      session.setAttribute("sessionPwd", vo.getPwd());
+//      String msg = "";
+//      String url = "";
+//      UserVO login = userDao.loginChk(vo, session);
+//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+//
+//      if (login != null && pwdChk) {
+//         int i = userDao.reservChk(vo);
+//         msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
+//
+//         url = "home.do";
+//
+//         session.setAttribute("sessionId", vo.getUId());
+//         session.setAttribute("sessionEmail", vo.getEmail());
+//         session.setAttribute("sessionName", vo.getName());
+//         session.setAttribute("sessionAddr", vo.getAddr());
+//         session.setAttribute("sessionPhone", vo.getPhone());
+//         mv.addObject("msg", msg);
+//         mv.addObject("url", url);
+//         mv.setViewName("user/alert");
+//      } else {
+//         msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+//         url = "userLoginForm.do";
+//         mv.addObject("msg", msg);
+//         mv.addObject("url", url);
+//         mv.setViewName("user/alert");
+//      }
+//      return mv;
+//   }
 
    @RequestMapping("/userSelect.do")
    public String userSelect(HttpSession session, UserVO vo) {
@@ -272,122 +272,63 @@ public class UserController {
       model.addAttribute("user", userDao.userSelectOne(vo));
       return "user/pfReservList";
    }
-
-   
-//   userBuyList.do 경로의 메소드가 3개 존재. (협의해서 하나로 줄이기)
-   
-   @RequestMapping("/userBuyList.do")
-   public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
-         UserPointViewVo uvo) {
-
-      mvo.setUId((String) session.getAttribute("sessionId"));
-      pvo.setUId((String) session.getAttribute("sessionId"));
-      uvo.setUId((String) session.getAttribute("sessionId"));
-
-      model.addAttribute("userPoint", userDao.userPoint(uvo));
-
-      model.addAttribute("list3", userDao.pointBuyList(uvo));
-      model.addAttribute("list2", movieDao.mvBuyList(mvo));
-      model.addAttribute("list1", perDao.pfBuyList(pvo));
-      return "user/userBuyList";
-   }
-
-//   @RequestMapping("/userBuyList.do")
-//   public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
-//      cri.setUId((String)session.getAttribute("sessionId"));
-//      PointPageVO pVO = new PointPageVO(cri,movieDao.mvBuyTotal(cri));
-//      model.addAttribute("pVO", pVO);
-//      model.addAttribute("list1", perDao.pfBuyList2(cri));
-//      model.addAttribute("list2", movieDao.mvBuyList2(cri));
-//      
-//      
-//      
-//      PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
-//      model.addAttribute("pageVO", pageVO); //페이지네이션전달   
-//      model.addAttribute("list3", userDao.pointBuyList2(cri));
-//      
-//      vo.setUId((String)session.getAttribute("sessionId"));
-//      model.addAttribute("user", userDao.userSelectOne(vo));
-//      return "user/userBuyList";
   
-//@RequestMapping("/userBuyList.do")
-//   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
-//      cri.setUId((String) session.getAttribute("sessionId"));
-//      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
-//      model.addAttribute("pageVO", pageVO);
-//      model.addAttribute("list1", perDao.pfBuyList2(cri));
-//      model.addAttribute("list2", movieDao.mvBuyList2(cri));
-//
-//      vo.setUId((String) session.getAttribute("sessionId"));
-//      model.addAttribute("user", userDao.userSelectOne(vo));
-//
-//      return "user/userBuyList";
-//   }
-
-   @RequestMapping("/userPointList.do")
-   public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+@RequestMapping("/userBuyList.do")
+   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
       cri.setUId((String) session.getAttribute("sessionId"));
-      PointPageVO pageVO = new PointPageVO(cri, userDao.pointBuyTotal(cri)); // (기준, 토탈)
-      model.addAttribute("pageVO", pageVO); // 페이지네이션전달
-      model.addAttribute("list3", userDao.pointBuyList2(cri));
+      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
+      model.addAttribute("pageVO", pageVO);
+      model.addAttribute("list1", perDao.pfBuyList2(cri));
+      model.addAttribute("list2", movieDao.mvBuyList2(cri));
 
       vo.setUId((String) session.getAttribute("sessionId"));
       model.addAttribute("user", userDao.userSelectOne(vo));
-      return "user/userPointList";
+
+      return "user/userBuyList";
    }
 
-   @RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
-   @ResponseBody
-   public String loginChk(UserVO userVO, @RequestParam("UId") String UId) {
-      userVO = userDao.loginChk(userVO);
-      String address = userVO.getAddr();
-      System.out.println(address);
-      return address;
-   }
+	@RequestMapping("/userPointList.do")
+	public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+		cri.setUId((String) session.getAttribute("sessionId"));
+		PointPageVO pageVO = new PointPageVO(cri, userDao.pointBuyTotal(cri)); // (기준, 토탈)
+		model.addAttribute("pageVO", pageVO); // 페이지네이션전달
+		model.addAttribute("list3", userDao.pointBuyList2(cri));
 
-//   public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
-//      return "user/userUpdateForm";
+		vo.setUId((String) session.getAttribute("sessionId"));
+		model.addAttribute("user", userDao.userSelectOne(vo));
+		return "user/userPointList";
+	}
 
-//   }
+	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
+	@ResponseBody
+	public String loginChk(UserVO userVO, @RequestParam("UId") String UId) {
+		userVO = userDao.loginChk(userVO);
+		String address = userVO.getAddr();
+		System.out.println(address);
+		return address;
+	}
 
-//   @RequestMapping("/companyMyPage.do")
-//   public String companyMyPage() {
-//      return "companyMyPage/companyMyPage";
-//   }
-
-<<<<<<< HEAD
-	// 아이디 찾기
+// 아이디 찾기
 	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
 		String result = userDao.searchId(name, phone);
 		return result;
 	}
-=======
-   // 아이디 찾기
-   @RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
-   @ResponseBody
-   public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
 
-      String result = userDao.searchId(name, phone);
-
-      return result;
-   }
->>>>>>> 4292e8750da24050ea149e013882bd4f7dca1a1e
-
-   // 비밀번호 찾기 메일 발송
-   
+	// 비밀번호 찾기 메일 발송
+	
     @RequestMapping(value = "/findpw.do", produces = "application/x-www-form-urlencoded; charset=UTF-8")
     @ResponseBody
-    public String findPwPOST(@ModelAttribute UserVO vo, @RequestParam("id") String Id) throws Exception {
-       System.out.println(Id);
-       vo.setUId(Id);
+    public String findPwPOST(@ModelAttribute UserVO vo, @RequestParam("id") String Id, @RequestParam("email") String email) throws Exception {
+    	System.out.println(Id);
+    	System.out.println(email);
+    	vo.setUId(Id);
+    	vo.setEmail(email);
         if (!userDao.findPw(vo)) {
-           System.out.println(vo);
-            return "해당되는 아이디가 존재하지 않습니다.";
+        	System.out.println(vo);
         }
-        return "해당 메일로 임시 비밀번호가 전송되었습니다.";
+            return  "아이디와 이메일이 일치하지 않습니다.\n입력하신 정보를 다시 한번 확인해주세요";
     }
-
 
 }

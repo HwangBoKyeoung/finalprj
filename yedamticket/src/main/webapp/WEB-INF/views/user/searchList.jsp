@@ -91,9 +91,9 @@
 	font-family: fantasy;
 }
 
-#posterA{
-height:390px;
-width:300px;
+.rPoster {
+    width: 300px;
+    height: 390px;																																																	
 }
 </style>
 <script
@@ -128,15 +128,18 @@ width:300px;
    </table> --%>
 	<div id="show"></div>
 	<div class="container">
-	<br><br>
-	<h2>전체영화</h2>
+		<br>
+		<br>
+		<h2>전체영화</h2>
 		<div class="row">
 			<c:forEach items="${searchName}" var="sN" varStatus="status">
 				<div class="col-3">
 					<div class="card">
 						<div class="poster" id="poster">
-							<input id="imgTag${status.index }" class="imgInfo" type="hidden"
-								value="${sN.fileCd}"> <img id="posterA"class="">
+							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
+								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
+								<input type="hidden" class="rankPoster" value="${sN.fileCd }">
+								<img class="rPoster">
 						</div>
 						<div class="details">
 							<br> <br>
@@ -146,9 +149,39 @@ width:300px;
 						</div>
 					</div>
 					<p id="mname">${sN.name}</p>
-					<div>
-						<button class="btnn">예매</button>
+					<form action="movieDetail.do" method="post">
+							<div>
+								<input type="hidden" name="docId" id="docId"
+									value="${sN.docId }">
+								<button type="submit" class="btnn">상세보기</button>
+							</div>
+						</form>
+				</div>
+			</c:forEach>
+			<c:forEach items="${searchName2}" var="sN" varStatus="status">
+				<div class="col-3">
+					<div class="card">
+						<div class="poster" id="poster">
+							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
+								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
+								<input type="hidden" class="rankPoster" value="${sN.fileCd }">
+								<img class="rPoster">
+						</div>
+						<div class="details">
+							<br> <br>
+							<div class="info">
+								<p class="pbox">${sN.content}</p>
+							</div>
+						</div>
 					</div>
+					<p id="mname">${sN.name}</p>
+					<form action="pBookingForm.do" method="post">
+							<div>
+								<input type="hidden" name="PNo" id="PNo"
+									value="${sN.PNo }">
+								<button type="submit" class="btnn">예매</button>
+							</div>
+						</form>
 				</div>
 			</c:forEach>
 		</div>
@@ -157,11 +190,16 @@ width:300px;
 				<td>검색된 아이템이 없습니다.</td>
 			</tr>
 		</c:if>
+		<c:if test="${empty searchName2 }">
+			<tr>
+				<td>검색된 아이템이 없습니다.</td>
+			</tr>
+		</c:if>
 	</div>
 
 	<script>
-		/*
-		   $.ajax({
+		
+		  /*  $.ajax({
 		      url: "ajaxFileCd.do",
 		      type: "post",
 		      data: {"searchName":$("#search").val()},
@@ -184,9 +222,11 @@ width:300px;
 		            }
 		         });
 		      }
-		   });
-		 */
-		$('.imgInfo').each(function(index, item) {
+		   }); */
+		 
+		 
+		 
+		/* $('.imgInfo').each(function(index, item) {
 			var data = item.value;
 			var imgId = item.id;
 			if (data == '' || data == null) {
@@ -196,7 +236,25 @@ width:300px;
 				let img = dataAry[0];
 				$("#" + imgId).next().attr("src", img);
 			}
-		});
+		}); */
+		
+		 ///박스오피스 포스터 filecd자르기
+		 let fileCd=document.getElementsByClassName('rankPoster');
+		 let rPoster=document.getElementsByClassName('rPoster');
+		 console.log(fileCd);
+		    for(var i =0;i<fileCd.length;i++){
+		    	
+		    	if(fileCd[i].defaultValue == null || fileCd[i].defaultValue == ''){
+		          rPoster[i].setAttribute('src','resources/yedamticket.png');
+		    		 console.log(fileCd[i]);
+		         }else{
+		            var split=(fileCd[i].defaultValue).split('|');
+		            rPoster[i].setAttribute('src',split[0]);   
+		         }
+		    }
+		//
+
+		
 	</script>
 </body>
 </html>

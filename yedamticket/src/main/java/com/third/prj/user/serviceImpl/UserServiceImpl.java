@@ -205,7 +205,7 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public boolean findPw(UserVO vo) {
 		// TODO Auto-generated method stub
-		UserVO uv = mapper.selectByMemberId(vo.getUId());
+		UserVO uv = mapper.selectByMemberId(vo.getUId(), vo.getEmail());
 		System.out.println("여기까지 왔을까?");
 		System.out.println(uv);
 		if (uv == null) {
@@ -216,16 +216,29 @@ public class UserServiceImpl implements UserService {
 		for (int i = 0; i < 12; i++) {
 			pw += (char) ((Math.random() * 26) + 97);
 		}
+
+//		String pw2 = pwdEncoder.encode(pw);
+//		System.out.println(pw2);
+		
 		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-		String pw2 = pwdEncoder.encode(pw);
-		System.out.println(pw2);
-		vo.setPwd(pw2);
+		vo.setPwd(pwdEncoder.encode(pw));
+		
+
+//		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//		String pw2 = pwdEncoder.encode(pw);
+//		System.out.println(pw2);
+//		vo.setPwd(pw2);
+
 		System.out.println("여기까지 왔을까2 ?");
-		System.out.println(vo);
+		System.out.println(uv);
 		// 비밀번호 변경
 		mapper.updatePassword2(vo);
+		
+		System.out.println("여기까지 왔을까3 ?");
+		System.out.println(vo);
 		// 비밀번호 변경 메일 발송
-		sendEmail(vo, pw2, "findpw");
+		sendEmail(vo, pw, "findpw");
+		
 		return true;
 	}
 
@@ -235,30 +248,53 @@ public class UserServiceImpl implements UserService {
 
 		System.out.println("진짜왔니?");
 		System.out.println(vo);
+		/*
+		 * String charSet = "utf-8"; String hostSMTP = "smtp.gmail.com"; // 네이버 이용시
+		 * smtp.naver.com String hostSMTPid = email; // 보내는 사람 이메일 주소 String hostSMTPpwd
+		 * = password; // 보내는 사람 비밀번호
+		 */		
+		
 		String charSet = "utf-8";
-		String hostSMTP = "smtp.gmail.com"; // 네이버 이용시 smtp.naver.com
-		String hostSMTPid = email; // 보내는 사람 이메일 주소
-		String hostSMTPpwd = password; // 보내는 사람 비밀번호
+		String hostSMTP = "smtp.gmail.com"; //네이버 이용시 smtp.naver.com
+		String hostSMTPid = "qqoxmaos2@gmail.com";
+		String hostSMTPpwd = "dlwogus1@";
+		
+		
 
 		// 보내는 사람 EMail, 제목, 내용
-		String fromEmail = email;
+		String fromEmail = "qqoxmaos2@gmail.com";
 		String fromName = "예담티켓";
 		String subject = "";
 		String msg = "";
 
-		/* String setfrom = "gmswjrdl7@gmail.com"; */
 
 		if (div.equals("findpw")) {
 			subject = "임시 비밀번호 입니다.";
-			msg += "<div align='center' style='border:1px solid black; font-family:verdana; padding: 200px 100px 200px 100px;'>";
-			msg += "<h3 style='color: blue;'>";
-			msg += vo.getUId() + "님의 임시 비밀번호 입니다. 비밀번호를 변경하여 사용하세요.</h3>";
-			msg += "<p>임시 비밀번호 : ";
-			msg += pw + "</p></div>";
+			msg += "<div align='center' style='border:1px solid black; font-family:verdana; padding: 50px 50px 50px 50px;'>";
+			msg += "<p>안녕하세요. 공연 및 영화 예매와 티켓양도거래를 위한 서비스를 제공하는 YD TICKET입니다.</p>";
+			msg += "<p>저희 (주)예담티켓을 이용해 주셔서 진심으로 감사드립니다.</p>";
+			msg += "<h3 style='color: #933880;'>";
+			msg += vo.getUId() + "님의 임시 비밀번호는 : ";
+			msg += pw + " 입니다</p></h3><br>";
+			msg += "<p>로그인후 마이페이지에서 비밀번호 변경을 완료해 주세요.</p>";
+			msg += "<a style='text-decoration:none;color:navy;font-size:20px;font-weight:bold;' href='localhost/prj/userLoginForm.do'><button style='width:300px;height:50px' onclick='location.href='localhost/prj/userLoginForm.do'>로그인페이지바로가기</button></a><br>";
+			msg += "<p>본 메일은 발신전용이며, 문의에 대한 회신은 처리되지 않습니다.</p>";
+			msg += "<p>(주)예담티켓과 관련하여 궁금하신 점이나 불편한 사항은 언제든지 문의바랍니다.</p>";
+			msg += "<br>";
+			msg += "<hr>";
+			msg += "<br>";
+			msg += "<p>&copy;YEDAMTICKET Corp.All rights reserved</p></div>";
+
+
+			
+			
+			
 		}
 
-		// 받는 사람 E-Mail 주소
-		//String mail = vo.getUId();mail
+		
+		String mail = vo.getEmail();
+		System.out.println("여기까지 왔을까4 ?");
+		System.out.println(vo.getEmail());
 
 		try {
 			HtmlEmail email = new HtmlEmail();
@@ -267,26 +303,33 @@ public class UserServiceImpl implements UserService {
 			System.out.println("2");
 			email.setCharset(charSet);
 			System.out.println("3");
-			email.setSSLOnConnect(true);
+			/* email.setSSLOnConnect(true); */
+			email.setSSL(true);
 			System.out.println("4");
-			email.setHostName("smtp.gmail.com");
+			email.setHostName(hostSMTP);
 			System.out.println("5");
 			email.setSmtpPort(465); // 네이버 이용시 587		
 			System.out.println("6");
-			email.setAuthentication("qqoxmaos2@gmail.com", "dlwogus1@");
+			email.setAuthentication(hostSMTPid, hostSMTPpwd);
 			System.out.println("7");
-			email.setStartTLSEnabled(true);
+			/* email.setStartTLSEnabled(true); */
+			email.setTLS(true);
 			System.out.println("8");
-			email.addTo("qqoxmaos2@gmail.com"); 
+			System.out.println(email.addTo("gmswjrdl7@gmail.com"));
+			email.addTo(mail, charSet);
+			
+			/*
+			 * System.out.println("9"); email.addTo("예담티켓");
+			 */
 			System.out.println("9");
-			email.addTo(fromEmail, fromName);
+			/* email.setFrom("qqoxmaos2@gmail.com"); */
+			email.setFrom(fromEmail, fromName, charSet);
 			System.out.println("10");
 			email.setSubject(subject);
 			System.out.println("11");
 			email.setHtmlMsg(msg);
 			System.out.println("12");
 			email.send();
-			email.setTLS(false);
 
 			System.out.println("13");
 		} catch (Exception e) {
@@ -295,16 +338,18 @@ public class UserServiceImpl implements UserService {
 
 	}
 
-	@Override
-	public UserVO selectByMemberId(String UId) {
-		// TODO Auto-generated method stub
-		return null;
-	}
+	
 
 	@Override
 	public int updatePassword2(UserVO vo) {
 		// TODO Auto-generated method stub
-		return 0;
+		return mapper.updatePassword2(vo);
+	}
+
+	@Override
+	public UserVO selectByMemberId(String UId, String email) {
+		// TODO Auto-generated method stub
+		return mapper.selectByMemberId(UId, email);
 	}
 
 }
