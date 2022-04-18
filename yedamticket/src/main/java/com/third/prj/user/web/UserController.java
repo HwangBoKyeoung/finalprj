@@ -364,9 +364,7 @@ public class UserController {
 	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
 	@ResponseBody
 	public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
-
 		String result = userDao.searchId(name, phone);
-
 		return result;
 	}
 

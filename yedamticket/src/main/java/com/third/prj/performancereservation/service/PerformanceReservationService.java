@@ -1,6 +1,7 @@
 package com.third.prj.performancereservation.service;
 
 import java.util.List;
+import java.util.Map;
 
 
 public interface PerformanceReservationService {
@@ -27,4 +28,6 @@ public interface PerformanceReservationService {
 	// 자유시장 리스트
 	List<PerformanceReservationViewVO> TicketMarket(PerformanceReservationViewVO performanceReservationViewVO);
 	
+	// 개인이 갖고있는 티켓 환불
+	int cancelpersonalPerf(Map<String, Object> map);
 }

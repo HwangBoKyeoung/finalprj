@@ -1,6 +1,7 @@
 package com.third.prj.performancereservation.serviceImpl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -57,5 +58,10 @@ public class PerformanceReservationServiceImpl implements PerformanceReservation
 	@Override
 	public List<PerformanceReservationViewVO> TicketMarket(PerformanceReservationViewVO performanceReservationViewVO) {
 		return mapper.TicketMarket(performanceReservationViewVO);
+	}
+
+	@Override
+	public int cancelpersonalPerf(Map<String, Object> map) {
+		return mapper.cancelpersonalPerf(map);
 	}
 }
