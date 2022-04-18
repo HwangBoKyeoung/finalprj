@@ -10,7 +10,7 @@
 		<result property="pNo" column="P_NO"/>
 		<result property="time" column="TIME"/>
 		<result property="endTime" column="ENDTIME"/>
-		<collection property="performanceVO" resultMap="pMap"/>
+		<!-- <collection property="performanceVO" resultMap="pMap"/> -->
 	</resultMap>
 	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="pMap">
 		<id property="pNo" column="p_No"/>

@@ -322,51 +322,43 @@ iframe {
 			<div class="card">
 
 				<div class="card-body">
-					<h4 class="card-title">Performance Delete List</h4>
+					<h4 class="card-title">Confirm List</h4>
 					<p class="card-description">기업회원마이페이지</p>
-					<form action="companyMyDeletePerforList.do">
+					<form action="#">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-									<option value="NAME"
-										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
-									<option value="DELETECD"
-										${pageVO.cri.searchType eq 'DELETECD' ? 'selected' : '' }>처리결과</option>
+									<option value="#"
+										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
+									<option value="#"
+										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
 								</select> <input type="text" name="searchName"
 									value="${pageVO.cri.searchName }">
 								<button type="submit" class="btn btn-primary">검색</button>
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
-								<input type="hidden" name="sessionId" value="${sessionId}">
-						</div>
+								<input type="hidden" name="CId" value="${sessionId}">
+							</div>
 					
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>공연 이름</th>
-							<th>출연자</th>
-							<th>삭제 사유</th>
-							<th>기업</th>
-							<th>신청 현황</th>
+							<th>#</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="${pers }" var="per">
-							<c:if test="${per.performanceVO.CId eq sessionId}">
-								<tr>
-									<td>${per.performanceVO.name}</td>
-									<td>${per.performanceVO.actor}</td>
-									<td>${per.performanceVO.content}</td>
-									<td>${per.performanceVO.CId}</td>
-									<td>${per.deleteCd}</td>
+						<c:forEach items="#" var="#">
+							<c:if test="#">
+								<tr onclick="#">
+									<td>#</td>
 								</tr>
 							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="actionForm" action="companyMyDeletePerforList.do" method="get">
+				<form id="actionForm" action="#" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
                   <input type="hidden" name="amount" value="${pageVO.amount }">
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
