@@ -1,6 +1,5 @@
 package com.third.prj.moviereply.service;
 
-import java.sql.Date;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -13,7 +12,7 @@ public class MovieReplyVO {
 	private int mvNo;
 	private String content;
 	private String star;
-	private Date wrDt;
+	private String wrDt;
 	private String UId;
 	private String docId;
 

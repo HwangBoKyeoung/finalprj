@@ -148,7 +148,7 @@
                          </span>
                           </td>
                           <td>
-                             ${r.content }
+                             <p>${r.content }</p>
                              <p>${r.wrDt }</p>
                           </td>
                           <td>

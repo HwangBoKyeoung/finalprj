@@ -34,4 +34,10 @@ public class MovieReplyServieImpl implements MovieReplyService {
 	public MovieReplyVO selectReplyNo() {
 		return mapper.selectReplyNo();
 	}
+
+	@Override
+	public MovieReplyVO getStar(MovieReplyVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.getStar(vo);
+	}
 }

@@ -134,7 +134,23 @@ figure>img {
 #result>.card:hover .caption {
 	opacity: 1;
 }
-
+.rPoster{
+	width:100%;
+	height:100%;
+}
+.rank {
+    position: absolute;
+    top: 17px;
+    left: 0;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    background-color: #38116a;
+    text-align: center;
+    box-shadow: 3px 3px 8px rgb(0 0 0 / 50%);
+    color: white;
+    font-size:25px;
+}
 </style>
 
 </head>
@@ -147,6 +163,9 @@ figure>img {
          <c:forEach items="${movie }" var="movie" varStatus="status">
             <div class="col-3">
                <div class="card">
+               <div class="rank">
+                  <strong>${status.count }</strong>                  
+                </div>
                   <div class="poster" id="poster">
                      <input class="rankPoster" type="hidden" value="${movie.fileCd}">
                      <img class="rPoster">
@@ -158,23 +177,18 @@ figure>img {
                      </div>
                   </div>
                </div>
-               <p id="mname">${movie.name}</p>
-               <form action="movieDetail.do" method="post">
+               <p id="mname">${movie.name}</p>        
 	               <div>
-	               	 <input type="hidden" name="docId" id="docId" value="${movie.docId }">
-	                  <button type="submit" class="btnn">상세보기</button>
-	               </div>
-               </form>
+		               <form action="movieDetail.do" method="post">
+		               	 <input type="hidden" name="docId" id="docId" value="${movie.docId }">
+		                  <button type="submit" class="btnn">상세보기</button>
+		               </form>  
+	               	<button type="button" class="btnn" onclick="location.href='movieBooking.do'">예매하기</button> 
+	               </div>          
             </div>
          </c:forEach>
-      </div>
-    
-  </div>	
-	
-	
-	
-	
-	
+   </div> 
+</div>		
 <h1>상영 예정작</h1>
    <div id="show"></div>
    <div class="container">
@@ -206,14 +220,19 @@ figure>img {
     
   </div>
   
- <script>
+<script>
  ///박스오피스 포스터 filecd자르기
  let fileCd=document.getElementsByClassName('rankPoster');
  let rPoster=document.getElementsByClassName('rPoster');
+ console.log(fileCd);
  	for(var i =0;i<fileCd.length;i++){
+ 		if(fileCd[i].defaultValue == null || fileCd[i].defaultValue == ''){
+ 			rPoster[i].setAttribute('src','resources/yedamticket.png');
+ 		}else{
+ 			var split=(fileCd[i].defaultValue).split('|');
+ 			rPoster[i].setAttribute('src',split[0]);	
+ 		}
  		
- 		var split=(fileCd[i].defaultValue).split('|');
- 		rPoster[i].setAttribute('src',split[0]);
  	}
 //
  let fileCd1=document.getElementsByClassName('realesePoster');
@@ -225,35 +244,6 @@ figure>img {
  	}
  
        
-   </script>
-
-
-<!--
-	<h1>박스오피스 순위</h1>
-	<div id="result"></div>
-	<h1>상영 예정작</h1>
-	<div id="wrapper">
-		<c:forEach items="${movies }" var="m">
-			<div class="card">
-				<header>
-					<h3>${m.name }</h3>
-				</header>
-				<figure>
-					<img src="/upload/${m.renames }">
-				</figure>
-				<p>
-					<span>감독: ${m.director }</span> <span>배우: ${m.actor }</span>
-				</p>
-				<p>
-					<span>장르: ${m.genre } </span> <span>연령: ${m.rating } 상영시간:
-						${m.runtime }</span>
-				</p>
-				<p>
-					<span>개봉예정일: ${m.startDate }</span>
-				</p>
-			</div>
-		</c:forEach>
-	</div>
--->
+</script>
 </body>
 </html>

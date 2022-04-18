@@ -1,13 +1,5 @@
 @charset "UTF-8";
-.hot{
-	fill:red;
-}
-.normal{
-	fill:violet;
-}
-.cool{
-	fill:blue;
-}
+
 #container {
     width: 400px;
     min-height: 400px;
@@ -15,7 +7,7 @@
     margin: 15px 35px;
 }
 #states path {
-    fill: #585858;
+    fill: transparent;
     stroke: #000000;
     stroke-width: 1.5px;
 }

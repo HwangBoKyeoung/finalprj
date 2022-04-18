@@ -7,13 +7,15 @@
 					  PAY_NO,
 					  U_ID,
 					  PAY,
-					  BUY_CTNT_CD)
+					  BUY_CTNT_CD,
+					  TEMP_POINT)
 	VALUES(			  
 					  SYSDATE,
 					  POINT_SEQ.NEXTVAL,
 					  #{UId},
 					  #{pay},
-					  #{buyCtntCd}
+					  #{buyCtntCd},
+					  (SELECT POINT FROM USERS WHERE U_ID = #{UId})
 					  )
 
 </insert>

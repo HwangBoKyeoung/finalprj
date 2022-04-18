@@ -488,6 +488,13 @@
 		SET PWD = #{pwd}
 		WHERE U_ID = #{UId}
 	</update>
+	<update id="payPoint" parameterType="com.third.prj.user.service.UserVO">
 	
+		UPDATE USERS
+		SET    POINT = ( SELECT POINT
+                 FROM   USERS
+                 WHERE  U_ID = #{UId}) - #{pay}
+		WHERE  U_ID  = #{UId}
+	</update>
 </mapper>
    

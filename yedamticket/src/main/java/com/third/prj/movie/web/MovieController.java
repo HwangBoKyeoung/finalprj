@@ -84,6 +84,7 @@ public class MovieController {
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
 		System.out.println("*****************************docid************************************" + rvo.getDocId());
+		model.addAttribute("star", movieReplyDao.getStar(rvo));
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
 		model.addAttribute("movie", vo);
@@ -93,15 +94,15 @@ public class MovieController {
 	// 댓글 입력
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
-	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
+	public String movieReplyInsert(Model model, MovieReplyVO vo) {
 
 		int n = movieReplyDao.movieReplyInsert(vo);
 		// select key 사용 바꾸기
 		if (n != 0) {
-			System.out.println(Integer.toString(vo.getMvReNo()));
-			return movieReplyDao.movieReplyList(vo);
+			
+			return "success";
 		} else {
-			return null;
+			return "fail";
 		}
 	}
 
@@ -219,12 +220,13 @@ public class MovieController {
 		model.addAttribute("user", userDao.userSelectOne(uvo));
 		model.addAttribute("movie", movieDao.mDetail(detailvo));
 
-		return "user/movie/movieReservationForm";
+		return "movie/movieReservationForm";
 	}
 
 	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
 	@RequestMapping("/moviePay.do")
-	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO) {
+	@ResponseBody
+	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO,UserVO usersVO) {
 		movieReservationDao.movieReservationInsert(vo);
 		vo=movieReservationDao.movieReservationSelect(vo);
 		System.out.println("reservno==============================="+vo.getMvReservNo());
@@ -232,11 +234,15 @@ public class MovieController {
 		
 		pointVO.setPayNo(vo.getMvReservNo());
 		pointVO.setUId(vo.getUId());
-		
+		userDao.payPoint(usersVO);
 		movieDao.audienceInsert(movieVO);
-		pointDao.payInsert(pointVO);
+		int n=pointDao.payInsert(pointVO);
+		if(n != 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
 		
-		return "redirect:home.do";
 	}
 
 	@RequestMapping("/movieInsertForm.do")

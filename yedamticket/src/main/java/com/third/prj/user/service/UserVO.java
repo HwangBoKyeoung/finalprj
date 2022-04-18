@@ -36,7 +36,8 @@ public class UserVO implements UserDetails{
 	private Date rdt;
 	private String role;
 	
-
+	//황규복
+	private int pay;
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<GrantedAuthority> auth = new ArrayList<>(); 
