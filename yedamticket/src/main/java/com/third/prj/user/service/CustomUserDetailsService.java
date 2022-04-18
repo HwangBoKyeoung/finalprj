@@ -4,36 +4,35 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
 	@Autowired
-	private UserService userDao;
-	
+	private MemberService memberDao;
+
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 //		단건조회 return
 		System.out.println("*****************************"+username);
 		
-		UserVO vo = new UserVO();
-		vo.setUId(username);
-		System.out.println("00000000000000000000000000000"+vo);
-		UserVO userVO = userDao.getUser(vo);
+		MemberVO vo = new MemberVO();
+		vo.setUsername(username);
+//		vo.setRole("user");
 		
-//		System.out.println("00000000000000000000000000001"+vo.getPwd());
-//		System.out.println("00000000000000000000000000002"+userVO.getPwd());
-//		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-//		boolean pwdChk = pwdEncoder.matches(userVO.getPwd().en, userVO.getPwd());
-//		아이디가 없으면?
-		if(userVO == null) {
+		System.out.println("00000000000000000000000000000"+vo);
+		
+		MemberVO memberVO = memberDao.selectIdMember(vo);
+		System.out.println("00000000000000000000000000001"+memberVO);
+		
+//		아이디 없을 때!!
+		if(memberVO == null) {
 			throw new UsernameNotFoundException("User not Found");
 		}
-		return userVO;
+		
+		return memberVO;
 	}
 	
-	
-
 }
