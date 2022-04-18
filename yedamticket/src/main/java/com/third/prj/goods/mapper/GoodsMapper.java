@@ -7,6 +7,11 @@ import com.third.prj.goods.service.GoodsVO;
 
 public interface GoodsMapper {
 	
+
+	List<GoodsVO> goodsList();
+	//굿즈등록
+	int goodsInsert(GoodsVO vo);
+
 	List<GoodsVO> goodsList(String goodsCd);
 	List<GoodsVO> goodsLi();
 	GoodsVO goodsSelect(GoodsVO vo);
@@ -17,5 +22,6 @@ public interface GoodsMapper {
 	public List<GoodsVO> getList(CriteriaVO cri);
 	// 전체 게시글수
 	public int getTotal(CriteriaVO cri);
+
 	
 }

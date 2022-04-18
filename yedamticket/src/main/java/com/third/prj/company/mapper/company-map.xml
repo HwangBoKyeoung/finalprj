@@ -3,90 +3,90 @@
 
 <mapper namespace="com.third.prj.company.mapper.CompanyMapper">
 
-	<insert id="companyInsert" parameterType="com.third.prj.company.service.CompanyVO">
-		INSERT INTO COMPANY (NAME
-						   , C_ID
-						   , PWD
-						   , EMAIL
-						   , ADDR
-						   , PHONE
-						   , BIZNO
-						   , DEAL_AGREE_CD)
-		VALUES (#{name}
-			  , #{CId}
-			  , #{pwd}
-			  , #{email}
-			  , #{addr}
-			  , #{phone}
-			  , #{bizno}
-			  , #{dealAgreeCd})
-	</insert>
-	
-	<select id="cidChk" resultType="int">
-		SELECT COUNT(*)
-		FROM   COMPANY
-		WHERE  C_ID = #{CId}
-	</select>
-	<select id="getTotal" resultType="int">
-		SELECT COUNT(*)
-		FROM COMPANY
-		WHERE
-		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-					OR EMAIL LIKE '%'||#{searchName}||'%'
-					OR C_ID LIKE '%'||#{searchName}||'%')</if>
-				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'CID'">C_ID LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == null or searchType ==''"> 1 = 1</if>
-	</select>
-	<select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
-		<![CDATA[
-		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT 
-		FROM
-			(
-			SELECT ROWNUM RN,A.* 
-			FROM (
-			SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT
-			FROM COMPANY
-			WHERE
-		]]>
-				<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-					OR EMAIL LIKE '%'||#{searchName}||'%'
-					OR C_ID LIKE '%'||#{searchName}||'%')</if>
-				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'CID'">C_ID LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == null or searchType ==''"> 1 = 1</if>
-			<![CDATA[
-			ORDER BY C_ID )A)
-			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
-		]]>
-	</select>
-	
-	<select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">
-		SELECT * 
-		FROM COMPANY
-		WHERE C_ID = #{CId}
-	</select>
-	
-	
-	<select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
-		SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
-		FROM COMPANY
-		WHERE C_ID = #{CId}
-		AND PWD = #{pwd}
-	</select>
-	
-	<update id="companyUpdate" parameterType="com.third.prj.company.service.CompanyVO">
-		UPDATE COMPANY
-		<set>
-			<if test="email != null"> EMAIL = #{email},</if>
-			<if test="pwd != null"> PWD = #{pwd},</if>
-			<if test="name != null"> NAME = #{name},</if>
-			<if test="phone != null"> PHONE = #{phone},</if>
-			<if test="addr != null"> ADDR = #{addr},</if>
-		</set>
-		WHERE C_ID = #{CId}
-	</update>
-	
+   <insert id="companyInsert" parameterType="com.third.prj.company.service.CompanyVO">
+      INSERT INTO COMPANY (NAME
+                     , C_ID
+                     , PWD
+                     , EMAIL
+                     , ADDR
+                     , PHONE
+                     , BIZNO
+                     , DEAL_AGREE_CD)
+      VALUES (#{name}
+           , #{CId}
+           , #{pwd}
+           , #{email}
+           , #{addr}
+           , #{phone}
+           , #{bizno}
+           , #{dealAgreeCd})
+   </insert>
+   
+   <select id="cidChk" resultType="int"> 
+      SELECT COUNT(*)
+      FROM   COMPANY
+      WHERE  C_ID = #{CId}
+   </select>
+   
+   <select id="getTotal" resultType="int">
+      SELECT COUNT(*)
+      FROM COMPANY
+      WHERE
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR EMAIL LIKE '%'||#{searchName}||'%'
+               OR C_ID LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'CId'">C_ID LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+   
+   <select id="companyList" resultType="com.third.prj.company.service.CompanyVO">
+      <![CDATA[
+      SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT 
+      FROM
+         (
+         SELECT ROWNUM RN,A.* 
+         FROM (
+         SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,NAME,C_ID,RDT
+         FROM COMPANY
+         WHERE
+      ]]>
+            <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR EMAIL LIKE '%'||#{searchName}||'%'
+               OR C_ID LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'EMAIL'">EMAIL LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'CId'">C_ID LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+         <![CDATA[
+         ORDER BY C_ID )A)
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+      ]]>
+   </select>
+   
+   <select id="companySelect" resultType="com.third.prj.company.service.CompanyVO">
+      SELECT * 
+      FROM COMPANY
+      WHERE C_ID = #{CId}
+   </select>
+   
+   <select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
+      SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
+      FROM COMPANY
+      WHERE C_ID = #{CId}
+   </select>
+   
+   <update id="companyUpdate" parameterType="com.third.prj.company.service.CompanyVO">
+      UPDATE COMPANY
+      <set>
+         <if test="email != null"> EMAIL = #{email},</if>
+         <if test="pwd != null"> PWD = #{pwd},</if>
+         <if test="name != null"> NAME = #{name},</if>
+         <if test="phone != null"> PHONE = #{phone},</if>
+         <if test="addr != null"> ADDR = #{addr},</if>
+      </set>
+      WHERE C_ID = #{CId}
+   </update>
+   
 </mapper>

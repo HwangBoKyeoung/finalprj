@@ -35,8 +35,8 @@
 	    ----------------------------
 	  </h2>
       <p>
-        채무자 ${UId } 와 채권자 ${sessionId } 는 채무자가 채권자에 대하여 현재 및 장래 부담할 채무의 담보를 위하여 채무자가 ${date} 일자 매매계약에 의거 제3채무자에게 가지고 있는 매매대금 채권을 하기 조건으로 채권자에게 양도 하기로 함.
-        <input type="hidden" name="UId" id='UId' value="${UId }">
+        채무자 ${RId } 와 채권자 ${sessionId } 는 채무자가 채권자에 대하여 현재 및 장래 부담할 채무의 담보를 위하여 채무자가 ${date} 일자 매매계약에 의거 제3채무자에게 가지고 있는 매매대금 채권을 하기 조건으로 채권자에게 양도 하기로 함.
+        <input type="hidden" name="RId" id='RId' value="${RId }">
       </p>
       <br />
       
@@ -78,7 +78,7 @@
       <input type="hidden" name="ownerAddr" id="ownerAddr" value="${ownerAddr }">
       <br>
       
-      <p class="pctr">양수인(을) : ${UId }</p>
+      <p class="pctr">양수인(을) : ${RId }</p>
       <p id="buyerAdd" class="pctr">주소 : ${buyerAddr }</p>
       <input type="hidden" name="buyerAddr" id="buyerAddr" value="${buyerAddr }">
 	</div>

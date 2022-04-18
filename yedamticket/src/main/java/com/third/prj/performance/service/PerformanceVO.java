@@ -2,8 +2,6 @@ package com.third.prj.performance.service;
 
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleVO;
-import com.third.prj.point.service.PointVO;
-import com.third.prj.user.service.UserVO;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -29,6 +27,9 @@ public class PerformanceVO {
 	private String confirm; //관리자 승인여부
 	private String refuseRs; //거부사유
 	
+	//류지희 컬럼추가
+	private int audience;
+	private int pop;
 	private PerformanceReservationVO performanceReservationVO;
 	private PerformanceScheduleVO performanceScheduleVO;
 	

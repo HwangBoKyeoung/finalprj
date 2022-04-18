@@ -12,7 +12,7 @@
 %>
 <script>
 	localStorage.clear();
-	alert("<%=msg%>");
+	alert(`<%=msg%>`);
 	location.href="<%=url%>";
 </script>
 <body>

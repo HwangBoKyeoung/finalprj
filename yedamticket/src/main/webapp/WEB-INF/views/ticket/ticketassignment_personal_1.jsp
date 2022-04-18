@@ -21,7 +21,7 @@
 				<p class="card-text">공연명 : ${name }</p>
 				<input id="name" type="hidden" name="name">
 				
-				<p class="card-text">양도할 아이디 : <input name="UId" id="UId" type="text">
+				<p class="card-text">양도할 아이디 : <input name="RId" id="RId" type="text">
 				<button type="button" class="idChk" id="idChk" value="N" onclick="fn_idChk(); ">중복체크</button>
 				</p>
 				
@@ -70,13 +70,19 @@
 	
 	// id 중복확인
 	function fn_idChk() {
+		var sessionid = '${sessionId}'
+			if($("#RId").val() == sessionid){
+				alert("자신에게 양도할 수 없습니다.");
+				return false;
+			}
+		
 		var chk = 0;
 		$.ajax({
 			url: "idChk",
 			type: "post",
 			dataType: "json",
 			data: {
-				"UId": $("#UId").val()
+				"UId": $("#RId").val()
 			},
 			success: function(data) {
 				if (data == 1) {
@@ -89,7 +95,7 @@
 						type: "post",
 						dataType: "text",
 						data: {
-							"UId": $("#UId").val()
+							"UId": $("#RId").val()
 						},
 						success: function(data) {
 							console.log(data)
@@ -103,8 +109,6 @@
 					alert("없는 아이디입니다!");
 					idCnum = 0;
 					$("#inpBtn").attr("disabled", true);
-				} else {
-					alert("아이디를 입력해주세요.");
 				}
 			}
 		})

@@ -26,12 +26,13 @@
 <body>
 	<form action="ticketassignment_personal_4.do" method="POST">
 	<input type="hidden" name="PReservNo" id="PReservNo" value="${PReservNo }">
+	<input type="hidden" name="RId" id="RId" value="${RId }">
 	<div class="no-drag" style="margin:auto; max-width: 30%;">
 	  <h2>
 	    채 권 양 도 통 지 서<br />
 	    ----------------------------
 	  </h2>
-      <p>수신인 : ${UId }</p>
+      <p>수신인 : ${RId }</p>
       <p>주 소 : ${buyerAddr }</p>
       <br />
       

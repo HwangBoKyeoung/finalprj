@@ -2,20 +2,23 @@ package com.third.prj.user.service;
 
 
 import java.sql.Date;
-
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class UserVO implements UserDetails{
 	
 	private String UId; // not null
@@ -33,41 +36,42 @@ public class UserVO implements UserDetails{
 	private Date rdt;
 	private String role;
 	
-	private UserCriteriaVO cri;
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return null;
+		List<GrantedAuthority> auth = new ArrayList<>(); 
+		auth.add(new SimpleGrantedAuthority(this.role));
+		return auth;
 	}
 	
 	@Override
 	public String getPassword() {
-		return null;
+		return pwd;
 	}
 	
 	@Override
 	public String getUsername() {
-		return null;
+		return UId;
 	}
 	
 	@Override
 	public boolean isAccountNonExpired() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	public boolean isAccountNonLocked() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return false;
+		return true;
 	}
 	
 	@Override
 	public boolean isEnabled() {
-		return false;
+		return true;
 	}
 	
 }

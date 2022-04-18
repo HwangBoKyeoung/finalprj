@@ -29,9 +29,9 @@ public class MovieVO {
 	private String fileCd; //파일구분코드
 	private String docId; //영화코드
 	private String renames; //변경된 파일명
+	private String audience;//관객수
 	private String confirm; //관리자 승인여부
 	private String refuseRs; //거부사유
-	
 	
 	private String searchName; //검색
 	

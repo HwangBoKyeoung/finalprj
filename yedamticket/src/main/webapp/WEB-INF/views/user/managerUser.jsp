@@ -25,8 +25,8 @@
 						</thead>
 						<tbody id="body">
 							<c:forEach items="${users}" var="user">
-								<tr onclick="location.href='managerUserSelect.do?uid=${user.uid}'">
-									<td>${user.uid}</td>
+								<tr onclick="location.href='managerUserSelect.do?UId=${user.UId}'">
+									<td>${user.UId}</td>
 									<td>${user.name}</td>
 									<td>${user.email}</td>
 									<td>${user.rdt}</td>
