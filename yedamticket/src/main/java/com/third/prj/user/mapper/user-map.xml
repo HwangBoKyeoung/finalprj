@@ -135,12 +135,22 @@
    </select>
 
    <select id="getUser" parameterType="com.third.prj.user.service.UserVO" resultType="com.third.prj.user.service.UserVO">
-      SELECT U_ID
-      , PWD
-      , UPPER('ROLE_'||role) as role
-      FROM USERS
-      WHERE U_ID = #{UId}
-   </select>
+		SELECT U_ID
+		, PWD
+		, EMAIL
+		, ADDR
+		, BIRTHDT
+		, PHONE
+		, NAME
+		, DEAL_AGREE_CD
+		, POINT
+		, MEMBERSHIP
+		, LOGIN_CD
+		, RDT
+		, UPPER('ROLE_'||role) as role
+		FROM USERS
+		WHERE U_ID = #{UId}
+	</select>
 
    <select id = "getUser2" parameterType="String" resultType="com.third.prj.user.service.UserVO">
       SELECT *
