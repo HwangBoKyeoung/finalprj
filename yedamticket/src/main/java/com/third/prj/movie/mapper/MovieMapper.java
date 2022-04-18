@@ -7,6 +7,7 @@ import com.third.prj.movie.service.CriteriaVO;
 import com.third.prj.movie.service.MovieVO;
 
 import com.third.prj.movie.service.MovieViewVO;
+import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.point.service.PointCriteriaVO;
 
 
@@ -37,8 +38,14 @@ public interface MovieMapper {
 	//영화 등록
 	int movieInsert(MovieVO vo);
 	
-	//통합검색
-	List<MovieVO> searchAll(String searchName);
+	/*
+	 * //통합검색 List<MovieVO> searchAll(String searchName);
+	 */
+	
+	//영화검색
+	List<MovieVO> movieSearch(String SearchName);
+	//공연검색
+	List<PerformanceVO> perSearch(String SearchName);
 
 	//페이징
 	List<MovieVO> mvListPaging(CriteriaVO cri);
