@@ -3,14 +3,12 @@ package com.third.prj.user.serviceImpl;
 import java.util.List;
 import java.util.Map;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Repository;
 
 import com.third.prj.moviereservation.service.MovieReservVO;
@@ -27,17 +25,9 @@ import com.third.prj.user.service.UserVO;
 
 @Repository("userDao")
 public class UserServiceImpl implements UserService {
-
-	private PasswordEncoder passwordEncoder;
-
-	@Inject
-	private BCryptPasswordEncoder pwdEncoder;
-
+	
 	@Autowired
 	private UserMapper mapper;
-
-	@Autowired
-	private UserService dao;
 
 	@Autowired
 	private SqlSession sqlSession;
@@ -105,19 +95,19 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-
 	public UserVO userSelectOne(UserVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.userSelectOne(vo);
 	}
-
+	
+	@Override
 	public UserVO loginChk(UserVO vo) {
 		return sqlSession.selectOne("loginChk", vo);
 	}
 
 	@Override
 	public UserVO loginChk(UserVO vo, HttpSession session) {
-		return dao.loginChk(vo);
+		return mapper.loginChk(vo);
 
 	}
 
@@ -226,11 +216,18 @@ public class UserServiceImpl implements UserService {
 		for (int i = 0; i < 12; i++) {
 			pw += (char) ((Math.random() * 26) + 97);
 		}
+
 //		String pw2 = pwdEncoder.encode(pw);
 //		System.out.println(pw2);
 		
 		vo.setPwd(pwdEncoder.encode(pw));
 		
+
+//		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//		String pw2 = pwdEncoder.encode(pw);
+//		System.out.println(pw2);
+//		vo.setPwd(pw2);
+
 		System.out.println("여기까지 왔을까2 ?");
 		System.out.println(uv);
 		// 비밀번호 변경

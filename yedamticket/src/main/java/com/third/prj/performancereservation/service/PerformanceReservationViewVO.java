@@ -20,6 +20,7 @@ public class PerformanceReservationViewVO {
 	private String seatStatCd;
 	private String seatNo;
 	private String RId;
+	private String cancelCd;
 	@JsonFormat(pattern = "YYYY-DD-MM")
 	private Date frDt;
 	private String time;

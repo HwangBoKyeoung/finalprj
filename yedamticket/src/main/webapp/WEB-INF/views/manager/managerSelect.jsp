@@ -62,7 +62,6 @@
                      type="text" class="form-control" id="phone" name="phone"
                      placeholder="Mobile number" value="${mana.phone }" readonly="readonly">
                </div>
-               
                <div class="form-group">
                   <label for="exampleInputMobile">AuthCode</label>
                   <div class="input-group-prepend">
@@ -96,15 +95,6 @@
          </div>
       </div>
    </div>
-   
-   <script type="text/javascript">
-   		
-   		/* $("#defaults").on('click', function(){
-   			location.href='managerdelete.do?MId='+ ${mana.MId};
-   			console.log(${mana.MId});
-   		}); */
-   
-   </script>
 
 </body>
 </html>
