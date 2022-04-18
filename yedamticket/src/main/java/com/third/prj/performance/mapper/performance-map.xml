@@ -43,6 +43,7 @@
 		<result column="LAT" property="lat" />
 		<result column="LNG" property="lng" />
 		<result column="RENAMES" property="renames" />
+		<result column="AUDIENCE" property="audience" />
 		<collection property="performanceScheduleVO"
 			resultMap="pScheduleMap" />
 	</resultMap>
@@ -413,5 +414,24 @@
 		INSERT INTO PERFORMANCE
 		VALUES(#{pNo},#{name},#{content},#{cId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
 	</insert>
+	
+	<!-- 류지희 performance 테이블에 관객수 업데이트문 추가 -->
+	<update id="updatePerformanceAudience" parameterType="com.third.prj.performance.service.PerformanceVO">
+		UPDATE PERFORMANCE
+		SET AUDIENCE = NVL(AUDIENCE,0) + #{audience}
+		WHERE P_NO =#{PNo}
+	</update>
+	<!-- 관리자페이지 인기순위 차트 -->
+	<select id="performancePopChart" resultType="com.third.prj.performance.service.PerformanceVO">
+	<![CDATA[
+	 	select *
+		from (
+		         select name,
+		                nvl(audience,0)*price AS pop,
+		                row_number() over (order by nvl(audience,0)*price  desc) row_num
+		         from performance)
+		where row_num < 11
+		]]>
+	</select>
 
 </mapper>

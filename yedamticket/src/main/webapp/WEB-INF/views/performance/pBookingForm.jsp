@@ -607,7 +607,6 @@ $('#plus').on("click",function(){
       let tdList=selectedSeat.getElementsByTagName('td');
       tdList[cnt].setAttribute('class','seatGray'); 
       cnt++;
-      console.log(cnt);
       $('#cnt').text(cnt);
       
    }
@@ -625,7 +624,6 @@ $('#minus').on("click",function(){
       let tdList=selectedSeat.getElementsByTagName('td');
       tdList[cnt].setAttribute('class','seatNone');  
       tdList[cnt].innerText='+';
-      console.log(cnt);
       $('#cnt').text(cnt);
    }
 });
@@ -734,6 +732,7 @@ let txt = $(event.target).text();
        alert("인원선택을 먼저해주세요!!!"); 
     }else{
         alert("좌석선택이 완료되엇습니다.");
+        console.log(cnt);
     };      
 }
 $('#backBtn').on('click',function(){

@@ -50,4 +50,9 @@ public interface PerformanceMapper {
 	PerformanceVO pSelect(PerformanceVO vo);
 	//지역별 공연리스트
 	List<PerformanceVO> locPlist(PerformanceVO vo);
+//	관객수 업데이트 쿼리 (류지희)
+	int updatePerformanceAudience(PerformanceVO vo);
+	
+	//관리자페이지 업데이트쿼리(류지희)
+	List<PerformanceVO> performancePopChart();
 }

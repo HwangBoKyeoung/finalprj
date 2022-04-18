@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <nav
 	class="navbar default-layout-navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
 	<div
 		class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-		<a class="navbar-brand brand-logo" href="index.html"><img
+		<a class="navbar-brand brand-logo" href="homeM.do"><img
 			src="resources/managers/assets/images/logo.svg" alt="logo" /></a> <a
-			class="navbar-brand brand-logo-mini" href="index.html"><img
+			class="navbar-brand brand-logo-mini" href="homeM.do"><img
 			src="resources/managers/assets/images/logo-mini.svg" alt="logo" /></a>
 	</div>
 	<div class="navbar-menu-wrapper d-flex align-items-stretch">
@@ -40,9 +41,18 @@
 				<div class="dropdown-menu navbar-dropdown"
 					aria-labelledby="profileDropdown">
 					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="managerLoginForm.do"> <i
-						class="mdi mdi-logout me-2 text-primary"></i> 로그아웃
-					</a>
+					<c:choose>
+						<c:when test="${empty sessionId }">
+							<a class="dropdown-item" href="managerLoginForm.do"> <i
+								class="mdi mdi-logout me-2 text-primary"></i> 로그인
+							</a>
+						</c:when>
+						<c:otherwise>
+							<a class="dropdown-item" href="kakaoLogout.do"> <i
+								class="mdi mdi-logout me-2 text-primary"></i> 로그아웃
+							</a>
+						</c:otherwise>
+					</c:choose>
 				</div></li>
 			<li class="nav-item d-none d-lg-block full-screen-link"><a
 				class="nav-link"> <i class="mdi mdi-fullscreen"

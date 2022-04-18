@@ -9,11 +9,11 @@
 
 <body>
    <!--Div that will hold the pie chart-->
-   <div id="barchart_values" style="width: 100%; height: 100%;"></div>
+   <div id=chart_div style="width: 100%; height: 100%;"></div>
    
    <script type="text/javascript">
       google.charts.load("current", {
-         packages : [ "bar" ]
+         packages : [ "corechart" ]
       });
       google.charts.setOnLoadCallback(drawChart);
       
@@ -47,7 +47,13 @@
                data.addRows(arr);
                console.log(data);
                
-               var chart = new google.charts.Bar(barchart_values);
+               var options = {
+            	          title: 'Company Performance',
+            	          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
+            	          vAxis: {minValue: 0}
+            	        };
+
+               var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
                chart.draw(data);
             }
          });

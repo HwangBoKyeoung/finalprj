@@ -288,14 +288,7 @@ h1 {
 							</a> <a class="dropdown-item" href="companyMyPage.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 기업회원 페이지
 							</a> 
-							 <a class="dropdown-item" href="movieInsertForm.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 영화등록
-							</a> 
-							<a class="dropdown-item" href="perInsertForm.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 공연등록
-							</a> <a class="dropdown-item" href="goodsInsertForm.do"> <i
-								class="fa-regular fa-comment-dots fa-2x"></i> 굿즈등록
-							</a> <a class="dropdown-item" href="searchList.do"> <i
+							 <a class="dropdown-item" href="searchList.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 검색어
 							</a>
 						</div></li>
