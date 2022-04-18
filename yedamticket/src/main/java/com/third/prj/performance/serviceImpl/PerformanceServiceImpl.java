@@ -88,4 +88,20 @@ public class PerformanceServiceImpl implements PerformanceService {
 		// TODO Auto-generated method stub
 		return mapper.locPlist(vo);
 	}
+
+
+	@Override
+	public int updatePerformanceAudience(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.updatePerformanceAudience(vo);
+	}
+
+
+	@Override
+	public List<PerformanceVO> performancePopChart() {
+		// TODO Auto-generated method stub
+		return mapper.performancePopChart();
+	}
+
+
 }
