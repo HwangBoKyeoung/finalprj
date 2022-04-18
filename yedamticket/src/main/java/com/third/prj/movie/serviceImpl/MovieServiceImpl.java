@@ -12,6 +12,7 @@ import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
 
 import com.third.prj.movie.service.MovieViewVO;
+import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.point.service.PointCriteriaVO;
 
 
@@ -89,11 +90,10 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.mList();
 	}
 
-	@Override
-	public List<MovieVO> searchAll(String searchName) {
-		// TODO Auto-generated method stub
-		return mapper.searchAll(searchName);
-	}
+	/*
+	 * @Override public List<MovieVO> searchAll(String searchName) { // TODO
+	 * Auto-generated method stub return mapper.searchAll(searchName); }
+	 */
 
 	public MovieVO mDetail(MovieVO vo) {
 		// TODO Auto-generated method stub
@@ -115,5 +115,17 @@ public class MovieServiceImpl implements MovieService {
 	public int popularSearch(MovieVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.popularSearch(vo);
+	}
+
+	@Override
+	public List<MovieVO> movieSearch(String SearchName) {
+		// TODO Auto-generated method stub
+		return mapper.movieSearch(SearchName);
+	}
+
+	@Override
+	public List<PerformanceVO> perSearch(String SearchName) {
+		// TODO Auto-generated method stub
+		return mapper.perSearch(SearchName);
 	}
 }

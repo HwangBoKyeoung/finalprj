@@ -29,6 +29,7 @@
 		<result property="name" column="name" />
 		<result property="content" column="content" />
 		<result property="actor" column="actor" />
+		<result property="pNo" column="P_NO"/>
 	</resultMap>
 
 	<!-- 프로시저 -->
@@ -214,7 +215,7 @@
 		to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
 
-	<select id="searchAll" resultMap="movieResultMap" parameterType="string">
+	<!-- <select id="searchAll" resultMap="movieResultMap" parameterType="string">
 		SELECT NAME, ACTOR, CONTENT,FILE_CD
 		FROM MOVIE
 		WHERE NAME LIKE '%'||#{searchName}||'%' or actor like
@@ -224,6 +225,18 @@
 		FROM PERFORMANCE
 		where name like '%'||#{searchName}||'%' or actor like
 		'%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+	</select> -->
+	
+	<select id="movieSearch" resultMap="movieResultMap" parameterType="String">
+	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID
+		FROM MOVIE
+		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+	</select>
+	
+	<select id="perSearch" resultMap="perFormanceMap" parameterType="String">
+		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO
+		FROM PERFORMANCE
+		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
 	</select>
 
 	<select id="getTotal" resultType="int">
