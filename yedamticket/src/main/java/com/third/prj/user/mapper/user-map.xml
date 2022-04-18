@@ -461,20 +461,21 @@
    <select id="searchId" resultType="String">
       select nvl(u_id, 0) from users 
         where name = #{name} and phone = #{phone}
-   </select>
-   
-   <!-- 마이페이지 회원정보 -->
-   <select id="selectByMemberId" resultType="com.third.prj.user.service.UserVO">
-      SELECT *
-      FROM USERS
-      WHERE U_ID = #{UId}
-   </select>
-   
-   <update id="updatePassword2" parameterType="com.third.prj.user.service.UserVO">
-      UPDATE USERS
-      SET PWD = #{pwd}
-      WHERE U_ID = #{UId}
-   </update>
-   
+	</select>
+	
+	<!-- 마이페이지 회원정보 -->
+	<select id="selectByMemberId" resultType="com.third.prj.user.service.UserVO">
+		SELECT *
+		FROM USERS
+		WHERE U_ID = #{UId}
+		AND EMAIL = #{email}
+	</select>
+	
+	<update id="updatePassword2" parameterType="com.third.prj.user.service.UserVO">
+		UPDATE USERS
+		SET PWD = #{pwd}
+		WHERE U_ID = #{UId}
+	</update>
+	
 </mapper>
    

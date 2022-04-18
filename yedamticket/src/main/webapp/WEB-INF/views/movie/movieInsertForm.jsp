@@ -75,7 +75,7 @@ textarea {
 						</tr>
 						<tr>
 							<td>포스터</td>
-							<td><input type="file" id="file" name="file" accept="image/gif, image/jpeg, image/png" 
+							<td><input type="file" id="file" name="file" multiple="multiple" accept="image/gif, image/jpeg, image/png" 
 								class="form-control"></td>
 						</tr>
 						<tr>

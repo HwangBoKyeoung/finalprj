@@ -110,7 +110,7 @@ public interface UserService {
 	void sendEmail(UserVO vo, String pw, String div);
 	
 	// 마이페이지 회원정보
-    UserVO selectByMemberId(@Param("UId") String UId);
+	UserVO selectByMemberId(@Param("UId") String UId,@Param("email") String email);
     
     // 비밀번호 찾기 시 회원 권한 변경
     int updatePassword2(UserVO vo);
