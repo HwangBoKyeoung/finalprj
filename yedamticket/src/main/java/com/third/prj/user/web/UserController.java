@@ -1,6 +1,5 @@
 package com.third.prj.user.web;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -39,281 +38,277 @@ import com.third.prj.user.service.UserVO;
 @Controller
 public class UserController {
 
-	@Autowired
-	private FaqService faqDao;
+   @Autowired
+   private FaqService faqDao;
 
-	@Autowired
-	private UserService userDao;
+   @Autowired
+   private UserService userDao;
 
-	@Autowired
-	private NoticeService noticeDao;
+   @Autowired
+   private NoticeService noticeDao;
 
-	@Autowired
-	private PerformanceService perDao;
+   @Autowired
+   private PerformanceService perDao;
 
-	@Autowired
-	private MovieService movieDao;
+   @Autowired
+   private MovieService movieDao;
 
-	@Inject
-	private BCryptPasswordEncoder pwdEncoder;
-	
-	
+   @RequestMapping("/signup_1.do")
+   public String signUp_1() {
+      return "signup/signup/signup_1";
+   }
 
-	@RequestMapping("/signup_1.do")
-	public String signUp_1() {
-		return "signup/signup/signup_1";
-	}
+   @RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)
+   public String signUp_3(HttpSession session) {
+      session.getAttribute("all");
+      return "signup/signup_3";
+   }
 
-	@RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)
-	public String signUp_3(HttpSession session) {
-		session.getAttribute("all");
-		return "signup/signup_3";
-	}
+   @PostMapping("/signup_4.do")
+   public String signUp_4(UserVO userVO, Model model, HttpServletRequest httpServletRequest) {
+      String pwd = userVO.getPwd();
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      String encryptedPwd = pwdEncoder.encode(pwd);
+      String addr = httpServletRequest.getParameter("addr");
+      String addr2 = httpServletRequest.getParameter("addr2");
+      String addr3 = addr + " " + addr2;
+      userVO.setAddr(addr3);
+      userVO.setPwd(encryptedPwd);
+      int n = userDao.userInsert(userVO);
+      if (n != 0) {
+         return "home/home";
+      }
+      return "signup/signup_error";
+   }
 
-	@PostMapping("/signup_4.do")
-	public String signUp_4(UserVO userVO, Model model, HttpServletRequest httpServletRequest) {
-		String pwd = userVO.getPwd();
-		String encryptedPwd = pwdEncoder.encode(pwd);
-		String addr = httpServletRequest.getParameter("addr");
-		String addr2 = httpServletRequest.getParameter("addr2");
-		String addr3 = addr + " " + addr2;
-		userVO.setAddr(addr3);
-		userVO.setPwd(encryptedPwd);
-		int n = userDao.userInsert(userVO);
-		if (n != 0) {
-			return "home/home";
-		}
-		return "signup/signup_error";
-	}
+   @ResponseBody
+   @RequestMapping(value = "/idChk", method = RequestMethod.POST)
+   public int idChk(UserVO userVO) {
+      int i = userDao.idChk(userVO);
+      return i;
+   }
 
-	@ResponseBody
-	@RequestMapping(value = "/idChk", method = RequestMethod.POST)
-	public int idChk(UserVO userVO) {
-		int i = userDao.idChk(userVO);
-		return i;
-	}
+   @ResponseBody
+   @RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
+   public int VerifyRecaptcha(HttpServletRequest request) {
+      VerifyRecaptcha.setSecretKey("6LfYlAwfAAAAAHv7aqyCEWaO9aQ_218wKAjEy9eT");
+      String gRecaptchaResponse = request.getParameter("recaptcha");
+      try {
+         if (VerifyRecaptcha.verify(gRecaptchaResponse))
+            return 0; // 성공
+         else
+            return 1; // 실패
+      } catch (Exception e) {
+         e.printStackTrace();
+         return -1; // 에러
+      }
+   }
+   /*
+    * 
+    * 
+    *    
+    */
 
-	@ResponseBody
-	@RequestMapping(value = "VerifyRecaptcha", method = RequestMethod.POST)
-	public int VerifyRecaptcha(HttpServletRequest request) {
-		VerifyRecaptcha.setSecretKey("6LfYlAwfAAAAAHv7aqyCEWaO9aQ_218wKAjEy9eT");
-		String gRecaptchaResponse = request.getParameter("recaptcha");
-		try {
-			if (VerifyRecaptcha.verify(gRecaptchaResponse))
-				return 0; // 성공
-			else
-				return 1; // 실패
-		} catch (Exception e) {
-			e.printStackTrace();
-			return -1; // 에러
-		}
-	}
-	/*
-	 * 
-	 * 
-	 * 	
-	 */
+   @RequestMapping("/userLoginForm.do")
+   public String userLoiginForm() {
+      return "user/user/userLoginForm";
+   }
 
-	@RequestMapping("/userLoginForm.do")
-	public String userLoiginForm() {
-		return "user/user/userLoginForm";
-	}
+   @RequestMapping("/managerUser.do")
+   public String managerUser(Model model, CriteriaVO cri) {
+      PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
+      model.addAttribute("users", userDao.userList(cri));
+      model.addAttribute("pageVO", pageVO);// 전체게시글 기준으로가지고옴
+      return "manager/user/managerUser";
+   }
 
-	@RequestMapping("/managerUser.do")
-	public String managerUser(Model model, CriteriaVO cri) {
-		PageVO pageVO = new PageVO(cri, userDao.getTotal(cri));
-		model.addAttribute("users", userDao.userList(cri));
-		model.addAttribute("pageVO", pageVO);// 전체게시글 기준으로가지고옴
-		return "manager/user/managerUser";
-	}
+   @RequestMapping("/managerUserSelect.do")
+   public String managerUserSelect(UserVO vo, Model model) {
+      vo = userDao.userSelect(vo);
 
-	@RequestMapping("/managerUserSelect.do")
-	public String managerUserSelect(UserVO vo, Model model) {
-		vo = userDao.userSelect(vo);
+      model.addAttribute("users", vo);
+      return "manager/user/managerUserSelect";
+   }
 
-		model.addAttribute("users", vo);
-		return "manager/user/managerUserSelect";
-	}
+   @RequestMapping("/userLogin.do")
+   public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
+//      userDao.userSelect(vo);
+//      session.setAttribute("sessionId", vo.getUId());
+//      session.setAttribute("sessionPwd", vo.getPwd());
+      String msg = "";
+      String url = "";
+      UserVO login = userDao.loginChk(vo, session);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
 
-	@RequestMapping("/userLogin.do")
-	public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
-//		userDao.userSelect(vo);
-//		session.setAttribute("sessionId", vo.getUId());
-//		session.setAttribute("sessionPwd", vo.getPwd());
-		String msg = "";
-		String url = "";
-		UserVO login = userDao.loginChk(vo, session);
-		boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+      if (login != null && pwdChk) {
+         int i = userDao.reservChk(vo);
+         msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
 
-		if (login != null && pwdChk) {
-			int i = userDao.reservChk(vo);
-			msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
+         url = "home.do";
 
-			url = "home.do";
+         session.setAttribute("sessionId", vo.getUId());
+         session.setAttribute("sessionEmail", vo.getEmail());
+         session.setAttribute("sessionName", vo.getName());
+         session.setAttribute("sessionAddr", vo.getAddr());
+         session.setAttribute("sessionPhone", vo.getPhone());
+         mv.addObject("msg", msg);
+         mv.addObject("url", url);
+         mv.setViewName("user/alert");
+      } else {
+         msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+         url = "userLoginForm.do";
+         mv.addObject("msg", msg);
+         mv.addObject("url", url);
+         mv.setViewName("user/alert");
+      }
+      return mv;
+   }
 
-			session.setAttribute("sessionId", vo.getUId());
-			session.setAttribute("sessionEmail", vo.getEmail());
-			session.setAttribute("sessionName", vo.getName());
-			session.setAttribute("sessionAddr", vo.getAddr());
-			session.setAttribute("sessionPhone", vo.getPhone());
-			mv.addObject("msg", msg);
-			mv.addObject("url", url);
-			mv.setViewName("user/alert");
-		} else {
-			msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-			url = "userLoginForm.do";
-			mv.addObject("msg", msg);
-			mv.addObject("url", url);
-			mv.setViewName("user/alert");
-		}
-		return mv;
-	}
+   @RequestMapping("/userSelect.do")
+   public String userSelect(HttpSession session, UserVO vo) {
+      userDao.userSelect(vo);
+      session.setAttribute("sessionId", vo.getUId());
+      session.setAttribute("sessionPwd", vo.getPwd());
+      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+      System.out.println("id :" + vo.getUId());
+      System.out.println("pwd :" + vo.getPwd());
+      System.out.println("name :" + vo.getName());
+      System.out.println("email :" + vo.getEmail());
+      System.out.println("phone :" + vo.getPhone());
+      System.out.println("addr :" + vo.getAddr());
+      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+      return "home/home";
+   }
 
-	@RequestMapping("/userSelect.do")
-	public String userSelect(HttpSession session, UserVO vo) {
-		userDao.userSelect(vo);
-		session.setAttribute("sessionId", vo.getUId());
-		session.setAttribute("sessionPwd", vo.getPwd());
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		System.out.println("id :" + vo.getUId());
-		System.out.println("pwd :" + vo.getPwd());
-		System.out.println("name :" + vo.getName());
-		System.out.println("email :" + vo.getEmail());
-		System.out.println("phone :" + vo.getPhone());
-		System.out.println("addr :" + vo.getAddr());
-		System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-		return "home/home";
-	}
+   @RequestMapping("/userService.do")
+   public String userService(Model model) {
+      model.addAttribute("notices", noticeDao.noticeSelectList());
+      model.addAttribute("faqs", faqDao.faqSelectList());
+      return "user/userService";
+   }
 
-	@RequestMapping("/userService.do")
-	public String userService(Model model) {
-		model.addAttribute("notices", noticeDao.noticeSelectList());
-		model.addAttribute("faqs", faqDao.faqSelectList());
-		return "user/userService";
-	}
+   @RequestMapping("/userPage.do")
+   public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
+      
+      cri.setUId((String)session.getAttribute("sessionId"));
+      vo.setUId((String)session.getAttribute("sessionId"));
+      pvo.setUId((String)session.getAttribute("sessionId"));
 
-	@RequestMapping("/userPage.do")
-	public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo, PerformanceReservationViewVO performanceReservationViewVO) {
-		
-		cri.setUId((String)session.getAttribute("sessionId"));
-		vo.setUId((String)session.getAttribute("sessionId"));
-		pvo.setUId((String)session.getAttribute("sessionId"));
-		performanceReservationViewVO.setRId((String) session.getAttribute("sessionId"));
-		
-		model.addAttribute("userPoint", userDao.userPoint(pvo));
-		model.addAttribute("mvList", userDao.mvRList(cri));
-		model.addAttribute("pfList", userDao.pfRList(cri));
-		model.addAttribute("prList", userDao.prList(cri));
-		
-		model.addAttribute("user", userDao.userSelectOne(vo));
+      model.addAttribute("userPoint", userDao.userPoint(pvo));
+      model.addAttribute("mvList", userDao.mvRList(cri));
+      model.addAttribute("pfList", userDao.pfRList(cri));
 
-		return "user/userPage";
-	}
+      model.addAttribute("user", userDao.userSelectOne(vo));
 
-	@RequestMapping("/userUpdateForm.do")
-	public String userUpdateForm(Model model, UserVO vo, HttpSession session) {
-		vo.setUId((String) session.getAttribute("sessionId"));
-		model.addAttribute("user", userDao.userSelectOne(vo));
-		return "user/userUpdateForm";
-	}
+      return "user/userPage";
+   }
 
-	@RequestMapping("/userUpdate.do")
-	public String userUpdate(UserVO vo) {
-		String pwd = vo.getPwd();
-		String encryptedPwd = pwdEncoder.encode(pwd);
-		vo.setPwd(encryptedPwd);
-		int n = userDao.userUpdate(vo);
-		if (n != 0) {
-			return "redirect:userUpdateForm.do";
-		}
-		return "user/errorPage";
-	}
+   @RequestMapping("/userUpdateForm.do")
+   public String userUpdateForm(Model model, UserVO vo, HttpSession session) {
+      vo.setUId((String) session.getAttribute("sessionId"));
+      model.addAttribute("user", userDao.userSelectOne(vo));
+      return "user/userUpdateForm";
+   }
 
-	@RequestMapping("/userDeleteForm.do")
-	public String userDeleteForm() {
-		return "user/userDeleteForm";
-	}
+   @RequestMapping("/userUpdate.do")
+   public String userUpdate(UserVO vo) {
+      String pwd = vo.getPwd();
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      String encryptedPwd = pwdEncoder.encode(pwd);
+      vo.setPwd(encryptedPwd);
+      int n = userDao.userUpdate(vo);
+      if (n != 0) {
+         return "redirect:userUpdateForm.do";
+      }
+      return "user/errorPage";
+   }
 
-	@RequestMapping("/userDelete.do")
-	public String userDelete(UserVO vo, HttpSession session) {
-		int n = userDao.userDelete(vo);
+   @RequestMapping("/userDeleteForm.do")
+   public String userDeleteForm() {
+      return "user/userDeleteForm";
+   }
 
-		if (n != 0) {
-			session.invalidate();
-			return "redirect:/";
-		}
-		return "user/errorPage";
-	}
+   @RequestMapping("/userDelete.do")
+   public String userDelete(UserVO vo, HttpSession session) {
+      int n = userDao.userDelete(vo);
 
-	@RequestMapping("/mvReservList.do")
-	public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
-		System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
-		cri.setUId((String)session.getAttribute("sessionId"));
-		System.out.println("=============== cri userid"+cri.getUId() + "===============");
-		UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
-		
-		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+      if (n != 0) {
+         session.invalidate();
+         return "redirect:/";
+      }
+      return "user/errorPage";
+   }
 
-		model.addAttribute("mvList", userDao.mvRList(cri));
+   @RequestMapping("/mvReservList.do")
+   public String mvReservList(Model model,UserVO vo, MovieReservVO mvo, HttpSession session ,UserCriteriaVO cri) {
+      System.out.println("=============== session userid"+(String)session.getAttribute("sessionId")+"===========================");
+      cri.setUId((String)session.getAttribute("sessionId"));
+      System.out.println("=============== cri userid"+cri.getUId() + "===============");
+      UserPageVO pageVO = new UserPageVO(cri, userDao.getMTotal(cri)); //(기준, 토탈)
+      
+      model.addAttribute("pageVO", pageVO); //페이지네이션전달   
 
-		vo.setUId((String) session.getAttribute("sessionId"));
-		model.addAttribute("user", userDao.userSelectOne(vo));
+      model.addAttribute("mvList", userDao.mvRList(cri));
 
-		return "user/mvReservList";
-	}
+      vo.setUId((String) session.getAttribute("sessionId"));
+      model.addAttribute("user", userDao.userSelectOne(vo));
 
-	@RequestMapping("pfReservList.do")
-	public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, UserVO vo,
-			UserCriteriaVO cri) {
+      return "user/mvReservList";
+   }
 
-		cri.setUId((String)session.getAttribute("sessionId"));
-		UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
-		
-		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
+   @RequestMapping("pfReservList.do")
+   public String pfReservList(Model model, HttpSession session, PerformanceReservationVO pvo, UserVO vo,
+         UserCriteriaVO cri) {
 
-		model.addAttribute("pfList", userDao.pfRList(cri));
+      cri.setUId((String)session.getAttribute("sessionId"));
+      UserPageVO pageVO = new UserPageVO(cri, userDao.getFTotal(cri)); //(기준, 토탈)
+      
+      model.addAttribute("pageVO", pageVO); //페이지네이션전달   
 
-		vo.setUId((String) session.getAttribute("sessionId"));
-		model.addAttribute("user", userDao.userSelectOne(vo));
-		return "user/pfReservList";
-	}
+      model.addAttribute("pfList", userDao.pfRList(cri));
 
-	
-//	userBuyList.do 경로의 메소드가 3개 존재. (협의해서 하나로 줄이기)
-	
-	@RequestMapping("/userBuyList.do")
-	public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
-			UserPointViewVo uvo) {
+      vo.setUId((String) session.getAttribute("sessionId"));
+      model.addAttribute("user", userDao.userSelectOne(vo));
+      return "user/pfReservList";
+   }
 
-		mvo.setUId((String) session.getAttribute("sessionId"));
-		pvo.setUId((String) session.getAttribute("sessionId"));
-		uvo.setUId((String) session.getAttribute("sessionId"));
+   
+//   userBuyList.do 경로의 메소드가 3개 존재. (협의해서 하나로 줄이기)
+   
+   @RequestMapping("/userBuyList.do")
+   public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
+         UserPointViewVo uvo) {
 
-		model.addAttribute("userPoint", userDao.userPoint(uvo));
+      mvo.setUId((String) session.getAttribute("sessionId"));
+      pvo.setUId((String) session.getAttribute("sessionId"));
+      uvo.setUId((String) session.getAttribute("sessionId"));
 
-		model.addAttribute("list3", userDao.pointBuyList(uvo));
-		model.addAttribute("list2", movieDao.mvBuyList(mvo));
-		model.addAttribute("list1", perDao.pfBuyList(pvo));
-		return "user/userBuyList";
-	}
+      model.addAttribute("userPoint", userDao.userPoint(uvo));
 
-//	@RequestMapping("/userBuyList.do")
-//	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
-//		cri.setUId((String)session.getAttribute("sessionId"));
-//		PointPageVO pVO = new PointPageVO(cri,movieDao.mvBuyTotal(cri));
-//		model.addAttribute("pVO", pVO);
-//		model.addAttribute("list1", perDao.pfBuyList2(cri));
-//		model.addAttribute("list2", movieDao.mvBuyList2(cri));
-//		
-//		
-//		
-//		PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
-//		model.addAttribute("pageVO", pageVO); //페이지네이션전달	
-//		model.addAttribute("list3", userDao.pointBuyList2(cri));
-//		
-//		vo.setUId((String)session.getAttribute("sessionId"));
-//		model.addAttribute("user", userDao.userSelectOne(vo));
-//		return "user/userBuyList";
+      model.addAttribute("list3", userDao.pointBuyList(uvo));
+      model.addAttribute("list2", movieDao.mvBuyList(mvo));
+      model.addAttribute("list1", perDao.pfBuyList(pvo));
+      return "user/userBuyList";
+   }
+
+//   @RequestMapping("/userBuyList.do")
+//   public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
+//      cri.setUId((String)session.getAttribute("sessionId"));
+//      PointPageVO pVO = new PointPageVO(cri,movieDao.mvBuyTotal(cri));
+//      model.addAttribute("pVO", pVO);
+//      model.addAttribute("list1", perDao.pfBuyList2(cri));
+//      model.addAttribute("list2", movieDao.mvBuyList2(cri));
+//      
+//      
+//      
+//      PointPageVO pageVO = new PointPageVO(cri,userDao.pointBuyTotal(cri)); //(기준, 토탈)
+//      model.addAttribute("pageVO", pageVO); //페이지네이션전달   
+//      model.addAttribute("list3", userDao.pointBuyList2(cri));
+//      
+//      vo.setUId((String)session.getAttribute("sessionId"));
+//      model.addAttribute("user", userDao.userSelectOne(vo));
+//      return "user/userBuyList";
   
 //@RequestMapping("/userBuyList.do")
 //   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
@@ -329,37 +324,38 @@ public class UserController {
 //      return "user/userBuyList";
 //   }
 
-	@RequestMapping("/userPointList.do")
-	public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
-		cri.setUId((String) session.getAttribute("sessionId"));
-		PointPageVO pageVO = new PointPageVO(cri, userDao.pointBuyTotal(cri)); // (기준, 토탈)
-		model.addAttribute("pageVO", pageVO); // 페이지네이션전달
-		model.addAttribute("list3", userDao.pointBuyList2(cri));
+   @RequestMapping("/userPointList.do")
+   public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+      cri.setUId((String) session.getAttribute("sessionId"));
+      PointPageVO pageVO = new PointPageVO(cri, userDao.pointBuyTotal(cri)); // (기준, 토탈)
+      model.addAttribute("pageVO", pageVO); // 페이지네이션전달
+      model.addAttribute("list3", userDao.pointBuyList2(cri));
 
-		vo.setUId((String) session.getAttribute("sessionId"));
-		model.addAttribute("user", userDao.userSelectOne(vo));
-		return "user/userPointList";
-	}
+      vo.setUId((String) session.getAttribute("sessionId"));
+      model.addAttribute("user", userDao.userSelectOne(vo));
+      return "user/userPointList";
+   }
 
-	@RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
-	@ResponseBody
-	public String loginChk(UserVO userVO, @RequestParam("UId") String UId) {
-		userVO = userDao.loginChk(userVO);
-		String address = userVO.getAddr();
-		System.out.println(address);
-		return address;
-	}
+   @RequestMapping(value = "/loginChk", produces = "application/text; charset=utf8")
+   @ResponseBody
+   public String loginChk(UserVO userVO, @RequestParam("UId") String UId) {
+      userVO = userDao.loginChk(userVO);
+      String address = userVO.getAddr();
+      System.out.println(address);
+      return address;
+   }
 
-//	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
-//		return "user/userUpdateForm";
+//   public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
+//      return "user/userUpdateForm";
 
-//	}
+//   }
 
-//	@RequestMapping("/companyMyPage.do")
-//	public String companyMyPage() {
-//		return "companyMyPage/companyMyPage";
-//	}
+//   @RequestMapping("/companyMyPage.do")
+//   public String companyMyPage() {
+//      return "companyMyPage/companyMyPage";
+//   }
 
+<<<<<<< HEAD
 	// 아이디 찾기
 	@RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
 	@ResponseBody
@@ -367,16 +363,27 @@ public class UserController {
 		String result = userDao.searchId(name, phone);
 		return result;
 	}
+=======
+   // 아이디 찾기
+   @RequestMapping(value = "/userSearch.do", method = RequestMethod.POST)
+   @ResponseBody
+   public String userIdSearch(@RequestParam("name") String name, @RequestParam("phone") String phone) {
 
-	// 비밀번호 찾기 메일 발송
-	
+      String result = userDao.searchId(name, phone);
+
+      return result;
+   }
+>>>>>>> 4292e8750da24050ea149e013882bd4f7dca1a1e
+
+   // 비밀번호 찾기 메일 발송
+   
     @RequestMapping(value = "/findpw.do", produces = "application/x-www-form-urlencoded; charset=UTF-8")
     @ResponseBody
     public String findPwPOST(@ModelAttribute UserVO vo, @RequestParam("id") String Id) throws Exception {
-    	System.out.println(Id);
-    	vo.setUId(Id);
+       System.out.println(Id);
+       vo.setUId(Id);
         if (!userDao.findPw(vo)) {
-        	System.out.println(vo);
+           System.out.println(vo);
             return "해당되는 아이디가 존재하지 않습니다.";
         }
         return "해당 메일로 임시 비밀번호가 전송되었습니다.";
