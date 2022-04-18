@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.third.prj.movie.service.MovieService;
 import com.third.prj.movie.service.MovieVO;
+import com.third.prj.performance.service.PerformanceVO;
 import com.third.prj.search.service.SearchService;
 import com.third.prj.search.service.SearchVO;
 
@@ -47,10 +48,12 @@ public class SearchController {
 		movieDao.popularSearch(vo);
 		System.out.println("-------------------------"+SearchName);
 		System.out.println("=========================="+vo);
-		System.out.println("**************************"+movieDao.searchAll(SearchName));
 		
-		List<MovieVO> list = movieDao.searchAll(SearchName);
+		
+		List<MovieVO> list = movieDao.movieSearch(SearchName);
+		List<PerformanceVO> list2 = movieDao.perSearch(SearchName);
 		model.addAttribute("searchName", list);
+		model.addAttribute("searchName2", list2);
 
 		
 		return "user/searchList";

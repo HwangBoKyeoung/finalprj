@@ -28,7 +28,7 @@
 	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieMap">
 		<result column="MV_NO" property="mvNo"/>
 		<result column="NAME" property="name"/>
-		<result column="GENRE" property="startDate"/>
+		<result column="GENRE" property="genre"/>
 		<result column="DIRECTOR" property="director"/>
 		<result column="RATING" property="rating"/>
 		<result column="DISTRIBUTOR" property="distributor"/>

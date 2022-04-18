@@ -78,6 +78,13 @@
 								<input type="text" class="form-control" id="actor" name="actor" value="${mv.actor }">
 							</div>
 						</div>
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2"
+								class="col-sm-3 col-form-label">요청상태</label>
+							<div class="col-sm-9">
+								<input type="text" class="form-control" id="confirm" name="confirm" value="${mv.confirm }" readonly="readonly">
+							</div>
+						</div>
 						<div>
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">영상</label>

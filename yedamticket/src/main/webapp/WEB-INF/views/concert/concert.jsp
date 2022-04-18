@@ -19,8 +19,8 @@ body {
 	margin: 0 auto;
 }
 </style>
- <script src='resources/calender/main.js'></script>
- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src='resources/calender/main.js'></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script>
 	document.addEventListener('DOMContentLoaded', function() {
 		var request = $.ajax({
@@ -51,7 +51,7 @@ body {
 			        $.ajax({
 			        	url: "ajaxModalForm.do",
 			        	type: "post",
-			        	data: {"frDt":start},
+			        	data: {"frDt" : start},
 			        	dataType: "json",
 			        	success: function(result){
 			        		console.log(result);

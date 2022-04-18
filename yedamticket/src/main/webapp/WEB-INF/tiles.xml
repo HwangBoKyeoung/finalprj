@@ -26,6 +26,16 @@
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
 		
+		<!-- <definition name="ticketassignment" template="/WEB-INF/views/layout/layoutT.jsp">
+			<put-attribute name="title" value="MyWebSite"/>
+			<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp"/>
+			<put-attribute name="body" value="" />
+			<put-attribute name="footerTT" value="/WEB-INF/views/layout/footerTT.jsp"/>
+		</definition>
+
+		<definition name="ticket/*/*" extends="ticketassignment" >
+			<put-attribute name="body" value="/WEB-INF/views/ticket/{1}/{2}.jsp"/>
+		</definition> -->
 		
 	<!-- per -->
 		<definition name="signup" template="/WEB-INF/views/layout/layoutMail.jsp">

@@ -2,6 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.performanceschedule.mapper.PerformanceScheduleMapper">
 
+
    <resultMap type="com.third.prj.performanceschedule.service.PerformanceScheduleVO" id="pfmcMap">
       <id property="PSchNo" column="P_SCH_NO" />
       <result property="frDt" column="FRDT"/>
