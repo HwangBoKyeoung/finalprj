@@ -17,7 +17,7 @@
 		<security:intercept-url pattern="/**" access="permitAll()" />
 		<security:form-login login-page="/userLoginForm.do" authentication-success-handler-ref="customLoginSuccessHandler" />
 		<security:logout logout-url="/logout" logout-success-url="/home.do" />
-		<security:csrf disabled="false" />
+		<security:csrf disabled="true" />
 	</security:http>
 	
 	<security:authentication-manager>
