@@ -277,22 +277,22 @@ public class UserController {
 
 	
 //	userBuyList.do 경로의 메소드가 3개 존재. (협의해서 하나로 줄이기)
-	
-	@RequestMapping("/userBuyList.do")
-	public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
-			UserPointViewVo uvo) {
-
-		mvo.setUId((String) session.getAttribute("sessionId"));
-		pvo.setUId((String) session.getAttribute("sessionId"));
-		uvo.setUId((String) session.getAttribute("sessionId"));
-
-		model.addAttribute("userPoint", userDao.userPoint(uvo));
-
-		model.addAttribute("list3", userDao.pointBuyList(uvo));
-		model.addAttribute("list2", movieDao.mvBuyList(mvo));
-		model.addAttribute("list1", perDao.pfBuyList(pvo));
-		return "user/userBuyList";
-	}
+//	
+//	@RequestMapping("/userBuyList.do")
+//	public String userBuyList(Model model, HttpSession session, PerformanceViewVO pvo, MovieViewVO mvo,
+//			UserPointViewVo uvo) {
+//
+//		mvo.setUId((String) session.getAttribute("sessionId"));
+//		pvo.setUId((String) session.getAttribute("sessionId"));
+//		uvo.setUId((String) session.getAttribute("sessionId"));
+//
+//		model.addAttribute("userPoint", userDao.userPoint(uvo));
+//
+//		model.addAttribute("list3", userDao.pointBuyList(uvo));
+//		model.addAttribute("list2", movieDao.mvBuyList(mvo));
+//		model.addAttribute("list1", perDao.pfBuyList(pvo));
+//		return "user/userBuyList";
+//	}
 
 //	@RequestMapping("/userBuyList.do")
 //	public String userBuyList(Model model,HttpSession session,PointCriteriaVO cri, UserVO vo ) {
@@ -312,19 +312,19 @@ public class UserController {
 //		model.addAttribute("user", userDao.userSelectOne(vo));
 //		return "user/userBuyList";
   
-//@RequestMapping("/userBuyList.do")
-//   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
-//      cri.setUId((String) session.getAttribute("sessionId"));
-//      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
-//      model.addAttribute("pageVO", pageVO);
-//      model.addAttribute("list1", perDao.pfBuyList2(cri));
-//      model.addAttribute("list2", movieDao.mvBuyList2(cri));
-//
-//      vo.setUId((String) session.getAttribute("sessionId"));
-//      model.addAttribute("user", userDao.userSelectOne(vo));
-//
-//      return "user/userBuyList";
-//   }
+@RequestMapping("/userBuyList.do")
+   public String userBuyList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
+      cri.setUId((String) session.getAttribute("sessionId"));
+      PointPageVO pageVO = new PointPageVO(cri, perDao.pfBuyTotal(cri));
+      model.addAttribute("pageVO", pageVO);
+      model.addAttribute("list1", perDao.pfBuyList2(cri));
+      model.addAttribute("list2", movieDao.mvBuyList2(cri));
+
+      vo.setUId((String) session.getAttribute("sessionId"));
+      model.addAttribute("user", userDao.userSelectOne(vo));
+
+      return "user/userBuyList";
+   }
 
 	@RequestMapping("/userPointList.do")
 	public String userPointList(Model model, HttpSession session, PointCriteriaVO cri, UserVO vo) {
@@ -347,10 +347,7 @@ public class UserController {
 		return address;
 	}
 
-//	public String userUpdateForm(UserVO vo, Model model, HttpSession session) {
-//		return "user/userUpdateForm";
 
-//	}
 
 //	@RequestMapping("/companyMyPage.do")
 //	public String companyMyPage() {

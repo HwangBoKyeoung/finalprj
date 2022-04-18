@@ -91,9 +91,9 @@
 	font-family: fantasy;
 }
 
-#posterA{
-height:390px;
-width:300px;
+#posterA {
+	height: 390px;
+	width: 300px;
 }
 </style>
 <script
@@ -128,15 +128,16 @@ width:300px;
    </table> --%>
 	<div id="show"></div>
 	<div class="container">
-	<br><br>
-	<h2>전체영화</h2>
+		<br>
+		<br>
+		<h2>전체영화</h2>
 		<div class="row">
 			<c:forEach items="${searchName}" var="sN" varStatus="status">
 				<div class="col-3">
 					<div class="card">
 						<div class="poster" id="poster">
 							<input id="imgTag${status.index }" class="imgInfo" type="hidden"
-								value="${sN.fileCd}"> <img id="posterA"class="">
+								value="${sN.fileCd}"> <img id="posterA" class="">
 						</div>
 						<div class="details">
 							<br> <br>
@@ -146,9 +147,13 @@ width:300px;
 						</div>
 					</div>
 					<p id="mname">${sN.name}</p>
-					<div>
-						<button class="btnn">예매</button>
-					</div>
+					<form action="movieDetail.do" method="post">
+							<div>
+								<input type="hidden" name="docId" id="docId"
+									value="${sN.docId }">
+								<button type="submit" class="btnn">상세보기</button>
+							</div>
+						</form>
 				</div>
 			</c:forEach>
 		</div>
