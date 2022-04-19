@@ -429,25 +429,6 @@ h1 {
 					<li class="login-css-add"><a href="kakaoLogout.do">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 				<%-- </sec:authorize> --%>
 
-
-					
-				<%--<sec:authorize access="isAnonymous()"> --%>
-					<li class="login-css-add"><a href="signup_1.do">회원가입</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-				<%-- </sec:authorize>
-				<sec:authorize access="hasRole('ROLE_COMPANY')"> --%>
-					<li class="login-css-add"><a href="#">기업페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-			<%-- 	</sec:authorize>
-				<sec:authorize access="hasRole('ROLE_USER')"> --%>
-					<li class="login-css-add"><a href="userPage.do">마이페이지</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-				<%-- </sec:authorize>
-				 --%>
-				<%-- <sec:authorize access="isAnonymous()"> --%>
-					<li class="login-css-add"><a href="userLoginForm.do">로그인</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-				<%-- </sec:authorize> --%>
-			<%-- 	<sec:authorize access="isAuthenticated()"> --%>
-					<li class="login-css-add"><a href="kakaoLogout.do">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
-			<%-- 	</sec:authorize> --%>
-
 		</div>
 	</nav>
 

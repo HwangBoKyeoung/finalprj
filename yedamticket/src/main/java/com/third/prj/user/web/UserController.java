@@ -133,9 +133,11 @@ public class UserController {
 
    @RequestMapping("/userLogin.do")
    public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
+
       userDao.userSelect(vo);
       session.setAttribute("sessionId", vo.getUId());
       session.setAttribute("sessionPwd", vo.getPwd());
+
       String msg = "";
       String url = "";
       UserVO login = userDao.loginChk(vo, session);
@@ -190,7 +192,7 @@ public class UserController {
    }
 
    @RequestMapping("/userPage.do")
-   public String userPage(Model model,UserVO vo, HttpSession session,UserCriteriaVO cri,UserPointViewVo pvo) {
+   public String userPage(Model model, UserVO vo, HttpSession session, UserCriteriaVO cri, UserPointViewVo pvo, PerformanceReservationViewVO performanceReservationViewVO) {
       
       cri.setUId((String)session.getAttribute("sessionId"));
       vo.setUId((String)session.getAttribute("sessionId"));
@@ -199,7 +201,7 @@ public class UserController {
       model.addAttribute("userPoint", userDao.userPoint(pvo));
       model.addAttribute("mvList", userDao.mvRList(cri));
       model.addAttribute("pfList", userDao.pfRList(cri));
-
+      model.addAttribute("prList", userDao.prList(cri));
       model.addAttribute("user", userDao.userSelectOne(vo));
 
       return "user/userPage";
