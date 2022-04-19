@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.user.mapper.MemberMapper">
+	<select id="selectMember" resultType="com.third.prj.user.service.MemberVO" parameterType="com.third.prj.user.service.MemberVO">
+		SELECT UPPER('ROLE_'||ROLE) AS ROLE, USERNAME, PASSWORD
+		FROM MEMBERS
+		WHERE ROLE=#{role}
+		AND USERNAME=#{username}
+	</select>
+	
+	<select id="selectIdMember" resultType="com.third.prj.user.service.MemberVO" parameterType="com.third.prj.user.service.MemberVO">
+		SELECT UPPER('ROLE_'||ROLE) AS ROLE, USERNAME, PASSWORD
+		FROM MEMBERS
+		WHERE USERNAME=#{username}
+	</select>
+	
+</mapper>
