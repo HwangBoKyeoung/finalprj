@@ -68,7 +68,7 @@ public class UserController {
    @PostMapping("/signup_4.do")
    public String signUp_4(UserVO userVO, Model model, HttpServletRequest httpServletRequest) {
       String pwd = userVO.getPwd();
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String encryptedPwd = pwdEncoder.encode(pwd);
       String addr = httpServletRequest.getParameter("addr");
       String addr2 = httpServletRequest.getParameter("addr2");
