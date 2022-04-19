@@ -354,21 +354,21 @@
                </div>
             </div>
          <form action="movieReservation.do" method="post">  
-         <input type="hidden" id="docId" name="docId">
-         <!-- 무비넘버 -->
-         <input type="hidden" id="reservLoc" name="reservLoc">
-         <!-- 지역 -->
-         <input type="hidden" id="reservHall" name="reservHall">
-         <!-- 영화관 -->
-         <input type="hidden" id="UId" name="UId" value="${sessionId }">
-         <!-- 사용자 -->
-         <input type="hidden" id="schDate" name="schDate">
-         <!-- 날짜-->
-         <input type="hidden" id="schTime" name="schTime">
-         <!-- 시간 -->
-         <input type="hidden" id="seatName" name="seatName">       
-         <!-- 관객수 -->
-         <button type="submit" id="payBtn" style="display:none;" class="btn btn-warning">결제하기</button>
+	         <input type="hidden" id="docId" name="docId">
+	         <!-- 무비넘버 -->
+	         <input type="hidden" id="reservLoc" name="reservLoc">
+	         <!-- 지역 -->
+	         <input type="hidden" id="reservHall" name="reservHall">
+	         <!-- 영화관 -->
+	         <input type="hidden" id="UId" name="UId" value="${sessionId }">
+	         <!-- 사용자 -->
+	         <input type="hidden" id="schDate" name="schDate">
+	         <!-- 날짜-->
+	         <input type="hidden" id="schTime" name="schTime">
+	         <!-- 시간 -->
+	         <input type="hidden" id="seatName" name="seatName">       
+	         <!-- 관객수 -->
+	         <button type="submit" id="payBtn" style="display:none;" class="btn btn-warning">결제하기</button>
   		 </form>
           <input type="hidden" id="name" name="name">
           <input type="hidden" id="runtime" name="runtime">
@@ -628,6 +628,8 @@
 								if ($('#selectedSeat .seatGray').length > cnt) {									
 									if($(event.target).hasClass("selectedSeat")){
 										$(event.target).removeClass("selectedSeat");
+										//console.log($('#seatName').val());
+										//$('#seatName').val($('#seatName').substr(0,$('#seatName').val().length-3));
 										tdList[cnt-1].innerText = "-";
 										cnt--;
 									}else{
