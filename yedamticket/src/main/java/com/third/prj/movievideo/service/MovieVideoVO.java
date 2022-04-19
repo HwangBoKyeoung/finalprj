@@ -10,9 +10,10 @@ import lombok.ToString;
 public class MovieVideoVO {
 	
 	private int pVideoNo;
-	private String vname;
-	private String vrenames;
+	private String vName;
+	private String vRenames;
 	private int MvNo;
 	private String fileCd;
+	private String docId;
 	
 }

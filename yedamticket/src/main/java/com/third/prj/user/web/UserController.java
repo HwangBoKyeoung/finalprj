@@ -139,7 +139,7 @@ public class UserController {
       String msg = "";
       String url = "";
       UserVO login = userDao.loginChk(vo, session);
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
 
       if (login != null && pwdChk) {

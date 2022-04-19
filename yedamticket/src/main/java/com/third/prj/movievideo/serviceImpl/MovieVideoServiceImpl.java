@@ -10,11 +10,17 @@ import com.third.prj.movievideo.service.MovieVideoVO;
 public class MovieVideoServiceImpl implements MovieVideoService {
 
 	@Autowired
-	private MovieVideoMapper map;
+	private MovieVideoMapper mapper;
 	
 	@Override
 	public MovieVideoVO mvvSelect(MovieVideoVO vo) {
-		return map.mvvSelect(vo);
+		return mapper.mvvSelect(vo);
+	}
+
+	@Override
+	public int movieVideoInsert(MovieVideoVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.movieVideoInsert(vo);
 	}
 
 }
