@@ -224,12 +224,22 @@ body {
 
 .jfk {
 	position: absolute;
-	top: 32px;
-	left: 25px;
+	top: 16px;
+	left: 6px;
 	font-family: Arial;
-	font-size: 45px;
+	font-size: 25px;
 	color: #222;
+	  width: 322px;
+    white-space: normal;
+    font-weight: bold;
+	
+	
 }
+.mName{
+  
+    
+}
+
 
 .sub-content {
 	width: 100%;
@@ -241,7 +251,7 @@ body {
 .name {
 	position: absolute;
 	top: 10px;
-	left: 30px;
+	left: 8px;
 	font-family: Arial Narrow, Arial;
 	font-weight: bold;
 	font-size: 14px;
@@ -256,7 +266,7 @@ body {
 .flight {
 	position: absolute;
 	top: 10px;
-	left: 140px;
+	left: 108px;
 	font-family: Arial Narrow, Arial;
 	font-weight: bold;
 	font-size: 14px;
@@ -271,7 +281,7 @@ body {
 .gate {
 	position: absolute;
 	top: 10px;
-	left: 260px;
+	left: 204px;
 	font-family: Arial Narrow, Arial;
 	font-weight: bold;
 	font-size: 14px;
@@ -286,7 +296,7 @@ body {
 .seat {
 	position: absolute;
 	top: 10px;
-	left: 340px;
+	left: 292px;
 	font-family: Arial Narrow, Arial;
 	font-weight: bold;
 	font-size: 14px;
@@ -343,7 +353,7 @@ body {
 .jfkslip {
 	font-size: 30px;
 	top: 10px;
-	left: 420px;
+	left: 345px;
 }
 
 .airlineslip {
@@ -519,7 +529,9 @@ html, body {
 					<span class="airline">YEDAM BOX</span> 
 					<span class="airline airlineslip">YEDAM BOX</span>
 					<div class="content">
-						<span class="jfk" id="mvName"></span> <span class="jfk jfkslip">
+					<div class="mName">
+						<span class="jfk" id="mvName"></span> </div><span class="jfk jfkslip">
+						
 							<img
 							src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fcodepen.io%2FMitchES%2Fpen%2FoezJBZ&chs=180x180&choe=UTF-8&chld=L|2"
 							width="160px">

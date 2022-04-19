@@ -20,7 +20,7 @@
 					<input type="hidden" name="mvNo" id="mvNo" value="${del.mvNo }">
 					
 					<p class="card-description"></p>
-					<form class="forms-sample" action="deleteRequestUpdate.do" method="post">
+					<form class="forms-sample" action="deleteRequestMVUpdate.do" method="post">
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }" >
 						<div class="form-group row">
 							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">삭제신청 사유</label>

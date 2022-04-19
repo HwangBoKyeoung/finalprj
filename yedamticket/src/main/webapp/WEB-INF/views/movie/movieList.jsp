@@ -31,7 +31,7 @@ h1 {
 	margin: auto;
 	margin-bottom: 35px;
 	margin-right: 20px;
-	padding: 0 50px;
+	padding: 0 30px;
 	text-align: center;
 	line-height: 34px;
 	color: white;
@@ -221,7 +221,7 @@ hr {
 						</div>
 					</div>
 					<p id="mname">${movie.name}</p>
-					<div>
+					<div style="display: -webkit-inline-box;">
 						<form action="movieDetail.do" method="post">
 							<input type="hidden" name="docId" id="docId"
 								value="${movie.docId }">
@@ -291,8 +291,6 @@ hr {
 	       var split=(fileCd1[i].defaultValue).split('|');
 	       rPoster1[i].setAttribute('src',split[0]);
 	    }
-		//	content 글자 자르기(이미지 위에 보이는 내용부분)
-		$(".pbox").substr(0, 20);
 	</script>
 
 </body>

@@ -33,9 +33,8 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	/*
-	 * @Inject private BCryptPasswordEncoder pwdEncoder;
-	 */
+//	@Inject
+//	private BCryptPasswordEncoder pwdEncoder;
 
 	@Override
 	public int userInsert(UserVO vo) {

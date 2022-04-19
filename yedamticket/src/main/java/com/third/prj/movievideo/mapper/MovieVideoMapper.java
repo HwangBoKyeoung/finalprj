@@ -7,4 +7,7 @@ public interface MovieVideoMapper {
 //	int PVideoUpdate(PerformanceVideoVO vo);
 	// performanceVideo조회 - 22/04/01(RJH)
 	MovieVideoVO mvvSelect(MovieVideoVO vo);
+	
+	//비디오 업로드
+	int movieVideoInsert(MovieVideoVO vo);
 }

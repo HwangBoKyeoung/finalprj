@@ -44,6 +44,7 @@
       <result property="chargeDt" column="CHARGEDT" />
       <result property="UId" column="U_ID" />
       <result property="point" column="POINT" />
+      <result property="payNo" column="PAY_NO"/>
    </resultMap>
    
    <resultMap type="hashmap" id="procedureCall"/>
@@ -224,6 +225,7 @@
       select *
       from userPointView
       where u_id = #{UId}
+      ORDER BY PAY_NO DESC
    </select>
  
    <select id="mvRList" resultMap="MovieReservMap">
@@ -377,7 +379,7 @@
       from userPointView
       where u_id = #{UId} ) A )  
          WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
-         ORDER BY CHARGEDT DESC
+         ORDER BY PAY_NO DESC
       ]]>
    </select>
 
