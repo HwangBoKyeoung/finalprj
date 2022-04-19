@@ -117,6 +117,7 @@
 		INSERT INTO DELETE_REQUEST(DEL_REQ_NO,DELDT,DELETE_CD,CONTENT,MV_NO,C_ID)
 		VALUES(#{delReqNo},#{delDt},#{deleteCd},#{content},#{mvNo},#{CId})		
 	</insert>
+	
 	<!-- 삭제신청 현황 -->
 	<select id="companyMyDeletePerforList" resultMap="delrequestMap">
 	<![CDATA[
@@ -124,7 +125,7 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,P.C_ID
+				SELECT P.P_NO,P.NAME,P.ACTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,P.C_ID,D.REFUSAL
 				FROM PERFORMANCE P, DELETE_REQUEST D
 				WHERE P.P_NO = D.P_NO
 				AND
@@ -168,7 +169,7 @@
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'LOC'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 				ORDER BY P.P_NO DESC )A) 
@@ -177,12 +178,12 @@
 	</select>
 	<select id="getTotalPerfor" resultType="int">
 		SELECT COUNT(*)
-		FROM PERFORMANCE P
-		LEFT OUTER JOIN DELETE_REQUEST D
-		ON (P.P_NO=D.P_NO)
-		WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
-		AND 
-		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
+				FROM PERFORMANCE P
+				LEFT OUTER JOIN DELETE_REQUEST D
+				ON (P.P_NO=D.P_NO)
+				WHERE D.DELETE_CD = '거절' OR D.DELETE_CD IS NULL
+				AND 
+				<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
@@ -195,7 +196,7 @@
 		FROM ( 
 			SELECT ROWNUM RN, A.*
 			FROM (
-			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,M.C_ID
+			SELECT M.MV_NO,M.NAME,M.DIRECTOR,D.CONTENT,D.DELETE_CD,D.DEL_REQ_NO,M.C_ID,D.REFUSAL
 				FROM MOVIE M, DELETE_REQUEST D
 				WHERE M.MV_NO = D.MV_NO
 				AND
@@ -207,7 +208,7 @@
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
  				ORDER BY M.MV_NO DESC )A)
-		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		WHERE RN > (#{pageNum}-1) * #{amount} AND RN <= #{pageNum} * #{amount}
  		]]>
 	</select>
 	

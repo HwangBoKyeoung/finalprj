@@ -288,43 +288,43 @@ iframe {
 </style>
 </head>
 <body>
-	<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
-			<div class="p-4 pt-5">
-				<h1>
-					<a href="companyMyPage.do" class="logo">COMPANY PAGE</a>
-				</h1>
-				<ul class="list-unstyled components mb-5">
+<div class="wrapper d-flex align-items-stretch">
+      <nav id="sidebar">
+         <div class="custom-menu">
+            <button type="button" id="sidebarCollapse" class="btn btn-primary">
+               <i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
+            </button>
+         </div>
+         <div class="p-4 pt-5">
+            <h1>
+               <a href="companyMyPage.do" class="logo">COMPANY PAGE</a>
+            </h1>
+            <ul class="list-unstyled components mb-5">
 					<li><a href="companyMovieList.do">영화 목록</a></li>
 					<li><a href="companyPerforList.do">공연 목록</a></li>
 					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
-					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
-					<li><a href="#">승인 요청</a></li>
+					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
+					<li><a href="#">승인 요청</a></li> 
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
-				<div class="form-group d-flex">
-					<div class="icon">
-						<span class="icon-paper-plane"></span>
-					</div>
-				</div>
-			</div>
-		</nav>
-
-		<div class="col-lg-12 grid-margin stretch-card">
+            <div class="form-group d-flex">
+               <div class="icon">
+                  <span class="icon-paper-plane"></span>
+               </div>
+            </div>
+         </div>
+      </nav>
+	<div class="col-lg-12 grid-margin stretch-card">
 			<div class="card">
 
 				<div class="card-body">
 					<h4 class="card-title">Performance Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMyDeletePerforList.do">
+						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
@@ -339,30 +339,27 @@ iframe {
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
-								<input type="hidden" name="sessionId" value="${sessionId}">
+							</div>
 						</div>
-					
+					</form>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>공연 이름</th>
-							<th>출연자</th>
 							<th>삭제 사유</th>
-							<th>기업</th>
 							<th>신청 현황</th>
+							<th>거절 사유</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
-							<c:if test="${per.performanceVO.CId eq sessionId}">
-								<tr>
-									<td>${per.performanceVO.name}</td>
-									<td>${per.performanceVO.actor}</td>
-									<td>${per.performanceVO.content}</td>
-									<td>${per.performanceVO.CId}</td>
-									<td>${per.deleteCd}</td>
-								</tr>
-							</c:if>
+							<tr>
+								<td>${per.performanceVO.name}</td>
+								<td>${per.performanceVO.content}</td>
+								<td>${per.deleteCd}</td>
+								<td>${per.refusal }</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -391,11 +388,9 @@ iframe {
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
-				</form>
-				</div>
 			</div>
 		</div>
-	</div>
+		</div>
 	<script>
       let actionForm = $("#actionForm");
       $("#content a").on("click", function(e){

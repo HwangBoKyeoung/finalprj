@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Inject
+	@Autowired
 	private BCryptPasswordEncoder pwdEncoder;
 
 	@Override

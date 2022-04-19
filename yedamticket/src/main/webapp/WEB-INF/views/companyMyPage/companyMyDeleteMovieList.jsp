@@ -24,8 +24,9 @@
 </head>
 <style>
 .card {
-    width: 85%;
+	width: 85%;
 }
+
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -305,7 +306,7 @@ iframe {
 					<li><a href="goodsPage.do">굿즈 목록</a></li>
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
-					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
+					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
 					<li><a href="#">승인 요청</a></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
@@ -325,6 +326,7 @@ iframe {
 					<h4 class="card-title">Movie Delete List</h4>
 					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyMyDeleteMovieList.do">
+						<div class="col-10">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
@@ -339,30 +341,29 @@ iframe {
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
-								<input type="hidden" name="CId" value="${sessionId}">
 							</div>
-					
+						</div>
+					</form>
+				</div>
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>영화 이름</th>
 							<th>영화 감독</th>
 							<th>삭제 사유</th>
-							<th>기업</th>
 							<th>삭제 처리</th>
+							<th>거절 사유</th>
 						</tr>
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${dels }" var="del">
-							<c:if test="${del.movieVO.CId eq sessionId}">
-								<tr>
-									<td>${del.movieVO.name}</td>
-									<td>${del.movieVO.director}</td>
-									<td>${del.movieVO.content}</td>
-									<td>${del.movieVO.CId}</td>
-									<td>${del.deleteCd}</td>
-								</tr>
-							</c:if>
+							<tr>
+								<td>${del.movieVO.name}</td>
+								<td>${del.movieVO.actor}</td>
+								<td>${del.movieVO.content}</td>
+								<td>${del.deleteCd}</td>
+								<td>${del.refusal }</td>
+							</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -391,34 +392,32 @@ iframe {
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
-				</form>
-				</div>
 			</div>
 		</div>
 	</div>
 	<script>
-      let actionForm = $("#actionForm");
-      $("#content a").on("click", function(e){
-         e.preventDefault();
-         console.log("click");
-         console.log($(this).attr("href"));
-         actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-         
-         actionForm.submit();
-      });
-      
-      let searchForm = $("#searchForm");
-      $("#searchForm button").on("click", function(e){
-         if(!searchForm.find("input[name='searchName']").val()){
-            alert('키워드를 입력하세요.');
-            return false;
-         }
-         
-         searchForm.find("input[name='pageNum']").val("1");
-         e.preventDefault();
-         
-         searchForm.submit();
-      })
-   </script>
+		let actionForm = $("#actionForm");
+		$("#content a").on("click", function(e) {
+			e.preventDefault();
+			console.log("click");
+			console.log($(this).attr("href"));
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+
+			actionForm.submit();
+		});
+
+		let searchForm = $("#searchForm");
+		$("#searchForm button").on("click", function(e) {
+			if (!searchForm.find("input[name='searchName']").val()) {
+				alert('키워드를 입력하세요.');
+				return false;
+			}
+
+			searchForm.find("input[name='pageNum']").val("1");
+			e.preventDefault();
+
+			searchForm.submit();
+		})
+	</script>
 </body>
 </html>

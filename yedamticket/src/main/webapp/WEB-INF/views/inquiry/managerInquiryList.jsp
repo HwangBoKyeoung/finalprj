@@ -22,6 +22,7 @@
 								<th>TITLE</th>
 								<th>DATE</th>
 								<th>ID</th>
+								<th>KIND</th>
 							</tr>
 						</thead>
 						<tbody id="body">
@@ -32,6 +33,7 @@
 									<td>${inq.title}</td>
 									<td>${inq.inDt }</td>
 									<td>${inq.UId }</td>
+									<td>${inq.kind }</td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -65,8 +67,8 @@
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="TITLE"
 									${pageVO.cri.searchType eq 'TITLE' ? 'selected' : '' }>제목</option>
-								<option value="UID"
-									${pageVO.cri.searchType eq 'UID' ? 'selected' : '' }>아이디</option>
+								<option value="KIND"
+									${pageVO.cri.searchType eq 'KIND' ? 'selected' : '' }>유형</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }" class="form-control"
 								aria-label="Text input with dropdown button">
