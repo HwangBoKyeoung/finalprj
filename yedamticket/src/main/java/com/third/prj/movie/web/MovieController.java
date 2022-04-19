@@ -93,15 +93,15 @@ public class MovieController {
 	// 댓글 입력
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
-	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
+	public String movieReplyInsert(Model model, MovieReplyVO vo) {
 
 		int n = movieReplyDao.movieReplyInsert(vo);
 		// select key 사용 바꾸기
 		if (n != 0) {
-			System.out.println(Integer.toString(vo.getMvReNo()));
-			return movieReplyDao.movieReplyList(vo);
+
+			return "success";
 		} else {
-			return null;
+			return "fail";
 		}
 	}
 
