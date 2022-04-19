@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
-		<form action="managerCompany.do">
+		
 			<div class="card-body">
 				<h4 class="card-title">Company List</h4>
 				<p class="card-description">기업회원 리스트</p>
@@ -25,8 +26,8 @@
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${coms }" var="com">
-							<tr onclick="location.href='managerCompanySelect.do?CId=${com.cid}' ">
-								<td>${com.cid}</td>
+							<tr onclick="location.href='managerCompanySelect.do?CId=${com.CId}' ">
+								<td>${com.CId}</td>
 								<td>${com.name}</td>
 								<td>${com.email}</td>
 								<td>${com.phone}</td>
@@ -35,25 +36,32 @@
 					</tbody>
 				</table>
 				<br>
+				<form id="actionForm" action="managerCompany.do" method="get">
+					<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+                    <input type="hidden" name="amount" value="${pageVO.amount }">
+                    <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
+                    <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
+               </form>
 				<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
-						<!-- 이전버튼 활성화 여부 -->
-						<a href="managerCompany.do?pageNum=${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn btn-secondary"></a>
-					</c:if>
-					<!-- pageNum -->
-					<c:forEach var="num" begin="${pageVO.startPage }"
-						end="${pageVO.endPage }">
-						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="managerCompany.do?pageNum=${num }"> <input type="button"
-							value="${num }" class="btn btn-secondary"></a>
-					</c:forEach>
-					<!-- 다음버튼 -->
-					<c:if test="${pageVO.next }">
-						<a href="managerCompany.do?pageNum=${pageVO.endPage+1 }"> <input
-							type="button" value="다음" class="btn btn-secondary"></a>
-					</c:if>
+                     <!-- 이전버튼 활성화 여부 -->
+                     <a href="${pageVO.startPage-1 }"> <input
+                        type="button" value="이전" class="btn btn-secondary"></a>
+                  </c:if>
+                  <!-- pageNum -->
+                  <c:forEach var="num" begin="${pageVO.startPage }"
+                     end="${pageVO.endPage }">
+                     <a class="${pageVO.pageNum == num ? 'active': '' }"
+                        href="${num }"> <input type="button"
+                        value="${num }" class="btn btn-secondary"></a>
+                  </c:forEach>
+                  <!-- 다음버튼 -->
+                  <c:if test="${pageVO.next }">
+                     <a href="${pageVO.endPage+1 }"> <input
+                        type="button" value="다음" class="btn btn-secondary"></a>
+                  </c:if>
 				</div>
+				<form action="managerCompany.do">
 				<div class="col-3">
 					<div class="input-group mb-3" align="right">
 						<select name="searchType" class="btn btn-outline-secondary">
@@ -74,10 +82,42 @@
 						<input type="hidden" name="amount" value="${pageVO.amount }">
 					</div>
 				</div>
-			</div>
 			</form>
+			</div>
 		</div>
 	</div>
+<script>
 
+	let frm1 = $("input[name='pageNum']").val();
+	let frm2 = $("input[name='amount']").val();
+	let frm3 = $("input[name='searchType']").val();
+	let frm4 = $("input[name='searchName']").val();
+	
+	console.log(frm1+', '+frm2+', '+frm3+', '+frm4);
+	
+	console.log()
+      let actionForm = $("#actionForm");
+      $("#content a").on("click", function(e){
+         e.preventDefault();
+         console.log("click");
+         console.log($(this).attr("href"));
+         actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+         
+         actionForm.submit();
+      });
+      
+      let searchForm = $("#searchForm");
+      $("#searchForm button").on("click", function(e){
+         if(!searchForm.find("input[name='searchName']").val()){
+            alert('키워드를 입력하세요.');
+            return false;
+         }
+         
+         searchForm.find("input[name='pageNum']").val("1");
+         e.preventDefault();
+         
+         searchForm.submit();
+      })
+   </script>
 </body>
 </html>

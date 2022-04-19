@@ -16,7 +16,7 @@
 					<tbody>
 						<tr>
 							<th>회원 아이디</th>
-							<td>${com.cid}</td>
+							<td>${com.CId}</td>
 						</tr>
 						<tr>
 							<th>기업 이메일</th>
@@ -50,6 +50,7 @@
 				</table>
 			</div>
 		</div>
+		
 	</div>
 
 </body>

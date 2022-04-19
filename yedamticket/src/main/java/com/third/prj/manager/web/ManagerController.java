@@ -68,7 +68,7 @@ public class ManagerController {
    public String managerUpdate(ManagerVO vo) {
       int n = managerDao.managerUpdate(vo);
       if (n != 0) {
-         return "redirect:manager.do";
+         return "redirect:managerSelet.do?MId="+ vo.getMId();
       }
       return "manager/manager/managerError";
    }

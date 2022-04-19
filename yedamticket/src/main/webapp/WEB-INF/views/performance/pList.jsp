@@ -18,6 +18,7 @@
 *{
 font-family: 'Gowun Dodum', sans-serif;
 }
+input::-webkit-input-placeholder { color: black; }
 </style>
 
 <body class="events-list-page">
@@ -117,6 +118,8 @@ font-family: 'Gowun Dodum', sans-serif;
                     <div class="upcoming-events-list">
                         
 					<c:forEach items="${Eperformance }" var="ep">
+					<div class="col-3">
+					<div class="card">
                         <div class="upcoming-event-wrap flex flex-wrap justify-content-between align-items-center">
                             <figure class="events-thumbnail">
                                 <a href="#"><img src="/upload/${ep.renames }"></a>
@@ -140,7 +143,8 @@ font-family: 'Gowun Dodum', sans-serif;
                                 <a href="#">Buy Tikets</a>
                             </footer>
                         </div>
-
+                        </div>
+                        </div>
                        </c:forEach>
                         </div>
                     </div>
