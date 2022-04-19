@@ -16,4 +16,5 @@ public class UserPointViewVo {
 	private Date payDt;
 	private int tempPoint;
 	private String buyCtntCd;
+	private int payNo;
 }

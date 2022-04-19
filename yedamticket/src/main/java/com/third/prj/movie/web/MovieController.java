@@ -84,7 +84,6 @@ public class MovieController {
 	@RequestMapping("/movieDetail.do")
 	public String movieDetail(Model model, MovieVO vo, MovieReplyVO rvo) {
 		System.out.println("*****************************docid************************************" + rvo.getDocId());
-		model.addAttribute("star", movieReplyDao.getStar(rvo));
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
 		model.addAttribute("movie", vo);
@@ -94,15 +93,15 @@ public class MovieController {
 	// 댓글 입력
 	@PostMapping("/movieReplyInsert.do")
 	@ResponseBody
-	public String movieReplyInsert(Model model, MovieReplyVO vo) {
+	public List<MovieReplyVO> movieReplyInsert(Model model, MovieReplyVO vo) {
 
 		int n = movieReplyDao.movieReplyInsert(vo);
 		// select key 사용 바꾸기
 		if (n != 0) {
-			
-			return "success";
+			System.out.println(Integer.toString(vo.getMvReNo()));
+			return movieReplyDao.movieReplyList(vo);
 		} else {
-			return "fail";
+			return null;
 		}
 	}
 
@@ -177,8 +176,8 @@ public class MovieController {
 		try {
 			FileCopyUtils.copy(file.getBytes(), target);
 			vo.setFileCd("PF_VIDEO");
-			vvo.setVname(fileName);
-			vvo.setVrenames(targetFile);
+			vvo.setVName(fileName);
+			vvo.setVRenames(targetFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -192,8 +191,8 @@ public class MovieController {
 		map.put("mv_content", vo.getContent());
 		map.put("mv_cid", vo.getCId());
 		map.put("mv_actor", vo.getActor());
-		map.put("mv_vname", vvo.getVname());
-		map.put("mv_vrname", vvo.getVrenames());
+		map.put("mv_vname", vvo.getVName());
+		map.put("mv_vrname", vvo.getVRenames());
 		map.put("mv_cd", vo.getFileCd());
 
 		movieDao.procedureCall(map);
@@ -220,13 +219,12 @@ public class MovieController {
 		model.addAttribute("user", userDao.userSelectOne(uvo));
 		model.addAttribute("movie", movieDao.mDetail(detailvo));
 
-		return "movie/movieReservationForm";
+		return "user/movie/movieReservationForm";
 	}
 
 	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
 	@RequestMapping("/moviePay.do")
-	@ResponseBody
-	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO,UserVO usersVO) {
+	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO) {
 		movieReservationDao.movieReservationInsert(vo);
 		vo=movieReservationDao.movieReservationSelect(vo);
 		System.out.println("reservno==============================="+vo.getMvReservNo());
@@ -234,15 +232,11 @@ public class MovieController {
 		
 		pointVO.setPayNo(vo.getMvReservNo());
 		pointVO.setUId(vo.getUId());
-		userDao.payPoint(usersVO);
-		movieDao.audienceInsert(movieVO);
-		int n=pointDao.payInsert(pointVO);
-		if(n != 0) {
-			return "success";
-		}else {
-			return "fail";
-		}
 		
+		movieDao.audienceInsert(movieVO);
+		pointDao.payInsert(pointVO);
+		
+		return "redirect:home.do";
 	}
 
 	@RequestMapping("/movieInsertForm.do")
@@ -251,15 +245,20 @@ public class MovieController {
 	}
 
 	@RequestMapping("/movieInsert.do")
-	public String movieInsert(MovieVO vo, MultipartFile file, HttpServletRequest request) {
-
+	public String movieInsert(MovieVO vo, MovieVideoVO vvo, MultipartFile file,MultipartFile fileV, HttpServletRequest request) {
+		
+		String fileNameV = fileV.getOriginalFilename();//비디오 
+		String idV = UUID.randomUUID().toString();
+		
 		String fileName = file.getOriginalFilename(); // 원본파일명
 		String id = UUID.randomUUID().toString(); // 고유한 유니크 아이디 생성
+		
 		System.out.println("fileName : " + fileName);
 		System.out.println("id : " + id);
 
 		String load = "C/DEV/apache-tomcat-9.0.56/webapps/upload";
-
+		
+		String targetFileV = idV +fileNameV.substring(fileNameV.lastIndexOf("."));
 		String targetFile = id + fileName.substring(fileName.lastIndexOf(".")); // 마지막으로 만나느 .을 출력, 업로드시 같은 이름의 파일을 덮어써
 																				// 버리는 현상 방지
 		System.out.println("targetFile : " + targetFile);
@@ -268,6 +267,7 @@ public class MovieController {
 		// File(request.getSession().getServletContext().getRealPath("upload"),targetFile);
 		// File target = new
 		// File(request.getServletContext().getRealPath("upload"),targetFile);
+		File targetV = new File(upLoadPath,targetFileV);
 		File target = new File(upLoadPath, targetFile);
 
 		System.out.println("---------------------------------------------------------");
@@ -276,20 +276,28 @@ public class MovieController {
 		System.out.println("target :" + target);
 
 		try {
+			FileCopyUtils.copy(fileV.getBytes(), targetV);
 			FileCopyUtils.copy(file.getBytes(), target);
 			System.out.println("copy suss");
-
+			
+			vvo.setVName(fileNameV);
+			vvo.setVRenames(targetFileV);
+			
 			vo.setFileCd(fileName);
 			vo.setRenames(targetFile);
+			mvvDao.movieVideoInsert(vvo);
 			movieDao.movieInsert(vo);
-			System.out.println("insert suss");
+			System.out.println("==================================================");
+			System.out.println("insert success");
+			System.out.println("==================================================");
 
 		} catch (Exception e) {
 			System.out.println("error");
 
 			e.printStackTrace();
 		}
-		return "redirect:movieList.do";
+		return "redirect:movieInsertForm.do";
+		
 	}
 	
 	/*

@@ -33,8 +33,9 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	private SqlSession sqlSession;
 	
-	@Inject
-	private BCryptPasswordEncoder pwdEncoder;
+	/*
+	 * @Inject private BCryptPasswordEncoder pwdEncoder;
+	 */
 
 	@Override
 	public int userInsert(UserVO vo) {
@@ -224,7 +225,7 @@ public class UserServiceImpl implements UserService {
 //		String pw2 = pwdEncoder.encode(pw);
 //		System.out.println(pw2);
 		
-//		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
 		vo.setPwd(pwdEncoder.encode(pw));
 		
 

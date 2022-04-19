@@ -207,14 +207,28 @@
 
 	</select>
 
-	<insert id="movieInsert">
-		<selectKey keyProperty="mvNo" resultType="int"
+	<insert id="movieInsert" parameterType="com.third.prj.user.service.UserVO">
+		 <selectKey keyProperty="mvNo" resultType="int"
 			order="BEFORE">
 			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO
 			FROM MOVIE
-		</selectKey>
-		INSERT INTO MOVIE VALUES(#{mvNo},#{name},#{genre},
-		to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
+		</selectKey> 
+		INSERT INTO MOVIE (
+							NAME,
+							GENRE,
+							STARTDATE,
+							 DIRECTOR,
+							 	RATING,
+							DISTRIBUTOR,
+							COUNTRY,
+							RUNTIME,
+							CONTENT,
+							C_ID,
+							ACTOR,
+							FILE_CD,
+							DOCID,
+							RENAMES) 
+					VALUES(#{name},#{genre},to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
 
 	<!-- <select id="searchAll" resultMap="movieResultMap" parameterType="string">
