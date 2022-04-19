@@ -357,7 +357,7 @@ iframe {
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${dels }" var="del">
-							<c:if test="${del.movieVO.CId eq sessionId}">
+							
 							<tr>
 								<td>${del.movieVO.name}</td>
 								
@@ -365,7 +365,7 @@ iframe {
 								<td>${del.deleteCd}</td>
 								<td>${del.refusal }</td>
 							</tr>
-							</c:if>
+							
 						</c:forEach>
 					</tbody>
 				</table>
