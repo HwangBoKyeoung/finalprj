@@ -1,5 +1,6 @@
 package com.third.prj.manager.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class ManagerController {
 
    @Autowired
    private ManagerService managerDao;
+   
+   //@Inject
+   //private BCryptPasswordEncoder pwdEncoder;
 
    // 관리자 리스트 페이지
    @RequestMapping("/manager.do")
@@ -41,7 +45,7 @@ public class ManagerController {
    @RequestMapping("/managerInsert.do")
    public String managerInsert(ManagerVO vo) {
       String encodedPwd = vo.getPwd();
-      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String decodedPwd = pwdEncoder.encode(encodedPwd);
       vo.setPwd(decodedPwd);
       int n = managerDao.managerInsert(vo);
@@ -100,7 +104,7 @@ public class ManagerController {
          String msg = "";
            String url = "";
          ManagerVO login = managerDao.manaLogin(vo, session);
-         BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//         BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
          boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
          
          if(login != null && pwdChk) {

@@ -111,7 +111,6 @@
 	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vrname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-	                #{mv_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
 	
@@ -139,7 +138,6 @@
 		FROM MOVIE
         WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
         AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
-        AND ROWNUM < 11  
         ]]>
 	</select>
 

@@ -360,7 +360,9 @@ $('nav a').click(function(e) {
 body {
   background: linear-gradient(to right, #3fb6a8, #7ed386);
 }
-
+*{
+font-family: 'Gowun Dodum', sans-serif;
+}
 .container {
   background: #ffffff;
   width: 700px;
@@ -377,7 +379,6 @@ body {
   float: right;
   margin-right: 12px;
   margin-top: 12px;
-  font-family: "Nunito Sans", sans-serif;
   color: #866ec766;
   font-weight: 900;
   font-size: 1.5em;
@@ -457,7 +458,6 @@ nav a:first-child {
 }
 
 h1 {
-  font-family: "Montserrat", sans-serif;
   color: #866ec766;
   font-size: 1.2em;
   margin-top: 40px;
@@ -466,7 +466,6 @@ h1 {
 
 h2 {
   color: black;
-  font-family: "Roboto", sans-serif;
   width: 80%;
   text-transform: uppercase;
   font-size: 20px;
@@ -478,7 +477,6 @@ h2 {
 p {
   border-top: 0;
   width: 80%;
-  font-family: "Montserrat", sans-serif;
   font-size: 0.9em;
   padding: 7px 0;
   color: #070707;
@@ -491,7 +489,6 @@ span {
 
 .btn {
   float: right;
-  font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   font-size: 10px;
   border: none;
@@ -504,7 +501,6 @@ span {
 
 input {
   border: 1px solid #dddddd;
-  font-family: "Roboto", sans-serif;
   padding: 2px;
   margin: 0;
 }
@@ -550,7 +546,7 @@ ${user }
           		<!-- 공연 스케쥴 넘버 -->
           		<input type="hidden" id="PSchNo" name="PSchNo" value="${sch.PSchNo }">
           		<!--아이디 -->
-          		<input type="hidden" id="UId" name="UId" value="micol1234">
+          		<input type="hidden" id="UId" name="UId" value="${sessionId }">
          		<!--차감될금액-->
 				<input type="hidden" id="pay" name="pay" >
 				<!-- 영화인지 공연인지 코드 -->
@@ -649,7 +645,6 @@ let slicePrice = price1.slice(0,-1);
      		
      	}
 	}else{
-		console.log($('#payFrm').serialize());
 		$.ajax({
 	        url: 'pPay.do',
 	        type: 'POST',
@@ -663,6 +658,7 @@ let slicePrice = price1.slice(0,-1);
 	        	  "audience":$('#audience').val()
 	        	},
 	        success: function (result) {
+	        	console.log("success");
 	            if(result == 'success'){
 	            	console.log("예약성공!");
 	            	location.href="userPage.do";

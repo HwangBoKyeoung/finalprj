@@ -171,9 +171,9 @@ public class MovieController {
 		String fileName = file.getOriginalFilename();
 		String id = UUID.randomUUID().toString();
 		String load = upLoadPath;
-		String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
-		File target = new File(load, targetFile);
 		try {
+			String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
+			File target = new File(load, targetFile);
 			FileCopyUtils.copy(file.getBytes(), target);
 			vo.setFileCd("PF_VIDEO");
 			vvo.setVName(fileName);

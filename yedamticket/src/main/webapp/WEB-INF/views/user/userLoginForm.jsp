@@ -142,7 +142,8 @@
             <div class="col-md-4 ml-auto mr-auto">
                <div class="card card-login card-plain">
                   <form class="form" action="userLogin.do" method="POST">
-                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+<%--                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> --%>
+
                      <div class="card-header text-center">
                         <div class="logo-container">
                            <img src="resources/users/img/now-logo.png" alt="">

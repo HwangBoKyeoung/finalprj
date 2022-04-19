@@ -1,5 +1,6 @@
 package com.third.prj.user.web;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -17,13 +18,10 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.movie.service.MovieService;
-import com.third.prj.movie.service.MovieViewVO;
 import com.third.prj.moviereservation.service.MovieReservVO;
 import com.third.prj.notice.service.NoticeService;
 import com.third.prj.performance.service.PerformanceService;
-import com.third.prj.performance.service.PerformanceViewVO;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
-import com.third.prj.performancereservation.service.PerformanceReservationViewVO;
 import com.third.prj.point.service.PointCriteriaVO;
 import com.third.prj.point.service.PointPageVO;
 import com.third.prj.recaptcha.VerifyRecaptcha;
@@ -52,6 +50,9 @@ public class UserController {
 
    @Autowired
    private MovieService movieDao;
+   
+   //@Inject
+   //private BCryptPasswordEncoder pwdEncoder;
 
    @RequestMapping("/signup_1.do")
    public String signUp_1() {
@@ -67,7 +68,7 @@ public class UserController {
    @PostMapping("/signup_4.do")
    public String signUp_4(UserVO userVO, Model model, HttpServletRequest httpServletRequest) {
       String pwd = userVO.getPwd();
-      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String encryptedPwd = pwdEncoder.encode(pwd);
       String addr = httpServletRequest.getParameter("addr");
       String addr2 = httpServletRequest.getParameter("addr2");
@@ -214,7 +215,7 @@ public class UserController {
    @RequestMapping("/userUpdate.do")
    public String userUpdate(UserVO vo) {
       String pwd = vo.getPwd();
-      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String encryptedPwd = pwdEncoder.encode(pwd);
       vo.setPwd(encryptedPwd);
       int n = userDao.userUpdate(vo);

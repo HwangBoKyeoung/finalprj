@@ -3,7 +3,7 @@
 
 <mapper namespace="com.third.prj.movievideo.mapper.MovieVideoMapper">
 	<select id="mvvSelect" resultType="com.third.prj.movievideo.service.MovieVideoVO">
-		SELECT p_video_no, vname, vrenames, mv_no, file_cd
+		SELECT p_video_no, vname, vrenames, mv_no
 		FROM   movie_video
 		WHERE  mv_no = #{mvNo}
 	</select>
