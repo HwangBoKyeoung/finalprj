@@ -169,7 +169,7 @@
 		 		<if test="searchType == 'ALL'">NAME LIKE '%'||#{searchName}||'%'
 					OR LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-				<if test="searchType == 'LOC'">DIRECTOR LIKE '%'||#{searchName}||'%'</if>
+				<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
 				<if test="searchType == null or searchType ==''"> 1 = 1</if>
 		<![CDATA[
 				ORDER BY P.P_NO DESC )A) 
