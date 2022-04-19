@@ -141,8 +141,8 @@
          <div class="container">
             <div class="col-md-4 ml-auto mr-auto">
                <div class="card card-login card-plain">
-                  <form class="form" action="login" method="POST">
-                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}">
+                  <form class="form" action="userLogin.do" method="POST">
+<%--                   <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"> --%>
                      <div class="card-header text-center">
                         <div class="logo-container">
                            <img src="resources/users/img/now-logo.png" alt="">
@@ -155,7 +155,7 @@
                                  class="now-ui-icons users_circle-08"></i>
                               </span>
                            </div>
-                           <input type="text" class="form-control" name = "username" placeholder="Id...">
+                           <input type="text" class="form-control" name = "UId" placeholder="Id...">
                         </div>
                         <div class="input-group no-border input-lg">
                            <div class="input-group-prepend">
@@ -163,7 +163,7 @@
                                  class="now-ui-icons objects_key-25"></i>
                               </span>
                            </div>
-                           <input type="password" placeholder="Password..." name="password"
+                           <input type="password" placeholder="Password..." name="pwd"
                               class="form-control" />
                         </div>
                         <br>

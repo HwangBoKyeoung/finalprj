@@ -79,6 +79,11 @@ textarea {
 								class="form-control"></td>
 						</tr>
 						<tr>
+							<td>동영상</td>
+							<td><input type="file" id="fileV" name="fileV" multiple="multiple" 
+								class="form-control"></td>
+						</tr>
+						<tr>
 							<td>영화 코드</td>
 							<td><input type="text" id="docId" name="docId"
 								class="form-control"></td>

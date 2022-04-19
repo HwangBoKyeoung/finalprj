@@ -49,8 +49,8 @@
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link" href="managerPerforDeleteList.do">Management</a></li>
-                  <li class="nav-item"><a class="nav-link" href="concertsales.do">Sales</a></li>
-                  <li class="nav-item"><a class="nav-link" href="concertpopularitychart.do">Popularity Chart</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforSalesChart.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforpopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
              </c:if> 

@@ -3,6 +3,7 @@ package com.third.prj.user.serviceImpl;
 import java.util.List;
 import java.util.Map;
 
+import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.mail.HtmlEmail;
@@ -31,6 +32,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private SqlSession sqlSession;
+	
+//	@Inject
+//	private BCryptPasswordEncoder pwdEncoder;
 
 	@Override
 	public int userInsert(UserVO vo) {

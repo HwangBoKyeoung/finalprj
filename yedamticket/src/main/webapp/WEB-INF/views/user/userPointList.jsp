@@ -57,6 +57,7 @@
 			<table class="table">
 				<thead>
 					<tr>
+						<th scope="col">결제번호</th>
 						<th scope="col">결제일자</th>
 						<th scope="col">사용처</th>
 						<th scope="col">포인트 충전</th>
@@ -67,6 +68,7 @@
 				<tbody>
 					<c:forEach items="${list3 }" var="point">
 						<tr class="plist">
+						<td>${point.payNo }</td>
 							<c:choose>
 								<c:when test="${point.chargeDt == null}">
 									<td>${point.payDt }</td>

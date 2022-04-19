@@ -25,11 +25,11 @@ body {
 .ticket {
 	width: 600px;
 	height: 250px;
-	background: #f8475b;
+	background: rgb(128, 61, 216);
 	border-radius: 3px;
 	box-shadow: 0 0 100px #aaa;
-	border-top: 1px solid #f8475b;
-	border-bottom: 1px solid #f8475b;
+	border-top: 1px solid rgb(128, 61, 216);
+	border-bottom: 1px solid rgb(128, 61, 216);
 }
 
 .left {
@@ -50,7 +50,7 @@ body {
 	margin-top: 8px;
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
-	border-right: 5px solid #f8475b;
+	border-right: 5px solid rgb(128, 61, 216);
 }
 
 .left li:nth-child(3), .left li:nth-child(6) {
@@ -105,14 +105,14 @@ body {
 	margin-left: 2px;
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
-	border-right: 5px solid #f8475b;
+	border-right: 5px solid rgb(128, 61, 216);
 }
 
 .left li:nth-child(14) {
 	margin-top: 7px;
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
-	border-right: 5px solid #f8475b;
+	border-right: 5px solid rgb(128, 61, 216);
 }
 
 .right {
@@ -128,7 +128,7 @@ body {
 	margin-top: 8px;
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
-	border-left: 5px solid #f8475b;
+	border-left: 5px solid rgb(128, 61, 216);
 }
 
 .right li:nth-child(3), .right li:nth-child(4), .right li:nth-child(6) {
@@ -181,7 +181,7 @@ body {
 	margin-top: 7px;
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
-	border-left: 5px solid #f8475b;
+	border-left: 5px solid rgb(128, 61, 216);
 }
 
 .ticket:after {
@@ -191,16 +191,17 @@ body {
 	top: 0px;
 	width: 2px;
 	height: 250px;
-	box-shadow: inset 0 0 0 #f8475b, inset 0 -10px 0 #B56E0A, inset 0 -20px
-		0 #f8475b, inset 0 -30px 0 #B56E0A, inset 0 -40px 0 #f8475b, inset 0
-		-50px 0 #999999, inset 0 -60px 0 #E5E5E5, inset 0 -70px 0 #999999,
-		inset 0 -80px 0 #E5E5E5, inset 0 -90px 0 #999999, inset 0 -100px 0
-		#E5E5E5, inset 0 -110px 0 #999999, inset 0 -120px 0 #E5E5E5, inset 0
-		-130px 0 #999999, inset 0 -140px 0 #E5E5E5, inset 0 -150px 0 #B0B0B0,
-		inset 0 -160px 0 #EEEEEE, inset 0 -170px 0 #B0B0B0, inset 0 -180px 0
-		#EEEEEE, inset 0 -190px 0 #B0B0B0, inset 0 -200px 0 #EEEEEE, inset 0
-		-210px 0 #B0B0B0, inset 0 -220px 0 #f8475b, inset 0 -230px 0 #B56E0A,
-		inset 0 -240px 0 #f8475b, inset 0 -250px 0 #B56E0A;
+	box-shadow: inset 0 0 0 rgb(128, 61, 216), inset 0 -10px 0 #B56E0A,
+		inset 0 -20px 0 rgb(128, 61, 216), inset 0 -30px 0 #B56E0A, inset 0
+		-40px 0 rgb(128, 61, 216), inset 0 -50px 0 #999999, inset 0 -60px 0
+		#E5E5E5, inset 0 -70px 0 #999999, inset 0 -80px 0 #E5E5E5, inset 0
+		-90px 0 #999999, inset 0 -100px 0 #E5E5E5, inset 0 -110px 0 #999999,
+		inset 0 -120px 0 #E5E5E5, inset 0 -130px 0 #999999, inset 0 -140px 0
+		#E5E5E5, inset 0 -150px 0 #B0B0B0, inset 0 -160px 0 #EEEEEE, inset 0
+		-170px 0 #B0B0B0, inset 0 -180px 0 #EEEEEE, inset 0 -190px 0 #B0B0B0,
+		inset 0 -200px 0 #EEEEEE, inset 0 -210px 0 #B0B0B0, inset 0 -220px 0
+		rgb(128, 61, 216), inset 0 -230px 0 #B56E0A, inset 0 -240px 0
+		rgb(128, 61, 216), inset 0 -250px 0 #B56E0A;
 }
 
 .content {
@@ -218,17 +219,22 @@ body {
 	font-family: Arial;
 	font-size: 15px;
 	font-weight: bold;
-	color: rgba(0, 0, 102, 1);
+	color: rgb(255, 255, 255);
 }
 
 .jfk {
-	position: absolute;
-	top: 32px;
-	left: 25px;
-	font-family: Arial;
-	font-size: 45px;
-	color: #222;
+	    font-weight: bold;
+    position: absolute;
+    top: 19px;
+    left: -82px;
+    font-family: Arial;
+    font-size: 25px;
+    color: #222;
+    width: 322px;
+    white-space: normal;
 }
+
+
 
 .sub-content {
 	width: 100%;
@@ -238,13 +244,13 @@ body {
 }
 
 .name {
-	position: absolute;
-	top: 10px;
-	left: 30px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
+	    position: absolute;
+    top: 10px;
+    left: 5px;
+    font-family: Arial Narrow, Arial;
+    font-weight: bold;
+    font-size: 14px;
+    color: #999;
 }
 
 .name span {
@@ -253,13 +259,13 @@ body {
 }
 
 .flight {
-	position: absolute;
-	top: 10px;
-	left: 140px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
+	    position: absolute;
+    top: 10px;
+    left: 101px;
+    font-family: Arial Narrow, Arial;
+    font-weight: bold;
+    font-size: 14px;
+    color: #999;
 }
 
 .flight span {
@@ -268,13 +274,13 @@ body {
 }
 
 .gate {
-	position: absolute;
-	top: 10px;
-	left: 260px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
+	    position: absolute;
+    top: 10px;
+    left: 208px;
+    font-family: Arial Narrow, Arial;
+    font-weight: bold;
+    font-size: 14px;
+    color: #999;
 }
 
 .gate span {
@@ -283,18 +289,18 @@ body {
 }
 
 .seat {
-	position: absolute;
-	top: 10px;
-	left: 340px;
-	font-family: Arial Narrow, Arial;
-	font-weight: bold;
-	font-size: 14px;
-	color: #999;
+	    position: absolute;
+    top: 10px;
+    left: 271px;
+    font-family: Arial Narrow, Arial;
+    font-weight: bold;
+    font-size: 14px;
+    color: #999;
 }
 
 .seat span {
 	color: #555;
-	font-size: 17px;
+	font-size: 16px;
 }
 
 .barcode {
@@ -304,25 +310,35 @@ body {
 	height: 30px;
 	width: 90px;
 	background: #222;
-	box-shadow: inset 0 1px 0 #f8475b, inset -2px 0 0 #f8475b, inset -4px 0
-		0 #222, inset -5px 0 0 #f8475b, inset -6px 0 0 #222, inset -9px 0 0
-		#f8475b, inset -12px 0 0 #222, inset -13px 0 0 #f8475b, inset -14px 0
-		0 #222, inset -15px 0 0 #f8475b, inset -16px 0 0 #222, inset -17px 0 0
-		#f8475b, inset -19px 0 0 #222, inset -20px 0 0 #f8475b, inset -23px 0
-		0 #222, inset -25px 0 0 #f8475b, inset -26px 0 0 #222, inset -26px 0 0
-		#f8475b, inset -27px 0 0 #222, inset -30px 0 0 #f8475b, inset -31px 0
-		0 #222, inset -33px 0 0 #f8475b, inset -35px 0 0 #222, inset -37px 0 0
-		#f8475b, inset -40px 0 0 #222, inset -43px 0 0 #f8475b, inset -44px 0
-		0 #222, inset -45px 0 0 #f8475b, inset -46px 0 0 #222, inset -48px 0 0
-		#f8475b, inset -49px 0 0 #222, inset -50px 0 0 #f8475b, inset -52px 0
-		0 #222, inset -54px 0 0 #f8475b, inset -55px 0 0 #222, inset -57px 0 0
-		#f8475b, inset -59px 0 0 #222, inset -61px 0 0 #f8475b, inset -64px 0
-		0 #222, inset -66px 0 0 #f8475b, inset -67px 0 0 #222, inset -68px 0 0
-		#f8475b, inset -69px 0 0 #222, inset -71px 0 0 #f8475b, inset -72px 0
-		0 #222, inset -73px 0 0 #f8475b, inset -75px 0 0 #222, inset -77px 0 0
-		#f8475b, inset -80px 0 0 #222, inset -82px 0 0 #f8475b, inset -83px 0
-		0 #222, inset -84px 0 0 #f8475b, inset -86px 0 0 #222, inset -88px 0 0
-		#f8475b, inset -89px 0 0 #222, inset -90px 0 0 #f8475b;
+	box-shadow: inset 0 1px 0 rgb(128, 61, 216), inset -2px 0 0
+		rgb(128, 61, 216), inset -4px 0 0 #222, inset -5px 0 0
+		rgb(128, 61, 216), inset -6px 0 0 #222, inset -9px 0 0
+		rgb(128, 61, 216), inset -12px 0 0 #222, inset -13px 0 0
+		rgb(128, 61, 216), inset -14px 0 0 #222, inset -15px 0 0
+		rgb(128, 61, 216), inset -16px 0 0 #222, inset -17px 0 0
+		rgb(128, 61, 216), inset -19px 0 0 #222, inset -20px 0 0
+		rgb(128, 61, 216), inset -23px 0 0 #222, inset -25px 0 0
+		rgb(128, 61, 216), inset -26px 0 0 #222, inset -26px 0 0
+		rgb(128, 61, 216), inset -27px 0 0 #222, inset -30px 0 0
+		rgb(128, 61, 216), inset -31px 0 0 #222, inset -33px 0 0
+		rgb(128, 61, 216), inset -35px 0 0 #222, inset -37px 0 0
+		rgb(128, 61, 216), inset -40px 0 0 #222, inset -43px 0 0
+		rgb(128, 61, 216), inset -44px 0 0 #222, inset -45px 0 0
+		rgb(128, 61, 216), inset -46px 0 0 #222, inset -48px 0 0
+		rgb(128, 61, 216), inset -49px 0 0 #222, inset -50px 0 0
+		rgb(128, 61, 216), inset -52px 0 0 #222, inset -54px 0 0
+		rgb(128, 61, 216), inset -55px 0 0 #222, inset -57px 0 0
+		rgb(128, 61, 216), inset -59px 0 0 #222, inset -61px 0 0
+		rgb(128, 61, 216), inset -64px 0 0 #222, inset -66px 0 0
+		rgb(128, 61, 216), inset -67px 0 0 #222, inset -68px 0 0
+		rgb(128, 61, 216), inset -69px 0 0 #222, inset -71px 0 0
+		rgb(128, 61, 216), inset -72px 0 0 #222, inset -73px 0 0
+		rgb(128, 61, 216), inset -75px 0 0 #222, inset -77px 0 0
+		rgb(128, 61, 216), inset -80px 0 0 #222, inset -82px 0 0
+		rgb(128, 61, 216), inset -83px 0 0 #222, inset -84px 0 0
+		rgb(128, 61, 216), inset -86px 0 0 #222, inset -88px 0 0
+		rgb(128, 61, 216), inset -89px 0 0 #222, inset -90px 0 0
+		rgb(128, 61, 216);
 }
 
 .slip {
@@ -332,7 +348,7 @@ body {
 .jfkslip {
 	font-size: 30px;
 	top: 10px;
-	left: 420px;
+	left: 345px;
 }
 
 .airlineslip {
@@ -378,11 +394,11 @@ html, body {
 	line-height: 23px;
 	cursor: pointer;
 }
-       #MBTN{
-		border-radius:10px;       
-     	margin-left: 15px;
 
-        }
+#MBTN {
+	border-radius: 10px;
+	margin-left: 15px;
+}
 </style>
 </head>
 <body>

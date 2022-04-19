@@ -96,7 +96,6 @@
 							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
 						</div>
 						
-						<input type="hidden" name="fileCd" id="fileCd" value="${videos.fileCd }">
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>

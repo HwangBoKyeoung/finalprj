@@ -111,9 +111,11 @@ public class PerformanceContorller {
 	@ResponseBody
 	public String pPay(PerformanceReservationVO vo,PointVO pointVO, PerformanceVO pvo,UserVO userVO) {
 		performanceReservationDao.pReservation(vo);
+		System.out.println("preservationVO"+vo);
 		int n=pointDao.payInsert(pointVO);
 		userDao.payPoint(userVO);
-//		류지희 : performance 테이블의 관객 수 업데이트 (공연 예매완료 시)
+		System.out.println("n"+n);
+
 		perDao.updatePerformanceAudience(pvo);
 		if(n != 0) {
 			return "success";
@@ -158,26 +160,19 @@ public class PerformanceContorller {
 	public String perSelect(PerformanceVO vo,MultipartFile file) {
 		String fileName = file.getOriginalFilename();
 		String id = UUID.randomUUID().toString();
-		System.out.println("fileName" + fileName);
-		System.out.println("id :" + id);
+		String load = upLoadPath;
  
-		if(fileName != "") {
-		String targetFile = id + fileName.substring(fileName.lastIndexOf('.'));
-		System.out.println(targetFile);
-		File target = new File(upLoadPath, targetFile);
-		
 		try {
+			String targetFile = id + fileName.substring(fileName.lastIndexOf('.'));
+			System.out.println(targetFile);
+			File target = new File(load, targetFile);
 			FileCopyUtils.copy(file.getBytes(), target);
-			System.out.println("copy suss");
-			
-			vo.setFileCd(fileName);
-			vo.setRenames(targetFile);
-
-			perDao.performanceUpdate(vo);
+				vo.setFileCd(fileName);
+				vo.setRenames(targetFile);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		}
+		perDao.performanceUpdate(vo);
 			return "redirect:/companyPerforList.do";
 	}
 	// 프로시저 수정
