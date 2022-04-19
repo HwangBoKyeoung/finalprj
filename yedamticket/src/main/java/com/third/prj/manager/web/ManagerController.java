@@ -23,8 +23,8 @@ public class ManagerController {
    @Autowired
    private ManagerService managerDao;
    
-   @Inject
-   private BCryptPasswordEncoder pwdEncoder;
+   //@Inject
+   //private BCryptPasswordEncoder pwdEncoder;
 
    // 관리자 리스트 페이지
    @RequestMapping("/manager.do")
