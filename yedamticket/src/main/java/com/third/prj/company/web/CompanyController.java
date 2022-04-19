@@ -1,6 +1,5 @@
 package com.third.prj.company.web;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -25,9 +22,6 @@ public class CompanyController {
 
    @Autowired
    private CompanyService companyDao;
-   
-   @Autowired
-   private BCryptPasswordEncoder pwdEncoder;
    
    @RequestMapping("/signupB_1.do")
    public String signUpB_2() {
@@ -57,7 +51,7 @@ public class CompanyController {
       
 //      패스워드 VO에 담기
       String encodedPwd = companyVO.getPwd();
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String decodedPwd = pwdEncoder.encode(encodedPwd);
       companyVO.setPwd(decodedPwd);
       
@@ -108,7 +102,7 @@ public class CompanyController {
         String url = "";
         System.out.println("***************************"+vo);
         CompanyVO login = companyDao.companyLogin(vo, session);
-//        BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+        BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
         System.out.println("==========================="+vo);
         if(vo != null && pwdEncoder.matches(vo.getPwd(), login.getPwd())) {
            msg = "로그인 성공";
@@ -141,7 +135,7 @@ public class CompanyController {
    @RequestMapping("/companyUpdate.do")
    public String companyUpdate(CompanyVO vo) {
       String pwd = vo.getPwd();
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String encyPwd = pwdEncoder.encode(pwd);
       vo.setPwd(encyPwd);
       int u = companyDao.companyUpdate(vo);
