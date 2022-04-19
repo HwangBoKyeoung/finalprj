@@ -65,7 +65,7 @@ public class CompanyController {
       
       int n = companyDao.companyInsert(companyVO);
       if (n != 0) {
-         return "home/home";
+         return "redirect:home.do";
     	 //return aaa;
       }
       return "signup/signup_error";
