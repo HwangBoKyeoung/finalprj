@@ -54,11 +54,12 @@
 		</init-param>
 		
 	</filter>
-	<!--
+	
 	<filter-mapping>
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 
 <!-- 	<filter>
 		<filter-name>springSecurityFilterChain</filter-name>
@@ -69,11 +70,6 @@
 	<filter-mapping>
 		<filter-name>springSecurityFilterChain</filter-name>
 		<url-pattern>/*</url-pattern>
-<<<<<<< HEAD
 	</filter-mapping> -->
-
-=======
-	</filter-mapping>
-	-->
->>>>>>> 436ae963bcb1df30406925b12b046576fd815b7f
+	
 </web-app>

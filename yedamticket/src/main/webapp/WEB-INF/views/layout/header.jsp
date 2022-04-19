@@ -425,6 +425,7 @@ h1 {
 			<%-- 	<sec:authorize access="isAuthenticated()"> --%>
 					<li class="login-css-add"><a href="kakaoLogout.do">로그아웃</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
 			<%-- 	</sec:authorize> --%>
+
 		</div>
 	</nav>
 

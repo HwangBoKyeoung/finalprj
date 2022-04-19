@@ -371,6 +371,7 @@ iframe {
 							</c:forEach>
                   </tbody>
                </table>
+               <br>
                
                <form id="actionForm" action="companyMovieList.do" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
