@@ -45,7 +45,7 @@ public class ManagerController {
    @RequestMapping("/managerInsert.do")
    public String managerInsert(ManagerVO vo) {
       String encodedPwd = vo.getPwd();
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String decodedPwd = pwdEncoder.encode(encodedPwd);
       vo.setPwd(decodedPwd);
       int n = managerDao.managerInsert(vo);
@@ -104,7 +104,7 @@ public class ManagerController {
          String msg = "";
            String url = "";
          ManagerVO login = managerDao.manaLogin(vo, session);
-//         BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+         BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
          boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
          
          if(login != null && pwdChk) {
