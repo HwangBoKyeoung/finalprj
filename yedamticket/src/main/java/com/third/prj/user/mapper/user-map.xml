@@ -498,5 +498,12 @@
                  WHERE  U_ID = #{UId}) - #{pay}
 		WHERE  U_ID  = #{UId}
 	</update>
+	
+	<select id="pwdCheck" resultType="com.third.prj.user.service.UserVO">
+	SELECT PWD 
+	FROM USERS
+	where pwd = #{pwd}
+	 
+	</select>
 </mapper>
    

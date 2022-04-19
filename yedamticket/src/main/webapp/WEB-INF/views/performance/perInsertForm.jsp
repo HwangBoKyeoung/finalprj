@@ -20,78 +20,77 @@
 				<h2 class="text-center">공연 등록</h2>
 				<form id="frm" action="perInsert.do" method="post"
 					enctype="multipart/form-data">
+					<input type="hidden" id="CId" name="CId" value="${sessionId }">
 					<table class="table">
-						
 						<tr>
-							<td>등록자</td>
-							<td><input type="text" id="CId" name="CId"
-								value="${sessionId }" class="form-control" readonly="readonly"></td>
+							<td>기업명</td>
+							<td><input type="text" id="" name=""
+								value="${sessionName }" class="form-control" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td>공연 이름</td>
 							<td><input type="text" id="name" name="name"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 						</tr>
 						<tr>
 							<td>출연 배우</td>
 							<td><input type="text" id="actor" name="actor"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 						</tr>
 						<tr>
 							
 							<td>시작날짜</td>
 							<td><input type="date" id="frdt" name="frDt"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 								
 						</tr>
 						<tr>
 							
 							<td>시작시간</td>
 							<td><input type="time" id="time" name="time"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 								
 						</tr>
 						<tr>
 							
 							<td>종료날짜</td>
 							<td><input type="date" id="trDt" name="trDt"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 								
 						</tr>
 						<tr>
 							
 							<td>종료시간</td>
 							<td><input type="time" id="endTime" name="endTime"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 								
 						</tr>
 						<tr>
 							
 							<td>지역</td>
 							<td><input type="text" id="loc" name="loc"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 								
 						</tr>
 						<tr>
-							<td>상세 주소</td>
-							<td><input type="text" id="addr" name="addr"
-								class="form-control"><button type="button" 
-								onclick="execDaumPostcode()" class="btn post">주소찾기</button></td>
+							<td >주소</td>
+								<td class="input-group has-validation"><input type="text" class="form-control" name="addr" id="addr" value="${user.addr }" required>
+								<input type="button" onclick="execDaumPostcode()" class="btn-sm" value="주소찾기" required="required"></td>
 						</tr>
 						<tr>
 							<td>가격</td>
 							<td><input type="text" id="price" name="price"
-								class="form-control"></td>
+								class="form-control" required="required"></td>
 						</tr>
 						<tr>
 							<td>포스터</td>
 							<td><input type="file" id="file" name="file"
-								accept="image/gif, image/jpeg, image/png" class="form-control"></td>
+								accept="image/gif, image/jpeg, image/png" class="form-control" required="required"></td>
 						</tr>
 						<tr>
 							<td>줄거리</td>
 							<td><textarea rows="10" cols="90" id="content"
-									name="content"></textarea></td>
+									name="content" required="required"></textarea></td>
 						</tr>
 					</table>
 					<button type="submit" class="form-control">등록</button>

@@ -34,7 +34,20 @@ th {
 						</tr>
 						<tr>
 							<th>문의유형</th>
-							<td>${inqs.kind }</td>
+							<c:choose>
+								<c:when test="${inqs.kind == 'mv' }">
+									<td>영화</td>
+								</c:when>
+								<c:when test="${inqs.kind == 'pf' }">
+									<td>공연</td>
+								</c:when>
+								<c:when test="${inqs.kind == 'pt' }">
+									<td>포인트</td>
+								</c:when>
+								<c:when test="${inqs.kind == 'de' }">
+									<td>배송</td>
+								</c:when>
+							</c:choose>
 						</tr>
 						<tr>
 							<th>제목</th>
@@ -50,6 +63,7 @@ th {
 						<input type="hidden" id="UId" name="UId" value="${sessionId }"
 							class="form-control" readonly="readonly">
 						<button type="submit" class="btn btn-success">수정</button>
+						
 						<button type="button" class="btn btn-warning"
 							onclick="location.href='inqDelete.do?inNo=${inqs.inNo}'">삭제</button>
 						<button type="button" class="btn btn-primary"

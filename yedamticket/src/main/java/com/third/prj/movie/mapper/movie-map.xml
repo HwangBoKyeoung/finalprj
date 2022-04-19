@@ -244,13 +244,13 @@
 	<select id="movieSearch" resultMap="movieResultMap" parameterType="String">
 	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID
 		FROM MOVIE
-		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+		WHERE NAME LIKE '%'||#{searchName}||'%'
 	</select>
 	
 	<select id="perSearch" resultMap="perFormanceMap" parameterType="String">
 		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO
 		FROM PERFORMANCE
-		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+		WHERE NAME LIKE '%'||#{searchName}||'%'
 	</select>
 
 	<select id="getTotal" resultType="int">

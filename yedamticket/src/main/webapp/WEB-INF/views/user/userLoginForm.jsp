@@ -175,10 +175,10 @@
                         </div>
                         <div class="card-footer text-center">
                            <a
-                              href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&redirect_uri=http://localhost/prj/kakaoLogin.do&response_type=code">
+                              href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&redirect_uri=http://3.39.54.67:8080/yedamticket/kakaoLogin.do&response_type=code">
 
                               <img src="resources/users/img/kakao_login_large_wide.png"
-                              class="loginBtn">
+                              class="loginBtn"> 
                            </a>
                         </div>
                         <br>

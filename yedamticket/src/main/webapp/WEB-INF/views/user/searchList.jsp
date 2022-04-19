@@ -130,7 +130,8 @@
 	<div class="container">
 		<br>
 		<br>
-		<h2>전체영화</h2>
+		<h2>전체목록</h2>
+		<br>
 		<div class="row">
 			<c:forEach items="${searchName}" var="sN" varStatus="status">
 				<div class="col-3">

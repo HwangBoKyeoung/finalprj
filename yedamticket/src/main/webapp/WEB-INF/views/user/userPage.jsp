@@ -36,6 +36,7 @@
 
 					</li>
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
+					<li><a href="userInfoCheck.do">회원정보체크</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="userBuyList.do">거래내역</a></li>

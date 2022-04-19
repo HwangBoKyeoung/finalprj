@@ -114,9 +114,13 @@ public class CompanyController {
            msg = "로그인 성공";
          url = "home.do";   
 
-         session.setAttribute("sessionName", vo.getName());
-         session.setAttribute("sessionId", vo.getCId());
-         session.setAttribute("pwd", vo.getPwd());
+         session.setAttribute("sessionName", login.getName());
+         System.out.println("=====================================================");
+         System.out.println(login.getName());
+         System.out.println(vo.getCId());
+         System.out.println("=====================================================");	
+         session.setAttribute("sessionId", login.getCId());
+         session.setAttribute("pwd", login.getPwd());
          mv.addObject("msg", msg);
          mv.addObject("url", url);
          mv.setViewName("company/alert");

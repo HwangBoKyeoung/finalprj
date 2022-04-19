@@ -32,6 +32,9 @@
       <ul class="nav nav-pills nav-stacked">
       <li><a href="userDeleteForm.do">회원탈퇴</a></li>
       </ul>
+      <ul class="nav nav-pills nav-stacked">
+      <li><a href="userPage.do">마이페이지</a></li>
+      </ul>
     </nav>
 
 		<div class="col-sm-9 page">
@@ -78,9 +81,9 @@
 						</div>
 						<div class="col-12" align="left">
 							<label for="addr" class="form-label">주소</label>
-							<div class="form-group form-group-sm">
-								<input type="text" class="form-control" name="addr" id="addr" value="${user.addr }"placeholder="address..." requireds>
-								<button type="button"onclick="execDaumPostcode()" class="btn">주소찾기</button>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="addr" id="addr" value="${user.addr }"placeholder="address..." required>
+								<input type="button" onclick="execDaumPostcode()" class="btn-sm" value="주소찾기">
 							</div>
 							<div align="right">
 								<button id="updateBtn" type="submit" class="btn btn-primary">수정</button>
