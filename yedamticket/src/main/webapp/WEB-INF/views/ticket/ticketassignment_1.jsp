@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
@@ -47,22 +46,28 @@ body {
 	user-select: none;
 }
 
-.body-content {
+
+ .body-content {
 	margin-top: 0px;
+	*/
 	/* padding-bottom: 200px; */ /* footer 높이 */
+	
 	padding-left: 0px;
 }
 
+
+
 .footer {
-	position: absolute;
 	width: 100%;
-	height: 200px; /* footer의 높이 */
-	/* position: absolute; */
+	height: 200px; 	
+	position: fixed; /* footer의 높이 */ 
 	bottom: 0;
 	left: 0;
-}
+		} 
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 </head>
 <body>
 	<c:set var="now" value="<%=new java.util.Date()%>" />
@@ -75,15 +80,15 @@ body {
 
 	<!-- ticket assginment  style="visibility: hidden"-->
 	<div id="pf_container" style="position: absolute">
-		<div align="center">
+		<div>
 			<c:if test="${empty prInfo }">
 				<div>
 					<h1>공연 예약 / 거래 현황이 없습니다.</h1>
 				</div>
 			</c:if>
-
+			
+			<h1>공연 예약 / 거래 현황</h1>
 			<div id="widthslider" align="center">
-				<h1>공연 예약 / 거래 현황</h1>
 				<ul class="widthlist">
 
 					<c:forEach items="${prInfo }" var="pr">
@@ -104,6 +109,7 @@ body {
 												<p class="card-text">가 격 : ${pr.price }</p>
 												<input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택"> 
 												<input type="button" onclick="selectedFnc4()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal3" value="환불">
+												<i class="fas fa-exclamation-circle" title="좌석수만큼 가격이 부과됩니다." style="cursor:pointer;" aria-hidden="true"></i>
 											</div>
 										</div>
 									</li>

@@ -6,9 +6,11 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Getter
 @Setter
+@ToString
 public class CompanyVO {
 	
 	private String email;
@@ -16,6 +18,7 @@ public class CompanyVO {
 	private String addr;
 	private String phone;
 	private String bizno;
+	private String nono;
 	private String dealAgreeCd;
 	private String name;
 	private String CId;

@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -35,19 +36,33 @@ public class CompanyController {
       return "signup/signupB_2";
    }
    
-   @PostMapping("/signupB_3.do")
-   public String signUpB_3(CompanyVO companyVO, Model model, HttpServletRequest httpServletRequest) {
-      String addr = httpServletRequest.getParameter("addr");
+   @RequestMapping(value = "/signupB_3.do")
+	public String signUpB_3(CompanyVO companyVO, Model model, HttpServletRequest httpServletRequest) {
+	   System.out.println("*******************************************************************");
+	   System.out.println("===================================="+companyVO);
+	   
+//	   주소 VO에 담기
+	  String addr = httpServletRequest.getParameter("addr");
       String addr2 = httpServletRequest.getParameter("addr2");
       String addr3 = addr + " " + addr2;
       companyVO.setAddr(addr3);
+      
+//      사업자등록번호 VO에 담기
+      String bizno = httpServletRequest.getParameter("bizno");
+      companyVO.setNono(bizno);
+      
+//      패스워드 VO에 담기
       String encodedPwd = companyVO.getPwd();
       BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String decodedPwd = pwdEncoder.encode(encodedPwd);
       companyVO.setPwd(decodedPwd);
+      
+      String aaa = companyVO.toString();
+      
       int n = companyDao.companyInsert(companyVO);
       if (n != 0) {
          return "home/home";
+    	 //return aaa;
       }
       return "signup/signup_error";
    }
