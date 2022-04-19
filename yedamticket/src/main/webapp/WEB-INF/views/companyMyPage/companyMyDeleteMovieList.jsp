@@ -349,7 +349,7 @@ iframe {
 					<thead>
 						<tr>
 							<th>영화 이름</th>
-							<th>영화 감독</th>
+							
 							<th>삭제 사유</th>
 							<th>삭제 처리</th>
 							<th>거절 사유</th>
@@ -359,7 +359,7 @@ iframe {
 						<c:forEach items="${dels }" var="del">
 							<tr>
 								<td>${del.movieVO.name}</td>
-								<td>${del.movieVO.actor}</td>
+								
 								<td>${del.movieVO.content}</td>
 								<td>${del.deleteCd}</td>
 								<td>${del.refusal }</td>
