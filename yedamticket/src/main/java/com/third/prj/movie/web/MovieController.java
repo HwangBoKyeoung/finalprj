@@ -224,19 +224,24 @@ public class MovieController {
 
 	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로
 	@RequestMapping("/moviePay.do")
-	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO) {
+	@ResponseBody
+	public String moviePay(MovieReservationVO vo,PointVO pointVO,MovieVO movieVO,UserVO usersVO) {
 		movieReservationDao.movieReservationInsert(vo);
 		vo=movieReservationDao.movieReservationSelect(vo);
 		System.out.println("reservno==============================="+vo.getMvReservNo());
 		System.out.println("u_id==================================="+vo.getUId());
-		
+
 		pointVO.setPayNo(vo.getMvReservNo());
 		pointVO.setUId(vo.getUId());
-		
+		userDao.payPoint(usersVO);
 		movieDao.audienceInsert(movieVO);
-		pointDao.payInsert(pointVO);
-		
-		return "redirect:home.do";
+		int n=pointDao.payInsert(pointVO);
+		if(n != 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+
 	}
 
 	@RequestMapping("/movieInsertForm.do")
