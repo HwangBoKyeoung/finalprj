@@ -7,7 +7,7 @@
 					    http://www.springframework.org/schema/security 
 					    http://www.springframework.org/schema/security/spring-security-5.2.xsd">
 
-	<security:http pattern="/resources/**" security="none" />
+	<!-- <security:http pattern="/resources/**" security="none" />
 	<bean id="customLoginSuccessHandlerU" class="com.third.prj.user.service.CustomLoginSuccessHandlerU" />
 	<bean id="customLoginSuccessHandlerM" class="com.third.prj.manager.service.CustomLoginSuccessHandlerM" />
 	<bean id="customLoginSuccessHandlerC" class="com.third.prj.company.service.CustomLoginSuccessHandlerC" />
@@ -29,6 +29,6 @@
 	</security:authentication-manager>
 	
 	<bean id="customUserDetail" class="com.third.prj.user.service.CustomUserDetailsService" />
-	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	<bean id="passwordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/> -->
 
 </beans>
