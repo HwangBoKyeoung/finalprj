@@ -217,7 +217,7 @@ public class UserController {
    @RequestMapping("/userUpdate.do")
    public String userUpdate(UserVO vo) {
       String pwd = vo.getPwd();
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
       String encryptedPwd = pwdEncoder.encode(pwd);
       vo.setPwd(encryptedPwd);
       int n = userDao.userUpdate(vo);
