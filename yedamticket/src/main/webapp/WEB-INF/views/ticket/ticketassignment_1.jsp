@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html>
@@ -32,12 +33,6 @@ body {
 	display: flex;
 }
 
-.widthlist2 {
-	padding: 1rem 0;
-	width: 100%;
-	display: flex;
-}
-
 .widthitem {
 	margin: 15px;
 	min-width: 20rem;
@@ -45,7 +40,6 @@ body {
 	list-style: none;
 	user-select: none;
 }
-
 
  .body-content {
 	margin-top: 0px;
@@ -105,8 +99,14 @@ body {
 												<p class="card-text">예약번호 : ${pr.PReservNo}</p>
 												<p class="card-text">공연일정 : ${pr.frDt }</p>
 												<p class="card-text">좌석번호 : ${pr.seatNo }</p>
+												<c:set var="seatCnt" value="${fn:split(pr.seatNo, ',') }"/>
+													<c:set var="seatCnt2" value="0"/>
+													<c:forEach var="seatCntFor" items="${seatCnt }">
+														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+													</c:forEach>	
 												<p class="card-text">좌석구역 : ${pr.loc }</p>
-												<p class="card-text">가 격 : ${pr.price }</p>
+												<p class="card-text">가 격 : ${pr.price * seatCnt2 }</p>													
+												
 												<input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택"> 
 												<input type="button" onclick="selectedFnc4()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal3" value="환불">
 												<i class="fas fa-exclamation-circle" title="좌석수만큼 가격이 부과됩니다." style="cursor:pointer;" aria-hidden="true"></i>
@@ -128,8 +128,13 @@ body {
 											<p class="card-text">예약번호 : ${pr.PReservNo}</p>
 											<p class="card-text">공연일정 : ${pr.frDt }</p>
 											<p class="card-text">좌석번호 : ${pr.seatNo }</p>
-											<p class="card-text">좌석구역 : ${pr.loc }</p>
-											<p class="card-text">가 격 : ${pr.price }</p>
+											<c:set var="seatCnt" value="${fn:split(pr.seatNo, ',') }"/>
+													<c:set var="seatCnt2" value="0"/>
+													<c:forEach var="seatCntFor" items="${seatCnt }">
+														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+													</c:forEach>	
+												<p class="card-text">좌석구역 : ${pr.loc }</p>
+												<p class="card-text">가 격 : ${pr.price * seatCnt2 }</p>	
 											<button type="button" class="btn btn-secondary"
 												data-toggle="tooltip" data-placement="bottom"
 												title="자유시장에 올라가있는 티켓입니다!">선택</button>
@@ -153,8 +158,13 @@ body {
 											<p class="card-text">예약번호 : ${pr.PReservNo}</p>
 											<p class="card-text">공연일정 : ${pr.frDt }</p>
 											<p class="card-text">좌석번호 : ${pr.seatNo }</p>
-											<p class="card-text">좌석구역 : ${pr.loc }</p>
-											<p class="card-text">가 격 : ${pr.price }</p>
+											<c:set var="seatCnt" value="${fn:split(pr.seatNo, ',') }"/>
+													<c:set var="seatCnt2" value="0"/>
+													<c:forEach var="seatCntFor" items="${seatCnt }">
+														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+													</c:forEach>	
+												<p class="card-text">좌석구역 : ${pr.loc }</p>
+												<p class="card-text">가 격 : ${pr.price * seatCnt2 }</p>	
 											<button type="button" class="btn btn-secondary"
 												data-toggle="tooltip" data-placement="bottom"
 												title="거래를 예정중인 티켓입니다!">선택</button>
@@ -313,7 +323,7 @@ body {
 
 			<div id="widthslider" align="center">
 				<h1>영화 예약 현황</h1>
-				<ul class="widthlist2">
+				<ul class="widthlist">
 					<c:forEach items="${mrInfo }" var="mr">
 						<c:if test="${mr.schDate > sysdate }">
 							<c:if test="${mr.cancelCd == 'N'}">
@@ -326,6 +336,15 @@ body {
 										<p class="card-text">좌석번호 : ${mr.seatName }</p>
 										<p class="card-text">영화관지역 : ${mr.reservHall }</p>
 										<p class="card-text">가 격 : 13000원</p>
+										<!-- 쉼표로 바뀌면 넣어주면 됨 -->
+										
+										<%-- <c:set var="mseatCnt" value="${fn:split(mr.seatName, ',') }"/>
+										<c:set var="mseatCnt2" value="0"/>
+											<c:forEach var="mseatCntFor" items="${seatName }">
+												<c:set var="mtt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+											</c:forEach>	
+											<p class="card-text">영화관지역 : ${mr.reservHall }</p>
+											<p class="card-text">가 격 : ${13000 * seatCnt2 }</p> --%>	
 										<input type="button" onclick="selectedFnc3()" class="btn btn" data-toggle="modal" data-target="#mrInfoModal" value="환불">
 									</div>
 								</div>

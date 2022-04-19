@@ -55,12 +55,9 @@ public class CompanyController {
       String decodedPwd = pwdEncoder.encode(encodedPwd);
       companyVO.setPwd(decodedPwd);
       
-      String aaa = companyVO.toString();
-      
       int n = companyDao.companyInsert(companyVO);
       if (n != 0) {
          return "redirect:home.do";
-    	 //return aaa;
       }
       return "signup/signup_error";
    }
