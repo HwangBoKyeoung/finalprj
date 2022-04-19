@@ -17,6 +17,9 @@
 <link rel="stylesheet" href="resources/performance/css/style.css">
 </head>
 <style>
+*{
+font-family: 'Gowun Dodum', sans-serif;
+}
 #plus,#minus,#cnt{
 border:1px solid black;
 width:50px;
@@ -94,7 +97,7 @@ ${performance }
                     </div>
                     <form action="pReservation.do" method="post">
                     <input type="hidden" id="PSchNo" name="PSchNo" value="${performance.performanceScheduleVO.PSchNo }">
-                    <input type="hidden" id="UId" name="UId" value="micol1234">
+                    <input type="hidden" id="UId" name="UId" value="${sessionId }">
                     <input type="hidden" id="loc" name="loc">
                     <input type="hidden" id="name" name="name" value="${performance.name }">
                     <input type="hidden" id="seatNo" name="seatNo">

@@ -139,7 +139,6 @@
 		FROM MOVIE
         WHERE STARTDATE BETWEEN TO_CHAR(SYSDATE,'yyyyMMdd') 
         AND TO_CHAR(SYSDATE +14,'yyyyMMdd')
-        AND ROWNUM < 11  
         ]]>
 	</select>
 

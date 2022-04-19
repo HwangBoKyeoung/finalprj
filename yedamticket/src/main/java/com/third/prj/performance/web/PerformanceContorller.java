@@ -111,9 +111,11 @@ public class PerformanceContorller {
 	@ResponseBody
 	public String pPay(PerformanceReservationVO vo,PointVO pointVO, PerformanceVO pvo,UserVO userVO) {
 		performanceReservationDao.pReservation(vo);
+		System.out.println("preservationVO"+vo);
 		int n=pointDao.payInsert(pointVO);
 		userDao.payPoint(userVO);
-//		류지희 : performance 테이블의 관객 수 업데이트 (공연 예매완료 시)
+		System.out.println("n"+n);
+
 		perDao.updatePerformanceAudience(pvo);
 		if(n != 0) {
 			return "success";

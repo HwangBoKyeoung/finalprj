@@ -130,40 +130,40 @@ public class UserController {
       return "manager/user/managerUserSelect";
    }
 
-//   @RequestMapping("/userLogin.do")
-//   public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
-////      userDao.userSelect(vo);
-////      session.setAttribute("sessionId", vo.getUId());
-////      session.setAttribute("sessionPwd", vo.getPwd());
-//      String msg = "";
-//      String url = "";
-//      UserVO login = userDao.loginChk(vo, session);
-//      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-//      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
-//
-//      if (login != null && pwdChk) {
-//         int i = userDao.reservChk(vo);
-//         msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
-//
-//         url = "home.do";
-//
-//         session.setAttribute("sessionId", vo.getUId());
-//         session.setAttribute("sessionEmail", vo.getEmail());
-//         session.setAttribute("sessionName", vo.getName());
-//         session.setAttribute("sessionAddr", vo.getAddr());
-//         session.setAttribute("sessionPhone", vo.getPhone());
-//         mv.addObject("msg", msg);
-//         mv.addObject("url", url);
-//         mv.setViewName("user/alert");
-//      } else {
-//         msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-//         url = "userLoginForm.do";
-//         mv.addObject("msg", msg);
-//         mv.addObject("url", url);
-//         mv.setViewName("user/alert");
-//      }
-//      return mv;
-//   }
+   @RequestMapping("/userLogin.do")
+   public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
+      userDao.userSelect(vo);
+      session.setAttribute("sessionId", vo.getUId());
+      session.setAttribute("sessionPwd", vo.getPwd());
+      String msg = "";
+      String url = "";
+      UserVO login = userDao.loginChk(vo, session);
+      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+
+      if (login != null && pwdChk) {
+         int i = userDao.reservChk(vo);
+         msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
+
+         url = "home.do";
+
+         session.setAttribute("sessionId", vo.getUId());
+         session.setAttribute("sessionEmail", vo.getEmail());
+         session.setAttribute("sessionName", vo.getName());
+         session.setAttribute("sessionAddr", vo.getAddr());
+         session.setAttribute("sessionPhone", vo.getPhone());
+         mv.addObject("msg", msg);
+         mv.addObject("url", url);
+         mv.setViewName("user/alert");
+      } else {
+         msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+         url = "userLoginForm.do";
+         mv.addObject("msg", msg);
+         mv.addObject("url", url);
+         mv.setViewName("user/alert");
+      }
+      return mv;
+   }
 
    @RequestMapping("/userSelect.do")
    public String userSelect(HttpSession session, UserVO vo) {

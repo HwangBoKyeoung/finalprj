@@ -170,7 +170,7 @@
                 <form>
                          <input type="hidden" name="star" id="star">
                         <h3><label for="content">Comments</label></h3>
-                        <textarea class="form-control" style="float:left; width: 70%" rows="3" id="content" name="content" placeholder="댓글을 입력해주세요." required="required"></textarea>
+                        <textarea class="form-control" style="float:left; width: 70%" rows="3" id="content" name="content" placeholder="댓글을 입력해주세요." required></textarea>
                         <button type="button" class="btn btn-lg" style="background:#cfc5e9; float:left; margin-left:53px;" onclick="aJaxCall()">입력</button>
                      </form>
                   </div>
@@ -232,7 +232,7 @@ function aJaxCall() {
     $.ajax({
        url : "movieReplyInsert.do",
        type : "post",
-       data : {"UId" : "enc1115", "docId" : "${movie.docId}","content" : $("#content").val(),"star" : $("#star").val()},
+       data : {"UId" : "${sessionId}", "docId" : "${movie.docId}","content" : $("#content").val(),"star" : $("#star").val()},
        dataType : "text",
        success : function(data){
           console.log(data);

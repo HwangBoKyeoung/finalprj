@@ -20,7 +20,9 @@
 body {
   background: linear-gradient(to right, #3fb6a8, #7ed386);
 }
-
+*{
+font-family: 'Gowun Dodum', sans-serif;
+}
 .container {
   background: #ffffff;
   width: 700px;
@@ -37,7 +39,6 @@ body {
   float: right;
   margin-right: 12px;
   margin-top: 12px;
-  font-family: "Nunito Sans", sans-serif;
   color: #866ec766;
   font-weight: 900;
   font-size: 1.5em;
@@ -117,7 +118,6 @@ nav a:first-child {
 }
 
 h1 {
-  font-family: "Montserrat", sans-serif;
   color: #866ec766;
   font-size: 1.2em;
   margin-top: 40px;
@@ -126,7 +126,6 @@ h1 {
 
 h2 {
   color: black;
-  font-family: "Roboto", sans-serif;
   width: 80%;
   text-transform: uppercase;
   font-size: 20px;
@@ -138,7 +137,6 @@ h2 {
 p {
   border-top: 0;
   width: 80%;
-  font-family: "Montserrat", sans-serif;
   font-size: 0.9em;
   padding: 7px 0;
   color: #070707;
@@ -151,7 +149,6 @@ span {
 
 .btn {
   float: right;
-  font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   font-size: 10px;
   border: none;
@@ -165,7 +162,7 @@ span {
 
 input {
   border: 1px solid #dddddd;
-  font-family: "Roboto", sans-serif;
+
   padding: 2px;
   margin: 0;
 }
