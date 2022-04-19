@@ -301,7 +301,7 @@ public class MovieController {
 
 			e.printStackTrace();
 		}
-		return "redirect:movieInsertForm.do";
+		return "redirect:movieList.do";
 		
 	}
 	
