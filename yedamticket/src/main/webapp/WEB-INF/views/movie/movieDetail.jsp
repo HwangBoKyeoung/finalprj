@@ -133,7 +133,7 @@
                <p>장르:${movie.genre }</p>
                <p id="startD"><input type="hidden" value="${movie.startDate}" id="hd" name="hd"></p>
               
-               <fmt:formatNumber var="starFloat" value="${star.star/10}" pattern="#.#"/>
+               <fmt:formatNumber var="starFloat" value="${star.star/20}" pattern="#.#"/>
                <fmt:formatNumber var="starAvg" value="${star.star}" pattern="#.#"/>
                <p>평점:
                

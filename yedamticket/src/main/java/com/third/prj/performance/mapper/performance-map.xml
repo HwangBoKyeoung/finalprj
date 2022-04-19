@@ -190,9 +190,9 @@
       AND P.LOC  LIKE '%' || #{loc} || '%'
       </if>
    </where>
-      <![CDATA[
-      
-              ) A ORDER BY FRDT) 
+      <![CDATA[    
+       ORDER BY FRDT
+              ) A ) 
                WHERE RN > (#{pageNum}-1) * #{amount} 
                AND RN <= #{pageNum} * #{amount}
       ]]>   

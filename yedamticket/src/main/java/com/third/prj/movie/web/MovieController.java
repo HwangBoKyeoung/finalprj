@@ -86,6 +86,7 @@ public class MovieController {
 		System.out.println("*****************************docid************************************" + rvo.getDocId());
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
+		model.addAttribute("star", movieReplyDao.getStar(rvo));
 		model.addAttribute("movie", vo);
 		return "movie/movieDetail";
 	}
