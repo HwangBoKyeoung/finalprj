@@ -51,8 +51,8 @@ public class UserController {
    @Autowired
    private MovieService movieDao;
    
-   @Inject
-   private BCryptPasswordEncoder pwdEncoder;
+   //@Inject
+   //private BCryptPasswordEncoder pwdEncoder;
 
    @RequestMapping("/signup_1.do")
    public String signUp_1() {
