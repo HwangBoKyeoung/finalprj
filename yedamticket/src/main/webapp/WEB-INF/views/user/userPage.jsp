@@ -35,13 +35,13 @@
 						<br>
 
 					</li>
-					<li><a href="userUpdateForm.do">회원정보수정</a></li>
-					<li><a href="userInfoCheckForm.do">회원정보체크</a></li>
+					<li><a href="userInfoCheckForm.do">회원정보수정</a></li>
+					<li><a href="passwordChangeForm.do">비번변경</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
-					<li><a href="userBuyList.do">거래내역</a></li>
+					<li><a href="userBuyList.do">거래내역 삭제 예정</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
-					<li><a href="userPointList.do">포인트충전내역</a></li>
+					<li><a href="userPointList.do">거래내역</a></li>
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">

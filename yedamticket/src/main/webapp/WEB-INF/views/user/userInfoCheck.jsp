@@ -61,7 +61,7 @@
 						<input type="hidden" id="UId" name="UId" value="${sessionId }">
 						<input type="password" id="pwd" name="pwd"><br>
 						<hr>
-						<button type="button" id="cencel">취소</button>
+						<button type="button" id="cancel">취소</button>
 						<button type="submit" id="submit">확인</button>
 					</div>
 				</form>
@@ -71,7 +71,7 @@
 
 	<!-- <script>
 		$(document).ready(function() {
-			$("#cencel").on("click", function() {
+			$("#cancel").on("click", function() {
 
 				location.href = "userPage.do";
 			})
@@ -79,19 +79,21 @@
 			$("#submit").on("click", function() {
 				if ($("#pwd").val() == "") {
 					alert("비밀번호를 입력해주세요.");
-					$("#pwd").focus();
+					$("#pwd").focus(); 
 					return false;
 				}
 				$.ajax({
 					url : "userInfoCheck.do",
 					type : "POST",
 					dataType : "json",
-					data : $("#pwd").val(),
+					data : $("#frm").serialize(),
 					success : function(data) {
 						console.log(data)
 						if (data == 0) {
 							alert("패스워드를 다시 확인해주세요.");
 							return;
+						}else{
+							location.href = "userUpdateForm.do";
 						}
 						
 					}
@@ -99,6 +101,6 @@
 			})
 			
 		});
-	</script> -->
+	</script>  -->
 </body>
 </html>

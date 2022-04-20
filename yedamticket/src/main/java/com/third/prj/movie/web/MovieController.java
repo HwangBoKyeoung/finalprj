@@ -250,7 +250,7 @@ public class MovieController {
 	}
 
 	@RequestMapping("/movieInsert.do")
-	public String movieInsert(MovieVO vo, MovieVideoVO vvo, MultipartFile file,MultipartFile fileV, HttpServletRequest request) {
+	public String movieInsert(MovieVO vo, MovieVideoVO vvo,MovieScheduleVO svo, Map<String, Object> map, MultipartFile file,MultipartFile fileV, HttpServletRequest request) {
 		
 		String fileNameV = fileV.getOriginalFilename();//비디오 
 		String idV = UUID.randomUUID().toString();
@@ -285,13 +285,30 @@ public class MovieController {
 			FileCopyUtils.copy(file.getBytes(), target);
 			System.out.println("copy suss");
 			
+			
+			
 			vvo.setVName(fileNameV);
 			vvo.setVRenames(targetFileV);
 			
+			System.out.println(vvo.getMvNo()); 
+			
 			vo.setFileCd(fileName);
 			vo.setRenames(targetFile);
-			mvvDao.movieVideoInsert(vvo);
 			movieDao.movieInsert(vo);
+			
+			vvo.setMvNo((vo.getMvNo()+1));
+			mvvDao.movieVideoInsert(vvo);
+			System.out.println("==================================================");
+			System.out.println(svo.getStartDate());
+			System.out.println(svo.toString());
+			System.out.println("==================================================");
+			
+			movieScheduleDao.movieSchInsert(svo);
+			
+			map.put("d1", vo.getDocId());
+			
+			movieDao.InsertMovieHall(map);
+			
 			System.out.println("==================================================");
 			System.out.println("insert success");
 			System.out.println("==================================================");

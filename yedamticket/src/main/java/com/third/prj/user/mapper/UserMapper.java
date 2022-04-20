@@ -127,4 +127,9 @@ public interface UserMapper {
     
     //비밀번호체크
     int pwdCheck(UserVO vo);
+    
+    //비밀번호변경
+    int pwdUpdate(UserVO vo);
+    
+
 }

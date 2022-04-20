@@ -128,4 +128,10 @@ public class MovieServiceImpl implements MovieService {
 		// TODO Auto-generated method stub
 		return mapper.perSearch(SearchName);
 	}
+
+	@Override
+	public int InsertMovieHall(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return mapper.InsertMovieHall(map);
+	}
 }

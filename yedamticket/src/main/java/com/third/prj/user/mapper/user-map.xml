@@ -503,7 +503,14 @@
 	SELECT COUNT(*) FROM USERS
 	WHERE U_ID = #{UId}
 	  AND PWD = #{pwd}
-	  
 	</select>
+	
+	 <update id="pwdUpdate" parameterType="com.third.prj.user.service.UserVO">
+      UPDATE USERS
+      <set>
+         <if test="pwd != null"> PWD = #{pwd},</if>
+      </set>
+      WHERE U_ID = #{UId}
+   </update>
 </mapper>
    

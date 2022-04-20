@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,7 @@
 </style>
 </head>
 <body>
+
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
@@ -88,9 +90,11 @@
 									<td>포인트충전</td>
 								</c:when>
 							</c:choose>
-							<td>+ ${point.charge }</td>
-							<td>- ${point.pay }</td>
-							<td>${point.tempPoint }</td>
+						
+							
+							<td class="don">+ ${point.charge }</td>
+							<td class="don">- ${point.pay }</td>
+							<td class="don">${point.tempPoint }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -116,5 +120,6 @@
 			</div>
 		</div>
 	</div>
+	
 </body>
 </html>

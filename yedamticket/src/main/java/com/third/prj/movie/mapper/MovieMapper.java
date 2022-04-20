@@ -56,5 +56,8 @@ public interface MovieMapper {
 	
 	//인기검색어
 	int popularSearch(MovieVO vo);
+	
+    //영화관등록
+    int InsertMovieHall(Map<String, Object> map);
 		
 }

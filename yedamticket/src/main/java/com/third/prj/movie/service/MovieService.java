@@ -60,5 +60,8 @@ public interface MovieService {
 
 	// 검색
 	int getTotal(CriteriaVO cri);
+	
+    //영화관등록
+    int InsertMovieHall(Map<String, Object> map);
 
 }

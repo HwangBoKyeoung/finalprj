@@ -364,7 +364,7 @@
 		
 		$(function(){
 			$("#searchBtn2").click(function(){
-
+				$("#searchBtn2").attr('disabled',true)
 				$.ajax({
 					url : "findpw.do",
 					type : "POST",
@@ -374,47 +374,14 @@
 						email : $('#email').val()
 					},
 					success : function(result) {
-						alert(result)
-						/* if (window.confirm(result == "해당 메일로 임시 비밀번호가 전송되었습니다.\n메일을 확인해주세요"))
-						{	
-							
-							$(".modal").fadeOut();
-						}
-						else
-						{
-						    // They clicked no
-						} */
+					     alert(result) 
+					    	
+					}	
 					
-
-						
-						
-						
-					},
 				})
 			});
 		})
-		/*  비밀번호 찾기 이메일로 보내기
-		$('#searchBtn2').click(function(){
-			console.log("패스워드 찾기 : ajax 들어가기 전");
-			console.log($('#UId').val());
-			console.log($('#email').val());
-			$.ajax({
-				type : "get",
-				url : "searchPassword.do",
-				data:{
-				UId : $('#UId').val(),
-				email : $('#email').val()
-				},
-				success : function(data){
-					console.log(data)
-					alert("해당 이메일로 임시 비밀번호를 발송하였습니다.");
-				},
-				error:function(xhr,status,error){
-					console.log("code:"+xhr.status+"\n"+"message:"+xhr.responseText+"\n"+"error:"+error);
-					alert(xhr.status);
-				}
-			});
-		}); */
+
 
 		
 	</script>

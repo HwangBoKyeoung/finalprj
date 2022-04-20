@@ -399,6 +399,9 @@ html, body {
 	border-radius: 10px;
 	margin-left: 15px;
 }
+tbody tr td:nth-child(3){
+	cursor:pointer
+}
 </style>
 </head>
 <body>
@@ -449,7 +452,7 @@ html, body {
 						</thead>
 						<tbody>
 							<c:forEach items="${mvList}" var="mv">
-								<tr>
+								<tr onclick="location.href='movieDetail.do?docId=${mv.docId }'">
 									<td scope="row">${mv.mvReservNo}</td>
 									<td>${mv.reservDt}</td>
 									<td>${mv.name}</td>

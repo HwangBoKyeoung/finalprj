@@ -72,7 +72,8 @@ th {
 				</form>
 			</div>
 		</div>
-		<div class="container">
+		
+		<div class="container2" style="display:none">
 			<div class="row">
 				<div class="col-md-2"></div>
 				<div class="col-md-9">
@@ -90,16 +91,22 @@ th {
 	</div>
 
 	<script type="text/javascript">
-$.ajax({
-	url: "inqReply.do",
-	type: "POST",
-	data: {inNo:${inqs.inNo }},
-	dataType: "json",
-	success:function(result){
-		console.log(result);
-		$("#txt").val(result[0].ans);
-	}
-});
+	$.ajax({
+		url: "inqReply.do",
+		type: "POST",
+		data: {inNo:${inqs.inNo }},
+		dataType: "json",
+		success:function(result){
+			var successCnt = 1
+			if(successCnt == 1){
+				$("#txt").val(result.ans);
+				$(".container2").show()
+			}
+			console.log(result);
+		}
+	});
+
+
 </script>
 </body>
 </html>

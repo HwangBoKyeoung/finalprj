@@ -279,8 +279,8 @@
 			SELECT NVL(MAX(P_NO), 0) + 1 AS PNO
 			FROM PERFORMANCE
 		</selectKey>
-		INSERT INTO PERFORMANCE
-		VALUES(#{pNo},#{name},#{content},#{cId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
+		INSERT INTO PERFORMANCE (P_NO, NAME, CONTENT, C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,LAT,LNG,RENAMES)
+		VALUES(#{pNo},#{name},#{content},#{CId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
 	</insert>
 	
 	<!-- 류지희 performance 테이블에 관객수 업데이트문 추가 -->

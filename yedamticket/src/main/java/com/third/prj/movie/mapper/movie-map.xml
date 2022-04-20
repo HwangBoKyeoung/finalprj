@@ -39,6 +39,11 @@
 	
 	<!-- 검색프로시저 -->
 	<resultMap type="hashmap" id="searchProcedure"/>
+	
+	<!-- 검색프로시저 -->
+	<resultMap type="hashmap" id="InsertMovieHall"/>
+	
+	
 
 	<select id="mvSelect"
 		resultType="com.third.prj.movie.service.MovieVO">
@@ -117,6 +122,11 @@
 
 	<insert id ="searchProcedure" statementType="CALLABLE"> 
 		{CALL popular_search(#{p_search, mode=IN, jdbcType=VARCHAR, javaType=String})}
+	</insert>
+	
+	<insert id ="InsertMovieHall" statementType="CALLABLE">
+		{CALL InsertMovieHall(#{d1, mode=IN, jdbcType=VARCHAR, javaType=STRING})}
+		
 	</insert>
 	
 	<insert id="popularSearch">
@@ -206,12 +216,11 @@
 	</select>
 
 	<insert id="movieInsert" parameterType="com.third.prj.user.service.UserVO">
-		 <selectKey keyProperty="mvNo" resultType="int"
-			order="BEFORE">
-			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO
+ 		 <selectKey keyProperty="mvNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(MV_NO), 0) + 1
 			FROM MOVIE
-		</selectKey> 
-		INSERT INTO MOVIE (
+		</selectKey>
+		INSERT INTO MOVIE (MV_NO,
 							NAME,
 							GENRE,
 							STARTDATE,
@@ -226,7 +235,7 @@
 							FILE_CD,
 							DOCID,
 							RENAMES) 
-					VALUES(#{name},#{genre},to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
+					VALUES(#{mvNo},#{name},#{genre},to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
 
 	<!-- <select id="searchAll" resultMap="movieResultMap" parameterType="string">
@@ -242,13 +251,13 @@
 	</select> -->
 	
 	<select id="movieSearch" resultMap="movieResultMap" parameterType="String">
-	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID
+	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID,RENAMES
 		FROM MOVIE
 		WHERE NAME LIKE '%'||#{searchName}||'%'
 	</select>
 	
 	<select id="perSearch" resultMap="perFormanceMap" parameterType="String">
-		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO
+		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO,RENAMES
 		FROM PERFORMANCE
 		WHERE NAME LIKE '%'||#{searchName}||'%'
 	</select>
