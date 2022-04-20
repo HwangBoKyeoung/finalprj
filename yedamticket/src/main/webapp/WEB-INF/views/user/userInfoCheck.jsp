@@ -51,19 +51,54 @@
 				<br> <br>
 				<hr>
 				<div>
-					<p align="center">회원님의 개인정보 보호를 위해 비밀번호를 입력하셔야 합니다.<br>로그인 시 사용하시는 비밀번호를 입력해 주세요.
+					<p align="center">
+						회원님의 개인정보 보호를 위해 비밀번호를 입력하셔야 합니다.<br>로그인 시 사용하시는 비밀번호를 입력해
+						주세요.
 					<p>
 				</div>
-				<form action="userInfoCheck.do" method="post">
-				<div align="center">
-					<input type="password" id="pwd" name="pwd"><br>
-					<hr>
-					<button type="button">취소</button>
-					<button type="submit">확인</button>
+				<form id="frm" action="userInfoCheck.do" method="post">
+					<div align="center">
+						<input type="hidden" id="UId" name="UId" value="${sessionId }">
+						<input type="password" id="pwd" name="pwd"><br>
+						<hr>
+						<button type="button" id="cencel">취소</button>
+						<button type="submit" id="submit">확인</button>
 					</div>
 				</form>
 			</div>
 		</div>
 	</div>
+
+	<!-- <script>
+		$(document).ready(function() {
+			$("#cencel").on("click", function() {
+
+				location.href = "userPage.do";
+			})
+
+			$("#submit").on("click", function() {
+				if ($("#pwd").val() == "") {
+					alert("비밀번호를 입력해주세요.");
+					$("#pwd").focus();
+					return false;
+				}
+				$.ajax({
+					url : "userInfoCheck.do",
+					type : "POST",
+					dataType : "json",
+					data : $("#pwd").val(),
+					success : function(data) {
+						console.log(data)
+						if (data == 0) {
+							alert("패스워드를 다시 확인해주세요.");
+							return;
+						}
+						
+					}
+				})
+			})
+			
+		});
+	</script> -->
 </body>
 </html>

@@ -288,15 +288,9 @@ public class UserServiceImpl implements UserService {
 			msg += "<hr>";
 			msg += "<br>";
 			msg += "<p>&copy;YEDAMTICKET Corp.All rights reserved</p></div>";
-
-
-			
-			
-			
+	
 		}
 
-
-		
 		String mail = vo.getEmail();
 		System.out.println("여기까지 왔을까4 ?");
 		System.out.println(vo.getEmail());
@@ -361,6 +355,12 @@ public class UserServiceImpl implements UserService {
 	public int payPoint(UserVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.payPoint(vo);
+	}
+
+	@Override
+	public int pwdCheck(UserVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.pwdCheck(vo);
 	}
 
 }

@@ -499,11 +499,11 @@
 		WHERE  U_ID  = #{UId}
 	</update>
 	
-	<select id="pwdCheck" resultType="com.third.prj.user.service.UserVO">
-	SELECT PWD 
-	FROM USERS
-	where pwd = #{pwd}
-	 
+	<select id="pwdCheck" resultType="int">
+	SELECT COUNT(*) FROM USERS
+	WHERE U_ID = #{UId}
+	  AND PWD = #{pwd}
+	  
 	</select>
 </mapper>
    

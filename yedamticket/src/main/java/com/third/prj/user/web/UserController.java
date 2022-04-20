@@ -341,10 +341,30 @@ public class UserController {
         return "해당 이메일로 임시 비밀번호가 전송되었습니다.\n이메일을 확인해주세요";
     }
     
-    @RequestMapping("/userInfoCheck.do")
-    public String userInfoCheck() {
+    @RequestMapping("/userInfoCheckForm.do")
+    public String userInfoCheckForm() {
     	return "user/userInfoCheck";
     }
     
+	/*
+	 * @RequestMapping("/userInfoCheck.do")
+	 * 
+	 * @ResponseBody public int userInfoCheck(UserVO vo,HttpSession session) {
+	 * System.out.println("==========================================");
+	 * System.out.println(vo.getPwd()); int result = userDao.pwdCheck(vo);
+	 * 
+	 * return result; }
+	 */
+    @RequestMapping("/userInfoCheck.do")
+    public String userInfoCheck(UserVO vo) {
+
+            int result = userDao.pwdCheck(vo);
+            System.out.println(result);
+        
+           if(result==1) {
+        	   return "user/userUpdateForm";
+           }
+           return "user/userPage";
+    }
 
 }

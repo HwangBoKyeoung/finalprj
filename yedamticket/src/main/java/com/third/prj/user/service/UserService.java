@@ -117,4 +117,7 @@ public interface UserService {
     
     //결제하면 포인트 변경
     int payPoint(UserVO vo);
+    
+    //비밀번호체크
+    int pwdCheck(UserVO vo);
 }
