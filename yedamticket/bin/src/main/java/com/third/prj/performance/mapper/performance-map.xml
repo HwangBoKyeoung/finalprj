@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper
+	namespace="com.third.prj.performance.mapper.PerformanceMapper">
+
+	<resultMap
+		type="com.third.prj.performance.service.PerformanceViewVO"
+		id="performanceViewMap">
+		<result property="pReservNo" column="P_RESERV_NO" />
+		<result property="name" column="NAME" />
+		<result property="charge" column="CHARGE" />
+		<result property="payDt" column="PAYDT" />
+		<result property="pay" column="PAY" />
+		<result property="point" column="POINT" />
+		<result property="buyCtntCd" column="BUY_CTNT_CD" />
+		<result property="UId" column="U_ID" />
+		<result property="tempPoint" column="TEMP_POINT"/>
+	</resultMap>
+ 
+	<!-- 황규복 -->
+	<!-- performanceSch resultMap -->
+	<resultMap
+		type="com.third.prj.performanceschedule.service.PerformanceScheduleVO"
+		id="pScheduleMap">
+		<result property="PSchNo" column="P_SCH_NO" />
+		<result property="frDt" column="FRDT" />
+		<result property="trDt" column="TRDT" />
+		<result property="time" column="TIME" />
+		<result property="endTime" column="ENDTIME" />
+	</resultMap>
+	<!-- performance resultMap -->
+	<resultMap
+		type="com.third.prj.performance.service.PerformanceVO" id="pMap">
+		<result column="P_NO" property="pNo" />
+		<result column="NAME" property="name" />
+		<result column="CONTENT" property="content" />
+		<result column="ACTOR" property="actor" />
+		<result column="FILE_CD" property="fileCd" />
+		<result column="LOC" property="loc" />
+		<result column="ADDR" property="addr" />
+		<result column="PRICE" property="price" />
+		<result column="LAT" property="lat" />
+		<result column="LNG" property="lng" />
+		<result column="RENAMES" property="renames" />
+		<result column="AUDIENCE" property="audience" />
+		<result column="CONFIRM" property="confirm"/>
+		<result column="REFUSE_RS" property="refuseRs"/>
+		<collection property="performanceScheduleVO" resultMap="pScheduleMap" />
+			
+	</resultMap>
+
+	<select id="companyPerforSelectList" resultType="com.third.prj.performance.service.PerformanceVO">
+	<![CDATA[
+	SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+	FROM
+		(
+		SELECT ROWNUM RN,A.* 
+		FROM (
+		SELECT 
+			P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE
+		FROM PERFORMANCE
+		WHERE
+	]]>
+		<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+			OR ACTOR LIKE '%'||#{searchName}||'%'
+			OR LOC LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'ACTOR'">ACTOR LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'LOC'">LOC LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+		ORDER BY P_NO DESC ) A )
+		WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+	]]>
+	</select>
+
+	<select id="perforSelect"
+		resultType="com.third.prj.performance.service.PerformanceVO">
+		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,CONFIRM,REFUSE_RS
+		FROM PERFORMANCE
+		WHERE p_no = #{PNo}
+	</select>
+	
+	<resultMap id="procedureCall" type="hashmap" />
+	<update id="procedureCall" statementType="CALLABLE">
+		{CALL perfor_pro(#{vp_no, mode=IN, jdbcType=INTEGER, javaType=INT},
+						#{p_name, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_loc, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_addr, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_price, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_lname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_cd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+						#{p_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})}
+	</update>
+
+	<update id="performanceUpdate" parameterType="com.third.prj.performance.service.PerformanceVO">
+		UPDATE PERFORMANCE
+		<set>
+		<if test="name != null"> NAME = #{name},</if>
+		<if test="content != null"> CONTENT = #{content},</if>
+		<if test="actor != null"> ACTOR = #{actor},</if>
+		<if test="loc != null"> LOC = #{loc},</if>
+		<if test="addr != null">ADDR = #{addr},</if>
+		<if test="price != null">PRICE = #{price},</if>
+		<if test="fileCd != null">FILE_CD = #{fileCd},</if>
+		<if test="renames != null">RENAMES = #{renames},</if>
+		</set>
+		WHERE P_NO = #{PNo}
+	</update>
+	
+	<select id="getTotal" resultType="int">
+		<![CDATA[
+			SELECT COUNT(*) AS TOTAL 
+			FROM (
+	    		SELECT ROWNUM RN, A.*
+	    		FROM (
+	    		
+	    		 SELECT 
+				 P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+				 PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
+				 FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+				 ON 
+				 P.P_NO = PS.P_NO     
+		]]>	
+		
+		<where>
+	      <if test="startDate == null and endDate == null and name == null and loc == null">
+	      AND 1=1
+	      </if>
+	      <!-- 날짜만 입력받은 경우 -->
+	      <if test="startDate != null and startDate !='' and endDate != null and endDate !=''">
+	      AND PS.FRDT BETWEEN #{startDate} AND #{endDate}
+	      </if>
+	      <!-- 날짜 + 이벤트 -->
+	      <if test="name != null and name !=''" >
+	      AND P.NAME LIKE '%' || #{name} || '%'
+	      </if>
+	      <!-- 날짜 + 지역 -->
+	      <if test="loc != null and loc !=''">
+	      AND P.LOC  LIKE '%' || #{loc} || '%'
+	      </if>
+   		</where>		
+		 ) A 
+		 ORDER BY FRDT)
+	</select>
+	<!-- 공연선택 -->
+	<select id="pSelect" resultMap="pMap">
+		SELECT 
+			P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+			PS.P_SCH_NO,PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
+			FROM 
+			PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+			ON 
+			P.P_NO = PS.P_NO
+	        WHERE P.P_NO = #{PNo}
+	</select>
+	
+  <!-- 공연 전체리스트  -->
+   <select id="pList" resultMap="pMap">
+        <![CDATA[
+         SELECT * 
+         FROM (
+             SELECT ROWNUM RN, A.*
+             FROM (
+             
+              SELECT 
+             P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
+             PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
+             FROM PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+             ON 
+             P.P_NO = PS.P_NO 
+      ]]>   
+      <where>
+      <if test="startDate == null and endDate == null and name == null and loc == null">
+      AND 1=1
+      </if>
+      <!-- 날짜만 입력받은 경우 -->
+      <if test="startDate != null and startDate !='' and endDate != null and endDate !=''">
+      AND PS.FRDT BETWEEN #{startDate} AND #{endDate}
+      </if>
+      <!-- 날짜 + 이벤트 -->
+      <if test="name != null and name !=''" >
+      AND P.NAME LIKE '%' || #{name} || '%'
+      </if>
+      <!-- 날짜 + 지역 -->
+      <if test="loc != null and loc !=''">
+      AND P.LOC  LIKE '%' || #{loc} || '%'
+      </if>
+   </where>
+      <![CDATA[
+      
+              ) A ORDER BY FRDT) 
+               WHERE RN > (#{pageNum}-1) * #{amount} 
+               AND RN <= #{pageNum} * #{amount}
+      ]]>   
+   </select>
+   <!-- 예정공연  -->
+   <select id="epList"  resultMap="pMap">
+   <![CDATA[
+         SELECT 
+         P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,P.RENAMES,
+		     PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME
+         FROM 
+         PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
+         ON 
+         P.P_NO = PS.P_NO
+           WHERE FRDT > TO_CHAR(SYSDATE,'YY/MM/DD') 
+           AND ROWNUM < 4
+        ]]>      
+   </select>
+
+   <!-- 지역에 맞게 -->
+   <select id="locPlist" resultMap="pMap">
+      <![CDATA[  
+      SELECT * FROM PERFORMANCE
+      WHERE ADDR LIKE  '%'||#{addr}||'%' 
+      AND ROWNUM <6
+      ]]>
+   </select>
+   <!-- end 황규복ㄴ -->
+
+	<select id="pfBuyList" resultMap="performanceViewMap">
+		SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+		AND U_ID = #{UId}
+	</select>
+
+
+	<select id="pfBuyList2"
+		resultMap="performanceViewMap">
+      	<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN ,
+								A.*
+	    		FROM (  SELECT *
+		FROM PERFORMANCEVIEW
+		WHERE BUY_CTNT_CD = 'pf'
+    	AND U_ID = #{UId} ) A ) 	 
+         WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+         ORDER BY PAYDT DESC
+		]]>
+	</select>
+
+	<!-- 검색조건에 맞춰서 total변경 -->
+   <select id="pfBuyTotal" resultType="int">
+      SELECT COUNT(*) + (SELECT COUNT(*) AS TOTAL
+      FROM (
+      SELECT *
+      FROM (
+      SELECT ROWNUM RN , B.*
+      FROM ( SELECT *
+      FROM PERFORMANCEVIEW
+      WHERE BUY_CTNT_CD = 'pf'
+      AND U_ID = #{UId} ) B )
+      )
+      ) as totalcnt
+      FROM (
+      SELECT *
+      FROM (
+      SELECT ROWNUM RN , A.*
+      FROM (
+      SELECT *
+      FROM MOVIEVIEW
+      WHERE BUY_CTNT_CD = 'mv'
+      AND U_ID = #{UId} ) A
+      )
+      )
+      GROUP BY BUY_ctnt_cd
+
+   </select>
+
+	<insert id="perInsert">
+		<selectKey keyProperty="pNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(P_NO), 0) + 1 AS PNO
+			FROM PERFORMANCE
+		</selectKey>
+		INSERT INTO PERFORMANCE
+		VALUES(#{pNo},#{name},#{content},#{cId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
+	</insert>
+	
+	<!-- 류지희 performance 테이블에 관객수 업데이트문 추가 -->
+	<update id="updatePerformanceAudience" parameterType="com.third.prj.performance.service.PerformanceVO">
+		UPDATE PERFORMANCE
+		SET AUDIENCE = NVL(AUDIENCE,0) + #{audience}
+		WHERE P_NO =#{PNo}
+	</update>
+	<!-- 관리자페이지 인기순위 차트 -->
+	<select id="performancePopChart" resultType="com.third.prj.performance.service.PerformanceVO">
+	<![CDATA[
+	 	select *
+		from (
+		         select name,
+		                nvl(audience,0)*price AS pop,
+		                row_number() over (order by nvl(audience,0)*price  desc) row_num
+		         from performance)
+		where row_num < 11
+		]]>
+	</select>
+
+</mapper>

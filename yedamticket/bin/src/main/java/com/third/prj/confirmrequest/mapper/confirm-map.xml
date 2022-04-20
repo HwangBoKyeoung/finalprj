@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.third.prj.confirmrequest.mapper.ConfirmMapper">
+	<resultMap type="com.third.prj.confirmrequest.service.ConfirmVO" id="confMap">
+		<result column="MV_NO" property="mvNo"/>
+		<result column="GENRE" property="genre"/>
+		<result column="RATING" property="rating"/>
+		<result column="DIRECTOR" property="director"/>
+		<result column="COUNTRY" property="country"/>
+		<result column="P_NO" property="pNo"/>
+		<result column="LOC" property="loc"/>
+		<result column="ADDR" property="addr"/>
+		<result column="G_NO" property="gNo"/>
+		<result column="SELLER" property="seller"/>
+		<result column="GOODS_CD" property="goodsCd"/>
+		<result column="C_ID" property="CId"/>
+		<result column="CONFIRM" property="confirm"/>
+		<result column="REFUSE_RS" property="refuseRs"/>
+		<result column="NAME" property="name"/>
+		<result column="FILE_CD" property="fileCd"/>
+		<result column="CONTENT" property="content"/>
+		<result column="PRICE" property="price"/>
+		<result column="ACTOR" property="actor"/>
+	</resultMap>
+	
+	<select id="movieConfirmList" resultMap="confMap">
+		SELECT *
+		FROM MOVIE
+		ORDER BY MV_NO = #{mvNo}
+	</select>
+	<select id="movieConfirmSelect" resultMap="confMap">
+		SELECT MV_NO,
+				NAME,
+				GENRE,
+				DIRECTOR,
+				RATING,
+				DISTRIBUTOR,
+				COUNTRY,
+				CONTENT,
+				ACTOR,
+				FILE_CD,
+				CONFIRM,
+				REFUSE_RS
+			FROM MOVIE
+			WHERE MV_NO = #{mvNo}
+	</select>
+	
+	<select id="perforConfirmList" resultMap="confMap">
+		SELECT *
+		FROM PERFORMANCE
+		ORDER BY P_NO = #{pNo}
+	</select>
+	<select id="perforConfirmSelect" resultMap="confMap">
+		SELECT P_NO,
+				NAME,
+				CONTENT,
+				C_ID,
+				ACTOR,
+				FILE_CD,
+				LOC,
+				ADDR,
+				PRICE,
+				CONFIRM,
+				REFUSE_RS
+		FROM PERFORMANCE
+		WHERE p_no = #{PNo}
+	</select>
+	
+	<select id="goodsConfirmList" resultMap="confMap">
+		SELECT *
+		FROM GOODS
+		ORDER BY G_NO = #{gNo}
+	</select>
+	<select id="goodsConfirmSelect" resultMap="confMap">
+		SELECT G_NO,
+				NAME, 
+				SELLER, 
+				PRICE, 
+				CONTENT, 
+				GOODS_CD, 
+				FILE_CD, 
+				FILE_RE, 
+				CONFIRM, 
+				REFUSE_RS
+		FROM GOODS
+		WHERE G_NO = #{gNo}
+	</select>
+	
+	<update id="movieConfirmUpdate" parameterType="com.third.prj.confirmrequest.service.ConfirmVO">
+		UPDATE MOVIE
+		<set>
+			<if test="confirm != null"> CONFIRM = #{confirm},</if>
+			<if test="refuseRs != null"> REFUSE_RS = #{refuseRs},</if>
+		</set>
+		WHERE MV_NO = #{MvNo}
+	</update>
+	
+	<update id="perforConfirmUpdate" parameterType="com.third.prj.confirmrequest.service.ConfirmVO">
+		UPDATE PERFORMANCE
+		<set>
+			<if test="confirm != null"> CONFIRM = #{confirm},</if>
+			<if test="refuseRs != null"> REFUSE_RS = #{refuseRs},</if>
+		</set>
+		WHERE P_NO = #{PNo}
+	</update>
+	
+	<update id="goodsConfirmUpdate" parameterType="com.third.prj.confirmrequest.service.ConfirmVO">
+		UPDATE GOODS
+		<set>
+			<if test="confirm != null"> CONFIRM = #{confirm},</if>
+			<if test="refuseRs != null"> REFUSE_RS = #{refuseRs},</if>
+		</set>
+		WHERE G_NO = #{GNo}
+	</update>
+	
+	
+</mapper>

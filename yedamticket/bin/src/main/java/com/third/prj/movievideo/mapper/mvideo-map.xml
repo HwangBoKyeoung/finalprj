@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.third.prj.movievideo.mapper.MovieVideoMapper">
+	<select id="mvvSelect" resultType="com.third.prj.movievideo.service.MovieVideoVO">
+		SELECT p_video_no, vname, vrenames, mv_no
+		FROM   movie_video
+		WHERE  mv_no = #{mvNo}
+	</select>
+	
+	<insert id="movieVideoInsert">
+		<selectKey keyProperty="pVideoNo" resultType="int"
+			order="BEFORE">
+			SELECT NVL(MAX(P_VIDEO_NO), 0) + 1 AS PVNO
+			FROM MOVIE_VIDEO
+		</selectKey>
+		INSERT INTO MOVIE_VIDEO (P_VIDEO_NO,VNAME,VRENAMES,DOCID) values(#{pVideoNo},#{vName},#{vRenames},#{docId})
+	</insert>
+</mapper>
