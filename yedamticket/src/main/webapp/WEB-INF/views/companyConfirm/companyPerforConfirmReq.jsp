@@ -306,7 +306,11 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
-					<li><a href="#">승인 요청</a></li>
+					<li>승인 요청<ul class="list-unstyled components mb-5">
+					<li><a href="movieCompanyConfirmList.do">영화 승인 요청</a></li>
+					<li><a href="perforCompanyConfirmList.do">공연 승인 요청</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 요청</a></li>
+					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -345,14 +349,22 @@ iframe {
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th>공연번호</th>
+							<th>공연이름</th>
+							<th>기업 아이디</th>
+							<th>주소</th>
+							<th>요청상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="#">
-							<c:if test="#">
-								<tr onclick="#">
-									<td>#</td>
+						<c:forEach items="${comC }" var="com">
+							<c:if test="${sessionId eq com.CId and com.confirm ne '승인'}">
+								<tr onclick="location.href='perforCompanyConfirmSelect.do?PNo=${com.PNo}'">
+									<td>${com.PNo }</td>
+									<td>${com.name }</td>
+									<td>${com.CId }</td>
+									<td>${com.addr }</td>
+									<td>${com.confirm }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
@@ -388,7 +400,7 @@ iframe {
 			</div>
 		</div>
 	</div>
-	<script>
+	<!-- <script>
       let actionForm = $("#actionForm");
       $("#content a").on("click", function(e){
          e.preventDefault();
@@ -411,6 +423,6 @@ iframe {
          
          searchForm.submit();
       })
-   </script>
+   </script> -->
 </body>
 </html>

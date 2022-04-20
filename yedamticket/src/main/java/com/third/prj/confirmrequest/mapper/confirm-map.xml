@@ -2,15 +2,15 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.third.prj.confirmrequest.mapper.ConfirmMapper">
 	<resultMap type="com.third.prj.confirmrequest.service.ConfirmVO" id="confMap">
-		<result column="MV_NO" property="mvNo"/>
+		<id column="MV_NO" property="mvNo"/>
+		<result column="P_NO" property="pNo"/>
+		<result column="G_NO" property="gNo"/>
 		<result column="GENRE" property="genre"/>
 		<result column="RATING" property="rating"/>
 		<result column="DIRECTOR" property="director"/>
 		<result column="COUNTRY" property="country"/>
-		<result column="P_NO" property="pNo"/>
 		<result column="LOC" property="loc"/>
 		<result column="ADDR" property="addr"/>
-		<result column="G_NO" property="gNo"/>
 		<result column="SELLER" property="seller"/>
 		<result column="GOODS_CD" property="goodsCd"/>
 		<result column="C_ID" property="CId"/>
@@ -24,9 +24,14 @@
 	</resultMap>
 	
 	<select id="movieConfirmList" resultMap="confMap">
-		SELECT *
+		SELECT MV_NO,
+				NAME,
+				GENRE,
+				C_ID,
+				RATING,
+				CONFIRM
 		FROM MOVIE
-		ORDER BY MV_NO = #{mvNo}
+		ORDER BY MV_NO
 	</select>
 	<select id="movieConfirmSelect" resultMap="confMap">
 		SELECT MV_NO,
@@ -34,7 +39,6 @@
 				GENRE,
 				DIRECTOR,
 				RATING,
-				DISTRIBUTOR,
 				COUNTRY,
 				CONTENT,
 				ACTOR,
@@ -46,9 +50,13 @@
 	</select>
 	
 	<select id="perforConfirmList" resultMap="confMap">
-		SELECT *
+		SELECT P_NO,
+				NAME,
+				C_ID,
+				ADDR,
+				CONFIRM
 		FROM PERFORMANCE
-		ORDER BY P_NO = #{pNo}
+		ORDER BY P_NO
 	</select>
 	<select id="perforConfirmSelect" resultMap="confMap">
 		SELECT P_NO,
@@ -63,13 +71,18 @@
 				CONFIRM,
 				REFUSE_RS
 		FROM PERFORMANCE
-		WHERE p_no = #{PNo}
+		WHERE P_NO = #{pNo}
 	</select>
 	
 	<select id="goodsConfirmList" resultMap="confMap">
-		SELECT *
+		SELECT G_NO,
+				NAME,
+				SELLER,
+				C_ID,
+				GOODS_CD,
+				CONFIRM
 		FROM GOODS
-		ORDER BY G_NO = #{gNo}
+		ORDER BY G_NO
 	</select>
 	<select id="goodsConfirmSelect" resultMap="confMap">
 		SELECT G_NO,
@@ -92,7 +105,7 @@
 			<if test="confirm != null"> CONFIRM = #{confirm},</if>
 			<if test="refuseRs != null"> REFUSE_RS = #{refuseRs},</if>
 		</set>
-		WHERE MV_NO = #{MvNo}
+		WHERE MV_NO = #{mvNo}
 	</update>
 	
 	<update id="perforConfirmUpdate" parameterType="com.third.prj.confirmrequest.service.ConfirmVO">
@@ -101,7 +114,7 @@
 			<if test="confirm != null"> CONFIRM = #{confirm},</if>
 			<if test="refuseRs != null"> REFUSE_RS = #{refuseRs},</if>
 		</set>
-		WHERE P_NO = #{PNo}
+		WHERE P_NO = #{pNo}
 	</update>
 	
 	<update id="goodsConfirmUpdate" parameterType="com.third.prj.confirmrequest.service.ConfirmVO">
@@ -110,8 +123,106 @@
 			<if test="confirm != null"> CONFIRM = #{confirm},</if>
 			<if test="refuseRs != null"> REFUSE_RS = #{refuseRs},</if>
 		</set>
-		WHERE G_NO = #{GNo}
+		WHERE G_NO = #{gNo}
 	</update>
 	
+	<select id="movieCompanyConfirmList" resultMap="confMap">
+		SELECT NAME, 
+				MV_NO,
+				GENRE,
+				C_ID,
+				CONFIRM
+		FROM MOVIE
+        ORDER BY MV_NO
+	</select>
+	<select id="perforCompanyConfirmList" resultMap="confMap">
+		SELECT NAME, 
+				P_NO,
+				C_ID,
+				ADDR,
+				CONFIRM
+		FROM PERFORMANCE
+        ORDER BY P_NO
+	</select>
+	<select id="goodsCompanyConfirmList" resultMap="confMap">
+		SELECT NAME, 
+				G_NO,
+				SELLER,
+				GOODS_CD,
+				C_ID,
+				CONFIRM
+		FROM GOODS
+        ORDER BY G_NO
+	</select>
 	
+	<select id="movieCompanyConfirmSelect" resultMap="confMap">
+		SELECT NAME, 
+				MV_NO,
+				C_ID, 
+				GENRE,
+				CONFIRM, 
+				REFUSE_RS
+		FROM MOVIE 
+		WHERE MV_NO = #{mvNo}
+	</select>
+	<select id="perforCompanyConfirmSelect" resultMap="confMap">
+		SELECT NAME, 
+				P_NO,
+				C_ID,
+				ACTOR,
+				ADDR,
+				CONFIRM, 
+				REFUSE_RS
+		FROM PERFORMANCE 
+		WHERE P_NO = #{pNo}
+	</select>
+	<select id="goodsCompanyConfirmSelect" resultMap="confMap">
+		SELECT NAME, 
+				G_NO,
+				C_ID,
+				GOODS_CD,
+				PRICE,
+				CONFIRM, 
+				REFUSE_RS
+		FROM GOODS 
+		WHERE G_NO = #{gNo}
+	</select>
+	
+	<select id="getList" resultType="com.third.prj.goods.service.GoodsVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT * 
+	          		FROM MOVIE 
+	          		WHERE
+         ]]>
+        <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR GENRE LIKE '%'||#{searchName}||'%'
+               OR CONFIRM LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'CONFIRM'">CONFIRM LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY G_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotal" resultType="int">
+      SELECT COUNT(*) AS TOTAL
+      FROM MOVIE
+      WHERE
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR GENRE LIKE '%'||#{searchName}||'%'
+               OR CONFIRM LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == 'CONFIRM'">CONFIRM LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
 </mapper>

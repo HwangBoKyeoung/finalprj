@@ -5,6 +5,15 @@
 
 	<tiles-definitions>
 	
+		<definition name="first" template="/WEB-INF/views/layout/layoutFirst.jsp">
+			<put-attribute name="title" value="예담티켓" />
+			<put-attribute name="body" value="" />
+		</definition>
+	
+		<definition name="first/*/*" extends="first">
+			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+		</definition>
+	
 		<definition name="my.home" template="/WEB-INF/views/layout/layout.jsp">
 			<put-attribute name="title" value="MyWebSite" />
 			<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp" />
@@ -17,21 +26,35 @@
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
 		
+		<!-- <definition name="ticketassignment" template="/WEB-INF/views/layout/layoutT.jsp">
+			<put-attribute name="title" value="MyWebSite"/>
+			<put-attribute name="header" value="/WEB-INF/views/layout/header.jsp"/>
+			<put-attribute name="body" value="" />
+			<put-attribute name="footerTT" value="/WEB-INF/views/layout/footerTT.jsp"/>
+		</definition>
+
+		<definition name="ticket/*/*" extends="ticketassignment" >
+			<put-attribute name="body" value="/WEB-INF/views/ticket/{1}/{2}.jsp"/>
+		</definition> -->
 		
-	<!-- per -->	
+	<!-- per -->
+		<definition name="signup" template="/WEB-INF/views/layout/layoutMail.jsp">
+			<put-attribute name="title" value="MyWebSite"/>
+			<put-attribute name="body" value=""/>
+		</definition>
+	
+	    <definition name="signup/*/*" extends="signup">
+      		<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
+    	</definition>
+	
 		<definition name="my.p" template="/WEB-INF/views/layout/layoutP.jsp">
 			<put-attribute name="title" value="MyWebSite" />
-		
-	
 			<put-attribute name="body" value="" />
-	
 		</definition>
 	
 		<definition name="p/*/*" extends="my.p">
 			<put-attribute name="body" value="/WEB-INF/views/{1}/{2}.jsp" />
 		</definition>
-		
-		
 		
 		<definition name="my.user" template="/WEB-INF/views/layout/layoutO.jsp">
 			<put-attribute name="title" value="MyWebSite" />

@@ -25,8 +25,9 @@
             </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="#">영화승인요청</a></li>
-                  <li class="nav-item"><a class="nav-link" href="#">공연승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="movieConfirmList.do">영화승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforConfirmList.do">공연승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="goodsConfirmList.do">굿즈승인요청</a></li>
                 </ul>
               </div></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
@@ -62,7 +63,7 @@
             </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="#">영화승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="movieConfirmList.do">영화승인요청</a></li>
                 </ul>
               </div></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
@@ -73,7 +74,7 @@
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link" href="managerMovieDeleteList.do">Management</a></li>
-                  <li class="nav-item"><a class="nav-link" href="movieSales.do">Sales</a></li>
+                  <li class="nav-item"><a class="nav-link" href="movieSalesChart.do">Sales</a></li>
                   <li class="nav-item"><a class="nav-link" href="moviePopularitychart.do">Popularity Chart</a></li>
                 </ul>
               </div></li>
@@ -86,7 +87,7 @@
             </a>
               <div class="collapse" id="ui-basic">
                 <ul class="nav flex-column sub-menu">
-                  <li class="nav-item"><a class="nav-link" href="#">공연승인요청</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforSalesChart.do">공연승인요청</a></li>
                 </ul>
               </div></li>
             <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"

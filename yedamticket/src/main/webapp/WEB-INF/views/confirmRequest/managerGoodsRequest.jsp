@@ -16,13 +16,23 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th></th>
+							<th>굿즈번호</th>
+							<th>굿즈이름</th>
+							<th>판매자</th>
+							<th>기업 아이디</th>
+							<th>영화/공연구분</th>
+							<th>요청상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="">
-							<tr onclick="#">
-								<td></td>
+						<c:forEach items="${conf }" var="con">
+							<tr onclick="location.href='goodsConfirmSelect.do?gNo=${con.GNo}'">
+								<td>${con.GNo }</td>
+								<td>${con.name }</td>
+								<td>${con.seller }</td>
+								<td>${con.CId }</td>
+								<td>${con.goodsCd }</td>
+								<td>${con.confirm }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

@@ -1,13 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
 <mapper namespace="com.third.prj.manager.mapper.ManagerMapper">
 
+	
  	<select id="managerSelectList" resultType="com.third.prj.manager.service.ManagerVO">
- 		SELECT *
+ 	<![CDATA[
+ 		SELECT M_ID,NAME,PWD,DEPART,PHONE,AUTH_CD,MANAGERSTAT
+ 		FROM
+ 			(
+ 			SELECT ROWNUM RN,A.*
+ 			FROM(
+	 			SELECT 
+	 			M_ID,NAME,PWD,DEPART,PHONE,AUTH_CD,MANAGERSTAT
+				FROM MANAGER
+				WHERE M_ID != 'micol'
+				AND 
+		]]>
+		<if test="searchType == 'ALL'">(DEPART LIKE '%'||#{searchName}||'%'
+			OR NAME LIKE '%'||#{searchName}||'%'
+			OR M_ID LIKE '%'||#{searchName}||'%')</if>
+		<if test="searchType == 'DEPART'">DEPART LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'MID'">M_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+		ORDER BY M_ID DESC ) A )
+		WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
+	]]>
+ 	</select>
+ 	<select id="getTotal" resultType="int">
+ 		SELECT COUNT(*)
 		FROM MANAGER
-		WHERE M_ID != 'micol'
-		ORDER BY M_ID DESC
+		WHERE
+		<if test="searchType == 'ALL'">DEPART LIKE '%'||#{searchName}||'%'
+					OR NAME LIKE '%'||#{searchName}||'%'
+					OR M_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'DEPART'">DEPART LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'MID'">M_ID LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
  	</select>
  	
  	<select id="managerSelect" resultType="com.third.prj.manager.service.ManagerVO" parameterType="com.third.prj.manager.service.ManagerVO">
@@ -15,22 +46,15 @@
  		FROM MANAGER
  		WHERE M_ID = #{MId}
  	</select>
- 	
+ 	<select id="manaLogin" resultType="com.third.prj.manager.service.ManagerVO">
+ 		SELECT *
+ 		FROM MANAGER
+ 		WHERE M_ID = #{MId}
+ 	</select>
  	<insert id="managerInsert" parameterType="com.third.prj.manager.service.ManagerVO">
- 		INSERT INTO MANAGER (M_ID
- 						   , NAME
- 						   , PWD
- 						   , DEPART
- 						   , PHONE
- 						   , AUTH_CD)
- 		VALUES(#{MId}
- 			 , #{name}
- 			 , #{pwd}
- 			 , #{depart}
- 			 , #{phone}
- 			 , #{authCd})
+ 		INSERT INTO MANAGER (M_ID, NAME, PWD, DEPART, PHONE, AUTH_CD)
+ 		VALUES(#{MId},#{name},#{pwd},#{depart},#{phone},#{authCd})
  	</insert>
- 	
  	<update id="managerUpdate" parameterType="com.third.prj.manager.service.ManagerVO">
  		UPDATE MANAGER
  		<set>
@@ -42,31 +66,20 @@
  		</set>
  		WHERE M_ID = #{MId}
  	</update>
- 	
  	<delete id="managerDelete" parameterType="com.third.prj.manager.service.ManagerVO">
  		DELETE FROM MANAGER 
  		WHERE M_ID = #{MId}
  	</delete>
- 	
- 	<select id="managerSearch" resultType="com.third.prj.manager.service.ManagerVO" parameterType="String">
- 		SELECT *
-		FROM MANAGER 
-		WHERE M_ID != 'micol'	
-		<if test="val != null and val != ''">
-			<if test="key == '전체'">AND (DEPART LIKE '%'||#{val}||'%' 
-									OR NAME LIKE '%'||#{val}||'%' 
-									OR M_ID LIKE '%'||#{val}||'%')</if>
-			<if test="key == '부서'">AND DEPART LIKE '%'||#{val}||'%'</if>
-			<if test="key == '이름'">AND NAME LIKE '%'||#{val}||'%'</if>
-			<if test="key == '아이디'">AND M_ID LIKE '%'||#{val}||'%'</if>
-			</if>
-		ORDER BY M_ID DESC
- 	</select>
  	
  	<select id="idCheck" parameterType="String" resultType="int">
  		SELECT COUNT(M_ID)
  		FROM MANAGER
  		WHERE M_ID = #{MId}
  	</select>
- 	
+<!--  	<select id="manaLogin" resultType="com.third.prj.manager.service.ManagerVO"> -->
+<!--  		SELECT M_ID,NAME, PWD, DEPART, PHONE, AUTH_CD -->
+<!--  		FROM MANAGER -->
+<!--  		WHERE M_ID = #{MId} -->
+<!--  		AND PWD = #{pwd} -->
+<!--  	</select> -->
 </mapper>

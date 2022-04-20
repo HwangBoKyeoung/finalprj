@@ -13,45 +13,92 @@
 			<div class="card">
 				<div class="card-body">
 					<h4 class="card-title">관리자 영화 승인요청 상세 페이지</h4>
-					<input type="hidden" name="#" id="#" value="#">
-					<input type="button" name="mvNo" id="mvNo" value="상세보기">
+					<input type="hidden" name="mvNo" id="mvNo" value="${conS.mvNo }">
 					<input type="hidden" name="#" id="#" value="#">
 					<p class="card-description"></p>
-					<form class="forms-sample" action="#" method="post">
-					<input type="hidden" name="#" id="#" value="#" >
+					<form class="forms-sample" action="movieConfirmUpdate.do" method="post">
+					<input type="hidden" name="mvNo" id="mvNo" value="${conS.mvNo }" >
 						<div class="form-group row">
-							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">---</label>
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">영화번호</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="#" name="#" value="#">
+								<input type="text" class="form-control" id="mvNo" name="mvNo" value="${conS.mvNo }" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">---</label>
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">영화제목</label>
 							<div class="col-sm-6">
-						 	<input type="date" class="form-control" id="#" name="#" value="#" readonly="readonly">
+						 	<input type="text" class="form-control" id="name" name="name" value="${conS.name }" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">
-							<label for="exampleInputUsername2"
-								class="col-sm-3 col-form-label">#</label>
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">장르</label>
 							<div class="col-sm-6">
-								<input type="text" class="form-control" id="#" name="#" value="#">
+								<input type="text" class="form-control" id="genre" name="genre" value="${conS.genre }" readonly="readonly">
 							</div>
-						</div>						
+						</div>
 						<div class="form-group row">
-							<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">---</label>
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">감독</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="director" name="director" value="${conS.director }" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">관람등급</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="rating" name="rating" value="${conS.rating }" readonly="readonly">
+							</div>
+						</div>	
+						<div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">국가</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="country" name="country" value="${conS.country }" readonly="readonly">
+							</div>
+						</div>	
+						<div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">영화설명</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="content" name="content" value="${conS.content }" readonly="readonly">
+							</div>
+						</div>	
+						<div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">출연진</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="actor" name="actor" value="${conS.actor }" readonly="readonly">
+							</div>
+						</div>	
+						<%-- <div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">포스터</label>
+							<div class="col-sm-6">
+								<input type="file" class="form-control" id="fileCd" name="fileCd" value="${conS.fileCd }" readonly="readonly">
+							</div>
+						</div>	 --%>
+						<%-- <div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">트레일러</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="#" name="#" value="${conS. }" readonly="readonly">
+							</div>
+						</div> --%>							
+						<div class="form-group row">
+							<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">요청상태</label>
 							<div class="col-sm-9">
-								<select class="col-md-10" id="#" name="#"
-										data-loc="#">
-									<option value="대기" <c:if test="#">selected</c:if>>대기</option>
-									<option value="승인" <c:if test="#">selected</c:if>>승인</option>
-									<option value="거절" <c:if test="#">selected</c:if>>거절</option>
+								<select class="col-md-10" id="selectedval" name="confirm"
+										data-loc="${conS.confirm}">
+									<option value="대기" <c:if test="${conS.confirm == '대기' }">selected</c:if>>대기</option>
+									<option value="승인" <c:if test="${conS.confirm == '승인' }">selected</c:if>>승인</option>
+									<option value="거부" <c:if test="${conS.confirm == '거부' }">selected</c:if>>거부</option>
 								</select>
 							</div>
 						</div>
+								<div class="form-group row">
+								<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">거부사유</label>
+									<div class="col-sm-6">
+										<input type="text" class="form-control" placeholder="거부사유" id="refuseRs" name="refuseRs" value="${conS.refuseRs }">
+									</div>
+								</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">요청처리</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>
+					<input type="hidden" value="${conS.confirm }" id="confirm">
 				</div>
 			</div>
 		</div>

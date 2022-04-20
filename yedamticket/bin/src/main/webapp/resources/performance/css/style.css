@@ -1,9 +1,9 @@
 @font-face {
     font-family: 'Calibri';
-    src: url('fonts/Calibri.eot?#iefix') format('embedded-opentype'),
-    url('fonts/Calibri.woff') format('woff'),
-    url('fonts/Calibri.ttf')  format('truetype'),
-    url('fonts/Calibri.svg#Calibri') format('svg');
+    src: url('resources/performance/css/fonts/Calibri.eot?#iefix') format('embedded-opentype'),
+    url('resources/performance/css/fonts/Calibri.woff') format('woff'),
+    url('resources/performance/css/fonts/Calibri.ttf')  format('truetype'),
+    url('resources/performance/css/fonts/Calibri.svg#Calibri') format('svg');
     font-weight: normal;
     font-style: normal;
 }
@@ -59,8 +59,8 @@ a:hover, a:active {
 --------------------------------------------------------------*/
 .btn {
     padding: 16px 46px;
-    border: 2px solid #9a24c1;
-    border-radius: 50px;
+   /*  border: 2px solid #9a24c1;
+    border-radius: 50px; */
     font-size: 18px;
     font-weight: bold;
     line-height: 1;
@@ -100,7 +100,7 @@ a:hover, a:active {
     background: -webkit-linear-gradient(180deg, rgba(171,0,229,1) 0%, rgba(88,20,121,1) 100%); /* safari5.1+,chrome10+ */
     background: -o-linear-gradient(180deg, rgba(171,0,229,1) 0%, rgba(88,20,121,1) 100%); /* opera 11.10+ */
     background: -ms-linear-gradient(180deg, rgba(171,0,229,1) 0%, rgba(88,20,121,1) 100%); /* ie10+ */
-    background: linear-gradient(270deg, rgba(171,0,229,1) 0%, rgba(88,20,121,1) 100%); /* w3c */
+    background: #cfc5e9; /* w3c */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#581479', endColorstr='#ab00e5',GradientType=1 ); /* ie6-9 */
     color: #fff;
 }
@@ -1275,7 +1275,7 @@ a:hover, a:active {
 
 .upcoming-events-header {
     padding: 20px 42px;
-    background: #9a28d7;
+    background: #cfc5e9;
 }
 
 .upcoming-events-header h4 {
@@ -1405,7 +1405,7 @@ ul.tabs-nav .tab-nav {
 
 ul.tabs-nav .tab-nav.active {
     border-color: transparent;
-    background: #9a28d7;
+    background: #cfc5e9;
     color: #fff;
 }
 
@@ -1418,6 +1418,7 @@ ul.tabs-nav .tab-nav.active {
     border: 1px solid #e5e5e5;
     background: #f3f8f9;
     padding: 15px;
+    height: 600px;
 }
 
 .tab-content {

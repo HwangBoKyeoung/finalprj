@@ -16,13 +16,23 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th></th>
+							<th>영화 번호</th>
+							<th>영화 제목</th>
+							<th>장 르</th>
+							<th>기업 아이디</th>
+							<th>관람 등급</th>
+							<th>요청 상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="">
-							<tr onclick="#">
-								<td></td>
+						<c:forEach items="${conf }" var="con">
+							<tr onclick="location.href='movieConfirmSelect.do?mvNo=${con.mvNo}'">
+								<td>${con.mvNo }</td>
+								<td>${con.name }</td>
+								<td>${con.genre }</td>
+								<td>${con.CId }</td>
+								<td>${con.rating }</td>
+								<td>${con.confirm }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

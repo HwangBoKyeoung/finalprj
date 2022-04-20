@@ -7,6 +7,10 @@
 <meta charset="utf-8" />
 <script src="https://kit.fontawesome.com/84d54512c7.js"
 	crossorigin="anonymous"></script>
+<!-- 폰트 -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="76x76"
 	href="./resources/users/img/apple-icon.png">
 <link rel="icon" type="image/png"
@@ -117,22 +121,7 @@ html, body {
 	<!--  Google Maps Plugin    -->
 	<!-- Control Center for Now Ui Kit: parallax effects, scripts for the example pages etc -->
 	<script src="./resources/users/js/now-ui-kit.js?v=1.3.0" type="text/javascript"></script>
-	
-<script>
-		$(document).ready(function() {
-			// the body of this function is in assets/js/now-ui-kit.js
-			nowuiKit.initSliders();
-		});
 
-		/* function scrollToDownload() {
-
-			if ($('.section-download').length != 0) {
-				$("html, body").animate({
-					scrollTop : $('.section-download').offset().top
-				}, 1000);
-			}
-		} */
-	</script>
 </body>
 
 </html>

@@ -19,6 +19,10 @@
 						<td>${inq.inNo }</td>
 					</tr>
 					<tr>
+						<th>KIND</th>
+						<td>${inq.kind }</td>
+					<tr>
+					<tr>
 						<th>TITLE</th>
 						<td>${inq.title}</td>
 					</tr>
@@ -30,6 +34,7 @@
 						<th>CONTENT</th>
 						<td>${inq.content }</td>
 					</tr>
+					
 				</table><br>
 				
 				 <div class="col-lg-6 grid-margin stretch-card">
@@ -45,8 +50,8 @@
 									<th>답변내용</th>
 									<c:choose>
 										<c:when test="${empty inqReply}">
-											<td id="answer"><textarea name="ans" id="ans"></textarea></td>
-											<button id="btnAns" onclick="aJaxCall()">등록</button>
+											<td id="answer"><textarea name="ans" id="ans"></textarea>
+											<button id="btnAns" onclick="aJaxCall()">등록</button></td>
 										</c:when>
 										<c:otherwise>
 											<td id="answer">${inqReply.ans}</td>

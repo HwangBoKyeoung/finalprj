@@ -318,7 +318,11 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
-					<li><a href="#">승인 요청</a></li>
+					<li>승인 요청<ul class="list-unstyled components mb-5">
+					<li><a href="movieCompanyConfirmList.do">영화 승인 요청</a></li>
+					<li><a href="perforCompanyConfirmList.do">공연 승인 요청</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 요청</a></li>
+					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -351,25 +355,31 @@ iframe {
 						<div class="col-6" align="left">
 							<label for="password" class="form-label">비밀번호</label>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control pw" name="pwd" id="pwd1" value="" placeholder="password" required>
+								<input type="password" class="form-control pw" name="pwd" id="pwd1" value="" placeholder="password" required="required">
 							</div>
 						</div>
 						<div class="col-6" align="left">
 							<label for="password" class="form-label">비밀번호확인</label>&nbsp;&nbsp;<font id = "checkPw" size = "2"></font>
 							<div class="input-group has-validation">
-								<input type="password" class="form-control pw" name="pwd2" id="pwd2" value="" placeholder="password" >
+								<input type="password" class="form-control pw" name="pwd2" id="pwd2" value="" placeholder="password" required="required">
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="companyName" class="form-label">기업명</label>
 							<div class="input-group has-validation">
-								<input type="text" class="form-control" id="name" name="name" value="${cmp.name }"placeholder="CompanyName">
+								<input type="text" class="form-control" id="name" name="name" value="${cmp.name }"placeholder="companyName">
 							</div>
 						</div>
 						<div class="col-12" align="left">
 							<label for="phone" class="form-label">전화번호</label>
 							<div class="input-group has-validation">
 								<input type="text" class="form-control" name="phone" id="phone" value="${cmp.phone }"placeholder="phone" required>
+							</div>
+						</div>
+						<div class="col-12" align="left">
+							<label for="phone" class="form-label">담당자</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="person" id="person" value="${cmp.person }"placeholder="담당자" required>
 							</div>
 						</div>
 						<div class="col-12" align="left">

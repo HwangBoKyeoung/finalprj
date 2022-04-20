@@ -10,18 +10,20 @@
 		<result property="star" column="star"/>
 		<result property="wrDt" column="wrdt"/>
 		<result property="UId" column="u_id"/>
+		<result property="docId" column="docid"/>
 	</resultMap>
 
 	<insert id="movieReplyInsert" parameterType="com.third.prj.moviereply.service.MovieReplyVO">
 	   INSERT INTO MOVIE_REPLY(MV_RE_NO
-	   						 , MV_NO,CONTENT
+	   						 , DOCID
+	   						 , CONTENT
 	   						 , STAR
 	   						 , WRDT
 	   						 , U_ID)
 	   VALUES (MOVIEREPLY_SEQ.NEXTVAL
-	   		 , #{mvNo}
+	   		 , #{docId}
 	   		 , #{content}
-	   		 , #{star}
+	   		 , (TO_NUMBER(#{star}) * 10)
 	   		 , SYSDATE
 	   		 , #{UId})
 	</insert>
@@ -37,9 +39,15 @@
 	</select>
 	
 	<select id="movieReplyList" resultMap="movieReplyResultMap">
-		SELECT *
+		SELECT MV_RE_NO,CONTENT,TO_char(WRDT,'yyyy-MM-dd hh24:mi:ss')AS wrDt,STAR,U_ID
 		FROM MOVIE_REPLY
-		WHERE MV_NO=#{mvNo}
+		WHERE DOCID=#{docId}
+	</select>
+	
+	<select id="getStar" resultMap="movieReplyResultMap">
+		SELECT AVG(NVL(STAR,0)) AS STAR
+        FROM MOVIE_REPLY
+        WHERE DOCID = #{docId}
 	</select>
 	
 </mapper>

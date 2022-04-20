@@ -15,6 +15,38 @@
 		FROM FAQ 
 		ORDER BY F_NO DESC
 	</select>
+	<select id="managerFaqList" resultType="com.third.prj.faq.service.FaqVO">
+	<![CDATA[
+		SELECT *
+		FROM
+			(
+			SELECT ROWNUM RN, A.*
+			FROM (
+				SELECT *
+				FROM FAQ
+				WHERE
+	]]>
+		<if test="searchType == 'ALL'">TITLE LIKE '%'||#{searchName}||'%'
+										OR QST_CD LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == 'QSTCD'">QST_CD LIKE '%'||#{searchName}||'%'</if>
+		<if test="searchType == null or searchType ==''"> 1 = 1</if>
+		<![CDATA[
+			ORDER BY F_NO DESC ) A )
+			WHERE RN > (#{pageNum}-1) * #{amount}  AND RN <= #{pageNum} * #{amount}
+		]]>
+	
+	</select>
+	<select id="getTotal" resultType="int">
+		SELECT COUNT(*)
+		FROM FAQ
+		WHERE
+			<if test="searchType == 'ALL'">TITLE LIKE '%'||#{searchName}||'%'
+										OR QST_CD LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'TITLE'">TITLE LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == 'QSTCD'">QST_CD LIKE '%'||#{searchName}||'%'</if>
+			<if test="searchType == null or searchType ==''"> 1 = 1</if>
+	</select>
 
 	<select id="faqSelect" parameterType="com.third.prj.faq.service.FaqVO" resultMap="faqResultMap">
 		SELECT F_NO, QST_CD,TITLE,CONTENT 

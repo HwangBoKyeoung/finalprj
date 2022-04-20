@@ -306,7 +306,11 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
-					<li><a href="#">승인 요청</a></li>
+					<li>승인 요청<ul class="list-unstyled components mb-5">
+					<li><a href="movieCompanyConfirmList.do">영화 승인 요청</a></li>
+					<li><a href="perforCompanyConfirmList.do">공연 승인 요청</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 요청</a></li>
+					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -324,15 +328,15 @@ iframe {
 				<div class="card-body">
 					<h4 class="card-title">Confirm List</h4>
 					<p class="card-description">기업회원마이페이지</p>
-					<form action="#">
+					<form action="movieCompanyConfirmList.do">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-									<option value="#"
-										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
-									<option value="#"
-										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
+									<option value="NAME"
+										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>이름</option>
+									<option value="GENRE"
+										${pageVO.cri.searchType eq 'GENRE' ? 'selected' : '' }>장르</option>
 								</select> <input type="text" name="searchName"
 									value="${pageVO.cri.searchName }">
 								<button type="submit" class="btn btn-primary">검색</button>
@@ -341,24 +345,32 @@ iframe {
 								<input type="hidden" name="amount" value="${pageVO.amount }">
 								<input type="hidden" name="CId" value="${sessionId}">
 							</div>
-					
+					</form>
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th>영화번호</th>
+							<th>영화제목</th>
+							<th>장르</th>
+							<th>기업 아이디</th>
+							<th>요청상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="#">
-							<c:if test="#">
-								<tr>
-									<td>#</td>
+						<c:forEach items="${comC }" var="com">
+							<c:if test="${sessionId eq com.CId and com.confirm ne '승인'}">
+								<tr onclick="location.href='movieCompanyConfirmSelect.do?MvNo=${com.mvNo }'">
+									<td>${com.mvNo }</td>
+									<td>${com.name }</td>
+									<td>${com.genre }</td>
+									<td>${com.CId }</td>
+									<td>${com.confirm }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="actionForm" action="#" method="get">
+				<form id="actionForm" action="movieCompanyConfirmList.do" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
                   <input type="hidden" name="amount" value="${pageVO.amount }">
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
@@ -383,7 +395,7 @@ iframe {
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
-				</form>
+				
 				</div>
 			</div>
 		</div>

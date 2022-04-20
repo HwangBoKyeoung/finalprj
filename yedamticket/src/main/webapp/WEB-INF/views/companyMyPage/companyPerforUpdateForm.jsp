@@ -83,7 +83,7 @@
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label">요청 상태</label>
 							<div class="col-sm-9">
-								<input type="text" class="form-control" id="confirm" name="confirm" value="${pers.confirm }">
+								<input type="text" class="form-control" id="confirm" name="confirm" value="${pers.confirm }" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">

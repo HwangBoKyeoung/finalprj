@@ -134,7 +134,7 @@
 											class="now-ui-icons objects_key-25"></i>
 										</span>
 									</div>
-									<input type="text" placeholder="Password..." name="pwd"
+									<input type="password" placeholder="Password..." name="pwd"
 										class="form-control" />
 								</div>
 								<div class="card-footer text-center">
@@ -145,7 +145,7 @@
 								</div>
 								<div class="pull-left">
 									<h6>
-										<a href="#pablo" class="link">Create Account</a>
+										<a href="signupB_1.do" class="link">Create Account</a>
 									</h6>
 								</div>
 								<div class="pull-right">

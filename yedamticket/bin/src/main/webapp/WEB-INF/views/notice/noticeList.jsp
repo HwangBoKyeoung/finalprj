@@ -340,14 +340,13 @@ iframe {
 					<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 					<input type="hidden" name="amount" value="${pageVO.amount }">
 				</div>
-
+</form>
 				
 					<table class="table" style="text-align: center;">
 						<thead>
 							<tr>
 								<th>번호</th>
 								<th>제목</th>
-								<th>작성자</th>
 								<th>작성일자</th>
 								<th>조회수</th>
 							</tr>
@@ -357,39 +356,38 @@ iframe {
 								onclick="location.href='noticeSelect.do?noticeNo=${list.noticeNo }'">
 								<td>${list.noticeNo}</td>
 								<td>${list.title }</td>
-								<td>${list.writer }</td>
 								<td>${list.wrDt}</td>
 								<td>${list.hit}</td>
 							</tr>
 						</c:forEach>
 						</tbody>
 					</table>
-					<br> <br>
-				
-				<div align="right" class="subBtn">
-					<button type="button" class="btn btn-primary"
-						onclick="location.href='noticeWriteForm.do'">글등록</button>
-				</div>
-				<div id="content" align="center">
+					<form id="actionForm" action="noticeList.do" method="get">
+                  <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+                  <input type="hidden" name="amount" value="${pageVO.amount }">
+                  <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
+                  <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
+               </form>
+					<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
-						<a href="noticeList.do?pageNum=${pageVO.startPage-1 }"> <input
+						<a href="${pageVO.startPage-1 }"> <input
 							type="button" value="이전" class="btn btn-secondary"></a>
 					</c:if>
 					<!-- pageNum -->
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="noticeList.do?pageNum=${num }"> <input type="button"
+							href="${num }"> <input type="button"
 							value="${num }" class="btn btn-secondary"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
-						<a href="noticeList.do?pageNum=${pageVO.endPage+1 }"> <input
+						<a href="${pageVO.endPage+1 }"> <input
 							type="button" value="다음" class="btn btn-secondary"></a>
 					</c:if>
 				</div>
-			</form>
+			
 		</div>
 	</div>
 

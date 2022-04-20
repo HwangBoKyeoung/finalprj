@@ -16,13 +16,21 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th></th>
+							<th>공연번호</th>
+							<th>공연제목</th>
+							<th>기업아이디</th>
+							<th>주소</th>
+							<th>요청상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="">
-							<tr onclick="#">
-								<td></td>
+						<c:forEach items="${conf }" var="con">
+							<tr onclick="location.href='perforConfirmSelect.do?pNo=${con.PNo}'">
+								<td>${con.PNo }</td>
+								<td>${con.name }</td>
+								<td>${con.CId }</td>
+								<td>${con.addr }</td>
+								<td>${con.confirm }</td>
 							</tr>
 						</c:forEach>
 					</tbody>

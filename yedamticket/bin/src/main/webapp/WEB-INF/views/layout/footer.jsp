@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="resources/chatbot/Chatbot.js"></script>
 </head>
 <body>
 	<footer class="footer" data-background-color="black" style="background: #100e302e;">

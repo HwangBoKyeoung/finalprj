@@ -16,21 +16,21 @@ public class ConfirmServiceImpl implements ConfirmService {
 	private ConfirmMapper mapper;
 
 	@Override
-	public List<ConfirmVO> movieConfirmList(CriteriaVO cri) {
+	public List<ConfirmVO> movieConfirmList() {
 		// TODO Auto-generated method stub
-		return mapper.movieConfirmList(cri);
+		return mapper.movieConfirmList();
 	}
 
 	@Override
 	public ConfirmVO movieConfirmSelect(ConfirmVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.companyConfirmSelect(vo);
+		return mapper.movieConfirmSelect(vo);
 	}
 
 	@Override
-	public List<ConfirmVO> perforConfirmList(CriteriaVO cri) {
+	public List<ConfirmVO> perforConfirmList() {
 		// TODO Auto-generated method stub
-		return mapper.perforConfirmList(cri);
+		return mapper.perforConfirmList();
 	}
 
 	@Override
@@ -40,9 +40,9 @@ public class ConfirmServiceImpl implements ConfirmService {
 	}
 
 	@Override
-	public List<ConfirmVO> goodsConfirmList(CriteriaVO cri) {
+	public List<ConfirmVO> goodsConfirmList() {
 		// TODO Auto-generated method stub
-		return mapper.goodsConfirmList(cri);
+		return mapper.goodsConfirmList();
 	}
 
 	@Override
@@ -70,18 +70,6 @@ public class ConfirmServiceImpl implements ConfirmService {
 	}
 
 	@Override
-	public List<ConfirmVO> CompanyConfirmList(CriteriaVO cri) {
-		// TODO Auto-generated method stub
-		return mapper.CompanyConfirmList(cri);
-	}
-
-	@Override
-	public ConfirmVO companyConfirmSelect(ConfirmVO vo) {
-		// TODO Auto-generated method stub
-		return mapper.companyConfirmSelect(vo);
-	}
-
-	@Override
 	public List<ConfirmVO> getList(CriteriaVO cri) {
 		// TODO Auto-generated method stub
 		return mapper.getList(cri);
@@ -92,5 +80,42 @@ public class ConfirmServiceImpl implements ConfirmService {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
+
+	@Override
+	public ConfirmVO movieCompanyConfirmSelect(ConfirmVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.movieCompanyConfirmSelect(vo);
+	}
+
+	@Override
+	public ConfirmVO perforCompanyConfirmSelect(ConfirmVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.perforCompanyConfirmSelect(vo);
+	}
+
+	@Override
+	public ConfirmVO goodsCompanyConfirmSelect(ConfirmVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.goodsCompanyConfirmSelect(vo);
+	}
+
+	@Override
+	public List<ConfirmVO> movieCompanyConfirmList() {
+		// TODO Auto-generated method stub
+		return mapper.movieCompanyConfirmList();
+	}
+
+	@Override
+	public List<ConfirmVO> perforCompanyConfirmList() {
+		// TODO Auto-generated method stub
+		return mapper.perforCompanyConfirmList();
+	}
+
+	@Override
+	public List<ConfirmVO> goodsCompanyConfirmList() {
+		// TODO Auto-generated method stub
+		return mapper.goodsCompanyConfirmList();
+	}
+
 
 }

@@ -24,6 +24,7 @@
 		     , DOCID
 		FROM MOVIE_HALL
 		WHERE LOC=#{loc}
+		AND DOCID=#{docId}
 	</select>
 
 </mapper>
