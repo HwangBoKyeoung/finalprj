@@ -130,7 +130,7 @@
    padding-left: 20px;
 }
 
-#payBtn {
+#payBtn,#ajaxBtn {
    width: 100%;
    height: 10%;
 }
@@ -149,7 +149,8 @@
 #seat td {
    padding: 15px;
    margin: 5px;
-   border-radius: 5px;
+   border-top-left-radius: 10px;
+   border-top-right-radius: 10px;
 }
 
 #selectedSeat td {
@@ -401,86 +402,26 @@ body {
                <input type="hidden" id="reservLoc" name="reservLoc">
                <input type="hidden" id="reservHall" name="reservHall">
                <input type="hidden" id="UId" name="UId" value="${sessionId }">
-                  <input
-                  type="hidden" id="schDate" name="schDate"> <input
-                  type="hidden" id="schTime" name="schTime"> <input
-                  type="hidden" id="seatName" name="seatName">
-
-               <c:choose>
-                  <c:when test="${not empty UId}">
-                     <button type="submit" style="display: none;"class="btn btn-warning">결제하기</button>                        
+               <input type="hidden" id="schDate" name="schDate">
+               <input type="hidden" id="schTime" name="schTime">
+               <input type="hidden" id="seatName" name="seatName">                 
+                <c:choose>
+                  <c:when test="${not empty sessionId}">
+                     <button type="submit" id="payBtn"  style="display: none;"class="btn btn-warning">결제하기</button>                        
                   </c:when>
                   <c:otherwise>
-                     <button type="button" id="payBtn" style="display: none;" class="btn btn-warning">로그인하세용</button>                        
+                     <button type="button" id="ajaxBtn" style="display: none;" class="btn btn-warning">로그인하세용</button>                        
                   </c:otherwise>
                </c:choose>
+                                                  
+                
             </form>
-            <input type="hidden" id="name" name="name"> <input type="hidden" id="runtime" name="runtime">
-              
+            <input type="hidden" id="name" name="name"> <input type="hidden" id="runtime" name="runtime">             
          </div>
       </div>
    </div>
 
- <div class="modal">
-		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-			<div class="container">
-            <div class="col-md-4 ml-auto mr-auto">
-               <div class="card card-login card-plain">
-                  <form class="form" action="userLogin1.do" method="POST">
 
-                     <div class="card-header text-center">
-                        <div class="logo-container">
-                           <img src="resources/users/img/now-logo.png" alt="">
-                        </div>
-                     </div>
-                     <div class="card-body">
-                        <div class="input-group no-border input-lg">
-                           <div class="input-group-prepend">
-                              <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i>
-                              </span>
-                           </div>
-                           <input type="text" class="form-control" name="UId1"  id="UId1" placeholder="Id...">
-                        </div>
-                        <div class="input-group no-border input-lg">
-                           <div class="input-group-prepend">
-                              <span class="input-group-text"> <i class="now-ui-icons objects_key-25"></i>
-                              </span>
-                           </div>
-                           <input type="password" placeholder="Password..." name="pwd"  id="pwd" class="form-control">
-                        </div>
-                        <br>
-                        <div class="card-footer text-center">
-                           <input type="button" onclick="ajaxLogin()" class="btn btn-primary btn-round btn-lg btn-block" value="LOGIN">
-                        </div>
-                        <div class="card-footer text-center">
-                           <a href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&amp;redirect_uri=http://localhost/prj/kakaoLogin.do&amp;response_type=code">
-
-                              <img src="resources/users/img/kakao_login_large_wide.png" class="loginBtn">
-                           </a>
-                        </div>
-                        <br>
-                        <div class="pull-left">
-                           <h6>
-                              <a href="signup_1.do" class="link">Create Account</a>
-                           </h6>
-                        </div>
-                        <div class="pull-right">
-                           <h6>
-                              <a href="companyLoginForm.do" class="link">기업회원이신가요?</a> <a href="managerLoginForm.do" class="link">관리자입니까?</a>
-                           </h6>
-                        </div>
-                        <div class="pull-left">
-                           <h6>
-                              <a href="#" class="idPassword link">아이디/비밀번호 찾기</a>
-                           </h6>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-		</div>
-	</div>
 
 
 
@@ -496,10 +437,9 @@ body {
 		    success: function (data) {
 		            console.log(data);
 		            if(data != null){
-		            $('#UId').val(data.uid);	
-		            $(".modal").fadeOut();
-		            
-		           $('#ajaxPay').submit();
+		            $('#UId').val(data.username);	
+
+		           $('#ajaxPay').submit(); 
 		            }else{
 		            	alert("아이디 또는 비밀번호가 틀림니다.");
 		            }
@@ -510,7 +450,7 @@ body {
    //모달
    
    		$(function() {
-			$("#payBtn").click(function() {
+			$("#ajaxBtn").click(function() {
 				$(".modal").fadeIn();
 			});
 
@@ -594,8 +534,7 @@ body {
             childNodes[i].classList.remove('selectedList');
          }
          event.target.setAttribute('class', 'selectedList');
-         $
-               .ajax({
+         $.ajax({
                   url : "movieSchdtList.do",
                   type : "post",
                   data : {
@@ -603,6 +542,7 @@ body {
                   },
                   success : function(data) {
                      console.log(data);
+               
                      $("#datepicker")
                            .datepicker(
                                  {
@@ -725,6 +665,7 @@ body {
          $('#moviePoster').css("display", "block");
          $('#finalReserv').css('display', "block");
          $('#payBtn').css('display', "block");
+         $('#ajaxBtn').css('display', "block");
          for (var i = 0; i < $('#schList button').length; i++) {
             $('#schList button').removeClass('selectedList');
          }
@@ -808,8 +749,8 @@ body {
                ;
                function selectSeat() {
                   //선택된 좌석을 좌석표 밑에 표시하기
-                  let selectedSeat = document
-                        .getElementById('selectedSeat');
+                  let selectedSeat = document.getElementById('selectedSeat');
+                        
                   let tdList = selectedSeat.getElementsByTagName('td');
                   //seatGray class의 수 만큼만 좌석을 선택가능 
                   if ($('#selectedSeat .seatGray').length > cnt) {
@@ -825,7 +766,7 @@ body {
                         //클릭한 td class 추가 
                         this.setAttribute('class', 'selectedSeat');
                         //input name 에 값넣기 누적
-                        seatName.value += $(event.target).text();
+                        seatName.value += $(event.target).text()+",";
                         console.log('자리더한후 seatName' + seatName.value);
                         ++cnt;
                         console.log("tdList에 좌석이름을 넣고 cnt" + cnt);

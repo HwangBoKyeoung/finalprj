@@ -6,7 +6,7 @@ window.onload = function() {
 function drawMap(target) {
     var width = 550; //지도의 넓이
     var height = 550; //지도의 높이
-    var initialScale = 5500; //확대시킬 값
+    var initialScale = 5400; //확대시킬 값
     var initialX = -11900; //초기 위치값 X
     var initialY = 4050; //초기 위치값 Y
     var labels;
@@ -212,11 +212,11 @@ function drawMap(target) {
         return 'translate(' + arr + ')';
     }
 
-    function zoom() {
+    /*function zoom() {
         projection.translate(d3.event.translate).scale(d3.event.scale);
         states.selectAll('path').attr('d', path);
         labels.attr('transform', translateTolabel);
-    }
+    }*/
 }
 $(document).ready(function(){
   var zindex = 10;

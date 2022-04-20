@@ -13,7 +13,6 @@
 <!-- Styles -->
 <link rel="stylesheet" href="resources/performance/css/style.css"> 
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-
 <style>
 *{
 font-family: 'Gowun Dodum', sans-serif;
@@ -21,8 +20,8 @@ font-family: 'Gowun Dodum', sans-serif;
 </style>
 
 <body class="events-list-page">
-
-<form class="events-search" action="pList.do" method="post">
+${vo }
+<form class="events-search" action="pList.do">
     <div class="container">
         <div class="row">
             <div class="col-12 col-md-2">
@@ -33,7 +32,7 @@ font-family: 'Gowun Dodum', sans-serif;
             </div>
 
             <div class="col-12 col-md-2">
-                <input type="text" id="name" name="name"placeholder="행사명" >
+                <input type="text" id="name" name="name" placeholder="행사명" >
             </div>
 
             <div class="col-12 col-md-2">
@@ -41,7 +40,7 @@ font-family: 'Gowun Dodum', sans-serif;
             </div>
 
             <div class="col-12 col-md-3">
-                <input class="btn btn-lg" style="background:#cfc5e9; margin: 0;" type="submit" value="Search Events">
+                <input class="btn btn-lg" style="background:#cfc5e9; margin: 0;" id="searchBtn" type="submit" value="Search Events">
             </div>
             <!-- hidden으로 숨겨서 들어갈 값 -->
 			<input type="hidden" name="pageNum" value="1">
@@ -86,22 +85,30 @@ font-family: 'Gowun Dodum', sans-serif;
  		</c:forEach>
     </div>
 </div>
+<form id="actionForm" action="pList.do" method="get">
+		<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+		<input type="hidden" name="amount" value="${pageVO.amount }">
+		<input type="hidden" name="startDate">
+		<input type="hidden" name="endDate">
+		<input type="hidden" name="name">
+		<input type="hidden" name="loc">
+</form>
 <div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
-						<a href="pList.do?pageNum=${pageVO.startPage-1 }"> <input
+						<a href="${pageVO.startPage-1 }"> <input
 							type="button" value="이전" class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:if>
 					<!-- pageNum -->
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="pList.do?pageNum=${num }"> <input type="button"
+							href="${num }"> <input type="button"
 							value="${num }"  class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
-						<a href="pList.do?pageNum=${pageVO.endPage+1 }"> <input
+						<a href="${pageVO.endPage+1 }"> <input
 							type="button" value="다음"  class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:if>
 				</div>
@@ -116,7 +123,7 @@ font-family: 'Gowun Dodum', sans-serif;
 
                     <div class="upcoming-events-list">
                         
-					<c:forEach items="${Eperformance }" var="ep">
+					<%-- <c:forEach items="${Eperformance }" var="ep">
                         <div class="upcoming-event-wrap flex flex-wrap justify-content-between align-items-center">
                             <figure class="events-thumbnail">
                                 <a href="#"><img src="/upload/${ep.renames }"></a>
@@ -141,15 +148,61 @@ font-family: 'Gowun Dodum', sans-serif;
                             </footer>
                         </div>
 
-                       </c:forEach>
+                       </c:forEach> --%>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
+    <input type="hidden" value="${psvo.startDate}" id="vostart">
+    <input type="hidden" value="${psvo.endDate}" id="voend">
+    <input type="hidden" value="${vo.name}" id="voname">
+    <input type="hidden" value="${vo.loc}" id="voloc">
 <script>
+
+let actionForm = $("#actionForm");
+
+let sd = $("#startDate").val();
+let ed = $("#endDate").val();
+let nm = $("#name").val();
+let lo = $("#loc").val();
+
+$("#searchBtn").on("click", function(){
+	actionForm.find("input[name='startDate']").val(sd);
+	actionForm.find("input[name='endDate']").val(ed);
+	actionForm.find("input[name='name']").val(nm);
+	actionForm.find("input[name='loc']").val(lo);
+});
+
+$("#content a").on("click", function(e) {
+	e.preventDefault();
+	console.log("click");
+	console.log($(this).attr("href"));
+	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	actionForm.find("input[name='startDate']").val($("#vostart").val());
+	actionForm.find("input[name='endDate']").val($("#voend").val());
+	actionForm.find("input[name='name']").val($("#voname").val());
+	actionForm.find("input[name='loc']").val($("#voloc").val());
+	console.log($("#voloc").val());
+	
+ 	actionForm.submit();
+});
+
+let searchForm = $("#searchForm");
+$("#searchForm button").on("click", function(e) {
+	if (!searchForm.find("input[name='searchName']").val()) {
+		alert('키워드를 입력하세요.');
+		return false;
+	}
+
+	searchForm.find("input[name='pageNum']").val("1");
+	e.preventDefault();
+
+	searchForm.submit();
+});
+
+
 $( function() {
     var availableTags = [
       "서울특별시",

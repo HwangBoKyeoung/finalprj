@@ -177,15 +177,19 @@ public class UserController {
 	      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
 	      
 	      session.setAttribute("sessionId", vo.getUId());
-	      return vo;
-			/*
-			 * if (login != null && pwdChk) { session.setAttribute("sessionId",
-			 * vo.getUId()); session.setAttribute("sessionEmail", vo.getEmail());
-			 * session.setAttribute("sessionName", vo.getName());
-			 * session.setAttribute("sessionAddr", vo.getAddr());
-			 * session.setAttribute("sessionPhone", vo.getPhone()); return "success"; } else
-			 * { return "fail"; }
-			 */
+	      
+			
+			if (login != null && pwdChk) {
+				session.setAttribute("sessionId", vo.getUId());
+				session.setAttribute("sessionEmail", vo.getEmail());
+				session.setAttribute("sessionName", vo.getName());
+				session.setAttribute("sessionAddr", vo.getAddr());
+				session.setAttribute("sessionPhone", vo.getPhone());
+				return login;
+			} else {
+				return login;
+			}
+			 
 	      
    }
 

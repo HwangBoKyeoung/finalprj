@@ -1102,8 +1102,8 @@ fieldset[disabled] .btn-info:hover {
     box-shadow: none
 }
 .btn-warning {
-    background-color: #ffb236;
-    color: #fff
+    background-color:#cfc5e9;
+    color: black;
 }
 .btn-warning.active:hover,
 .btn-warning:active:hover,
