@@ -53,7 +53,7 @@ public class UserController {
    
    @RequestMapping("/signup_1.do")
    public String signUp_1() {
-      return "signup/signup/signup_1";
+      return "signup/signup_1";
    }
 
    @RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)

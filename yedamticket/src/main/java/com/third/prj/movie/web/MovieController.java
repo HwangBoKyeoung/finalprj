@@ -219,7 +219,7 @@ public class MovieController {
 		model.addAttribute("user", userDao.userSelectOne(uvo));
 		model.addAttribute("movie", movieDao.mDetail(detailvo));
 
-		return "user/movie/movieReservationForm";
+		return "movie/movieReservationForm";
 	}
 
 	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로

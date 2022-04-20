@@ -714,7 +714,7 @@ body {
 								//클릭한 td class 추가 
 								this.setAttribute('class', 'selectedSeat');
 								//input name 에 값넣기 누적
-								seatName.value += $(event.target).text();
+								seatName.value += $(event.target).text()+",";
 								console.log('자리더한후 seatName' + seatName.value);
 								++cnt;
 								console.log("tdList에 좌석이름을 넣고 cnt" + cnt);

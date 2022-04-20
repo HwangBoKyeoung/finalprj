@@ -9,11 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet"
-	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
-	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-	crossorigin="anonymous">
-	<script src="https://kit.fontawesome.com/84d54512c7.js"
-	crossorigin="anonymous"></script>
+   href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
+   integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+   crossorigin="anonymous">
+   <script src="https://kit.fontawesome.com/84d54512c7.js"
+   crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <style>
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
@@ -180,12 +180,12 @@ input {
 }
 
 .subscription  h2{
-	margin-bottom:0px;
-	margin-top:0px;
+   margin-bottom:0px;
+   margin-top:0px;
 }
 .subscription  p{
-	margin-bottom:0px;
-	margin-top:0px;
+   margin-bottom:0px;
+   margin-top:0px;
 }
         
     </style>
@@ -196,28 +196,28 @@ input {
         <div id="logo"><h1 class="logo">YEDAM</h1>
           <div class="CTA">
           <form id="payFrm" >
-         		<!-- 무비넘버 -->
-				<input type="hidden" id="docId" name="docId" value="${movie.docId }">
-				<!-- 지역 -->
-				<input type="hidden" id="reservLoc" name="reservLoc" value="${re.reservLoc }">
-				<!-- 영화관 -->
-				<input type="hidden" id="reservHall" name="reservHall"  value="${re.reservHall }">
-				<!-- 사용자 -->
-				<input type="hidden" id="UId" name="UId" value="${sessionId }">
-				<!-- 날짜-->
-				<input type="hidden" id="schDate" name="schDate"  value="${re.schDate }">
-				<!-- 시간 -->
-				<input type="hidden" id="schTime" name="schTime" value="${re.schTime }">
-				<!-- 좌석이름 -->
-				<input type="hidden" id="seatName" name="seatName" value="${re.seatName }">
-				<!-- 영화 가격 -->
-				<input type="hidden" id="pay" name="pay">
-				<!-- 영화인지 공연인지 코드 -->
-				<input type="hidden" id="buyCtntCd" name="buyCtntCd" value="mv">
-				<!-- 관객수 -->
-				<input type="hidden" id="audience" name="audience">
-				<button type="button" onclick="chkPoint()" class="btn">결제하기</button>
-			</form>
+               <!-- 무비넘버 -->
+            <input type="hidden" id="docId" name="docId" value="${movie.docId }">
+            <!-- 지역 -->
+            <input type="hidden" id="reservLoc" name="reservLoc" value="${re.reservLoc }">
+            <!-- 영화관 -->
+            <input type="hidden" id="reservHall" name="reservHall"  value="${re.reservHall }">
+            <!-- 사용자 -->
+            <input type="hidden" id="UId" name="UId" value="${sessionId }">
+            <!-- 날짜-->
+            <input type="hidden" id="schDate" name="schDate"  value="${re.schDate }">
+            <!-- 시간 -->
+            <input type="hidden" id="schTime" name="schTime" value="${re.schTime }">
+            <!-- 좌석이름 -->
+            <input type="hidden" id="seatName" name="seatName">
+            <!-- 영화 가격 -->
+            <input type="hidden" id="pay" name="pay">
+            <!-- 영화인지 공연인지 코드 -->
+            <input type="hidden" id="buyCtntCd" name="buyCtntCd" value="mv">
+            <!-- 관객수 -->
+            <input type="hidden" id="audience" name="audience">
+            <button type="button" onclick="chkPoint()" class="btn">결제하기</button>
+         </form>
             </div>
         </div>
         <div class="leftbox">
@@ -255,7 +255,7 @@ input {
             <h2>시간</h2>
             <p>${re.schDate } ${re.schTime }</p>
             <h2>좌석</h2>
-            <p>${re.seatName }<p/>
+            <p id="pSeatName"><p/>
             <h2>가격</h2>
             <p id="price"></p>        
           </div> 
@@ -263,7 +263,7 @@ input {
             <h1>Account Settings</h1>
             <h2>Sync Watchlist to My Stuff</h2>
             <h2>Hold Your Subscription</h2>
-			<h2>Cancel Your Subscription </h2>
+         <h2>Cancel Your Subscription </h2>
             <h2>Your Devices</h2>
 
            
@@ -276,44 +276,47 @@ input {
 function chkPoint(){
 let price1=$('#price').text();
 let slicePrice = price1.slice(0,-1);
-	 if( ${user.point } < slicePrice){
-		 let bool=confirm("포인트가 부족합니다. 충전하러 가시겟습니까??");
-     	if(bool){
-     		location.href="point_1.do";
-     	}else{
-     		
-     	}
-	}else{
-		$.ajax({
-	        url: 'moviePay.do',
-	        type: 'POST',
-	        data:$('#payFrm').serialize(),
-	        success: function (result) {
-	            if(result == 'success'){
-	            	location.href="userPage.do";
-	            }else if(result == 'fail'){
-	            	
-	            }
-	        }
-	    });
-	}
+    if( ${user.point } < slicePrice){
+       let bool=confirm("포인트가 부족합니다. 충전하러 가시겟습니까??");
+        if(bool){
+           location.href="point_1.do";
+        }else{
+           
+        }
+   }else{
+      $.ajax({
+           url: 'moviePay.do',
+           type: 'POST',
+           data:$('#payFrm').serialize(),
+           success: function (result) {
+               if(result == 'success'){
+                  location.href="userPage.do";
+               }else if(result == 'fail'){
+                  
+               }
+           }
+       });
+   }
 }
 
 (function (){
-	let fileCd=('${movie.fileCd}').split('|');
-	let poster=fileCd[0];	
-	//$('.container').css({"background":"url(" + poster + ")"});
-	let seatName='${re.seatName }';
-	let cnt=0;
-	let price=13000;
-	for(var i =0;i<seatName.length;i++){
-		if(i%3==0){
-			cnt++;
-		}
-	}
-	$('#price').text(price*cnt+'원');
-	$('#pay').val(price*cnt);
-	$('#audience').val(cnt);
+   let seatName=('${re.seatName }');
+   let strName=seatName.substring(0,seatName.length-1);
+   $('#seatName').val(strName);
+   let splitName=strName.split(',');
+   console.log(splitName);
+   let fileCd=('${movie.fileCd}').split('|');
+   let poster=fileCd[0];   
+
+   let cnt=0;
+   let price=13000;
+   for(var i =0;i<splitName.length;i++){      
+         pSeatName.innerText+=splitName[i];
+         cnt++;      
+   }
+   $('#price').text(price*cnt+'원');
+   $('#pay').val(price*cnt);
+   $('#audience').val(cnt);
 })();
 
 /*active button class onclick*/

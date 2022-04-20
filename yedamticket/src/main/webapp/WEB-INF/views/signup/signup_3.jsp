@@ -35,7 +35,7 @@
 									 <i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="이름" required="required" id="name" name="name" maxlength="8">
+								<input type="text" class="form-control" placeholder="이름" required="required" id="name" name="name" maxlength="8" onkeyup="nameConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -54,8 +54,7 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="10">
-								
+								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="100" onkeyup="passConfirm1()">
 							</div>
 
 							<div class="input-group no-border">
@@ -65,7 +64,7 @@
 									</span>
 								</div>
 								
-								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()" maxlength="10">
+								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm2()" maxlength="100">
 							</div>
  
  
@@ -186,11 +185,27 @@
 			return false;
 		}
 
-		if (passCnum == 1) {
+		if (nameCnum == 1){
+			alert("이름을 확인해주세요.")
+			return false;
+		}
+		
+		if (uidCnum == 1){
+			alert("아이디를 확인해주세요")
+		}
+		
+		if (passCnum2 == 1) {
 			alert("비밀번호를 확인해주세요.")
 			return false
 		}
 
+		if (phoneCnum == 1){
+			alert("전화번호를 확인해주세요.")
+			return false;
+		}
+		
+		
+		
 		var v = grecaptcha.getResponse()
 		if (v.length == 0) {
 			alert("자동가입방지를 체크해주세요.")
@@ -209,8 +224,24 @@
 			$('#idChk').attr("disabled", true)
 		}else{
 			$('#idChk').attr("disabled", false)
+			idConfirm();
 		}
 	}
+	
+	function idConfirm(){
+		var id = document.getElementById("UId").value;
+		var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+		if(! RegExp.test(id)){
+			console.log("올바른 아이디를 입력하세요.")
+			$('#UId').css("color", "#FE0A03");
+			$('#UId').css("font-weight", "bold")
+			uidCnum = 1;
+		}else{
+			console.log("정상적인 이름입니다.")
+			$('#UId').css("color", "greenyellow")
+			uidCnum = 0;
+		}
+	}	
 	
 	// id 중복확인
 	function fn_idChk() {
@@ -238,6 +269,24 @@
 		})
 	}
 
+	// 이름 유효성 검사
+	function nameConfirm(){
+		var name = document.getElementById("name").value;
+		var n_RegExp = /^[가-힣]{2,15}$/; //이름 유효성검사 정규식
+		if(! n_RegExp.test(name)){
+			console.log("올바른 이름을 입력하세요.")
+			$('#name').css("color", "#FE0A03");
+			$('#name').css("font-weight", "bold")
+			nameCnum = 1;
+		}else{
+			console.log("정상적인 이름입니다.")
+			$('#name').css("color", "greenyellow")
+			nameCnum = 0;
+		}
+	}
+	
+	
+	
 	// 휴대폰 번호 유효성 검사
 	function phoneConfirm() {
 		var phone = document.getElementById('phone').value;
@@ -274,18 +323,50 @@
 		}
 	}
 
-	// 비밀번호 확인		
-	function passConfirm() {
+	// 비밀번호 유효성 검사
+	function passConfirm1(){
+		var pw = $("#pwd").val();
+		var passCnum1 = 1
+		var reg = /^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var hangulcheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		 
+		if(false === reg.test(pw)) {
+		$("#pwd").css("color", "#FE0A03")
+		$('#pwd').css("font-weight", "bold")
+		console.log('비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다.');
+		}else if(/(\w)\1\1\1/.test(pw)){
+			$("#pwd").css("color", "#FE0A03")
+			passCnum1 = 1;
+		 	console.log('같은 문자를 4번 이상 사용하실 수 없습니다.');
+		 	return false;
+		 }else if(pw.search(/\s/) != -1){
+			 $("#pwd").css("color", "#FE0A03")
+			 passCnum1 = 1;
+		 	console.log("비밀번호는 공백 없이 입력해주세요.");
+		 	return false;
+		 }else if(hangulcheck.test(pw)){
+			 $("#pwd").css("color", "#FE0A03")
+			 passCnum1 = 1;
+		 	console.log("비밀번호에 한글을 사용 할 수 없습니다."); 
+		 }else {
+		 	console.log("통과");
+		 	$("#pwd").css("color", "greenyellow")
+		 	passCnum1 = 0;
+		 }
+	}
+	
+	// 비밀번호 재 확인		
+	function passConfirm2() {
 		var password = document.getElementById('pwd'); //비밀번호
 		var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
 		var passwordConfirmClassName = $('#pwd2').attr('name');
 		if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
 			$('#pwd2').css("color", "greenyellow")
-			passCnum = 0;
+			passCnum2 = 0;
 		} else {
 			$('#pwd2').css("color", "#FE0A03")
 			$('#pwd2').css("font-weight", "bold")
-			passCnum = 1;
+			passCnum2 = 1;
 		}
 	}
 	</script>

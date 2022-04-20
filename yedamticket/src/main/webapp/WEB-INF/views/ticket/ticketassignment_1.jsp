@@ -33,10 +33,16 @@ body {
 	display: flex;
 }
 
+.widthlist2 {
+	padding: 1rem 0;
+	width: 100%;
+	display: flex;
+}
+
 .widthitem {
 	margin: 15px;
-	min-width: 20rem;
-	min-height: 18rem;
+	min-width: 10rem;
+	min-height: 9rem; 
 	list-style: none;
 	user-select: none;
 }
@@ -49,12 +55,11 @@ body {
 	padding-left: 0px;
 }
 
-
-
 .footer {
 	width: 100%;
-	height: 200px; 	
-	position: fixed; /* footer의 높이 */ 
+	height: 200px;
+	/* footer의 높이 */ 	
+	/* position: fixed; */  
 	bottom: 0;
 	left: 0;
 		} 
@@ -73,14 +78,18 @@ body {
 	<input type="button" value="영화" onclick="mvfold();">
 
 	<!-- ticket assginment  style="visibility: hidden"-->
-	<div id="pf_container" style="position: absolute">
+	<!-- <div id="pf_container" style="position: absolute"> -->
+	
+	<div id="full_container">
+
+	<!-- performance assignment -->
+	<div id="pf_container">
 		<div>
 			<c:if test="${empty prInfo }">
 				<div>
 					<h1>공연 예약 / 거래 현황이 없습니다.</h1>
 				</div>
 			</c:if>
-			
 			<h1>공연 예약 / 거래 현황</h1>
 			<div id="widthslider" align="center">
 				<ul class="widthlist">
@@ -167,7 +176,7 @@ body {
 												<p class="card-text">가 격 : ${pr.price * seatCnt2 }</p>	
 											<button type="button" class="btn btn-secondary"
 												data-toggle="tooltip" data-placement="bottom"
-												title="거래를 예정중인 티켓입니다!">선택</button>
+												title="거래 예정중인 티켓입니다!">선택</button>
 											<input type="button" onclick="selectedFnc2()"
 												class="btn btn-primary" data-toggle="modal"
 												data-target="#prInfoModal2" value="취소">
@@ -313,17 +322,17 @@ body {
 	</div>
 
 	<!-- movie assignment -->
-	<div id="mv_container" style="position: absolute">
-		<div align="center">
+	<!-- <div id="mv_container" style="position: absolute"> -->
+	<div id="mv_container" style="display:none">
+		<div>
 			<c:if test="${empty mrInfo }">
 				<div>
 					<h1>영화 예약 현황이 없습니다.</h1>
 				</div>
 			</c:if>
-
+			<h1>영화 예약 현황</h1>
 			<div id="widthslider" align="center">
-				<h1>영화 예약 현황</h1>
-				<ul class="widthlist">
+				<ul class="widthlist2">
 					<c:forEach items="${mrInfo }" var="mr">
 						<c:if test="${mr.schDate > sysdate }">
 							<c:if test="${mr.cancelCd == 'N'}">
@@ -334,18 +343,14 @@ body {
 										<p class="ca rd-text">예약번호 : ${mr.mvReservNo}</p>
 										<p class="card-text">공연일정 : ${mr.schDate }</p>
 										<p class="card-text">좌석번호 : ${mr.seatName }</p>
-										<p class="card-text">영화관지역 : ${mr.reservHall }</p>
-										<p class="card-text">가 격 : 13000원</p>
-										<!-- 쉼표로 바뀌면 넣어주면 됨 -->
-										
-										<%-- <c:set var="mseatCnt" value="${fn:split(mr.seatName, ',') }"/>
+										<c:set var="mseatCnt" value="${fn:split(mr.seatName, ',') }"/>
 										<c:set var="mseatCnt2" value="0"/>
-											<c:forEach var="mseatCntFor" items="${seatName }">
-												<c:set var="mtt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+											<c:forEach var="mseatCntFor" items="${mseatCnt }">
+												<c:set var="mtt" value="${mseatCnt2 = mseatCnt2 + 1 }"/>
 											</c:forEach>	
 											<p class="card-text">영화관지역 : ${mr.reservHall }</p>
-											<p class="card-text">가 격 : ${13000 * seatCnt2 }</p> --%>	
-										<input type="button" onclick="selectedFnc3()" class="btn btn" data-toggle="modal" data-target="#mrInfoModal" value="환불">
+											<p class="card-text">가 격 : ${13000 * mseatCnt2 }</p>	
+										<input type="button" onclick="selectedFnc3()" class="btn btn-primary" data-toggle="modal" data-target="#mrInfoModal" value="환불">
 									</div>
 								</div>
 							</li>
@@ -394,15 +399,245 @@ body {
 					</div>
 				</div>
 				<!-- Movie_reservation Modal End -->
-
 			</div>
 		</div>
 	</div>
+	</div>
 
 	<script>
-	$("#mv_container").css("visibility", "hidden")
+	slider1();
+	slider2();
+	// 슬라이더----------------
+	// 요소
+	function slider1(){
+	let list = document.querySelector(".widthlist");
+    // 사이즈
+	let listScrollWidth = list.scrollWidth
+	let listClientWidth = list.clientWidth
 	
-	function pffold(){
+	// 필요한 변수
+	let startX = 0
+	let nowX = 0
+	let endX = 0
+	let listX = 0
+
+	// 스크롤 시작
+	onScrollStart = (e) => {
+	  startX = getClientX(e)
+	  window.addEventListener("mousemove", onScrollMove)
+	  window.addEventListener("touchmove", onScrollMove)
+	  window.addEventListener("mouseup", onScrollEnd)
+	  window.addEventListener("touchend", onScrollEnd)
+	}
+
+	// 스크롤이 움직이면서 현재 위치 기록
+	onScrollMove = (e) => {
+	  nowX = getClientX(e)
+	  setTranslateX(listX + nowX - startX)
+	}
+
+	// 스크롤이 끝난 상태 기록
+	onScrollEnd = (e) => {
+	  endX = getClientX(e)
+	  listX = getTranslateX()
+	  
+	  // 이벤트 리스너 초기화
+	  window.removeEventListener("mousedown", onScrollStart)
+	  window.removeEventListener("touchstart", onScrollStart)
+	  window.removeEventListener("mousemove", onScrollMove)
+	  window.removeEventListener("touchmove", onScrollMove)
+	  window.removeEventListener("mouseup", onScrollEnd)
+	  window.removeEventListener("touchend", onScrollEnd)
+	  window.removeEventListener("click", onClick)
+
+	  // 드래그 이후 대기시간(밀리초)
+	  setTimeout(() => {
+	    bindEvents()
+	    list.style.transition = ""
+	  }, 100)
+	}
+
+	// if문의 조건이 만족되지 않으면 onClick함수 실행 중단
+	onClick = (e) => {
+	  if (startX - endX !== 0) {
+	    e.preventDefault()
+	  }
+	}
+
+	// 
+	getClientX = (e) => {
+	  let isTouches = e.touches ? true : false
+	  return isTouches ? e.touches[0].clientX : e.clientX
+	}
+
+	// x 좌표값을 int형으로 변환
+	getTranslateX = () => {
+	  return parseInt(getComputedStyle(list).transform.split(/[^\-0-9]+/g)[5])
+	}
+
+	// x 좌표값을 touchend 위치로 설정
+	setTranslateX = (x) => {
+	  list.style.transform = `translateX(\${x}px)`
+	}
+
+	// 이벤트를 부여
+	bindEvents = () => {
+	  list.addEventListener("mousedown", onScrollStart)
+	  list.addEventListener("touchstart", onScrollStart)
+	  list.addEventListener("click", onClick)
+	}
+
+	// 원위치로 복귀시키는 함수
+	
+	resetPosition = () => {
+	  if (listX > 0) {
+	    setTranslateX(0)
+	    list.style.transition = `all 0.3s ease`
+	    listX = 0
+	  } else if (listX < listClientWidth - listScrollWidth) {
+	    setTranslateX(listClientWidth - listScrollWidth)
+	    list.style.transition = `all 0.3s ease`
+	    listX = listClientWidth - listScrollWidth
+	  }
+	}
+	
+	bindEvents()
+	}
+	
+	function slider2(){
+		let list = document.querySelector(".widthlist2");
+	    // 사이즈
+		let listScrollWidth = list.scrollWidth
+		let listClientWidth = list.clientWidth
+		
+		// 필요한 변수
+		let startX = 0
+		let nowX = 0
+		let endX = 0
+		let listX = 0
+
+		// 스크롤 시작
+		onScrollStart = (e) => {
+		  startX = getClientX(e)
+		  window.addEventListener("mousemove", onScrollMove)
+		  window.addEventListener("touchmove", onScrollMove)
+		  window.addEventListener("mouseup", onScrollEnd)
+		  window.addEventListener("touchend", onScrollEnd)
+		}
+
+		// 스크롤이 움직이면서 현재 위치 기록
+		onScrollMove = (e) => {
+		  nowX = getClientX(e)
+		  setTranslateX(listX + nowX - startX)
+		}
+
+		// 스크롤이 끝난 상태 기록
+		onScrollEnd = (e) => {
+		  endX = getClientX(e)
+		  listX = getTranslateX()
+
+		  // 원위치로 돌아오는 기능 비활성화 하여 다른 기능에 사용
+		  /*
+		  if (listX > 0) {
+		      setTranslateX(0)
+		      list.style.transition = `all 0.3s ease`;
+		      listX = 0
+		    } else if (listX < listClientWidth - listScrollWidth) {
+		      setTranslateX(listClientWidth - listScrollWidth)
+		      list.style.transition = `all 0.3s ease`;
+		      listX = listClientWidth - listScrollWidth
+		    } 
+		  */
+		
+		  
+		  // 이벤트 리스너 초기화
+		  window.removeEventListener("mousedown", onScrollStart)
+		  window.removeEventListener("touchstart", onScrollStart)
+		  window.removeEventListener("mousemove", onScrollMove)
+		  window.removeEventListener("touchmove", onScrollMove)
+		  window.removeEventListener("mouseup", onScrollEnd)
+		  window.removeEventListener("touchend", onScrollEnd)
+		  window.removeEventListener("click", onClick)
+
+		  // 드래그 이후 대기시간(밀리초)
+		  setTimeout(() => {
+		    bindEvents()
+		    list.style.transition = ""
+		  }, 100)
+		}
+
+		// if문의 조건이 만족되지 않으면 onClick함수 실행 중단
+		onClick = (e) => {
+		  if (startX - endX !== 0) {
+		    e.preventDefault()
+		  }
+		}
+
+		// 
+		getClientX = (e) => {
+		  let isTouches = e.touches ? true : false
+		  return isTouches ? e.touches[0].clientX : e.clientX
+		}
+
+		// x 좌표값을 int형으로 변환
+		getTranslateX = () => {
+		  return parseInt(getComputedStyle(list).transform.split(/[^\-0-9]+/g)[5])
+		}
+
+		// x 좌표값을 touchend 위치로 설정
+		setTranslateX = (x) => {
+		  list.style.transform = `translateX(\${x}px)`
+		}
+
+		// 이벤트를 부여
+		bindEvents = () => {
+		  list.addEventListener("mousedown", onScrollStart)
+		  list.addEventListener("touchstart", onScrollStart)
+		  list.addEventListener("click", onClick)
+		}
+
+		// 원위치로 복귀시키는 함수
+		resetPosition = () => {
+		  if (listX > 0) {
+		    setTranslateX(0)
+		    list.style.transition = `all 0.3s ease`
+		    listX = 0
+		  } else if (listX < listClientWidth - listScrollWidth) {
+		    setTranslateX(listClientWidth - listScrollWidth)
+		    list.style.transition = `all 0.3s ease`
+		    listX = listClientWidth - listScrollWidth
+		  }
+		}
+		
+		bindEvents()
+		}
+	
+	// 원위치로 돌아오는 기능 비활성화 하여 다른 기능에 사용
+	  function setZero(){ 
+	  if (listX > 0) {
+	      setTranslateX(0)
+	      list.style.transition = `all 0.3s ease`;
+	      listX = 0
+	    } else if (listX < listClientWidth - listScrollWidth) {
+	      setTranslateX(listClientWidth - listScrollWidth)
+	      list.style.transition = `all 0.3s ease`;
+	      listX = listClientWidth - listScrollWidth
+	    } 
+	  }
+	
+  	function setXzero1(){
+		let list = document.querySelector(".widthlist");
+		list.style.transform = ""
+	}
+	
+	function setXzero2(){
+		let list = document.querySelector(".widthlist2");
+		list.style.transform = ""
+	}
+	
+	/* $("#mv_container").css("visibility", "hidden") */
+	
+	/* function pffold(){
 		$("#pf_container").css("visibility","visible")
 		$("#mv_container").css("visibility", "hidden")
 	
@@ -411,8 +646,21 @@ body {
 	function mvfold(){
 		$("#mv_container").css("visibility","visible")
 		$("#pf_container").css("visibility", "hidden")
-	}
+	} */
 	
+	function pffold(){
+		document.getElementById('pf_container').style.display="";
+		document.getElementById('mv_container').style.display="none";
+		slider1();
+		setXzero1();
+	}	
+	
+	function mvfold(){
+		document.getElementById('pf_container').style.display="none";
+		document.getElementById('mv_container').style.display="";
+		slider2();
+		setXzero2();
+	}
 	
 	
 	function selectedFnc(){
@@ -435,7 +683,7 @@ body {
 		$("#date").val(date.substring(7,))
 		$("#seatNo").val(seat.substring(7,))
 		$("#loc").val(loc.substring(7,))
-		$("#price").val(price.substring(7,))
+		$("#price").val(price.substring(6,))
 	}
 	
 	function selectedFnc2(){
@@ -485,7 +733,7 @@ body {
 		$("#MVdate").val(date.substring(7,))
 		$("#MVseatNo").val(seat.substring(7,))
 		$("#MVloc").val(loc.substring(7,))
-		$("#MVprice").val(price.substring(7,))
+		$("#MVprice").val(price.substring(6,))
 	}
 	
 	function selectedFnc4(){
@@ -514,113 +762,8 @@ body {
 	}
 	
 	
-	// 슬라이더----------------
-	// 요소
-	const list = document.querySelector(".widthlist")
-
-    // 사이즈
-	const listScrollWidth = list.scrollWidth
-	const listClientWidth = list.clientWidth
 	
-	// 필요한 변수
-	let startX = 0
-	let nowX = 0
-	let endX = 0
-	let listX = 0
-
-	// 스크롤 시작
-	const onScrollStart = (e) => {
-	  startX = getClientX(e)
-	  window.addEventListener("mousemove", onScrollMove)
-	  window.addEventListener("touchmove", onScrollMove)
-	  window.addEventListener("mouseup", onScrollEnd)
-	  window.addEventListener("touchend", onScrollEnd)
-	  
-	}
-
-	// 스크롤이 움직이면서 현재 위치 기록
-	const onScrollMove = (e) => {
-	  nowX = getClientX(e)
-	  setTranslateX(listX + nowX - startX)
-	}
-
-	// 스크롤이 끝난 상태 기록
-	const onScrollEnd = (e) => {
-	  endX = getClientX(e)
-	  listX = getTranslateX()
-
-	  // 원위치로 돌아오는 기능 비활성화 하여 다른 기능에 사용
-	  /* if (listX > 0) {
-	      setTranslateX(0)
-	      list.style.transition = `all 0.3s ease`;
-	      listX = 0
-	    } else if (listX < listClientWidth - listScrollWidth) {
-	      setTranslateX(listClientWidth - listScrollWidth)
-	      list.style.transition = `all 0.3s ease`;
-	      listX = listClientWidth - listScrollWidth
-	    } */
-
-	  // 이벤트 리스너 초기화
-	  window.removeEventListener("mousedown", onScrollStart)
-	  window.removeEventListener("touchstart", onScrollStart)
-	  window.removeEventListener("mousemove", onScrollMove)
-	  window.removeEventListener("touchmove", onScrollMove)
-	  window.removeEventListener("mouseup", onScrollEnd)
-	  window.removeEventListener("touchend", onScrollEnd)
-	  window.removeEventListener("click", onClick)
-
-	  // 드래그 이후 대기시간(밀리초)
-	  setTimeout(() => {
-	    bindEvents()
-	    list.style.transition = ""
-	  }, 100)
-	}
-
-	// if문의 조건이 만족되지 않으면 onClick함수 실행 중단
-	const onClick = (e) => {
-	  if (startX - endX !== 0) {
-	    e.preventDefault()
-	  }
-	}
-
-	// 
-	const getClientX = (e) => {
-	  const isTouches = e.touches ? true : false
-	  return isTouches ? e.touches[0].clientX : e.clientX
-	}
-
-	// x 좌표값을 int형으로 변환
-	const getTranslateX = () => {
-	  return parseInt(getComputedStyle(list).transform.split(/[^\-0-9]+/g)[5])
-	}
-
-	// x 좌표값을 touchend 위치로 설정
-	const setTranslateX = (x) => {
-	  list.style.transform = `translateX(\${x}px)`
-	}
-
-	// 이벤트를 부여
-	const bindEvents = () => {
-	  list.addEventListener("mousedown", onScrollStart)
-	  list.addEventListener("touchstart", onScrollStart)
-	  list.addEventListener("click", onClick)
-	}
-
-	// 원위치로 복귀시키는 함수
-	const resetPosition = () => {
-	  if (listX > 0) {
-	    setTranslateX(0)
-	    list.style.transition = `all 0.3s ease`
-	    listX = 0
-	  } else if (listX < listClientWidth - listScrollWidth) {
-	    setTranslateX(listClientWidth - listScrollWidth)
-	    list.style.transition = `all 0.3s ease`
-	    listX = listClientWidth - listScrollWidth
-	  }
-	}
-	
-	bindEvents()
 	</script>
-
+	
 </body>
 </html>
