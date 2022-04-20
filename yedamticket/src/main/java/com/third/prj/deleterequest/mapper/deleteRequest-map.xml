@@ -24,6 +24,7 @@
 		<result column="LOC" property="loc"/>
 		<result column="ADDR" property="addr"/>
 		<result column="PRICE" property="price"/>
+		<result column="RENAMES" property="renames" />
 	</resultMap>
 	<resultMap type="com.third.prj.movie.service.MovieVO" id="movieMap">
 		<result column="MV_NO" property="mvNo"/>

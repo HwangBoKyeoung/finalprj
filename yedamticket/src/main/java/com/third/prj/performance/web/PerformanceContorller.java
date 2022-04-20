@@ -136,7 +136,7 @@ public class PerformanceContorller {
 	public String companyPerforUpdateForm(PerformanceVO vo, Model model) {
 
 		vo = perDao.perforSelect(vo);
-		System.out.println("==================================" + vo.getPNo());
+		System.out.println("==================================" + vo);
 		//vvo.setPNo(vo.getPNo());
 
 		model.addAttribute("pers", vo);
@@ -173,7 +173,7 @@ public class PerformanceContorller {
 			e.printStackTrace();
 		}
 		perDao.performanceUpdate(vo);
-			return "redirect:/companyPerforList.do";
+			return "redirect:/companyPerforUpdateForm.do?PNo="+vo.getPNo();
 	}
 	// 프로시저 수정
 //	@RequestMapping("/performanceUpdate.do")

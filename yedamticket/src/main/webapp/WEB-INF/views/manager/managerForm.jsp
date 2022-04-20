@@ -28,7 +28,7 @@
 					<div class="form-group row">
 						<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
 						<div class="col-sm-9">
-							<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password">
+							<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required="required">
 						</div>
 					</div>
 					
@@ -36,21 +36,21 @@
 						<label for="exampleInputConfirmPassword2"
 							class="col-sm-3 col-form-label">Name</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="name" name="name">
+							<input type="text" class="form-control" id="name" name="name" required="required">
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<label for="exampleInputEmail2" class="col-sm-3 col-form-label">Depart</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="depart" name="depart">
+							<input type="text" class="form-control" id="depart" name="depart" required="required">
 						</div>
 					</div>
 					
 					<div class="form-group row">
 						<label for="exampleInputMobile" class="col-sm-3 col-form-label">Phone</label>
 						<div class="col-sm-9">
-							<input type="text" class="form-control" id="phone" name="phone" placeholder="Mobile number">
+							<input type="text" class="form-control" id="phone" name="phone" placeholder="Mobile number" required="required">
 						</div>
 					</div>
 					
@@ -59,8 +59,7 @@
 						<div class="input-group-prepend">
 							<select name="authCd" id="selected">
 								<option value="movie">영화담당자</option>
-								<option value="consert">공연담당자</option>
-								<option value="goods">굿즈담당자</option>
+								<option value="performance">공연담당자</option>
 							</select>
 						</div>
 					</div>

@@ -8,6 +8,24 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<script type="text/javascript"> 
+        $(function() {
+            $("#file").on('change', function(){
+                readURL(this);
+            });
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function (e) {
+                  $('#preImage').attr('src', e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+            }
+        }
+      
+        
+     </script> 
 </head>
 <body>
 	<div>
@@ -97,6 +115,7 @@
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">포스터</label>
 							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
+							<img id="preImage" src="/upload/${pers.renames}" alt="image_title"/>
 						</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>

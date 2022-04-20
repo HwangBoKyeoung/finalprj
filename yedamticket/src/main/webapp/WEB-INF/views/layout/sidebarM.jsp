@@ -50,7 +50,7 @@
                 <ul class="nav flex-column sub-menu">
                   <li class="nav-item"><a class="nav-link" href="managerPerforDeleteList.do">Management</a></li>
                   <li class="nav-item"><a class="nav-link" href="perforSalesChart.do">Sales</a></li>
-                  <li class="nav-item"><a class="nav-link" href="perforpopularitychart.do">Popularity Chart</a></li>
+                  <li class="nav-item"><a class="nav-link" href="perforpopularitychart.do">TOP10 Chart</a></li>
                 </ul>
               </div></li>
              </c:if> 

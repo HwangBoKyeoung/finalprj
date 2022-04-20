@@ -1,5 +1,7 @@
 package com.third.prj.deleterequest.web;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +122,10 @@ public class DeleteRequestController {
 	public String conPage(Model model, CriteriaVO cri) {
 		PageVO pageVO = new PageVO(cri, delDao.getTotalPerfor(cri));
 		model.addAttribute("pers", delDao.companyPerforSelectList(cri));
+		
+		List<DeleteRequestVO> list = delDao.companyPerforSelectList(cri);
+		
+		System.out.println("******************************"+list);
 		model.addAttribute("pageVO", pageVO);
 		return "companyMyPage/companyMyPerforList";
 	}

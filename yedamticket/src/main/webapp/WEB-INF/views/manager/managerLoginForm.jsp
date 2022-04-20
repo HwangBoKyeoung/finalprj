@@ -39,71 +39,6 @@
 </style>
 
 <body class="login-page sidebar-collapse">
-	<!-- Navbar -->
-	<nav
-		class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent "
-		color-on-scroll="400">
-		<div class="container">
-			<div class="dropdown button-dropdown">
-				<a href="#pablo" class="dropdown-toggle" id="navbarDropdown"
-					data-toggle="dropdown"> <span class="button-bar"></span> <span
-					class="button-bar"></span> <span class="button-bar"></span>
-				</a>
-				<div class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<a class="dropdown-header">Dropdown header</a> <a
-						class="dropdown-item" href="#">Action</a> <a class="dropdown-item"
-						href="#">Another action</a> <a class="dropdown-item" href="#">Something
-						else here</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">Separated link</a>
-					<div class="dropdown-divider"></div>
-					<a class="dropdown-item" href="#">One more separated link</a>
-				</div>
-			</div>
-			<div class="navbar-translate">
-				<a class="navbar-brand"
-					href="https://demos.creative-tim.com/now-ui-kit/index.html"
-					rel="tooltip" title="Designed by Invision. Coded by Creative Tim"
-					data-placement="bottom" target="_blank"> Now Ui Kit </a>
-				<button class="navbar-toggler navbar-toggler" type="button"
-					data-toggle="collapse" data-target="#navigation"
-					aria-controls="navigation-index" aria-expanded="false"
-					aria-label="Toggle navigation">
-					<span class="navbar-toggler-bar top-bar"></span> <span
-						class="navbar-toggler-bar middle-bar"></span> <span
-						class="navbar-toggler-bar bottom-bar"></span>
-				</button>
-			</div>
-			<div class="collapse navbar-collapse justify-content-end"
-				id="navigation"
-				data-nav-image="resources/users/img/blurred-image-1.jpg">
-				<ul class="navbar-nav">
-					<li class="nav-item"><a class="nav-link" href="home.do">홈으로</a></li>
-					<li class="nav-item"><a class="nav-link"
-						href="https://github.com/creativetimofficial/now-ui-kit/issues">Have
-							an issue?</a></li>
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="Follow us on Twitter" data-placement="bottom"
-						href="https://twitter.com/CreativeTim" target="_blank"> <i
-							class="fab fa-twitter"></i>
-							<p class="d-lg-none d-xl-none">Twitter</p>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="Like us on Facebook" data-placement="bottom"
-						href="https://www.facebook.com/CreativeTim" target="_blank"> <i
-							class="fab fa-facebook-square"></i>
-							<p class="d-lg-none d-xl-none">Facebook</p>
-					</a></li>
-					<li class="nav-item"><a class="nav-link" rel="tooltip"
-						title="Follow us on Instagram" data-placement="bottom"
-						href="https://www.instagram.com/CreativeTimOfficial"
-						target="_blank"> <i class="fab fa-instagram"></i>
-							<p class="d-lg-none d-xl-none">Instagram</p>
-					</a></li>
-				</ul>
-			</div>
-		</div>
-	</nav>
 	<!-- End Navbar -->
 	<div class="page-header ">
 		<div class="page-header-image"
@@ -115,7 +50,9 @@
 						<form class="form" action="manaLogin.do" method="POST">
 							<div class="card-header text-center">
 								<div class="logo-container">
-									<img src="resources/users/img/now-logo.png" alt="">
+								<a href="home.do">
+									<img src="resources/users/img/now-logo.png"  alt="">
+									</a>
 								</div>
 							</div>
 							<div class="card-body">
@@ -142,16 +79,6 @@
 										class="btn btn-primary btn-round btn-lg btn-block"
 										value="LOGIN">
 									<!-- <a href="userSelect.do" class="btn btn-primary btn-round btn-lg btn-block">Login</a> -->
-								</div>
-								<div class="pull-left">
-									<h6>
-										<a href="#pablo" class="link">Create Account</a>
-									</h6>
-								</div>
-								<div class="pull-right">
-									<h6>
-										<a href="#pablo" class="link">Need Help?</a>
-									</h6>
 								</div>
 							</div>
 						</form>

@@ -306,7 +306,7 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
-					<li><a href="#">승인 요청</a></li> 
+					<li><a href="#">승인진행현황</a></li> 
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
