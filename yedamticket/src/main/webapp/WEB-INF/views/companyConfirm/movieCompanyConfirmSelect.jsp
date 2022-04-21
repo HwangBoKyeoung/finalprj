@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/users/js/core/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 <body>
 <div class="col-md-10 grid-margin stretch-card">
@@ -47,14 +49,14 @@
 				</select>
 			</div>
 		</div>
-		<c:if test="${comS.confirm == '대기' }">
+		<%-- <c:if test="${comS.confirm == '대기' }">
 				<div class="form-group row">
 				<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">요청현황</label>
 					<div class="col-sm-6">
 						<input type="text" class="form-control" placeholder="--" id="refuseRs" name="refuseRs" value="심사중" readonly="readonly">
 					</div>
 				</div>
-			</c:if>
+			</c:if> --%>
 			<c:if test="${comS.confirm == '거부' }">
 				<div class="form-group row">
 					<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">거부사유</label>

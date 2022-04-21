@@ -38,6 +38,7 @@
 				NAME,
 				GENRE,
 				DIRECTOR,
+				C_ID,
 				RATING,
 				COUNTRY,
 				CONTENT,
@@ -89,6 +90,7 @@
 				NAME, 
 				SELLER, 
 				PRICE, 
+				C_ID,
 				CONTENT, 
 				GOODS_CD, 
 				FILE_CD, 
@@ -188,6 +190,12 @@
 		WHERE G_NO = #{gNo}
 	</select>
 	
+	
+	
+	
+	
+	
+	
 	<select id="getList" resultType="com.third.prj.goods.service.GoodsVO">
 		<![CDATA[
 			SELECT * 
@@ -195,16 +203,13 @@
 	    		SELECT ROWNUM RN
 	    			 , A.*
 	    		FROM (
-	    			SELECT * 
-	          		FROM MOVIE 
-	          		WHERE
+	    			SELECT * FROM GOODS
+					WHERE (CONFIRM='거부' OR CONFIRM = '대기')
+					AND
          ]]>
-        <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-               OR GENRE LIKE '%'||#{searchName}||'%'
-               OR CONFIRM LIKE '%'||#{searchName}||'%')</if>
+       	 	<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
             <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-            <if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
-            <if test="searchType == 'CONFIRM'">CONFIRM LIKE '%'||#{searchName}||'%'</if>
             <if test="searchType == null or searchType ==''"> 1 = 1</if>
         <![CDATA[  			
           		ORDER BY G_NO DESC ) A ) 
@@ -214,15 +219,184 @@
 	</select>
 	
 	<select id="getTotal" resultType="int">
-      SELECT COUNT(*) AS TOTAL
-      FROM MOVIE
-      WHERE
+	      SELECT COUNT(*) 
+	      FROM GOODS
+		  WHERE (CONFIRM='거부' OR CONFIRM = '대기')
+		  AND
       <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
-               OR GENRE LIKE '%'||#{searchName}||'%'
-               OR CONFIRM LIKE '%'||#{searchName}||'%')</if>
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
             <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
-            <if test="searchType == 'GENRE'">GENRE LIKE '%'||#{searchName}||'%'</if>
-            <if test="searchType == 'CONFIRM'">CONFIRM LIKE '%'||#{searchName}||'%'</if>
             <if test="searchType == null or searchType ==''"> 1 = 1</if>
    </select>
+   
+   
+   <select id="getListMovie" resultType="com.third.prj.movie.service.MovieVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT * FROM MOVIE
+					WHERE (CONFIRM='거부' OR CONFIRM = '대기')
+					AND
+         ]]>
+       	 	<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY MV_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalMovie" resultType="int">
+       SELECT COUNT(*) 
+	      FROM MOVIE
+		  WHERE (CONFIRM='거부' OR CONFIRM = '대기')
+		  AND
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+   
+   <select id="getListPerformance" resultType="com.third.prj.performance.service.PerformanceVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT * FROM PERFORMANCE
+					WHERE (CONFIRM='거부' OR CONFIRM = '대기')
+					AND
+         ]]>
+       	 	<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY P_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalPerformance" resultType="int">
+       SELECT COUNT(*) 
+	      FROM PERFORMANCE
+		  WHERE (CONFIRM='거부' OR CONFIRM = '대기')
+		  AND
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+   
+   <!-- 관리자페이지 : 승인요청 페이징/검색페이징 기능 쿼리 -->
+   <select id="getListAdminGoods" resultType="com.third.prj.goods.service.GoodsVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT *
+					FROM GOODS
+					WHERE CONFIRM = '대기'
+					AND
+         ]]>
+       	 	<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY G_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalAdminGoods" resultType="int">
+       		SELECT COUNT(*) 
+	      	FROM GOODS
+			WHERE CONFIRM = '대기'
+			AND
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+   
+   <select id="getListAdminMovie" resultType="com.third.prj.movie.service.MovieVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT *
+					FROM MOVIE
+					WHERE CONFIRM = '대기'
+					AND
+         ]]>
+       	 	<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY MV_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalAdminMovie" resultType="int">
+       		SELECT COUNT(*) 
+	      	FROM MOVIE
+			WHERE CONFIRM = '대기'
+			AND
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+   
+   <select id="getListAdminPerformance" resultType="com.third.prj.performance.service.PerformanceVO">
+		<![CDATA[
+			SELECT * 
+			FROM (
+	    		SELECT ROWNUM RN
+	    			 , A.*
+	    		FROM (
+	    			SELECT *
+					FROM PERFORMANCE
+					WHERE CONFIRM = '대기'
+					AND
+         ]]>
+       	 	<if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+        <![CDATA[  			
+          		ORDER BY P_NO DESC ) A ) 
+         WHERE RN > (#{pageNum}-1) * #{amount} 
+         AND RN <= #{pageNum} * #{amount}
+		]]>
+	</select>
+	
+	<select id="getTotalAdminPerformance" resultType="int">
+       		SELECT COUNT(*) 
+	      	FROM PERFORMANCE
+			WHERE CONFIRM = '대기'
+			AND
+      <if test="searchType == 'ALL'">(NAME LIKE '%'||#{searchName}||'%'
+               OR CONTENT LIKE '%'||#{searchName}||'%')</if>
+            <if test="searchType == 'NAME'">NAME LIKE '%'||#{searchName}||'%'</if>
+            <if test="searchType == null or searchType ==''"> 1 = 1</if>
+   </select>
+   
 </mapper>

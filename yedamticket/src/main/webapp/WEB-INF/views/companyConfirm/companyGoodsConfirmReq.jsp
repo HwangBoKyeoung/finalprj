@@ -328,25 +328,24 @@ iframe {
 				<div class="card-body">
 					<h4 class="card-title">Confirm List</h4>
 					<p class="card-description">기업회원마이페이지</p>
-					<form action="#">
+					<form action="goodsCompanyConfirmList.do" method="get">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-									<option value="#"
-										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
-									<option value="#"
-										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
+									<option value="NAME"
+										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>굿즈명</option>
+									
 								</select> <input type="text" name="searchName"
-									value="${pageVO.cri.searchName }">
+									value="<c:out value='${pageVO.cri.searchName }'/>">
 								<button type="submit" class="btn btn-primary">검색</button>
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-								<input type="hidden" name="amount" value="${pageVO.amount }">
+								<input type="hidden" name="amount" value="${pageVO.cri.amount }">
 								<input type="hidden" name="CId" value="${sessionId}">
 							</div>
-					
-				<table class="table table-hover">
+					</form>
+					<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>굿즈번호</th>
@@ -359,7 +358,7 @@ iframe {
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${comC }" var="com">
-							<c:if test="${sessionId eq com.CId and com.confirm ne '승인'}">
+							<c:if test="${sessionId eq com.CId}">
 								<tr onclick="location.href='goodsCompanyConfirmSelect.do?GNo=${com.GNo}'">
 									<td>${com.GNo }</td>
 									<td>${com.name }</td>
@@ -372,7 +371,7 @@ iframe {
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="actionForm" action="#" method="get">
+				<form id="actionForm" action="goodsCompanyConfirmList.do" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
                   <input type="hidden" name="amount" value="${pageVO.amount }">
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
@@ -397,7 +396,7 @@ iframe {
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
-				</form>
+				
 				</div>
 			</div>
 		</div>
@@ -412,19 +411,6 @@ iframe {
          
          actionForm.submit();
       });
-      
-      let searchForm = $("#searchForm");
-      $("#searchForm button").on("click", function(e){
-         if(!searchForm.find("input[name='searchName']").val()){
-            alert('키워드를 입력하세요.');
-            return false;
-         }
-         
-         searchForm.find("input[name='pageNum']").val("1");
-         e.preventDefault();
-         
-         searchForm.submit();
-      })
    </script>
 </body>
 </html>

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/users/js/core/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
@@ -60,27 +62,44 @@
 					</c:if>
 				</div>
 				<br>
-				<form action="#">
+				<form action="movieConfirmList.do" method="get">
 					<div class="col-10">
 						<div class="searchBar" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
 								<option value="ALL"
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-								<option value="#"
+								<option value="NAME"
 									${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>#</option>
-								<option value="#"
-									${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>#</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }">
 							<button type="submit" class="btn btn-primary">검색</button>
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-							<input type="hidden" name="amount" value="${pageVO.amount }">
+							<input type="hidden" name="amount" value="${pageVO.cri.amount }">
 						</div>
 					</div>
 				</form>
+				
+				<form id="actionForm" action="movieConfirmList.do" method="get">
+                  <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+                  <input type="hidden" name="amount" value="${pageVO.amount }">
+                  <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
+                  <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
+               </form>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+      let actionForm = $("#actionForm");
+      $("#content a").on("click", function(e){
+         e.preventDefault();
+         console.log("click");
+         console.log($(this).attr("href"));
+         actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+         
+         actionForm.submit();
+      });
+   </script>
 </body>
 </html>

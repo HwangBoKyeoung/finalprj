@@ -117,5 +117,65 @@ public class ConfirmServiceImpl implements ConfirmService {
 		return mapper.goodsCompanyConfirmList();
 	}
 
+	@Override
+	public List<ConfirmVO> getListMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListMovie(cri);
+	}
+
+	@Override
+	public int getTotalMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalMovie(cri);
+	}
+
+	@Override
+	public List<ConfirmVO> getListPerformance(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListPerformance(cri);
+	}
+
+	@Override
+	public int getTotalPerformance(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalPerformance(cri);
+	}
+
+	@Override
+	public List<ConfirmVO> getListAdminGoods(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListAdminGoods(cri);
+	}
+
+	@Override
+	public int getTotalAdminGoods(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalAdminGoods(cri);
+	}
+
+	@Override
+	public List<ConfirmVO> getListAdminMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListAdminMovie(cri);
+	}
+
+	@Override
+	public int getTotalAdminMovie(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalAdminMovie(cri);
+	}
+
+	@Override
+	public List<ConfirmVO> getListAdminPerformance(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getListAdminPerformance(cri);
+	}
+
+	@Override
+	public int getTotalAdminPerformance(CriteriaVO cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotalAdminPerformance(cri);
+	}
+
 
 }

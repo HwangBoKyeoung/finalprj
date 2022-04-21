@@ -1,4 +1,3 @@
-/*<!-- Channel Plugin Scripts -->*/
   (function() {
     var w = window;
     if (w.ChannelIO) {
@@ -37,4 +36,3 @@
   ChannelIO('boot', {
     "pluginKey": "6f137d7d-ac29-4afd-a48b-13d394eb8371"
   });
-/*<!-- End Channel Plugin -->*/

@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/users/js/core/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 <body>
 	<div>
@@ -22,6 +24,12 @@
 							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">영화번호</label>
 							<div class="col-sm-6">
 								<input type="text" class="form-control" id="mvNo" name="mvNo" value="${conS.mvNo }" readonly="readonly">
+							</div>
+						</div>
+						<div class="form-group row">
+							<label for="exampleInputUsername2" class="col-sm-3 col-form-label">담당기업</label>
+							<div class="col-sm-6">
+								<input type="text" class="form-control" id="CId" name="CId" value="${conS.CId }" readonly="readonly">
 							</div>
 						</div>
 						<div class="form-group row">
@@ -89,7 +97,7 @@
 								</select>
 							</div>
 						</div>
-								<div class="form-group row">
+								<div class="form-group row" id="selectedShow" style="display:none">
 								<label for="exampleInputConfirmPassword2" class="col-sm-3 col-form-label">거부사유</label>
 									<div class="col-sm-6">
 										<input type="text" class="form-control" placeholder="거부사유" id="refuseRs" name="refuseRs" value="${conS.refuseRs }">
@@ -103,5 +111,15 @@
 			</div>
 		</div>
 	</div>
+	
+	<script>
+	$("#selectedval").change(function() {
+		if($(this).val()=='거부'){
+			$("#selectedShow").show();
+		} else{
+			$("#selectedShow").empty();
+		}
+		});
+	</script>
 </body>
 </html>
