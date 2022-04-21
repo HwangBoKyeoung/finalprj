@@ -15,6 +15,11 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+	.input-group, .form-group{
+		margin-bottom : 40px;
+	}
+</style>
 </head>
 <body>
 	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
@@ -56,7 +61,8 @@
 								</div>
 								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="100" onkeyup="passConfirm1()">
 							</div>
-
+							<p id="pppp" style="display:none;">비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다</p>
+							
 							<div class="input-group no-border">
 								<div class="input-group-prepend">
 									<span class="input-group-text"> 
@@ -129,6 +135,14 @@
 		</div>
 	</div>
 	<script>
+	$(document).ready(function(){
+	var email = $("#email").val()
+	if(email == null){
+		alert("세션이 만료되었습니다 이메일을 확인해 주세요..")
+		return $(location).attr('href', 'signup_1.do')
+	}
+	})
+	
 	// 주소찾기
     function findAddr() {
         new daum.Postcode({
@@ -235,10 +249,12 @@
 			console.log("올바른 아이디를 입력하세요.")
 			$('#UId').css("color", "#FE0A03");
 			$('#UId').css("font-weight", "bold")
+			$("#idChk").attr("disabled", true);
 			uidCnum = 1;
 		}else{
 			console.log("정상적인 이름입니다.")
 			$('#UId').css("color", "greenyellow")
+			$("#idChk").attr("disabled", false);
 			uidCnum = 0;
 		}
 	}	
@@ -303,25 +319,6 @@
 		}
 	}
 
-	// 생년월일 번호 유효성 검사
-	function birthConfirm() {
-		var birth = document.getElementById('birthDt').value;
-		var regBirth = /^(19[0-9][0-9]|20[0-2][0-2])(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
-
-		if (!regBirth.test(birth)) {
-			console.log('올바른 생년월일을 입력하세요.');
-			$('#birthDt').css("color", "#FE0A03");
-			$('#birthDt').css("font-weight", "bold")
-			birthCnum = 1;
-		}
-		else {
-			if (birth < 20220329) {
-				console.log('정상적인 생년월일입니다..!');
-				$('#birthDt').css("color", "greenyellow")
-				birthCnum = 0;
-			}
-		}
-	}
 
 	// 비밀번호 유효성 검사
 	function passConfirm1(){
@@ -329,7 +326,12 @@
 		var passCnum1 = 1
 		var reg = /^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 		var hangulcheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
-		 
+		$("#pwd").parent().css("margin-bottom", 0)
+		$("#pppp").css("display", "")
+		$("#pppp").css("color", "#FE0A03")
+		$("#pppp").css("font-size", "smaller")
+		$("#pppp").css("text-align", "center")
+		$("#pppp").text("비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다.")
 		if(false === reg.test(pw)) {
 		$("#pwd").css("color", "#FE0A03")
 		$('#pwd').css("font-weight", "bold")
@@ -351,6 +353,8 @@
 		 }else {
 		 	console.log("통과");
 		 	$("#pwd").css("color", "greenyellow")
+		 	$("#pppp").text("조건을 충족합니다.")
+		 	$("#pppp").css("color", "greenyellow")
 		 	passCnum1 = 0;
 		 }
 	}
