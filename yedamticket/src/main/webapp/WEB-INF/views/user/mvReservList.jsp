@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -223,15 +224,15 @@ body {
 }
 
 .jfk {
-	    font-weight: bold;
-    position: absolute;
-    top: 19px;
-    left: -82px;
+	position: absolute;
+    top: 20px;
+    left: 29px;
     font-family: Arial;
     font-size: 25px;
     color: #222;
-    width: 322px;
+    width: 320px;
     white-space: normal;
+    font-weight: bold;
 }
 
 
@@ -417,11 +418,12 @@ tbody tr td:nth-child(3){
 						<h6>${sessionId }님은 회원 입니다</h6>
 						<h6>보유 포인트${user.point }P</h6> <br>
 					</li>
-					<li><a href="userUpdateForm.do">회원정보수정</a></li>
+					<li><a href="userInfoCheckForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
-					<li><a href="userBuyList.do">거래내역</a></li>
-					<li><a href="userPointList.do">포인트충전내역</a></li>
+					<li><a href="userBuyList.do">거래내역 삭제 예정</a></li>
+					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
+					<li><a href="userPointList.do">거래내역</a></li>
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
@@ -441,23 +443,23 @@ tbody tr td:nth-child(3){
 					<table class="table table-sm">
 						<thead>
 							<tr>
-								<th scope="col">예매번호</th>
-								<th scope="col">예매일</th>
-								<th scope="col">영화명</th>
-								<th scope="col">관람일</th>
-								<th scope="col">상영시간</th>
+								<th class="text-center">예매번호</th>
+								<th class="text-center">예매일</th>
+								<th class="text-center">영화명</th>
+								<th class="text-center">관람일</th>
+								<th class="text-center">상영시간</th>
 								<th scope="col">좌석번호</th>
 								<th scope="col">모바일티켓</th>
 							</tr>
 						</thead>
 						<tbody>
 							<c:forEach items="${mvList}" var="mv">
-								<tr onclick="location.href='movieDetail.do?docId=${mv.docId }'">
-									<td scope="row">${mv.mvReservNo}</td>
-									<td>${mv.reservDt}</td>
-									<td>${mv.name}</td>
-									<td>${mv.schDate}</td>
-									<td>${mv.schTime}</td>
+								<tr >
+									<td class="text-center">${mv.mvReservNo}</td>
+									<td class="text-center" ><fmt:formatDate value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
+									<td class="text-center" onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}</td>
+									<td class="text-center">${mv.schDate}</td>
+									<td class="text-center">${mv.schTime}</td>
 									<td>${mv.seatName}</td>
 									<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
 									<td><button type="button" id="MBTN"
@@ -602,6 +604,7 @@ tbody tr td:nth-child(3){
 							$("#ex2_Result2").html(str);
 							console.log(str);
 						});
+		
 	</script>
 </body>
 </html>

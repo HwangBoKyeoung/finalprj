@@ -135,37 +135,63 @@ public class UserController {
 
 	@RequestMapping("/userLogin.do")
 	public ModelAndView userSelect(HttpSession session, UserVO vo, ModelAndView mv) {
-
+		
+		System.out.println("userSelect start");
 		userDao.userSelect(vo);
+		System.out.println("userSelect end");
+		
 		session.setAttribute("sessionId", vo.getUId());
 		session.setAttribute("sessionPwd", vo.getPwd());
+		
+		System.out.println("sessionId : " + vo.getUId());
+		System.out.println("sessionPwd : " + vo.getPwd());
+		
+		System.out.println("idChk start");
+		int idCheck = userDao.idChk(vo);
+		System.out.println("idChk end");
+		
+		switch (idCheck) {
+		case 1:
+			String msg = "";
+			String url = ""; 
+			
+			System.out.println("login > loginChk start");
+			UserVO login = userDao.loginChk(vo, session);
+			System.out.println("login > loginChk end");
+			
+			BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+			boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
 
-		String msg = "";
-		String url = "";
-		UserVO login = userDao.loginChk(vo, session);
-		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-		boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+			if (login != null && pwdChk) {
+				int i = userDao.reservChk(vo);
+				msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
+				url = "home.do";
 
-		if (login != null && pwdChk) {
-			int i = userDao.reservChk(vo);
-			msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
-			url = "home.do";
+				session.setAttribute("sessionId", vo.getUId());
+				session.setAttribute("sessionEmail", vo.getEmail());
+				session.setAttribute("sessionName", vo.getName());
+				session.setAttribute("sessionAddr", vo.getAddr());
+				session.setAttribute("sessionPhone", vo.getPhone());
+ 
+				mv.addObject("msg", msg);
+				mv.addObject("url", url);
+				mv.setViewName("user/alert");
+			}else{
+				msg = "비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+				url = "userLoginForm.do";
+				mv.addObject("msg", msg);
+				mv.addObject("url", url);
+				mv.setViewName("user/alert");
+			}
+			break;
 
-			session.setAttribute("sessionId", vo.getUId());
-			session.setAttribute("sessionEmail", vo.getEmail());
-			session.setAttribute("sessionName", vo.getName());
-			session.setAttribute("sessionAddr", vo.getAddr());
-			session.setAttribute("sessionPhone", vo.getPhone());
-
-			mv.addObject("msg", msg);
-			mv.addObject("url", url);
+		case 0:
+			String msg2 = "아이디 또는 비밀번호를 확인해주세요";
+			String url2 = "userLoginForm.do";
+			mv.addObject("msg", msg2);
+			mv.addObject("url", url2);
 			mv.setViewName("user/alert");
-		} else {
-			msg = "아이디나 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-			url = "userLoginForm.do";
-			mv.addObject("msg", msg);
-			mv.addObject("url", url);
-			mv.setViewName("user/alert");
+			break;
 		}
 		return mv;
 	}
@@ -342,7 +368,7 @@ public class UserController {
 			return "아이디와 이메일이 일치하지 않습니다.\n입력하신 정보를 다시 한번 확인해주세요";
 		}
 
-		return "해당 이메일로 임시 비밀번호가 전송되었습니다.\n확인을 누르시면 변경창으로 이동합니다";
+		return "해당 이메일로 임시 비밀번호가 전송되었습니다.\n 로그인후 마이페이지에서 비밀번호를 변경해주세요";
 	}
 
 	@RequestMapping("/userInfoCheckForm.do")
@@ -404,6 +430,5 @@ public class UserController {
 		}
 		return "user/userInfoCheck";
 	}
-
 
 }
