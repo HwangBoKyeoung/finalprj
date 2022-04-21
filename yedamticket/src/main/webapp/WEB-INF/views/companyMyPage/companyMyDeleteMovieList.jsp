@@ -357,10 +357,8 @@ iframe {
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${dels }" var="del">
-							
 							<tr>
 								<td>${del.movieVO.name}</td>
-								
 								<td>${del.movieVO.content}</td>
 								<td>${del.deleteCd}</td>
 								<td>${del.refusal }</td>

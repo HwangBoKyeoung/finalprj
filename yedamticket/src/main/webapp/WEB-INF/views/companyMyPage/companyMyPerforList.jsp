@@ -358,7 +358,6 @@ iframe {
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
-							<c:if test="${per.performanceVO.CId eq sessionId}">
 								<tr
 									onclick="location.href='companyPerforUpdateForm.do?PNo=${per.PNo}' ">
 									<td>${per.performanceVO.PNo}</td>
@@ -366,7 +365,6 @@ iframe {
 									<td>${per.performanceVO.CId}</td>
 									<td>${per.performanceVO.loc}</td>
 								</tr>
-							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -410,18 +408,6 @@ iframe {
 			actionForm.submit();
 		});
 
-		let searchForm = $("#searchForm");
-		$("#searchForm button").on("click", function(e) {
-			if (!searchForm.find("input[name='searchName']").val()) {
-				alert('키워드를 입력하세요.');
-				return false;
-			}
-
-			searchForm.find("input[name='pageNum']").val("1");
-			e.preventDefault();
-
-			searchForm.submit();
-		})
 	</script>
 </body>
 </html>

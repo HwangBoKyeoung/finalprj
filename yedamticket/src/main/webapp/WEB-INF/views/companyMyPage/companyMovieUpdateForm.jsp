@@ -122,7 +122,7 @@ ${mv }
 								<input type="text" class="form-control" id="confirm" name="confirm" value="${mv.confirm }" readonly="readonly">
 							</div>
 						</div>
-						<div>
+						<%-- <div>
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">영상</label>
 							<input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="vfile" name="vfile">
@@ -134,7 +134,7 @@ ${mv }
 							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
 							<img id="preImage" src="/upload/${mv.renames}" alt="${mv.fileCd}"/>
 						</div>
-						
+						 --%>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
 						<button class="btn btn-light" type="reset">Cancel</button>
 					</form>

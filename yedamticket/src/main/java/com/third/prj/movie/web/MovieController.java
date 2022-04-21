@@ -151,8 +151,9 @@ public class MovieController {
 	@RequestMapping("/companyMovieUpdateForm.do")
 	public String companyMovieUpdateForm(MovieVO vo, MovieVideoVO vvo, Model model) {
 //			MovieVideoVO vvo = new MovieVideoVO();
-		vo = movieDao.mvSelect(vo);
+		System.out.println("============================1"+vo);
 		System.out.println("============================" + vo.getMvNo());
+		vo = movieDao.mvSelect(vo);
 		System.out.println("****************"+vo.getDocId());
 		vvo.setMvNo(vo.getMvNo());
 		vvo = mvvDao.mvvSelect(vvo);
