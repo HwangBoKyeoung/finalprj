@@ -135,9 +135,10 @@
 		</div>
 	</div>
 	<script>
+	// 이메일(세션값) 값 검증
 	$(document).ready(function(){
 	var email = $("#email").val()
-	if(email == null){
+	if(email == ''){
 		alert("세션이 만료되었습니다 이메일을 확인해 주세요..")
 		return $(location).attr('href', 'signup_1.do')
 	}
