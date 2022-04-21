@@ -58,7 +58,6 @@ ${vo }
             <figure class="events-thumbnail">
                 <img src="resources/performance/images/event-1.jpg" alt="">
             </figure>
-
             <div class="event-content-wrap">
                 <header class="entry-header flex justify-content-between">
                     <div>
@@ -71,7 +70,6 @@ ${vo }
                     <div class="event-cost flex justify-content-center align-items-center">
                         <p>${p.price }</p>
                     </div>
-                    <!-- pno으로 해야하는데 임시 -->
                    <input type="hidden" name='pNo' value="${p.PNo }">
                     
                 </header>
