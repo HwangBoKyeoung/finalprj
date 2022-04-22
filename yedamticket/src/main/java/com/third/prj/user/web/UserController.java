@@ -267,13 +267,31 @@ public class UserController {
 
    @RequestMapping("/userDelete.do")
    public String userDelete(UserVO vo, HttpSession session) {
-      int n = userDao.userDelete(vo);
+	   UserVO login = userDao.loginChk(vo, session);
+	      System.out.println("===========================================");
+	      System.out.println("sesion : " + session.toString());
+	      System.out.println("login : " + login);
+	      System.out.println("vo : " + vo);
+	      System.out.println("===========================================");
 
-      if (n != 0) {
-         session.invalidate();
-         return "redirect:/";
-      }
-      return "user/errorPage";
+	      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+	      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+	      System.out.println("pwdChk : " + pwdChk);
+
+	      if (login != null && pwdChk) {
+	         System.out.println("vo' UId : " + vo.getUId());
+	         System.out.println("vo' pwd : " + vo.getPwd());
+
+	         int result = userDao.userDelete(login);
+	         System.out.println("result : " + result);
+
+	         if (result == 1) {
+	        	 session.invalidate();
+	            return "redirect:/";
+	         }
+
+	      }
+	      return "user/errorPage";
    }
 
    @RequestMapping("/mvReservList.do")

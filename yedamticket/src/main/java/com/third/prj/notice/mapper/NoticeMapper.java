@@ -18,7 +18,7 @@ public interface NoticeMapper {
 	// 페이징
 	public List<NoticeVO> getList(CriteriaVO cri);
 	// 전체 게시글수
-	public int getTotal(CriteriaVO cri);
+		public int getTotal(CriteriaVO cri);
 	
 	
 	

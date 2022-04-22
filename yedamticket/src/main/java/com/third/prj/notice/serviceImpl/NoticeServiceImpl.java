@@ -52,8 +52,11 @@ public class NoticeServiceImpl implements NoticeService {
 		return mapper.getList(cri);
 	}
 
+
+
 	@Override
 	public int getTotal(CriteriaVO cri) {
+		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
 	}
 

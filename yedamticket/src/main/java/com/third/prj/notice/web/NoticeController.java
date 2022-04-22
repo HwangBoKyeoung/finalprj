@@ -20,6 +20,7 @@ public class NoticeController {
 
 	@RequestMapping("/noticeList.do")
 	public String noticeList(Model model, CriteriaVO cri) {
+	
 		PageVO pageVO = new PageVO(cri, noticeDao.getTotal(cri)); //(기준, 토탈)
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달		
 		model.addAttribute("list", noticeDao.getList(cri)); //게시글전달

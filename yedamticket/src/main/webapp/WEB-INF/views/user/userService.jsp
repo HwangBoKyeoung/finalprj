@@ -9,18 +9,13 @@
 <meta charset="utf-8">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
 <link
 	href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
 	rel="stylesheet">
 
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
@@ -335,14 +330,9 @@ margin-right: 45%;
 
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="index.html" class="logo">고객센터</a>
+					<a href="userPage.do" class="logo">고객센터</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="noticeList.do">공지사항</a></li>
@@ -354,8 +344,8 @@ margin-right: 45%;
 					<h4 class="h6">고객센터</h4>
 					<h4 class="h6">전화상담</h4>
 					<h2 class="h6">1588-1588</h2>
-					<span>평일 09:00~18:00</span><br> <span>토요일 09:00~17:00 </span><br>
-					<span>일요일 공휴일 휴무</span>
+					<span>평일 09:00~18:00</span><br>
+					<span>토,일요일 공휴일 휴무</span>
 
 					<div class="form-group d-flex">
 						<div class="icon">

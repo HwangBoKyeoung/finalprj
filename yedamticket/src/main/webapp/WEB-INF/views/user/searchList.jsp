@@ -136,12 +136,12 @@
 		<br>
 		<div class="row">
 			<c:forEach items="${searchName}" var="sN" varStatus="status">
-			
 				<div class="col-3">
 					<div class="card">
 						<div class="poster" id="poster">
 							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
+								<div>영화</div>
 							<input type="hidden" class="rankPoster" value="${sN.fileCd }">
 							<input type="hidden"  value="${sN.renames }">
 							<img class="rPoster">
