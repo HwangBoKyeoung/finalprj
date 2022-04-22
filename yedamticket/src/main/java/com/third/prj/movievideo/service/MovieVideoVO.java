@@ -13,7 +13,6 @@ public class MovieVideoVO {
 	private String vName;
 	private String vRenames;
 	private int MvNo;
-	private String fileCd;
 	private String docId;
 	
 }

@@ -123,7 +123,7 @@
 	border-color: honeydew;
 	position: absolute;
 	right: 45%;
-	top: 50px;
+	top: 60px;
 }
 
 .searchform input {
@@ -131,21 +131,20 @@
 }
 
 .searchform input[type=search] {
-	background-color: transparent;
-	border: medium none;
-	border-radius: 0;
-	box-sizing: content-box;
-	color: #fff;
-	cursor: pointer;
-	float: left;
-	font-family: inherit;
-	font-size: 30px;
-	margin-bottom: 0;
-	padding: 3px 0;
-	transition: all 0.5s ease 0s;
-	width: 250px;
-	-webkit-appearance: none;
-	-moz-appearance: none;
+	    background-color: transparent;
+    border: medium none;
+    border-radius: 0;
+    box-sizing: content-box;
+    color: #fff;
+    cursor: pointer;
+    float: left;
+    font-family: inherit;
+    font-size: 25px;
+    margin-bottom: 0;
+    padding: 1px 0;
+    transition: all 0.5s ease 0s;
+    width: 294px;
+    -webkit-appearance: none;
 	/* clears the 'X' from Internet Explorer */
 	/* clears the 'X' */
 }
@@ -521,7 +520,7 @@ h1 {
 								<form id="frm" class="searchform" action="searchAll.do">
 									<div>
 										<input type="search" id="searchName" name="searchName"
-											placeholder="Search" required="required">
+											placeholder="제목으로 검색하세요" required="required">
 										<button type="submit" id="searchsubmit">
 											<i class="fas fa-search fa-2x" aria-hidden="true"></i>
 										</button>

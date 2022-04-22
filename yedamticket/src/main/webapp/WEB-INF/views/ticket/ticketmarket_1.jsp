@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -58,8 +59,13 @@ body {
 					  	<p class="card-text" >예약번호 : ${t.PReservNo}</p>
 					    <p class="card-text">공연일정 : ${t.frDt }</p>
 					    <p class="card-text">좌석번호 : ${t.seatNo }</p>
+					    <c:set var="seatCnt" value="${fn:split(t.seatNo, ',') }"/>
+						<c:set var="seatCnt2" value="0"/>
+							<c:forEach var="seatCntFor" items="${seatCnt }">
+								<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+							</c:forEach>	
 					    <p class="card-text">좌석구역 : ${t.loc }</p>
-					    <p class="card-text">가  격 : ${t.price }</p>
+					    <p class="card-text">가  격 : ${t.price * seatCnt2}</p>
 					    
 					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" onclick="selectedFnc();">선택</button>
 					  </div>

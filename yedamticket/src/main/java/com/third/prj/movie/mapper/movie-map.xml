@@ -23,6 +23,7 @@
 		<result property="confirm" column="confirm"/>
 		<result property="refuseRs" column="refuse_rs"/>
 		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
+		<collection property="movieVideoVO" resultMap="movieVideoMap"></collection>
 	</resultMap>
 
 	<resultMap
@@ -34,18 +35,33 @@
 		<result property="pNo" column="P_NO"/>
 	</resultMap>
 
+	<resultMap type="com.third.prj.movievideo.service.MovieVideoVO" id="movieVideoMap">
+		<result property="pVideoNo" column="P_VIDEO_NO"/>
+		<result property="vName" column="VNAME"/>
+		<result property="vRenames" column="VRENAMES"/>
+		<result property="MvNo" column="MV_NO"/>
+		<result property="docId" column="DOCID"/>
+	</resultMap>
 	<!-- 프로시저 -->
 	<resultMap type="hashmap" id="procedureCall" />
 	
 	<!-- 검색프로시저 -->
 	<resultMap type="hashmap" id="searchProcedure"/>
+	
+	<!-- 검색프로시저 -->
+	<resultMap type="hashmap" id="InsertMovieHall"/>
+	
+	
 
 	<select id="mvSelect"
 		resultType="com.third.prj.movie.service.MovieVO">
-		SELECT
-		MV_NO,NAME,GENRE,STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY,RUNTIME,CONTENT,C_ID,ACTOR,FILE_CD,DOCID,CONFIRM,REFUSE_RS
-		FROM MOVIE
-		WHERE MV_NO = #{mvNo}
+		SELECT 
+	    M.MV_NO,M.NAME,M.GENRE,M.STARTDATE,M.DIRECTOR,M.RATING,M.DISTRIBUTOR,M.COUNTRY,M.RUNTIME,M.CONTENT,
+	    M.C_ID,M.ACTOR,M.FILE_CD,M.DOCID,M.CONFIRM,M.REFUSE_RS,M.RENAMES,
+	    MV.P_VIDEO_NO,MV.VNAME,MV.VRENAMES
+	    FROM MOVIE M, MOVIE_VIDEO MV
+	    WHERE M.MV_NO = MV.MV_NO
+	    AND M.MV_NO=#{mvNo}
 	</select>
 
 	<select id="mvListPaging"
@@ -99,14 +115,22 @@
 	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_cid, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_fileCd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_renames, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vrname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_docId, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
 	
 
 	<insert id ="searchProcedure" statementType="CALLABLE"> 
 		{CALL popular_search(#{p_search, mode=IN, jdbcType=VARCHAR, javaType=String})}
+	</insert>
+	
+	<insert id ="InsertMovieHall" statementType="CALLABLE">
+		{CALL InsertMovieHall(#{d1, mode=IN, jdbcType=VARCHAR, javaType=STRING})}
+		
 	</insert>
 	
 	<insert id="popularSearch">
@@ -206,12 +230,11 @@
 	</select>
 
 	<insert id="movieInsert" parameterType="com.third.prj.user.service.UserVO">
-		 <selectKey keyProperty="mvNo" resultType="int"
-			order="BEFORE">
-			SELECT NVL(MAX(mv_NO), 0) + 1 AS MVNO
+ 		 <selectKey keyProperty="mvNo" resultType="int" order="BEFORE">
+			SELECT NVL(MAX(MV_NO), 0) + 1
 			FROM MOVIE
-		</selectKey> 
-		INSERT INTO MOVIE (
+		</selectKey>
+		INSERT INTO MOVIE (MV_NO,
 							NAME,
 							GENRE,
 							STARTDATE,
@@ -226,7 +249,7 @@
 							FILE_CD,
 							DOCID,
 							RENAMES) 
-					VALUES(#{name},#{genre},to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
+					VALUES(#{mvNo},#{name},#{genre},to_char(to_date(#{startDate},'yyyy-mm-dd'),'yyyymmdd'),#{director},#{rating},#{distributor},#{country},#{runtime},#{content},#{CId},#{actor},#{fileCd},#{docId},#{renames})
 	</insert>
 
 	<!-- <select id="searchAll" resultMap="movieResultMap" parameterType="string">
@@ -242,15 +265,15 @@
 	</select> -->
 	
 	<select id="movieSearch" resultMap="movieResultMap" parameterType="String">
-	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID
+	SELECT NAME, ACTOR, CONTENT,FILE_CD,DOCID,RENAMES
 		FROM MOVIE
-		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+		WHERE NAME LIKE '%'||#{searchName}||'%'
 	</select>
 	
 	<select id="perSearch" resultMap="perFormanceMap" parameterType="String">
-		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO
+		SELECT NAME, ACTOR, CONTENT,FILE_CD,P_NO,RENAMES
 		FROM PERFORMANCE
-		WHERE NAME LIKE '%'||#{searchName}||'%' or content like '%'||#{searchName}||'%'
+		WHERE NAME LIKE '%'||#{searchName}||'%'
 	</select>
 
 	<select id="getTotal" resultType="int">
@@ -280,5 +303,23 @@
 		 SET AUDIENCE = (NVL(AUDIENCE,0) + #{audience}) 
 		 WHERE DOCID =#{docId}
 	</update>
+	
+	<select id="cMovieList" resultType="com.third.prj.movie.service.MovieVO">
+		SELECT *
+		FROM MOVIE
+		WHERE C_ID = #{CId}
+	</select>
+	
+<!-- 	<select id="getTotalCM" resultType="int"> -->
+<!-- 	SELECT COUNT(*) AS TOTAL -->
+<!-- 		FROM -->
+<!-- 		( SELECT * -->
+<!-- 		FROM ( -->
+<!-- 		SELECT ROWNUM RN , -->
+<!-- 		A.* -->
+<!-- 		FROM ( SELECT * -->
+<!-- 		FROM MOVIE  -->
+<!-- 		WHERE C_ID =#{CId} ) A )) -->
+<!-- 	</select> -->
 
 </mapper>

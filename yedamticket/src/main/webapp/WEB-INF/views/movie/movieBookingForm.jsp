@@ -140,6 +140,7 @@
    border: 1px solid #e6def9;
    width: 55px;
    height: 65px;
+    text-align: center;
 }
 
 .selectedSeat, .selectedList, .selectedLoc, .selectedHall, .showTime {
@@ -153,16 +154,9 @@
    border-top-right-radius: 10px;
 }
 
-#selectedSeat td {
-   text-align: center;
-}
 
 #seat td:hover {
    background: #a1a1a196;
-}
-
-#seat td:nth-child(3) {
-   background: transparent;
 }
 
 .sub-content {
@@ -422,8 +416,8 @@ body {
    </div>
 
 <div class="modal">
-		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-			<div class="container">
+      <div class="modal_content" title="클릭하면 창이 닫힙니다.">
+         <div class="container">
             <div class="col-md-4 ml-auto mr-auto">
                <div class="card card-login card-plain">
                   <form class="form" action="userLogin1.do" method="POST">
@@ -479,46 +473,48 @@ body {
                </div>
             </div>
          </div>
-		</div>
-		</div>
+      </div>
+      </div>
 
 
 
    <script>
    //ajaxLogin()
    function ajaxLogin(){
-	   $.ajax({
-		   url: 'userLogin1.do',
-		    type: 'post',
-		    data: {"UId": $('#UId1').val(),
-		    		"pwd": $('#pwd').val()},
-		    dataType: "json",
-		    success: function (data) {
-		            console.log(data);
-		            if(data != null){
-		            $('#UId').val(data.username);	
+      $.ajax({
+         url: 'userLogin1.do',
+          type: 'post',
+          data: {"UId": $('#UId1').val(),
+                "pwd": $('#pwd').val()},
+          dataType: "json",
+          success: function (data) {
+                  console.log(data);
+                  if(data != null){
+                  $('#UId').val(data.username);   
 
-		           $('#ajaxPay').submit(); 
-		            }else{
-		            	alert("아이디 또는 비밀번호가 틀림니다.");
-		            }
-		        }
-	   });
+                 $('#ajaxPay').submit(); 
+                  }else{
+                     alert("아이디 또는 비밀번호가 틀림니다.");
+                  }
+              }
+      });
    }
    
    //모달
    
-   		$(function() {
-			$("#ajaxBtn").click(function() {
-				$(".modal").fadeIn();
-			});
 
-			$("#close").click(function() {
-				$(".modal").fadeOut();
-			});
-	
+         $(function() {
+         $("#ajaxBtn").click(function() {
+            $(".modal").fadeIn();
+         });
 
-		});
+         $("#close").click(function() {
+            $(".modal").fadeOut();
+         });
+   
+
+      });
+
       //영화관지역
       $('#movieList').on('click', 'div', selectedList);
       function selectedList() {
@@ -697,8 +693,6 @@ body {
                                        for (var i = 0; i < timeList.length; i++) {
                                           if (timeStr.getTime() > timeList[i]
                                                 .getAttribute('data-timestamp')) {
-                                             console
-                                                   .log(timeList[i].children);
                                              timeList[i].children[0].classList
                                                    .add('out');
                                              timeList[i].children[0].disabled = true;
@@ -729,14 +723,14 @@ body {
          ;
          event.target.setAttribute('class', 'selectedList');
          $('#schTime').val($(event.target).text())
-         /*  //버튼누르면 색바뀜
+           //버튼누르면 색바뀜
            let childNodes = event.target.parentNode.children;
            
-           for (var i = 0; i < childNodes.length; i++) {
+         /*   for (var i = 0; i < childNodes.length; i++) {
               childNodes[i].classList.remove('selectedList');
-           }
+           } */
            event.target.setAttribute('class', 'selectedList');
-          ;*/
+          
          //영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름을 가져옴                  
          // 황보경수정
          let divLoc = $("<div>");
@@ -787,8 +781,8 @@ body {
                      let seatChr = String.fromCharCode(A);
                      td.append(btn);
                      td.name = seatChr + seatNo;
-                     td.setAttribute('data-seatName', seatChr + '-'
-                           + seatNo);
+                     td.setAttribute('data-seatName', seatChr + '-'+ seatNo);
+                           
                      td.innerText = seatChr + '-' + seatNo;
                      tr.append(td);
                   }
@@ -802,8 +796,8 @@ body {
                ////////////////////////////
                for (i = 0; i < seatTd.length; i++) {
                   seatTd.eq(i).on('click', selectSeat);
-               }
-               ;
+               };
+               
                function selectSeat() {
                   //선택된 좌석을 좌석표 밑에 표시하기
                   let selectedSeat = document.getElementById('selectedSeat');
@@ -817,9 +811,7 @@ body {
                         cnt--;
                      } else {
                         console.log('tdList에 들어가는 cnt' + cnt);
-
                         tdList[cnt].innerText = $(event.target).text();
-
                         //클릭한 td class 추가 
                         this.setAttribute('class', 'selectedSeat');
                         //input name 에 값넣기 누적
@@ -833,28 +825,15 @@ body {
                      alert("인원선택을 먼저해주세요!!!");
                   } else if ($('#selectedSeat .seatGray').length < cnt) {
                      cnt = 0;
-                  }
-                  ;
+                  };                
                }//end selectseat
-               let seatNameArry = [];
-               //예약된 좌석문자열을(ex.F-5F-6F-7) 하나의단일 좌석으로 쪼갠다.          
-               if (result.length == 0) {
-                  console.log("result is null");
-               } else {
-                  console.log("result > 0");
-                  for (var i = 0; i < result.length; i++) {
-                     var splitSeatName = result[i].seatName;
-                     for (var j = 0; j < splitSeatName.length; j += 3) {
-                        seatNameArry.push(splitSeatName.substr(j, 3));
-                     }
-                  }
-               }
+               let resultArry=(result[0].seatName).split(',');
                ///예약된좌석 이벤트 없애기
-               for (var i = 0; i < seatNameArry.length; i++) {
-                  var a = "#seat td:contains(" + seatNameArry[i] + ")";
+               for (var i = 0; i < resultArry.length; i++) {
+                  var a = "#seat td:contains(" + resultArry[i] + ")";
                   $($(a)[0]).off('click');
                   $(a).css("backgroundColor", "black");
-               }
+               } 
             }
          });
 

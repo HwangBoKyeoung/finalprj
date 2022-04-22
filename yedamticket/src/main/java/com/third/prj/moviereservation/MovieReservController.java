@@ -22,9 +22,11 @@ public class MovieReservController {
 		String UId = (String) session.getAttribute("sessionId");
 		System.out.println(UId);
 		int PReservNo2 =  Integer.parseInt(request.getParameter("MVPReservNo2"));
-		 
+		int mvPrice =  Integer.parseInt(request.getParameter("MVprice"));
+		
 		map.put("p1", UId);
 		map.put("p2", PReservNo2);
+		map.put("p3", mvPrice);
 		int i = movieDao.cancelreservMovie(map);
 		if(i != 0) {
 			return "user/userPage";

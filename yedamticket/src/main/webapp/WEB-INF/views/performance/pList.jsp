@@ -17,6 +17,7 @@
 *{
 font-family: 'Gowun Dodum', sans-serif;
 }
+input::-webkit-input-placeholder { color: black; }
 </style>
 
 <body class="events-list-page">
@@ -145,7 +146,6 @@ ${vo }
                                 <a href="#">Buy Tikets</a>
                             </footer>
                         </div>
-
                        </c:forEach> --%>
                         </div>
                     </div>

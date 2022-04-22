@@ -1,6 +1,5 @@
 package com.third.prj.manager.web;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +22,6 @@ public class ManagerController {
    @Autowired
    private ManagerService managerDao;
    
-   //@Inject
-   //private BCryptPasswordEncoder pwdEncoder;
 
    // 관리자 리스트 페이지
    @RequestMapping("/manager.do")

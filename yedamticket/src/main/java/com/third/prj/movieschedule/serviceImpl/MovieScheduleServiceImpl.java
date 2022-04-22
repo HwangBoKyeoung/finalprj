@@ -20,4 +20,10 @@ public class MovieScheduleServiceImpl implements MovieScheduleService {
 		return mapper.movieSchdtList(vo);
 	}
 
+	@Override
+	public int movieSchInsert(MovieScheduleVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.movieSchInsert(vo);
+	}
+
 }

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -224,20 +225,14 @@ body {
 
 .jfk {
 	position: absolute;
-	top: 16px;
-	left: 6px;
-	font-family: Arial;
-	font-size: 25px;
-	color: #222;
-	  width: 322px;
+    top: 20px;
+    left: 29px;
+    font-family: Arial;
+    font-size: 25px;
+    color: #222;
+    width: 320px;
     white-space: normal;
     font-weight: bold;
-	
-	
-}
-.mName{
-  
-    
 }
 
 
@@ -418,11 +413,12 @@ html, body {
 						<h6>${sessionId }님은회원입니다</h6>
 						<h6>보유 포인트${user.point }P</h6> <br>
 					</li>
-					<li><a href="userUpdateForm.do">회원정보수정</a></li>
+					<li><a href="userInfoCheckForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
 					<li><a href="mvReservList.do">영화예매내역</a></li>
-					<li><a href="userBuyList.do">거래내역</a></li>
-					<li><a href="userPointList.do">포인트충전내역</a></li>
+					<li><a href="userBuyList.do">거래내역 삭제 예정</a></li>
+					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
+					<li><a href="userPointList.do">거래내역</a></li>
 					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 				<div class="mb-5">
@@ -455,7 +451,7 @@ html, body {
 							<c:forEach var="pf" items="${pfList}">
 								<tr>
 									<td>${pf.performanceReservationVO.PReservNo}</td>
-									<td>${pf.performanceReservationVO.reserveDttm}</td>
+									<td><fmt:formatDate value="${pf.performanceReservationVO.reserveDttm}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td>${pf.name}</td>
 									<td>${pf.performanceScheduleVO.frDt}</td>
 									<td>${pf.performanceScheduleVO.time}</td>

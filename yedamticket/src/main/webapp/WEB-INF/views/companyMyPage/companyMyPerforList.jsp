@@ -310,7 +310,11 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
-					<li><a href="#">승인 요청</a></li>
+					<li>승인 현황<ul class="list-unstyled components mb-5">
+					<li><a href="movieCompanyConfirmList.do">영화 승인 현황</a></li>
+					<li><a href="perforCompanyConfirmList.do">공연 승인 현황</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 현황</a></li>
+					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -358,7 +362,6 @@ iframe {
 					</thead>
 					<tbody id="body">
 						<c:forEach items="${pers }" var="per">
-							<c:if test="${per.performanceVO.CId eq sessionId}">
 								<tr
 									onclick="location.href='companyPerforUpdateForm.do?PNo=${per.PNo}' ">
 									<td>${per.performanceVO.PNo}</td>
@@ -366,7 +369,6 @@ iframe {
 									<td>${per.performanceVO.CId}</td>
 									<td>${per.performanceVO.loc}</td>
 								</tr>
-							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -410,18 +412,6 @@ iframe {
 			actionForm.submit();
 		});
 
-		let searchForm = $("#searchForm");
-		$("#searchForm button").on("click", function(e) {
-			if (!searchForm.find("input[name='searchName']").val()) {
-				alert('키워드를 입력하세요.');
-				return false;
-			}
-
-			searchForm.find("input[name='pageNum']").val("1");
-			e.preventDefault();
-
-			searchForm.submit();
-		})
 	</script>
 </body>
 </html>
