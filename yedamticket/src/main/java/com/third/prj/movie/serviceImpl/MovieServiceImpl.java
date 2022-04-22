@@ -145,4 +145,10 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.movieReservList();
 
 	}
+
+	@Override
+	public List<MovieVO> moviePopChart() {
+		// TODO Auto-generated method stub
+		return mapper.moviePopChart();
+	}
 }

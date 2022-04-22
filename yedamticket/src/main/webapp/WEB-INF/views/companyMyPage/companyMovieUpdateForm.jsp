@@ -41,10 +41,6 @@ function readURL(input) {
 </script>
 </head>
 <body>
-${videos }
-<br>
-
-${mv }
 	<div>
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">

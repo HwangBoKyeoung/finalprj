@@ -113,6 +113,7 @@ public class DeleteRequestController {
 	// 기업원 마이페이지- 삭제 신청현황(영화)
 	@RequestMapping("/companyMyDeleteMovieList.do")
 	public String companyMyDeleteMovieList(Model model, CriteriaVO cri,MovieVO vo,HttpSession session) {
+		vo.setCId((String) session.getAttribute("sessionId"));
 		PageVO pageVO = new PageVO(cri, delDao.getTotalDeleteMovie(cri,vo));
 		model.addAttribute("dels", delDao.companyMyDeleteMovieList(cri,vo));
 		model.addAttribute("pageVO", pageVO);

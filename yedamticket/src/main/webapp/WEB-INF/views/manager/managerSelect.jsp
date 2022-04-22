@@ -32,7 +32,7 @@
                
                <div class="form-group">
                   <label for="exampleInputEmail1">Password</label> <input
-                     type="password" class="form-control" id="pwd" name="pwd" value="${mana.pwd }" readonly="readonly">
+                     type="password" class="form-control" id="pwd" name="pwd" readonly="readonly">
                </div>
                
                <div class="form-group">

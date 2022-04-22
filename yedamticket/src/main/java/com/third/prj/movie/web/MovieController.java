@@ -359,4 +359,16 @@ public class MovieController {
 	 * @ResponseBody public List<MovieVO> ajaxFileCd(MovieVO vo) { List<MovieVO>
 	 * list = movieDao.searchAll(vo.getSearchName()); return list; }
 	 */
+	//관리자페이지 영화 인기순위 - 류지희
+	@RequestMapping("/moviePopularitychart.do")
+	public String moviePopularitychart() {
+		return "manager/manager/managerMoviePopChart";
+	}
+	@RequestMapping("/moviePop.do")
+	@ResponseBody
+	public List<MovieVO> moviePop(MovieVO vo){
+		List<MovieVO> list= movieDao.moviePopChart();
+		System.out.println("*********************************"+list);
+		return list;
+	}
 }

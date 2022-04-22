@@ -280,7 +280,6 @@ iframe {
 }
 </style>
 </head>
-<h1>sessionId : ${sessionId }</h1>
 <body>
    <div class="wrapper d-flex align-items-stretch">
       <nav id="sidebar">
