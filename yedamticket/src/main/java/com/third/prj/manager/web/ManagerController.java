@@ -99,14 +99,14 @@ public class ManagerController {
       @RequestMapping("/manaLogin.do")
       public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
          String msg = "";
-           String url = "";
+         String url = "";
          ManagerVO login = managerDao.manaLogin(vo, session);
          BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
          boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
          
          if(login != null && pwdChk) {
             msg = "로그인 성공";
-            url = "homeM.do";   
+            url = "managerSelet.do?MId=" + vo.getMId();   
             session.setAttribute("sessionId", vo.getMId());
             session.setAttribute("sessionName", login.getName());
             session.setAttribute("sessionDp", login.getDepart());

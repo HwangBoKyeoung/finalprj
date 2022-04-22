@@ -168,8 +168,8 @@
 	
 	<select id="moviePopChart" resultType="com.third.prj.movie.service.MovieVO">
 		<![CDATA[
-	 	select *
-		from (
+	 	select NAME,AUDIENCE
+		from ( 
 		         SELECT NAME,AUDIENCE,ROW_NUMBER() OVER (ORDER BY NVL(AUDIENCE,0)  DESC) ROW_NUM
 		         FROM MOVIE)
 		where row_num < 11

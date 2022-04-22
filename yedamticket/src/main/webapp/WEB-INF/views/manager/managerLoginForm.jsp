@@ -63,7 +63,7 @@
 										</span>
 									</div>
 									<input type="text" class="form-control" name="MId"
-										placeholder="Id...">
+										placeholder="Id..." required="required">
 								</div>
 								<div class="input-group no-border input-lg">
 									<div class="input-group-prepend">
@@ -71,8 +71,8 @@
 											class="now-ui-icons objects_key-25"></i>
 										</span>
 									</div>
-									<input type="text" placeholder="Password..." name="pwd"
-										class="form-control" />
+									<input type="password" placeholder="Password..." name="pwd"
+										class="form-control" required="required"/>
 								</div>
 								<div class="card-footer text-center">
 									<input type="submit"

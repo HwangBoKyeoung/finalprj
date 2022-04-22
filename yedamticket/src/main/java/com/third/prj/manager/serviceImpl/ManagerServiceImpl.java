@@ -4,6 +4,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
+import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -20,6 +21,9 @@ public class ManagerServiceImpl implements ManagerService{
 
 	@Autowired
 	private ManagerService dao;
+	
+	@Autowired
+	private SqlSession sqlSession;
 	
 	@Override
 	public List<ManagerVO> managerSelectList(CriteriaVO cri) {
@@ -62,12 +66,12 @@ public class ManagerServiceImpl implements ManagerService{
 	@Override
 	public ManagerVO manaLogin(ManagerVO vo) {
 		// TODO Auto-generated method stub
-		return mapper.manaLogin(vo);
+		return sqlSession.selectOne("manaLogin", vo);
 	}
 
 	@Override
 	public ManagerVO manaLogin(ManagerVO vo, HttpSession session) {
-		return dao.manaLogin(vo);
+		return mapper.manaLogin(vo);
 	}
 	
 	

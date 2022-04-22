@@ -172,12 +172,14 @@ public class PerformanceContorller {
 			System.out.println(targetFile);
 			File target = new File(load, targetFile);
 			FileCopyUtils.copy(file.getBytes(), target);
-				vo.setFileCd(fileName);
-				vo.setRenames(targetFile);
+			vo.setFileCd(fileName);
+			vo.setRenames(targetFile);
+			
+			perDao.performanceUpdate(vo);
 		}catch (Exception e) {
 			e.printStackTrace();
 		}
-		perDao.performanceUpdate(vo);
+		
 			return "redirect:/companyPerforUpdateForm.do?PNo="+vo.getPNo();
 	}
 	// 프로시저 수정

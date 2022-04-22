@@ -59,7 +59,7 @@
 									</c:choose>
 								</tr>
 						    </table>
-												
+							<input type="button" value="목록" onclick="location.href='managerInquiryList.do'">		
 						    <div id="show">
 						    
 						    </div>
