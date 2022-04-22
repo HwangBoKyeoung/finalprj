@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,6 +42,11 @@
                 <p class="category text-default"><b style="color: gold">GOLD</b>등급의 고객님께서는 멤버쉽이 유지되는 동안 <b class="category text-primary">10%의 공연할인 혜택</b>을 받으실 수 있습니다</p>
               </div>
             </div>
+            <c:if test="${not empty sessionId }">
+	            <div style="width: 100%">
+	            	<a type="button" class="btn btn-primary" href="userPointList.do" id="payHistory">나의 결제내역</a>
+	            </div>
+            </c:if>
           </div>
         </div>
       </div>

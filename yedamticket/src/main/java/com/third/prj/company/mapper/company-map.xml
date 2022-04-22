@@ -83,6 +83,7 @@
          <if test="email != null"> EMAIL = #{email},</if>
          <if test="pwd != null"> PWD = #{pwd},</if>
          <if test="name != null"> NAME = #{name},</if>
+         <if test="person != null"> PERSON = #{person},</if>
          <if test="phone != null"> PHONE = #{phone},</if>
          <if test="addr != null"> ADDR = #{addr},</if>
       </set>

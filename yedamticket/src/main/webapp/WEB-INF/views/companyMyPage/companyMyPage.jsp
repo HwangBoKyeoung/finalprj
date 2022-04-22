@@ -377,6 +377,12 @@ iframe {
 							</div>
 						</div>
 						<div class="col-12" align="left">
+							<label for="phone" class="form-label">담당자</label>
+							<div class="input-group has-validation">
+								<input type="text" class="form-control" name="person" id="person" value="${cmp.person }"placeholder="담당자" required>
+							</div>
+						</div>
+						<div class="col-12" align="left">
 							<label for="bizno" class="form-label">사업자등록번호</label>
 							<div class="input-group has-validation">
 								<input type="text" class="form-control" id="bizno" name="bizno" value="${cmp.bizno }" readonly="readonly">
