@@ -33,12 +33,12 @@ function drawMap(target) {
         .on("click", function(){
             var eid=event.target.id;
             let value=eid.substr(eid.indexOf('-')+1,eid.length);
-		switch(value){
-			case "Seoul":
-			var region = "서울";
+      switch(value){
+         case "Seoul":
+         var region = "서울";
             break;
-			case "Gyeongsangbuk-do":
-			var region = "경상북도";
+         case "Gyeongsangbuk-do":
+         var region = "경상북도";
             break;
             case "Gyeonggi-do":
             var region = "경기도";
@@ -88,68 +88,68 @@ function drawMap(target) {
             case "Busan":
             var region = "부산";
             break;
-			case "Jeju-do":
-			var region = "제주도";
-			break;				
-		}
-		console.log(region);
-			$('#region').val(region);
-			$.ajax({
-				url: "locPlist.do",
-				type: "post",
-				data: { "addr": region },
-				success: function(result) {
-					console.log(result);
-				 $('.col-8').empty();
-					let cards = $('.cards');
-					console.log(cards);
-					let row8 = $('.col-8');				
-					for (var i = 0; i < result.length; i++) {
-						cards.find('h2').text(result[i].name);
-						cards.find('p').text(result[i].addr);
-						cards.find('#reservBtn').attr('href',"pBookingForm.do?pNo="+result[i].pno);
-						cards.find('.card-description').text(result[i].content);
-						row8.append(cards.html());
-					}							
-					$(document).ready(function() {
-						var zindex = 10;
-						$(".toggle-info").click(function(e) {
-							e.preventDefault();
-							var isShowing = false;
-							if ($(this.parentNode.parentNode).hasClass("show")) {
-								isShowing = true
-							}
-							if ($("div.cards").hasClass("showing")) {
-								// a card is already in view
-								$("div.card.show")
-									.removeClass("show");
-								if (isShowing) {
-									// this card was showing - reset the grid
-									$("div.cards")
-										.removeClass("showing");
-								} else {
-									// this card isn't showing - get in with it
-									$(this.parentNode.parentNode)
-										.css({ zIndex: zindex })
-										.addClass("show");
-								}
-								zindex++;
-							} else {
-								// no cards in view
-								$("div.cards")
-									.addClass("showing");
-								$(this.parentNode.parentNode)
-									.css({ zIndex: zindex })
-									.addClass("show");
-								zindex++;
-							}
-						});
-					});
-				}
-			});
+         case "Jeju-do":
+         var region = "제주도";
+         break;            
+      }
+      console.log(region);
+         $('#region').val(region);
+         $.ajax({
+            url: "locPlist.do",
+            type: "post",
+            data: { "addr": region },
+            success: function(result) {
+               console.log(result);
+             $('.col-8').empty();
+               let cards = $('.cards');
+               console.log(cards);
+               let row8 = $('.col-8');            
+               for (var i = 0; i < result.length; i++) {
+                  cards.find('h2').text(result[i].name);
+                  cards.find('p').text(result[i].addr);
+                  cards.find('#reservBtn').attr('href',"pBookingForm.do?pNo="+result[i].pno);
+                  cards.find('.card-description').text(result[i].content);
+                  row8.append(cards.html());
+               }                     
+               $(document).ready(function() {
+                  var zindex = 10;
+                  $(".toggle-info").click(function(e) {
+                     e.preventDefault();
+                     var isShowing = false;
+                     if ($(this.parentNode.parentNode).hasClass("show")) {
+                        isShowing = true
+                     }
+                     if ($("div.cards").hasClass("showing")) {
+                        // a card is already in view
+                        $("div.card.show")
+                           .removeClass("show");
+                        if (isShowing) {
+                           // this card was showing - reset the grid
+                           $("div.cards")
+                              .removeClass("showing");
+                        } else {
+                           // this card isn't showing - get in with it
+                           $(this.parentNode.parentNode)
+                              .css({ zIndex: zindex })
+                              .addClass("show");
+                        }
+                        zindex++;
+                     } else {
+                        // no cards in view
+                        $("div.cards")
+                           .addClass("showing");
+                        $(this.parentNode.parentNode)
+                           .css({ zIndex: zindex })
+                           .addClass("show");
+                        zindex++;
+                     }
+                  });
+               });
+            }
+         });
 
 ///////////////////////////
-		/*$('#region').val(region);
+      /*$('#region').val(region);
         var i = 0;
         var speed = 200;
         document.getElementById("demo").innerHTML="";
