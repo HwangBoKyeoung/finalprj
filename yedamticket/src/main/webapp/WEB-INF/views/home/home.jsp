@@ -90,9 +90,7 @@
          </div>
          <div class="col-8">
             <h1 id="demo"></h1>           
-			
-    	  </div>
-    		
+    	  </div>    		
       	</div>
       <div class="cards" style="display: none;">
 				  <div class="card">

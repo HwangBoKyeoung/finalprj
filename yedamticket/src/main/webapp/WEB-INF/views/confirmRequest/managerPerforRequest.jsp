@@ -6,6 +6,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="./resources/users/js/core/jquery.min.js"
+	type="text/javascript"></script>
 </head>
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
@@ -16,13 +18,21 @@
 				<table class="table table-hover">
 					<thead>
 						<tr>
-							<th></th>
+							<th>공연번호</th>
+							<th>공연제목</th>
+							<th>기업아이디</th>
+							<th>주소</th>
+							<th>요청상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="">
-							<tr onclick="#">
-								<td></td>
+						<c:forEach items="${conf }" var="con">
+							<tr onclick="location.href='perforConfirmSelect.do?pNo=${con.PNo}'">
+								<td>${con.PNo }</td>
+								<td>${con.name }</td>
+								<td>${con.CId }</td>
+								<td>${con.addr }</td>
+								<td>${con.confirm }</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -50,7 +60,7 @@
 					</c:if>
 				</div>
 				<br>
-				<form action="#">
+				<form action="perforConfirmList.do" method="get">
 					<div class="col-10">
 						<div class="searchBar" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
@@ -58,8 +68,6 @@
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="NAME"
 									${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
-								<option value="DELETECD"
-									${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>삭제처리</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }">
 							<button type="submit" class="btn btn-primary">검색</button>
@@ -69,8 +77,26 @@
 						</div>
 					</div>
 				</form>
+			<form id="actionForm" action="perforConfirmList.do" method="get">
+                  <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+                  <input type="hidden" name="amount" value="${pageVO.amount }">
+                  <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
+                  <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
+               </form>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+      let actionForm = $("#actionForm");
+      $("#content a").on("click", function(e){
+         e.preventDefault();
+         console.log("click");
+         console.log($(this).attr("href"));
+         actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+         
+         actionForm.submit();
+      });
+   </script>
 </body>
 </html>
