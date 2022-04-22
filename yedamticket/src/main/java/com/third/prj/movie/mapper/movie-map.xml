@@ -23,6 +23,7 @@
 		<result property="confirm" column="confirm"/>
 		<result property="refuseRs" column="refuse_rs"/>
 		<collection property="performanceVO" resultMap="perFormanceMap"></collection>
+		<collection property="movieVideoVO" resultMap="movieVideoMap"></collection>
 	</resultMap>
 
 	<resultMap
@@ -34,6 +35,13 @@
 		<result property="pNo" column="P_NO"/>
 	</resultMap>
 
+	<resultMap type="com.third.prj.movievideo.service.MovieVideoVO" id="movieVideoMap">
+		<result property="pVideoNo" column="P_VIDEO_NO"/>
+		<result property="vName" column="VNAME"/>
+		<result property="vRenames" column="VRENAMES"/>
+		<result property="MvNo" column="MV_NO"/>
+		<result property="docId" column="DOCID"/>
+	</resultMap>
 	<!-- 프로시저 -->
 	<resultMap type="hashmap" id="procedureCall" />
 	
@@ -47,10 +55,13 @@
 
 	<select id="mvSelect"
 		resultType="com.third.prj.movie.service.MovieVO">
-		SELECT
-		MV_NO,NAME,GENRE,STARTDATE,DIRECTOR,RATING,DISTRIBUTOR,COUNTRY,RUNTIME,CONTENT,C_ID,ACTOR,FILE_CD,DOCID,CONFIRM,REFUSE_RS
-		FROM MOVIE
-		WHERE MV_NO = #{mvNo}
+		SELECT 
+	    M.MV_NO,M.NAME,M.GENRE,M.STARTDATE,M.DIRECTOR,M.RATING,M.DISTRIBUTOR,M.COUNTRY,M.RUNTIME,M.CONTENT,
+	    M.C_ID,M.ACTOR,M.FILE_CD,M.DOCID,M.CONFIRM,M.REFUSE_RS,M.RENAMES,
+	    MV.P_VIDEO_NO,MV.VNAME,MV.VRENAMES
+	    FROM MOVIE M, MOVIE_VIDEO MV
+	    WHERE M.MV_NO = MV.MV_NO
+	    AND M.MV_NO=#{mvNo}
 	</select>
 
 	<select id="mvListPaging"
@@ -81,16 +92,6 @@
 			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
 			]]>
 	</select>
-
-
-	<!-- 황규복 -->
-
-	<!-- <resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap"> 
-		<id property="mvNo" column="mv_no"/> <result property="name" column="name"/> 
-		<result property="content" column="content"/> <result property="actor" column="actor"/> 
-		</resultMap> -->
-
-
 	<resultMap type="com.third.prj.movie.service.MovieViewVO" id="movieViewMap">
 		<result property="mvReservNo" column="MV_RESERV_NO" />
 		<result property="name" column="NAME" />
@@ -114,8 +115,11 @@
 	                #{mv_content, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_cid, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_actor, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_fileCd, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_renames, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_vrname, mode=IN, jdbcType=VARCHAR, javaType=STRING},
+	                #{mv_docId, mode=IN, jdbcType=VARCHAR, javaType=STRING},
 	                #{mv_message, mode=OUT, jdbcType=VARCHAR, javaType=STRING})
 	</update>
 	
@@ -135,11 +139,6 @@
 
 	
 
-	<!-- 페이징 <select id="getListWithPaging" resultMap="movieResultMap"> <![CDATA[ 
-		SELECT * FROM ( select /*+INDEX_DESC(tbl_board pk_board)*/ rownum rn, from 
-		movie where rownum <= #{pageNum} * #{amount} ) where rn > (#{pageNum}-1)*#{amount} 
-		]]> </select> -->
-
 	<!-- 영화상영예정작 -->
 	<select id="mList" resultMap="movieResultMap">
 		<![CDATA[
@@ -151,7 +150,7 @@
         ]]>
 	</select>
 
-	<!-- 영화리스트 -->
+	<!-- 영화리스트 1-10등까지-->
 	<select id="movieList" resultMap="movieResultMap">
 		<![CDATA[
       SELECT ROWNUM, A.*
@@ -164,6 +163,21 @@
       BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
       AND TO_CHAR(SYSDATE,'yyyyMMdd') ) A
         WHERE ROWNUM BETWEEN 1 AND 10
+         ]]>
+	</select>
+	
+	<!-- 영화 예약리스트 -->
+	<select id="movieReservList" resultMap="movieResultMap">
+		<![CDATA[
+      SELECT ROWNUM, A.*
+        FROM(
+        SELECT NAME,AUDIENCE,STARTDATE,SUBSTR(CONTENT,0,100) CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
+        RANK() OVER (ORDER BY AUDIENCE ASC) RANK
+        FROM MOVIE
+        WHERE
+      STARTDATE
+      BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
+      AND TO_CHAR(SYSDATE,'yyyyMMdd') ) A
          ]]>
 	</select>
   
@@ -289,5 +303,23 @@
 		 SET AUDIENCE = (NVL(AUDIENCE,0) + #{audience}) 
 		 WHERE DOCID =#{docId}
 	</update>
+	
+	<select id="cMovieList" resultType="com.third.prj.movie.service.MovieVO">
+		SELECT *
+		FROM MOVIE
+		WHERE C_ID = #{CId}
+	</select>
+	
+<!-- 	<select id="getTotalCM" resultType="int"> -->
+<!-- 	SELECT COUNT(*) AS TOTAL -->
+<!-- 		FROM -->
+<!-- 		( SELECT * -->
+<!-- 		FROM ( -->
+<!-- 		SELECT ROWNUM RN , -->
+<!-- 		A.* -->
+<!-- 		FROM ( SELECT * -->
+<!-- 		FROM MOVIE  -->
+<!-- 		WHERE C_ID =#{CId} ) A )) -->
+<!-- 	</select> -->
 
 </mapper>

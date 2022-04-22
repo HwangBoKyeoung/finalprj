@@ -210,10 +210,13 @@
 		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
 			<div class="full">
 				<div class="container">
+				
 					<div class="area_inputs wow fadeIn">
+					
 						<div class="sub_title font-weight-bold text-white">
 							<h3>아이디/비밀번호 찾기</h3>
 						</div>
+						
 						<div style="margin-bottom: 10px;"
 							class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input" id="search_1"
@@ -221,12 +224,14 @@
 							<label class="custom-control-label font-weight-bold text-white"
 								for="search_1">아이디 찾기</label>
 						</div>
+						
 						<div class="custom-control custom-radio custom-control-inline">
 							<input type="radio" class="custom-control-input" id="search_2"
 								name="search_total" onclick="search_check(2)"> <label
 								class="custom-control-label font-weight-bold text-white"
 								for="search_2">비밀번호 찾기</label>
 						</div>
+						
 						<div id="searchI">
 							<div class="form-group">
 								<label class="font-weight-bold text-white " for="name">이름</label>
@@ -235,6 +240,7 @@
 										placeholder="ex)전호민">
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<label class="font-weight-bold text-white " for="phone">휴대폰번호</label>
 								<div>
@@ -242,35 +248,44 @@
 										placeholder="ex) 01012345678">
 								</div>
 							</div>
+							
 							<div class="form-group">
 								<button id="searchBtn" type="button" onclick="idSearch_click()"
 									class="btn btn-primary btn-block">확인</button>
 								<a class="btn btn-danger btn-block" id="close">취소</a>
 							</div>
+							
 						</div>
+						
 						<div id="searchP" style="display: none;">
 							<div class="form-group">
-								<form action="">
-									<label class="font-weight-bold text-white " for="UId">아이디</label>
-									<div>
-										<input type="text" class="form-control" id="UId" name="UId"
-											placeholder="ex) Id">
-									</div>
-								</form>
-							</div>
-							<div class="form-group">
+							<form action="">
+								<label class="font-weight-bold text-white " for="UId">아이디</label>
+								<div>
+									<input type="text" class="form-control" id="UId" name="UId"
+										placeholder="ex) Id">
+								</div>
+								
+							</form>
+							
+							</div> 
+							 <div class="form-group">
 								<label class="font-weight-bold text-white " for="email">이메일</label>
 								<div>
 									<input type="email" class="form-control" id="email"
 										name="email" placeholder="ex) E-mail@gmail.com">
 								</div>
+
 							</div>
+
 							<div class="form-group">
 								<button id="searchBtn2" type="button"
 									class="btn btn-primary btn-block">확인</button>
 								<a class="btn btn-danger btn-block" id="close2">취소</a>
 							</div>
+							
 						</div>
+						
 					</div>
 				</div>
 			</div>

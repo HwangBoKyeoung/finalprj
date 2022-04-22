@@ -17,6 +17,7 @@ public interface MovieMapper {
 	//결제하면 관객수 늘리기
 	int audienceInsert(MovieVO vo);
 	List<MovieVO> movieList();
+	List<MovieVO> movieReservList();
 	//결제페이지로갈 영화상세정보
 	MovieVO mDetail(MovieVO vo);
 	List<MovieVO> mList();
@@ -57,7 +58,12 @@ public interface MovieMapper {
 	//인기검색어
 	int popularSearch(MovieVO vo);
 	
+
     //영화관등록
     int InsertMovieHall(Map<String, Object> map);
+
+	//관리자페이지 기업정보
+	List<MovieVO> cMovieList(MovieVO vo);
+
 		
 }

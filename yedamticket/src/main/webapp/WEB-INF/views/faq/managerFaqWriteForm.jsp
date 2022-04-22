@@ -37,8 +37,7 @@
 							<tr>
 								<td colspan="2" class="text-center">
 								<input type="submit" value="등록" class="btn btn-success"> 
-								<input type="reset" value="취소" class="btn btn-warning"> 
-								<input type="button" onclick="location.href='faqList.do'" value="목록" class="btn btn-primary">
+								<input type="button" onclick="location.href='managerFaq.do'" value="목록" class="btn btn-primary">
 								</td>
 							</tr>
 						</tbody>

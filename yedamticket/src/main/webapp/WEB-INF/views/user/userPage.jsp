@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!doctype html>
 <html>
 
@@ -78,21 +79,22 @@
 					</thead>
 					<tbody>
 						<c:forEach items="${prList}" var="pr" begin="0" end="2">
-							<tr>
-								<td id="Lname" scope="row">${pr.name}</td>
-								<td id="LPReservNo">${pr.PReservNo}</td>
-								<td id="LfrDt">${pr.frDt}</td>
-								<td id="LseatNo">${pr.seatNo}</td>
-								<td id="Lloc">${pr.loc}</td>
-								<td id="Lprice">${pr.price}</td>
-								<td id="LUId" hidden="">${pr.UId}</td>
-								<td><input type="button" id="chargebtn"
-									class="btn btn-primary" onclick="selectedFnc();"
-									data-toggle="modal" data-target="#prInfoModal" value="결제"></td>
-								<td><input type="button" id="cancelbtn"
-									class="btn btn-primary" onclick="selectedFnc2();"
-									data-toggle="modal" data-target="#prCancelModal" value="취소"></td>
-							</tr>
+								<tr>
+									<td id="Lname" scope="row">${pr.name}</td>
+									<td id="LPReservNo" >${pr.PReservNo}</td>
+									<td id="LfrDt" >${pr.frDt}</td>
+									<td id="LseatNo" >${pr.seatNo}</td>
+									<c:set var="seatCnt" value="${fn:split(pr.seatNo, ',') }"/>
+										<c:set var="seatCnt2" value="0"/>
+										<c:forEach var="seatCntFor" items="${seatCnt }">
+											<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
+										</c:forEach>
+									<td id="Lloc">${pr.loc}</td>
+									<td id="Lprice">${pr.price * seatCnt2}</td>
+									<td id="LUId" hidden="">${pr.UId}</td>
+									<td><input type="button" id="chargebtn" class="btn btn-primary" onclick="selectedFnc();" data-toggle="modal" data-target="#prInfoModal" value="결제"></td>
+									<td><input type="button" id="cancelbtn" class="btn btn-primary" onclick="selectedFnc2();" data-toggle="modal" data-target="#prCancelModal" value="취소"></td>
+								</tr>
 						</c:forEach>
 					</tbody>
 				</table>
@@ -241,7 +243,7 @@
 			$("#frDt").val(LfrDt)
 			$("#seatNo").val(LseatNo)
 			$("#loc").val(Lloc)
-			$("#price").val(Lprice)
+			$("#price").val(Lprice2)
 			$("#UId").val(LUId)
 		}
 
@@ -268,7 +270,7 @@
 			$("#frDt").val(LfrDt)
 			$("#seatNo").val(LseatNo)
 			$("#loc").val(Lloc)
-			$("#price").val(Lprice)
+			$("#price").val(Lprice2)
 			$("#UId").val(LUId)
 
 			console.log("LPReservNo : " + LPReservNo)

@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 <meta charset="utf-8" />
 <title>koreaMap</title>
 <style type="text/css">
@@ -22,7 +23,6 @@
 .jbwrap {
    width: 50%;
    margin: 10px auto;
-/*    border: 1px solid #000000; */
 }
 
 .jbwrap img {
@@ -36,6 +36,16 @@
    background-color: transparent;
    text-align: center;
 }
+
+
+
+
+
+
+
+
+
+
 </style>
 </head>
 <!-- css -->
@@ -75,16 +85,42 @@
    <!--지역별 공연-->
    <section>
       <div class="row">
-         <div class="col-5">
+         <div class="col-4">
             <div id="container"></div>
          </div>
-         <div class="col-7">
-
-            <h1 id="demo"></h1>
-            <table id="locList" class="table table-sm table-dark">
-            </table>
-         </div>
-      </div>
+         <div class="col-8">
+            <h1 id="demo"></h1>           
+			
+    	  </div>
+    		
+      	</div>
+      <div class="cards" style="display: none;">
+				  <div class="card">
+				    <div class="card__image-holder">
+				      <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
+				    </div>
+				    <div class="card-title">
+				      <a  class="toggle-info btn">
+				        <span class="left"></span>
+				        <span class="right"></span>
+				      </a>
+				      <h2>
+				          Card title
+				      </h2>
+				      <p>Image from unsplash.com</p>
+				    </div>
+				    <div class="card-flap flap1">
+				      <div class="card-description">
+				        This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+				      </div>
+				      <div class="card-flap flap2">
+				        <div class="card-actions">
+				          <a id="reservBtn" class="btn">예매하기</a>
+				        </div>
+				      </div>
+				    </div>
+				  </div>
+				</div>
    </section>
    <br>
    <div class="hr-sect">영화 인기순위 및 상영예정작 안내</div>
@@ -301,7 +337,7 @@
    tabMenu.find("li.active > ul").show();
 
    function tabList(e) {
-      e.preventDefault(); //#의 기능을 차단
+      //e.preventDefault(); //#의 기능을 차단
       var target = $(this);
       target.next().show().parent("li").addClass("active").siblings("li")
             .removeClass("active").find("ul").hide();

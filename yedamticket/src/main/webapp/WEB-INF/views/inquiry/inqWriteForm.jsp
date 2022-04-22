@@ -58,7 +58,7 @@ th {
 							<input type="hidden" id="UId" name="UId" value="${sessionId }"
 							class="form-control" readonly="readonly">
 							<input type="submit" value="등록" class="btn btn-success"> 
-							<input type="reset" value="취소" class="btn btn-warning"> 
+							<input type="button" class="btn btn-light" value="취소" onclick="location.href='managerInquiryList.do'"> 
 							<input type="button" onclick="location.href='inqList.do'" value="목록" class="btn btn-primary">
 							</td>
 						</tr>

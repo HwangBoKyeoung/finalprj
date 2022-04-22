@@ -86,6 +86,7 @@ public class MovieController {
 		System.out.println("*****************************docid************************************" + rvo.getDocId());
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
+		model.addAttribute("star", movieReplyDao.getStar(rvo));
 		model.addAttribute("movie", vo);
 		return "movie/movieDetail";
 	}
@@ -121,7 +122,7 @@ public class MovieController {
 	// 영화 예약페이지로
 	@RequestMapping("/movieBooking.do")
 	public String movieBooking(Model model) {
-		model.addAttribute("movies", movieDao.movieList());
+		model.addAttribute("movies", movieDao.movieReservList());
 		return "movie/movieBookingForm";
 
 	}
@@ -151,8 +152,10 @@ public class MovieController {
 	@RequestMapping("/companyMovieUpdateForm.do")
 	public String companyMovieUpdateForm(MovieVO vo, MovieVideoVO vvo, Model model) {
 //			MovieVideoVO vvo = new MovieVideoVO();
-		vo = movieDao.mvSelect(vo);
+		System.out.println("============================1"+vo);
 		System.out.println("============================" + vo.getMvNo());
+		vo = movieDao.mvSelect(vo);
+		System.out.println("****************"+vo.getDocId());
 		vvo.setMvNo(vo.getMvNo());
 		vvo = mvvDao.mvvSelect(vvo);
 		System.out.println("============================" + vvo);
@@ -166,18 +169,33 @@ public class MovieController {
 	// 영화 수정 페이지(프로시저 ->rjh(2022/04/05)
 	@RequestMapping("/companyMovieUpdate.do")
 	public String companyMovieUpdate(Model model, Map<String, Object> map, MovieVO vo, MovieVideoVO vvo,
-			MultipartFile file) {
+			MultipartFile file, MultipartFile vfile) {
 
+//		이미지 파일명 renames 설정
 		String fileName = file.getOriginalFilename();
 		String id = UUID.randomUUID().toString();
+		
+//		영상 파일명 renames 설정
+		String vfileName = vfile.getOriginalFilename();
+		String vid = UUID.randomUUID().toString();
+		
 		String load = upLoadPath;
+		
 		try {
+//			이미지 파일 저장
 			String targetFile = id + fileName.substring(fileName.lastIndexOf("."));
 			File target = new File(load, targetFile);
 			FileCopyUtils.copy(file.getBytes(), target);
-			vo.setFileCd("PF_VIDEO");
-			vvo.setVName(fileName);
-			vvo.setVRenames(targetFile);
+			vo.setFileCd(fileName);
+			vo.setRenames(targetFile);
+			
+//			영상 파일 저장
+			String targetvFile = vid + vfileName.substring(vfileName.lastIndexOf("."));
+			File targetv = new File(load, targetvFile);
+			FileCopyUtils.copy(vfile.getBytes(), targetv);
+			vvo.setVName(vfileName);
+			vvo.setVRenames(targetvFile);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -191,13 +209,14 @@ public class MovieController {
 		map.put("mv_content", vo.getContent());
 		map.put("mv_cid", vo.getCId());
 		map.put("mv_actor", vo.getActor());
+		map.put("mv_fileCd", vo.getFileCd());
+		map.put("mv_renames", vo.getRenames());
 		map.put("mv_vname", vvo.getVName());
 		map.put("mv_vrname", vvo.getVRenames());
-		map.put("mv_cd", vo.getFileCd());
 
 		movieDao.procedureCall(map);
 
-		return "redirect:companyMovieList.do";
+		return "redirect:companyMovieUpdateForm.do?mvNo="+vo.getMvNo();
 	}
 
 	// 영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름(seat_name)을 가져옴
@@ -219,7 +238,7 @@ public class MovieController {
 		model.addAttribute("user", userDao.userSelectOne(uvo));
 		model.addAttribute("movie", movieDao.mDetail(detailvo));
 
-		return "user/movie/movieReservationForm";
+		return "movie/movieReservationForm";
 	}
 
 	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로

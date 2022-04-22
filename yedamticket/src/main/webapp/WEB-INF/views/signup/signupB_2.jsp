@@ -99,15 +99,6 @@
 								</div>
 								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone" onkeyup="phoneConfirm()">
 							</div>
-							
-							<div class="input-group no-border">
-								<div class="input-group-prepend">
-									<span class="input-group-text"> 
-										<i class="now-ui-icons"></i>
-									</span>
-								</div>
-								
-							</div>
 
 							<div class="input-group no-border">
 								<div class="input-group-prepend">
@@ -166,6 +157,15 @@
 	</div>
 	
 	<script>
+	// 이메일(세션값) 값 검증
+	$(document).ready(function(){
+		var email = $("#email").val()
+		if(email == ''){
+			alert("세션이 만료되었습니다 이메일을 확인해 주세요..")
+			return $(location).attr('href', 'signupB_1.do')
+		}
+	})
+		
 	// 양도 권한
 	function transferAgree(){
 		$("#transferChk").val("Y")

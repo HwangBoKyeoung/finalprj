@@ -55,4 +55,6 @@ public interface PerformanceMapper {
 	
 	//관리자페이지 업데이트쿼리(류지희)
 	List<PerformanceVO> performancePopChart();
+//	관리자페이지 기업회원조회
+		List<PerformanceVO> cperList(PerformanceVO vo);
 }

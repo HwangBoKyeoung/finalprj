@@ -6,11 +6,11 @@ import java.util.List;
 public interface GoodsService {
 	
 
-	List<GoodsVO> goodsList();
-
+	List<GoodsVO> mGoodsList(GoodsVO vo);
+	List<GoodsVO> cGoodsList(GoodsVO vo);
 	int goodsInsert(GoodsVO vo);
 
-	List<GoodsVO> goodsList(String goodsCd);
+
 	List<GoodsVO> goodsLi();
 	GoodsVO goodsSelect(GoodsVO vo);
 	

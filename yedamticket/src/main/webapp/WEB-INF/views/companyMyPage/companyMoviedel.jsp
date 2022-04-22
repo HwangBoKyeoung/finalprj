@@ -35,6 +35,7 @@
 					</table>
 					<br>
 					<button type="submit" class="btn btn-gradient-primary me-2">요청</button>
+					<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyMovieList.do'">
 				</div>
 			</div>
 		</form>

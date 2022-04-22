@@ -55,7 +55,7 @@ public class NoticeController {
 		int n = noticeDao.noticeUpdate(vo);
 
 		if (n != 0) {
-			return "redirect:managerNotice.do";
+			return "redirect:managerNoticeUpdateForm.do?noticeNo="+vo.getNoticeNo();
 		}
 		return "notice/noticeError";
 	}

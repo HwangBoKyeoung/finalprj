@@ -133,5 +133,16 @@ public class MovieServiceImpl implements MovieService {
 	public int InsertMovieHall(Map<String, Object> map) {
 		// TODO Auto-generated method stub
 		return mapper.InsertMovieHall(map);
+  }
+  
+	public List<MovieVO> cMovieList(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.cMovieList(vo);
+	}
+
+	public List<MovieVO> movieReservList() {
+		// TODO Auto-generated method stub
+		return mapper.movieReservList();
+
 	}
 }

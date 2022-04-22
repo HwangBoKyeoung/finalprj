@@ -39,7 +39,7 @@
 	</select>
 	
 	<select id="movieReplyList" resultMap="movieReplyResultMap">
-		SELECT MV_RE_NO,CONTENT,TO_char(WRDT,'yyyy-MM-dd hh24:mi:ss')AS wrDt,STAR,U_ID
+		SELECT MV_RE_NO,CONTENT,TO_CHAR(WRDT,'yyyy-MM-dd hh24:mi:ss')AS wrDt,STAR,U_ID
 		FROM MOVIE_REPLY
 		WHERE DOCID=#{docId}
 	</select>
