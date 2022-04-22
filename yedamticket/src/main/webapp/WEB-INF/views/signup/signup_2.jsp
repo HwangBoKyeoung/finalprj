@@ -9,7 +9,7 @@
 
 </head>
 <body>
-	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+	<div class="section section-signup" style="background-image : url('./resources/users/img/ssp7.jpg'); height: 100vh;  background-repeat : no-repeat; background-size : cover;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="orange">
@@ -28,9 +28,8 @@
 	</div>
 	<script>
 	function closeWindow(){
-		   window.open('', '_blenk', '');
+		   self.opener = self;
 		   window.close();
-		   return false;
 	}
 	</script>
 </body>

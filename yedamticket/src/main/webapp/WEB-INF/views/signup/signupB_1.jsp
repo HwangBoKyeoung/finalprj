@@ -63,7 +63,7 @@
 			</div>
 		</div>
 		<div class="col text-center">
-			<a href="signupB_1.do" class="btn btn-outline-default btn-round btn-white btn-lg" target="_blank">일반회원이십니까?</a> 
+			<a href="signup_1.do" class="btn btn-outline-default btn-round btn-white btn-lg" target="_blank">일반회원이십니까?</a> 
 		</div>
 	</div>
 </div>

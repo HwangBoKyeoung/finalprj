@@ -247,13 +247,11 @@
 		var id = document.getElementById("UId").value;
 		var RegExp = /^[a-zA-Z0-9]{4,12}$/;
 		if(! RegExp.test(id)){
-			console.log("올바른 아이디를 입력하세요.")
 			$('#UId').css("color", "#FE0A03");
 			$('#UId').css("font-weight", "bold")
 			$("#idChk").attr("disabled", true);
 			uidCnum = 1;
 		}else{
-			console.log("정상적인 이름입니다.")
 			$('#UId').css("color", "greenyellow")
 			$("#idChk").attr("disabled", false);
 			uidCnum = 0;

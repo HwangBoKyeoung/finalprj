@@ -15,8 +15,13 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+<style>
+	.input-group, .form-group{
+		margin-bottom : 40px;
+	}
+</style>
 <body>
-	<div class="section section-signup" style="background-image: url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="black">
@@ -35,7 +40,7 @@
 										<i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="기업명(담당인)" required="required" id="name" name="name">
+								<input type="text" class="form-control" placeholder="기업명(담당인)" required="required" id="name" name="name" maxlength="8" onkeyup="nameConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -54,7 +59,7 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd">
+								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="100" onkeyup="passConfirm1()">
 							</div>
 
 							<div class="input-group no-border">
