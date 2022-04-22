@@ -209,7 +209,7 @@ input {
 				<!-- 시간 -->
 				<input type="hidden" id="schTime" name="schTime" value="${re.schTime }">
 				<!-- 좌석이름 -->
-				<input type="hidden" id="seatName" name="seatName" value="${re.seatName }">
+				<input type="hidden" id="seatName" name="seatName">
 				<!-- 영화 가격 -->
 				<input type="hidden" id="pay" name="pay">
 				<!-- 영화인지 공연인지 코드 -->
@@ -255,7 +255,7 @@ input {
             <h2>시간</h2>
             <p>${re.schDate } ${re.schTime }</p>
             <h2>좌석</h2>
-            <p>${re.seatName }<p/>
+            <p id="pSeatName"><p/>
             <h2>가격</h2>
             <p id="price"></p>        
           </div> 
@@ -300,16 +300,19 @@ let slicePrice = price1.slice(0,-1);
 }
 
 (function (){
+	let seatName=('${re.seatName }');
+	let strName=seatName.substring(0,seatName.length-1);
+	$('#seatName').val(strName);
+	let splitName=strName.split(',');
+	console.log(splitName);
 	let fileCd=('${movie.fileCd}').split('|');
 	let poster=fileCd[0];	
-	//$('.container').css({"background":"url(" + poster + ")"});
-	let seatName='${re.seatName }';
+
 	let cnt=0;
 	let price=13000;
-	for(var i =0;i<seatName.length;i++){
-		if(i%3==0){
-			cnt++;
-		}
+	for(var i =0;i<splitName.length;i++){		
+			pSeatName.innerText+=splitName[i];
+			cnt++;		
 	}
 	$('#price').text(price*cnt+'원');
 	$('#pay').val(price*cnt);

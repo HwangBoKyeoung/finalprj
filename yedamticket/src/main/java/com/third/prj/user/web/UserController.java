@@ -169,21 +169,28 @@ public class UserController {
       }
       return mv;
    }
-
-   @RequestMapping("/userSelect.do")
-   public String userSelect(HttpSession session, UserVO vo) {
-      userDao.userSelect(vo);
-      session.setAttribute("sessionId", vo.getUId());
-      session.setAttribute("sessionPwd", vo.getPwd());
-      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-      System.out.println("id :" + vo.getUId());
-      System.out.println("pwd :" + vo.getPwd());
-      System.out.println("name :" + vo.getName());
-      System.out.println("email :" + vo.getEmail());
-      System.out.println("phone :" + vo.getPhone());
-      System.out.println("addr :" + vo.getAddr());
-      System.out.println("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-      return "home/home";
+   @RequestMapping("/userLogin1.do")
+   @ResponseBody
+   public UserVO userSelect1(HttpSession session, UserVO vo) {
+	      UserVO login = userDao.loginChk(vo, session);
+	      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+	      boolean pwdChk = pwdEncoder.matches(vo.getPwd(), login.getPwd());
+	      
+	      session.setAttribute("sessionId", vo.getUId());
+	      
+			
+			if (login != null && pwdChk) {
+				session.setAttribute("sessionId", vo.getUId());
+				session.setAttribute("sessionEmail", vo.getEmail());
+				session.setAttribute("sessionName", vo.getName());
+				session.setAttribute("sessionAddr", vo.getAddr());
+				session.setAttribute("sessionPhone", vo.getPhone());
+				return login;
+			} else {
+				return login;
+			}
+			 
+	      
    }
 
    @RequestMapping("/userService.do")

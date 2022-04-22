@@ -190,9 +190,9 @@
       AND P.LOC  LIKE '%' || #{loc} || '%'
       </if>
    </where>
-      <![CDATA[
-      
-              ) A ORDER BY FRDT) 
+      <![CDATA[    
+       ORDER BY FRDT
+              ) A ) 
                WHERE RN > (#{pageNum}-1) * #{amount} 
                AND RN <= #{pageNum} * #{amount}
       ]]>   
@@ -207,7 +207,7 @@
          PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
          ON 
          P.P_NO = PS.P_NO
-           WHERE FRDT > TO_CHAR(SYSDATE,'YY/MM/DD') 
+           WHERE FRDT > trunc(SYSDATE) 
            AND ROWNUM < 4
         ]]>      
    </select>

@@ -86,6 +86,7 @@ public class MovieController {
 		System.out.println("*****************************docid************************************" + rvo.getDocId());
 		model.addAttribute("replys", movieReplyDao.movieReplyList(rvo));
 		vo = movieDao.movieDetail(vo);
+		model.addAttribute("star", movieReplyDao.getStar(rvo));
 		model.addAttribute("movie", vo);
 		return "movie/movieDetail";
 	}
@@ -121,7 +122,7 @@ public class MovieController {
 	// 영화 예약페이지로
 	@RequestMapping("/movieBooking.do")
 	public String movieBooking(Model model) {
-		model.addAttribute("movies", movieDao.movieList());
+		model.addAttribute("movies", movieDao.movieReservList());
 		return "movie/movieBookingForm";
 
 	}
@@ -219,7 +220,7 @@ public class MovieController {
 		model.addAttribute("user", userDao.userSelectOne(uvo));
 		model.addAttribute("movie", movieDao.mDetail(detailvo));
 
-		return "user/movie/movieReservationForm";
+		return "movie/movieReservationForm";
 	}
 
 	// 결제페이지에서 결제(유저의 point을 영화표값으로 차감)하고 메인으로

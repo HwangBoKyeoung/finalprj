@@ -47,7 +47,7 @@ section > article > #map{
       background-color: #ccc;
    }
    
-.row > .seat{
+.row > .detailSeat{
    color:white;
     background-color: #444451;
      height: 24px;
@@ -82,6 +82,33 @@ section > article > #map{
 .seatNone{
    background:white;
 }
+.modal {
+   z-index: 1;
+   position: absolute;
+   width: 100%;
+   height: 100%;
+   background: rgba(0, 0, 0, 0.8);
+   top: 0;
+   left: 0;
+   display: none;
+}
+
+.modal_content { 
+        width: 700px;
+    height: 800px;
+    background: #cfc5e9;
+    border-radius: 35px;
+    position: relative;
+    top: 25%;
+    left: 43%;
+    margin-top: -705px;
+    margin-left: -130px;
+    text-align: center;
+    box-sizing: border-box;
+    padding: 74px 0;
+    line-height: 23px;
+    cursor: pointer;
+}
 </style>
 <body>
 ${performance }
@@ -95,7 +122,7 @@ ${performance }
                         <div class="event-location"><a href="#">${performance.addr }</a></div>
                         <div class="event-date">${performance.frDt }  ${performance.time }</div>
                     </div>
-                    <form action="pReservation.do" method="post">
+                    <form action="pReservation.do" method="post" id="ajaxPay">
                     <input type="hidden" id="PSchNo" name="PSchNo" value="${performance.performanceScheduleVO.PSchNo }">
                     <input type="hidden" id="UId" name="UId" value="${sessionId }">
                     <input type="hidden" id="loc" name="loc">
@@ -103,10 +130,17 @@ ${performance }
                     <input type="hidden" id="seatNo" name="seatNo">
                     <input type="hidden" id="price" name="price" value="${performance.price }">
                     <div class="buy-tickets flex justify-content-center align-items-center">
-                        <button type="submit" class="btn gradient-bg">Buy Tikets</button>
+                    <c:choose>
+                  		<c:when test="${not empty sessionId}">                        
+                        	<button type="submit" class="btn gradient-bg">예매하기</button>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<button type="button" id="ajaxBtn" class="btn gradient-bg">로그인하세요</button>
+                    	</c:otherwise>
+                    </c:choose>
                     </div>
                     </form>
-                </header>
+                </header>            
                 <figure class="events-thumbnail">
                     <img src="resources/performance/images/summer.jpg" alt="">
                 </figure>
@@ -541,7 +575,69 @@ ${performance }
             </div>
         </div>
     </div>
+ <div class="modal">
+		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
+			<div class="container">
+            <div class="col-md-4 ml-auto mr-auto">
+               <div class="card card1-login card1-plain">
+                  <form class="form" action="userLogin1.do" method="POST">
 
+                     <div class="card-header text-center">
+                        <div class="logo-container">
+                           <img src="resources/users/img/now-logo.png" alt="">
+                        </div>
+                     </div>
+                     <div class="card-body">
+                        <div class="input-group no-border input-lg">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i>
+                              </span>
+                           </div>
+                           <input type="text" class="form-control" name="UId1"  id="UId1" placeholder="Id...">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="now-ui-icons objects_key-25"></i>
+                              </span>
+                           </div>
+                           <input type="password" placeholder="Password..." name="pwd"  id="pwd" class="form-control">
+                        </div>
+                        <br>
+                        <div class="card-footer text-center">
+                           <input type="button" onclick="ajaxLogin()" class="btn btn-primary btn-round btn-lg btn-block" value="LOGIN">
+                        </div>
+                        <div class="card-footer text-center">
+                           <a href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&amp;redirect_uri=http://localhost/prj/kakaoLogin.do&amp;response_type=code">
+
+                              <img src="resources/users/img/kakao_login_large_wide.png" class="loginBtn">
+                           </a>
+                        </div>
+                        <br>
+                        <div class="pull-left">
+                           <h6>
+                              <a href="signup_1.do" class="link">Create Account</a>
+                           </h6>
+                        </div>
+                         <div class="close">
+                          
+                        </div>
+                        <div class="pull-right">
+                           <h6>
+                              <a href="companyLoginForm.do" class="link">기업회원이신가요?</a> <a href="managerLoginForm.do" class="link">관리자입니까?</a>
+                           </h6>
+                        </div>
+                        <div class="pull-left">
+                           <h6>
+                              <a href="#" class="idPassword link">아이디/비밀번호 찾기</a>
+                           </h6>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+		</div>
+	</div>
     <img src="resources/performance/images/공연상세.jpg">
 
 
@@ -549,6 +645,42 @@ ${performance }
 
 
 <script>
+//ajaxLogin()
+function ajaxLogin(){
+	   $.ajax({
+		   url: 'userLogin1.do',
+		    type: 'post',
+		    data: {"UId": $('#UId1').val(),
+		    		"pwd": $('#pwd').val()},
+		    dataType: "json",
+		    success: function (data) {
+		            console.log(data);
+		            if(data != null){
+		            $('#UId').val(data.username);	
+
+		           $('#ajaxPay').submit(); 
+		            }else{
+		            	alert("아이디 또는 비밀번호가 틀림니다.");
+		            }
+		        }
+	   });
+}
+
+   //모달
+   
+   		$(function() {
+			$("#ajaxBtn").click(function() {
+				$(".modal").fadeIn();
+			});
+
+			$(".close").click(function() {
+				$(".modal").fadeOut();
+			});
+			
+
+		});
+
+
 //인원추가하는 버튼
 $('#plus').on("click",function(){
    var cnt=$('#cnt').text();
@@ -614,7 +746,7 @@ $(".seat").click(function() {
                 var A = 65 + i;
                 for(var j=0;j<8;j++){
                    let col=document.createElement('div');
-                   col.setAttribute('class','seat');
+                   col.setAttribute('class','detailSeat');
                    let seatChr = String
                   .fromCharCode(A);
                    col.innerText=seatChr+(j+1);
@@ -624,14 +756,11 @@ $(".seat").click(function() {
              }//end i for
              
              //.seatContainer .seat 수만큼 클릭이벤트걸기
-             let seat = $('.seatContainer');
-             for(var i =0;i<seat.length;i++){
-                seat[i].addEventListener('click',selectSeat);
-             }//end i for
+            $('.seatContainer').on('click','.detailSeat',selectSeat);
              //seatArry배열안에 값들을 이벤트제거 + 예약못하게 색바꾸기
              console.log(seatArry);
              for(var i = 0;i<seatArry.length;i++){
-                var a = ".row .seat:contains("+ seatArry[i]+ ")";
+                var a = ".row .detailSeat:contains("+ seatArry[i]+ ")";
                 console.log($(a)[0]);
                 $(a).addClass('occupied');
                 $(a)[0].removeEventListener('click',selectSeat);
@@ -672,7 +801,7 @@ function selectSeat(){
       }
       
    }else if($('#selectedSeat .seatGray').length == cnt){
-let txt = $(event.target).text();
+		let txt = $(event.target).text();
       
       for(let i =0;i<tdList.length;i++){
          console.log(tdList[i].innerText);
