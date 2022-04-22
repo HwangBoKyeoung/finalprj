@@ -283,11 +283,10 @@ iframe {
 	color: #666;
 	margin-right: 5px;
 }
-
-
 </style>
 
 <body>
+${pageVO }
 	<div class="wrapper d-flex align-items-stretch ">
 		<nav id="sidebar">
 			<div class="custom-menu">
@@ -321,7 +320,7 @@ iframe {
 			</div>
 		</nav>
 		<div id="content">
-			<form action="noticeList.do">
+			<form action="noticeList.do" method="get">
 				<div class="searchBar" align="right">
 					<select name="searchType">
 						<option value="title"
@@ -340,54 +339,52 @@ iframe {
 					<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 					<input type="hidden" name="amount" value="${pageVO.amount }">
 				</div>
-</form>
-				
-					<table class="table" style="text-align: center;">
-						<thead>
-							<tr>
-								<th>번호</th>
-								<th>제목</th>
-								<th>작성일자</th>
-								<th>조회수</th>
-							</tr>
-						</thead>
-						<c:forEach items="${list }" var="list">
-							<tr
-								onclick="location.href='noticeSelect.do?noticeNo=${list.noticeNo }'">
-								<td>${list.noticeNo}</td>
-								<td>${list.title }</td>
-								<td>${list.wrDt}</td>
-								<td>${list.hit}</td>
-							</tr>
-						</c:forEach>
-						</tbody>
-					</table>
-					<form id="actionForm" action="noticeList.do" method="get">
+			</form>
+			<table class="table" style="text-align: center;">
+				<thead>
+					<tr>
+						<th>번호</th>
+						<th>제목</th>
+						<th>작성일자</th>
+						<th>조회수</th>
+					</tr>
+				</thead>
+				<c:forEach items="${list }" var="list">
+					<tr
+						onclick="location.href='noticeSelect.do?noticeNo=${list.noticeNo }'">
+						<td>${list.noticeNo}</td>
+						<td>${list.title }</td>
+						<td>${list.wrDt}</td>
+						<td>${list.hit}</td>
+					</tr>
+				</c:forEach>
+				</tbody>
+			</table>
+			<form id="actionForm" action="noticeList.do" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
                   <input type="hidden" name="amount" value="${pageVO.amount }">
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
                   <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
                </form>
-					<div id="content" align="center">
-					<c:if test="${pageVO.prev }">
-						<!-- 이전버튼 활성화 여부 -->
-						<a href="${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn btn-secondary"></a>
-					</c:if>
-					<!-- pageNum -->
-					<c:forEach var="num" begin="${pageVO.startPage }"
-						end="${pageVO.endPage }">
-						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="${num }"> <input type="button"
-							value="${num }" class="btn btn-secondary"></a>
-					</c:forEach>
-					<!-- 다음버튼 -->
-					<c:if test="${pageVO.next }">
-						<a href="${pageVO.endPage+1 }"> <input
-							type="button" value="다음" class="btn btn-secondary"></a>
-					</c:if>
+			<div id="content" align="center">
+                  <c:if test="${pageVO.prev }">
+                     <!-- 이전버튼 활성화 여부 -->
+                     <a href="${pageVO.startPage-1 }"> <input
+                        type="button" value="이전" class="btn btn-secondary"></a>
+                  </c:if>
+                  <!-- pageNum -->
+                  <c:forEach var="num" begin="${pageVO.startPage }"
+                     end="${pageVO.endPage }">
+                     <a class="${pageVO.pageNum == num ? 'active': '' }"
+                        href="${num }"> <input type="button"
+                        value="${num }" class="btn btn-secondary"></a>
+                  </c:forEach>
+                  <!-- 다음버튼 -->
+                  <c:if test="${pageVO.next }">
+                     <a href="${pageVO.endPage+1 }"> <input
+                        type="button" value="다음" class="btn btn-secondary"></a>
+                  </c:if>
 				</div>
-			
 		</div>
 	</div>
 
@@ -411,11 +408,16 @@ iframe {
 			}
 		}
 
-		$(".que").click(function() {
-			$(this).next(".anw").stop().slideToggle(300);
-			$(this).toggleClass('on').siblings().removeClass('on');
-			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
-		});
+		
+		let actionForm = $("#actionForm");
+	      $("#content a").on("click", function(e){
+	         e.preventDefault();
+	         console.log("click");
+	         console.log($(this).attr("href"));
+	         actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+	         
+	         actionForm.submit();
+	      });
 	</script>
 </body>
 
