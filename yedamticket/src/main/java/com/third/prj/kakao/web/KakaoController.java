@@ -90,9 +90,6 @@ public class KakaoController {
         model.addAttribute("msg", msg);
         model.addAttribute("url", url);
 
-
-
-
 		return "user/alert";
 
 	}

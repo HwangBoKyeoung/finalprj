@@ -15,5 +15,9 @@
 		FROM MOVIE_SCHEDULE
 		WHERE DOCID=#{docId}
 	</select>
-	
+ 
+	<insert id="movieSchInsert" parameterType="com.third.prj.movieschedule.service.MovieScheduleVO">
+			INSERT INTO MOVIE_SCHEDULE(MV_SCH_NO,SCHDT,DOCID)
+			VALUES(mv_sch_seq.nextval,to_date(#{startDate})+30,#{docId})
+	</insert>
 </mapper>

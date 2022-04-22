@@ -87,34 +87,42 @@ public interface UserService {
 
 	// 양수 내역 리스트화
 	public List<PerformanceReservationVO> getprList(UserCriteriaVO cri);
-	
+
 	// 양수 내역 리스트
 	public List<PerformanceReservationVO> prList(UserCriteriaVO cri);
-	
+
 	// 유저정보 불러오기
 	public UserVO getUser2(String Uid);
-	
+
 	// 개인 양수
 	int reservedBuy(Map<String, Object> map);
-	
+
 	// 자유시장 구매
 	int marketBuy(Map<String, Object> map);
-	
+
 	// 아이디 찾기
 	String searchId(@Param("name") String name, @Param("phone") String phone);
-	
-	//비밀번호 찾기
-	boolean findPw(UserVO vo); 
-	
-	//이메일발송
+
+	// 비밀번호 찾기
+	boolean findPw(UserVO vo);
+
+	// 이메일발송
 	void sendEmail(UserVO vo, String pw, String div);
-	
+
 	// 마이페이지 회원정보
-	UserVO selectByMemberId(@Param("UId") String UId,@Param("email") String email);
-    
-    // 비밀번호 찾기 
-    int updatePassword2(UserVO vo);
-    
-    //결제하면 포인트 변경
-    int payPoint(UserVO vo);
+	UserVO selectByMemberId(@Param("UId") String UId, @Param("email") String email);
+
+	// 비밀번호 찾기
+	int updatePassword2(UserVO vo);
+
+	// 결제하면 포인트 변경
+	int payPoint(UserVO vo);
+
+	// 비밀번호체크
+	int pwdCheck(UserVO vo);
+
+	// 비밀번호변경
+	int pwdUpdate(UserVO vo);
+
+
 }

@@ -61,6 +61,9 @@ public interface MovieService {
 	// 검색
 	int getTotal(CriteriaVO cri);
 
+    //영화관등록
+    int InsertMovieHall(Map<String, Object> map);
+
 	//관리자페이지 기업정보
 	List<MovieVO> cMovieList(MovieVO vo);
 	

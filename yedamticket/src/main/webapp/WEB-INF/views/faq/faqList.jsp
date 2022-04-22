@@ -235,56 +235,61 @@ iframe {
 		width: 100% !important
 	}
 }
+.accordion {
+	width: 700px;
+	max-width: 1000px;
+	margin: 2rem auto;
 
-* {
-	box-sizing: border-box;
 }
 
-.que:first-child {
-	border-top: 1px solid black;
+.accordion-item {
+	background-color: #fff;
+	color: #111;
+	margin: 1rem 0;
+	border-radius: 0.3rem;
+	box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.25);
 }
 
-.que {
+.accordion-item-header {
+	padding: 0.5rem 3rem 0.5rem 1rem;
+	min-height: 3.5rem;
+	line-height: 1.25rem;
+	font-weight: bold;
+	display: flex;
+	font-size: 17px;
+	align-items: center;
 	position: relative;
-	padding: 17px 0;
 	cursor: pointer;
-	font-size: 14px;
-	border-bottom: 1px solid #dddddd;
 }
 
-.que::before {
-	display: inline-block;
-	content: 'Q';
-	font-size: 14px;
-	color: #006633;
-	margin-right: 5px;
+.accordion-item-header::after {
+	content: "\002B";
+	font-size: 2rem;
+	position: absolute;
+	right: 1rem;
 }
 
-.que.on>span {
-	font-weight: bold;
-	color: #006633;
+.accordion-item-header.active::after {
+	content: "\2212";
 }
 
-.anw {
-	display: none;
+.accordion-item-body {
+	max-height: 0;
 	overflow: hidden;
-	font-size: 14px;
-	background-color: #f4f4f2;
-	padding: 27px 0;
+	transition: max-height 0.2s ease-out;
 }
 
-.anw::before {
-	display: inline-block;
-	content: 'A';
-	font-size: 14px;
-	font-weight: bold;
-	color: #666;
-	margin-right: 5px;
+.accordion-item-body-content {
+	padding: 1rem;
+	line-height: 1.5rem;
+	font-family: sans-serif;
+	border-top: 1px solid;
+	font-size: 16px;
+	border-image: linear-gradient(to right, transparent, #34495e, transparent)
+		1;
 }
-
-.wbtn {
-	position: relative;
-	left: 650px;
+.accordion{
+margin-right: 45%;
 }
 </style>
 </head>
@@ -322,36 +327,35 @@ iframe {
 			</div>
 		</nav>
 		
-		<div class="container">
-			<br>
-			<c:forEach items="${faqs }" var="faq" begin="0" end="9">
-				<div class="col-8">
-					<div id="Accordion_wrap">
-						<div class="que">
-							<span>${faq.FNo }</span> <span>${faq.title }</span>
-						</div>
-						<div class="anw">
-							<span>${faq.content }</span>
+		<div class="container  ">
+				<br>
+				<h2>FAQ</h2>
+				<c:forEach items="${faqs }" var="faq" begin="0" end="5">
+					<div class="accordion">
+						<div class="accordion-item">
+							<div class="accordion-item-header">${faq.title }</div>
+							<div class="accordion-item-body">
+								<div class="accordion-item-body-content">${faq.content }</div>
+							</div>
 						</div>
 					</div>
-				</div>
-			</c:forEach>
-		</div>
+				</c:forEach>
+			</div>
 	</div>
 
 	<script type="text/javascript">
-		$(".que").click(function() {
-			$(this).next(".anw").stop().slideToggle(300);
-			$(this).toggleClass('on').siblings().removeClass('on');
-			$(this).next(".anw").siblings(".anw").slideUp(300); // 1개씩 펼치기
-		});
-	</script>
-
-	<script type="text/javascript">
-		function faqSearch(n) {
-			frm.FNo.value = n;
-			frm.submit();
-		}
+	 const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
+     accordionItemHeaders.forEach(accordionItemHeader => {
+         accordionItemHeader.addEventListener("click", event => {
+             accordionItemHeader.classList.toggle("active");
+             const accordionItemBody = accordionItemHeader.nextElementSibling;
+             if (accordionItemHeader.classList.contains("active")) {
+                 accordionItemBody.style.maxHeight = accordionItemBody.scrollHeight + "px";
+             } else {
+                 accordionItemBody.style.maxHeight = 0;
+             }
+         });
+     });
 	</script>
 	<script src="./resources/users/js/core/jquery.min.js"></script>
 	<script src="./resources/users/js/core/popper.js"></script>

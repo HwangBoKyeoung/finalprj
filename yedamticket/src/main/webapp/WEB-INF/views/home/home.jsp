@@ -90,37 +90,35 @@
          </div>
          <div class="col-8">
             <h1 id="demo"></h1>           
-			
-    	  </div>
-    		
-      	</div>
+         </div>          
+         </div>
       <div class="cards" style="display: none;">
-				  <div class="card">
-				    <div class="card__image-holder">
-				      <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
-				    </div>
-				    <div class="card-title">
-				      <a  class="toggle-info btn">
-				        <span class="left"></span>
-				        <span class="right"></span>
-				      </a>
-				      <h2>
-				          Card title
-				      </h2>
-				      <p>Image from unsplash.com</p>
-				    </div>
-				    <div class="card-flap flap1">
-				      <div class="card-description">
-				        This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-				      </div>
-				      <div class="card-flap flap2">
-				        <div class="card-actions">
-				          <a id="reservBtn" class="btn">예매하기</a>
-				        </div>
-				      </div>
-				    </div>
-				  </div>
-				</div>
+              <div class="card">
+                <div class="card__image-holder">
+                  <img class="card__image" src="https://source.unsplash.com/300x225/?wave" alt="wave" />
+                </div>
+                <div class="card-title">
+                  <a  class="toggle-info btn">
+                    <span class="left"></span>
+                    <span class="right"></span>
+                  </a>
+                  <h2>
+                      Card title
+                  </h2>
+                  <p>Image from unsplash.com</p>
+                </div>
+                <div class="card-flap flap1">
+                  <div class="card-description">
+                    This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
+                  </div>
+                  <div class="card-flap flap2">
+                    <div class="card-actions">
+                      <a id="reservBtn" class="btn">예매하기</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
    </section>
    <br>
    <div class="hr-sect">영화 인기순위 및 상영예정작 안내</div>
