@@ -17,11 +17,6 @@ public class GoodsServiceImpl implements GoodsService {
 	private GoodsMapper mapper;
 
 	@Override
-	public List<GoodsVO> goodsList() {
-		return mapper.goodsList();
-	}
-
-	@Override
 	public int goodsInsert(GoodsVO vo) {
 		// TODO Auto-generated method stub
 		return mapper.goodsInsert(vo);
@@ -31,7 +26,6 @@ public class GoodsServiceImpl implements GoodsService {
 	public int goodsUpdate(GoodsVO vo) {
 		return mapper.goodsUpdate(vo);
 	}
-
 
 	@Override
 	public GoodsVO goodsSelect(GoodsVO vo) {
@@ -64,9 +58,17 @@ public class GoodsServiceImpl implements GoodsService {
 	}
 
 	@Override
-	public List<GoodsVO> goodsList(String goodsCd) {
+	public List<GoodsVO> mGoodsList(GoodsVO vo) {
 		// TODO Auto-generated method stub
-		return null;
+		return mapper.mGoodsList(vo);
 	}
+
+	@Override
+	public List<GoodsVO> cGoodsList(GoodsVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.cGoodsList(vo);
+	}
+
+	
 	
 }

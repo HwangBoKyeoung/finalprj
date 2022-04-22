@@ -77,7 +77,7 @@
 
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,CONFIRM,REFUSE_RS
+		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,CONFIRM,REFUSE_RS,RENAMES
 		FROM PERFORMANCE
 		WHERE p_no = #{PNo}
 	</select>
@@ -190,9 +190,9 @@
       AND P.LOC  LIKE '%' || #{loc} || '%'
       </if>
    </where>
-      <![CDATA[
-      
-              ) A ORDER BY FRDT) 
+      <![CDATA[    
+       ORDER BY FRDT
+              ) A ) 
                WHERE RN > (#{pageNum}-1) * #{amount} 
                AND RN <= #{pageNum} * #{amount}
       ]]>   
@@ -207,7 +207,7 @@
          PERFORMANCE P JOIN PERFORMANCE_SCHEDULE PS
          ON 
          P.P_NO = PS.P_NO
-           WHERE FRDT > TO_CHAR(SYSDATE,'YY/MM/DD') 
+           WHERE FRDT > trunc(SYSDATE) 
            AND ROWNUM < 4
         ]]>      
    </select>
@@ -300,6 +300,10 @@
 		         from performance)
 		where row_num < 11
 		]]>
+	</select>
+	
+	<select id="cperList" resultType="com.third.prj.performance.service.PerformanceVO">
+		SELECT * FROM PERFORMANCE WHERE C_ID = #{CId}
 	</select>
 
 </mapper>

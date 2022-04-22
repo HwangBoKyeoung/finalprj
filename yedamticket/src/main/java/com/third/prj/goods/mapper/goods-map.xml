@@ -32,9 +32,15 @@
 		</if>
 	</sql>
 	
-	<select id="goodsList" resultMap="goodsResultMap">
+	<select id="cGoodsList" resultMap="goodsResultMap">
 		SELECT * 
 		FROM GOODS 
+		WHERE GOODS_CD = #{goodsCd}
+	</select>
+	<select id="mGoodsList" resultMap="goodsResultMap">
+		SELECT * 
+		FROM GOODS 
+		WHERE GOODS_CD = #{goodsCd}
 	</select>
 
 	

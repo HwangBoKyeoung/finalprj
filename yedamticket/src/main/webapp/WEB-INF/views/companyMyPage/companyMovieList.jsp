@@ -6,21 +6,14 @@
 <head>
 <title>Sidebar 02</title>
 <meta charset="utf-8">
-<meta name="viewport"
-   content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link rel="stylesheet"
-   href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<link rel="stylesheet" href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
 <link rel="stylesheet" href="/resources/demos/style.css">
+<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./resources/users/css/style.css">
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
-
-<link
-   href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900"
-   rel="stylesheet">
-
-<link rel="stylesheet"
-   href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-<link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
 <style>
 .card {
@@ -287,6 +280,7 @@ iframe {
 }
 </style>
 </head>
+<h1>sessionId : ${sessionId }</h1>
 <body>
    <div class="wrapper d-flex align-items-stretch">
       <nav id="sidebar">
@@ -306,7 +300,7 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
-					<li><a href="#">승인 요청</a></li> 
+					<li><a href="#">승인진행현황</a></li> 
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -338,12 +332,11 @@ iframe {
                            <option value="DIRECTOR"
                               ${pageVO.cri.searchType eq 'DIRECTOR' ? 'selected' : '' }>감독</option>
                         </select> <input type="text" name="searchName"
-                           value="<c:out value='${pageVO.cri.searchName }'/>">
+                           value="${pageVO.cri.searchName }">
                         <button type="submit" class="btn btn-primary">검색</button>
-                        <input type="hidden" name="pageNum" value="${pageVO.cri.pageNum }">
+                        <input type="hidden" name="pageNum" value="1">
                         <!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-                        <input type="hidden" name="amount" value="${pageVO.cri.amount }">
-                        <input type="hidden" name="sessionId" value="${sessionId}">
+                        <input type="hidden" name="amount" value="${pageVO.amount }">
                      </div>
                   </div>
                </form>
@@ -358,17 +351,17 @@ iframe {
                      </tr>
                   </thead>
                   <tbody id="body">
+                  <c:if test="${sessionId != ''}">
                      <c:forEach items="${dels }" var="mv">
-								<c:if test="${mv.movieVO.CId eq sessionId}">
-									<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
-										<td>${mv.movieVO.name}</td>
-										<td>${mv.movieVO.CId}</td>
-										<td>${mv.movieVO.rating}</td>
-										<td>${mv.movieVO.director}</td>
-										<td>${mv.movieVO.genre}</td>
-									</tr>
-								</c:if>
-							</c:forEach>
+						<tr onclick="location.href='companyMovieUpdateForm.do?mvNo=${mv.mvNo}' ">
+							<td>${mv.movieVO.name}</td>
+							<td>${mv.movieVO.CId}</td>
+							<td>${mv.movieVO.rating}</td>
+							<td>${mv.movieVO.director}</td>
+							<td>${mv.movieVO.genre}</td> 
+						</tr>
+					</c:forEach>
+				</c:if>
                   </tbody>
                </table>
                <br>
@@ -414,18 +407,6 @@ iframe {
          actionForm.submit();
       });
       
-      let searchForm = $("#searchForm");
-      $("#searchForm button").on("click", function(e){
-         if(!searchForm.find("input[name='searchName']").val()){
-            alert('키워드를 입력하세요.');
-            return false;
-         }
-         
-         searchForm.find("input[name='pageNum']").val("1");
-         e.preventDefault();
-         
-         searchForm.submit();
-      })
    </script>
 	
 </body>

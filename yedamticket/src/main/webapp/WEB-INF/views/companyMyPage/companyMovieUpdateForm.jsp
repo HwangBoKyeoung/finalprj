@@ -6,8 +6,45 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script type="text/javascript">
+$(function() {
+    $("#vfile").on('change', function(){
+        readURL(this);
+    });
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+       var reader = new FileReader();
+       reader.onload = function (e) {
+          $('#prevImage').attr('src', e.target.result);
+       }
+       reader.readAsDataURL(input.files[0]);
+    }
+}
+        $(function() {
+            $("#file").on('change', function(){
+                readURL(this);
+            });
+        });
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+               var reader = new FileReader();
+               reader.onload = function (e) {
+                  $('#preImage').attr('src', e.target.result);
+               }
+               reader.readAsDataURL(input.files[0]);
+            }
+        }
+      
+        
+</script>
 </head>
 <body>
+${videos }
+<br>
+
+${mv }
 	<div>
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">
@@ -85,21 +122,24 @@
 								<input type="text" class="form-control" id="confirm" name="confirm" value="${mv.confirm }" readonly="readonly">
 							</div>
 						</div>
-						<div>
+						<%-- <div>
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">영상</label>
-							<input type="file" accept="image/gif, image/jpeg, image/png, video/mp4,video/mkv, video/x-m4v,video/*" id="file" name="file">
+							<input type="file" accept="video/mp4,video/mkv, video/x-m4v,video/*" id="vfile" name="vfile">
+							<img id="prevImage" src="/upload/${mv.movieVideoVO.vRenames}" alt="${mv.movieVideoVO.vRename}"/>
 						</div>
 						<div>
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">포스터</label>
 							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
+							<img id="preImage" src="/upload/${mv.renames}" alt="${mv.fileCd}"/>
 						</div>
-						
+						 --%>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyMovieList.do'">
 					</form>
 						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyMoviedel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
+						<input type="hidden" value="${mv.docId }" id="docId" name="docId">
 				</div>
 			</div>
 		</div>
