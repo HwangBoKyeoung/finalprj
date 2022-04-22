@@ -487,27 +487,28 @@ body {
    <script>
    //ajaxLogin()
    function ajaxLogin(){
-	   $.ajax({
-		   url: 'userLogin1.do',
-		    type: 'post',
-		    data: {"UId": $('#UId1').val(),
-		    		"pwd": $('#pwd').val()},
-		    dataType: "json",
-		    success: function (data) {
-		            console.log(data);
-		            if(data != null){
-		            $('#UId').val(data.username);	
+      $.ajax({
+         url: 'userLogin1.do',
+          type: 'post',
+          data: {"UId": $('#UId1').val(),
+                "pwd": $('#pwd').val()},
+          dataType: "json",
+          success: function (data) {
+                  console.log(data);
+                  if(data != null){
+                  $('#UId').val(data.username);   
 
-		           $('#ajaxPay').submit(); 
-		            }else{
-		            	alert("아이디 또는 비밀번호가 틀림니다.");
-		            }
-		        }
-	   });
+                 $('#ajaxPay').submit(); 
+                  }else{
+                     alert("아이디 또는 비밀번호가 틀림니다.");
+                  }
+              }
+      });
    }
    
    //모달
    
+
    		$(function() {
 			$("#ajaxBtn").click(function() {
 				$(".modal").fadeIn();
@@ -519,6 +520,7 @@ body {
 	
 
 		});
+
       //영화관지역
       $('#movieList').on('click', 'div', selectedList);
       function selectedList() {

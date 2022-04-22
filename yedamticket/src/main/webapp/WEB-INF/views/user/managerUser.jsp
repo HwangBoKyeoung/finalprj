@@ -6,11 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 </head>
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
-			<form action="managerUser.do">
+			
 				<div class="card-body">
 					<h4 class="card-title">User List</h4>
 					<p class="card-description">사용자 리스트</p>
@@ -35,25 +36,33 @@
 						</tbody>
 					</table>
 					<br>
-					<div id="content" align="center">
-						<c:if test="${pageVO.prev }">
-							<!-- 이전버튼 활성화 여부 -->
-							<a href="managerUser.do?pageNum=${pageVO.startPage-1 }"> <input
-								type="button" value="이전" class="btn btn-secondary"></a>
-						</c:if>
-						<!-- pageNum -->
-						<c:forEach var="num" begin="${pageVO.startPage }"
-							end="${pageVO.endPage }">
-							<a class="${pageVO.pageNum == num ? 'active': '' }"
-								href="managerUser.do?pageNum=${num }"> <input type="button"
-								value="${num }" class="btn btn-secondary"></a>
-						</c:forEach>
-						<!-- 다음버튼 -->
-						<c:if test="${pageVO.next }">
-							<a href="managerUser.do?pageNum=${pageVO.endPage+1 }"> <input
-								type="button" value="다음" class="btn btn-secondary"></a>
-						</c:if>
+					<form id="actionForm" action="managerUser.do" method="get">
+					<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+					<input type="hidden" name="amount" value="${pageVO.amount }">
+					<input type="hidden" name="searchType"
+						value="${pageVO.cri.searchType }"> <input type="hidden"
+						name="searchName" value="${pageVO.cri.searchName }">
+				</form>
+				<div id="content" align="center">
+					<c:if test="${pageVO.prev }">
+						<!-- 이전버튼 활성화 여부 -->
+						<a href="${pageVO.startPage-1 }"> <input type="button"
+							value="이전" class="btn btn-secondary"></a>
+					</c:if>
+					<!-- pageNum -->
+					<c:forEach var="num" begin="${pageVO.startPage }"
+						end="${pageVO.endPage }">
+						<a class="${pageVO.pageNum == num ? 'active': '' }" href="${num }">
+							<input type="button" value="${num }" class="btn btn-secondary">
+						</a>
+					</c:forEach>
+					<!-- 다음버튼 -->
+					<c:if test="${pageVO.next }">
+						<a href="${pageVO.endPage+1 }"> <input type="button"
+							value="다음" class="btn btn-secondary"></a>
+					</c:if>
 					</div>
+					<form action="managerUser.do">
 					<div class="col-3">
 						<div class="input-group mb-3" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
@@ -70,10 +79,33 @@
 							<input type="hidden" name="amount" value="${pageVO.amount }">
 						</div>
 					</div>
-				</div>
 			</form>
+				</div>
 		</div>
 	</div>
+	<script>
+		let actionForm = $("#actionForm");
+		$("#content a").on("click", function(e) {
+			e.preventDefault();
+			console.log("click");
+			console.log($(this).attr("href"));
+			actionForm.find("input[name='pageNum']").val($(this).attr("href"));
 
+			actionForm.submit();
+		});
+
+		let searchForm = $("#searchForm");
+		$("#searchForm button").on("click", function(e) {
+			if (!searchForm.find("input[name='searchName']").val()) {
+				alert('키워드를 입력하세요.');
+				return false;
+			}
+
+			searchForm.find("input[name='pageNum']").val("1");
+			e.preventDefault();
+
+			searchForm.submit();
+		})
+	</script>
 </body>
 </html>

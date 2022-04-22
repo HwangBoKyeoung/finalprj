@@ -15,6 +15,11 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<style>
+	.input-group, .form-group{
+		margin-bottom : 40px;
+	}
+</style>
 </head>
 <body>
 	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
@@ -35,7 +40,7 @@
 									 <i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="이름" required="required" id="name" name="name" maxlength="8">
+								<input type="text" class="form-control" placeholder="이름" required="required" id="name" name="name" maxlength="8" onkeyup="nameConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -54,10 +59,10 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="10">
-								
+								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="100" onkeyup="passConfirm1()">
 							</div>
-
+							<p id="pppp" style="display:none;">비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다</p>
+							
 							<div class="input-group no-border">
 								<div class="input-group-prepend">
 									<span class="input-group-text"> 
@@ -65,7 +70,7 @@
 									</span>
 								</div>
 								
-								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()" maxlength="10">
+								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm2()" maxlength="100">
 							</div>
  
  
@@ -130,6 +135,15 @@
 		</div>
 	</div>
 	<script>
+	// 이메일(세션값) 값 검증
+	$(document).ready(function(){
+	var email = $("#email").val()
+	if(email == ''){
+		alert("세션이 만료되었습니다 이메일을 확인해 주세요..")
+		return $(location).attr('href', 'signup_1.do')
+	}
+	})
+	
 	// 주소찾기
     function findAddr() {
         new daum.Postcode({
@@ -186,11 +200,27 @@
 			return false;
 		}
 
-		if (passCnum == 1) {
+		if (nameCnum == 1){
+			alert("이름을 확인해주세요.")
+			return false;
+		}
+		
+		if (uidCnum == 1){
+			alert("아이디를 확인해주세요")
+		}
+		
+		if (passCnum2 == 1) {
 			alert("비밀번호를 확인해주세요.")
 			return false
 		}
 
+		if (phoneCnum == 1){
+			alert("전화번호를 확인해주세요.")
+			return false;
+		}
+		
+		
+		
 		var v = grecaptcha.getResponse()
 		if (v.length == 0) {
 			alert("자동가입방지를 체크해주세요.")
@@ -209,8 +239,26 @@
 			$('#idChk').attr("disabled", true)
 		}else{
 			$('#idChk').attr("disabled", false)
+			idConfirm();
 		}
 	}
+	
+	function idConfirm(){
+		var id = document.getElementById("UId").value;
+		var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+		if(! RegExp.test(id)){
+			console.log("올바른 아이디를 입력하세요.")
+			$('#UId').css("color", "#FE0A03");
+			$('#UId').css("font-weight", "bold")
+			$("#idChk").attr("disabled", true);
+			uidCnum = 1;
+		}else{
+			console.log("정상적인 이름입니다.")
+			$('#UId').css("color", "greenyellow")
+			$("#idChk").attr("disabled", false);
+			uidCnum = 0;
+		}
+	}	
 	
 	// id 중복확인
 	function fn_idChk() {
@@ -238,6 +286,24 @@
 		})
 	}
 
+	// 이름 유효성 검사
+	function nameConfirm(){
+		var name = document.getElementById("name").value;
+		var n_RegExp = /^[가-힣]{2,15}$/; //이름 유효성검사 정규식
+		if(! n_RegExp.test(name)){
+			console.log("올바른 이름을 입력하세요.")
+			$('#name').css("color", "#FE0A03");
+			$('#name').css("font-weight", "bold")
+			nameCnum = 1;
+		}else{
+			console.log("정상적인 이름입니다.")
+			$('#name').css("color", "greenyellow")
+			nameCnum = 0;
+		}
+	}
+	
+	
+	
 	// 휴대폰 번호 유효성 검사
 	function phoneConfirm() {
 		var phone = document.getElementById('phone').value;
@@ -254,38 +320,58 @@
 		}
 	}
 
-	// 생년월일 번호 유효성 검사
-	function birthConfirm() {
-		var birth = document.getElementById('birthDt').value;
-		var regBirth = /^(19[0-9][0-9]|20[0-2][0-2])(0[0-9]|1[0-2])(0[1-9]|[1-2][0-9]|3[0-1])$/
 
-		if (!regBirth.test(birth)) {
-			console.log('올바른 생년월일을 입력하세요.');
-			$('#birthDt').css("color", "#FE0A03");
-			$('#birthDt').css("font-weight", "bold")
-			birthCnum = 1;
-		}
-		else {
-			if (birth < 20220329) {
-				console.log('정상적인 생년월일입니다..!');
-				$('#birthDt').css("color", "greenyellow")
-				birthCnum = 0;
-			}
-		}
+	// 비밀번호 유효성 검사
+	function passConfirm1(){
+		var pw = $("#pwd").val();
+		var passCnum1 = 1
+		var reg = /^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var hangulcheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		$("#pwd").parent().css("margin-bottom", 0)
+		$("#pppp").css("display", "")
+		$("#pppp").css("color", "#FE0A03")
+		$("#pppp").css("font-size", "smaller")
+		$("#pppp").css("text-align", "center")
+		$("#pppp").text("비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다.")
+		if(false === reg.test(pw)) {
+		$("#pwd").css("color", "#FE0A03")
+		$('#pwd').css("font-weight", "bold")
+		console.log('비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다.');
+		}else if(/(\w)\1\1\1/.test(pw)){
+			$("#pwd").css("color", "#FE0A03")
+			passCnum1 = 1;
+		 	console.log('같은 문자를 4번 이상 사용하실 수 없습니다.');
+		 	return false;
+		 }else if(pw.search(/\s/) != -1){
+			 $("#pwd").css("color", "#FE0A03")
+			 passCnum1 = 1;
+		 	console.log("비밀번호는 공백 없이 입력해주세요.");
+		 	return false;
+		 }else if(hangulcheck.test(pw)){
+			 $("#pwd").css("color", "#FE0A03")
+			 passCnum1 = 1;
+		 	console.log("비밀번호에 한글을 사용 할 수 없습니다."); 
+		 }else {
+		 	console.log("통과");
+		 	$("#pwd").css("color", "greenyellow")
+		 	$("#pppp").text("조건을 충족합니다.")
+		 	$("#pppp").css("color", "greenyellow")
+		 	passCnum1 = 0;
+		 }
 	}
-
-	// 비밀번호 확인		
-	function passConfirm() {
+	
+	// 비밀번호 재 확인		
+	function passConfirm2() {
 		var password = document.getElementById('pwd'); //비밀번호
 		var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
 		var passwordConfirmClassName = $('#pwd2').attr('name');
 		if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
 			$('#pwd2').css("color", "greenyellow")
-			passCnum = 0;
+			passCnum2 = 0;
 		} else {
 			$('#pwd2').css("color", "#FE0A03")
 			$('#pwd2').css("font-weight", "bold")
-			passCnum = 1;
+			passCnum2 = 1;
 		}
 	}
 	</script>

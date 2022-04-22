@@ -87,12 +87,12 @@
       AND PWD = #{pwd}
    </select>
 <!-- 황보경 -->
-   <!-- <select id="userSelectOne"
-      resultType="com.third.prj.user.service.UserVO">
-      SELECT *
-      FROM USERS
-      WHERE U_ID = #{UId}
-   </select> -->
+<!--     <select id="userSelectOne" -->
+<!--       resultType="com.third.prj.user.service.UserVO"> -->
+<!--       SELECT * -->
+<!--       FROM USERS -->
+<!--       WHERE U_ID = #{UId} -->
+<!--    </select>  -->
 
    <resultMap type="com.third.prj.user.service.UserVO" id="userMap">
       <id column="u_id" property="UId" />
@@ -338,7 +338,6 @@
          ORDER BY RESERVE_DTTM DESC
       ]]>
    </select>
-
    <select id="userSelectOne"
       resultType="com.third.prj.user.service.UserVO">
       SELECT *
@@ -490,13 +489,27 @@
 		SET PWD = #{pwd}
 		WHERE U_ID = #{UId}
 	</update>
+  
 	<update id="payPoint" parameterType="com.third.prj.user.service.UserVO">
-	
 		UPDATE USERS
 		SET    POINT = ( SELECT POINT
                  FROM   USERS
                  WHERE  U_ID = #{UId}) - #{pay}
 		WHERE  U_ID  = #{UId}
 	</update>
+  
+  <select id="pwdCheck" resultType="int">
+      SELECT COUNT(*) FROM USERS
+      WHERE U_ID = #{UId}
+      AND PWD = #{pwd}
+   </select>
+
+   <update id="pwdUpdate"
+      parameterType="com.third.prj.user.service.UserVO">
+      UPDATE USERS
+      <set>
+         <if test="pwd != null"> PWD = #{pwd},</if>
+      </set>
+      WHERE U_ID = #{UId}
+   </update>
 </mapper>
-   

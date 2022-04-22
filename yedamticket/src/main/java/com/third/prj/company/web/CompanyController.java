@@ -1,6 +1,8 @@
 package com.third.prj.company.web;
 
-import javax.inject.Inject;
+
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -8,10 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -19,16 +19,26 @@ import com.third.prj.company.service.CompanyService;
 import com.third.prj.company.service.CompanyVO;
 import com.third.prj.company.service.CriteriaVO;
 import com.third.prj.company.service.PageVO;
+import com.third.prj.movie.service.MovieService;
+import com.third.prj.movie.service.MovieVO;
+import com.third.prj.performance.service.PerformanceService;
+import com.third.prj.performance.service.PerformanceVO;
 
 @Controller
 public class CompanyController {
 
    @Autowired
    private CompanyService companyDao;
+
+   @Autowired
+   private MovieService movieDao;
+   
+   @Autowired
+   private PerformanceService perDao;
    
 //   @Autowired
 //   private BCryptPasswordEncoder pwdEncoder;
-   
+
    @RequestMapping("/signupB_1.do")
    public String signUpB_2() {
       return "signup/signupB_1";
@@ -61,12 +71,9 @@ public class CompanyController {
       String decodedPwd = pwdEncoder.encode(encodedPwd);
       companyVO.setPwd(decodedPwd);
       
-      String aaa = companyVO.toString();
-      
       int n = companyDao.companyInsert(companyVO);
       if (n != 0) {
          return "redirect:home.do";
-    	 //return aaa;
       }
       return "signup/signup_error";
    }
@@ -89,9 +96,12 @@ public class CompanyController {
    
    //기업회원 상세정보(관리자페이지)
    @RequestMapping("/managerCompanySelect.do")
-   public String managerCompanySelect(CompanyVO vo, Model model) {
+   public String managerCompanySelect(CompanyVO vo, Model model,PerformanceVO pvo, MovieVO mvo) {
       vo = companyDao.companySelect(vo);
       model.addAttribute("com",vo);
+      System.out.println("=================="+vo.getCId());
+//      model.addAttribute("mv", movieDao.cMovieList(mvo));
+//      model.addAttribute("pf", perDao.cperList(pvo));
       return "manager/company/managerCompanySelect";
    }
 
@@ -114,9 +124,13 @@ public class CompanyController {
            msg = "로그인 성공";
          url = "home.do";   
 
-         session.setAttribute("sessionName", vo.getName());
-         session.setAttribute("sessionId", vo.getCId());
-         session.setAttribute("pwd", vo.getPwd());
+         session.setAttribute("sessionName", login.getName());
+         System.out.println("=====================================================");
+         System.out.println(login.getName());
+         System.out.println(vo.getCId());
+         System.out.println("=====================================================");	
+         session.setAttribute("sessionId", login.getCId());
+         session.setAttribute("pwd", login.getPwd());
          mv.addObject("msg", msg);
          mv.addObject("url", url);
          mv.setViewName("company/alert");

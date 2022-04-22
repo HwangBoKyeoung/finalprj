@@ -3,7 +3,7 @@
 
 <mapper namespace="com.third.prj.movievideo.mapper.MovieVideoMapper">
 	<select id="mvvSelect" resultType="com.third.prj.movievideo.service.MovieVideoVO">
-		SELECT p_video_no, vname, vrenames, mv_no
+		SELECT p_video_no, vname, vrenames, mv_no,docid
 		FROM   movie_video
 		WHERE  mv_no = #{mvNo}
 	</select>
@@ -14,6 +14,6 @@
 			SELECT NVL(MAX(P_VIDEO_NO), 0) + 1 AS PVNO
 			FROM MOVIE_VIDEO
 		</selectKey>
-		INSERT INTO MOVIE_VIDEO (P_VIDEO_NO,VNAME,VRENAMES,DOCID) values(#{pVideoNo},#{vName},#{vRenames},#{docId})
+		INSERT INTO MOVIE_VIDEO (P_VIDEO_NO,VNAME,VRENAMES,DOCID,MV_NO) values(#{pVideoNo},#{vName},#{vRenames},#{docId}, (select max(mv_no) from movie)) 
 	</insert>
 </mapper>

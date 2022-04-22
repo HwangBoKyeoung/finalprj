@@ -27,7 +27,7 @@ public class kakao_restapi {
 		// 포스트 파라미터의 grant_type이라는 명칭에 authorization_code를 추가한다 아래도 동일
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "876f8c44421d27c420bd6ffaab02bb68")); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost/prj/kakaoLogin.do")); // 리다이렉트 URI
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://3.39.54.67:8080/yedamticket/kakaoLogin.do")); // 리다이렉트 URI
 		postParams.add(new BasicNameValuePair("code", autorize_code)); // 로그인 과정중 얻은 code 값
 
 		final HttpClient client = HttpClientBuilder.create().build();
@@ -99,7 +99,7 @@ public class kakao_restapi {
 
 		postParams.add(new BasicNameValuePair("grant_type", "authorization_code"));
 		postParams.add(new BasicNameValuePair("client_id", "876f8c44421d27c420bd6ffaab02bb68")); // REST API KEY
-		postParams.add(new BasicNameValuePair("redirect_uri", "http://localhost/prj/kakaoLogin.do")); // 리다이렉트 URI
+		postParams.add(new BasicNameValuePair("redirect_uri", "http://3.39.54.67:8080/yedamticket/kakaoLogin.do")); // 리다이렉트 URI
 		postParams.add(new BasicNameValuePair("code", code)); // 로그인 과정중 얻은 code 값
 
 		final HttpClient client = HttpClientBuilder.create().build();

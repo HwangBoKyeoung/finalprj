@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,6 +24,7 @@
 </style>
 </head>
 <body>
+
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
 			<div class="p-4 pt-5">
@@ -52,13 +54,14 @@
 			</div>
 		</nav>
 		<div class="container">
+		<br>
 			<h2>거래내역</h2>
 			<br>
 			<table class="table">
 				<thead>
 					<tr>
 						<th scope="col">결제번호</th>
-						<th scope="col">결제일자</th>
+						<th scope="col">결제일</th>
 						<th scope="col">사용처</th>
 						<th scope="col">포인트 충전</th>
 						<th scope="col">포인트 사용</th>
@@ -67,8 +70,14 @@
 				</thead>
 				<tbody>
 					<c:forEach items="${list3 }" var="point">
+						<fmt:formatNumber value="${point.charge }" var="charge" pattern="#,###" />
+						<fmt:formatNumber value="${point.pay }" var="pay" pattern="#,###" />
+						<fmt:formatNumber value="${point.tempPoint }" var="tempPoint" pattern="#,###" />
+						
+						<%-- <fmt:parseDate var="payDt" pattern="yyyy-MM-dd HH:mm:ss.SSS" value="${point.payDt }"/>
+						<fmt:parseDate var="chargeDt" pattern="yyyy-MM-dd HH:mm:ss.SSS" value="${point.chargeDt }"/> --%>
 						<tr class="plist">
-						<td>${point.payNo }</td>
+							<td>${point.payNo }</td>
 							<c:choose>
 								<c:when test="${point.chargeDt == null}">
 									<td>${point.payDt }</td>
@@ -88,9 +97,9 @@
 									<td>포인트충전</td>
 								</c:when>
 							</c:choose>
-							<td>+ ${point.charge }</td>
-							<td>- ${point.pay }</td>
-							<td>${point.tempPoint }</td>
+							<td >+ ${charge}</td>
+							<td >- ${pay }</td>
+							<td >${tempPoint }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -116,5 +125,6 @@
 			</div>
 		</div>
 	</div>
+
 </body>
 </html>

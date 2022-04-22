@@ -54,7 +54,6 @@ textarea {
                             <td colspan="2" class="text-center">
                             	<input type="hidden" id="UId" name="UId" value="${inqs.UId }" class="form-control" readonly="readonly">
                                 <input type="submit"  class="btn btn-success" value="수정">
-                                <input type="reset" class="btn btn-warning" value="취소">
                                 <input type="button" class="btn btn-primary" onclick="location.href='inqList.do'" value="목록">
                             </td>
                         </tr>

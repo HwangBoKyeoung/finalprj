@@ -6,6 +6,11 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style type="text/css">
+input{
+    margin: 5px 0;
+}
+</style>
 </head>
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
@@ -53,9 +58,11 @@
 						<a href="manager.do?pageNum=${pageVO.endPage+1 }"> <input
 							type="button" value="다음" class="btn btn-secondary"></a>
 					</c:if>
-					<input type="button" class="btn btn-gradient-primary me-2" onclick="location.href='managerForm.do'" value="등록">
 				</div>
-					<div class="col-3">
+				<c:if test="${sessionId eq 'micol'}">
+					<input type="button" class="btn btn-gradient-primary me-2" onclick="location.href='managerForm.do'" value="등록">
+					</c:if>
+					<div class="col-5">
 						<div class="input-group mb-3" align="right">
 							<select name="searchType" class="btn btn-outline-secondary">
 								<option value="ALL" ${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>

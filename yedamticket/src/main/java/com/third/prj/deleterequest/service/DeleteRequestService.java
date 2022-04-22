@@ -2,6 +2,9 @@ package com.third.prj.deleterequest.service;
 
 import java.util.List;
 
+import com.third.prj.movie.service.MovieVO;
+import com.third.prj.performance.service.PerformanceVO;
+
 
 public interface DeleteRequestService {
 
@@ -26,18 +29,24 @@ public interface DeleteRequestService {
 	int getTotal(CriteriaVO cri);
 	
 	//기업마이페이지 삭제 현황(공연)
-	List<DeleteRequestVO> companyMyDeletePerforList(CriteriaVO cri);
-	int getTotalDeletePerfor(CriteriaVO cri);
+	List<DeleteRequestVO> companyMyDeletePerforList(CriteriaVO cri, PerformanceVO vo);
+	int getTotalDeletePerfor(CriteriaVO cri, PerformanceVO vo);
 	//기업마이페이지 삭제 현황(영화)
-	List<DeleteRequestVO> companyMyDeleteMovieList(CriteriaVO cri);
-	int getTotalDeleteMovie(CriteriaVO cri);
+	List<DeleteRequestVO> companyMyDeleteMovieList(CriteriaVO cri,MovieVO vo);
+	int getTotalDeleteMovie(CriteriaVO cri,MovieVO vo);
 	
 	//기업회원 마이페이지 공연 목록
-	List<DeleteRequestVO> companyPerforSelectList(CriteriaVO cri);
-	int getTotalPerfor(CriteriaVO cri);
+	List<DeleteRequestVO> companyPerforSelectList(CriteriaVO cri, PerformanceVO vo);
+	int getTotalPerfor(CriteriaVO cri,PerformanceVO vo);
 	
 	//기업회원 마이페이지 영화목록
-	List<DeleteRequestVO> companyMovieSelectList(CriteriaVO cri);
-	int getTotalMovie(CriteriaVO cri);
+	List<DeleteRequestVO> companyMovieSelectList(CriteriaVO cri,MovieVO vo);
+	int getTotalMovie(CriteriaVO cri,MovieVO vo);
 	
+	//관리자 페이지 삭제요청 페이지
+	List<DeleteRequestVO> managerPerforDelList(CriteriaVO cri);
+	int getTotalPDel(CriteriaVO cri);
+	
+	List<DeleteRequestVO> managerMovieDelList(CriteriaVO cri);
+	int getTotaMDel(CriteriaVO cri);
 }

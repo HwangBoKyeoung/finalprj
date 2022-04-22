@@ -92,12 +92,15 @@
 }
 
 .rPoster {
-    width: 300px;
-    height: 390px;																																																	
+	width: 300px;
+	height: 390px;
 }
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	
+
+	
 </head>
 <body>
 	${search}
@@ -128,18 +131,20 @@
    </table> --%>
 	<div id="show"></div>
 	<div class="container">
+		<br> <br>
+		<h2>전체목록</h2>
 		<br>
-		<br>
-		<h2>전체영화</h2>
 		<div class="row">
 			<c:forEach items="${searchName}" var="sN" varStatus="status">
+			
 				<div class="col-3">
 					<div class="card">
 						<div class="poster" id="poster">
 							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
-								<input type="hidden" class="rankPoster" value="${sN.fileCd }">
-								<img class="rPoster">
+							<input type="hidden" class="rankPoster" value="${sN.fileCd }">
+							<input type="hidden"  value="${sN.renames }">
+							<img class="rPoster">
 						</div>
 						<div class="details">
 							<br> <br>
@@ -150,39 +155,40 @@
 					</div>
 					<p id="mname">${sN.name}</p>
 					<form action="movieDetail.do" method="post">
-							<div>
-								<input type="hidden" name="docId" id="docId"
-									value="${sN.docId }">
-								<button type="submit" class="btnn">상세보기</button>
-							</div>
-						</form>
+						<div>
+							<input type="hidden" name="docId" id="docId" value="${sN.docId }">
+							<button type="submit" class="btnn">상세보기</button>
+						</div>
+					</form>
 				</div>
 			</c:forEach>
-			<c:forEach items="${searchName2}" var="sN" varStatus="status">
+			<c:forEach items="${searchName2}" var="sN2" varStatus="status">
+			
 				<div class="col-3">
 					<div class="card">
 						<div class="poster" id="poster">
 							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
-								<input type="hidden" class="rankPoster" value="${sN.fileCd }">
-								<img class="rPoster">
+							<input type="hidden" class="rankPoster" value="${sN2.fileCd }">
+							<input type="hidden"  value="${sN2.renames }">
+									<img src="/upload/${sN2.renames }" alt="dd">
 						</div>
 						<div class="details">
 							<br> <br>
 							<div class="info">
-								<p class="pbox">${sN.content}</p>
+								<p class="pbox">${sN2.content}</p>
 							</div>
 						</div>
 					</div>
-					<p id="mname">${sN.name}</p>
+					<p id="mname">${sN2.name}</p>
 					<form action="pBookingForm.do" method="post">
-							<div>
-								<input type="hidden" name="PNo" id="PNo"
-									value="${sN.PNo }">
-								<button type="submit" class="btnn">예매</button>
-							</div>
-						</form>
+						<div>
+							<input type="hidden" name="PNo" id="PNo" value="${sN2.PNo }">
+							<button type="submit" class="btnn">예매</button>
+						</div>
+					</form>
 				</div>
+				
 			</c:forEach>
 		</div>
 		<c:if test="${empty searchName }">
@@ -198,34 +204,32 @@
 	</div>
 
 	<script>
-		
-		  /*  $.ajax({
-		      url: "ajaxFileCd.do",
-		      type: "post",
-		      data: {"searchName":$("#search").val()},
-		      dataType: "json",
-		      success: function(result){
+	
+		/*  $.ajax({
+		    url: "ajaxFileCd.do",
+		    type: "post",
+		    data: {"searchName":$("#search").val()},
+		    dataType: "json",
+		    success: function(result){
 		//              console.log(result);
 		//              console.log(result.fileCd);
-		         let img = $("<img>"); 
-		         $.each(result, function(idx, item){
-		            let a = '';
-		            let data = item.fileCd;
-		            
-		            if(data=='' || data == null){
-		               a = data;
-		               $("#imgTag").attr("src", "resources/yedamticket.png");
-		            } else{
-		               a = data.split('|');
-		               let b = a[0];
-		               $("#imgTag").attr("src", b);
-		            }
-		         });
-		      }
-		   }); */
-		 
-		 
-		 
+		       let img = $("<img>"); 
+		       $.each(result, function(idx, item){
+		          let a = '';
+		          let data = item.fileCd;
+		          
+		          if(data=='' || data == null){
+		             a = data;
+		             $("#imgTag").attr("src", "resources/yedamticket.png");
+		          } else{
+		             a = data.split('|');
+		             let b = a[0];
+		             $("#imgTag").attr("src", b);
+		          }
+		       });
+		    }
+		 }); */
+
 		/* $('.imgInfo').each(function(index, item) {
 			var data = item.value;
 			var imgId = item.id;
@@ -237,24 +241,22 @@
 				$("#" + imgId).next().attr("src", img);
 			}
 		}); */
-		
-		 ///박스오피스 포스터 filecd자르기
-		 let fileCd=document.getElementsByClassName('rankPoster');
-		 let rPoster=document.getElementsByClassName('rPoster');
-		 console.log(fileCd);
-		    for(var i =0;i<fileCd.length;i++){
-		    	
-		    	if(fileCd[i].defaultValue == null || fileCd[i].defaultValue == ''){
-		          rPoster[i].setAttribute('src','resources/yedamticket.png');
-		    		 console.log(fileCd[i]);
-		         }else{
-		            var split=(fileCd[i].defaultValue).split('|');
-		            rPoster[i].setAttribute('src',split[0]);   
-		         }
-		    }
-		//
 
-		
+		///박스오피스 포스터 filecd자르기
+		 let fileCd = document.getElementsByClassName('rankPoster');
+		let rPoster = document.getElementsByClassName('rPoster');
+		console.log(fileCd);
+		for (var i = 0; i < fileCd.length; i++) {
+
+			if (fileCd[i].defaultValue == null || fileCd[i].defaultValue == '') {
+				rPoster[i].setAttribute('src', 'resources/yedamticket.png');
+				console.log(fileCd[i]);
+			} else {
+				var split = (fileCd[i].defaultValue).split('|');
+				rPoster[i].setAttribute('src', split[0]);
+			}
+		} 
+		//
 	</script>
 </body>
 </html>
