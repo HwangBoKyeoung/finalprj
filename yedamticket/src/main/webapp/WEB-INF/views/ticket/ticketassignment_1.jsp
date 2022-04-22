@@ -64,6 +64,10 @@ body {
 	left: 0;
 		} 
 
+.close {
+   display:none;
+}
+
 </style>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
@@ -73,10 +77,12 @@ body {
 	<c:set var="sysdate">
 		<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />
 	</c:set>
-	${sessionId }
-	<input type="button" value="공연" onclick="pffold();">
-	<input type="button" value="영화" onclick="mvfold();">
-
+	<h2>현재 로그인 한 유저 : ${sessionId }</h2>
+	<div align="center">
+		<input type="button" class="btn btn-primary btn-lg" value="영화목록 보기" onclick="mvfold();">
+		<input type="button" class="btn btn-primary btn-lg" value="공연목록 보기" onclick="pffold();">
+	</div>
+	<hr>
 	<!-- ticket assginment  style="visibility: hidden"-->
 	<!-- <div id="pf_container" style="position: absolute"> -->
 	

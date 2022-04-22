@@ -22,7 +22,7 @@
 </style>
 </head>
 <body>
-	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+	<div class="section section-signup" style="background-image : url('./resources/users/img/ssp7.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="black">
@@ -89,6 +89,7 @@
 										<i class="now-ui-icons location_pin"></i>
 									</span>
 								</div>
+								
 								<input type="text" class="form-control" placeholder="주소" required="required" id="addr" name="addr" maxlength="20">
 								<input type="text" class="form-control" placeholder="상세주소" required="required" id="addr2" name="addr2">
 								<input type="hidden" id="sample6_extraAddress">
@@ -207,6 +208,7 @@
 		
 		if (uidCnum == 1){
 			alert("아이디를 확인해주세요")
+			return false;
 		}
 		
 		if (passCnum2 == 1) {
@@ -218,9 +220,7 @@
 			alert("전화번호를 확인해주세요.")
 			return false;
 		}
-		
-		
-		
+
 		var v = grecaptcha.getResponse()
 		if (v.length == 0) {
 			alert("자동가입방지를 체크해주세요.")
@@ -247,13 +247,11 @@
 		var id = document.getElementById("UId").value;
 		var RegExp = /^[a-zA-Z0-9]{4,12}$/;
 		if(! RegExp.test(id)){
-			console.log("올바른 아이디를 입력하세요.")
 			$('#UId').css("color", "#FE0A03");
 			$('#UId').css("font-weight", "bold")
 			$("#idChk").attr("disabled", true);
 			uidCnum = 1;
 		}else{
-			console.log("정상적인 이름입니다.")
 			$('#UId').css("color", "greenyellow")
 			$("#idChk").attr("disabled", false);
 			uidCnum = 0;
@@ -262,7 +260,6 @@
 	
 	// id 중복확인
 	function fn_idChk() {
-		var chk = 0;
 		$.ajax({
 			url: "idChk",
 			type: "post",

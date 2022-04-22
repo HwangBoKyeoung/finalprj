@@ -15,8 +15,13 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
+<style>
+	.input-group, .form-group{
+		margin-bottom : 40px;
+	}
+</style>
 <body>
-	<div class="section section-signup" style="background-image: url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+	<div class="section section-signup" style="background-image : url('./resources/users/img/ssp7.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="black">
@@ -35,7 +40,7 @@
 										<i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="기업명(담당인)" required="required" id="name" name="name">
+								<input type="text" class="form-control" placeholder="기업명(담당인)" required="required" id="name" name="name" maxlength="8" onkeyup="nameConfirm()">
 							</div>
 
 							<div class="input-group no-border">
@@ -44,7 +49,7 @@
 										<i class="now-ui-icons users_circle-08"></i>
 									</span>
 								</div>
-								<input type="text" placeholder="아이디" class="form-control" required="required" id="CId" name="CId" onkeyup="idbtnC();"/>
+								<input type="text" placeholder="아이디" class="form-control" required="required" id="CId" name="CId" onkeyup="idbtnC();" maxlength="12"/>
 								<button type="button" class="cidChk" id="cidChk" value="N" onclick="fn_idChk()">중복체크</button>
 							</div>
 
@@ -54,8 +59,9 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd">
+								<input type="password" class="form-control" placeholder="비밀번호" required="required" id="pwd" name="pwd" maxlength="100" onkeyup="passConfirm1()">
 							</div>
+							<p id="pppp" style="display:none;">비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다</p>
 
 							<div class="input-group no-border">
 								<div class="input-group-prepend">
@@ -63,7 +69,7 @@
 										<i class="now-ui-icons ui-1_lock-circle-open"></i>
 									</span>
 								</div>
-								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm()">
+								<input type="password" class="form-control" placeholder="비밀번호 확인" required="required" id="pwd2" name="pwd2" onkeyup="passConfirm2()" maxlength="100">
 							</div>
 
 							<div class="input-group no-border">
@@ -81,7 +87,7 @@
 										<i class="now-ui-icons location_pin"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="주소" required="required" id="addr" name="addr">
+								<input type="text" class="form-control" placeholder="주소" required="required" id="addr" name="addr" maxlength="20">
 								<input type="text" class="form-control" placeholder="상세주소" required="required" id="addr2" name="addr2">
 								<input type="hidden" id="sample6_extraAddress">
 								<input type="hidden" id="sample6_postcode">
@@ -97,7 +103,7 @@
 										<i class="now-ui-icons tech_mobile"></i>
 									</span>
 								</div>
-								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone" onkeyup="phoneConfirm()">
+								<input type="text" class="form-control" placeholder="연락처" required="required" id="phone" name="phone" onkeyup="phoneConfirm()" maxlength="11">
 							</div>
 
 							<div class="input-group no-border">
@@ -157,6 +163,13 @@
 	</div>
 	
 	<script>
+	// 변수 선언
+	let nameCnum = 0;
+	let cidCnum = 0;
+	let passCnum1 = 0;
+	let passCnum2 = 0;
+	let phoneCnum = 0;
+	
 	// 이메일(세션값) 값 검증
 	$(document).ready(function(){
 		var email = $("#email").val()
@@ -165,11 +178,136 @@
 			return $(location).attr('href', 'signupB_1.do')
 		}
 	})
-		
+	
 	// 양도 권한
 	function transferAgree(){
 		$("#transferChk").val("Y")
 		$('#modal').modal('hide')
+	}
+
+	// 시작 시 비활성화로 시작
+	$('#idChk').attr("disabled", true)
+	
+	// 이름 유효성 검사
+	function nameConfirm(){
+		var name = document.getElementById("name").value;
+		var n_RegExp = /^[가-힣]{2,15}$/; //이름 유효성검사 정규식
+		if(! n_RegExp.test(name)){
+			console.log("올바른 이름을 입력하세요.")
+			$('#name').css("color", "#FE0A03");
+			$('#name').css("font-weight", "bold")
+			nameCnum = 1;
+		}else{
+			console.log("정상적인 이름입니다.")
+			$('#name').css("color", "greenyellow")
+			nameCnum = 0;
+		}
+	}
+	
+	// id가 비어있을 때 중복확인 버튼 비활성화
+	function idbtnC(){
+		if($('#CId').val().length < 1){
+			$('#idChk').attr("disabled", true)
+		}else{
+			$('#idChk').attr("disabled", false)
+			idConfirm();
+		}
+	}
+	
+	// 아이디 유효성 검증	
+	function idConfirm(){
+		cidCnum = 1;
+		var id = document.getElementById("CId").value;
+		var RegExp = /^[a-zA-Z0-9]{4,12}$/;
+		if(! RegExp.test(id)){
+			$('#CId').css("color", "#FE0A03");
+			$('#CId').css("font-weight", "bold")
+			$("#cidChk").attr("disabled", true);
+			cidCnum = 1;
+		}else{
+			$('#CId').css("color", "greenyellow")
+			$("#cidChk").attr("disabled", false);
+			cidCnum = 0;
+		}
+	}	
+	
+	// 아이디 중복확인
+	function fn_idChk() {
+		$.ajax({
+			url: "cidChk",
+			type: "post",
+			dataType: "json",
+			data: {
+				"CId": $("#CId").val()
+			},
+			success: function(data) {
+				if (data == 1) {
+					$("#cidChk").val('N');
+					alert("중복된 아이디 입니다..");
+				} else if (data == 0) {
+					$("#cidChk").val('Y');
+					alert("사용가능한 아이디 입니다.");
+				} else {
+					alert("아이디를 입력해주세요.");
+				}
+			}
+		})
+	}
+	
+	// 비밀번호 유효성 검사
+	function passConfirm1(){
+		passCnum1 = 1
+		var pw = $("#pwd").val();
+		var reg = /^(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+		var hangulcheck = /[ㄱ-ㅎ|ㅏ-ㅣ|가-힣]/;
+		$("#pwd").parent().css("margin-bottom", 0)
+		$("#pppp").css("display", "")
+		$("#pppp").css("color", "#FE0A03")
+		$("#pppp").css("font-size", "smaller")
+		$("#pppp").css("text-align", "center")
+		$("#pppp").text("비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다.")
+		if(false === reg.test(pw)) {
+		$("#pwd").css("color", "#FE0A03")
+		$('#pwd').css("font-weight", "bold")
+		console.log('비밀번호는 8자 이상이어야 하며, 숫자/특수문자를 모두 포함해야 합니다.');
+		}else if(/(\w)\1\1\1/.test(pw)){
+			$("#pwd").css("color", "#FE0A03")
+			passCnum1 = 1;
+		 	console.log('같은 문자를 4번 이상 사용하실 수 없습니다.');
+		 	return false;
+		 }else if(pw.search(/\s/) != -1){
+			 $("#pwd").css("color", "#FE0A03")
+			 passCnum1 = 1;
+		 	console.log("비밀번호는 공백 없이 입력해주세요.");
+		 	return false;
+		 }else if(hangulcheck.test(pw)){
+			 $("#pwd").css("color", "#FE0A03")
+			 passCnum1 = 1;
+		 	console.log("비밀번호에 한글을 사용 할 수 없습니다."); 
+		 }else {
+		 	console.log("통과");
+		 	$("#pwd").css("color", "greenyellow")
+		 	$("#pppp").text("조건을 충족합니다.")
+		 	$("#pppp").css("color", "greenyellow")
+		 	passCnum1 = 0;
+		 }
+	}
+	
+	// 비밀번호 재 확인		
+	function passConfirm2() {
+		passCnum2 = 1;
+		var password = document.getElementById('pwd'); //비밀번호
+		var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
+		var passwordConfirmClassName = $('#pwd2').attr('name');
+		if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
+			$('#pwd2').css("color", "greenyellow")
+			passCnum2 = 0;
+		} else {
+			$('#pwd2').css("color", "#FE0A03")
+			$('#pwd2').css("font-weight", "bold")
+			passCnum2 = 1;
+		}
+		console.log("passConfirm2 > " + passCnum2)
 	}
 	
 	// 주소찾기
@@ -217,71 +355,9 @@
         }).open();
     }
 	
-	// 리캡챠 및 submit버튼 확인
-	function check_recaptcha() {
-		if ($('#cidChk').val() == 'N') {
-			alert('아이디 중복체크 하세요')
-			return false;
-		}
-		if (passCnum == 1) {
-			alert("비밀번호를 확인해주세요.")
-			return false
-		}
-		if ($('#bizChk').val() == 'N') {
-			alert('사업자 등록번호 중복체크 하세요.')
-			return false
-		}
-		if ($('#transferChk').val() == 'N') {
-			alert('양도 계약에 동의해 주세요.')
-			return false
-		}
-		
-		var v = grecaptcha.getResponse()
-		if (v.length == 0) {
-			alert("자동가입방지를 체크해주세요.")
-			return false;
-		} else {
-			return true;
-		}
-	}
-	// 아이디 중복확인
-	function fn_idChk() {
-		$.ajax({
-			url: "cidChk",
-			type: "post",
-			dataType: "json",
-			data: {
-				"CId": $("#CId").val()
-			},
-			success: function(data) {
-				if (data == 1) {
-					$("#cidChk").val('N');
-					alert("중복된 아이디 입니다..");
-					idCnum = 1;
-				} else if (data == 0) {
-					$("#cidChk").val('Y');
-					alert("사용가능한 아이디 입니다.");
-					idCnum = 0;
-				} else {
-					alert("아이디를 입력해주세요.");
-				}
-			}
-		})
-	}
-	// 시작 시 비활성화로 시작
-	$('#idChk').attr("disabled", true)
-	
-	// id가 비어있을 때 중복확인 버튼 비활성화
-	function idbtnC(){
-		if($('#UId').val().length < 1){
-			$('#idChk').attr("disabled", true)
-		}else{
-			$('#idChk').attr("disabled", false)
-		}
-	}
-	
-	// 휴대폰 번호 유효성 검사
+ // 휴대폰 번호 유효성 검사
 	function phoneConfirm() {
+		phoneCnum = 1;
 		var phone = document.getElementById('phone').value;
 		var regTel = /^(01[016789]{1}|070|02|0[3-9]{1}[0-9]{1})([0-9]{3,4})([0-9]{4})$/;
 		if (!regTel.test(phone)) {
@@ -295,19 +371,7 @@
 			phoneCnum = 0;
 		}
 	}
-	// 비밀번호 확인
-	function passConfirm() {
-		var password = document.getElementById('pwd'); //비밀번호 
-		var passwordConfirm = document.getElementById('pwd2'); //비밀번호 확인 값
-		var passwordConfirmClassName = $('#pwd2').attr('name');
-		if (password.value == passwordConfirm.value) {//password 변수의 값과 passwordConfirm 변수의 값과 동일하다.
-			$('#pwd2').css("color", "greenyellow")
-			passCnum = 0;
-		} else {
-			$('#pwd2').css("color", "red")
-			passCnum = 1;
-		}
-	}
+	
 	// 사업자등록번호 유효성 검사
 	function biznoConfirm() {
 		// 샘플용 사업자등록번호(카카오) : 5048600471 
@@ -326,8 +390,8 @@
 				var bnum = result.data[0].b_stt_cd
 				if (bnum == 1) {
 					$('#bizChk').val("Y")
-					$('#bizno').attr("disabled", true)
 					$("#bizno").val($("#nono").val());
+					$('#nono').attr("disabled", true)
 					alert("확인되었습니다.")
 				} else {
 					$('#bizChk').val("N")
@@ -339,10 +403,41 @@
 			},
 		})
 	}
-	// 주소와 상세주소 합치기
-	
-	
+ 
+	// 리캡챠 및 submit버튼 확인
+	function check_recaptcha() {
+		var v = grecaptcha.getResponse()
+		if ($('#cidChk').val() == 'N') {
+			alert('아이디 중복체크 하세요')
+			return false;
+		} else if (nameCnum == 1){
+			alert("이름을 확인해주세요.")
+			return false;
+		} else if (cidCnum == 1){
+			alert("아이디를 확인해주세요.")
+			return false;
+		} else if (passCnum1 == 1) {
+			alert("비밀번호를 확인해주세요.")
+			return false;
+		} else if (passCnum2 == 1){
+			alert("비밀번호를 확인해주세요.")
+			return false;
+		} else if(phoneCnum == 1){
+			alert("전화번호를 확인해주세요.")
+			return false;
+		} else if ($('#bizChk').val() == 'N') {
+			alert('사업자 등록번호 중복체크 하세요.')
+			return false;
+		} else if ($('#transferChk').val() == 'N') {
+			alert('양도 계약에 동의해 주세요.')
+			return false;
+		} else if (v.length == 0) {
+			alert("자동가입방지를 체크해주세요.")
+			return false;
+		} else {
+			return true;
+		}
+	}
 	</script>
-	
 </body>
 </html>
