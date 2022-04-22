@@ -28,18 +28,19 @@ public class GoodsController {
 	private String upLoadPath;
 
 	@RequestMapping("/cGoodsList.do")
-	public String cGoodsList(Model model) {
+	public String cGoodsList(Model model,GoodsVO vo) {
 		String goodsCd = "pf";
-		model.addAttribute("cGoods", goodsDao.goodsList(goodsCd));
+		vo.setGoodsCd(goodsCd);
+		model.addAttribute("cGoods", goodsDao.cGoodsList(vo));
 		return "goods/cGoodsList";
 	}
 
 	@RequestMapping("/mGoodsList.do")
-	public String mGoodsList(Model model) {
-		model.addAttribute("mGoods", goodsDao.goodsList());
-
+	public String mGoodsList(Model model,GoodsVO vo) {
+	
 		String goodsCd = "mv";
-		model.addAttribute("mGoods", goodsDao.goodsList(goodsCd));
+		vo.setGoodsCd(goodsCd);
+		model.addAttribute("mGoods", goodsDao.mGoodsList(vo));
 
 		return "goods/mGoodsList";
 	}

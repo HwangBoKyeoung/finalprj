@@ -17,7 +17,7 @@ public interface MovieService {
 	MovieVO mDetail(MovieVO vo);
 
 	List<MovieVO> movieList();
-
+	List<MovieVO> movieReservList();
 	List<MovieVO> mList();
 
 	// end
@@ -60,5 +60,9 @@ public interface MovieService {
 
 	// 검색
 	int getTotal(CriteriaVO cri);
+	//
+	
 
+	//관리자페이지 기업정보
+	List<MovieVO> cMovieList(MovieVO vo);
 }

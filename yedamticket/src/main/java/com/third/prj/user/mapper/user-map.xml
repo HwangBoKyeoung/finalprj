@@ -87,12 +87,12 @@
       AND PWD = #{pwd}
    </select>
 <!-- 황보경 -->
-   <!-- <select id="userSelectOne"
-      resultType="com.third.prj.user.service.UserVO">
-      SELECT *
-      FROM USERS
-      WHERE U_ID = #{UId}
-   </select> -->
+<!--     <select id="userSelectOne" -->
+<!--       resultType="com.third.prj.user.service.UserVO"> -->
+<!--       SELECT * -->
+<!--       FROM USERS -->
+<!--       WHERE U_ID = #{UId} -->
+<!--    </select>  -->
 
    <resultMap type="com.third.prj.user.service.UserVO" id="userMap">
       <id column="u_id" property="UId" />

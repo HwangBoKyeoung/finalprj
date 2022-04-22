@@ -88,7 +88,7 @@ public class FaqController {
 		int n = faqDao.faqUpdate(vo);
 
 		if (n != 0) {
-			return "redirect:managerFaq.do";
+			return "redirect:managerFaqSelect.do?FNo=" + vo.getFNo();
 		}
 		return "faq/faqError";
 	}
