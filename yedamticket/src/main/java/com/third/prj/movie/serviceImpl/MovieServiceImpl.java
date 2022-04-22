@@ -135,4 +135,8 @@ public class MovieServiceImpl implements MovieService {
 		return mapper.cMovieList(vo);
 	}
 
+	public List<MovieVO> movieReservList() {
+		// TODO Auto-generated method stub
+		return mapper.movieReservList();
+	}
 }

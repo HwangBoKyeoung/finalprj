@@ -1,23 +1,23 @@
 package com.third.prj.performance.web;
 
 import java.io.File;
+import java.sql.Date;
 import java.util.List;
 import java.util.UUID;
-
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.third.prj.performance.service.CriteriaVO;
 import com.third.prj.performance.service.PageVO;
 import com.third.prj.performance.service.PerformanceService;
 import com.third.prj.performance.service.PerformanceVO;
-
 import com.third.prj.performancereservation.service.PerformanceReservationService;
 import com.third.prj.performancereservation.service.PerformanceReservationVO;
 import com.third.prj.performanceschedule.service.PerformanceScheduleService;
@@ -55,14 +55,19 @@ public class PerformanceContorller {
 
 	//황규복 start
 	@RequestMapping("/pList.do")
-	public String pList(Model model , CriteriaVO cri) {
+	public String pList(Model model , CriteriaVO cri, PerformanceVO vo, PerformanceScheduleVO psvo) {
 		PageVO pageVO = new PageVO(cri, perDao.getTotal(cri));
 		System.out.println("pList");
 		model.addAttribute("pageVO", pageVO); //페이지네이션전달
 		System.out.println("start"+cri.getStartDate());
 		System.out.println("end"+cri.getEndDate());
 		model.addAttribute("performance",perDao.pList(cri));
-		model.addAttribute("Eperformance",perDao.epList());
+		
+		model.addAttribute("vo", vo);
+		System.out.println("************************************"+vo);
+		model.addAttribute("psvo", psvo);
+		System.out.println("===================================="+psvo);
+//		model.addAttribute("Eperformance",perDao.epList());
 		return "performance/pList";
 
 	}

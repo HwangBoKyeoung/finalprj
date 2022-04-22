@@ -1,4 +1,7 @@
-@charset "UTF-8";
+
+
+
+
 @font-face {
   font-family: 'Source Sans Pro';
   font-style: normal;
@@ -42,7 +45,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 a.btn {
-  background: #0096a0;
+  background: #cfc5e9;
   border-radius: 4px;
   box-shadow: 0 2px 0px 0 rgba(0, 0, 0, 0.25);
   color: #ffffff;
@@ -155,6 +158,7 @@ div.card div.card-flap {
 div.card div.flap1 {
   transition: all 0.3s 0.3s ease-out;
   z-index: -1;
+  left:0;
 }
 div.card div.flap2 {
   transition: all 0.3s 0s ease-out;

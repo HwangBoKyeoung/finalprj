@@ -87,16 +87,6 @@
 			WHERE rn BETWEEN (#{pageNum} -1) *#{amount} AND #{pageNum} * #{amount}
 			]]>
 	</select>
-
-
-	<!-- 황규복 -->
-
-	<!-- <resultMap type="com.third.prj.movie.service.MovieVO" id="movieResultMap"> 
-		<id property="mvNo" column="mv_no"/> <result property="name" column="name"/> 
-		<result property="content" column="content"/> <result property="actor" column="actor"/> 
-		</resultMap> -->
-
-
 	<resultMap type="com.third.prj.movie.service.MovieViewVO" id="movieViewMap">
 		<result property="mvReservNo" column="MV_RESERV_NO" />
 		<result property="name" column="NAME" />
@@ -139,11 +129,6 @@
 
 	
 
-	<!-- 페이징 <select id="getListWithPaging" resultMap="movieResultMap"> <![CDATA[ 
-		SELECT * FROM ( select /*+INDEX_DESC(tbl_board pk_board)*/ rownum rn, from 
-		movie where rownum <= #{pageNum} * #{amount} ) where rn > (#{pageNum}-1)*#{amount} 
-		]]> </select> -->
-
 	<!-- 영화상영예정작 -->
 	<select id="mList" resultMap="movieResultMap">
 		<![CDATA[
@@ -155,7 +140,7 @@
         ]]>
 	</select>
 
-	<!-- 영화리스트 -->
+	<!-- 영화리스트 1-10등까지-->
 	<select id="movieList" resultMap="movieResultMap">
 		<![CDATA[
       SELECT ROWNUM, A.*
@@ -168,6 +153,21 @@
       BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
       AND TO_CHAR(SYSDATE,'yyyyMMdd') ) A
         WHERE ROWNUM BETWEEN 1 AND 10
+         ]]>
+	</select>
+	
+	<!-- 영화 예약리스트 -->
+	<select id="movieReservList" resultMap="movieResultMap">
+		<![CDATA[
+      SELECT ROWNUM, A.*
+        FROM(
+        SELECT NAME,AUDIENCE,STARTDATE,SUBSTR(CONTENT,0,100) CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
+        RANK() OVER (ORDER BY AUDIENCE ASC) RANK
+        FROM MOVIE
+        WHERE
+      STARTDATE
+      BETWEEN TO_CHAR(SYSDATE-31,'yyyyMMdd')
+      AND TO_CHAR(SYSDATE,'yyyyMMdd') ) A
          ]]>
 	</select>
   
