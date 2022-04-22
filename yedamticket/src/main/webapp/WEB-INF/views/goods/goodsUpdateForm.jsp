@@ -30,7 +30,7 @@
 						});
 
 						//이미지 미리보기
-						 var imgTarget = $('.preview-image .upload-hidden');
+						/*  var imgTarget = $('.preview-image .upload-hidden');
 
 						imgTarget
 								.on(
@@ -70,29 +70,22 @@
 												img[0].style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(enable='true',sizingMethod='scale',src=\""
 														+ imgSrc + "\")";
 											}
-										}); 
+										});  */
 					});
-/* function readImage(input) {
-    // 인풋 태그에 파일이 있는 경우
-    if(input.files && input.files[0]) {
-        // 이미지 파일인지 검사 (생략)
-        // FileReader 인스턴스 생성
-        const reader = new FileReader()
-        // 이미지가 로드가 된 경우
-        reader.onload = e => {
-            const previewImage = document.getElementById("preview-image")
-            previewImage.src = e.target.result
-        }
-        // reader가 이미지 읽도록 하기
-        reader.readAsDataURL(input.files[0])
-    }
-}
-
-//input file에 change 이벤트 부여
-const inputImage = document.getElementById("input_file")
-inputImage.addEventListener("change", e => {
- readImage(e.target)
-}); */
+	        $(function() {
+	            $("#input_file").on('change', function(){
+	                readURL(this);
+	            });
+	        });
+	        function readURL(input) {
+	            if (input.files && input.files[0]) {
+	               var reader = new FileReader();
+	               reader.onload = function (e) {
+	                  $('#preImage').attr('src', e.target.result);
+	               }
+	               reader.readAsDataURL(input.files[0]);
+	            }
+	        }
 </script>
 <style type="text/css">
 body {
@@ -235,11 +228,11 @@ label {
 							</div>
 						</div>
 						<div class="filebox bs3-primary preview-image">
-						    	<!-- <img style="width: 500px;" id="preview-image" src="https://dummyimage.com/500x500/ffffff/000000.png&text=preview+image"> -->
 								<br>
+								<img id="preImage" src="/upload/${gds.fileRe}" alt="${gds.fileCd}"/> <br>
 								<label for="input_file">업로드</label>
 								<input class="upload-name" value="${gds.fileCd }" disabled="disabled" style="width: 200px;">
-								<input type="file" name="file" id="input_file" class="upload-hidden">
+								<input type="file" accept="image/gif, image/jpeg, image/png" name="file" id="input_file" class="upload-hidden">
 						</div>
 							<div class="input-group no-border">
 								<input type="hidden" class="form-control" id="goodsCd"
@@ -247,7 +240,8 @@ label {
 									value="${gds.goodsCd}">
 							</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<button type="button" class="btn btn-light" type="reset">Cancel</button>
+						<button type="reset" class="btn btn-light">Cancel</button>
+						<button type="button" onclick="location.href='goodsPage.do'" class="btn btn-light">목록으로</button>
 						<button type="button" class="btn btn-gradient-primary me-2" onclick="location.href='goodsDelete.do?gNo=${gds.GNo}'">Delete</button>
 					</form>
 				</div>
