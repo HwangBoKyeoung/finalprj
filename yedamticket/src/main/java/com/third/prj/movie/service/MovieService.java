@@ -60,9 +60,10 @@ public interface MovieService {
 
 	// 검색
 	int getTotal(CriteriaVO cri);
-	//
-	
 
 	//관리자페이지 기업정보
 	List<MovieVO> cMovieList(MovieVO vo);
+	
+	//관리자페이지- 영화순위(류지희)
+	List<MovieVO> moviePopChart();
 }
