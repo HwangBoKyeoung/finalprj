@@ -1,6 +1,5 @@
 package com.third.prj.user.web;
 
-import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -53,12 +52,9 @@ public class UserController {
    @Autowired
    private MovieService movieDao;
    
-   //@Inject
-   //private BCryptPasswordEncoder pwdEncoder;
-
    @RequestMapping("/signup_1.do")
    public String signUp_1() {
-      return "signup/signup/signup_1";
+      return "signup/signup_1";
    }
 
    @RequestMapping(value = "/signup_3.do", method = RequestMethod.GET)

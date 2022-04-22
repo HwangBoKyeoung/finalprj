@@ -87,7 +87,8 @@
 	<update id="cancelreservMovie" statementType="CALLABLE">
 		{CALL 
 		cancelreservMovie(#{p1, mode=IN, jdbcType=VARCHAR, javaType=STRING},
-						  #{p2, mode=IN, jdbcType=INTEGER, javaType=INT}
+						  #{p2, mode=IN, jdbcType=INTEGER, javaType=INT},
+						  #{p3, mode=IN, jdbcType=INTEGER, javaType=INT}
 						  )
 		}
 	</update>
