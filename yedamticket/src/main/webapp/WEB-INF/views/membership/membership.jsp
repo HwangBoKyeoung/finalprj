@@ -47,7 +47,7 @@
 	            	<a type="button" class="btn btn-primary" href="userPointList.do" id="payHistory">나의 결제내역</a>
 	            </div>
             </c:if>
-          </div>
+          </div> 
         </div>
       </div>
     </div>

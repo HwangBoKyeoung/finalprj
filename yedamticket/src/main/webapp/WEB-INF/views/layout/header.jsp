@@ -507,7 +507,7 @@ h1 {
 							aria-labelledby="navbarDropdownMenuLink1">
 							<a class="dropdown-item" href="userService.do"> <i
 								class="fa-regular fa-comment-dots fa-2x"></i> 상담
-							</a> <a class="dropdown-item" target="_blank" href="membership.do">
+							</a> <a class="dropdown-item" href="membership.do">
 								<i class="fa-solid fa-circle-info fa-2x"></i> 멤버십 안내
 							</a>
 						</div></li>
