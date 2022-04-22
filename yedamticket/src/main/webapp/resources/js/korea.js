@@ -148,20 +148,7 @@ function drawMap(target) {
 				}
 			});
 
-///////////////////////////
-		/*$('#region').val(region);
-        var i = 0;
-        var speed = 200;
-        document.getElementById("demo").innerHTML="";
-        typeWriter();
-        function typeWriter() {
-          if (i < region.length) {
-            document.getElementById("demo").innerHTML += region.charAt(i);
-            i++;
-            setTimeout(typeWriter, speed);
-          }
 
-        }*/
       });
 
     var states = svg
@@ -222,9 +209,4 @@ function drawMap(target) {
         return 'translate(' + arr + ')';
     }
 
-    /*function zoom() {
-        projection.translate(d3.event.translate).scale(d3.event.scale);
-        states.selectAll('path').attr('d', path);
-        labels.attr('transform', translateTolabel);
-    }*/
 }
