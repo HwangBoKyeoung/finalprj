@@ -17,5 +17,6 @@ public class MovieScheduleVO {
 	private String docId;
 	private String time;
 	private int mvHallNo;
+	private Date startDate;
 	
 }

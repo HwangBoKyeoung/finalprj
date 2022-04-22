@@ -24,12 +24,15 @@
 </style>
 <body>
 	<div class="container-flUId">
-		<nav class="col-sm-3 sidenav">
+			<nav class="col-sm-3 sidenav">
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="userUpdateForm.do">회원정보수정</a></li>
 			</ul>
 			<ul class="nav nav-pills nav-stacked">
 				<li><a href="userDeleteForm.do">회원탈퇴</a></li>
+			</ul>
+			<ul class="nav nav-pills nav-stacked">
+				<li><a href="userPage.do">마이페이지</a></li>
 			</ul>
 		</nav>
 		<div class="col-sm-9 page">

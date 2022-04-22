@@ -28,31 +28,31 @@ textarea {
 						</tr>
 						<tr>
 							<td>굿즈 분류</td>
-							<td><select name="goodsCd" id="goodsCd" class="form-control">
+							<td><select name="goodsCd" id="goodsCd" class="form-control" required="required">
 									<option value="mv" selected="selected">영화굿즈</option>
 									<option value="pf">공연굿즈</option>
 							</select></td>
 						</tr>
 						<tr>
 							<td>굿즈이름</td>
-							<td><input type="text" id="name" name="name"
+							<td><input type="text" id="name" name="name" required="required"
 								class="form-control"></td>
 						</tr>
 						<tr>
 							<td>가격</td>
-							<td><input type="text" id="price" name="price"
+							<td><input type="text" id="price" name="price" required="required"
 								class="form-control"></td>
 						</tr>
 						<tr>
 						<tr>
 							<td>사진</td>
 							<td><input type="file" id="file" name="file"
-								accept="image/gif, image/jpeg, image/png" class="form-control"></td>
+								accept="image/gif, image/jpeg, image/png" class="form-control" required="required"></td>
 						</tr>
 						<tr>
 							<td>상세정보</td>
 							<td><textarea rows="10" cols="90" id="content"
-									name="content"></textarea></td>
+									name="content" required="required"></textarea></td>
 						</tr>
 					</table>
 					<button type="submit" class="form-control">등록</button>
