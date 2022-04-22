@@ -6,10 +6,14 @@
 <meta charset="UTF-8">
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
 <link href="./resources/users/css/now-ui-kit.css?v=1.3.0" rel="stylesheet" />
-
+<style>
+.card[data-background-color] {
+    background-color: #cec5e9;
+}
+</style>
 </head>
 <body>
-	<div class="section section-signup" style="background-image : url('./resources/users/img/bg8.jpg'); background-size: cover; background-position: top center; min-height: 700px;">
+	<div class="section section-signup" style="background-image : url('./resources/users/img/ssp7.jpg'); height: 100vh;  background-repeat : no-repeat; background-size : cover;">
 		<div class="container">
 			<div class="row">
 				<div class="card card-signup" data-background-color="orange">

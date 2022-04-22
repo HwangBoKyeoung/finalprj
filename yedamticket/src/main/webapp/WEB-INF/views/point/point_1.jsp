@@ -41,9 +41,15 @@
 		</div>
 	</div>
 <script>
+
 function pay(){
+		
 	var IMP = window.IMP // 생략가능
 	var point = $('#point').val()
+	if(point < 5000){
+		alert("금액을 입력해주세요")
+		return false;
+	}
 	IMP.init("imp08063906")
 	// i'mport 관리자 페이지 -> 내정보 -> 가맹점식별코드
 	// ''안에 띄어쓰기 없이 가맹점 식별코드를 붙여넣어주세요. 안그러면 결제창이 안뜹니다.
