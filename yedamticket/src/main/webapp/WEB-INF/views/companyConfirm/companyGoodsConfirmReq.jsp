@@ -306,7 +306,11 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
-					<li><a href="#">승인 요청</a></li>
+					<li>승인 요청<ul class="list-unstyled components mb-5">
+					<li><a href="movieCompanyConfirmList.do">영화 승인 요청</a></li>
+					<li><a href="perforCompanyConfirmList.do">공연 승인 요청</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 요청</a></li>
+					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
@@ -324,41 +328,50 @@ iframe {
 				<div class="card-body">
 					<h4 class="card-title">Confirm List</h4>
 					<p class="card-description">기업회원마이페이지</p>
-					<form action="#">
+					<form action="goodsCompanyConfirmList.do" method="get">
 							<div class="searchBar" align="right">
 								<select name="searchType" class="btn btn-outline-secondary">
 									<option value="ALL"
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
-									<option value="#"
-										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
-									<option value="#"
-										${pageVO.cri.searchType eq '#' ? 'selected' : '' }>#</option>
+									<option value="NAME"
+										${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>굿즈명</option>
+									
 								</select> <input type="text" name="searchName"
-									value="${pageVO.cri.searchName }">
+									value="<c:out value='${pageVO.cri.searchName }'/>">
 								<button type="submit" class="btn btn-primary">검색</button>
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-								<input type="hidden" name="amount" value="${pageVO.amount }">
+								<input type="hidden" name="amount" value="${pageVO.cri.amount }">
 								<input type="hidden" name="CId" value="${sessionId}">
 							</div>
-					
-				<table class="table table-hover">
+					</form>
+					<table class="table table-hover">
 					<thead>
 						<tr>
-							<th>#</th>
+							<th>굿즈번호</th>
+							<th>굿즈이름</th>
+							<th>판매자</th>
+							<th>기업 아이디</th>
+							<th>영화/굿즈 구분</th>
+							<th>요청상태</th>
 						</tr>
 					</thead>
 					<tbody id="body">
-						<c:forEach items="#" var="#">
-							<c:if test="#">
-								<tr>
-									<td>#</td>
+						<c:forEach items="${comC }" var="com">
+							<c:if test="${sessionId eq com.CId}">
+								<tr onclick="location.href='goodsCompanyConfirmSelect.do?GNo=${com.GNo}'">
+									<td>${com.GNo }</td>
+									<td>${com.name }</td>
+									<td>${com.seller }</td>
+									<td>${com.CId }</td>
+									<td>${com.goodsCd }</td>
+									<td>${com.confirm }</td>
 								</tr>
 							</c:if>
 						</c:forEach>
 					</tbody>
 				</table>
-				<form id="actionForm" action="#" method="get">
+				<form id="actionForm" action="goodsCompanyConfirmList.do" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
                   <input type="hidden" name="amount" value="${pageVO.amount }">
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
@@ -383,7 +396,7 @@ iframe {
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
-				</form>
+				
 				</div>
 			</div>
 		</div>
@@ -398,19 +411,6 @@ iframe {
          
          actionForm.submit();
       });
-      
-      let searchForm = $("#searchForm");
-      $("#searchForm button").on("click", function(e){
-         if(!searchForm.find("input[name='searchName']").val()){
-            alert('키워드를 입력하세요.');
-            return false;
-         }
-         
-         searchForm.find("input[name='pageNum']").val("1");
-         e.preventDefault();
-         
-         searchForm.submit();
-      })
    </script>
 </body>
 </html>

@@ -410,7 +410,7 @@ body {
                      <button type="submit" id="payBtn"  style="display: none;"class="btn btn-warning">결제하기</button>                        
                   </c:when>
                   <c:otherwise>
-                     <button type="button" id="ajaxBtn" style="display: none;" class="btn btn-warning">로그인하세용</button>                        
+                     <button type="button" onclick="ajaxLogin()" id="ajaxBtn" style="display: none;" class="btn btn-warning">로그인하세용</button>                        
                   </c:otherwise>
                </c:choose>
                                                   
@@ -421,7 +421,66 @@ body {
       </div>
    </div>
 
+<div class="modal">
+		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
+			<div class="container">
+            <div class="col-md-4 ml-auto mr-auto">
+               <div class="card card-login card-plain">
+                  <form class="form" action="userLogin1.do" method="POST">
 
+                     <div class="card-header text-center">
+                        <div class="logo-container">
+                           <img src="resources/users/img/now-logo.png" alt="">
+                        </div>
+                     </div>
+                     <div class="card-body">
+                        <div class="input-group no-border input-lg">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i>
+                              </span>
+                           </div>
+                           <input type="text" class="form-control" name="UId1"  id="UId1" placeholder="Id...">
+                        </div>
+                        <div class="input-group no-border input-lg">
+                           <div class="input-group-prepend">
+                              <span class="input-group-text"> <i class="now-ui-icons objects_key-25"></i>
+                              </span>
+                           </div>
+                           <input type="password" placeholder="Password..." name="pwd"  id="pwd" class="form-control">
+                        </div>
+                        <br>
+                        <div class="card-footer text-center">
+                           <input type="button" onclick="ajaxLogin()" class="btn btn-primary btn-round btn-lg btn-block" value="LOGIN">
+                        </div>
+                        <div class="card-footer text-center">
+                           <a href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&amp;redirect_uri=http://localhost/prj/kakaoLogin.do&amp;response_type=code">
+
+                              <img src="resources/users/img/kakao_login_large_wide.png" class="loginBtn">
+                           </a>
+                        </div>
+                        <br>
+                        <div class="pull-left">
+                           <h6>
+                              <a href="signup_1.do" class="link">Create Account</a>
+                           </h6>
+                        </div>
+                        <div class="pull-right">
+                           <h6>
+                              <a href="companyLoginForm.do" class="link">기업회원이신가요?</a> <a href="managerLoginForm.do" class="link">관리자입니까?</a>
+                           </h6>
+                        </div>
+                        <div class="pull-left">
+                           <h6>
+                              <a href="#" class="idPassword link">아이디/비밀번호 찾기</a>
+                           </h6>
+                        </div>
+                     </div>
+                  </form>
+               </div>
+            </div>
+         </div>
+		</div>
+		</div>
 
 
 
@@ -449,19 +508,19 @@ body {
    
    //모달
    
-         $(function() {
-         $("#ajaxBtn").click(function() {
-            $(".modal").fadeIn();
-         });
 
-         $("#close").click(function() {
-            $(".modal").fadeOut();
-         });
-         $("#close2").click(function() {
-            $(".modal").fadeOut();
-         });
+   		$(function() {
+			$("#ajaxBtn").click(function() {
+				$(".modal").fadeIn();
+			});
 
-      });
+			$("#close").click(function() {
+				$(".modal").fadeOut();
+			});
+	
+
+		});
+
       //영화관지역
       $('#movieList').on('click', 'div', selectedList);
       function selectedList() {

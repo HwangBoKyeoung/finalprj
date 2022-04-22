@@ -18,6 +18,10 @@ body {
 	max-width: 1100px;
 	margin: 0 auto;
 }
+.close {
+	background-image: none;
+	height: 0px;
+}
 </style>
 <script src='resources/calender/main.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -63,6 +67,11 @@ body {
 			        		$(".modal-body", function (arr) {
 			        		var arr = result;
 			        		var rs = "";
+							if (arr == 0) {
+								$("#exampleModalLabel").hide();
+		        				rs += "<h2>" + "등록된 일정이 없습니다" + "</h2>";
+		        			} else {
+		        				$("#exampleModalLabel").show();
 			        		rs += "<table class='table table-hover' id='contents'>";
 			        		rs += "<tr>";
 		        			rs += "<th>" + "공연 시작일" + "</th>";
@@ -81,6 +90,7 @@ body {
 			        			rs += "<td>" + v.addr + "</td>";
 			        			rs += "</tr>";
 			        		}
+		        			}
 			        		rs += "</table>";
 			        		$(".modal-body").append(rs);
 							});
