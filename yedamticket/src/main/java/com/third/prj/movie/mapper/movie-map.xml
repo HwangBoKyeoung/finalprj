@@ -56,7 +56,7 @@
 	    MV.P_VIDEO_NO,MV.VNAME,MV.VRENAMES
 	    FROM MOVIE M, MOVIE_VIDEO MV
 	    WHERE M.MV_NO = MV.MV_NO
-	    AND M.MV_NO=${mvNo}
+	    AND M.MV_NO=#{mvNo}
 	</select>
 
 	<select id="mvListPaging"
