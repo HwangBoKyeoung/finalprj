@@ -310,7 +310,11 @@ iframe {
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
 					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
-					<li><a href="#">승인진행현황</a></li>
+					<li>승인 요청<ul class="list-unstyled components mb-5">
+					<li><a href="movieCompanyConfirmList.do">영화 승인 요청</a></li>
+					<li><a href="perforCompanyConfirmList.do">공연 승인 요청</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 요청</a></li>
+					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
 					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
 				</ul>
