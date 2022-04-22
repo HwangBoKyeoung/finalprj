@@ -118,7 +118,7 @@
 							<img id="preImage" src="/upload/${pers.renames}" alt="image_title"/>
 						</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyPerforList.do'">
 					</form>
 						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyPerforDel.do?PNo=${pers.PNo}&cId=${pers.CId}'">삭제요청</button>
 						<%-- <input type="hidden" name="no" id="no" value="${pers.PNo}"> --%>

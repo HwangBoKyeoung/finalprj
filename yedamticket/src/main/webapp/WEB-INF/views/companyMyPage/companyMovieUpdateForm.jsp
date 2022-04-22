@@ -136,7 +136,7 @@ ${mv }
 						</div>
 						 --%>
 						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyMovieList.do'">
 					</form>
 						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyMoviedel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
 						<input type="hidden" value="${mv.docId }" id="docId" name="docId">

@@ -63,7 +63,7 @@
 						</div>
 						
 						<button type="submit" class="btn btn-gradient-primary me-2">요청처리</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='managerMovieDeleteList.do'">
 					</form>
 					<input type="hidden" value="${del.deleteCd}" id="del">
 				</div>
