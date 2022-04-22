@@ -3,6 +3,7 @@ package com.third.prj.movie.service;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.third.prj.moviereservation.service.MovieReservVO;
+import com.third.prj.movievideo.service.MovieVideoVO;
 import com.third.prj.performance.service.PerformanceVO;
 
 import lombok.Getter;
@@ -38,6 +39,9 @@ public class MovieVO {
 	
 	private MovieReservVO movieReservVO;
 	private PerformanceVO performanceVO;
+	
+	//영화 수정페이지-기업회원페이지
+	private MovieVideoVO movieVideoVO;
 	
 
 }

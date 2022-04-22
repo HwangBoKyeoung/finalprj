@@ -130,6 +130,11 @@ public class MovieServiceImpl implements MovieService {
 	}
 
 	@Override
+	public List<MovieVO> cMovieList(MovieVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.cMovieList(vo);
+	}
+
 	public List<MovieVO> movieReservList() {
 		// TODO Auto-generated method stub
 		return mapper.movieReservList();

@@ -77,7 +77,7 @@
 
 	<select id="perforSelect"
 		resultType="com.third.prj.performance.service.PerformanceVO">
-		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,CONFIRM,REFUSE_RS
+		SELECT P_NO,NAME,CONTENT,C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,CONFIRM,REFUSE_RS,RENAMES
 		FROM PERFORMANCE
 		WHERE p_no = #{PNo}
 	</select>
@@ -300,6 +300,10 @@
 		         from performance)
 		where row_num < 11
 		]]>
+	</select>
+	
+	<select id="cperList" resultType="com.third.prj.performance.service.PerformanceVO">
+		SELECT * FROM PERFORMANCE WHERE C_ID = #{CId}
 	</select>
 
 </mapper>

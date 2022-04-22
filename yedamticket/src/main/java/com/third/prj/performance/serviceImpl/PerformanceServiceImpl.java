@@ -104,4 +104,11 @@ public class PerformanceServiceImpl implements PerformanceService {
 	}
 
 
+	@Override
+	public List<PerformanceVO> cperList(PerformanceVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.cperList(vo);
+	}
+
+
 }

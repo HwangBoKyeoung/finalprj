@@ -27,6 +27,7 @@
 		WHERE BUY_CTNT_CD = 'mv'
 		AND PAYDT IS NOT NULL
 		GROUP BY NVL2(PAYDT, TO_CHAR(PAYDT,'YY/MM/DD'),2022)
+		ORDER BY 1 ASC
 	</select>
 	<select id="managerPerforSaleList" resultType="com.third.prj.point.service.PointVO">
 		SELECT NVL2(PAYDT, TO_CHAR(PAYDT,'YY/MM/DD'), 2022) DAYDATE,
@@ -34,5 +35,6 @@
 		FROM POINT
 		WHERE BUY_CTNT_CD = 'pf'
 		GROUP BY NVL2(PAYDT, TO_CHAR(PAYDT,'YY/MM/DD'), 2022)
+		ORDER BY 1 ASC
 	</select>
 </mapper>

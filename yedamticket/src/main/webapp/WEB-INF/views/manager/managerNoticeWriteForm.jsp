@@ -44,8 +44,7 @@ textarea {
 					<tr>
 
 						<td colspan="2" class="text-center"><input type="submit"
-							value="등록" class="btn btn-success"> <input type="reset"
-							value="취소" class="btn btn-warning"> <input type="button"
+							value="등록" class="btn btn-success"> <input type="button"
 							onclick="location.href='managerNotice.do'" value="목록"
 							class="btn btn-primary"></td>
 					</tr>

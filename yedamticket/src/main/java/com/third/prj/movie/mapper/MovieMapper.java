@@ -57,5 +57,8 @@ public interface MovieMapper {
 	
 	//인기검색어
 	int popularSearch(MovieVO vo);
+	
+	//관리자페이지 기업정보
+	List<MovieVO> cMovieList(MovieVO vo);
 		
 }

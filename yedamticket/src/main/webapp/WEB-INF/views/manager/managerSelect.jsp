@@ -68,15 +68,13 @@
                   	<c:if test="${sessionDp eq '대표'}">
 	                     <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6">
 	                        <option value="movie" <c:if test="${mana.authCd=='movie'}"> selected</c:if>> 영화담당자</option>
-	                        <option value="consert" <c:if test="${mana.authCd=='consert'}"> selected</c:if>> 공연담당자</option>
-	                        <option value="goods" <c:if test="${mana.authCd=='goods'}"> selected</c:if>> 굿즈담당자 </option>
+	                        <option value="performance" <c:if test="${mana.authCd=='performance'}"> selected</c:if>> 공연담당자</option>
 	                     </select>
                      </c:if>
                      <c:if test="${sessionDp ne '대표'}">
 	                     <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6" disabled="disabled">
 	                        <option value="movie" <c:if test="${mana.authCd=='movie'}"> selected</c:if>> 영화담당자</option>
-	                        <option value="consert" <c:if test="${mana.authCd=='consert'}"> selected</c:if>> 공연담당자</option>
-	                        <option value="goods" <c:if test="${mana.authCd=='goods'}"> selected</c:if>> 굿즈담당자 </option>
+	                        <option value="performance" <c:if test="${mana.authCd=='performance'}"> selected</c:if>> 공연담당자</option>
 	                     </select>
                      </c:if>
                   </div>

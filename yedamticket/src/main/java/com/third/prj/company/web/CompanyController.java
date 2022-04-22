@@ -1,5 +1,7 @@
 package com.third.prj.company.web;
 
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -19,12 +21,22 @@ import com.third.prj.company.service.CompanyService;
 import com.third.prj.company.service.CompanyVO;
 import com.third.prj.company.service.CriteriaVO;
 import com.third.prj.company.service.PageVO;
+import com.third.prj.movie.service.MovieService;
+import com.third.prj.movie.service.MovieVO;
+import com.third.prj.performance.service.PerformanceService;
+import com.third.prj.performance.service.PerformanceVO;
 
 @Controller
 public class CompanyController {
 
    @Autowired
    private CompanyService companyDao;
+   
+   @Autowired
+   private MovieService movieDao;
+   
+   @Autowired
+   private PerformanceService perDao;
    
 //   @Autowired
 //   private BCryptPasswordEncoder pwdEncoder;
@@ -89,9 +101,12 @@ public class CompanyController {
    
    //기업회원 상세정보(관리자페이지)
    @RequestMapping("/managerCompanySelect.do")
-   public String managerCompanySelect(CompanyVO vo, Model model) {
+   public String managerCompanySelect(CompanyVO vo, Model model,PerformanceVO pvo, MovieVO mvo) {
       vo = companyDao.companySelect(vo);
       model.addAttribute("com",vo);
+      System.out.println("=================="+vo.getCId());
+//      model.addAttribute("mv", movieDao.cMovieList(mvo));
+//      model.addAttribute("pf", perDao.cperList(pvo));
       return "manager/company/managerCompanySelect";
    }
 
