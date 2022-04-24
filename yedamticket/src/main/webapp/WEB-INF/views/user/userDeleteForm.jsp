@@ -19,6 +19,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 /*-------------------------------- END ----*/
+*{
+	list-style: none;
+}
 #body-row {
 	margin-left: 0;
 	margin-right: 0;
@@ -79,14 +82,20 @@
 a.bg-dark {
 	background-color: #132644 !important;
 }
+
+label{
+	font-weight: bold;
+	color: black;
+	font-size: 15px;
+}
 </style>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="custom-menu"></div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="index.html" class="logo"></a>
+					<a href="userPage.do" class="logo">회원정보</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
@@ -127,7 +136,8 @@ a.bg-dark {
 			</div>
 			<!-- /.modal-dialog -->
 		</div>
-		<div class="col-6">
+		<div class="col-4" style="margin-left: auto; margin-right: auto;">
+		<br><h2>회원탈퇴</h2><br>
 			<form class="frm" action="userDelete.do" method="POST" role="form">
 				<div class="form-group" id="divPassword">
 					<label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
@@ -145,7 +155,7 @@ a.bg-dark {
 							<input type="hidden" class="form-control" name="UId" id="UId"
 					value="${sessionId}">
 					</div>
-				</div>
+				</div><br>
 				<button type="submit" id="subBtn" class="btn btn-primary">탈퇴</button>
 			</form>
 		</div>

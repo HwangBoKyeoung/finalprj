@@ -40,8 +40,8 @@
 }
 
 * {
-	margin: 0;
-	padding: 0;
+	/* margin: 0;
+	padding: 0; */
 	box-sizing: border-box
 }
 
@@ -301,12 +301,12 @@ h4{
 </style>
 <body>
 	<div class="wrapper d-flex align-items-stretch ">
-		<nav id="sidebar">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="p-4 pt-5">
 				<h1>
 					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
-				<ul class="list-unstyled components mb-5">
+				<ul class="list-unstyled components mb-5" style="padding-bottom: 450px;">
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="faqList.do">FAQ</a></li>
 					<li><a href="inqList.do">1:1 문의</a></li>
@@ -328,7 +328,7 @@ h4{
 			</div>
 		</nav>
 		<div class="col-lg-12 grid-margin stretch-card" id="list">
-         <div class="card">
+         <div class="card" style="height: 980px;">
             <div class="card-body">
 			<form action="noticeList.do" method="get">
 			<h4 class="card-title">공지사항</h4>
@@ -377,24 +377,24 @@ h4{
                   <input type="hidden" name="amount" value="${pageVO.amount }">
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
                   <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
-               </form>
-			<div id="content" align="center">
+               </form><br>
+			<div id="content" align="center" style="height: 500px;">
                   <c:if test="${pageVO.prev }">
                      <!-- 이전버튼 활성화 여부 -->
                      <a href="${pageVO.startPage-1 }"> <input
-                        type="button" value="이전" class="btn btn-secondary"></a>
+							type="button" value="이전" class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial; padding:0px;"></a>
                   </c:if>
                   <!-- pageNum -->
                   <c:forEach var="num" begin="${pageVO.startPage }"
                      end="${pageVO.endPage }">
                      <a class="${pageVO.pageNum == num ? 'active': '' }"
                         href="${num }"> <input type="button"
-                        value="${num }" class="btn btn-secondary"></a>
+							value="${num }"  class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial;padding:0px;"></a>
                   </c:forEach>
                   <!-- 다음버튼 -->
                   <c:if test="${pageVO.next }">
-                     <a href="${pageVO.endPage+1 }"> <input
-                        type="button" value="다음" class="btn btn-secondary"></a>
+                     <a href="${pageVO.endPage+1 }"><input
+							type="button" value="다음"  class="btn" style="background:#6c757d; color: white; width: 38px; font-weight:initial; height: 38px;padding:0px;"></a>
                   </c:if>
 				</div>
 				</div>

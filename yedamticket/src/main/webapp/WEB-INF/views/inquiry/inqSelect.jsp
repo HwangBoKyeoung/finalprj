@@ -22,11 +22,11 @@ th {
 <body>
 	<div class="container">
 		<div class="row">
-		<h4 style="font-size: 70px;">1:1문의 내용</h4>
+		<h4 style="font-size: 70px;">1:1문의 내용</h4><br>
 				<form id="frm" action="inqUpdateForm.do">
 					<input type="hidden" name="inNo" id="inNo" value="${inqs.inNo}">
 					<table class="table">
-						<tr>
+						<tr style="border-top: none;">
 							<th>작성일자</th>
 							<td>${inqs.inDt }</td>
 						</tr>
@@ -60,17 +60,17 @@ th {
 					<div align="center">
 						<input type="hidden" id="UId" name="UId" value="${sessionId }"
 							class="form-control" readonly="readonly">
-						<button type="submit" class="btn btn-success">수정</button>
+						<button type="submit" class="btn" style="background: #301e4e;">수정</button>
 						
-						<button type="button" class="btn btn-warning"
+						<button type="button" class="btn" style="background: #301e4e;"
 							onclick="location.href='inqDelete.do?inNo=${inqs.inNo}'">삭제</button>
-						<button type="button" class="btn btn-primary"
-							onclick="location.href='inqList.do'">목록가기</button>
+						<button type="button" class="btn" style="background: #301e4e;"
+							onclick="location.href='inqList.do'">목록</button>
 					</div>
 				</form>
 			</div>
 		</div>
-		
+		<br><br>
 		<div class="container2" style="display:none">
 			<div class="row">
 				<div class="col-md-2"></div>
@@ -86,7 +86,7 @@ th {
 			</div>
 		</div>
 
-	</div>
+	</div><br><br>
 
 	<script type="text/javascript">
 	$.ajax({

@@ -8,7 +8,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="./resources/users/css/style.css">
 <style>
+*{
+	list-style: none;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -236,7 +242,6 @@ body {
 }
 
 
-
 .sub-content {
 	width: 100%;
 	height: 100px;
@@ -245,13 +250,13 @@ body {
 }
 
 .name {
-	    position: absolute;
-    top: 10px;
-    left: 5px;
-    font-family: Arial Narrow, Arial;
-    font-weight: bold;
-    font-size: 14px;
-    color: #999;
+	position: absolute;
+	top: 10px;
+	left: 8px;
+	font-family: Arial Narrow, Arial;
+	font-weight: bold;
+	font-size: 14px;
+	color: #999;
 }
 
 .name span {
@@ -260,13 +265,13 @@ body {
 }
 
 .flight {
-	    position: absolute;
-    top: 10px;
-    left: 101px;
-    font-family: Arial Narrow, Arial;
-    font-weight: bold;
-    font-size: 14px;
-    color: #999;
+	position: absolute;
+	top: 10px;
+	left: 108px;
+	font-family: Arial Narrow, Arial;
+	font-weight: bold;
+	font-size: 14px;
+	color: #999;
 }
 
 .flight span {
@@ -275,13 +280,13 @@ body {
 }
 
 .gate {
-	    position: absolute;
-    top: 10px;
-    left: 208px;
-    font-family: Arial Narrow, Arial;
-    font-weight: bold;
-    font-size: 14px;
-    color: #999;
+	position: absolute;
+	top: 10px;
+	left: 204px;
+	font-family: Arial Narrow, Arial;
+	font-weight: bold;
+	font-size: 14px;
+	color: #999;
 }
 
 .gate span {
@@ -290,18 +295,18 @@ body {
 }
 
 .seat {
-	    position: absolute;
-    top: 10px;
-    left: 271px;
-    font-family: Arial Narrow, Arial;
-    font-weight: bold;
-    font-size: 14px;
-    color: #999;
+	position: absolute;
+	top: 10px;
+	left: 292px;
+	font-family: Arial Narrow, Arial;
+	font-weight: bold;
+	font-size: 14px;
+	color: #999;
 }
 
 .seat span {
 	color: #555;
-	font-size: 16px;
+	font-size: 17px;
 }
 
 .barcode {
@@ -400,15 +405,11 @@ html, body {
 	border-radius: 10px;
 	margin-left: 15px;
 }
-tbody tr td:nth-child(3){
-	cursor:pointer
-}
 </style>
 </head>
 <body>
-
-<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
+	<div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="custom-menu"></div>
 			<div class="p-4 pt-5">
 				<h1>
@@ -426,7 +427,6 @@ tbody tr td:nth-child(3){
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
 					<li><a href="userPointList.do">거래내역</a></li>
-					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 
 				<div class="mb-5">
@@ -443,11 +443,11 @@ tbody tr td:nth-child(3){
 				</div>
 			</div>
 		</nav>
-	<div class="container">
-		<h2>영화예매내역</h2>
-		<div class="main-content">
-			<div class="cols-12">
-					<table class="table table-sm">
+		<div class="container" style="height: 1000px;">
+			<br><h2>영화예매내역</h2><br>
+			<div class="main-content">
+				<div class="cols-12">
+					<table class="table table-sm tblMemSearch">
 						<thead>
 							<tr>
 								<th class="text-center">예매번호</th>
@@ -460,15 +460,14 @@ tbody tr td:nth-child(3){
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach items="${mvList}" var="mv">
-								<tr >
+							<c:forEach var="mv" items="${mvList}">
+								<tr>
 									<td class="text-center">${mv.mvReservNo}</td>
 									<td class="text-center" ><fmt:formatDate value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 									<td class="text-center" onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}</td>
 									<td class="text-center">${mv.schDate}</td>
 									<td class="text-center">${mv.schTime}</td>
 									<td>${mv.seatName}</td>
-									<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
 									<td><button type="button" id="MBTN"
 											class="checkBtn btn-xs btn-primary">보기</button></td>
 								</tr>
@@ -479,26 +478,26 @@ tbody tr td:nth-child(3){
 					<div id="content" align="center">
 						<c:if test="${pageVO.prev }">
 							<!-- 이전버튼 활성화 여부 -->
-							<a href="mvReservList.do?pageNum=${pageVO.startPage-1 }"> <input
+							<a href="pfReservList.do?pageNum=${pageVO.startPage-1 }"> <input
 								type="button" value="이전" class="btn btn-secondary"></a>
 						</c:if>
 						<!-- pageNum -->
 						<c:forEach var="num" begin="${pageVO.startPage }"
 							end="${pageVO.endPage }">
 							<a class="${pageVO.pageNum == num ? 'active': '' }"
-								href="mvReservList.do?pageNum=${num }"> <input type="button"
+								href="pfReservList.do?pageNum=${num }"> <input type="button"
 								value="${num }" class="btn btn-secondary"></a>
 						</c:forEach>
 						<!-- 다음버튼 -->
 						<c:if test="${pageVO.next }">
-							<a href="mvReservList.do?pageNum=${pageVO.endPage+1 }"> <input
+							<a href="pfReservList.do?pageNum=${pageVO.endPage+1 }"> <input
 								type="button" value="다음" class="btn btn-secondary"></a>
 						</c:if>
 					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
 	<div class="modal">
 		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
 			<div class="box">
@@ -535,15 +534,16 @@ tbody tr td:nth-child(3){
 					<li></li>
 				</ul>
 				<div class="ticket">
-					<span class="airline">YEDAM BOX</span> <span
-						class="airline airlineslip">YEDAM BOX</span>
+					<span class="airline">YEDAM BOX</span> 
+					<span class="airline airlineslip">YEDAM BOX</span>
 					<div class="content">
-						<span class="jfk" id="mvName"></span> <span class="jfk jfkslip">
+					<div class="mName">
+						<span class="jfk" id="mvName"></span> </div><span class="jfk jfkslip">
+						
 							<img
 							src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fcodepen.io%2FMitchES%2Fpen%2FoezJBZ&chs=180x180&choe=UTF-8&chld=L|2"
 							width="160px">
-						</span> <span class="plane planeslip">
-							<?xml version="1.0" ?>
+						</span> <span class="plane planeslip"> <?xml version="1.0" ?>
 						</span>
 						<div class="sub-content">
 							<span class="flight">상영시간<br>

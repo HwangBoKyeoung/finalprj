@@ -66,12 +66,12 @@
 						alt="Deal">
 				</div>
 				<div class="carousel-item" data-bs-interval="1000">
-					<img src="resources/users/img/banner2.jpg" class="d-block w-100"
-						alt="...">
+					<a href="pList.do"><img src="resources/users/img/banner2.jpg" class="d-block w-100"
+						alt="..."></a>
 				</div>
 				<div class="carousel-item">
-					<img src="resources/users/img/banner3.jpg" class="d-block w-100"
-						alt="...">
+					<a href="movieList.do"><img src="resources/users/img/banner3.jpg" class="d-block w-100"
+						alt="..."></a>
 				</div>
 			</div>
 		</div>

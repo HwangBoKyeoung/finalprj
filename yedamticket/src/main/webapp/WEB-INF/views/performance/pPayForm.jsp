@@ -357,11 +357,12 @@ $('nav a').click(function(e) {
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <style>
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
-body {
+/* body {
   background: linear-gradient(to right, #3fb6a8, #7ed386);
-}
+} */
 *{
 font-family: 'Gowun Dodum', sans-serif;
+list-style: none;
 }
 .container {
   background: #ffffff;
@@ -395,7 +396,7 @@ font-family: 'Gowun Dodum', sans-serif;
   z-index: 1;
   background: #866ec766;
   font-size: 1em;
-  transform: rotate(-90deg);
+/*   transform: rotate(-90deg); */
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }
@@ -458,10 +459,11 @@ nav a:first-child {
 }
 
 h1 {
-  color: #866ec766;
-  font-size: 1.2em;
+  color: #301e4e;
+  font-size: 2.0em;
   margin-top: 40px;
   margin-bottom: 35px;
+  font-weight: bold;
 }
 
 h2 {
@@ -472,6 +474,7 @@ h2 {
   letter-spacing: 1px;
   margin-left: 2px;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 p {
@@ -480,6 +483,7 @@ p {
   font-size: 0.9em;
   padding: 7px 0;
   color: #070707;
+  margin-bottom: 30px;
 }
 
 span {
@@ -492,8 +496,9 @@ span {
   text-transform: uppercase;
   font-size: 10px;
   border: none;
-  color: #866ec766;
+  color: #3fb6a8;
 }
+
 .btn:hover {
   text-decoration: underline;
   font-weight: 900;
@@ -501,6 +506,7 @@ span {
 
 input {
   border: 1px solid #dddddd;
+
   padding: 2px;
   margin: 0;
 }
@@ -516,23 +522,27 @@ input {
 .noshow {
   opacity: 0;
 }
-.subscription  h1{
-	margin-bottom:0px;
-}
+
 .subscription  h2{
-	margin-bottom:0px;
-	margin-top:0px;
+   margin-bottom:0px;
+   margin-top:0px;
 }
 .subscription  p{
-	margin-bottom:0px;
-	margin-top:0px;
+   margin-bottom:0px;
+   margin-top:0px;
+   padding-bottom: 15px;
+   
 }
         
+     .swal-modal {
+		width: 20%;
+	}
+	
+	.swal-button--confirm {
+		background-color: #ffb236;
+	}   
 </style>
 </head>
-${re }
-${sch }
-${user }
 <body>
     <div class="container" style="margin-top: 50px;margin-bottom: 90px;">
 
@@ -553,56 +563,53 @@ ${user }
 				<input type="hidden" id="buyCtntCd" name="buyCtntCd" value="pf">
 				<input type="hidden" id="audience" name="audience">
 				
-				<button type="button" onclick="chkPoint()" id="payBtn" class="btn">결제하기</button>
+				<button type="button" onclick="chkPoint()" class="btn" style="width: 120%;height: 70px;background: #cfc5e9;color: black;font-weight: bold;font-size: 13px;">결제하기</button>
 			</form>
             </div>
         </div>
-        <div class="leftbox">
+        <div class="leftbox" style="line-height: 88px;">
           <nav style="text-align: center;" id="nav">
             <a id="profile" class="active"><i class="fa fa-user"></i></a>
             <a id="payment"><i class="fa fa-credit-card"></i></a>
             <a id="subscription"><i class="fa-solid fa-tv"></i></a>
-            <a id="privacy"><i class="fa fa-tasks"></i></a>
-            <a id="settings"><i class="fa fa-cog"></i></a>
+            <!-- <a id="privacy"><i class="fa fa-tasks"></i></a>
+            <a id="settings"><i class="fa fa-cog"></i></a> -->
           </nav>
         </div>
         <div class="rightbox">
           <div class="profile noshow">
-            <h1>Personal Info</h1>
-            <h2>Full Name</h2>
-            <p>${user.UId }</p>
-            <h2>Birthday</h2>
+          <h1>구매자 정보</h1>
+            <h2>성명</h2>
+            <p>${user.name } </p>
+            <h2>생년월일</h2>
             <p>${user.birthDt }</p>
-            <h2>Email</h2>
-            <p>${user.email }</p>
+            <h2>이메일</h2>
+            <p>${user.email}</p>
           </div>
           
           <div class="payment noshow">
-            <h1>MemberShip</h1>
-            <h2></h2>
-            <p></p>       
+            <h1>멤버십 정보</h1>
+            <h2>등급 : ${user.membership }</h2>
+            <p>현재 포인트 잔액 : ${user.point }원</p>       
           </div>
       
           <div class="subscription ">
-            <h1>영수증</h1>
+            <h1>상품 정보</h1>
             <h2>공연제목</h2>
             <p>${re.name }</p>
-            <h2>장소</h2>
+            <h2>개최장소</h2>
             <p>${sch.addr }</p>
             <c:if test="${not empty sch.trDt }">            	
             <h2>날짜/시간</h2>
             <p>${sch.frDt } ~ ${sch.trDt } ${sch.time } ~ ${sch.endTime }</p>
-            <p></p>
             </c:if>
             <c:if test="${empty sch.trDt }">            	
             <h2>날짜/시간</h2>
             <p>${sch.frDt } ${sch.time } ~ ${sch.endTime }</p>
-            <p></p>
             </c:if>     
-            <h2>구역</h2>
-            <p>${re.loc }<p/>
-            <h2>좌석</h2>
-            <p id="seatName"><p/>
+            <h2>구역 및 좌석</h2>
+            <p style="display: inline;">${re.loc }구역 <p style="display: inline-block;" id="seatName"></p></p>
+            
             <h2>가격</h2>
             <p id="price"></p>        
           </div> 
@@ -628,7 +635,11 @@ ${user }
 	for(var i =0;i<cnt;i++){
 		console.log(seatName[i]);
 		var seatVal=document.getElementById('seatName');
-		seatVal.innerText += seatName[i];
+		if(i==cnt-1){
+			seatVal.innerText += (seatName[i]);
+		} else{
+			seatVal.innerText += (seatName[i]+', ');
+		}
 	}
 	$('#price').text(price*cnt+'원');
 	$('#pay').val(price*cnt);
@@ -638,12 +649,10 @@ function chkPoint(){
 let price1=$('#price').text();
 let slicePrice = price1.slice(0,-1);
 	 if( ${user.point } < slicePrice){
-		 let bool=confirm("포인트가 부족합니다. 충전하러 가시겟습니까??");
-     	if(bool){
-     		location.href="point_1.do";
-     	}else{
-     		
-     	}
+		swal("포인트가 부족합니다. 충전하러 가시겟습니까?");
+		$(".swal-button--confirm").on("click", function(){
+			location.href='point_1.do';
+		});
 	}else{
 		$.ajax({
 	        url: 'pPay.do',

@@ -282,7 +282,7 @@ iframe {
 
 <body>
 	<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="custom-menu"></div>
 			<div class="p-4 pt-5">
 				<h1>
@@ -318,6 +318,9 @@ iframe {
 			</div>
 		</nav>
 		<div class="container">
+		<div class="cols-12">
+			<br><h2>나의 예매내역</h2><br>
+		</div>
 			<c:if test="${not empty prList}">
 				<span>결제대기티켓</span>
 				<div class="cols-12">
@@ -392,7 +395,7 @@ iframe {
 					</table>
 				</div>
 			</c:if>
-			<br>
+			<br><br>
 			<c:if test="${not empty mvList}">
 				<span>영화예매내역</span>
 				<div class="main-content">

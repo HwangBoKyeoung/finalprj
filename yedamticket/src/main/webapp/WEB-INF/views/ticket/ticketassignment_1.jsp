@@ -12,12 +12,13 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	list-style: none;
 }
 
 body {
 	width: 100%;
-	padding: 4rem 0;
-	overflow: hidden;
+	padding: 0 0;
+/* 	overflow: hidden; */
 }
 
 .widthslider {
@@ -77,10 +78,13 @@ body {
 	<c:set var="sysdate">
 		<fmt:formatDate value="${now}" pattern="yyyy-MM-dd" />
 	</c:set>
-	<h2>현재 로그인 한 유저 : ${sessionId }</h2>
-	<div align="center">
-		<input type="button" class="btn btn-primary btn-lg" value="영화목록 보기" onclick="mvfold();">
-		<input type="button" class="btn btn-primary btn-lg" value="공연목록 보기" onclick="pffold();">
+	<%-- <h2>현재 로그인 한 유저 : ${sessionId }</h2> --%>
+	<br>
+	<h1 style="padding-left: 20px;">${sessionName}님의 보유 티켓</h1>
+	<br>
+	<div align="left" style="padding-left: 25px;">
+		<input type="button" style="background: #cfc5e9;" class="btn btn-lg" value="보유 영화티켓" onclick="mvfold();">
+		<input type="button" style="background: #cfc5e9;" class="btn btn-lg" value="보유 공연티켓" onclick="pffold();">
 	</div>
 	<hr>
 	<!-- ticket assginment  style="visibility: hidden"-->
@@ -96,7 +100,8 @@ body {
 					<h1>공연 예약 / 거래 현황이 없습니다.</h1>
 				</div>
 			</c:if>
-			<h1>공연 예약 / 거래 현황</h1>
+			<h2 style="padding-left: 30px;">공연</h2>
+			<h5 style="padding-left: 35px;">공연 티켓은 환불, 양도거래 가능합니다.</h5>
 			<div id="widthslider" align="center">
 				<ul class="widthlist">
 
@@ -336,7 +341,8 @@ body {
 					<h1>영화 예약 현황이 없습니다.</h1>
 				</div>
 			</c:if>
-			<h1>영화 예약 현황</h1>
+			<h2 style="padding-left: 30px;">영화</h2>
+			<h5 style="padding-left: 35px;">영화 티켓은 환불은 가능하지만 양도거래는 불가능합니다.</h5>
 			<div id="widthslider" align="center">
 				<ul class="widthlist2">
 					<c:forEach items="${mrInfo }" var="mr">
@@ -655,6 +661,12 @@ body {
 	} */
 	
 	function pffold(){
+		$(event.target).siblings().css({
+			"background" : "#cfc5e9"
+		});
+		$(event.target).css({
+			"background" : "#301e4e"
+		});
 		document.getElementById('pf_container').style.display="";
 		document.getElementById('mv_container').style.display="none";
 		slider1();
@@ -662,6 +674,12 @@ body {
 	}	
 	
 	function mvfold(){
+		$(event.target).siblings().css({
+			"background" : "#cfc5e9"
+		});
+		$(event.target).css({
+			"background" : "#301e4e"
+		});
 		document.getElementById('pf_container').style.display="none";
 		document.getElementById('mv_container').style.display="";
 		slider2();

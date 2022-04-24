@@ -17,11 +17,12 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <style>
 @import url("https://fonts.googleapis.com/css?family=Nunito:400,900|Montserrat|Roboto");
-body {
+/* body {
   background: linear-gradient(to right, #3fb6a8, #7ed386);
-}
+} */
 *{
 font-family: 'Gowun Dodum', sans-serif;
+list-style: none;
 }
 .container {
   background: #ffffff;
@@ -31,7 +32,6 @@ font-family: 'Gowun Dodum', sans-serif;
   position: relative;
   margin-top: 10%;
   box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
- 
   background-repeat:no-repeat;
 }
 
@@ -55,7 +55,7 @@ font-family: 'Gowun Dodum', sans-serif;
   z-index: 1;
   background: #866ec766;
   font-size: 1em;
-  transform: rotate(-90deg);
+/*   transform: rotate(-90deg); */
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }
@@ -118,10 +118,11 @@ nav a:first-child {
 }
 
 h1 {
-  color: #866ec766;
-  font-size: 1.2em;
+  color: #301e4e;
+  font-size: 2.0em;
   margin-top: 40px;
   margin-bottom: 35px;
+  font-weight: bold;
 }
 
 h2 {
@@ -132,6 +133,7 @@ h2 {
   letter-spacing: 1px;
   margin-left: 2px;
   font-weight: bold;
+  margin-bottom: 10px;
 }
 
 p {
@@ -140,6 +142,7 @@ p {
   font-size: 0.9em;
   padding: 7px 0;
   color: #070707;
+  margin-bottom: 30px;
 }
 
 span {
@@ -186,8 +189,16 @@ input {
 .subscription  p{
    margin-bottom:0px;
    margin-top:0px;
+   padding-bottom: 15px;
+   
 }
-        
+        .swal-modal {
+		width: 20%;
+	}
+	
+	.swal-button--confirm {
+		background-color: #ffb236;
+	}     
     </style>
 </head>
 <body>
@@ -216,38 +227,38 @@ input {
             <input type="hidden" id="buyCtntCd" name="buyCtntCd" value="mv">
             <!-- 관객수 -->
             <input type="hidden" id="audience" name="audience">
-            <button type="button" onclick="chkPoint()" class="btn">결제하기</button>
+            <button type="button" onclick="chkPoint()" class="btn" style="width: 120%;height: 70px;background: #cfc5e9;color: black;font-weight: bold;font-size: 13px;">결제하기</button>
          </form>
             </div>
         </div>
-        <div class="leftbox">
+        <div class="leftbox" style="line-height: 88px;">
           <nav style="text-align: center;" id="nav">
             <a id="profile" class="active"><i class="fa fa-user"></i></a>
             <a id="payment"><i class="fa fa-credit-card"></i></a>
             <a id="subscription"><i class="fa-solid fa-tv"></i></a>
-            <a id="privacy"><i class="fa fa-tasks"></i></a>
-            <a id="settings"><i class="fa fa-cog"></i></a>
+            <!-- <a id="privacy"><i class="fa fa-tasks"></i></a>
+            <a id="settings"><i class="fa fa-cog"></i></a> -->
           </nav>
         </div>
         <div class="rightbox">
           <div class="profile noshow">
-            <h1>Personal Info</h1>
-            <h2>Full Name</h2>
+            <h1>구매자 정보</h1>
+            <h2>성명</h2>
             <p>${user.name } </p>
-            <h2>Birthday</h2>
+            <h2>생년월일</h2>
             <p>${user.birthDt }</p>
-            <h2>Email</h2>
+            <h2>이메일</h2>
             <p>${user.email}</p>
           </div>
           
           <div class="payment noshow">
-            <h1>MemberShip</h1>
-            <h2>${user.membership }</h2>
-            <p>${user.point }원</p>       
+            <h1>멤버십 정보</h1>
+            <h2>등급 : ${user.membership }</h2>
+            <p>현재 포인트 잔액 : ${user.point }원</p>       
           </div>
       
           <div class="subscription ">
-            <h1>영수증</h1>
+            <h1>상품 정보</h1>
             <h2>영화제목</h2>
             <p>${movie.name }</p>
             <h2>장소</h2>
@@ -255,8 +266,8 @@ input {
             <h2>시간</h2>
             <p>${re.schDate } ${re.schTime }</p>
             <h2>좌석</h2>
-            <p id="pSeatName"><p/>
-            <h2>가격</h2>
+            <p id="pSeatName"></p>
+            <h2>금액</h2>
             <p id="price"></p>        
           </div> 
        <div class="settings noshow">
@@ -277,12 +288,10 @@ function chkPoint(){
 let price1=$('#price').text();
 let slicePrice = price1.slice(0,-1);
     if( ${user.point } < slicePrice){
-       let bool=confirm("포인트가 부족합니다. 충전하러 가시겟습니까??");
-        if(bool){
-           location.href="point_1.do";
-        }else{
-           
-        }
+    	swal("포인트가 부족합니다. 충전하러 가시겟습니까?");
+		$(".swal-button--confirm").on("click", function(){
+			location.href='point_1.do';
+		});
    }else{
       $.ajax({
            url: 'moviePay.do',
@@ -310,8 +319,12 @@ let slicePrice = price1.slice(0,-1);
 
    let cnt=0;
    let price=13000;
-   for(var i =0;i<splitName.length;i++){      
-         pSeatName.innerText+=splitName[i];
+   for(var i =0;i<splitName.length;i++){    
+	   if(i==splitName.length-1){
+		   pSeatName.innerText += (splitName[i]);
+		} else{
+			pSeatName.innerText += (splitName[i]+', ');
+		}
          cnt++;      
    }
    $('#price').text(price*cnt+'원');

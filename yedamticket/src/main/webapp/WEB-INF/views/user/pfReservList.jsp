@@ -12,6 +12,9 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/users/css/style.css">
 <style>
+*{
+	list-style: none;
+}
 body {
 	margin: 0;
 	padding: 0;
@@ -406,7 +409,7 @@ html, body {
 </head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="custom-menu"></div>
 			<div class="p-4 pt-5">
 				<h1>
@@ -424,7 +427,6 @@ html, body {
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
 					<li><a href="userPointList.do">거래내역</a></li>
-					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 
 				<div class="mb-5">
@@ -441,8 +443,8 @@ html, body {
 				</div>
 			</div>
 		</nav>
-		<div class="container">
-			<h2>공연예매내역</h2>
+		<div class="container" style="height: 1000px;">
+			<br><h2>공연예매내역</h2><br>
 			<div class="main-content">
 				<div class="cols-12">
 					<table class="table table-sm tblMemSearch">
