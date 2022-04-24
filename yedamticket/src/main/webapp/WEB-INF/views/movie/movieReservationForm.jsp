@@ -32,7 +32,6 @@ list-style: none;
   position: relative;
   margin-top: 10%;
   box-shadow: 2px 5px 20px rgba(119, 119, 119, 0.5);
- 
   background-repeat:no-repeat;
 }
 
@@ -56,7 +55,7 @@ list-style: none;
   z-index: 1;
   background: #866ec766;
   font-size: 1em;
-  transform: rotate(-90deg);
+/*   transform: rotate(-90deg); */
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }

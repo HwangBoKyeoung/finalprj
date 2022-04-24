@@ -396,7 +396,7 @@ list-style: none;
   z-index: 1;
   background: #866ec766;
   font-size: 1em;
-  transform: rotate(-90deg);
+/*   transform: rotate(-90deg); */
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }

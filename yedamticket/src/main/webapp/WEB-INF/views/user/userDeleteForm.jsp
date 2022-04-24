@@ -19,6 +19,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 /*-------------------------------- END ----*/
+*{
+	list-style: none;
+}
 #body-row {
 	margin-left: 0;
 	margin-right: 0;

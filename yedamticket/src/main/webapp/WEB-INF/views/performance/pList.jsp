@@ -77,21 +77,21 @@ input::-webkit-input-placeholder { color: black; }
             <div class="event-content-wrap">
                 <header class="entry-header flex justify-content-between">
                     <div>
-                        <h2 class="entry-title" style="font-size: 18px; padding-bottom: 25px;">${p.name }</h2>
+                        <h2 class="entry-title" style="font-size: 25px; padding-bottom: 25px; font-weight: bold">${p.name }</h2>
 
                         <div class="event-location">${p.loc }</div>
 						
                         <div class="event-date">${p.performanceScheduleVO.frDt }  ${p.performanceScheduleVO.time }</div>
                     </div>
-                    <div class="event-cost flex justify-content-center align-items-center">
+                    <%-- <div class="event-cost flex justify-content-center align-items-center">
                         <p>${p.price }</p>
-                    </div>
+                    </div> --%>
                    <input type="hidden" name='pNo' value="${p.PNo }">
                     
                 </header>
-
-                <footer class="entry-footer">
-                    <button type="submit"  class="btn btn-lg" style="background:#cfc5e9;" >Buy Tikets</button>
+				<br>
+                <footer class="entry-footer" style="text-align: right;">
+                    <button type="submit"  class="btn btn-lg" style="background:#cfc5e9;" >예매하기</button>
                     <br>
                 </footer><br>
             </div>
@@ -107,24 +107,24 @@ input::-webkit-input-placeholder { color: black; }
 		<input type="hidden" name="endDate">
 		<input type="hidden" name="name">
 		<input type="hidden" name="loc">
-</form>
+</form><br>
 <div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
 						<a href="${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn btn-lg" style="background:#cfc5e9;"></a>
+							type="button" value="이전" class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial; padding:0px;"></a>
 					</c:if>
 					<!-- pageNum -->
 					<c:forEach var="num" begin="${pageVO.startPage }"
 						end="${pageVO.endPage }">
 						<a class="${pageVO.pageNum == num ? 'active': '' }"
 							href="${num }"> <input type="button"
-							value="${num }"  class="btn btn-lg" style="background:#cfc5e9;"></a>
+							value="${num }"  class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial;padding:0px;"></a>
 					</c:forEach>
 					<!-- 다음버튼 -->
 					<c:if test="${pageVO.next }">
 						<a href="${pageVO.endPage+1 }"> <input
-							type="button" value="다음"  class="btn btn-lg" style="background:#cfc5e9;"></a>
+							type="button" value="다음"  class="btn" style="background:#6c757d; color: white; width: 38px; font-weight:initial; height: 38px;padding:0px;"></a>
 					</c:if>
 				</div><br><br>
 <%-- <div class="upcoming-events-outer">

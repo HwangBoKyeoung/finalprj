@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <link rel="stylesheet" href="./resources/users/css/style.css">
+<style>
+	*{
+	list-style: none;
+}
+</style>
 </head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
