@@ -13,8 +13,8 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Goods Request List</h4>
-				<p class="card-description">굿즈등록요청 리스트</p>
+				<h4 class="card-title" style="font-size: 50px;">굿즈 등록 요청 목록</h4>
+				<br>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -63,20 +63,18 @@
 				</div>
 				<br>
 				<form action="goodsConfirmList.do" method="get">
-					<div class="col-10">
 						<div class="searchBar" align="right">
-							<select name="searchType" class="btn btn-outline-secondary">
+							<select id="inputState" name="searchType" style="border-style: none;">
 								<option value="ALL"
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="NAME"
 									${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }">
-							<button type="submit" class="btn btn-primary">검색</button>
+							<button type="submit" class="btn-sm btn-primary">검색</button>
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 							<input type="hidden" name="amount" value="${pageVO.cri.amount }">
-						</div>
 					</div>
 				</form>
 				

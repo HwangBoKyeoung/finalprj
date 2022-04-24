@@ -14,9 +14,9 @@
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">삭제처리페이지</h4>
+					<h4 class="card-title"style="font-size: 50px;">영화 삭제 요청</h4> <br>
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }">
-					<input type="button" name="mvNo" id="mvNo" value="공연정보" onclick="location.href='movieDetail.do?mvNo=${del.mvNo}'">
+					<input type="button" name="mvNo" id="mvNo" class="btn-sm btn-primary" value="공연정보" onclick="location.href='movieDetail.do?mvNo=${del.mvNo}'">
 					<input type="hidden" name="mvNo" id="mvNo" value="${del.mvNo }">
 					
 					<p class="card-description"></p>

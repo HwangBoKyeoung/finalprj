@@ -216,7 +216,9 @@ iframe {
 }
 
 .table, .row {
-	width: 100% !important
+	width: 95% !important;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 /* .row:hover {
@@ -297,18 +299,25 @@ iframe {
 	color: #666;
 	margin-right: 5px;
 }
+
+#sidebar {
+	background: #301e4e;
+}
+
+#list {
+	margin-top: 20px;
+}
+
+h4 {
+	font-size: 70px;
+}
 </style>
 <body>
 	<div class="wrapper d-flex align-items-stretch ">
 		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="index.html" class="logo">고객센터</a>
+					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="noticeList.do">공지사항</a></li>
@@ -331,69 +340,72 @@ iframe {
 				</div>
 			</div>
 		</nav>
-		<div id="content">
-			<br>
-			<table class="table table-bordered" style="text-align: center;">
-				<thead>
-					<tr>
-						<th>NO</th>
-						<th>문의유형</th>
-						<th>제목</th>
-						<th>일자</th>
-					</tr>
-				</thead>
-				<tbody>
-					<c:forEach items="${inqs }" var="inq">
-						<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
-							<td>${inq.inNo }</td>
-							<c:choose>
-								<c:when test="${inq.kind == 'mv'}">
-									<td>영화</td>
-								</c:when>
-								<c:when test="${inq.kind == 'pf'}">
-									<td>공연</td>
-								</c:when>
-								<c:when test="${inq.kind == 'pt'}">
-									<td>포인트</td>
-								</c:when>
-								<c:when test="${inq.kind == 'de'}">
-									<td>배송</td>
-								</c:when>
-							</c:choose>
-							<td>${inq.title}</td>
-							<td>${inq.inDt }</td>
-						</tr>
-					</c:forEach>
-				</tbody>
-			</table>
-			<br>
-			<div align="right">
-				<button type="button" class="btn btn-primary"
-					onclick="location.href='inqWriteForm.do'">글등록</button>
+		<div class="col-lg-12 grid-margin stretch-card" id="list">
+			<div class="card">
+				<div class="card-body">
+					<h4 class="card-title">1:1 문의</h4>
+					<br>
+					<table class="table table-hover">
+						<thead>
+							<tr>
+								<th>NO</th>
+								<th>문의유형</th>
+								<th>제목</th>
+								<th>일자</th>
+							</tr>
+						</thead>
+						<tbody id="body">
+							<c:forEach items="${inqs }" var="inq">
+								<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
+									<td>${inq.inNo }</td>
+									<c:choose>
+										<c:when test="${inq.kind == 'mv'}">
+											<td>영화</td>
+										</c:when>
+										<c:when test="${inq.kind == 'pf'}">
+											<td>공연</td>
+										</c:when>
+										<c:when test="${inq.kind == 'pt'}">
+											<td>포인트</td>
+										</c:when>
+										<c:when test="${inq.kind == 'de'}">
+											<td>배송</td>
+										</c:when>
+									</c:choose>
+									<td>${inq.title}</td>
+									<td>${inq.inDt }</td>
+								</tr>
+							</c:forEach>
+						</tbody>
+					</table>
+					<br>
+					<div align="left"><br>
+				<button onclick="location.href='inqWriteForm.do'" class="btn btn-primary">글등록</button>
 			</div>
-			<br>
-			<div id="content" align="center">
-				<c:if test="${pageVO.prev }">
-					<!-- 이전버튼 활성화 여부 -->
-					<a href="inqList.do?pageNum=${pageVO.startPage-1 }"> <input
-						type="button" value="이전" class="btn btn-secondary"></a>
-				</c:if>
-				<!-- pageNum -->
-				<c:forEach var="num" begin="${pageVO.startPage }"
-					end="${pageVO.endPage }">
-					<a class="${pageVO.pageNum == num ? 'active': '' }"
-						href="inqList.do?pageNum=${num }"> <input type="button"
-						value="${num }" class="btn btn-secondary"></a>
-				</c:forEach>
-				<!-- 다음버튼 -->
-				<c:if test="${pageVO.next }">
-					<a href="inqList.do?pageNum=${pageVO.endPage+1 }"> <input
-						type="button" value="다음" class="btn btn-secondary"></a>
-				</c:if>
+					<div id="content" align="center">
+						<c:if test="${pageVO.prev }">
+							<!-- 이전버튼 활성화 여부 -->
+							<a href="inqList.do?pageNum=${pageVO.startPage-1 }"> <input
+								type="button" value="이전" class="btn btn-secondary"></a>
+						</c:if>
+						<!-- pageNum -->
+						<c:forEach var="num" begin="${pageVO.startPage }"
+							end="${pageVO.endPage }">
+							<a class="${pageVO.pageNum == num ? 'active': '' }"
+								href="inqList.do?pageNum=${num }"> <input type="button"
+								value="${num }" class="btn btn-secondary"></a>
+						</c:forEach>
+						<!-- 다음버튼 -->
+						<c:if test="${pageVO.next }">
+							<a href="inqList.do?pageNum=${pageVO.endPage+1 }"> <input
+								type="button" value="다음" class="btn btn-secondary"></a>
+						</c:if>
+					</div>
+				</div>
 			</div>
+			
 		</div>
 	</div>
-
 	<script type="text/javascript">
 		$(".que").click(function() {
 			$(this).next(".anw").stop().slideToggle(300);

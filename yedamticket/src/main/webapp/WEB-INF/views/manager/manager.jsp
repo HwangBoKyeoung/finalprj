@@ -17,8 +17,7 @@ input{
 		<div class="card">
 			<form action="manager.do">
 				<div class="card-body">
-					<h4 class="card-title">Manager List</h4>
-					<p class="card-description">관리자 리스트</p>
+					<h4 class="card-title"style="font-size: 50px;">관리자 목록</h4><br>
 					<table class="table table-hover" id="contents">
 						<thead>
 							<tr>
@@ -40,6 +39,8 @@ input{
 						</tbody>
 					</table>
 					<br>
+					<div align="right" class="subBtn">
+					<button type="button" class="btn btn-primary" class="btn btn-gradient-primary me-2" onclick="location.href='managerForm.do'">등록</button>
 					<div id="content" align="center">
 					<c:if test="${pageVO.prev }">
 						<!-- 이전버튼 활성화 여부 -->
@@ -60,19 +61,16 @@ input{
 					</c:if>
 				</div>
 				<c:if test="${sessionId eq 'micol'}">
-					<input type="button" class="btn btn-gradient-primary me-2" onclick="location.href='managerForm.do'" value="등록">
 					</c:if>
-					<div class="col-5">
-						<div class="input-group mb-3" align="right">
-							<select name="searchType" class="btn btn-outline-secondary">
+						<div class="searchBar" align="right">
+							<select id="inputState" name="searchType" style="border-style: none;">
 								<option value="ALL" ${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="DEPART" ${pageVO.cri.searchType eq 'DEPART' ? 'selected' : '' }>부서</option>
 								<option value="NAME" ${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>이름</option>
 								<option value="MID" ${pageVO.cri.searchType eq 'MID' ? 'selected' : '' }>아이디</option>
 							</select> <input type="text" name="searchName"
-								value="${pageVO.cri.searchName }" class="form-control"
-								aria-label="Text input with dropdown button">
-							<button type="submit" class="btn btn-outline-secondary">검색</button>
+								value="${pageVO.cri.searchName }">
+							<button type="submit" class="btn-sm btn-primary">검색</button>
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 							<input type="hidden" name="amount" value="${pageVO.amount }">

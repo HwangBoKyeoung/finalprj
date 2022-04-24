@@ -14,7 +14,8 @@
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">관리자 굿즈 승인요청 상세 페이지</h4>
+					<h4 class="card-title" style="font-size: 50px;">굿즈 등록 요청</h4>
+					<br>
 					<input type="hidden" name="gNo" id="gNo" value="${conS.GNo }">
 					<p class="card-description"></p>
 					<form class="forms-sample" action="goodsConfirmUpdate.do" method="post">
@@ -85,7 +86,7 @@
 									</div>
 								</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">요청처리</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<button class="btn btn-gradient-primary me-2" onclick="location.href='goodsConfirmList.do'" type="reset">Cancel</button>
 					</form>
 				</div>
 			</div>

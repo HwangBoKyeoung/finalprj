@@ -8,11 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-${pers }
 	<div class="col-lg-6 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Performance</h4>
+				<h4 class="card-title">공연 상세정보</h4>
 				<table class="table">
 					<tr>
 						<th>공연 이름</th>

@@ -14,10 +14,10 @@
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">삭제처리페이지</h4>
+					<h4 class="card-title" style="font-size: 50px;">공연 삭제 요청</h4><br>
 					<input type="hidden" name="delReqNo" id="delReqNo" value="${del.delReqNo }">
 					<input type="hidden" name="PNo" id="PNo" value="${del.PNo }">
-					<input type="button" name="PNo" id="PNo" value="공연정보" onclick="location.href='pBookingForm.do?mvNo=${del.mvNo}'">
+					<input type="button" class="btn-sm btn-primary" name="PNo" id="PNo" value="공연정보" onclick="location.href='pBookingForm.do?mvNo=${del.mvNo}'">
 					<input type="hidden" name="mvNo" id="mvNo" value="${del.mvNo }">
 					<p class="card-description"></p>
 					<form class="forms-sample" action="deleteRequestPFUpdate.do" method="post">

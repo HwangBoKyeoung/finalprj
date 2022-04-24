@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<!doctype html>
+<!DOCTYPE html>
 <html>
-
 <head>
 <title>Sidebar 02</title>
 <meta charset="utf-8">
@@ -23,8 +22,11 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
-<style>
-/*@font-face {
+<style type="text/css">
+.card {
+    width: 85%;
+}
+@font-face {
 	font-family: Poppins-Regular;
 	src:
 		url(https://colorlib.com/etc/tb/Table_Responsive_v2/fonts/poppins/Poppins-Regular.ttf)
@@ -202,14 +204,17 @@ iframe {
 }
 
 .table, .row {
-	width: 100% !important
-}*/
+	width: 95% !important;
+	margin-left: auto;
+    margin-right: auto;
+	
+}
 
 /* .row:hover {
     background-color: #ececff;
     cursor: pointer
 } */
-/* @media ( max-width :768px) {
+@media ( max-width :768px) {
 	.row {
 		border-bottom: 1px solid #f2f2f2;
 		padding-bottom: 18px;
@@ -282,49 +287,43 @@ iframe {
 	font-weight: bold;
 	color: #666;
 	margin-right: 5px;
-} */
-
-/* 사이드바 */
-    .sidenav {
-      position: absolute;
-      width: 200px;
-      height: 100%;
-      margin-left: -20px;
-      margin-top:50px
-    }
-    /* 본문 */
-    .page {
-     margin-top:50px;
-     margin-left: 250px;
-    }
+}
+#sidebar,#search{
+	background:#301e4e;
+}
+#list{
+	margin-top: 20px;
+}
+h4{
+	font-size: 70px;
+}
 </style>
-
+</head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="companyMyPage.do" class="logo">COMPANY PAGE</a>
+					<a href="companyMyPage.do" class="logo">기업페이지</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
-					<li><a href="companyMovieList.do">영화 목록</a></li>
-					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="goodsPage.do">굿즈 목록</a></li>
+            		<li>영화<ul class="list-unstyled components mb-5">
+            		<li><a href="companyMovieList.do">영화 목록</a></li>
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
-					<li><a href="perInsertForm.do">공연 등록</a></li>
-					<li><a href="goodsInsertForm.do">굿즈 등록</a></li> 
-					<li>승인 현황<ul class="list-unstyled components mb-5">
 					<li><a href="movieCompanyConfirmList.do">영화 승인 현황</a></li>
+					<li><a href="companyMyDeleteMovieList.do">영화삭제신청현황</a></li>
+            		</ul></li>
+            		<li>공연<ul class="list-unstyled components mb-5">
+					<li><a href="companyPerforList.do">공연 목록</a></li>
+					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="perforCompanyConfirmList.do">공연 승인 현황</a></li>
-					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 현황</a></li>
-					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
-					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
+            		</ul></li>
+            		<li>굿즈<ul class="list-unstyled components mb-5">
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
+					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 현황</a></li>
+            		</ul></li>
 				</ul>
 				<div class="form-group d-flex">
 					<div class="icon">
@@ -334,12 +333,11 @@ iframe {
 			</div>
 		</nav>
 		
-		<div class="col-sm-9 page">
-			<div class="col-6">
-				<h4 class="mb-3" align="left">기업회원정보</h4>
+		<div class="col-lg-12 grid-margin stretch-card" id="list">
+			<div class="card">
+				<div class="card-body">
 				<form class="frm" action="companyUpdate.do" method="POST" onsubmit="alertt();" id="frms">
-					
-					<div class="row g-3">
+				<h4 class="card-title">기업회원정보</h4>
 						<div class="col-12" align="left">
 							<label for="email" class="form-label">이메일</label>
 							<div class="input-group has-validation">
@@ -396,10 +394,11 @@ iframe {
 							<div align="right">
 								<button id="updateBtn" type="submit" class="btn btn-primary" style="margin-right: 50%">수정</button>
 							</div>
-						</div>
 					</div>
 				</form>
 			</div>
+			</div>
+			
 		</div>
 	</div>
 	<script type="text/javascript">

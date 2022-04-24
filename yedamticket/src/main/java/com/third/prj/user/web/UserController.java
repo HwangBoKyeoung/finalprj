@@ -163,11 +163,14 @@ public class UserController {
             msg = "어서오세요 " + vo.getUId() + "님 \n\n 현재 결제해야 할 항목은 " + i + "건 입니다.";
             url = "home.do";
 
-            session.setAttribute("sessionId", vo.getUId());
-            session.setAttribute("sessionEmail", vo.getEmail());
-            session.setAttribute("sessionName", vo.getName());
-            session.setAttribute("sessionAddr", vo.getAddr());
-            session.setAttribute("sessionPhone", vo.getPhone());
+            session.setAttribute("sessionId", login.getUId());
+            session.setAttribute("sessionEmail", login.getEmail());
+            session.setAttribute("sessionName", login.getName());
+            session.setAttribute("sessionAddr", login.getAddr());
+            session.setAttribute("sessionPhone", login.getPhone());
+            session.setAttribute("sessionAuth", login.getRole());
+            System.out.println("**********************"+login.getRole());
+            session.setAttribute("sessionGrade", login.getMembership());
  
             mv.addObject("msg", msg);
             mv.addObject("url", url);

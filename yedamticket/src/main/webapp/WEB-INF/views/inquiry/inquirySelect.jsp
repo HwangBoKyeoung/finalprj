@@ -9,15 +9,17 @@
 <script src="resources/js/jquery.min.js"></script>
 </head>
 <body>
-	<div class="col-lg-6 grid-margin stretch-card">
+	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Inquiry Select</h4>
-				<table class="table">
+				<h4 class="card-title" style="font-size: 40px;">1:1문의 내용</h4><br>
+				<table class="table table-basic">
+				<thead>
 					<tr>					
 						<th>NO</th>
 						<td>${inq.inNo }</td>
 					</tr>
+					</thead>
 					<tr>
 						<th>KIND</th>
 						<td>${inq.kind }</td>
@@ -34,24 +36,22 @@
 						<th>CONTENT</th>
 						<td>${inq.content }</td>
 					</tr>
-					
 				</table><br>
-				
-				 <div class="col-lg-6 grid-margin stretch-card">
+				 <div class="col-lg-12grid-margin stretch-card">
 					<div class="card">
 						<div class="card-body">
-						
 							<h4 class="card-title">답변</h4>
 							<table class="table" id="replytable">							  
 								<tr>					
-									<th>상담 답변</th>									
+									<th>상담 답변</th>	
+									<td></td>								
 								</tr>
 								<tr id="body">
 									<th>답변내용</th>
 									<c:choose>
 										<c:when test="${empty inqReply}">
-											<td id="answer"><textarea name="ans" id="ans"></textarea>
-											<button id="btnAns" onclick="aJaxCall()">등록</button></td>
+											<td id="answer"><textarea cols="50" rows="8" style="text-align: left;" name="ans" id="ans"></textarea>
+											<button id="btnAns" onclick="aJaxCall()"  class="btn-sm btn-primary">등록</button></td>
 										</c:when>
 										<c:otherwise>
 											<td id="answer">${inqReply.ans}</td>
@@ -59,7 +59,7 @@
 									</c:choose>
 								</tr>
 						    </table>
-							<input type="button" value="목록" onclick="location.href='managerInquiryList.do'">		
+							<input type="button" value="목록" onclick="location.href='managerInquiryList.do'"  class="btn-sm btn-primary">		
 						    <div id="show">
 						    
 						    </div>

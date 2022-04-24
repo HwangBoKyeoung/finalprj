@@ -14,7 +14,8 @@
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">관리자 영화 승인요청 상세 페이지</h4>
+					<h4 class="card-title" style="font-size: 50px;">영화 등록 요청</h4>
+					<br>
 					<input type="hidden" name="mvNo" id="mvNo" value="${conS.mvNo }">
 					<input type="hidden" name="#" id="#" value="#">
 					<p class="card-description"></p>
@@ -104,7 +105,7 @@
 									</div>
 								</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">요청처리</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<button class="btn btn-gradient-primary me-2" type="reset" onclick="location.href='movieConfirmList.do'">Cancel</button>
 					</form>
 					<input type="hidden" value="${conS.confirm }" id="confirm">
 				</div>

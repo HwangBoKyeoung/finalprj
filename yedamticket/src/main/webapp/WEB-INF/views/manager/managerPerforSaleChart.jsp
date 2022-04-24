@@ -9,6 +9,8 @@
 
 <body>
    <!--Div that will hold the pie chart-->
+  <!--  <h1 style="text-align: center;">공연 매출 차트</h1>
+   <br><br> -->
    <div id=chart_div style="width:50%; height: 100%;"></div>
    
    <script type="text/javascript">
@@ -48,7 +50,11 @@
                console.log(data);
                
                var options = {
-            	          title: 'Company Performance',
+            	          title: {
+//             	        	  display: true,
+            	        	  text : 'Company Performance',
+//             	        	  fontSize : '150px'
+            	          },
             	          series: {
             	              0: { color: '#a561bd' },
             	              1: { color: '#c784de' },
@@ -60,7 +66,7 @@
             	          vAxis: {minValue: 0}
             	        };
 
-               var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+               var chart = new google.visualization.AreaChart(document.getElementById('chart_div'),options);
                chart.draw(data);
             }
          });

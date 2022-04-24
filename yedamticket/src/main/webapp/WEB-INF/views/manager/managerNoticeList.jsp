@@ -11,8 +11,7 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Notice List</h4>
-				<p class="card-description">공지사항 관리</p>
+				<h4 class="card-title" style="font-size: 50px;">공지사항 목록</h4>
 				<table class="table table-hover" id="contents">
 					<thead>
 						<tr>
@@ -27,7 +26,7 @@
 							<td onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'" >${list.noticeNo}</td>
 							<td onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'">${list.title }</td>
 							<td onclick="location.href='managerNoticeUpdateForm.do?noticeNo=${list.noticeNo }'">${list.wrDt }</td>
-							<td> <button onclick="location.href='managerNoticeDel.do?noticeNo=${list.noticeNo}'">삭제</button></td>
+							<td> <button onclick="location.href='managerNoticeDel.do?noticeNo=${list.noticeNo}'"  class="btn-sm btn-primary">삭제</button></td>
 						</tr>
 					</c:forEach>
 					</tbody>
@@ -65,10 +64,9 @@
 					</div>
 					</div>
 				</div>
-				<div class="col-5">
 				<form action="managerNotice.do">
-					<div class="input-group mb-3" align="right">
-							<select name="searchType" class="btn btn-outline-secondary">
+					<div class="searchBar" align="right">
+							<select id="inputState" name="searchType" style="border-style: none;">
 							<option value="title"
 								${pageVO.cri.searchType eq 'title' ? 'selected' : '' }>제목</option>
 							<option value="content"
@@ -79,7 +77,7 @@
 								${pageVO.cri.searchType eq 'titcont' ? 'selected' : '' }>제목+내용</option>
 						</select> <input type="text" name="searchName"
 							value="${pageVO.cri.searchName }">
-						<button type="submit" class="btn btn-outline-secondary">검색</button>
+						<button type="submit" class="btn-sm btn-primary">검색</button>
 						<!-- hidden으로 숨겨서 들어갈 값 -->
 						<input type="hidden" name="pageNum" value="1">
 						<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
@@ -87,7 +85,6 @@
 					</div>
 				</form>
 				</div>
-			</div>
 			</div>
 			<script>
 				let actionForm = $("#actionForm");

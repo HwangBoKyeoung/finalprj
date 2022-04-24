@@ -14,7 +14,7 @@
 		<div class="col-md-10 grid-margin stretch-card">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">관리자 공연 승인요청 상세 페이지</h4>
+					<h4 class="card-title" style="font-size: 40px;">공연 등록 요청</h4>
 					<input type="hidden" name="pNo" id="pNo" value="${conS.PNo }">
 					<p class="card-description"></p>
 					<form class="forms-sample" action="perforConfirmUpdate.do" method="post">
@@ -79,7 +79,7 @@
 									</div>
 								</div>
 						<button type="submit" class="btn btn-gradient-primary me-2">요청처리</button>
-						<button class="btn btn-light" type="reset">Cancel</button>
+						<button class="btn btn-gradient-primary me-2" type="reset" onclick="location.href='perforConfirmList.do'">Cancel</button>
 					</form>
 				</div>
 			</div>

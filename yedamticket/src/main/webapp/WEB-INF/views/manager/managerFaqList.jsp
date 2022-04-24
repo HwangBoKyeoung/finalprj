@@ -11,8 +11,7 @@
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">FAQ List</h4>
-				<p class="card-description">FAQ 관리</p>
+				<h4 class="card-title" style="font-size: 50px;">FAQ 목록</h4><br>
 				<table class="table table-hover" id="contents">
 					<thead>
 						<tr>
@@ -28,7 +27,7 @@
 								<td onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">${faq.FNo}</td>
 								<td onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">${faq.title }</td>
 								<td onclick="location.href='managerFaqSelect.do?FNo=${faq.FNo}'">${faq.qstCd}</td>
-								<td><button onclick="location.href='faqDelete.do?FNo=${faq.FNo}'">삭제</button></td>
+								<td><button onclick="location.href='faqDelete.do?FNo=${faq.FNo}'" class="btn-sm btn-primary">삭제</button></td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -64,10 +63,9 @@
 							value="다음" class="btn btn-secondary"></a>
 					</c:if>
 				</div>
-				<div class="col-5">
 					<form action="managerFaq.do">
-						<div class="input-group mb-3" align="left">
-							<select name="searchType" class="btn btn-outline-secondary">
+						<div class="searchBar" align="right">
+							<select id="inputState" name="searchType" style="border-style: none;">
 								<option value="ALL"
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="QSTCD"
@@ -75,16 +73,14 @@
 								<option value="TITLE"
 									${pageVO.cri.searchType eq 'TITLE' ? 'selected' : '' }>제목</option>
 							</select> <input type="text" name="searchName"
-								value="${pageVO.cri.searchName }" class="form-control"
-								aria-label="Text input with dropdown button">
-							<button type="submit" class="btn btn-outline-secondary">검색</button>
+								value="${pageVO.cri.searchName }">
+							<button type="submit" class="btn-sm btn-primary">검색</button>
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 							<input type="hidden" name="amount" value="${pageVO.amount }">
 						</div>
 					</form>
 				</div>
-			</div>
 		</div>
 	</div>
 

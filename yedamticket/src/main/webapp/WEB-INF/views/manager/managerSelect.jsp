@@ -17,53 +17,53 @@
 <div class="col-md-6 grid-margin stretch-card">
       <div class="card">
          <div class="card-body">
-            <h4 class="card-title">상세페이지</h4>
+            <h4 class="card-title" style="font-size: 40px;">관리자 정보</h4><br>
             <form class="forms-sample" action="managerUpdate.do" method="post">
                <div class="form-group">
                	<c:if test="${sessionId eq mana.MId}">
-                  <label for="exampleInputUsername1">ID</label> <input type="text"
+                  <label for="exampleInputUsername1">아이디</label> <input type="text"
                      class="form-control" id="MId" name="MId" value="${mana.MId }">
                 </c:if>
                 <c:if test="${sessionId ne mana.MId}">
-                  <label for="exampleInputUsername1">ID</label> <input type="text"
+                  <label for="exampleInputUsername1">아이디</label> <input type="text"
                      class="form-control" id="MId" name="MId" readonly="readonly" value="${mana.MId }">
                 </c:if>
                </div>
                
                <div class="form-group">
-                  <label for="exampleInputEmail1">Password</label> <input
+                  <label for="exampleInputEmail1">비밀번호</label> <input
                      type="password" class="form-control" id="pwd" name="pwd" readonly="readonly">
                </div>
                
                <div class="form-group">
                <c:if test="${sessionId eq mana.MId}">
-                  <label for="exampleInputUsername1">Name</label> <input type="text"
+                  <label for="exampleInputUsername1">이름</label> <input type="text"
                      class="form-control" id="name" name="name" value="${mana.name }">
                </c:if>
                <c:if test="${sessionId ne mana.MId}">
-                  <label for="exampleInputUsername1">Name</label> <input type="text"
+                  <label for="exampleInputUsername1">이름</label> <input type="text"
                      class="form-control" id="name" name="name" readonly="readonly" value="${mana.name }">
                </c:if>
                </div>
                <c:if test="${sessionId eq 'micol'}">
                <div class="form-group">
-                  <label for="exampleInputUsername1">Depart</label> <input
+                  <label for="exampleInputUsername1">부서</label> <input
                      type="text" class="form-control" id="depart" value="${mana.depart }" name="depart">
                </div>
                </c:if>
                <c:if test="${sessionId ne 'micol'}">
                <div class="form-group">
-                  <label for="exampleInputUsername1">Depart</label> <input
+                  <label for="exampleInputUsername1">부서</label> <input
                      type="text" class="form-control" id="depart" value="${mana.depart }" name="depart" readonly="readonly">
                </div>
                </c:if>
                <div class="form-group">
-                  <label for="exampleInputUsername1">Phone</label> <input
+                  <label for="exampleInputUsername1">전화번호</label> <input
                      type="text" class="form-control" id="phone" name="phone"
                      placeholder="Mobile number" value="${mana.phone }" readonly="readonly">
                </div>
                <div class="form-group">
-                  <label for="exampleInputMobile">AuthCode</label>
+                  <label for="exampleInputMobile">권한</label>
                   <div class="input-group-prepend">
                   	<c:if test="${sessionDp eq '대표'}">
 	                     <select name="authCd" id="selectedval" data-auth="${mana.authCd }" class="col-md-6">
@@ -79,15 +79,15 @@
                      </c:if>
                   </div>
                </div>
-                  <button type="submit" class="btn btn-gradient-primary me-2">UPDATE</button>
+                  <button type="submit" class="btn btn-gradient-primary me-2">수정</button>
             </form>
             
             <div>
             	<c:if test="${sessionDp eq '대표'}">
-            	<button style="margin-right:7px;" class="btn btn-gradient-primary me-2" onclick="location.href='managerDelete.do?MId=${mana.MId}'">DELETE</button>
+            	<button style="margin-right:7px;" class="btn btn-gradient-primary me-2" onclick="location.href='managerDelete.do?MId=${mana.MId}'">삭제</button>
             	</c:if>
             	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-				<button class="btn btn-gradient-primary me-2" onclick="location.href='manager.do'">Cancel</button>
+				<button class="btn btn-gradient-primary me-2" onclick="location.href='manager.do'">취소</button>
             </div>
             
          </div>

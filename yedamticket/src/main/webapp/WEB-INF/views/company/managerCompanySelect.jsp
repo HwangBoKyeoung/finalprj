@@ -12,7 +12,7 @@
 	<div class="col-lg-6 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Company</h4>
+				<h4 class="card-title" style="font-size: 40px;">기업 회원 정보</h4>
 				<table class="table">
 					<tbody>
 						<tr>
@@ -50,6 +50,10 @@
 					</tbody>
 				</table>
 			</div>
+			<div align="center">
+		<button class="btn-sm btn-primary" onclick="location.href='managerCompany.do'">목록</button>
+		</div>
+		<br>
 		<div>
 		<div class="card">
 			<div class="card-body">
@@ -93,7 +97,6 @@
 			</div>
 		</div>
 		</div>
-
 		</div>
 </body>
 </html>
