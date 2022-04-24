@@ -31,11 +31,11 @@
 		url(https://colorlib.com/etc/tb/Table_Responsive_v2/fonts/poppins/Poppins-Bold.ttf)
 }
 
-* {
+/* * {
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box
-}
+} */
 
 body, html {
 	height: 100%;

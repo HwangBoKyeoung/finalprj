@@ -18,6 +18,10 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
 <style>
+*{
+	list-style: none;
+}
+
 h1 {
 	color: #7a5ecf;
 	text-align: left;
@@ -245,9 +249,9 @@ hr {
 			<c:forEach items="${movies }" var="m" varStatus="status">
 				<div class="col-3">
 					<div class="card">
-						<div class="poster" id="poster">
+						<div class="poster" id="poster1">
 							<input class="realesePoster" type="hidden" value="${m.fileCd}">
-							<img class="rePoster">
+							<img class="rePoster" style="width: 100%;">
 						</div>
 						<div class="details">
 							<br> <br>
@@ -287,7 +291,7 @@ hr {
 	 let fileCd1=document.getElementsByClassName('realesePoster');
 	 let rPoster1=document.getElementsByClassName('rePoster');
 	    for(var i =0;i<fileCd.length;i++){
-	       
+	    	console.log(fileCd1[i].defaultValue);
 	       var split=(fileCd1[i].defaultValue).split('|');
 	       rPoster1[i].setAttribute('src',split[0]);
 	    }

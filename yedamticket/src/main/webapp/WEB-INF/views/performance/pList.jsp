@@ -16,12 +16,27 @@
 <style>
 *{
 font-family: 'Gowun Dodum', sans-serif;
+list-style: none;
 }
 input::-webkit-input-placeholder { color: black; }
+.hr-sect{
+	color: #7a5ecf;
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
+	width: 1400px;
+}
+
+
 </style>
+</head>
 
 <body class="events-list-page">
-${vo }
+<div class="container">
+	<h1 class="hr-sect">공연 리스트</h1>
+		<hr>
+</div>
 <form class="events-search" action="pList.do">
     <div class="container">
         <div class="row">
@@ -41,7 +56,7 @@ ${vo }
             </div>
 
             <div class="col-12 col-md-3">
-                <input class="btn btn-lg" style="background:#cfc5e9; margin: 0;" id="searchBtn" type="submit" value="Search Events">
+                <input class="btn btn-lg" style="background:#cfc5e9; margin: 0;" id="searchBtn" type="submit" value="검색">
             </div>
             <!-- hidden으로 숨겨서 들어갈 값 -->
 			<input type="hidden" name="pageNum" value="1">
@@ -62,7 +77,7 @@ ${vo }
             <div class="event-content-wrap">
                 <header class="entry-header flex justify-content-between">
                     <div>
-                        <h2 class="entry-title">${p.name }</h2>
+                        <h2 class="entry-title" style="font-size: 18px; padding-bottom: 25px;">${p.name }</h2>
 
                         <div class="event-location">${p.loc }</div>
 						
@@ -77,12 +92,13 @@ ${vo }
 
                 <footer class="entry-footer">
                     <button type="submit"  class="btn btn-lg" style="background:#cfc5e9;" >Buy Tikets</button>
-                </footer>
+                    <br>
+                </footer><br>
             </div>
         </div>
         </form>
  		</c:forEach>
-    </div>
+    </div><br>
 </div>
 <form id="actionForm" action="pList.do" method="get">
 		<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
@@ -110,8 +126,8 @@ ${vo }
 						<a href="${pageVO.endPage+1 }"> <input
 							type="button" value="다음"  class="btn btn-lg" style="background:#cfc5e9;"></a>
 					</c:if>
-				</div>
-<div class="upcoming-events-outer">
+				</div><br><br>
+<%-- <div class="upcoming-events-outer">
     <div class="container">
         <div class="row">
             <div class="col-12">
@@ -122,7 +138,7 @@ ${vo }
 
                     <div class="upcoming-events-list">
                         
-					<%-- <c:forEach items="${Eperformance }" var="ep">
+					<c:forEach items="${Eperformance }" var="ep">
                         <div class="upcoming-event-wrap flex flex-wrap justify-content-between align-items-center">
                             <figure class="events-thumbnail">
                                 <a href="#"><img src="/upload/${ep.renames }"></a>
@@ -146,7 +162,7 @@ ${vo }
                                 <a href="#">Buy Tikets</a>
                             </footer>
                         </div>
-                       </c:forEach> --%>
+                       </c:forEach>
                         </div>
                     </div>
                 </div>
@@ -156,7 +172,7 @@ ${vo }
     <input type="hidden" value="${psvo.startDate}" id="vostart">
     <input type="hidden" value="${psvo.endDate}" id="voend">
     <input type="hidden" value="${vo.name}" id="voname">
-    <input type="hidden" value="${vo.loc}" id="voloc">
+    <input type="hidden" value="${vo.loc}" id="voloc"> --%>
 <script>
 
 let actionForm = $("#actionForm");

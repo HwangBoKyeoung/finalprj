@@ -7,15 +7,10 @@
 
 <head>
 <meta charset="utf-8" />
-
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<title>로그인</title>
-<meta
-	content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
-	name='viewport' />
-<script src="https://developers.kakao.com/sdk/js/kakao.js"></script>
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-<!--     Fonts and icons     -->
+<link rel="apple-touch-icon" sizes="76x76"
+	href="./resources/users/img/apple-icon.png">
+<link rel="icon" type="image/png"
+	href="./resources/users/img/favicon.png">
 <link
 	href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
 	rel="stylesheet" />
@@ -23,14 +18,14 @@
 	href="https://use.fontawesome.com/releases/v5.7.1/css/all.css"
 	integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
 	crossorigin="anonymous">
-<!-- CSS Files -->
 <link href="./resources/users/css/bootstrap.min.css" rel="stylesheet" />
 <link href="./resources/users/css/now-ui-kit.css?v=1.3.0"
 	rel="stylesheet" />
-<!-- CSS Just for demo purpose, don't include it in your project -->
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
-<script src="https://kit.fontawesome.com/84d54512c7.js"
-	crossorigin="anonymous"></script>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script src="https://www.google.com/recaptcha/api.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
 .loginBtn {
@@ -39,56 +34,81 @@
 </style>
 
 <body class="login-page sidebar-collapse">
+	<!-- Navbar (부가적인 페이지이동 부분) -->
+	<nav
+		class="navbar navbar-expand-lg bg-primary fixed-top navbar-transparent "
+		color-on-scroll="400">
+		<div class="collapse navbar-collapse justify-content-end"
+			id="navigation"
+			data-nav-image="resources/users/img/blurred-image-1.jpg">
+			<ul class="navbar-nav">
+				<li class="nav-item"><a class="nav-link" href="home.do">홈으로</a></li>
+				<li class="nav-item"><a class="nav-link" href="faqList.do">문의사항이
+						있으신가요?</a></li>
+			</ul>
+		</div>
+		</div>
+	</nav>
 	<!-- End Navbar -->
-	<div class="page-header ">
-		<div class="page-header-image"
-			style="background-image: url(resources/users/img/bts.jpg)"></div>
+
+	<div class="page-header"
+		style="background-image: url('./resources/users/img/ssp7.jpg'); background-position: top center;">
 		<div class="content">
 			<div class="container">
 				<div class="col-md-4 ml-auto mr-auto">
-					<div class="card card-login card-plain">
-						<form class="form" action="manaLogin.do" method="POST">
-							<div class="card-header text-center">
-								<div class="logo-container">
-								<a href="home.do">
-									<img src="resources/users/img/now-logo.png"  alt="">
-									</a>
-								</div>
+					<div class="card card-signup card-login card-plain"
+						style="background: #301e4e;">
+						<div class="card-header text-center">
+							<h3 class="card-title title-up">로그인</h3>
+							<div class="social-line" style="margin-bottom: 23px;">
+								<img src="resources/users/img/YDTICKET_white.png" alt="">
 							</div>
-							<div class="card-body">
-								<div class="input-group no-border input-lg">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i
-											class="now-ui-icons users_circle-08"></i>
-										</span>
+						</div>
+						<div id="personalLogin">
+							<form class="form" action="manaLogin.do" method="POST">
+								<div class="card-body">
+									<div class="input-group no-border input-lg">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="now-ui-icons users_circle-08"></i>
+											</span>
+										</div>
+										<input type="text" class="form-control UId" name="MId"
+											placeholder="Id...">
 									</div>
-									<input type="text" class="form-control" name="MId"
-										placeholder="Id..." required="required">
-								</div>
-								<div class="input-group no-border input-lg">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i
-											class="now-ui-icons objects_key-25"></i>
-										</span>
+									<div class="input-group no-border input-lg">
+										<div class="input-group-prepend">
+											<span class="input-group-text"> <i
+												class="now-ui-icons objects_key-25"></i>
+											</span>
+										</div>
+										<input type="password" placeholder="Password..." name="pwd"
+											class="form-control pwd" />
 									</div>
-									<input type="password" placeholder="Password..." name="pwd"
-										class="form-control" required="required"/>
+									<div class="card-footer text-center">
+										<input type="submit" class="btn-round btn btn-block btnLogin"
+											style="background: #cfc5e9; border: 0px;" value="로그인"><br>
+									</div>
+									<br>
+									<div class="pull-left">
+										<h6>
+											<a href="signup_1.do" class="link">회원가입</a><br>
+										</h6>
+									</div>
+									<div class="pull-left">
+										<h6>
+											<a href="#" class="idPassword link">아이디/비밀번호 찾기</a>
+										</h6>
+									</div>
 								</div>
-								<div class="card-footer text-center">
-									<input type="submit"
-										class="btn btn-primary btn-round btn-lg btn-block"
-										value="LOGIN">
-									<!-- <a href="userSelect.do" class="btn btn-primary btn-round btn-lg btn-block">Login</a> -->
-								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-
-
+	
 	<!--   Core JS Files   -->
 	<script src="./resources/users/js/core/jquery.min.js"
 		type="text/javascript"></script>

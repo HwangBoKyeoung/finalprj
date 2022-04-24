@@ -4,7 +4,7 @@ window.onload = function() {
 
 //지도 그리기
 function drawMap(target) {
-   var width = 530; //지도의 넓이
+    var width = 530; //지도의 넓이
     var height = 550; //지도의 높이
     var initialScale = 5600; //확대시킬 값
     var initialX = -12200; //초기 위치값 X
@@ -30,6 +30,7 @@ function drawMap(target) {
         .attr('height', height + 'px')
         .attr('id', 'map')
         .attr('class', 'map')
+		.attr('fill', '#afafafcf')
         .on("click", function(){
             var eid=event.target.id;
             let value=eid.substr(eid.indexOf('-')+1,eid.length);
@@ -103,7 +104,7 @@ function drawMap(target) {
              $('.col-8').empty();
                let cards = $('.cards');
                console.log(cards);
-               let row8 = $('.col-8');            
+               let row8 = $('.col-8');
                for (var i = 0; i < result.length; i++) {
                   cards.find('h2').text(result[i].name);
                   cards.find('p').text(result[i].addr);
@@ -173,6 +174,7 @@ function drawMap(target) {
         .append('rect')
         .attr('class', 'background')
         .attr('width', width + 'px')
+		.attr('fill', '#afafafcf')
         .attr('height', height + 'px');
 
     //geoJson데이터를 파싱하여 지도그리기
@@ -206,6 +208,8 @@ function drawMap(target) {
     //텍스트 위치 조절 - 하드코딩으로 위치 조절을 했습니다.
     function translateTolabel(d) {
         var arr = path.centroid(d);
+		
+		console.log(arr);
         if (d.properties.code == 31) {
             //서울 경기도 이름 겹쳐서 경기도 내리기
             arr[1] +=

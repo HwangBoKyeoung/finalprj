@@ -8,8 +8,6 @@
 <script src="https://kit.fontawesome.com/84d54512c7.js"
 	crossorigin="anonymous"></script>
 <!-- 폰트 -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
 <link rel="apple-touch-icon" sizes="76x76"
 	href="./resources/users/img/apple-icon.png">
@@ -36,7 +34,7 @@
 
 <link rel="canonical"
 	href="https://getbootstrap.com/docs/5.1/examples/album/">
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 * {
 box-sizing: border-box;
@@ -71,6 +69,7 @@ html, body {
 	margin-top: 0px;
 	/* padding-bottom: 200px; */ /* footer 높이 */
 	padding-left: 0px;
+	background: white;
 }
 
 .footer {
@@ -79,6 +78,7 @@ html, body {
 	/* position: absolute; */
 	bottom: 0;
 	left: 0;
+	padding-top: 0px;
 }
 </style>
 </head>
