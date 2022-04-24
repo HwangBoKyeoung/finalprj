@@ -8,8 +8,11 @@
 <link href='resources/calender/main.css' rel='stylesheet' />
 
 <style>
+*{
+	list-style: none;
+}
 body {
-	margin: 40px 10px;
+/* 	margin: 40px 10px; */
 	padding: 0;
 	font-family: Arial, Helvetica Neue, Helvetica, sans-serif;
 	font-size: 14px;
@@ -21,6 +24,14 @@ body {
 .close {
 	background-image: none;
 	height: 0px;
+}
+.hr-sect{
+	color: #7a5ecf;
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
+	width: 1400px;
 }
 </style>
 <script src='resources/calender/main.js'></script>
@@ -123,9 +134,14 @@ body {
 	});
 </script>
 </head>
-<body>
+<body><br>
+<div class="container">
+	<h1 class="hr-sect">공연 일정</h1>
+		<hr>
+		
+</div>
 <input type="hidden" value="${schs }">
-
+<br><br>
 <div id='calendar'></div>
 	<div class="modal fade bd-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
   <div class="modal-dialog modal-lg" role="document">
@@ -144,6 +160,6 @@ body {
       </div>
     </div>
   </div>
-</div>
+</div><br><br>
 </body>
 </html>

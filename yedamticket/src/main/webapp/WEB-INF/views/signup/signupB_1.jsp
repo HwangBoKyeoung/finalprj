@@ -13,15 +13,15 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
 .card[data-background-color] {
-    background-color: #cec5e9;
+    background-color: #301e4e;
 }
  
 #id::placeholder{
-	color:black;
+	color:white;
 }
 
 #email::placeholder{
-	color:black;
+	color:white;
 } 
 
 </style>
@@ -33,10 +33,10 @@
 			<div class="card card-signup" data-background-color="blue" >
 				<form class="form" name="join" action="mailSending2.do" method="post" onsubmit="return btnFnc()">
 					<div class="card-header text-center">
-						<h3 class="card-title title-up" style="color:black;">기업회원 회원가입</h3>
+						<h3 class="card-title title-up" style="color:white;">기업회원 회원가입</h3>
 					</div>
 					<div class="card-header text-center">
-						<h4 class="card-title title-up" style="color:black;">이메일을 입력해주세요.</h4>
+						<h4 class="card-title title-up" style="color:white;">이메일을 입력해주세요.</h4>
 					</div>
 					<div class="card-body">
 						<div class="input-group no-border">
@@ -46,7 +46,7 @@
 							<input type="hidden" name="subject" id="subject" required="required">
 						</div>
 						<div class="form-group">
-						<select class="form-control" id="selmail" name = "email" onchange="email_change()" style="color:black;">
+						<select class="form-control" id="selmail" name = "email" onchange="email_change()" style="color: white;">
 							<option value="0" style="color : black">선택하세요</option>
 							<option value="9" style="color : black">직접입력</option>
 							<option value="naver.com" style="color : black">naver.com</option>
@@ -56,14 +56,14 @@
 						</div>
 					</div>
 					<div class="card-footer text-center">
-						<input type="submit" id="submitBtn" class="btn btn-neutral btn-round btn-lg" value="이메일 발송"/>
+						<input type="submit" id="submitBtn" class="btn btn-neutral btn-round btn-lg" style="color: black" value="이메일 발송"/>
 						<input type="hidden" name = "all">
 					</div>
 				</form>
 			</div>
 		</div>
 		<div class="col text-center">
-			<a href="signup_1.do" class="btn btn-outline-default btn-round btn-white btn-lg" target="_blank">일반회원이십니까?</a> 
+			<a href="signup_1.do" class="btn btn-outline-default btn-round btn-white btn-lg">일반회원이십니까?</a> 
 		</div>
 	</div>
 </div>

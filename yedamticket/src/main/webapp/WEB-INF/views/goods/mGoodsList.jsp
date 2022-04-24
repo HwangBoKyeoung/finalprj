@@ -8,6 +8,9 @@
 <title>Insert title here</title>
 </head>
 <style>
+*{
+	list-style: none;
+}
       .bd-placeholder-img {
         font-size: 1.125rem;
         text-anchor: middle;
@@ -21,10 +24,22 @@
           font-size: 3.5rem;
         }
       }
+      
+      .hr-sect{
+	color: #7a5ecf;
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
+	width: 1400px;
+}
     </style>
 <body>
-<h1>영화굿즈</h1>
- <div class="album py-5 bg-light">
+<div class="container">
+	<h1 class="hr-sect">영화굿즈</h1>
+		<hr>
+</div>
+ <div class="album py-5">
  <div class="container">
 <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
 				<c:forEach var="i" items="${mGoods }">
@@ -37,8 +52,7 @@
 								<p class="card-text">${i.content}</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
-										<button class="btn btn-danger">view</button>
-										<button class="btn btn-danger">edit</button>
+										<button class="btn" style="background: #cfc5e9;">상세</button>
 										
 									</div>
 									<p><b>${i.price}원</b></p>
