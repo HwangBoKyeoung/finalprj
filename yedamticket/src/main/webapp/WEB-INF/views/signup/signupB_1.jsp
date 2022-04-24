@@ -12,6 +12,9 @@
 <link href="./resources/users/demo/demo.css" rel="stylesheet" />
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <style>
+*{
+	list-style: none;
+}
 .card[data-background-color] {
     background-color: #301e4e;
 }

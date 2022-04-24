@@ -304,12 +304,12 @@ h4{
 </head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="p-4 pt-5">
 				<h1>
 					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
-				<ul class="list-unstyled components mb-5">
+				<ul class="list-unstyled components mb-5" style="padding-bottom: 450px;">
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="faqList.do">FAQ</a></li>
 					<li><a href="inqList.do">1:1 문의</a></li>
@@ -332,7 +332,7 @@ h4{
 		</nav>
 		
 		<div class="col-lg-12 grid-margin stretch-card" id="list">
-         <div class="card">
+         <div class="card" style="height: 980px; width: 85%;">
             <div class="card-body">
 				<h4 class="card-title">FAQ</h4>
 				<c:forEach items="${faqs }" var="faq" begin="0" end="5">

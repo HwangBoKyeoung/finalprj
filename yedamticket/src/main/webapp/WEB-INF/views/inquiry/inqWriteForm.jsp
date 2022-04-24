@@ -1,4 +1,4 @@
-cid<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -23,7 +23,7 @@ th {
 			<div class="col-md-2"></div>
 			<div class="col-md-9">
 				<br>
-				<h3 class="text-left">1:1문의 작성</h3>
+				<h4 style="font-size: 70px;">1:1문의 작성</h4><br>
 				<form id="frm" action="inqWrite.do" method="post">
 					<table class="table">
 						<tr>
@@ -57,9 +57,9 @@ th {
 							<td colspan="2" class="text-center">
 							<input type="hidden" id="UId" name="UId" value="${sessionId }"
 							class="form-control" readonly="readonly">
-							<input type="submit" value="등록" class="btn btn-success"> 
-							<input type="reset" class="btn" value="취소"> 
-							<input type="button" onclick="location.href='inqList.do'" value="목록" class="btn btn-primary">
+							<input type="submit" value="등록" class="btn" style="background: #301e4e;"> 
+							<input type="reset" class="btn" value="취소" style="background: #301e4e;"> 
+							<input type="button" onclick="location.href='inqList.do'" style="background: #301e4e;" value="목록" class="btn">
 							</td>
 						</tr>
 
@@ -67,9 +67,9 @@ th {
 				</form>
 			</div>
 		</div>
-	</div>
-</body>
+	</div><br><br>
 <script>
 	document.getElementById('inDt').valueAsDate = new Date();
 </script>
+</body>
 </html>

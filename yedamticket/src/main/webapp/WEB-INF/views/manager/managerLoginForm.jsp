@@ -95,7 +95,7 @@
 											<a href="signup_1.do" class="link">회원가입</a><br>
 										</h6>
 									</div>
-									<div class="pull-left">
+									<div class="pull-right">
 										<h6>
 											<a href="#" class="idPassword link">아이디/비밀번호 찾기</a>
 										</h6>

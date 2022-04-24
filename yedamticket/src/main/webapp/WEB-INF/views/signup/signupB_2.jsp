@@ -22,6 +22,9 @@
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 <style>
+*{
+	list-style: none;
+}
 .input-group, .form-group {
 	margin-bottom: 40px;
 }
@@ -233,14 +236,11 @@
 								style="background: #cfc5e9; color: white; width: 80%"
 								class="btn btn-neutral btn-round btn-lg" value="회원가입">
 						</div>
+						<a href="userLoginForm.do" style="padding-left: 350px; padding-bottom: 10px; color: white;">로그인 페이지로</a>
 					</form>
 				</div>
 			</div>
-			<div class="col text-center">
-				<a href="login.do"
-					class="btn btn-outline-default btn-round btn-white btn-lg"
-					target="_blank">로그인 페이지로</a>
-			</div>
+			
 		</div>
 	</div>
 
@@ -253,13 +253,13 @@
 		let phoneCnum = 0;
 
 		// 이메일(세션값) 값 검증
-		/* $(document).ready(function() {
+		$(document).ready(function() {
 			var email = $("#email").val()
 			if (email == '') {
 				alert("세션이 만료되었습니다 이메일을 확인해 주세요..")
 				return $(location).attr('href', 'signupB_1.do')
 			}
-		}) */
+		})
 
 		// 양도 권한
 		function transferAgree() {

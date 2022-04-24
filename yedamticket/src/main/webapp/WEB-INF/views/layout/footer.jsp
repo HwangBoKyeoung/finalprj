@@ -12,7 +12,7 @@
 	<footer class="footer" data-background-color="black" style="background: #100e302e;"><br>
 	<div class="container-fluid">
 		<div style="float: left; padding-left: 20px;">
-			<img width="200" src="resources/users/img/YDTICKET.png">
+			<img width="300" src="resources/users/img/YDTICKET.png">
 		</div>
 		<div>
 			<div><br>
