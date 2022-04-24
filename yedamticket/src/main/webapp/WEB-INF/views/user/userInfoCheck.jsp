@@ -28,7 +28,6 @@
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
 					<li><a href="userPointList.do">거래내역</a></li>
-					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 
 				<div class="mb-5">
@@ -46,7 +45,7 @@
 			</div>
 		</nav>
 		<div class="container">
-			<h2>회원정보</h2>
+			<br><h2>회원정보 수정</h2>
 			<div class="cols-12">
 				<br> <br>
 				<hr>

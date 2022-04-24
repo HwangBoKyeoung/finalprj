@@ -27,10 +27,10 @@
 </style>
 </head>
 
-<div class="section section-signup" style="background-image : url('./resources/users/img/ssp7.jpg'); height: 100vh;  background-repeat : no-repeat; background-size : cover;">
+<div class="section section-signup" style="background-image : url('./resources/users/img/ssp7_ab.jpg'); height: 100vh;background-repeat : no-repeat; background-size : cover;background-position: top center;">
 	<div class="container">
 		<div class="row">
-			<div class="card card-signup" data-background-color="blue" >
+			<div class="card card-signup" data-background-color="blue" style="padding-bottom: 10px;">
 				<form class="form" name="join" action="mailSending2.do" method="post" onsubmit="return btnFnc()">
 					<div class="card-header text-center">
 						<h3 class="card-title title-up" style="color:white;">기업회원 회원가입</h3>
@@ -41,7 +41,7 @@
 					<div class="card-body">
 						<div class="input-group no-border">
 							<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required="required" onkeyup="idcheck();" maxlength="13">
-							<input type="text" id="email" name="email" class="form-control" placeholder="주소 (@ 생략)" style="color:black;">
+							<input type="text" id="email" name="email" class="form-control" placeholder="주소 (@ 생략)" style="color:white;">
 							<input type="hidden" name="content" id="content" required="required">
 							<input type="hidden" name="subject" id="subject" required="required">
 						</div>
@@ -59,11 +59,11 @@
 						<input type="submit" id="submitBtn" class="btn btn-neutral btn-round btn-lg" style="color: black" value="이메일 발송"/>
 						<input type="hidden" name = "all">
 					</div>
+					<a href="signup_1.do" style="padding-left: 350px;">일반회원이십니까?</a>
 				</form>
 			</div>
 		</div>
 		<div class="col text-center">
-			<a href="signup_1.do" class="btn btn-outline-default btn-round btn-white btn-lg">일반회원이십니까?</a> 
 		</div>
 	</div>
 </div>

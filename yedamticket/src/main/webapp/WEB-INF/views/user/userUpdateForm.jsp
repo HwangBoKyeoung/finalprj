@@ -20,6 +20,9 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 /*-------------------------------- END ----*/
+*{
+list-style: none;
+}
 #body-row {
 	margin-left: 0;
 	margin-right: 0;
@@ -80,15 +83,21 @@
 a.bg-dark {
 	background-color: #132644 !important;
 }
+
+label{
+	font-weight: bold;
+	color: black;
+	font-size: 15px;
+}
 </style>
 </head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
-		<nav id="sidebar">
+		<nav id="sidebar" style="height: 1000px;">
 			<div class="custom-menu"></div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="index.html" class="logo"></a>
+					<a href="userPage.do" class="logo">회원정보</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="userUpdateForm.do">회원정보수정</a></li>
@@ -134,8 +143,9 @@ a.bg-dark {
 		<!--// 모달창 -->
 
 		<!-- MAIN -->
-		<div class="col-6">
-
+		
+		<div class="col-4" style="margin-left: auto; margin-right: auto;">
+		<br><h2>회원정보 수정</h2><br>
 			<form class="form-horizontal" role="form" method="post" id="form"
 				action="userUpdate.do" onsubmit="return updateTest();">
 				<div class="form-group" id="divId">
@@ -210,7 +220,7 @@ a.bg-dark {
 							</div>
 
 				<div class="form-group">
-					<div class="col-lg-offset-2 col-lg-10">
+					<div class="col-lg-offset-2 col-lg-10"><br>
 						<button type="submit" class="btn btn-primary" id="submit_input">수정</button>
 					</div>
 				</div>

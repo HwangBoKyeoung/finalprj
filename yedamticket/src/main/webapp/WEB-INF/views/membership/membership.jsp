@@ -6,13 +6,31 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<style>
+*{
+	list-style: none;
+}
+
+      .hr-sect{
+	color: #7a5ecf;
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
+	width: 1400px;
+}
+</style>
 </head>
+
 <body>
-<div class="section section-team text-center">
+	<div class="container">
+	<h1 class="hr-sect">멤버십 안내</h1>
+		<hr>
+</div>
+<div class="section section-team text-center" style="padding-top: 35px;">
       <div class="container">
-        <h2 class="title">멤버십 안내</h2>
         <p class="category text-default">저희 <b style="color: red">Yedam Ticket</b> 고객님께 제공하는 멤버십 고객 등급 제도입니다.</p>
-        <p class="category text-default">고객님의 <b class="category text-primary">월 결제내역</b>에 따라 고객등급이 산정됩니다.</p>
+        <p class="category text-default">고객님의 <b class="category text-primary">월 결제내역</b>에 따라 고객등급이 산정됩니다.</p><br>
         <div class="team">
           <div class="row">
             <div class="col-md-4">

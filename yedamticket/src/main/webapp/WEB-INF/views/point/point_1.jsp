@@ -5,41 +5,79 @@
 <meta charset="UTF-8">
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.8.js"></script>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
+<style>
+	*{
+		list-style: none;
+	}
+	
+	#point::placeholder{
+		color: white;
+	}
+	
+	.payBtn{
+		background-color: #301e4e;
+	}
+	
+	/* .container-fluid{
+		width: 100%;
+		height: 100%;
+		overflow: hidden;
+		position: relative;
+	}
+	
+	.container-fluid > #pintdiv1{
+		position: absolute;
+		width: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	} */
+	
+	.container-fluid{
+		padding-left: 0px;
+		padding-right: 0px;
+	}
+	
+</style>
 </head>
 <body>
-	<div id="pointdiv1" class="section section-signup" style="background-image: url('./resources/users/img/bg11.jpg'); background-size: cover; background-position: top center; min-height: 700px; padding-top: 0; display: flex; align-items: center; justify-content: center;">
-		<div id="pointdiv2" style="width: 535px; height: 600px; padding: 1rem; margin: 1rem; float: left;"> 
-			<div class="card card-signup" data-background-color="black" style="height:100%; width:100%;">
+<div class="container-fluid">
+	<div id="pointdiv1" class="section section-signup" style="background-image : url('./resources/users/img/ssp7_ab.jpg'); height: 100vh;background-repeat : no-repeat; background-size : cover;background-position: top center;">
+		<div id="pointdiv2" style="width: 535px; height: 600px; padding: 1rem; margin: 1rem; float: left; padding-top: 20px;"> 
+			<div class="card card-signup" style="height:90%; width:100%; background: #cfc5e9;">
 				<form id="form" action="point_2.do" method="POST">
 					<div class="card-header text-center">
 						<h3 class="card-title title-up">충전</h3>
 					</div>
 					<div class="card-header text-center">
 						<input type="number" id="point" class="form-control" placeholder="금액을 입력해주세요." required="required" readonly="readonly" name="point" maxlength="7" onkeyup="maxPoint();" oninput="maxLengthChk(this);" 
-						 style="background-color: gray; width: 80%; margin-left: auto; margin-right: auto; width: 80%;"/>
+						 style="background-color: gray; height: 39px; color:white; margin-bottom: 20px; width: 80%; margin-left: auto; margin-right: auto;"/>
 					    <input type="hidden" id="UId" name="UId" value="${sessionId}"/>
-							<button class="btn" type="button" onclick="fiveThousand();">+5천 원</button>
-						    <button class="btn" type="button" onclick="tenThousand();">+1만 원</button>
-						    <button class="btn" type="button" onclick="fiftyThousand();">+5만 원</button>
-						    <button class="btn" type="button" onclick="oneHundredThousand();">+10만 원</button>
+							<button class="btn payBtn" type="button" onclick="fiveThousand();">+5천 원</button>
+						    <button class="btn payBtn" type="button" onclick="tenThousand();">+1만 원</button>
+						    <button class="btn payBtn" type="button" onclick="fiftyThousand();">+5만 원</button>
+						    <button class="btn payBtn" type="button" onclick="oneHundredThousand();">+10만 원</button>
 					</div>
 					<div class="card-footer text-center">
-						<img alt="kakaopay" src="./resources/kakaopay/payment_icon_yellow_large.png">
+						<img alt="kakaopay" style="width: 25%;" src="./resources/kakaopay/payment_icon_yellow_large.png">
+						<input type="button" id="payment" class="btn btn-neutral btn-round btn-lg" value="충전" onclick="pay();">
+						<br>
 					</div>
-					<div id="divfooter1" class="card-footer text-center" style="
+					<a id="reset" onclick="resetPoint();" style="text-decoration: underline; padding-left: 177px; cursor: pointer;">초기화하시겠습니까?</a>
+					<!-- <div id="divfooter1" class="card-footer text-center" style="
 						position: absolute;
 						bottom: 11px;
 						margin-right: auto;
 						margin-left: auto;
 						left: 0;
-						right: 0;">
-						<input type="button" id="payment" class="btn btn-neutral btn-round btn-lg" value="충전" onclick="pay();">
-						<input type="reset" id="reset" class="btn btn-neutral btn-round btn-lg" onclick="resetPoint();" value="초기화">
-					</div>
+						right: 0;"> -->
+						
+					</div><!--  -->
 				</form>
 			</div>
 		</div>
 	</div>
+</div>
 <script>
 function pay(){
 	var IMP = window.IMP // 생략가능
