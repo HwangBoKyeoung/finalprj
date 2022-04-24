@@ -33,7 +33,7 @@
 				<p class="card-text">가 격 : ${price }</p>
 				<input id="price" type="hidden" name="price">
 				
-				<input id="inpBtn" type="submit" class="btn btn-primary" value="선택">
+				<input id="inpBtn" type="submit" class="btn btn-primary" value="확인">
 				<input type="button" class="btn btn-danger" onclick="location.href='ticketassignment_1.do'" value="취소">
 			</div>
 		</div>
