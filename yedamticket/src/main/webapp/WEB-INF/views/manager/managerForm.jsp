@@ -13,12 +13,11 @@
 		<div class="card">
 		
 			<div class="card-body">
-				<h4 class="card-title">Admin Insert</h4>
-				<p class="card-description">Horizontal form layout</p>
+				<h4 class="card-title">관리자 등록</h4>
 				<form class="forms-sample" action="managerInsert.do" method="post" onsubmit="return chec_id();">
 				
 					<div class="form-group row">
-						<label for="exampleInputUsername2" class="col-sm-3 col-form-label">ID</label>
+						<label for="exampleInputUsername2" class="col-sm-3 col-form-label">아이디</label>
 						<div class="col-sm-6">
 							<input type="text" class="form-control" id="MId" name="MId" placeholder="ID">
 							<button type="button" class="btn btn-light" id="idCheck" name="idCheck" onclick="fn_idCheck();" value="N">중복체크</button>
@@ -26,7 +25,7 @@
 					</div>
 					
 					<div class="form-group row">
-						<label for="exampleInputPassword2" class="col-sm-3 col-form-label">Password</label>
+						<label for="exampleInputPassword2" class="col-sm-3 col-form-label">비밀번호</label>
 						<div class="col-sm-9">
 							<input type="password" class="form-control" id="pwd" name="pwd" placeholder="Password" required="required">
 						</div>
@@ -34,28 +33,28 @@
 					
 					<div class="form-group row">
 						<label for="exampleInputConfirmPassword2"
-							class="col-sm-3 col-form-label">Name</label>
+							class="col-sm-3 col-form-label">이름</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="name" name="name" required="required">
 						</div>
 					</div>
 					
 					<div class="form-group row">
-						<label for="exampleInputEmail2" class="col-sm-3 col-form-label">Depart</label>
+						<label for="exampleInputEmail2" class="col-sm-3 col-form-label">부서</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="depart" name="depart" required="required">
 						</div>
 					</div>
 					
 					<div class="form-group row">
-						<label for="exampleInputMobile" class="col-sm-3 col-form-label">Phone</label>
+						<label for="exampleInputMobile" class="col-sm-3 col-form-label">전화번호</label>
 						<div class="col-sm-9">
 							<input type="text" class="form-control" id="phone" name="phone" placeholder="Mobile number" required="required">
 						</div>
 					</div>
 					
 					<div class="form-group row">
-						<label for="exampleInputMobile" class="col-sm-3 col-form-label">AuthCode</label>
+						<label for="exampleInputMobile" class="col-sm-3 col-form-label">권한</label>
 						<div class="input-group-prepend">
 							<select name="authCd" id="selected">
 								<option value="movie">영화담당자</option>
@@ -64,9 +63,8 @@
 						</div>
 					</div>
 					
-					<button type="submit" class="btn btn-gradient-primary me-2">INSERT</button>
-					<button class="btn btn-light" type="reset">Cancel</button>
-					
+					<button type="submit" class="btn btn-gradient-primary me-2">등록</button>
+					<input type="button" class="btn btn-light" type="reset" value="취소" onclick="location.href='manager.do'">					
 				</form>
 			</div>
 		</div>

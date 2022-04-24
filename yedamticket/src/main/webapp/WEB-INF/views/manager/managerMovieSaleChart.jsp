@@ -19,12 +19,6 @@
       
       function drawChart() {
          let arr = [];
-         /* let jsonData = $.ajax({
-            url : "movieSales.do",
-            type : "post",
-            dataType : "json",
-            async: false
-         }).responseText; */
          
          $.ajax({
             url : "movieSales.do",
@@ -54,7 +48,7 @@
             	        };
 
                var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
-               chart.draw(data);
+               chart.draw(data,options);
             }
          });
       }

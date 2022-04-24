@@ -25,11 +25,10 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
-<style>
+<style type="text/css">
 .card {
-	width: 85%;
+    width: 85%;
 }
-
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -208,7 +207,10 @@ iframe {
 }
 
 .table, .row {
-	width: 100% !important
+	width: 95% !important;
+	margin-left: auto;
+    margin-right: auto;
+	
 }
 
 /* .row:hover {
@@ -289,34 +291,42 @@ iframe {
 	color: #666;
 	margin-right: 5px;
 }
+#sidebar,#search{
+	background:#301e4e;
+}
+#list{
+	margin-top: 20px;
+}
+h4{
+	font-size: 70px;
+}
 </style>
 </head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="companyMyPage.do" class="logo">COMPANY PAGE</a>
+					<a href="companyMyPage.do" class="logo">기업페이지</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
-					<li><a href="companyMovieList.do">영화 목록</a></li>
-					<li><a href="companyPerforList.do">공연 목록</a></li>
-					<li><a href="goodsPage.do">굿즈 목록</a></li>
+            		<li>영화<ul class="list-unstyled components mb-5">
+            		<li><a href="companyMovieList.do">영화 목록</a></li>
 					<li><a href="movieInsertForm.do">영화 등록</a></li>
-					<li><a href="perInsertForm.do">공연 등록</a></li>
-					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
-					<li>승인 현황<ul class="list-unstyled components mb-5">
 					<li><a href="movieCompanyConfirmList.do">영화 승인 현황</a></li>
+					<li><a href="companyMyDeleteMovieList.do">영화삭제신청현황</a></li>
+            		</ul></li>
+            		<li>공연<ul class="list-unstyled components mb-5">
+					<li><a href="companyPerforList.do">공연 목록</a></li>
+					<li><a href="perInsertForm.do">공연 등록</a></li>
 					<li><a href="perforCompanyConfirmList.do">공연 승인 현황</a></li>
-					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 현황</a></li>
-					</ul></li>
 					<li><a href="companyMyDeletePerforList.do">공연삭제신청현황</a></li>
-					<li><a href="companyMyDeleteMovieList.do">영화삭제신청</a></li>
+            		</ul></li>
+            		<li>굿즈<ul class="list-unstyled components mb-5">
+					<li><a href="goodsPage.do">굿즈 목록</a></li>
+					<li><a href="goodsInsertForm.do">굿즈 등록</a></li>
+					<li><a href="goodsCompanyConfirmList.do">굿즈 승인 현황</a></li>
+            		</ul></li>
 				</ul>
 				<div class="form-group d-flex">
 					<div class="icon">
@@ -326,15 +336,13 @@ iframe {
 			</div>
 		</nav>
 
-		<div class="col-lg-12 grid-margin stretch-card">
+		<div class="col-lg-12 grid-margin stretch-card" id="list">
 			<div class="card">
 				<div class="card-body">
-					<h4 class="card-title">Performance List</h4>
-					<p class="card-description">기업회원마이페이지</p>
 					<form action="companyPerforList.do">
-						<div class="col-10">
+					<h4 class="card-title">공연 목록</h4>
 							<div class="searchBar" align="right">
-								<select name="searchType" class="btn btn-outline-secondary">
+								<select id="inputState" name="searchType" style="border-style: none;">
 									<option value="ALL"
 										${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 									<option value="NAME"
@@ -343,14 +351,14 @@ iframe {
 										${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>공연지역</option>
 								</select> <input type="text" name="searchName"
 									value="${pageVO.cri.searchName }">
-								<button type="submit" class="btn btn-primary">검색</button>
+								<button type="submit" class="btn btn-primary" id="search">검색</button>
 								<input type="hidden" name="pageNum" value="1">
 								<!-- 								검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 								<input type="hidden" name="amount" value="${pageVO.amount }">
 							</div>
-						</div>
 					</form>
 				</div>
+				<br>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -372,6 +380,7 @@ iframe {
 						</c:forEach>
 					</tbody>
 				</table>
+				<br><br>
 				<form id="actionForm" action="companyPerforList.do" method="get">
 					<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
 					<input type="hidden" name="amount" value="${pageVO.amount }">

@@ -23,7 +23,10 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/users/css/style.css">
 </head>
-<style>
+<style type="text/css">
+.card {
+    width: 85%;
+}
 @font-face {
 	font-family: Poppins-Regular;
 	src:
@@ -202,7 +205,10 @@ iframe {
 }
 
 .table, .row {
-	width: 100% !important
+	width: 95% !important;
+	margin-left: auto;
+    margin-right: auto;
+	
 }
 
 /* .row:hover {
@@ -283,20 +289,22 @@ iframe {
 	color: #666;
 	margin-right: 5px;
 }
+#sidebar,#search{
+	background:#301e4e;
+}
+#list{
+	margin-top: 20px;
+}
+h4{
+	font-size: 70px;
+}
 </style>
-
 <body>
-${pageVO }
 	<div class="wrapper d-flex align-items-stretch ">
 		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="index.html" class="logo">고객센터</a>
+					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="noticeList.do">공지사항</a></li>
@@ -319,10 +327,13 @@ ${pageVO }
 				</div>
 			</div>
 		</nav>
-		<div id="content">
+		<div class="col-lg-12 grid-margin stretch-card" id="list">
+         <div class="card">
+            <div class="card-body">
 			<form action="noticeList.do" method="get">
+			<h4 class="card-title">공지사항</h4>
 				<div class="searchBar" align="right">
-					<select name="searchType">
+					 <select id="inputState" name="searchType" style="border-style: none;">
 						<option value="title"
 							${pageVO.cri.searchType eq 'title' ? 'selected' : '' }>제목</option>
 						<option value="content"
@@ -333,13 +344,14 @@ ${pageVO }
 							${pageVO.cri.searchType eq 'titcont' ? 'selected' : '' }>제목+내용</option>
 					</select> <input type="text" name="searchName"
 						value="${pageVO.cri.searchName }">
-					<button type="submit" class="btn btn-primary">검색</button>
+					<button type="submit" class="btn btn-primary" id="search">검색</button>
 					<!-- hidden으로 숨겨서 들어갈 값 -->
 					<input type="hidden" name="pageNum" value="1">
 					<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 					<input type="hidden" name="amount" value="${pageVO.amount }">
 				</div>
 			</form>
+			<br>
 			<table class="table" style="text-align: center;">
 				<thead>
 					<tr>
@@ -385,14 +397,10 @@ ${pageVO }
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
+				</div>
+				</div>
 		</div>
 	</div>
-
-
-
-
-
-
 	<script>
 		window.onload = function() {
 			if (history.state == '')

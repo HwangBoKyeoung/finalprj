@@ -16,39 +16,39 @@ textarea {
 <body>
 <div class="container">
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8"><br>
-			<h2 class="text-center">공지사항 작성</h2>
+		<div class="col-md-8">
+			<h2 class="card-title">공지사항 작성</h2><br>
 			<form id="frm" action="managerNoticeWrite.do" method="post">
 				<table class="table">
+				<tbody>
 					<tr>
 						<td>작성자</td>
-						<td><input type="text" id="writer" name="writer" 
+						<td style="text-align: left;"><input type="text" id="writer" name="writer" 
 							value="관리자" readonly="readonly"></td>
 					</tr>
 					<tr>
 						<td>작성일자</td>
-						<td><input type="date" id="wrDt" name="wrDt"
+						<td style="text-align: left;"><input type="date" id="wrDt" name="wrDt"
 							readonly="readonly" value=""></td>
 					</tr>
 					<tr>
 						<td>제목</td>
-						<td><input type="text" size="75" id="title" name="title"
+						<td style="text-align: left;"><input type="text" size="55" id="title" name="title"
 							required="required"></td>
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td><textarea rows="10" cols="75" id="content" name="content"
+						<td style="text-align: left;"><textarea rows="10" cols="75" id="content" name="content"
 								></textarea></td>
 					</tr>
 					<tr>
 
 						<td colspan="2" class="text-center"><input type="submit"
-							value="등록" class="btn btn-success"> <input type="button"
+							value="등록" class="btn btn-primary"> <input type="button"
 							onclick="location.href='managerNotice.do'" value="목록"
 							class="btn btn-primary"></td>
 					</tr>
-
+</tbody>
 				</table>
 			</form>
 		</div>

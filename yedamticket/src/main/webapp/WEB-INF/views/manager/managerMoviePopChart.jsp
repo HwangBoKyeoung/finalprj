@@ -38,8 +38,8 @@
                
                var data = new google.visualization.DataTable();
                
-               data.addColumn('string', 'Performance Name');
-               data.addColumn('number', 'AUDIENCE');
+               data.addColumn('string', '공연이름');
+               data.addColumn('number', '관객수');
                
                for(let i=0; i<result.length; i++){
                   arr.push([result[i].name, result[i].audience]);   
@@ -53,8 +53,7 @@
             	          width: 900,
             	          height : 900,
             	          legend: { position: 'none' },
-            	          chart: { title: 'MOVIE AUDIENCE Ranking',
-            	                   subtitle: 'Popularity Ranking' },
+            	          chart: { title: '영화 TOP10 인기순위'},
             	          bars: 'horizontal', // Required for Material Bar Charts.
             	          axes: {
             	            x: {

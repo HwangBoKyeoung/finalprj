@@ -8,13 +8,27 @@
 <title>Insert title here</title>
 <script src="./resources/users/js/core/jquery.min.js"
 	type="text/javascript"></script>
+<style type="text/css">
+	h4{
+		font-weight: 20px;
+	}
+	
+	th{
+		font-weight: bold;
+		font-size: 30px;
+		text-align: center;
+	}
+	td{
+		font-size : 50px;
+	}
+</style>
 </head>
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Performance Request List</h4>
-				<p class="card-description">공연등록요청 리스트</p>
+				<h4 class="card-title" style="font-size: 50px;">공연 등록 요청 목록</h4>
+				<br>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -61,21 +75,19 @@
 				</div>
 				<br>
 				<form action="perforConfirmList.do" method="get">
-					<div class="col-10">
 						<div class="searchBar" align="right">
-							<select name="searchType" class="btn btn-outline-secondary">
+							 <select id="inputState" name="searchType" style="border-style: none;">
 								<option value="ALL"
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="NAME"
 									${pageVO.cri.searchType eq 'NAME' ? 'selected' : '' }>공연이름</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }">
-							<button type="submit" class="btn btn-primary">검색</button>
+							<button type="submit" class="btn-sm btn-primary">검색</button>
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 							<input type="hidden" name="amount" value="${pageVO.amount }">
 						</div>
-					</div>
 				</form>
 			<form id="actionForm" action="perforConfirmList.do" method="get">
                   <input type="hidden" name="pageNum" value="${pageVO.pageNum }">

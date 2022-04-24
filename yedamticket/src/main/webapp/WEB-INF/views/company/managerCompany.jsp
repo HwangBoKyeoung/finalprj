@@ -11,11 +11,10 @@
 <body>
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
-		
 			<div class="card-body">
-				<h4 class="card-title">Company List</h4>
-				<p class="card-description">기업회원 리스트</p>
-				<table class="table table-hover" id="contents">
+				<h4 class="card-title" style="font-size: 50px;">기업회원 목록</h4>
+				<br>
+				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th>기업아이디</th>
@@ -61,10 +60,10 @@
                         type="button" value="다음" class="btn btn-secondary"></a>
                   </c:if>
 				</div>
+				<br>
 				<form action="managerCompany.do">
-				<div class="col-3">
-					<div class="input-group mb-3" align="right">
-						<select name="searchType" class="btn btn-outline-secondary">
+					<div class="searchBar" align="right">
+							<select id="inputState" name="searchType" style="border-style: none;">
 							<option value="ALL"
 								${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 							<option value="NAME"
@@ -74,18 +73,16 @@
 							<option value="CID"
 								${pageVO.cri.searchType eq 'CID' ? 'selected' : '' }>아이디</option>
 						</select> <input type="text" name="searchName"
-							value="${pageVO.cri.searchName }" class="form-control"
-							aria-label="Text input with dropdown button">
-						<button type="submit" class="btn btn-outline-secondary">검색</button>
+							value="${pageVO.cri.searchName }">
+						<button type="submit" class="btn-sm btn-primary">검색</button>
 						<input type="hidden" name="pageNum" value="1">
 						<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 						<input type="hidden" name="amount" value="${pageVO.amount }">
 					</div>
-				</div>
 			</form>
 			</div>
+			</div>
 		</div>
-	</div>
 <script>
 
 	let frm1 = $("input[name='pageNum']").val();

@@ -8,12 +8,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
 	<div class="col-lg-12 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Movie Delete List</h4>
-				<p class="card-description">영화 삭제요청 페이지</p>
+				<h4 class="card-title" style="font-size: 50px;">영화 삭제 요청</h4><br>
 				<table class="table table-hover">
 					<thead>
 						<tr>
@@ -58,9 +56,8 @@
 				</div>
 				<br>
 				<form action="managerMovieDeleteList.do">
-					<div class="col-10">
 						<div class="searchBar" align="right">
-							<select name="searchType" class="btn btn-outline-secondary">
+							<select id="inputState" name="searchType" style="border-style: none;">
 								<option value="ALL"
 									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
 								<option value="NAME"
@@ -69,11 +66,10 @@
 									${pageVO.cri.searchType eq 'LOC' ? 'selected' : '' }>삭제처리</option>
 							</select> <input type="text" name="searchName"
 								value="${pageVO.cri.searchName }">
-							<button type="submit" class="btn btn-primary">검색</button>
+							<button type="submit" class="btn-sm btn-primary">검색</button>
 							<input type="hidden" name="pageNum" value="1">
 							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
 							<input type="hidden" name="amount" value="${pageVO.amount }">
-						</div>
 					</div>
 				</form>
 			</div>

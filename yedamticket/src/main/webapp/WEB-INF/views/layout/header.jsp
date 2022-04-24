@@ -338,7 +338,7 @@ input::placeholder {
 							<a class="dropdown-item" href="cGoodsList.do" style="font-size: 250%;"> 공연굿즈
 							</a>
 						</div></li>
-					<li class="nav-item dropdown"><a href="userService.do"
+					<li class="nav-item dropdown"><a href="noticeList.do"
 						class="" id="navbarDropdownMenuLink1"
 						style="font-size: 250%;">
 							고객센터

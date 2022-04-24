@@ -21,6 +21,7 @@ th {
 <body>
 	<div class="container">
 		<div class="row">
+		<h4 style="font-size: 70px;">공지사항</h4>
 			<div class="col-md-2"></div>
 			<div class="col-md-10">
 				<br>
@@ -49,6 +50,7 @@ th {
 						<button type="button" class="btn btn-primary"
 							onclick="location.href='noticeList.do'">목록가기</button>
 					</div>
+					<br>
 			</div>
 		</div>
 	</div>

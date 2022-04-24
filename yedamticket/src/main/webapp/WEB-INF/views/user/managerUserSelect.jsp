@@ -11,7 +11,7 @@
 	<div class="col-lg-6 grid-margin stretch-card">
 		<div class="card">
 			<div class="card-body">
-				<h4 class="card-title">Users</h4>
+				<h4 class="card-title" style="font-size: 40px;">일반 회원 정보</h4><br>
 				<table class="table">
 					<tr>
 						<th>회원 아이디</th>
@@ -49,5 +49,8 @@
 			</div>
 		</div>
 	</div>
+	<div align="center">
+		<button class="btn-sm btn-primary" onclick="location.href='managerUser.do'">목록</button>
+		</div>
 </body>
 </html>

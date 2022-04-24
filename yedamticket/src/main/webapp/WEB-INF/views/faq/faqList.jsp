@@ -291,19 +291,23 @@ iframe {
 .accordion{
 margin-right: 45%;
 }
+#sidebar{
+	background:#301e4e;
+}
+#list{
+	margin-top: 20px;
+}
+h4{
+	font-size: 70px;
+}
 </style>
 </head>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar">
-			<div class="custom-menu">
-				<button type="button" id="sidebarCollapse" class="btn btn-primary">
-					<i class="fa fa-bars"></i> <span class="sr-only">Toggle Menu</span>
-				</button>
-			</div>
 			<div class="p-4 pt-5">
 				<h1>
-					<a href="index.html" class="logo">고객센터</a>
+					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="noticeList.do">공지사항</a></li>
@@ -327,9 +331,10 @@ margin-right: 45%;
 			</div>
 		</nav>
 		
-		<div class="container  ">
-				<br>
-				<h2>FAQ</h2>
+		<div class="col-lg-12 grid-margin stretch-card" id="list">
+         <div class="card">
+            <div class="card-body">
+				<h4 class="card-title">FAQ</h4>
 				<c:forEach items="${faqs }" var="faq" begin="0" end="5">
 					<div class="accordion">
 						<div class="accordion-item">
@@ -341,6 +346,7 @@ margin-right: 45%;
 					</div>
 				</c:forEach>
 			</div>
+	</div>
 	</div>
 
 	<script type="text/javascript">

@@ -22,9 +22,7 @@ th {
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-2"></div>
-			<div class="col-md-9">
-				<br>
+		<h4 style="font-size: 70px;">1:1문의 내용</h4>
 				<form id="frm" action="inqUpdateForm.do">
 					<input type="hidden" name="inNo" id="inNo" value="${inqs.inNo}">
 					<table class="table">

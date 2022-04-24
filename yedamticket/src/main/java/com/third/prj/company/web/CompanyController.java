@@ -129,6 +129,7 @@ public class CompanyController {
          System.out.println("=====================================================");	
          session.setAttribute("sessionId", login.getCId());
          session.setAttribute("pwd", login.getPwd());
+         session.setAttribute("sessionAuth", login.getRole());
          mv.addObject("msg", msg);
          mv.addObject("url", url);
          mv.setViewName("company/alert");

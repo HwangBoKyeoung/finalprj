@@ -6,44 +6,48 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <style>
 textarea {
-    resize: none;
-  }
+	resize: none;
+}
 </style>
 <body>
-<div class="container">
+	<div class="container">
 		<div class="row">
-			<div class="col-md-2"></div>
 			<div class="col-md-9">
+				<h4 class="card-title" style="font-size: 50px;">공지사항 수정</h4>
 				<br>
 				<form id="frm" action="managerNoticeUpdate.do" method="post">
-                    <input type="hidden" value="${notice.noticeNo}" id="noticeNo" name="noticeNo">
+					<input type="hidden" value="${notice.noticeNo}" id="noticeNo"
+						name="noticeNo">
 					<table class="table">
-						<tr>
-                            <th >작성일자</th>
-                            <td >
-                                <input type="date" id="wrDt" name="wrDt" value="${notice.wrDt }" readonly="readonly" class="form-control"> 
-                            </td>
-                        </tr>
-						<tr>
-                            <th>제목</th>
-                            <td >
-                                <input type="text" size="75" id="title" name="title" value="${notice.title }" class="form-control"> 
-                            </td>	
-                        </tr>
-                        <tr>
-                            <th>내용</th>
-                            <td >
-                                 <textarea rows="10" cols="80" id="content" name="content" >${notice.content }</textarea>
-                            </td>
-                        </tr>	
+						<tbody>
+							<tr>
+								<th>작성일자</th>
+								<td><input type="date" id="wrDt" name="wrDt"
+									value="${notice.wrDt }" readonly="readonly"
+									class="form-control"></td>
+							</tr>
+							<tr>
+								<th>제목</th>
+								<td><input type="text" size="75" id="title" name="title"
+									value="${notice.title }" class="form-control"></td>
+							</tr>
+							<tr>
+								<th>내용</th>
+								<td><textarea rows="10" cols="80" id="content"
+										name="content">${notice.content }</textarea></td>
+							</tr>
+						</tbody>
 					</table>
 					<div align="center">
-                            <input type="submit" class="btn btn-success" value="수정">
-                            <input type="button" class="btn btn-primary" onclick="location.href='managerNotice.do'" value="목록">
-                        </div>
+						<input type="submit" class="btn btn-primary" value="수정"> <input
+							type="button" class="btn btn-primary"
+							onclick="location.href='managerNotice.do'" value="목록">
+					</div>
 				</form>
 			</div>
 		</div>

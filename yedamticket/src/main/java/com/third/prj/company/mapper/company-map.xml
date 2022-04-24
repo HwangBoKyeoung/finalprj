@@ -72,7 +72,7 @@
    </select>
    
    <select id="companyLogin" resultType="com.third.prj.company.service.CompanyVO">
-      SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT
+      SELECT EMAIL,PWD,ADDR,PHONE,BIZNO,DEAL_AGREE_CD,NAME,C_ID,RDT, UPPER('ROLE_'||role) as role
       FROM COMPANY
       WHERE C_ID = #{CId}
    </select>
