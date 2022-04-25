@@ -250,8 +250,8 @@
 													<span class="icon a12 ir_pm">18세이상관람가</span>
 												</c:if>
 
-												<strong>${movie.name }</strong>
-
+												<strong>${movie.name }  </strong>
+    
 											</h3>
 											<div class="infor_btn">
 												<a href="movieDetail.do?docId=${movie.docId }">상세정보</a> <a href="movieBooking.do">예매하기</a>
