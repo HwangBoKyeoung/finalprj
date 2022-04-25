@@ -7,9 +7,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.third.prj.faq.service.CriteriaVO;
+import com.third.prj.faq.service.CriteriaVO2;
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.faq.service.FaqVO;
 import com.third.prj.faq.service.PageVO;
+import com.third.prj.faq.service.PageVO2;
 
 @Controller
 public class FaqController {
@@ -18,9 +20,9 @@ public class FaqController {
 	FaqService faqDao;
 
 	@RequestMapping("/faqList.do")
-	public String faqList(Model model ,CriteriaVO cri) {
-		PageVO pageVO = new PageVO(cri, faqDao.getTotal(cri));
-		model.addAttribute("faqs", faqDao.managerFaqList(cri));
+	public String faqList(Model model ,CriteriaVO2 cri) {
+		PageVO2 pageVO = new PageVO2(cri, faqDao.getTotal2(cri));
+		model.addAttribute("faqs", faqDao.managerFaqList2(cri));
 		model.addAttribute("pageVO",pageVO);
 		return "faq/faqList";
 	}

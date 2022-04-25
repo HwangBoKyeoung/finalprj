@@ -362,7 +362,7 @@ h4 {
 							<input type="hidden" name="amount" value="${pageVO.amount }">
 						</div>
 					</form>
-					<c:forEach items="${faqs }" var="faq" begin="0" end="5">
+					<c:forEach items="${faqs }" var="faq" >
 						<div class="accordion">
 							<div class="accordion-item">
 								<div class="accordion-item-header">[${faq.qstCd}]${faq.title }</div>
