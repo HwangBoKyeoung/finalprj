@@ -175,7 +175,7 @@ textarea.form-control {
 			<div class="col-lg-12" style="padding-top: 50px; text-align: center;">
 				<hr>
 				<h2>
-					<ins>줄거리</ins>
+					줄거리
 				</h2>
 				<br>
 				<p style="text-align: center;">${movie.content }</p>
@@ -183,7 +183,7 @@ textarea.form-control {
 				<hr>
 				<br>
 				<h2>
-					<ins>트레일러/예고편</ins>
+					트레일러/예고편
 				</h2>
 				<div id="tabMenu" style="padding-top: 30px;">
 					<iframe width="80%" height="500"
@@ -219,6 +219,8 @@ textarea.form-control {
 										style="background: #cfc5e9; float: left; margin-left: 53px;"
 										onclick="aJaxCall()">입력</button>
 								</form>
+							</div>
+							</div>
 							</div>
 				</c:if>
 				<div id="reply">

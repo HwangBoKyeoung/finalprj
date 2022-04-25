@@ -127,7 +127,7 @@
 									name="content" required="required"></textarea></td>
 						</tr>
 					</table>
-					<button type="submit" class="form-control">등록</button>
+					<button type="submit" style="background-color: #cfc5e9;margin-bottom: 20px;" class="form-control">등록</button>
 				</form>
 			</div>
 		</div>

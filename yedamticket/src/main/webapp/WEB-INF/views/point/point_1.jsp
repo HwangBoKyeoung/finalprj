@@ -44,7 +44,7 @@
 <div class="container-fluid">
 	<div id="pointdiv1" class="section section-signup" style="background-image : url('./resources/users/img/ssp7_ab.jpg'); height: 100vh;background-repeat : no-repeat; background-size : cover;background-position: top center;">
 		<div id="pointdiv2" style="width: 535px; height: 600px; padding: 1rem; margin: 1rem; float: left; padding-top: 20px;"> 
-			<div class="card card-signup" style="height:90%; width:100%; background: #cfc5e9;">
+			<div class="card card-signup" style="margin-left: 670px;height:90%; width:100%; background: #cfc5e9;">
 				<form id="form" action="point_2.do" method="POST">
 					<div class="card-header text-center">
 						<h3 class="card-title title-up">충전</h3>
@@ -72,8 +72,8 @@
 						left: 0;
 						right: 0;"> -->
 						
-					</div><!--  -->
 				</form>
+					</div><!--  -->
 			</div>
 		</div>
 	</div>

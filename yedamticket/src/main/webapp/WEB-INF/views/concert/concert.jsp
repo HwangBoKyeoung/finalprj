@@ -33,6 +33,10 @@ body {
 	font-family: 'Gowun Dodum', sans-serif;
 	width: 1400px;
 }
+
+/* .fc-theme-standard td:hover{
+	background-color: red;
+} */
 </style>
 <script src='resources/calender/main.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -45,8 +49,8 @@ body {
 		});
 		
 		request.done(function(data) {
-			console.log(data[0]);
-
+			console.log(data);
+			
 			var calendarEl = document.getElementById('calendar');
 			
 			var calendar = new FullCalendar.Calendar(calendarEl, {
@@ -62,7 +66,7 @@ body {
 			    	let str = arg.startStr;
 			    	let start = str.substr(0,10);
 			    	console.log(start);
-
+					console.log(arg);
 			        $.ajax({
 			        	url: "ajaxModalForm.do",
 			        	type: "post",
@@ -161,5 +165,12 @@ body {
     </div>
   </div>
 </div><br><br>
+<script>
+	/* let table = document.getElementsByTagName('table');
+	table.onclick = function(event){
+		let target = event.target;
+		console.log(target);
+	} */
+</script>
 </body>
 </html>

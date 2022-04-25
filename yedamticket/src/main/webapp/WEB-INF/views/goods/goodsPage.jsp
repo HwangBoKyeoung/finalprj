@@ -294,7 +294,7 @@ iframe {
 	margin-top: 20px;
 }
 h4{
-	font-size: 70px;
+	font-size: 35px;
 }
 </style>
 </head>

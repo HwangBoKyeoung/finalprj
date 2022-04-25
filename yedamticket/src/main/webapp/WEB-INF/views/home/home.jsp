@@ -24,6 +24,9 @@
 <script type="text/javascript" src="resources/js/d3.js"></script>
 <script type="text/javascript" src="resources/js/korea.js"></script>
 <style type="text/css">
+*{
+	list-style: none;
+}
 .p1 {
 	font-size: 250%;
 	font-weight: bold;

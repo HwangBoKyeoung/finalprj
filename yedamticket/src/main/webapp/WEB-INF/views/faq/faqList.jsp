@@ -238,6 +238,7 @@ iframe {
 	width: 700px;
 	max-width: 1000px;
 	margin: 2rem auto;
+  margin-right: 45%;
 }
 
 .accordion-item {
@@ -287,9 +288,7 @@ iframe {
 		1;
 }
 
-.accordion {
-	margin-right: 45%;
-}
+
 
 #sidebar {
 	background: #301e4e;
@@ -402,6 +401,8 @@ h4 {
 			</div>
 		</div>
 	</div>
+
+</div>
 	<script type="text/javascript">
 	 const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
      accordionItemHeaders.forEach(accordionItemHeader => {

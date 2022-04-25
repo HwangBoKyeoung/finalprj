@@ -26,9 +26,7 @@
 		<collection property="movieVideoVO" resultMap="movieVideoMap"></collection>
 	</resultMap>
 
-	<resultMap
-		type="com.third.prj.performance.service.PerformanceVO"
-		id="perFormanceMap">
+	<resultMap type="com.third.prj.performance.service.PerformanceVO" id="perFormanceMap">
 		<result property="name" column="name" />
 		<result property="content" column="content" />
 		<result property="actor" column="actor" />

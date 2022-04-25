@@ -111,16 +111,16 @@
 								<input type="text" class="form-control" id="price" name="price" value="${pers.price }">
 							</div>
 						</div>
-					 <div>
+					 <div style="margin-bottom: 70px;">
 							<label for="exampleInputConfirmPassword2"
 								class="col-sm-3 col-form-label" style="text-align: left;padding-left:0px;">포스터</label>
 							<input type="file" accept="image/gif, image/jpeg, image/png" id="file" name="file">
 							<img id="preImage" src="/upload/${pers.renames}" alt="image_title"/>
 						</div>
-						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyPerforList.do'">
+						<button type="submit" class="btn me-2" style="background: #301e4e;">수정</button>
+						<input type="button" class="btn btn-light" style="background: #301e4e;" value="목록" onclick="location.href='companyPerforList.do'">
 					</form>
-						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyPerforDel.do?PNo=${pers.PNo}&cId=${pers.CId}'">삭제요청</button>
+						<button class="btn btn-gradient-primary me-2" style="background: #301e4e;margin-top: 5px;" onclick="location.href='companyPerforDel.do?PNo=${pers.PNo}&cId=${pers.CId}'">삭제요청</button>
 						<%-- <input type="hidden" name="no" id="no" value="${pers.PNo}"> --%>
 				</div>
 			</div>

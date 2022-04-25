@@ -23,7 +23,7 @@
 				<p class="card-text">좌석구역 : ${loc }</p>
 				<p class="card-text">가  격 : ${price }</p>
 				<input type="button" class="btn btn-secondary" onclick="chargeChk();" value="결제">
-				<input type="button" onclick="location.href='userPage.do'" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
+				<input type="button" onclick="location.href='ticketmarket_1.do'" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal2" value="취소">
 			</div>
 		</div>
 	</div>
