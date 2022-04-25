@@ -58,7 +58,7 @@
 	<div align="right" style="margin:auto; max-width: 30%;">
 		<i class="fas fa-exclamation-circle" title="10% 수수료가 부가된 가격입니다." style="cursor:pointer;" aria-hidden="true"></i>
 		<input type="submit" class="btn" value="확인">
-		<input type="button" class="btn btn-danger" onclick="location.href='ticketassignment_1.do'" value="취소">
+		<input type="button" class="btn btn-danger" onclick="location.href='ticketmarket_1.do'" value="취소">
 	</div>
 	</form>
 </body>
