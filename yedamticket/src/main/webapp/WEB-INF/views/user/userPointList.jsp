@@ -113,9 +113,9 @@
 									<td>포인트충전</td>
 								</c:when>
 							</c:choose>
-							<td>+ ${charge}</td>
-							<td>- ${pay }</td>
-							<td>${tempPoint }</td>
+							<td style="text-align: right;">+ ${charge}</td>
+							<td style="text-align: right;">- ${pay }</td>
+							<td style="text-align: right;">${tempPoint }</td>
 						</tr>
 					</c:forEach>
 				</tbody>

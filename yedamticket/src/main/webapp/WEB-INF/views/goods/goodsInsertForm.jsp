@@ -55,7 +55,7 @@ textarea {
 									name="content" required="required"></textarea></td>
 						</tr>
 					</table>
-					<button type="submit" class="form-control">등록</button>
+					<button type="submit" style="background: #cfc5e9;margin-bottom: 30px;" class="form-control">등록</button>
 				</form>
 			</div>
 		</div>

@@ -26,8 +26,8 @@ input::-webkit-input-placeholder { color: black; }
 	margin-bottom: 5px;
 	font-family: 'Gowun Dodum', sans-serif;
 	width: 1400px;
+	font-size: 3.5em;
 }
-
 
 </style>
 </head>

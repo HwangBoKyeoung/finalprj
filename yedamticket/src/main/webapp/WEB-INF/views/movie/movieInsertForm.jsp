@@ -13,7 +13,7 @@ textarea {
 <input type="hidden" name="mvNo" id="mvNo">
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row" style="padding-bottom: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-9">
 				<br>
@@ -95,7 +95,7 @@ textarea {
 								></textarea></td>
 						</tr>
 					</table>
-					<button type="submit" class="form-control">등록</button>
+					<button type="submit" style="background-color: #cfc5e9;" class="form-control">등록</button>
 				</form>
 			</div>
 		</div>

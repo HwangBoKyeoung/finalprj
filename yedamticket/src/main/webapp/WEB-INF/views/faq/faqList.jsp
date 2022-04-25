@@ -238,7 +238,8 @@ iframe {
 .accordion {
 	width: 700px;
 	max-width: 1000px;
-	margin: 2rem auto;
+	margin-left: auto;
+    margin-right: auto;
 
 }
 
@@ -288,9 +289,7 @@ iframe {
 	border-image: linear-gradient(to right, transparent, #34495e, transparent)
 		1;
 }
-.accordion{
-margin-right: 45%;
-}
+
 #sidebar{
 	background:#301e4e;
 }
@@ -334,7 +333,7 @@ h4{
 		<div class="col-lg-12 grid-margin stretch-card" id="list">
          <div class="card" style="height: 980px; width: 85%;">
             <div class="card-body">
-				<h4 class="card-title">FAQ</h4>
+            <br><h2>FAQ</h2><br>
 				<c:forEach items="${faqs }" var="faq" begin="0" end="5">
 					<div class="accordion">
 						<div class="accordion-item">
@@ -348,7 +347,7 @@ h4{
 			</div>
 	</div>
 	</div>
-
+</div>
 	<script type="text/javascript">
 	 const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
      accordionItemHeaders.forEach(accordionItemHeader => {

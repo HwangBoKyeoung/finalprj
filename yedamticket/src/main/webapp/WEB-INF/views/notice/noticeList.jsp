@@ -7,11 +7,11 @@
 <head>
 <title>Sidebar 02</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- <meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
@@ -47,7 +47,7 @@
 
 body, html {
 	height: 100%;
-	font-family: sans-serif
+	font-family: sans-serif;
 }
 
 a {
@@ -131,7 +131,7 @@ iframe {
 	background: #866ec7
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
 	.row {
 		display: block
 	}
@@ -155,7 +155,7 @@ iframe {
 		display: block
 	}
 }
-
+ */
 .cell {
 	display: table-cell
 }
@@ -215,7 +215,7 @@ iframe {
     background-color: #ececff;
     cursor: pointer
 } */
-@media ( max-width :768px) {
+/* @media ( max-width :768px) {
 	.row {
 		border-bottom: 1px solid #f2f2f2;
 		padding-bottom: 18px;
@@ -297,7 +297,7 @@ iframe {
 }
 h4{
 	font-size: 70px;
-}
+} */
 </style>
 <body>
 	<div class="wrapper d-flex align-items-stretch ">
@@ -331,7 +331,7 @@ h4{
          <div class="card" style="height: 980px;">
             <div class="card-body">
 			<form action="noticeList.do" method="get">
-			<h4 class="card-title">공지사항</h4>
+			<br><h2>공지사항</h2><br>
 				<div class="searchBar" align="right">
 					 <select id="inputState" name="searchType" style="border-style: none;">
 						<option value="title"

@@ -343,7 +343,7 @@ h4 {
 		<div class="col-lg-12 grid-margin stretch-card" id="list">
 			<div class="card" style="height: 980px; width: 85%;">
 				<div class="card-body">
-					<h4 class="card-title">1:1 문의</h4>
+				<br><h2>1:1 문의</h2><br>
 					<br>
 					<table class="table table-hover">
 						<thead>

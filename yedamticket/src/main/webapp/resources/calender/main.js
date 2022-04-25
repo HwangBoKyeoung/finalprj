@@ -290,7 +290,14 @@ var FullCalendar = (function (exports) {
     // ----------------------------------------------------------------------------------------------------------------
     function buildDelegationHandler(selector, handler) {
         return function (ev) {
-            var matchedChild = elementClosest(ev.target, selector);
+	console.log(selector);
+            var matchedChild = elementClosest(ev.target.parentNode, selector);
+			/*ev.target.parentNode.parentNode.addEventListener("mouseover", function(e){
+				ev.target.style.backgroundColor='#866ec766';
+			});
+			ev.target.parentNode.parentNode.addEventListener("mouseleave", function(e){
+				ev.target.style.backgroundColor='transparent';
+			});*/
             if (matchedChild) {
                 handler.call(matchedChild, ev, matchedChild);
             }
