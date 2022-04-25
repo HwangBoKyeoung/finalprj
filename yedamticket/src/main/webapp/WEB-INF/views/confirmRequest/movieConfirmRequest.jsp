@@ -118,7 +118,7 @@
 		if($(this).val()=='거부'){
 			$("#selectedShow").show();
 		} else{
-			$("#selectedShow").empty();
+			$("#selectedShow").hide();
 		}
 		});
 	</script>

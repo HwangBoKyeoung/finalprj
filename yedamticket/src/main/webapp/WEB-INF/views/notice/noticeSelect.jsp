@@ -11,6 +11,7 @@ textarea {
 	resize: none;
 	 color: transparent;
  text-shadow: 0 0 0 black;
+ 
 }
 
 th {
@@ -42,7 +43,7 @@ th {
 						</tr>
 						<tr>
 							<th>내용</th>
-							<td><textarea rows="10" cols="90" id="content"
+							<td><textarea rows="30" cols="90" id="content"
 									name="content" readonly="readonly" disabled>${notice.content }</textarea></td>
 						</tr>
 					</table>

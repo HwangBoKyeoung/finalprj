@@ -3,6 +3,7 @@ package com.third.prj.faq.mapper;
 import java.util.List;
 
 import com.third.prj.faq.service.CriteriaVO;
+import com.third.prj.faq.service.CriteriaVO2;
 import com.third.prj.faq.service.FaqVO;
 
 public interface FaqMapper {
@@ -16,5 +17,10 @@ public interface FaqMapper {
 	//관리자페이지 FAQ
 		List<FaqVO> managerFaqList(CriteriaVO cri);
 		int getTotal(CriteriaVO cri);
+		
+		// 관리자페이지 FAQ
+		List<FaqVO> managerFaqList2(CriteriaVO2 cri);
+
+		int getTotal2(CriteriaVO2 cri);
 	
 }

@@ -50,9 +50,7 @@ ul, li {
 }
 
 input {
-	display: block;
 	outline: none;
-	border: none !important
 }
 
 textarea {
@@ -235,11 +233,12 @@ iframe {
 		width: 100% !important
 	}
 }
+
 .accordion {
 	width: 700px;
 	max-width: 1000px;
 	margin: 2rem auto;
-
+  margin-right: 45%;
 }
 
 .accordion-item {
@@ -288,17 +287,26 @@ iframe {
 	border-image: linear-gradient(to right, transparent, #34495e, transparent)
 		1;
 }
-.accordion{
-margin-right: 45%;
+
+
+
+#sidebar {
+	background: #301e4e;
 }
-#sidebar{
-	background:#301e4e;
-}
-#list{
+
+#list {
 	margin-top: 20px;
 }
-h4{
+
+h4 {
 	font-size: 70px;
+}
+.btnSearch{
+	background: #866ec7;
+}
+#content{
+	position: absolute;
+	left: -240px;
 }
 </style>
 </head>
@@ -309,7 +317,8 @@ h4{
 				<h1>
 					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
-				<ul class="list-unstyled components mb-5" style="padding-bottom: 450px;">
+				<ul class="list-unstyled components mb-5"
+					style="padding-bottom: 450px;">
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="faqList.do">FAQ</a></li>
 					<li><a href="inqList.do">1:1 문의</a></li>
@@ -330,25 +339,70 @@ h4{
 				</div>
 			</div>
 		</nav>
-		
 		<div class="col-lg-12 grid-margin stretch-card" id="list">
-         <div class="card" style="height: 980px; width: 85%;">
-            <div class="card-body">
-				<h4 class="card-title">FAQ</h4>
-				<c:forEach items="${faqs }" var="faq" begin="0" end="5">
-					<div class="accordion">
-						<div class="accordion-item">
-							<div class="accordion-item-header">${faq.title }</div>
-							<div class="accordion-item-body">
-								<div class="accordion-item-body-content">${faq.content }</div>
+			<div class="card" style="height: 980px; width: 85%;">
+				<div class="card-body">
+					<h4 class="card-title">FAQ</h4>
+					<form action="faqList.do">
+						<div class="searchBar" align="center">
+							<select id="inputState" name="searchType"
+								style="border-style: none;">
+								<option value="ALL"
+									${pageVO.cri.searchType eq 'ALL' ? 'selected' : '' }>전체</option>
+								<option value="QSTCD"
+									${pageVO.cri.searchType eq 'QSTCD' ? 'selected' : '' }>분야</option>
+								<option value="TITLE"
+									${pageVO.cri.searchType eq 'TITLE' ? 'selected' : '' }>제목</option>
+							</select> <input type="text" name="searchName"
+								value="${pageVO.cri.searchName }">
+							<button type="submit" class="btn-sm btn-primary btnSearch">검색</button>
+							<input type="hidden" name="pageNum" value="1">
+							<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
+							<input type="hidden" name="amount" value="${pageVO.amount }">
+						</div>
+					</form>
+					<c:forEach items="${faqs }" var="faq" >
+						<div class="accordion">
+							<div class="accordion-item">
+								<div class="accordion-item-header">[${faq.qstCd}]${faq.title }</div>
+								<div class="accordion-item-body">
+									<div class="accordion-item-body-content">${faq.content }</div>
+								</div>
 							</div>
 						</div>
-					</div>
-				</c:forEach>
+					</c:forEach>
+				<form id="actionForm" action="faqList.do" method="get">
+					<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+					<input type="hidden" name="amount" value="${pageVO.amount }">
+					<input type="hidden" name="searchType"
+						value="${pageVO.cri.searchType }"> <input type="hidden"
+						name="searchName" value="${pageVO.cri.searchName }">
+				</form>
+				<div id="content" align="center">
+					<c:if test="${pageVO.prev }">
+						<!-- 이전버튼 활성화 여부 -->
+						<a href="${pageVO.startPage-1 }"> <input type="button"
+							value="이전" class="btn btn-secondary"></a>
+					</c:if>
+					<!-- pageNum -->
+					<c:forEach var="num" begin="${pageVO.startPage }"
+						end="${pageVO.endPage }">
+						<a class="${pageVO.pageNum == num ? 'active': '' }" href="${num }">
+							<input type="button" value="${num }" class="btn btn-secondary">
+						</a>
+					</c:forEach>
+					<!-- 다음버튼 -->
+					<c:if test="${pageVO.next }">
+						<a href="${pageVO.endPage+1 }"> <input type="button"
+							value="다음" class="btn btn-secondary"></a>
+					</c:if>
+				</div>
+				</div>
 			</div>
-	</div>
+		</div>
 	</div>
 
+</div>
 	<script type="text/javascript">
 	 const accordionItemHeaders = document.querySelectorAll(".accordion-item-header");
      accordionItemHeaders.forEach(accordionItemHeader => {
@@ -362,6 +416,17 @@ h4{
              }
          });
      });
+     
+     let actionForm = $("#actionForm");
+     $("#content a").on("click", function(e){
+        e.preventDefault();
+        console.log("click");
+        console.log($(this).attr("href"));
+        actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+        
+        actionForm.submit();
+     });
+     
 	</script>
 	<script src="./resources/users/js/core/jquery.min.js"></script>
 	<script src="./resources/users/js/core/popper.js"></script>

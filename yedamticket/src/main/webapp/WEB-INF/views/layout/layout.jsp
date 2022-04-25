@@ -40,6 +40,7 @@
 box-sizing: border-box;
 -webkit-box-sizing: border-box;
 -moz-box-sizing: border-box;
+font-family: 'Gowun Dodum', sans-serif;
 }
 
 html, body {
@@ -80,6 +81,7 @@ html, body {
 	left: 0;
 	padding-top: 0px;
 }
+
 </style>
 </head>
 <body class="index-page sidebar-collapse">

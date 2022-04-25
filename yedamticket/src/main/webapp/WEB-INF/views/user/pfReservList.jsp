@@ -404,6 +404,10 @@ html, body {
 #MBTN {
 	border-radius: 10px;
 	margin-left: 15px;
+	background: #8867bf;
+	border-radius: 10px;
+	padding: 4px;
+	font-size: 14px;
 }
 </style>
 </head>
@@ -469,7 +473,7 @@ html, body {
 									<td>${pf.performanceScheduleVO.time}</td>
 									<td>${pf.performanceReservationVO.seatNo}</td>
 									<td><button type="button" id="MBTN"
-											class="checkBtn btn-xs btn-primary">보기</button></td>
+											class="checkBtn btn btn-primary btn-xs">보기</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>

@@ -196,6 +196,7 @@ iframe {
 	width: 100% !important
 }
 
+
 /* .row:hover {
     background-color: #ececff;
     cursor: pointer
@@ -278,6 +279,16 @@ iframe {
 .logo {
 	color: white;
 }
+.btn{
+border-radius: 20px;
+padding: 4px;
+font-size: 12px;
+margin-top: -7px;
+}
+
+span{
+    font-size: 20px;
+}
 </style>
 
 <body>
@@ -291,7 +302,9 @@ iframe {
 				<div>	
 					<h6>${sessionId }님의</h6>
 					<fmt:formatNumber value="${user.point }" var="Point"/>
-					<h6>보유 포인트${Point }P</h6>
+					<h6>보유 포인트${Point }P<button class="btn btn-sm" style="background: #cec5e9; margin-left: 10px;"
+								onclick="location.href='point_1.do'">충전</button></h6>
+					
 					<br>
 				</div>
 				<ul class="list-unstyled components mb-5">
@@ -300,7 +313,6 @@ iframe {
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
 					<li><a href="userPointList.do">거래내역</a></li>
-					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 
 				<div class="mb-5">
@@ -322,7 +334,7 @@ iframe {
 			<br><h2>나의 예매내역</h2><br>
 		</div>
 			<c:if test="${not empty prList}">
-				<span>결제대기티켓</span>
+				<span style="font-size: 25px;color: black;">결제대기티켓</span>
 				<div class="cols-12">
 					<table class="table table-sm">
 						<thead>
@@ -369,7 +381,7 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${empty prList}">
-				<span>결제대기티켓</span>
+				<span style="font-size: 25px;color: black;">결제대기티켓</span>
 				<div class="cols-12">
 					<table class="table table-sm">
 						<thead>
@@ -397,7 +409,7 @@ iframe {
 			</c:if>
 			<br><br>
 			<c:if test="${not empty mvList}">
-				<span>영화예매내역</span>
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs"onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -433,7 +445,8 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${empty mvList}">
-				<span>영화예매내역</span>
+
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -458,7 +471,7 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${not empty pfList}">
-				<span>공연예매내역</span>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm tblMemSearch">
@@ -492,7 +505,7 @@ iframe {
 			</c:if>
 			<br>
 			<c:if test="${empty pfList}">
-				<span>공연예매내역</span>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
