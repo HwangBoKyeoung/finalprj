@@ -82,7 +82,7 @@ let chked2 = 0;
 function idcheck(){
 	let id = $("#id").val()
 	let selector = $("#selmail").val()
-	let RegExp = /^[a-zA-Z0-9]{4,12}$/;
+	let RegExp = /^[a-zA-Z0-9]{4,21}$/;
 	
 	if(! RegExp.test(id)){
 		console.log("id조건 영어, 4자리이상 12자리이하.")
