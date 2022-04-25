@@ -41,8 +41,11 @@
 								<p class="card-text">${i.content}</p>
 								<div class="d-flex justify-content-between align-items-center">
 									<div class="btn-group">
-										<button class="btn" style="background: #cfc5e9;"">상세</button>
-										
+									<form action="goodsPayForm.do" method="post">
+										<input type="hidden" id="GNo" name="GNo" value="${i.GNo }">
+										<input type="hidden" id="UId" name="UId" value="${sessionId }">
+										<button type="submit" class="btn" style="background: #cfc5e9;">구매하기</button>
+									</form>
 									</div>
 									<p><b>${i.price}원</b></p>
 								</div>

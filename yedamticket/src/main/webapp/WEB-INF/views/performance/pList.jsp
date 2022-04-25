@@ -72,7 +72,14 @@ input::-webkit-input-placeholder { color: black; }
     	<form action="pBookingForm.do" method="post">
         <div class="col-12 col-lg-6 single-event">
             <figure class="events-thumbnail">
-                <img src="resources/performance/images/event-1.jpg" alt="">
+            <c:choose>
+          		<c:when test="${not empty p.fileCd}">
+          		  <img src="resources/performance/images/${p.fileCd}" style="width: 559px; height: 300px;">
+          		</c:when>  
+               	<c:otherwise>
+               		<img src="resources/performance/images/alt.jpg" style="width: 559px; height: 300px;">
+               	</c:otherwise>
+            </c:choose>
             </figure>
             <div class="event-content-wrap">
                 <header class="entry-header flex justify-content-between">
