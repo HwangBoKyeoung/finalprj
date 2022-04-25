@@ -10,23 +10,29 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.third.prj.goods.service.CriteriaVO;
 import com.third.prj.goods.service.GoodsService;
 import com.third.prj.goods.service.GoodsVO;
-
-import com.third.prj.goods.service.CriteriaVO;
 import com.third.prj.goods.service.PageVO;
+import com.third.prj.point.service.PointService;
+import com.third.prj.point.service.PointVO;
+import com.third.prj.user.service.UserService;
+import com.third.prj.user.service.UserVO;
 
 @Controller
 public class GoodsController {
 
 	@Autowired
 	private GoodsService goodsDao;
-
+	@Autowired
+	private UserService userDao;
 	@Autowired
 	private String upLoadPath;
-
+	@Autowired
+	private PointService pointDao;
 	@RequestMapping("/cGoodsList.do")
 	public String cGoodsList(Model model,GoodsVO vo) {
 		String goodsCd = "pf";
@@ -44,7 +50,35 @@ public class GoodsController {
 
 		return "goods/mGoodsList";
 	}
-
+	@RequestMapping("/goodsPayForm.do")
+	public String goodsPayForm(Model model,UserVO userVO,GoodsVO vo) {
+		
+		
+		model.addAttribute("goods",goodsDao.goodsSelect(vo));
+		model.addAttribute("user",userDao.userSelectOne(userVO));
+		return "goods/goodsPayForm";
+	}
+	@RequestMapping("/goodsPay.do")
+	@ResponseBody
+	public String goodsPay(UserVO usersVO,PointVO pointVO) {
+		userDao.payPoint(usersVO);
+		int n=pointDao.payInsert(pointVO);
+	
+		if(n != 0) {
+			return "success";
+		}else {
+			return "fail";
+		}
+		
+	}
+	@RequestMapping("/goodsDetail.do")
+	public String goodsDetail(GoodsVO vo,Model model) {
+		
+		model.addAttribute("goods",goodsDao.goodsSelect(vo));
+		return "goods/goodsDetail";
+	};
+		
+	
 	@RequestMapping("/goodsUpdateForm.do")
 	public String goodsUpdateForm(GoodsVO vo) {
 		goodsDao.goodsUpdate(vo);

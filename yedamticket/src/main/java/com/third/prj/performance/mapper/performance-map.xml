@@ -164,8 +164,7 @@
          SELECT * 
          FROM (
              SELECT ROWNUM RN, A.*
-             FROM (
-             
+             FROM (            
               SELECT 
              P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
              PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
@@ -216,8 +215,8 @@
    <select id="locPlist" resultMap="pMap">
       <![CDATA[  
       SELECT * FROM PERFORMANCE
-      WHERE ADDR LIKE  '%'||#{addr}||'%' 
-      AND ROWNUM <6
+      WHERE ADDR LIKE  #{addr}||'%' 
+      AND ROWNUM <5
       ]]>
    </select>
    <!-- end 황규복ㄴ -->

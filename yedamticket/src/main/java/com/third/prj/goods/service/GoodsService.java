@@ -10,7 +10,7 @@ public interface GoodsService {
 	List<GoodsVO> cGoodsList(GoodsVO vo);
 	int goodsInsert(GoodsVO vo);
 
-
+	
 	List<GoodsVO> goodsLi();
 	GoodsVO goodsSelect(GoodsVO vo);
 	

@@ -151,10 +151,10 @@
 	<!-- 영화리스트 1-10등까지-->
 	<select id="movieList" resultMap="movieResultMap">
 		<![CDATA[
-      SELECT ROWNUM, A.*
+   SELECT ROWNUM, A.*
         FROM(
         SELECT NAME,AUDIENCE,STARTDATE,SUBSTR(CONTENT,0,100) CONTENT,FILE_CD,RATING,DOCID,RUNTIME,
-        RANK() OVER (ORDER BY AUDIENCE ASC) RANK
+        RANK() OVER (ORDER BY AUDIENCE DESC) RANK
         FROM MOVIE
         WHERE
       STARTDATE

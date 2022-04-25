@@ -220,8 +220,8 @@ textarea.form-control {
 										onclick="aJaxCall()">입력</button>
 								</form>
 							</div>
-							</div>
-							</div>
+					</div>
+					</div>
 				</c:if>
 				<div id="reply">
 					<br> <br> <br> <br> <br>

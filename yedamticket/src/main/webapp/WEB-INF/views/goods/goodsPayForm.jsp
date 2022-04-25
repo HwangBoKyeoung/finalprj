@@ -55,6 +55,7 @@ list-style: none;
   z-index: 1;
   background: #866ec766;
   font-size: 1em;
+/*   transform: rotate(-90deg); */
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }
@@ -205,27 +206,12 @@ input {
     
         <div id="logo"><h1 class="logo">YEDAM</h1>
           <div class="CTA">
-          <form id="payFrm" >
-               <!-- 무비넘버 -->
-            <input type="hidden" id="docId" name="docId" value="${movie.docId }">
-            <!-- 지역 -->
-            <input type="hidden" id="reservLoc" name="reservLoc" value="${re.reservLoc }">
-            <!-- 영화관 -->
-            <input type="hidden" id="reservHall" name="reservHall"  value="${re.reservHall }">
-            <!-- 사용자 -->
+          <form id="payFrm"> 
             <input type="hidden" id="UId" name="UId" value="${sessionId }">
-            <!-- 날짜-->
-            <input type="hidden" id="schDate" name="schDate"  value="${re.schDate }">
-            <!-- 시간 -->
-            <input type="hidden" id="schTime" name="schTime" value="${re.schTime }">
-            <!-- 좌석이름 -->
-            <input type="hidden" id="seatName" name="seatName">
             <!-- 영화 가격 -->
-            <input type="hidden" id="pay" name="pay">
+            <input type="hidden" id="pay" name="pay" value="${goods.price }">
             <!-- 영화인지 공연인지 코드 -->
-            <input type="hidden" id="buyCtntCd" name="buyCtntCd" value="mv">
-            <!-- 관객수 -->
-            <input type="hidden" id="audience" name="audience">
+            <input type="hidden" id="buyCtntCd" name="buyCtntCd" value="gd">    
             <button type="button" onclick="chkPoint()" class="btn" style="width: 120%;height: 70px;background: #cfc5e9;color: black;font-weight: bold;font-size: 13px;">결제하기</button>
          </form>
             </div>
@@ -235,19 +221,17 @@ input {
             <a id="profile" class="active"><i class="fa fa-user"></i></a>
             <a id="payment"><i class="fa fa-credit-card"></i></a>
             <a id="subscription"><i class="fa-solid fa-tv"></i></a>
-            <!-- <a id="privacy"><i class="fa fa-tasks"></i></a>
-            <a id="settings"><i class="fa fa-cog"></i></a> -->
           </nav>
         </div>
         <div class="rightbox">
           <div class="profile noshow">
             <h1>구매자 정보</h1>
             <h2>성명</h2>
-            <p>${user.name } </p>
+            <p>${user.name }</p>
             <h2>생년월일</h2>
             <p>${user.birthDt }</p>
             <h2>이메일</h2>
-            <p>${user.email}</p>
+            <p>${user.email }</p>
           </div>
           
           <div class="payment noshow">
@@ -257,17 +241,10 @@ input {
           </div>
       
           <div class="subscription ">
-            <h1>상품 정보</h1>
-            <h2>영화제목</h2>
-            <p>${movie.name }</p>
-            <h2>장소</h2>
-            <p>${re.reservLoc } ${re.reservHall }영화관</p>
-            <h2>시간</h2>
-            <p>${re.schDate } ${re.schTime }</p>
-            <h2>좌석</h2>
-            <p id="pSeatName"></p>
+            <h1>상품 정보</h1>           
+            <p>${goods.name}</p>
             <h2>금액</h2>
-            <p id="price"></p>        
+            <p>${goods.price }원</p>        
           </div> 
        <div class="settings noshow">
             <h1>Account Settings</h1>
@@ -293,7 +270,7 @@ let slicePrice = price1.slice(0,-1);
 		});
    }else{
       $.ajax({
-           url: 'moviePay.do',
+           url: 'goodsPay.do',
            type: 'POST',
            data:$('#payFrm').serialize(),
            success: function (result) {
@@ -307,29 +284,7 @@ let slicePrice = price1.slice(0,-1);
    }
 }
 
-(function (){
-   let seatName=('${re.seatName }');
-   let strName=seatName.substring(0,seatName.length-1);
-   $('#seatName').val(strName);
-   let splitName=strName.split(',');
-   console.log(splitName);
-   let fileCd=('${movie.fileCd}').split('|');
-   let poster=fileCd[0];   
 
-   let cnt=0;
-   let price=13000;
-   for(var i =0;i<splitName.length;i++){    
-	   if(i==splitName.length-1){
-		   pSeatName.innerText += (splitName[i]);
-		} else{
-			pSeatName.innerText += (splitName[i]+', ');
-		}
-         cnt++;      
-   }
-   $('#price').text(price*cnt+'원');
-   $('#pay').val(price*cnt);
-   $('#audience').val(cnt);
-})();
 
 /*active button class onclick*/
 $('#nav a').click(function(e) {
