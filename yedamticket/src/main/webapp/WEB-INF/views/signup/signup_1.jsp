@@ -43,7 +43,7 @@
 					</div>
 					<div class="card-body">
 						<div class="input-group no-border">
-							<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required="required" onkeyup="idcheck();" maxlength="13">
+							<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required="required" onkeyup="idcheck();" maxlength="20">
 							<input type="text" id="email" name="email" class="form-control" placeholder="주소 (@ 생략)" style="color:white;">
 							<input type="hidden" name="content" id="content" required="required">
 							<input type="hidden" name="subject" id="subject" required="required">
