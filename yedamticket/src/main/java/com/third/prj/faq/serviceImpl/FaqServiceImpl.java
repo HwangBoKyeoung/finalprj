@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import com.third.prj.faq.mapper.FaqMapper;
 import com.third.prj.faq.service.CriteriaVO;
+import com.third.prj.faq.service.CriteriaVO2;
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.faq.service.FaqVO;
 
@@ -51,6 +52,18 @@ public class FaqServiceImpl implements FaqService {
 	public int getTotal(CriteriaVO cri) {
 		// TODO Auto-generated method stub
 		return mapper.getTotal(cri);
+	}
+
+	@Override
+	public List<FaqVO> managerFaqList2(CriteriaVO2 cri) {
+		// TODO Auto-generated method stub
+		return mapper.managerFaqList2(cri);
+	}
+
+	@Override
+	public int getTotal2(CriteriaVO2 cri) {
+		// TODO Auto-generated method stub
+		return mapper.getTotal2(cri);
 	}
 
 }

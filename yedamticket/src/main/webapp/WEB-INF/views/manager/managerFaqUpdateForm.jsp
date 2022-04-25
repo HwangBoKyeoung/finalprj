@@ -19,9 +19,13 @@
 						<tr>
 							<th width="100" style="text-align: left;">유형</th>
 							<td style="text-align: left;"><select name="qstCd">
-										<option value="티켓예매">티켓예매/발권</option>
+										<option value="회원가입"selected="selected">회원가입</option>
+										<option value="티켓예매/발권">티켓예매/발권</option>
+										<option value="구매/결제">구매/결제</option>
 										<option value="취소/환불">취소/환불</option>
-										<option value="배송/반송" selected="selected">배송/반송</option>
+										<option value="배송/반송">배송/반송</option>
+										<option value="판매방법">판매방법</option>
+										<option value="상품등록/수정">상품등록/수정</option>
 								</select></td>
 						</tr>
 						<tr>

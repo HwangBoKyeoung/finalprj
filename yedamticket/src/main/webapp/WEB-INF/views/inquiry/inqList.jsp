@@ -311,15 +311,19 @@ iframe {
 h4 {
 	font-size: 70px;
 }
+
+
 </style>
 <body>
+
 	<div class="wrapper d-flex align-items-stretch ">
 		<nav id="sidebar" style="height: 1000px;">
 			<div class="p-4 pt-5">
 				<h1>
 					<a href="noticeList.do" class="logo">고객센터</a>
 				</h1>
-				<ul class="list-unstyled components mb-5" style="padding-bottom: 450px;">
+				<ul class="list-unstyled components mb-5"
+					style="padding-bottom: 450px;">
 					<li><a href="noticeList.do">공지사항</a></li>
 					<li><a href="faqList.do">FAQ</a></li>
 					<li><a href="inqList.do">1:1 문의</a></li>
@@ -340,13 +344,14 @@ h4 {
 				</div>
 			</div>
 		</nav>
+		<c:if test="${not empty inqs}">
 		<div class="col-lg-12 grid-margin stretch-card" id="list">
 			<div class="card" style="height: 980px; width: 85%;">
 				<div class="card-body">
 				<br><h2>1:1 문의</h2><br>
 					<br>
 					<table class="table table-hover">
-						<thead>
+						<thead >
 							<tr>
 								<th>NO</th>
 								<th>문의유형</th>
@@ -356,55 +361,117 @@ h4 {
 						</thead>
 						<tbody id="body">
 							<c:forEach items="${inqs }" var="inq">
-								<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
-									<td>${inq.inNo }</td>
-									<c:choose>
-										<c:when test="${inq.kind == 'mv'}">
-											<td>영화</td>
-										</c:when>
-										<c:when test="${inq.kind == 'pf'}">
-											<td>공연</td>
-										</c:when>
-										<c:when test="${inq.kind == 'pt'}">
-											<td>포인트</td>
-										</c:when>
-										<c:when test="${inq.kind == 'de'}">
-											<td>배송</td>
-										</c:when>
-									</c:choose>
-									<td>${inq.title}</td>
-									<td>${inq.inDt }</td>
-								</tr>
+								<c:if test="${sessionId  == inq.UId}">
+									<tr onclick="location.href='inqSelect.do?inNo=${inq.inNo }'">
+										<td>${inq.inNo }</td>
+										<c:choose>
+											<c:when test="${inq.kind == 'mv'}">
+												<td>영화</td>
+											</c:when>
+											<c:when test="${inq.kind == 'pf'}">
+												<td>공연</td>
+											</c:when>
+											<c:when test="${inq.kind == 'pt'}">
+												<td>포인트</td>
+											</c:when>
+											<c:when test="${inq.kind == 'de'}">
+												<td>배송</td>
+											</c:when>
+										</c:choose>
+										<td>${inq.title}</td>
+										<td>${inq.inDt }</td>
+									</tr>
+								</c:if>
 							</c:forEach>
 						</tbody>
 					</table>
 					<br>
-					<div align="left"><br>
-				<button onclick="location.href='inqWriteForm.do'" class="btn btn-primary">글등록</button>
-			</div>
+					<div align="left">
+						<br>
+						<button onclick="location.href='inqWriteForm.do'"
+							class="btn btn-primary">글등록</button>
+					</div>
 					<div id="content" align="center">
 						<c:if test="${pageVO.prev }">
 							<!-- 이전버튼 활성화 여부 -->
 							<a href="inqList.do?pageNum=${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn" style="background:#6c757d; color: white; width: 45px; height: 38px; font-weight:initial; padding:0px;"></a>
+								type="button" value="이전" class="btn"
+								style="background: #6c757d; color: white; width: 45px; height: 38px; font-weight: initial; padding: 0px;"></a>
 						</c:if>
 						<!-- pageNum -->
 						<c:forEach var="num" begin="${pageVO.startPage }"
 							end="${pageVO.endPage }">
 							<a class="${pageVO.pageNum == num ? 'active': '' }"
 								href="inqList.do?pageNum=${num }"> <input type="button"
-							value="${num }"  class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial;padding:0px;"></a>
+								value="${num }" class="btn"
+								style="background: #6c757d; color: white; width: 38px; height: 38px; font-weight: initial; padding: 0px;"></a>
 						</c:forEach>
 						<!-- 다음버튼 -->
 						<c:if test="${pageVO.next }">
 							<a href="inqList.do?pageNum=${pageVO.endPage+1 }"> <input
-							type="button" value="다음" class="btn" style="background:#6c757d; color: white; width: 45px; font-weight:initial; height: 38px;padding:0px;"></a>
+								type="button" value="다음" class="btn"
+								style="background: #6c757d; color: white; width: 45px; font-weight: initial; height: 38px; padding: 0px;"></a>
 						</c:if>
 					</div>
 				</div>
 			</div>
-			
 		</div>
+		</c:if>
+		<c:if test="${empty inqs }">
+			<div class="col-lg-12 grid-margin stretch-card" id="list">
+				<div class="card" style="height: 980px; width: 85%;">
+					<div class="card-body">
+						<h4 class="card-title">1:1 문의</h4>
+						<br>
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>NO</th>
+									<th>문의유형</th>
+									<th>제목</th>
+									<th>일자</th>
+								</tr>
+							</thead>
+							<tbody id="body">
+								<tr style="text-align: center;">
+									<td colspan="4">최근 문의 내역이 없습니다</td>
+								</tr>
+							</tbody>
+						</table>
+						<br>
+						<div align="left">
+							<br>
+							<button onclick="location.href='inqWriteForm.do'"
+								class="btn btn-primary">글등록</button>
+						</div>
+						<div id="content" align="center">
+							<c:if test="${pageVO.prev }">
+								<!-- 이전버튼 활성화 여부 -->
+								<a href="inqList.do?pageNum=${pageVO.startPage-1 }"> <input
+									type="button" value="이전" class="btn"
+									style="background: #6c757d; color: white; width: 45px; height: 38px; font-weight: initial; padding: 0px;"></a>
+							</c:if>
+							<!-- pageNum -->
+							<c:forEach var="num" begin="${pageVO.startPage }"
+								end="${pageVO.endPage }">
+								<a class="${pageVO.pageNum == num ? 'active': '' }"
+									href="inqList.do?pageNum=${num }"> <input type="button"
+									value="${num }" class="btn"
+									style="background: #6c757d; color: white; width: 38px; height: 38px; font-weight: initial; padding: 0px;"></a>
+							</c:forEach>
+							<!-- 다음버튼 -->
+							<c:if test="${pageVO.next }">
+								<a href="inqList.do?pageNum=${pageVO.endPage+1 }"> <input
+									type="button" value="다음" class="btn"
+									style="background: #6c757d; color: white; width: 45px; font-weight: initial; height: 38px; padding: 0px;"></a>
+							</c:if>
+						</div>
+					</div>
+				</div>
+			</div>
+		</c:if>
+
+
 	</div>
 	<script type="text/javascript">
 		$(".que").click(function() {

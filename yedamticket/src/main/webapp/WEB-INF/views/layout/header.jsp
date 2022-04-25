@@ -364,6 +364,7 @@ input::placeholder {
 								<div id="show" style="float: right"></div>
 							</div>
 						</div></li>
+						
 					
 				</ul>
 			</div>
@@ -399,7 +400,11 @@ input::placeholder {
 
 						$.each(result, function(idx, item) {
 							if(idx < 10){
-							let p = $("<p>").text((idx + 1) + ". " + item.keyword);
+							let p = $("<p>"); //.text((idx + 1) + ". " + item.keyword);
+							let a = $("<a >").attr("href","searchAll.do?searchName="+item.keyword);
+							a.text((idx + 1) + ". " + item.keyword);
+							p.append(a);
+
 							div2.append(p);
 							}
 							//p.css("padding-left", "50px");
@@ -410,6 +415,8 @@ input::placeholder {
 				}
 			});
 		});
+		
+		
 
 		$(document).ready(function() {
 			$('.more').click(function() {
@@ -465,5 +472,7 @@ input::placeholder {
 			ticker();
 
 		});
+		
+		
 	</script>
 </body>

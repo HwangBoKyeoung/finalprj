@@ -279,6 +279,16 @@ iframe {
 .logo {
 	color: white;
 }
+.btn{
+border-radius: 20px;
+padding: 4px;
+font-size: 12px;
+margin-top: -7px;
+}
+
+span{
+    font-size: 20px;
+}
 </style>
 
 <body>
@@ -399,7 +409,7 @@ iframe {
 			</c:if>
 			<br><br>
 			<c:if test="${not empty mvList}">
-				<span style="font-size: 25px;color: black;">영화예매내역</span>
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs"onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -435,7 +445,8 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${empty mvList}">
-				<span style="font-size: 25px;color: black;">영화예매내역</span>
+
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -460,7 +471,7 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${not empty pfList}">
-				<span style="font-size: 25px;color: black;">공연예매내역</span>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm tblMemSearch">
@@ -494,7 +505,7 @@ iframe {
 			</c:if>
 			<br>
 			<c:if test="${empty pfList}">
-				<span style="font-size: 25px;color: black;">공연예매내역</span>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">

@@ -38,7 +38,7 @@ textarea {
 					</tr>
 					<tr>
 						<td>내용</td>
-						<td style="text-align: left;"><textarea rows="10" cols="75" id="content" name="content"
+						<td style="text-align: left;"><textarea rows="20" cols="90" id="content" name="content"
 								></textarea></td>
 					</tr>
 					<tr>

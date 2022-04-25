@@ -112,34 +112,50 @@ public class CompanyController {
    //기업회원 로그인
    @RequestMapping("/companyLogin.do")
    public ModelAndView companyLogin(HttpSession session, CompanyVO vo, ModelAndView mv) {
-      String msg = "";
-        String url = "";
-        System.out.println("***************************"+vo);
-        CompanyVO login = companyDao.companyLogin(vo, session);
-        BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-        System.out.println("==========================="+vo);
-        if(vo != null && pwdEncoder.matches(vo.getPwd(), login.getPwd())) {
-           msg = "로그인 성공";
-         url = "home.do";   
 
-         session.setAttribute("sessionName", login.getName());
-         System.out.println("=====================================================");
-         System.out.println(login.getName());
-         System.out.println(vo.getCId());
-         System.out.println("=====================================================");	
-         session.setAttribute("sessionId", login.getCId());
-         session.setAttribute("pwd", login.getPwd());
-         session.setAttribute("sessionAuth", login.getRole());
-         mv.addObject("msg", msg);
-         mv.addObject("url", url);
-         mv.setViewName("user/alert");
-        } else {
-           msg = "아이디가 비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-         url = "userLoginForm.do";
-         mv.addObject("msg", msg);
-         mv.addObject("url", url);
-         mv.setViewName("user/alert");
-        }
+      int cidCheck = companyDao.cidChk(vo);
+      
+      switch(cidCheck) {
+      case 1:
+    	  String msg = "";
+    	     String url = "";
+    	     System.out.println("***************************"+vo);
+    	     CompanyVO login = companyDao.companyLogin(vo, session);
+    	     BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+    	     System.out.println("==========================="+vo);
+    	     if(vo != null && pwdEncoder.matches(vo.getPwd(), login.getPwd())) {
+    	        msg = "로그인 성공";
+    	      url = "home.do";    
+    	      
+    	      session.setAttribute("sessionName", login.getName());
+    	      System.out.println("=====================================================");
+    	      System.out.println(login.getName());
+    	      System.out.println(vo.getCId());
+    	      System.out.println("=====================================================");	
+    	      session.setAttribute("sessionId", login.getCId());
+    	      session.setAttribute("pwd", login.getPwd());
+    	      session.setAttribute("sessionAuth", login.getRole());
+    	      mv.addObject("msg", msg);
+    	      mv.addObject("url", url);
+    	      mv.setViewName("company/alert");
+    	  }else {
+    		  msg = "비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+              url = "companyLoginForm.do";
+              mv.addObject("msg", msg);
+              mv.addObject("url", url);
+              mv.setViewName("company/alert");
+    	  }
+    	  break;
+    	  
+      case 0:
+    	  String msg2 = "아이디 또는 비밀번호를 확인해주세요";
+          String url2 = "userLoginForm.do";
+          mv.addObject("msg", msg2);
+          mv.addObject("url", url2);
+          mv.setViewName("user/alert");
+          break;
+      }
+
       return mv;
    }
    //기업 마이페이지 메인 겸 조회/수정

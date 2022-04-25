@@ -19,9 +19,10 @@
 @import url('https://fonts.googleapis.com/css?family=Montserrat');
 
 /*-------------------------------- END ----*/
-*{
+* {
 	list-style: none;
 }
+
 #body-row {
 	margin-left: 0;
 	margin-right: 0;
@@ -83,10 +84,14 @@ a.bg-dark {
 	background-color: #132644 !important;
 }
 
-label{
+label {
 	font-weight: bold;
 	color: black;
 	font-size: 15px;
+}
+
+.form-control {
+	border: 1px solid #cec5e9;
 }
 </style>
 <body>
@@ -137,7 +142,9 @@ label{
 			<!-- /.modal-dialog -->
 		</div>
 		<div class="col-4" style="margin-left: auto; margin-right: auto;">
-		<br><h2>회원탈퇴</h2><br>
+			<br>
+			<h2>회원탈퇴</h2>
+			<br>
 			<form class="frm" action="userDelete.do" method="POST" role="form">
 				<div class="form-group" id="divPassword">
 					<label for="inputPassword" class="col-lg-4 control-label">패스워드</label>
@@ -152,19 +159,20 @@ label{
 					<div class="col-lg-10">
 						<input type="password" class="form-control" id="pwd2" name="pwd2"
 							data-rule-required="true" placeholder="패스워드 확인" maxlength="10">
-							<input type="hidden" class="form-control" name="UId" id="UId"
-					value="${sessionId}">
+						<input type="hidden" class="form-control" name="UId" id="UId"
+							value="${sessionId}">
 					</div>
-				</div><br>
+				</div>
+				<br>
 				<button type="submit" id="subBtn" class="btn btn-primary">탈퇴</button>
 			</form>
 		</div>
-		</div>
-	
-	
-	
-	
-	
+	</div>
+
+
+
+
+
 
 	<script>
 		/* $("#subBtn").attr('disabled', true);

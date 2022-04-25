@@ -45,7 +45,7 @@
 }
 
 .modal_content {
-	width: 482px;
+	width: 548px;
 	height: 537px;
 	background: #020409;
 	border-radius: 35px;
