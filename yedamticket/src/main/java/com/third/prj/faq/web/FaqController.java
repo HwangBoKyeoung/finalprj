@@ -18,8 +18,10 @@ public class FaqController {
 	FaqService faqDao;
 
 	@RequestMapping("/faqList.do")
-	public String faqList(Model model) {
-		model.addAttribute("faqs", faqDao.faqSelectList());
+	public String faqList(Model model ,CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, faqDao.getTotal(cri));
+		model.addAttribute("faqs", faqDao.managerFaqList(cri));
+		model.addAttribute("pageVO",pageVO);
 		return "faq/faqList";
 	}
 

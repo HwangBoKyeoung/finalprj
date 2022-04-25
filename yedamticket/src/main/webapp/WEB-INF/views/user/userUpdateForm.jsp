@@ -89,6 +89,10 @@ label{
 	color: black;
 	font-size: 15px;
 }
+
+.form-control {
+	border: 1px solid #cec5e9;
+}
 </style>
 </head>
 <body>

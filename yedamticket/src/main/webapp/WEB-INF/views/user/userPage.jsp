@@ -278,6 +278,16 @@ iframe {
 .logo {
 	color: white;
 }
+.btn{
+border-radius: 20px;
+padding: 4px;
+font-size: 12px;
+margin-top: -7px;
+}
+
+span{
+    font-size: 20px;
+}
 </style>
 
 <body>
@@ -300,7 +310,6 @@ iframe {
 					<li><a href="mvReservList.do">영화예매내역</a></li>
 					<li><a href="ticketassignment_1.do">내 티켓 보기 / 내 예약 정보</a></li>
 					<li><a href="userPointList.do">거래내역</a></li>
-					<li><a href="#">티켓거래내역</a></li>
 				</ul>
 
 				<div class="mb-5">
@@ -397,7 +406,7 @@ iframe {
 			</c:if>
 			<br><br>
 			<c:if test="${not empty mvList}">
-				<span>영화예매내역</span>
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs"onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -433,7 +442,7 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${empty mvList}">
-				<span>영화예매내역</span>
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -458,7 +467,7 @@ iframe {
 			</c:if>
 			<br> <br>
 			<c:if test="${not empty pfList}">
-				<span>공연예매내역</span>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm tblMemSearch">
@@ -492,7 +501,7 @@ iframe {
 			</c:if>
 			<br>
 			<c:if test="${empty pfList}">
-				<span>공연예매내역</span>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">

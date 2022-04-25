@@ -15,7 +15,7 @@ textarea {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<br>
 				<h2 class="text-center">굿즈 등록</h2>
 				<form id="frm" action="goodsInsert.do" method="post"

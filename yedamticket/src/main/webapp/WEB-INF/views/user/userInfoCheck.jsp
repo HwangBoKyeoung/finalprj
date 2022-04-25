@@ -65,8 +65,8 @@
 						<input type="hidden" id="UId" name="UId" value="${sessionId }">
 						<input type="password" id="pwd" name="pwd"><br>
 						<hr>
-						<button type="button" id="cancel">취소</button>
-						<button type="submit" id="submit">확인</button>
+						<button type="button" class="btn1 btn btn-primary btn-xs" id="cancel" onclick="location.href='userPage.do'">취소</button>
+						<button type="submit" class="btn1 btn btn-primary btn-xs"id="submit">확인</button>
 					</div>
 				</form>
 			</div>

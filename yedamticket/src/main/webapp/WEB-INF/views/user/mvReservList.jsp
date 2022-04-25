@@ -12,9 +12,10 @@
 	href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="./resources/users/css/style.css">
 <style>
-*{
+* {
 	list-style: none;
 }
+
 body {
 	margin: 0;
 	padding: 0;
@@ -231,16 +232,15 @@ body {
 
 .jfk {
 	position: absolute;
-    top: 20px;
-    left: 29px;
-    font-family: Arial;
-    font-size: 25px;
-    color: #222;
-    width: 320px;
-    white-space: normal;
-    font-weight: bold;
+	top: 20px;
+	left: 29px;
+	font-family: Arial;
+	font-size: 25px;
+	color: #222;
+	width: 320px;
+	white-space: normal;
+	font-weight: bold;
 }
-
 
 .sub-content {
 	width: 100%;
@@ -404,7 +404,13 @@ html, body {
 #MBTN {
 	border-radius: 10px;
 	margin-left: 15px;
+	background: #8867bf;
+	border-radius: 10px;
+	padding: 4px;
+	font-size: 14px;
 }
+
+
 </style>
 </head>
 <body>
@@ -415,9 +421,9 @@ html, body {
 				<h1>
 					<a href="userPage.do" class="logo">마이페이지</a>
 				</h1>
-				<div>	
+				<div>
 					<h6>${sessionId }님의</h6>
-					<fmt:formatNumber value="${user.point }" var="Point"/>
+					<fmt:formatNumber value="${user.point }" var="Point" />
 					<h6>보유 포인트${Point }P</h6>
 					<br>
 				</div>
@@ -444,7 +450,9 @@ html, body {
 			</div>
 		</nav>
 		<div class="container" style="height: 1000px;">
-			<br><h2>영화예매내역</h2><br>
+			<br>
+			<h2>영화예매내역</h2>
+			<br>
 			<div class="main-content">
 				<div class="cols-12">
 					<table class="table table-sm tblMemSearch">
@@ -463,13 +471,15 @@ html, body {
 							<c:forEach var="mv" items="${mvList}">
 								<tr>
 									<td class="text-center">${mv.mvReservNo}</td>
-									<td class="text-center" ><fmt:formatDate value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
-									<td class="text-center" onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}</td>
+									<td class="text-center"><fmt:formatDate
+											value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
+									<td class="text-center"
+										onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}</td>
 									<td class="text-center">${mv.schDate}</td>
 									<td class="text-center">${mv.schTime}</td>
 									<td>${mv.seatName}</td>
 									<td><button type="button" id="MBTN"
-											class="checkBtn btn-xs btn-primary">보기</button></td>
+											class="checkBtn btn btn-primary btn-xs">보기</button></td>
 								</tr>
 							</c:forEach>
 						</tbody>
@@ -534,23 +544,22 @@ html, body {
 					<li></li>
 				</ul>
 				<div class="ticket">
-					<span class="airline">YEDAM BOX</span> 
-					<span class="airline airlineslip">YEDAM BOX</span>
+					<span class="airline">YEDAM BOX</span> <span
+						class="airline airlineslip">YEDAM BOX</span>
 					<div class="content">
-					<div class="mName">
-						<span class="jfk" id="mvName"></span> </div><span class="jfk jfkslip">
-						
-							<img
+						<div class="mName">
+							<span class="jfk" id="mvName"></span>
+						</div>
+						<span class="jfk jfkslip"> <img
 							src="https://chart.googleapis.com/chart?cht=qr&chl=https%3A%2F%2Fcodepen.io%2FMitchES%2Fpen%2FoezJBZ&chs=180x180&choe=UTF-8&chld=L|2"
 							width="160px">
 						</span> <span class="plane planeslip"> <?xml version="1.0" ?>
 						</span>
 						<div class="sub-content">
-							<span class="flight">상영시간<br>
-							<span id="schTime"></span></span> <span class="name">관람일<br>
-							<span id="schdate"></span></span> <span class="gate">예매번호<br>
-							<span id="mvReservNo"></span></span> <span class="seat">좌석<br>
-							<span id="seat"></span></span>
+							<span class="flight">상영시간<br> <span id="schTime"></span></span>
+							<span class="name">관람일<br> <span id="schdate"></span></span>
+							<span class="gate">예매번호<br> <span id="mvReservNo"></span></span>
+							<span class="seat">좌석<br> <span id="seat"></span></span>
 						</div>
 					</div>
 					<div class="barcode"></div>
@@ -611,7 +620,6 @@ html, body {
 							$("#ex2_Result2").html(str);
 							console.log(str);
 						});
-		
 	</script>
 </body>
 </html>

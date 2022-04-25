@@ -90,7 +90,7 @@ textarea {
 								class="form-control" required="required"></td>
 						</tr>
 						<tr>
-							<td>줄거리</td>
+							<td>상세정보</td>
 							<td><textarea rows="10" cols="75" id="content" name="content" required="required"
 								></textarea></td>
 						</tr>

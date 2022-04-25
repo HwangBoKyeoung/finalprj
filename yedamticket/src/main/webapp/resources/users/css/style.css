@@ -8300,6 +8300,17 @@ a[data-toggle="collapse"] {
   -webkit-transition: all 0.3s;
   -o-transition: all 0.3s;
   transition: all 0.3s; }
+  
+ #content1 {
+  width: 100%;
+  padding: 0;
+/*   min-height: 100vh; */
+  -webkit-transition: all 0.3s;
+  -o-transition: all 0.3s;
+  transition: all 0.3s;
+  position: absolute;
+	left: -240px;
+   }
 
 .btn.btn-primary {
   background: #866ec7;
