@@ -93,6 +93,10 @@ label {
 .form-control {
 	border: 1px solid #cec5e9;
 }
+
+
+
+
 </style>
 <body>
 	<div class="wrapper d-flex align-items-stretch">
@@ -122,30 +126,13 @@ label {
 				</div>
 			</div>
 		</nav>
-		<div class="modal fade" id="defaultModal">
-			<div class="modal-dialog">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal"
-							aria-hidden="true">×</button>
-						<h4 class="modal-title">알림</h4>
-					</div>
-					<div class="modal-body">
-						<p class="modal-contents"></p>
-					</div>
-					<div class="modal-footer">
-						<button type="button" class="btn btn-default" data-dismiss="modal">닫기</button>
-					</div>
-				</div>
-				<!-- /.modal-content -->
-			</div>
-			<!-- /.modal-dialog -->
-		</div>
+		
 		<div class="col-4" style="margin-left: auto; margin-right: auto;">
 			<br>
 			<h2>회원탈퇴</h2>
 			<br>
-			<form class="frm" action="userDelete.do" method="POST" role="form">
+			<p class="lead">회원탈퇴를 하실려면 비밀번호를 입력해주세요.</p>
+			<form class="frm" action="userDelete.do" method="POST" id="deleteForm" >
 				<div class="form-group" id="divPassword">
 					<label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
 					<div class="col-lg-10">
@@ -164,7 +151,7 @@ label {
 					</div>
 				</div>
 				<br>
-				<button type="submit" id="subBtn" class="btn btn-primary">탈퇴</button>
+				 <button type="button" id="deletee" name="delete" class="btn btn-primary">회원탈퇴</button>
 			</form>
 		</div>
 	</div>
@@ -175,115 +162,76 @@ label {
 
 
 	<script>
-		/* $("#subBtn").attr('disabled', true);
-		$('.pw').keyup(function() {
-			let pass1 = $("#pwd1").val();
-			let pass2 = $("#pwd2").val();
-
-			if (pass1 != "" || pass2 != "") {
-				if (pass1 == pass2) {
-					$("#checkPw").html('일치');
-					$("#checkPw").attr('color', 'green');
-					$("#subBtn").attr('disabled', false);
-				} else {
-					$("#checkPw").html('불일치');
-					$("#checkPw").attr('color', 'red');
-					$("#subBtn").attr('disabled', true);
-				}
+	
+	$(document).ready(function(){
+		
+		$("#deletee").on("click", function(){
+			
+			if($("#pwd").val()==""){
+				swal('회원정보 수정', '비밀번호를 입력해주세요');
+				$(".swal-button--confirm").on("click", function(){
+					location.href= reload()
+				});
+				$("#pwd").focus();
+				return false
 			}
-
-		}) */
-
-		function alertt() {
-			alert("회원 탈퇴가 정상 처리 되엇습니다.")
-		}
-
-		$(function() {
-			//모달을 전역변수로 선언
-			var modalContents = $(".modal-contents");
-			var modal = $("#defaultModal");
-
-			$('#pwd').keyup(function(event) {
-
-				var divPassword = $('#divPassword');
-
-				if ($('#pwd').val() == "") {
-					divPassword.removeClass("has-success");
-					divPassword.addClass("has-error");
-				} else {
-					divPassword.removeClass("has-error");
-					divPassword.addClass("has-success");
+			
+			if($("#pwd2").val()==""){
+				swal("비밀번호 확인을 입력해주세요");
+				$(".swal-button--confirm").on("click", function(){
+					location.href= reload()
+				});
+				$("#pwd2").focus();
+				return false
+			}
+			
+			if ($("#pwd").val() != $("#pwd2").val()) {
+				swal("비밀번호가 일치하지 않습니다.");
+				$(".swal-button--confirm").on("click", function(){
+					location.href= reload()
+				});
+				$("#pwd").focus();
+				 
+				return false;
 				}
-			});
-
-			$('#pwd2').keyup(function(event) {
-
-				var passwordCheck = $('#pwd2').val();
-				var password = $('#pwd').val();
-				var divPasswordCheck = $('#divPasswordCheck');
-
-				if ((passwordCheck == "") || (password != passwordCheck)) {
-					divPasswordCheck.removeClass("has-success");
-					divPasswordCheck.addClass("has-error");
-				} else {
-					divPasswordCheck.removeClass("has-error");
-					divPasswordCheck.addClass("has-success");
+			
+			$.ajax({
+				url : "pwdCheck.do",
+				type : "POST",
+				dataType : "json",
+				data : $("#deleteForm").serializeArray(),
+				success: function(data){
+					
+					if(data==0){
+						swal("비밀번호를 확인해주세요.");
+						$(".swal-button--confirm").on("click", function(){
+							location.href= reload()
+						});
+						return;
+					}else{
+						  swal({
+						         title: "정말 탈퇴 하시겠습니까?",
+						         icon: "warning",
+						         buttons: true,
+						         dangerMode: true,
+						       })
+						       .then((willDelete) => {
+						         if (willDelete) {
+						           swal("회원탈퇴가 정상 처리 되었습니다", {
+						             icon: "success",
+						           });
+						           $("#deleteForm").submit();
+						         } else {
+						           swal("취소하셨습니다");
+						         }
+						       });
+						
+					}
 				}
-			});
-			//------- validation 검사
-			$("form").submit(
-					function(event) {
-						var divPassword = $('#divPassword');
-						var divPasswordCheck = $('#divPasswordCheck');
-						var divEmail = $('#divEmail');
-						var divPhoneNumber = $('#divPhoneNumber');
-
-						//패스워드 검사
-						if ($('#pwd').val() == "") {
-							modalContents.text("패스워드를 입력하여 주시기 바랍니다.");
-							modal.modal('show');
-
-							divPassword.removeClass("has-success");
-							divPassword.addClass("has-error");
-							$('#pwd').focus();
-							return false;
-						} else {
-							divPassword.removeClass("has-error");
-							divPassword.addClass("has-success");
-						}
-
-						//패스워드 확인
-						if ($('#passwordCheck').val() == "") {
-							modalContents.text("패스워드 확인을 입력하여 주시기 바랍니다.");
-							modal.modal('show');
-
-							divPasswordCheck.removeClass("has-success");
-							divPasswordCheck.addClass("has-error");
-							$('#passwordCheck').focus();
-							return false;
-						} else {
-							divPasswordCheck.removeClass("has-error");
-							divPasswordCheck.addClass("has-success");
-						}
-
-						//패스워드 비교
-						if ($('#pwd').val() != $('#pwd2').val()
-								|| $('#pwd2').val() == "") {
-							modalContents.text("패스워드가 일치하지 않습니다.");
-							modal.modal('show');
-
-							divPasswordCheck.removeClass("has-success");
-							divPasswordCheck.addClass("has-error");
-							$('#passwordCheck').focus();
-							return false;
-						} else {
-							divPasswordCheck.removeClass("has-error");
-							divPasswordCheck.addClass("has-success");
-						}
-					});
+			})
 		});
+	})
+	
 	</script>
-
-
 </body>
 </html>

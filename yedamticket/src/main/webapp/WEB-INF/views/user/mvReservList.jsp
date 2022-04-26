@@ -488,19 +488,19 @@ html, body {
 					<div id="content" align="center">
 						<c:if test="${pageVO.prev }">
 							<!-- 이전버튼 활성화 여부 -->
-							<a href="pfReservList.do?pageNum=${pageVO.startPage-1 }"> <input
+							<a href="mvReservList.do?pageNum=${pageVO.startPage-1 }"> <input
 								type="button" value="이전" class="btn btn-secondary"></a>
 						</c:if>
 						<!-- pageNum -->
 						<c:forEach var="num" begin="${pageVO.startPage }"
 							end="${pageVO.endPage }">
 							<a class="${pageVO.pageNum == num ? 'active': '' }"
-								href="pfReservList.do?pageNum=${num }"> <input type="button"
+								href="mvReservList.do?pageNum=${num }"> <input type="button"
 								value="${num }" class="btn btn-secondary"></a>
 						</c:forEach>
 						<!-- 다음버튼 -->
 						<c:if test="${pageVO.next }">
-							<a href="pfReservList.do?pageNum=${pageVO.endPage+1 }"> <input
+							<a href="mvReservList.do?pageNum=${pageVO.endPage+1 }"> <input
 								type="button" value="다음" class="btn btn-secondary"></a>
 						</c:if>
 					</div>

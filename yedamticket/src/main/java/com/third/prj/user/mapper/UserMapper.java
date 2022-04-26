@@ -117,22 +117,21 @@ public interface UserMapper {
 	void sendEmail(UserVO vo, String pw, String div);
 
 	// 마이페이지 회원정보
-	UserVO selectByMemberId(@Param("UId") String UId,@Param("email") String email);
+	UserVO selectByMemberId(@Param("UId") String UId, @Param("email") String email);
 
 	// 비밀번호 찾기 시 회원 권한 변경
 	int updatePassword2(UserVO vo);
-	
-	//결제하면 포인트 변경
-    int payPoint(UserVO vo);
-    
-    //비밀번호체크
-    int pwdCheck(UserVO vo);
-    
-    //비밀번호변경
-    int pwdUpdate(UserVO vo);
-    
 
-    
-    
+	// 결제하면 포인트 변경
+	int payPoint(UserVO vo);
+
+	// 비밀번호체크
+	int pwdCheck(UserVO vo);
+
+	// 비밀번호변경
+	int pwdUpdate(UserVO vo);
+
+	// 비밀번호체크2
+	public String pwdCheck2(String UId);
 
 }

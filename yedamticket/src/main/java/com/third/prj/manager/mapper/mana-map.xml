@@ -82,4 +82,10 @@
 <!--  		WHERE M_ID = #{MId} -->
 <!--  		AND PWD = #{pwd} -->
 <!--  	</select> -->
+		<select id="midChk" resultType="int">
+	SELECT COUNT(*)
+	FROM MANAGER
+	WHERE M_ID = #{MId}
+</select>
+
 </mapper>

@@ -139,7 +139,7 @@ public class CompanyController {
     	      mv.setViewName("company/alert");
     	  }else {
     		  msg = "비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-              url = "companyLoginForm.do";
+              url = "userLoginForm.do";
               mv.addObject("msg", msg);
               mv.addObject("url", url);
               mv.setViewName("company/alert");

@@ -73,6 +73,12 @@ public class ManagerServiceImpl implements ManagerService{
 	public ManagerVO manaLogin(ManagerVO vo, HttpSession session) {
 		return mapper.manaLogin(vo);
 	}
+
+	@Override
+	public int midChk(ManagerVO vo) {
+		// TODO Auto-generated method stub
+		return mapper.midChk(vo);
+	}
 	
 	
 }
