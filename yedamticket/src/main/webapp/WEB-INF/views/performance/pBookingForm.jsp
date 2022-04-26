@@ -939,11 +939,8 @@ $(".seat").click(function() {
                 $(a)[0].removeEventListener('click',selectSeat);
              } 
              
-          }//end success
-          
-          
-       });
-       
+          }//end success      
+     });      
 });
 function selectSeat(){           
 //    console.log(this.innerText);
@@ -974,8 +971,7 @@ function selectSeat(){
       }
       
    }else if($('#selectedSeat .seatGray').length == cnt){
-		let txt = $(event.target).text();
-      
+		let txt = $(event.target).text();      
       for(let i =0;i<tdList.length;i++){
          console.log(tdList[i].innerText);
           if(txt==tdList[i].innerText){
@@ -999,6 +995,7 @@ $('#backBtn').on('click',function(){
    let selectedSeat = document.getElementById('selectedSeat');
    let tdList=selectedSeat.getElementsByTagName('td');
    console.log(tdList);
+   $('#seatNo').val('');
    for(let i =0;i<tdList.length;i++){
       tdList[i].classList.remove('seatGray');
       tdList[i].innerText='+';
@@ -1052,10 +1049,7 @@ $('#backBtn').on('click',function(){
       });
    } // end initMap();
 </script>
-	<script
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA79F3HwKaIZZGfFmXbW6esaI6fqbxti0I&callback=initMap"
-		async defer>
-    </script>
+	<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA79F3HwKaIZZGfFmXbW6esaI6fqbxti0I&callback=initMap"async defer></script>
 	<script type='text/javascript' src='resources/performance/js/jquery.js'></script>
 	<script type='text/javascript'
 		src='resources/performance/js/masonry.pkgd.min.js'></script>

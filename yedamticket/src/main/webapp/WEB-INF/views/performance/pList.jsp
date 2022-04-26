@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 
@@ -20,22 +20,22 @@ list-style: none;
 }
 input::-webkit-input-placeholder { color: black; }
 .hr-sect{
-	color: #7a5ecf;
-	text-align: left;
-	margin-top: 50px;
-	margin-bottom: 5px;
-	font-family: 'Gowun Dodum', sans-serif;
-	width: 1400px;
+   color: #7a5ecf;
+   text-align: left;
+   margin-top: 50px;
+   margin-bottom: 5px;
+   font-family: 'Gowun Dodum', sans-serif;
+   width: 1400px;
+   font-size: 3.5em;
 }
-
 
 </style>
 </head>
 
 <body class="events-list-page">
 <div class="container">
-	<h1 class="hr-sect">공연 리스트</h1>
-		<hr>
+   <h1 class="hr-sect">공연 리스트</h1>
+      <hr>
 </div>
 <form class="events-search" action="pList.do">
     <div class="container">
@@ -59,26 +59,26 @@ input::-webkit-input-placeholder { color: black; }
                 <input class="btn btn-lg" style="background:#cfc5e9; margin: 0;" id="searchBtn" type="submit" value="검색">
             </div>
             <!-- hidden으로 숨겨서 들어갈 값 -->
-			<input type="hidden" name="pageNum" value="1">
-			<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
-			<input type="hidden" name="amount" value="${pageVO.amount }">
+         <input type="hidden" name="pageNum" value="1">
+         <!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
+         <input type="hidden" name="amount" value="${pageVO.amount }">
         </div>
     </div>
 </form>
 
 <div class="container">
     <div class="row events-list">
-    	<c:forEach items="${performance }" var="p">
-    	<form action="pBookingForm.do" method="post">
+       <c:forEach items="${performance }" var="p">
+       <form action="pBookingForm.do" method="post">
         <div class="col-12 col-lg-6 single-event">
             <figure class="events-thumbnail">
             <c:choose>
-          		<c:when test="${not empty p.fileCd}">
-          		  <img src="resources/performance/images/${p.fileCd}" style="width: 559px; height: 300px;">
-          		</c:when>  
-               	<c:otherwise>
-               		<img src="resources/performance/images/alt.jpg" style="width: 559px; height: 300px;">
-               	</c:otherwise>
+                <c:when test="${not empty p.fileCd}">
+                  <img src="resources/performance/images/${p.fileCd}" style="width: 559px; height: 300px;">
+                </c:when>  
+                  <c:otherwise>
+                     <img src="resources/performance/images/alt.jpg" style="width: 559px; height: 300px;">
+                  </c:otherwise>
             </c:choose>
             </figure>
             <div class="event-content-wrap">
@@ -87,7 +87,7 @@ input::-webkit-input-placeholder { color: black; }
                         <h2 class="entry-title" style="font-size: 25px; padding-bottom: 25px; font-weight: bold">${p.name }</h2>
 
                         <div class="event-location">${p.loc }</div>
-						
+                  
                         <div class="event-date">${p.performanceScheduleVO.frDt }  ${p.performanceScheduleVO.time }</div>
                     </div>
                     <%-- <div class="event-cost flex justify-content-center align-items-center">
@@ -96,7 +96,7 @@ input::-webkit-input-placeholder { color: black; }
                    <input type="hidden" name='pNo' value="${p.PNo }">
                     
                 </header>
-				<br>
+            <br>
                 <footer class="entry-footer" style="text-align: right;">
                     <button type="submit"  class="btn btn-lg" style="background:#cfc5e9;" >예매하기</button>
                     <br>
@@ -104,36 +104,36 @@ input::-webkit-input-placeholder { color: black; }
             </div>
         </div>
         </form>
- 		</c:forEach>
+       </c:forEach>
     </div><br>
 </div>
 <form id="actionForm" action="pList.do" method="get">
-		<input type="hidden" name="pageNum" value="${pageVO.pageNum }">
-		<input type="hidden" name="amount" value="${pageVO.amount }">
-		<input type="hidden" name="startDate">
-		<input type="hidden" name="endDate">
-		<input type="hidden" name="name">
-		<input type="hidden" name="loc">
+      <input type="hidden" name="pageNum" value="${pageVO.pageNum }">
+      <input type="hidden" name="amount" value="${pageVO.amount }">
+      <input type="hidden" name="startDate">
+      <input type="hidden" name="endDate">
+      <input type="hidden" name="name">
+      <input type="hidden" name="loc">
 </form><br>
 <div id="content" align="center">
-					<c:if test="${pageVO.prev }">
-						<!-- 이전버튼 활성화 여부 -->
-						<a href="${pageVO.startPage-1 }"> <input
-							type="button" value="이전" class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial; padding:0px;"></a>
-					</c:if>
-					<!-- pageNum -->
-					<c:forEach var="num" begin="${pageVO.startPage }"
-						end="${pageVO.endPage }">
-						<a class="${pageVO.pageNum == num ? 'active': '' }"
-							href="${num }"> <input type="button"
-							value="${num }"  class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial;padding:0px;"></a>
-					</c:forEach>
-					<!-- 다음버튼 -->
-					<c:if test="${pageVO.next }">
-						<a href="${pageVO.endPage+1 }"> <input
-							type="button" value="다음"  class="btn" style="background:#6c757d; color: white; width: 38px; font-weight:initial; height: 38px;padding:0px;"></a>
-					</c:if>
-				</div><br><br>
+               <c:if test="${pageVO.prev }">
+                  <!-- 이전버튼 활성화 여부 -->
+                  <a href="${pageVO.startPage-1 }"> <input
+                     type="button" value="이전" class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial; padding:0px;"></a>
+               </c:if>
+               <!-- pageNum -->
+               <c:forEach var="num" begin="${pageVO.startPage }"
+                  end="${pageVO.endPage }">
+                  <a class="${pageVO.pageNum == num ? 'active': '' }"
+                     href="${num }"> <input type="button"
+                     value="${num }"  class="btn" style="background:#6c757d; color: white; width: 38px; height: 38px; font-weight:initial;padding:0px;"></a>
+               </c:forEach>
+               <!-- 다음버튼 -->
+               <c:if test="${pageVO.next }">
+                  <a href="${pageVO.endPage+1 }"> <input
+                     type="button" value="다음"  class="btn" style="background:#6c757d; color: white; width: 38px; font-weight:initial; height: 38px;padding:0px;"></a>
+               </c:if>
+            </div><br><br>
 <%-- <div class="upcoming-events-outer">
     <div class="container">
         <div class="row">
@@ -145,7 +145,7 @@ input::-webkit-input-placeholder { color: black; }
 
                     <div class="upcoming-events-list">
                         
-					<c:forEach items="${Eperformance }" var="ep">
+               <c:forEach items="${Eperformance }" var="ep">
                         <div class="upcoming-event-wrap flex flex-wrap justify-content-between align-items-center">
                             <figure class="events-thumbnail">
                                 <a href="#"><img src="/upload/${ep.renames }"></a>
@@ -175,11 +175,11 @@ input::-webkit-input-placeholder { color: black; }
                 </div>
             </div>
         </div>
-    </div>
+    </div>--%>
     <input type="hidden" value="${psvo.startDate}" id="vostart">
     <input type="hidden" value="${psvo.endDate}" id="voend">
     <input type="hidden" value="${vo.name}" id="voname">
-    <input type="hidden" value="${vo.loc}" id="voloc"> --%>
+    <input type="hidden" value="${vo.loc}" id="voloc"> 
 <script>
 
 let actionForm = $("#actionForm");
@@ -190,37 +190,37 @@ let nm = $("#name").val();
 let lo = $("#loc").val();
 
 $("#searchBtn").on("click", function(){
-	actionForm.find("input[name='startDate']").val(sd);
-	actionForm.find("input[name='endDate']").val(ed);
-	actionForm.find("input[name='name']").val(nm);
-	actionForm.find("input[name='loc']").val(lo);
+   actionForm.find("input[name='startDate']").val(sd);
+   actionForm.find("input[name='endDate']").val(ed);
+   actionForm.find("input[name='name']").val(nm);
+   actionForm.find("input[name='loc']").val(lo);
 });
 
 $("#content a").on("click", function(e) {
-	e.preventDefault();
-	console.log("click");
-	console.log($(this).attr("href"));
-	actionForm.find("input[name='pageNum']").val($(this).attr("href"));
-	actionForm.find("input[name='startDate']").val($("#vostart").val());
-	actionForm.find("input[name='endDate']").val($("#voend").val());
-	actionForm.find("input[name='name']").val($("#voname").val());
-	actionForm.find("input[name='loc']").val($("#voloc").val());
-	console.log($("#voloc").val());
-	
- 	actionForm.submit();
+   e.preventDefault();
+   console.log("click");
+   console.log($(this).attr("href"));
+   actionForm.find("input[name='pageNum']").val($(this).attr("href"));
+   actionForm.find("input[name='startDate']").val($("#vostart").val());
+   actionForm.find("input[name='endDate']").val($("#voend").val());
+   actionForm.find("input[name='name']").val($("#voname").val());
+   actionForm.find("input[name='loc']").val($("#voloc").val());
+   console.log($("#voloc").val());
+   
+    actionForm.submit();
 });
 
 let searchForm = $("#searchForm");
 $("#searchForm button").on("click", function(e) {
-	if (!searchForm.find("input[name='searchName']").val()) {
-		alert('키워드를 입력하세요.');
-		return false;
-	}
+   if (!searchForm.find("input[name='searchName']").val()) {
+      alert('키워드를 입력하세요.');
+      return false;
+   }
 
-	searchForm.find("input[name='pageNum']").val("1");
-	e.preventDefault();
+   searchForm.find("input[name='pageNum']").val("1");
+   e.preventDefault();
 
-	searchForm.submit();
+   searchForm.submit();
 });
 
 

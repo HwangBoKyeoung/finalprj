@@ -841,19 +841,31 @@ body {
 							swal("", "인원 선택을 먼저 해주세요.", "error");
 						} else if ($('#selectedSeat .seatGray').length < cnt) {
 							cnt = 0;
-						}
-						;
+						};
+						
 					}//end selectseat
-					let resultArry = (result[0].seatName).split(',');
-					///예약된좌석 이벤트 없애기
-					for (var i = 0; i < resultArry.length; i++) {
-						var a = "#seat td:contains(" + resultArry[i] + ")";
-						$($(a)[0]).off('click');
-						$(a).css("backgroundColor", "black");
-					}
-				}
+					console.log(result);
+					let arry=[];
+					if(result == ''){
+						console.log('예약된 좌석없음');
+					}else{
+						for(var i=0; i<result.length; i++){
+						console.log(result[i].seatName);
+						arry[i]=(result[i].seatName).split(',');
+						}
+						console.log(arry);					
+						for(var i=0;i<arry.length;i++){
+							//console.log(arry[i].length);
+							for(var j=0;j<arry[i].length;j++){
+								//console.log(arry[i][j]);
+								var a = "#seat td:contains(" + arry[i][j] + ")";
+					            $($(a)[0]).off('click');
+					            $(a).css("backgroundColor", "black");
+							}
+						}
+					}						
+				}	
 			});
-
 		};
 
 		//인원추가하는 버튼
