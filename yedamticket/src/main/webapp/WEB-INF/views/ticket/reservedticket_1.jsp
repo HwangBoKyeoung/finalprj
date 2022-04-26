@@ -4,6 +4,11 @@
 <head>
 <meta charset="UTF-8">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+	<style>
+		*{
+			list-style: none;
+		}
+	</style>
 </head>
 <body>
 <form id="chargeFrm" action="reservedticket_2.do" method="POST">
