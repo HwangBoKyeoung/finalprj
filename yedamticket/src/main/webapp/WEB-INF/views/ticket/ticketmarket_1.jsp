@@ -11,12 +11,13 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	list-style: none;
 }
 
 body {
 	width: 100%;
-	padding: 4rem 0;
-	overflow: hidden;
+/* 	padding: 4rem 0; */
+/* 	overflow: hidden; */
 }
 
 .widthslider {
@@ -39,14 +40,25 @@ body {
 	list-style: none;
 	user-select: none;
 }
+
+.hr-sect{
+	color: #7a5ecf;
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
+	width: 1400px;
+	font-size: 3.5em;
+}
 </style>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
-<div align="center">
-	<h1>자유거래 티켓</h1>
-</div>
+<div align="center" class="container">
+	<h1 class="hr-sect">자유거래</h1>
+	<hr>
+	
 	<div align="center">
  		<div id="widthslider" align="center">
 			<ul class="widthlist">
@@ -73,16 +85,16 @@ body {
 				</li>
 				</c:forEach>
 			</ul>
-			<input type="button" onclick="resetPosition()" value="원위치로" />
+			<!-- <input type="button" onclick="resetPosition()" value="원위치로" /> -->
 			
 			<!-- Modal -->
 			<div class="modal fade" id="prInfoModal">
 			  <div class="modal-dialog">
 			    <div class="modal-content">
 			      <div class="modal-header">
-			        <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+			       <!--  <button type="button" class="close" data-dismiss="modal" aria-label="닫기">
 			          <span aria-hidden="true">&times;</span>
-			        </button>
+			        </button> -->
 			      </div>
 			      <form action="ticketmarket_2.do" method="POST">
 			      <input type="hidden" id="UId" name="UId">
@@ -124,6 +136,8 @@ body {
 			<!-- Modal End -->
 		</div>
 	</div>
+</div>
+	
 	
 	<script>
 	function selectedFnc(){

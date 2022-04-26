@@ -74,9 +74,9 @@
 						<th scope="col">결제번호</th>
 						<th scope="col">결제일</th>
 						<th scope="col">사용처</th>
-						<th scope="col">포인트 충전</th>
-						<th scope="col">포인트 사용</th>
-						<th scope="col">포인트잔액</th>
+						<td  align="right">포인트 충전</td>
+						<td  align="right">포인트 사용</td>
+						<td  align="right">포인트잔액</td>
 					</tr>
 				</thead>
 				<tbody>
@@ -110,12 +110,15 @@
 									<td>포인트충전</td>
 								</c:when>
 								<c:when test="${point.buyCtntCd == 'gd' }">
-									<td>포인트충전</td>
+									<td>굿즈결제</td>
+								</c:when>
+								<c:when test="${point.buyCtntCd == 're' }">
+									<td>환불금액</td>
 								</c:when>
 							</c:choose>
-							<td>+ ${charge}</td>
-							<td>- ${pay }</td>
-							<td>${tempPoint }</td>
+							<td align="right">+ ${charge}</td>
+							<td align="right">- ${pay }</td>
+							<td align="right">${tempPoint }</td>
 						</tr>
 					</c:forEach>
 				</tbody>
@@ -139,6 +142,8 @@
 						type="button" value="다음" class="btn btn-secondary"></a>
 				</c:if>
 			</div>
+			<br>
+			<br>
 		</div>
 	</div>
 

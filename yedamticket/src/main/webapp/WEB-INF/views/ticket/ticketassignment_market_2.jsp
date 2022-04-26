@@ -4,6 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <style>
+*{
+	line-style: none;
+	}
 	  .no-drag {
 	  -ms-user-select: none;
 	  -moz-user-select: -moz-none; 
@@ -21,6 +24,11 @@
       h2 {
         text-align: center;
       }
+      
+      *{
+      list-style:none;
+      }
+      
 </style>
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 </head>
@@ -29,12 +37,11 @@
 	<input type="hidden" name="price" id="price" value="${price }">
 	<input type="hidden" name="loc" id="loc" value="${loc }">
 	<input type="hidden" name="PReservNo" id="PReservNo" value="${PReservNo }">
-	<div class="no-drag" style="margin:auto; max-width: 30%;">
-	  <h2>
-	    채 권 양 도 계 약 서<br />
-	    ----------------------------
-	  </h2>
-      <p>
+	<div class="no-drag" style="margin:auto; margin-top: 30px; max-width: 43%; padding-bottom: 20px; border: 1px solid #301e4e; padding-left: 20px; padding-right: 20px;">
+	<br>
+	  <h2 style="font-weight: bold; padding-top:20px">채 권 양 도 계 약 서<br /></h2>
+	  <hr style="background: #301e4e;">
+      <p style="padding-top: 10px;">
         채권자 ${sessionId } 는 채무자가 채권자에 대하여 현재 및 장래 부담할 채무의 담보를 위하여 채무자가 ${date} 일자 매매계약에 의거 제3채무자에게 가지고 있는 매매대금 채권을 하기 조건으로 채권자에게 양도 하기로 함.
         
       </p>
@@ -81,8 +88,8 @@
       <p class="pctr">양수인(을) : </p>
       <p id="buyerAdd" class="pctr">주소 : </p>
 	</div>
-	<div align="right" style="margin:auto; max-width: 30%;">
-		<input type="submit" class="btn" value="확인">
+	<div align="right" style="margin:auto; max-width: 43%; margin-top: 20px; margin-bottom: 30px;">
+		<input type="submit" class="btn" style="background: #301e4e;" value="확인">
 		<input type="button" class="btn btn-danger" onclick="location.href='ticketassignment_1.do'" value="취소">
 	</div>
 	</form>

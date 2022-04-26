@@ -23,7 +23,7 @@ th {
 			<div class="col-md-2"></div>
 			<div class="col-md-9">
 				<br>
-				<h4 style="font-size: 70px;">1:1문의 작성</h4><br>
+				<h4 class="card-title" style="font-size: 50px;">1:1문의 작성</h4><br>
 				<form id="frm" action="inqWrite.do" method="post">
 					<table class="table">
 						<tr>

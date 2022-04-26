@@ -175,11 +175,13 @@ input::-webkit-input-placeholder { color: black; }
                 </div>
             </div>
         </div>
+<<<<<<< HEAD
     </div>--%>
     <input type="hidden" value="${psvo.startDate}" id="vostart">
     <input type="hidden" value="${psvo.endDate}" id="voend">
     <input type="hidden" value="${vo.name}" id="voname">
     <input type="hidden" value="${vo.loc}" id="voloc"> 
+
 <script>
 
 let actionForm = $("#actionForm");

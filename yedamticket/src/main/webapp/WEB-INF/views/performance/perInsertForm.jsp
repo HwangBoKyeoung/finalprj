@@ -9,6 +9,16 @@
 	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
+.btn1{
+    border-radius: 10px;
+    background: #8867bf;
+    font-size: 14px;
+    margin-left: 4px;
+    margin-top: 2px;
+    padding: 8px;
+}
+
+
 </style>
 </head>
 <input type="hidden" name="PNo" id="PNo">
@@ -16,7 +26,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<br>
 				<h2 class="text-center">공연 등록</h2>
 				<form id="frm" action="perInsert.do" method="post"
@@ -94,7 +104,7 @@
 								<input type="text" class="form-control" placeholder="상세주소" required="required" id="addr2" name="addr2">
 								<input type="hidden" id="sample6_extraAddress">
 								<input type="hidden" id="sample6_postcode">
-								<input type="button" id="AddrSample" onclick="findAddr();" value="주소찾기"> 
+								<input type="button" id="AddrSample" onclick="findAddr();" value="주소찾기" class="btn1 btn btn-primary btn-xs"> 
 								<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 								<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 								</div></td>
@@ -112,12 +122,12 @@
 								required="required"></td>
 						</tr>
 						<tr>
-							<td>줄거리</td>
+							<td>상세정보</td>
 							<td><textarea rows="10" cols="90" id="content"
 									name="content" required="required"></textarea></td>
 						</tr>
 					</table>
-					<button type="submit" class="form-control">등록</button>
+					<button type="submit" style="background-color: #cfc5e9;margin-bottom: 20px;" class="form-control">등록</button>
 				</form>
 			</div>
 		</div>

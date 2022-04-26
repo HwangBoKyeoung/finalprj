@@ -32,8 +32,8 @@
 						</tr>
 					</table>
 					<br>
-					<button type="submit" class="btn btn-gradient-primary me-2">요청</button>
-					<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyPerforList.do'">
+					<button type="submit" class="btn btn-gradient-primary me-2" style="background: #301e4e;margin-top: 5px;">요청</button>
+					<input type="button" class="btn btn-light" value="Cancel" style="background: #301e4e;margin-top: 5px;" onclick="location.href='companyPerforList.do'">
 				</div>
 			</div>
 		</form>

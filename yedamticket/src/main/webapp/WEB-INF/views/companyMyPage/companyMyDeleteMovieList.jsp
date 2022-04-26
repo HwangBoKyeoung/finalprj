@@ -295,7 +295,7 @@ iframe {
 	margin-top: 20px;
 }
 h4{
-	font-size: 70px;
+	font-size: 35px;
 }
 </style>
 </head>
@@ -384,7 +384,7 @@ h4{
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
                   <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
                </form>
-				<div id="content" align="center">
+				<div id="content" align="center" style="padding-bottom: 30px;">
                   <c:if test="${pageVO.prev }">
                      <!-- 이전버튼 활성화 여부 -->
                      <a href="${pageVO.startPage-1 }"> <input

@@ -1,6 +1,6 @@
 package com.third.prj.inquiry.serviceImpl;
 
-import java.util.List;
+import java.util.List;  
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -58,5 +58,10 @@ public class InquiryServiceImpl implements InquiryService {
 	public List<InquiryVO> manaerInquiryList(CriteriaVO cri) {
 		return mapper.manaerInquiryList(cri);
 	}
+
+
+	
+
+
 
 }

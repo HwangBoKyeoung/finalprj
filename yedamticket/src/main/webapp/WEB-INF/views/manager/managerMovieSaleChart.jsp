@@ -9,7 +9,7 @@
 
 <body>
    <!--Div that will hold the pie chart-->
-   <div id=chart_div style="width: 100%; height: 100%;"></div>
+   <div id=chart_div style="width: 100%; height: 1000px;"></div>
    
    <script type="text/javascript">
       google.charts.load("current", {
@@ -31,8 +31,8 @@
                
                var data = new google.visualization.DataTable();
                
-               data.addColumn('string', 'dayDate');
-               data.addColumn('number', 'sales');
+               data.addColumn('string', '일');
+               data.addColumn('number', '매출');
                
                for(let i=0; i<result.length; i++){
                   arr.push([result[i].dayDate, result[i].sales]);   
@@ -42,10 +42,18 @@
                console.log(data);
                
                var options = {
-            	          title: 'Company Performance',
-            	          hAxis: {title: 'Year',  titleTextStyle: {color: '#333'}},
-            	          vAxis: {minValue: 0}
-            	        };
+            	          title: '영화 일일 매출',
+            	          hAxis: {title: 'Year',  titleTextStyle: {color: '#fff'}},
+            	          vAxis: {minValue: 0},
+            	          responsive: false,
+            	          scales: {
+            					yAxes: [{
+            						ticks: {
+            							beginAtZero: true
+            						}
+            					}]
+            				},
+            			};
 
                var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
                chart.draw(data,options);

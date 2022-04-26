@@ -9,7 +9,7 @@
 
 <body>
    <!--Div that will hold the pie chart-->
-   <div id="barchart_values" style="width: 100%; height: 100%;"></div>
+   <div id="barchart_values" style="width: 100%; height: 100%; margin-bottom: 30px;"></div>
    
    <script type="text/javascript">
       google.charts.load("current", {
@@ -38,8 +38,8 @@
                
                var data = new google.visualization.DataTable();
                
-               data.addColumn('string', 'Performance Name');
-               data.addColumn('number', 'pop');
+               data.addColumn('string', '공연제목');
+               data.addColumn('number', '관객수');
                
                for(let i=0; i<result.length; i++){
                   arr.push([result[i].name, result[i].pop]);   
@@ -49,12 +49,11 @@
                console.log(data);
                
                var options = {
-            	          title: 'Chess opening moves',
+            	          title: '공연인기순위',
             	          width: 900,
             	          height : 900,
             	          legend: { position: 'none' },
-            	          chart: { title: 'Performance Popularity Ranking',
-            	                   subtitle: 'Popularity Ranking' },
+            	          chart: { title: 'TOP10 인기순위'},
             	          bars: 'horizontal', // Required for Material Bar Charts.
             	          axes: {
             	            x: {

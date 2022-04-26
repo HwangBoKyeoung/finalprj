@@ -15,7 +15,7 @@ textarea {
 	<div class="container">
 		<div class="row">
 			<div class="col-md-2"></div>
-			<div class="col-md-9">
+			<div class="col-md-10">
 				<br>
 				<h2 class="text-center">굿즈 등록</h2>
 				<form id="frm" action="goodsInsert.do" method="post"
@@ -55,7 +55,7 @@ textarea {
 									name="content" required="required"></textarea></td>
 						</tr>
 					</table>
-					<button type="submit" class="form-control">등록</button>
+					<button type="submit" style="background: #cfc5e9;margin-bottom: 30px;" class="form-control">등록</button>
 				</form>
 			</div>
 		</div>

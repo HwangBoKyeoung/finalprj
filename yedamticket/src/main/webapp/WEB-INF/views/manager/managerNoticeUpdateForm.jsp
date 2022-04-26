@@ -12,7 +12,9 @@
 <style>
 textarea {
 	resize: none;
+	
 }
+
 </style>
 <body>
 	<div class="container">
@@ -38,8 +40,7 @@ textarea {
 							</tr>
 							<tr>
 								<th>내용</th>
-								<td><textarea rows="10" cols="80" id="content"
-										name="content">${notice.content }</textarea></td>
+								<td><textarea rows="30" cols="110" id="content"name="content" >${notice.content }</textarea></td>
 							</tr>
 						</tbody>
 					</table>

@@ -23,6 +23,7 @@
 <style>
 * {
 	font-family: 'Gowun Dodum', sans-serif;
+	list-style: none;
 }
 
 #plus, #minus, #cnt {
@@ -153,9 +154,10 @@ section>article>#map {
 						<div class="single-event-heading">
 							<h2 class="entry-title">${performance.name }</h2>
 							<div class="event-location">
-								<a href="#">${performance.addr }</a>
+								<a>${performance.addr }</a>
+								
 							</div>
-							<div class="event-date">${performance.frDt }
+							<div class="event-date"><br>${performance.frDt }
 								${performance.time }</div>
 						</div>
 
@@ -170,7 +172,7 @@ section>article>#map {
 				<div class="tabs">
 					<ul class="tabs-nav flex">
 						<li class="tab-nav flex justify-content-center align-items-center"
-							data-target="#tab_details">Details</li>
+							data-target="#tab_details">상세정보</li>
 						<li class="tab-nav flex justify-content-center align-items-center"
 							data-target="#tab_venue">위치</li>
 					</ul>
@@ -208,7 +210,7 @@ section>article>#map {
 										<p id="locName"></p>
 									</div>
 									<div class="single-event-details-row">
-										<label>좌석</label>
+										<label style="display: inline-block;float: left;padding-right: 30px">좌석</label>
 										<div id="seatName">
 											<table id="selectedSeat">
 												<tr>
@@ -744,7 +746,7 @@ section>article>#map {
 
 									</div>
 									<!-- 공연장 상세 좌석도 -->
-									<div id="detailSeat" style="display: none;">
+									<div id="detailSeat" style="display: none;padding-left: 150px;">
 										<div>
 											<div id="minus">-</div>
 											<div id="cnt">0</div>
@@ -753,7 +755,7 @@ section>article>#map {
 										<button id="backBtn" class="btn gradient-bg"
 											style="margin-top: 0; margin-left: 20px;">뒤로가기</button>
 
-										<div class="seatContainer">
+										<div class="seatContainer" style="padding-top: 20px;padding-left: 30px;">
 											<div class="screen">
 												<img height="100px" width="290px"
 													src="resources/performance/images/stage.png">

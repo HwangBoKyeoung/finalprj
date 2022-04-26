@@ -24,4 +24,6 @@ public interface ManagerMapper {
 	//로그인
 	ManagerVO manaLogin(ManagerVO vo);
 	ManagerVO manaLogin(ManagerVO vo, HttpSession session);
+	//  company 아이디 체크
+   int midChk(ManagerVO vo);
 }

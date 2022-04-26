@@ -230,7 +230,7 @@ label {
 						<div class="filebox bs3-primary preview-image">
 								<br>
 								<img id="preImage" src="/upload/${gds.fileRe}" alt="${gds.fileCd}"/> <br>
-								<label for="input_file">업로드</label>
+								<label for="input_file" style="background: #301e4e;">업로드</label>
 								<input class="upload-name" value="${gds.fileCd }" disabled="disabled" style="width: 200px;">
 								<input type="file" accept="image/gif, image/jpeg, image/png" name="file" id="input_file" class="upload-hidden">
 						</div>
@@ -239,10 +239,10 @@ label {
 									name="goodsCd" placeholder="1" readonly="readonly"
 									value="${gds.goodsCd}">
 							</div>
-						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<button type="reset" class="btn btn-light">Cancel</button>
-						<button type="button" onclick="location.href='goodsPage.do'" class="btn btn-light">목록으로</button>
-						<button type="button" class="btn btn-gradient-primary me-2" onclick="location.href='goodsDelete.do?gNo=${gds.GNo}'">Delete</button>
+						<button type="submit" class="btn me-2" style="background: #301e4e;">수정</button>
+						<button type="reset" class="btn" style="background: #301e4e;">초기화</button>
+						<button type="button" onclick="location.href='goodsPage.do'" style="background: #301e4e;" class="btn">목록으로</button>
+						<button type="button" class="btn me-2" style="background: #301e4e;" onclick="location.href='goodsDelete.do?gNo=${gds.GNo}'">삭제</button>
 					</form>
 				</div>
 			</div>

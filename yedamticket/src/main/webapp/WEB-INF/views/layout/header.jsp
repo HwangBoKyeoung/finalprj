@@ -322,10 +322,9 @@ input::placeholder {
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">					
-							<a class="dropdown-item" href="pList.do" style="font-size: 250%;"> 공연리스트
-
-							</a><a class="dropdown-item" href="concertSch.do" style="font-size: 250%;"> 공연 일정
-							</a>
+							<a class="dropdown-item" href="pList.do" style="font-size: 250%;"> 공연리스트</a>
+							<a class="dropdown-item" href="concertSch.do" style="font-size: 250%;"> 공연 일정</a>
+							<a class="dropdown-item" href="ticketmarket_1.do" style="font-size: 250%;"> 자유 거래</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
 						class="dropdown-toggle" id="navbarDropdownMenuLink1"
@@ -364,6 +363,7 @@ input::placeholder {
 								<div id="show" style="float: right"></div>
 							</div>
 						</div></li>
+						
 					
 				</ul>
 			</div>
@@ -399,7 +399,11 @@ input::placeholder {
 
 						$.each(result, function(idx, item) {
 							if(idx < 10){
-							let p = $("<p>").text((idx + 1) + ". " + item.keyword);
+							let p = $("<p>"); //.text((idx + 1) + ". " + item.keyword);
+							let a = $("<a >").attr("href","searchAll.do?searchName="+item.keyword);
+							a.text((idx + 1) + ". " + item.keyword);
+							p.append(a);
+
 							div2.append(p);
 							}
 							//p.css("padding-left", "50px");
@@ -410,6 +414,8 @@ input::placeholder {
 				}
 			});
 		});
+		
+		
 
 		$(document).ready(function() {
 			$('.more').click(function() {
@@ -465,5 +471,7 @@ input::placeholder {
 			ticker();
 
 		});
+		
+		
 	</script>
 </body>

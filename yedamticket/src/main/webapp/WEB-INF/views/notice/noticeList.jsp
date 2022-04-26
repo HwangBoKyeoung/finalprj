@@ -7,11 +7,11 @@
 <head>
 <title>Sidebar 02</title>
 <meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- <meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no"> -->
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.13.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+<!-- <link rel="stylesheet" href="/resources/demos/style.css"> -->
 <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>
 
@@ -47,7 +47,7 @@
 
 body, html {
 	height: 100%;
-	font-family: sans-serif
+	font-family: sans-serif;
 }
 
 a {
@@ -131,7 +131,7 @@ iframe {
 	background: #866ec7
 }
 
-@media screen and (max-width:768px) {
+/* @media screen and (max-width:768px) {
 	.row {
 		display: block
 	}
@@ -155,7 +155,7 @@ iframe {
 		display: block
 	}
 }
-
+ */
 .cell {
 	display: table-cell
 }
@@ -215,7 +215,7 @@ iframe {
     background-color: #ececff;
     cursor: pointer
 } */
-@media ( max-width :768px) {
+/* @media ( max-width :768px) {
 	.row {
 		border-bottom: 1px solid #f2f2f2;
 		padding-bottom: 18px;
@@ -296,8 +296,9 @@ iframe {
 	margin-top: 20px;
 }
 h4{
-	font-size: 70px;
+	font-size: 35px;
 }
+
 </style>
 <body>
 	<div class="wrapper d-flex align-items-stretch ">
@@ -331,7 +332,7 @@ h4{
          <div class="card" style="height: 980px;">
             <div class="card-body">
 			<form action="noticeList.do" method="get">
-			<h4 class="card-title">공지사항</h4>
+			<br><h2>공지사항</h2><br>
 				<div class="searchBar" align="right">
 					 <select id="inputState" name="searchType" style="border-style: none;">
 						<option value="title"
@@ -344,7 +345,7 @@ h4{
 							${pageVO.cri.searchType eq 'titcont' ? 'selected' : '' }>제목+내용</option>
 					</select> <input type="text" name="searchName"
 						value="${pageVO.cri.searchName }">
-					<button type="submit" class="btn btn-primary" id="search">검색</button>
+					<button type="submit" class="btn btn-primary btn1" id="search">검색</button>
 					<!-- hidden으로 숨겨서 들어갈 값 -->
 					<input type="hidden" name="pageNum" value="1">
 					<!-- 검색버튼을 누르면 무조건 페이지 번호 1번으로 다시세팅 -->
@@ -378,7 +379,7 @@ h4{
                   <input type="hidden" name="searchType" value="${pageVO.cri.searchType }">
                   <input type="hidden" name="searchName" value="${pageVO.cri.searchName }">
                </form><br>
-			<div id="content" align="center" style="height: 500px;">
+			<div id="content"  align="center" style="height: 500px;">
                   <c:if test="${pageVO.prev }">
                      <!-- 이전버튼 활성화 여부 -->
                      <a href="${pageVO.startPage-1 }"> <input
