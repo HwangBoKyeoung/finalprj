@@ -124,7 +124,7 @@
               </c:if>
              <li class="nav-item"><a class="nav-link" data-bs-toggle="collapse" href="#ui-basic" aria-expanded="false"
               aria-controls="ui-basic"> 
-              <span class="menu-title">게시판</span> <i class="menu-arrow"></i> 
+              <span class="menu-title">고객센터</span> <i class="menu-arrow"></i> 
               <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
               <div class="collapse" id="ui-basic">

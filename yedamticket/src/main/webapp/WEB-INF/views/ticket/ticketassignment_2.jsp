@@ -6,6 +6,9 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <style>
+    *{
+    list-style: none;
+    }
       .item-wrap {
         max-width: 80%;
         margin: 0 auto;
@@ -141,16 +144,26 @@
       #btnr:before{
       	background-color:#bdbdef;
       }
-      
+      .hr-sect{
+	color: #7a5ecf;
+	text-align: left;
+	margin-top: 50px;
+	margin-bottom: 5px;
+	font-family: 'Gowun Dodum', sans-serif;
+	width: 1400px;
+	font-size: 3.5em;
+}
     </style>
   </head>
   <body>
-  	<h1>티켓 양도</h1>
+  <div class="container">
+  <h1 class="hr-sect">티켓 양도</h1>
+	<hr>
   	
     <div class="item-wrap">
       <div class="items">
         <div class="item left">
-          <div class="inner">
+          <div class="inner" style="height: 300px;">
           	<form id="lfrm" action="ticketassignment_personal_1.do" method="POST">
 		  	<input name="name" type="hidden" value="${name }">
 		  	<input name="date" type="hidden" value="${date }">
@@ -166,7 +179,7 @@
         </div>
         
         <div class="item right">
-          <div class="inner">
+          <div class="inner" style="height: 300px;">
           <form id="rfrm" action="ticketassignment_market_1.do" method="POST">
 		  	<input name="name" type="hidden" value="${name }">
 		  	<input name="date" type="hidden" value="${date }">
@@ -182,7 +195,7 @@
         </div>
       </div>
     </div>
-    
+    </div>
     <script>
     function submitleft(){
     	$('#lfrm').submit();

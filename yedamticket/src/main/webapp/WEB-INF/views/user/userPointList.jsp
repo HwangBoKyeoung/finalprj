@@ -110,7 +110,10 @@
 									<td>포인트충전</td>
 								</c:when>
 								<c:when test="${point.buyCtntCd == 'gd' }">
-									<td>포인트충전</td>
+									<td>굿즈결제</td>
+								</c:when>
+								<c:when test="${point.buyCtntCd == 're' }">
+									<td>환불금액</td>
 								</c:when>
 							</c:choose>
 							<td align="right">+ ${charge}</td>
