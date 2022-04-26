@@ -72,10 +72,8 @@ public class PerformanceContorller {
 
 	}
 
-
-//	@RequestMapping("/pserSelect.do")
-//	public String perSelect(PerformanceVO vo, Model model) {
-
+	
+	
 	//공연 상세페이지 + 예약	
 	@RequestMapping("/pBookingForm.do")
 	public String pBookingForm(Model model,PerformanceVO vo) {
