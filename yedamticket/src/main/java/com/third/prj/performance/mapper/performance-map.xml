@@ -164,8 +164,7 @@
          SELECT * 
          FROM (
              SELECT ROWNUM RN, A.*
-             FROM (
-             
+             FROM (            
               SELECT 
              P.P_NO,P.NAME,P.CONTENT,P.ACTOR,P.FILE_CD,P.LOC,P.ADDR,P.PRICE,P.LAT,P.LNG,
              PS.FRDT,PS.TRDT,PS.TIME,PS.ENDTIME 
@@ -179,7 +178,7 @@
       </if>
       <!-- 날짜만 입력받은 경우 -->
       <if test="startDate != null and startDate !='' and endDate != null and endDate !=''">
-      AND PS.FRDT BETWEEN #{startDate} AND #{endDate}
+      AND to_char(PS.FRDT,'yyyy-mm-dd') BETWEEN #{startDate} AND #{endDate}
       </if>
       <!-- 날짜 + 이벤트 -->
       <if test="name != null and name !=''" >
@@ -216,8 +215,8 @@
    <select id="locPlist" resultMap="pMap">
       <![CDATA[  
       SELECT * FROM PERFORMANCE
-      WHERE ADDR LIKE  '%'||#{addr}||'%' 
-      AND ROWNUM <6
+      WHERE ADDR LIKE  #{addr}||'%' 
+      AND ROWNUM <5
       ]]>
    </select>
    <!-- end 황규복ㄴ -->

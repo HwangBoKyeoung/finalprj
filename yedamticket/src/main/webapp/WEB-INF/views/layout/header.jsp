@@ -322,10 +322,9 @@ input::placeholder {
 					</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 						<div class="dropdown-menu dropdown-menu-right"
 							aria-labelledby="navbarDropdownMenuLink1">					
-							<a class="dropdown-item" href="pList.do" style="font-size: 250%;"> 공연리스트
-
-							</a><a class="dropdown-item" href="concertSch.do" style="font-size: 250%;"> 공연 일정
-							</a>
+							<a class="dropdown-item" href="pList.do" style="font-size: 250%;"> 공연리스트</a>
+							<a class="dropdown-item" href="concertSch.do" style="font-size: 250%;"> 공연 일정</a>
+							<a class="dropdown-item" href="ticketmarket_1.do" style="font-size: 250%;"> 자유 거래</a>
 						</div></li>
 					<li class="nav-item dropdown"><a href="#"
 						class="dropdown-toggle" id="navbarDropdownMenuLink1"

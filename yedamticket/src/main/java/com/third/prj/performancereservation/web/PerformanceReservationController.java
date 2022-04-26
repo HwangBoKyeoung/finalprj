@@ -316,9 +316,10 @@ public class PerformanceReservationController {
 		model.addAttribute("loc", loc);
 		model.addAttribute("ownerAddr", ownerAddr);
 		model.addAttribute("sessionId", sessionId);
-
+		model.addAttribute("msg","자유거래 등록이 완료되었습니다.");	
+		
 		performancereservationDao.ticketToMarket(PReservNo2);
-
+		
 		return "ticket/ticketassignment_market_3";
 	}
 	// TicketAssignment_market

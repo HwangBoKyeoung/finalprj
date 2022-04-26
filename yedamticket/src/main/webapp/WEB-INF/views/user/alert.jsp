@@ -7,6 +7,12 @@
 <title>Insert title here</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <style>
+	*{
+	list-style: none;
+	}
+	.footer{
+		position: fixed;
+	}
 	.swal-modal {
 		width: 30%;
 	}

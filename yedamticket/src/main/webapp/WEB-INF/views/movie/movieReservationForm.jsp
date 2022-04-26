@@ -55,7 +55,6 @@ list-style: none;
   z-index: 1;
   background: #866ec766;
   font-size: 1em;
-/*   transform: rotate(-90deg); */
   transition: all 0.5s ease-in-out;
   cursor: pointer;
 }
@@ -299,9 +298,18 @@ let slicePrice = price1.slice(0,-1);
            data:$('#payFrm').serialize(),
            success: function (result) {
                if(result == 'success'){
-                  location.href="userPage.do";
-               }else if(result == 'fail'){
+            	   swal("결제가 완료되었습니다.", '결제금액: '+slicePrice+'원 입니다.');
+            		
+            		$(".swal-button--confirm").on("click", function(){
+            			location.href="userPage.do";
+            		});
                   
+               }else if(result == 'fail'){
+            	   swal("결제가 실패했습니다.", '다시 시도해주세요.');
+           		
+           		$(".swal-button--confirm").on("click", function(){
+           			location.reload();
+           		});
                }
            }
        });

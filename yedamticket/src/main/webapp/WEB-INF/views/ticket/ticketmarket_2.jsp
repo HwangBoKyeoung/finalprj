@@ -4,6 +4,9 @@
 <head>
 <meta charset="UTF-8">
 <style>
+	*{
+	line-style: none;
+	}
 	  .no-drag {
 	  -ms-user-select: none;
 	  -moz-user-select: -moz-none; 
@@ -37,10 +40,8 @@
 	<input type="hidden" name="UId" id="UId" value="${UId }">
 	<input type="hidden" name="date" id="date" value="${date }">
 	<div class="no-drag" style="margin:auto; max-width: 30%;">
-	  <h2>
-	    채 권 양 도 통 지 서<br />
-	    ----------------------------
-	  </h2>
+	  <br>
+	  <h2 style="font-weight: bold; padding-top:20px">채 권 양 도 통 지 서<br /><br></h2>
       <p>수신인 : ${sessionId }</p>
       <p>주 소 : ${buyerAddr }</p>
       <br />
@@ -55,10 +56,10 @@
       <p id="ownerAdd" class="pctr">주소 : ${ownerAddr }</p>
       <br>
 	</div>
-	<div align="right" style="margin:auto; max-width: 30%;">
+	<div align="right"  style="margin:auto; max-width: 43%; margin-top: 20px; margin-bottom: 30px;">
 		<i class="fas fa-exclamation-circle" title="10% 수수료가 부가된 가격입니다." style="cursor:pointer;" aria-hidden="true"></i>
-		<input type="submit" class="btn" value="확인">
-		<input type="button" class="btn btn-danger" onclick="location.href='ticketassignment_1.do'" value="취소">
+		<input type="submit" class="btn" style="background: #301e4e;" value="확인">
+		<input type="button" class="btn btn-danger" onclick="location.href='ticketmarket_1.do'" value="취소">
 	</div>
 	</form>
 </body>

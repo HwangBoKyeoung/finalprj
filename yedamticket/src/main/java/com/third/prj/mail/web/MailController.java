@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -18,8 +19,9 @@ public class MailController {
 	private JavaMailSender mailSender;
 
 	@RequestMapping(value = "mailChk.do", method = RequestMethod.POST)
-	public String mailChk(HttpSession session) {
-		return "signup/signup_2";
+	public String mailChk(HttpSession session, Model model) {
+		model.addAttribute("msg", "이메일 발송이 완료되었습니다.");
+		return "user/alert2";
 	}
 
 	// 일반회원 메일전송

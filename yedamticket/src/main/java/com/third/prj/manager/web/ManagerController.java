@@ -81,6 +81,7 @@ public class ManagerController {
 		return "manager/manager/managerError";
 	}
 
+
 	// 관리자 등록 아이디 중복확인
 	@ResponseBody
 	@RequestMapping("/idCheck.do")
@@ -94,47 +95,48 @@ public class ManagerController {
 		return "company/manager/managerLoginForm";
 	}
 
-	// 관리자회원 로그인
-	@RequestMapping("/manaLogin.do")
-	public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
-		int midCheck = managerDao.midChk(vo);
+      // 관리자회원 로그인
+   @RequestMapping("/manaLogin.do")
+   public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
+      int midCheck = managerDao.midChk(vo);
 
-		switch (midCheck) {
-		case 1:
-			String msg = "";
-			String url = "";
-			ManagerVO login = managerDao.manaLogin(vo, session);
-			BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+      switch (midCheck) {
+      case 1:
+         String msg = "";
+         String url = "";
+         ManagerVO login = managerDao.manaLogin(vo, session);
+         BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
 
-			if (vo != null && pwdEncoder.matches(vo.getPwd(), login.getPwd())) {
-				msg = "로그인 성공";
-				url = "managerSelet.do?MId=" + vo.getMId();
-				session.setAttribute("sessionId", vo.getMId());
-				session.setAttribute("sessionName", login.getName());
-				session.setAttribute("sessionDp", login.getDepart());
-				session.setAttribute("sessionAuthCd", login.getAuthCd());
-				mv.addObject("msg", msg);
-				mv.addObject("url", url);
-				mv.setViewName("company/alert");
+         if (vo != null && pwdEncoder.matches(vo.getPwd(), login.getPwd())) {
+            msg = "로그인 성공";
+            url = "managerSelet.do?MId=" + vo.getMId();
+            session.setAttribute("sessionId", vo.getMId());
+            session.setAttribute("sessionName", login.getName());
+            session.setAttribute("sessionDp", login.getDepart());
+            session.setAttribute("sessionAuthCd", login.getAuthCd());
+            mv.addObject("msg", msg);
+            mv.addObject("url", url);
+            mv.setViewName("user/alert");
 
-			} else {
-				msg = "비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
-				url = "managerLoginForm.do";
-				mv.addObject("msg", msg);
-				mv.addObject("url", url);
-				mv.setViewName("company/alert");
-			}
-			break;
+         } else {
+            msg = "비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
+            url = "managerLoginForm.do";
+            mv.addObject("msg", msg);
+            mv.addObject("url", url);
+            mv.setViewName("user/alert");
+         }
+         break;
 
-		case 0:
-			String msg2 = "아이디 또는 비밀번호를 확인해주세요";
-			String url2 = "managerLoginForm.do";
-			mv.addObject("msg", msg2);
-			mv.addObject("url", url2);
-			mv.setViewName("company/alert");
-			break;
-		}
-		return mv;
-	}
+      case 0:
+         String msg2 = "아이디 또는 비밀번호를 확인해주세요";
+         String url2 = "managerLoginForm.do";
+         mv.addObject("msg", msg2);
+         mv.addObject("url", url2);
+         mv.setViewName("user/alert");
+         break;
+      }
+      return mv;
+   }
+  
 
 }

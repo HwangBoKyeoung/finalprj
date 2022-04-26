@@ -23,6 +23,7 @@
 <style>
 * {
 	font-family: 'Gowun Dodum', sans-serif;
+	list-style: none;
 }
 
 #plus, #minus, #cnt {
@@ -153,16 +154,15 @@ section>article>#map {
 						<div class="single-event-heading">
 							<h2 class="entry-title">${performance.name }</h2>
 							<div class="event-location">
-								<a href="#">${performance.addr }</a>
+								<a>${performance.addr }</a>
+								
 							</div>
-							<div class="event-date">${performance.frDt }
+							<div class="event-date"><br>${performance.frDt }
 								${performance.time }</div>
 						</div>
 
 					</header>
-					<figure class="events-thumbnail">
-						<img src="resources/performance/images/summer.jpg" alt="">
-					</figure>
+					
 				</div>
 			</div>
 		</div>
@@ -172,7 +172,7 @@ section>article>#map {
 				<div class="tabs">
 					<ul class="tabs-nav flex">
 						<li class="tab-nav flex justify-content-center align-items-center"
-							data-target="#tab_details">Details</li>
+							data-target="#tab_details">상세정보</li>
 						<li class="tab-nav flex justify-content-center align-items-center"
 							data-target="#tab_venue">위치</li>
 					</ul>
@@ -210,7 +210,7 @@ section>article>#map {
 										<p id="locName"></p>
 									</div>
 									<div class="single-event-details-row">
-										<label>좌석</label>
+										<label style="display: inline-block;float: left;padding-right: 30px">좌석</label>
 										<div id="seatName">
 											<table id="selectedSeat">
 												<tr>
@@ -746,7 +746,7 @@ section>article>#map {
 
 									</div>
 									<!-- 공연장 상세 좌석도 -->
-									<div id="detailSeat" style="display: none;">
+									<div id="detailSeat" style="display: none;padding-left: 150px;">
 										<div>
 											<div id="minus">-</div>
 											<div id="cnt">0</div>
@@ -755,7 +755,7 @@ section>article>#map {
 										<button id="backBtn" class="btn gradient-bg"
 											style="margin-top: 0; margin-left: 20px;">뒤로가기</button>
 
-										<div class="seatContainer">
+										<div class="seatContainer" style="padding-top: 20px;padding-left: 30px;">
 											<div class="screen">
 												<img height="100px" width="290px"
 													src="resources/performance/images/stage.png">
@@ -802,69 +802,16 @@ section>article>#map {
 				</c:choose>
 			</div>
 		</form>
-		<!-- <div class="modal">
-		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-			<div class="container">
-            <div class="col-md-4 ml-auto mr-auto">
-               <div class="card card1-login card1-plain">
-                  <form class="form" action="userLogin1.do" method="POST">
-
-                     <div class="card-header text-center">
-                        <div class="logo-container">
-                           <img src="resources/users/img/now-logo.png" alt="">
-                        </div>
-                     </div>
-                     <div class="card-body">
-                        <div class="input-group no-border input-lg">
-                           <div class="input-group-prepend">
-                              <span class="input-group-text"> <i class="now-ui-icons users_circle-08"></i>
-                              </span>
-                           </div>
-                           <input type="text" class="form-control" name="UId1"  id="UId1" placeholder="Id...">
-                        </div>
-                        <div class="input-group no-border input-lg">
-                           <div class="input-group-prepend">
-                              <span class="input-group-text"> <i class="now-ui-icons objects_key-25"></i>
-                              </span>
-                           </div>
-                           <input type="password" placeholder="Password..." name="pwd"  id="pwd" class="form-control">
-                        </div>
-                        <br>
-                        <div class="card-footer text-center">
-                           <input type="button" onclick="ajaxLogin()" class="btn btn-primary btn-round btn-lg btn-block" value="LOGIN">
-                        </div>
-                        <div class="card-footer text-center">
-                           <a href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&amp;redirect_uri=http://localhost/prj/kakaoLogin.do&amp;response_type=code">
-
-                              <img src="resources/users/img/kakao_login_large_wide.png" class="loginBtn">
-                           </a>
-                        </div>
-                        <br>
-                        <div class="pull-left">
-                           <h6>
-                              <a href="signup_1.do" class="link">Create Account</a>
-                           </h6>
-                        </div>
-                         <div class="close">
-                          
-                        </div>
-                        <div class="pull-right">
-                           <h6>
-                              <a href="companyLoginForm.do" class="link">기업회원이신가요?</a> <a href="managerLoginForm.do" class="link">관리자입니까?</a>
-                           </h6>
-                        </div>
-                        <div class="pull-left">
-                           <h6>
-                              <a href="#" class="idPassword link">아이디/비밀번호 찾기</a>
-                           </h6>
-                        </div>
-                     </div>
-                  </form>
-               </div>
-            </div>
-         </div>
-		</div>
-	</div> -->
+		<figure class="events-thumbnail">
+					  <c:choose>
+		          		<c:when test="${not empty performance.fileCd}">
+		          		  	<img src="resources/performance/images/${performance.fileCd}" style="width: 1111px; height: 900px;">
+		          		</c:when>  
+		               	<c:otherwise>
+		               		<img src="resources/performance/images/alt.jpg" style="width: 1111px; height: 430px;">
+		               	</c:otherwise>
+		              </c:choose>								
+					</figure>
 		<img src="resources/performance/images/공연상세.jpg"
 			style="padding-top: 50px; width: 100%;">
 
@@ -1054,6 +1001,7 @@ $('#backBtn').on('click',function(){
    let selectedSeat = document.getElementById('selectedSeat');
    let tdList=selectedSeat.getElementsByTagName('td');
    console.log(tdList);
+   $('#seatNo').val('');
    for(let i =0;i<tdList.length;i++){
       tdList[i].classList.remove('seatGray');
       tdList[i].innerText='+';

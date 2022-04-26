@@ -108,6 +108,12 @@ function drawMap(target) {
                for (var i = 0; i < result.length; i++) {
                   cards.find('h2').text(result[i].name);
                   cards.find('p').text(result[i].addr);
+				if(result[i].fileCd == null){
+				  cards.find('img').attr('src','resources/performance/images/alt.jpg');
+				}else{
+				  cards.find('img').attr('src','resources/performance/images/'+result[i].fileCd);
+				}
+				 
                   cards.find('#reservBtn').attr('href',"pBookingForm.do?pNo="+result[i].pno);
                   cards.find('.card-description').text(result[i].content);
                   row8.append(cards.html());

@@ -43,7 +43,7 @@
 					</div>
 					<div class="card-body">
 						<div class="input-group no-border">
-							<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required="required" onkeyup="idcheck();" maxlength="13">
+							<input type="text" id="id" name="id" class="form-control" placeholder="아이디" required="required" onkeyup="idcheck();" maxlength="20">
 							<input type="text" id="email" name="email" class="form-control" placeholder="주소 (@ 생략)" style="color:white;">
 							<input type="hidden" name="content" id="content" required="required">
 							<input type="hidden" name="subject" id="subject" required="required">
@@ -82,7 +82,7 @@ let chked2 = 0;
 function idcheck(){
 	let id = $("#id").val()
 	let selector = $("#selmail").val()
-	let RegExp = /^[a-zA-Z0-9]{4,12}$/;
+	let RegExp = /^[a-zA-Z0-9]{4,21}$/;
 	
 	if(! RegExp.test(id)){
 		console.log("id조건 영어, 4자리이상 12자리이하.")
@@ -154,7 +154,7 @@ function btnFnc() {
 		content += "<p>저희 (주)예담티켓을 이용해 주셔서 진심으로 감사드립니다.</p>";
 		content += "<p>회원가입을 계속 진행하시려면 아래 '메일인증' 버튼을 눌러 회원가입을 완료해 주세요.</p>";
 		content += "<p>감사합니다.</p>";
-		content += "<a style='text-decoration:none;color:navy;font-size:20px;font-weight:bold;' href='localhost/prj/signupB_2.do'><button style='width:500px;height:70px' onclick='location.href='localhost/prj/signupB_2.do''>메일인증</button></a><br>"
+		content += "<a style='text-decoration:none;color:navy;font-size:20px;font-weight:bold;' href='http://3.39.54.67:8080/yedamticket/signupB_2.do'><button style='width:500px;height:70px' onclick='location.href='http://3.39.54.67:8080/yedamticket/signupB_2.do''>메일인증</button></a><br>"
 		content += "<p>본 메일은 발신전용이며, 문의에 대한 회신은 처리되지 않습니다.</p>";
 		content += "<p>(주)예담티켓과 관련하여 궁금하신 점이나 불편한 사항은 언제든지 문의바랍니다.</p>"
 		content += "<br>";

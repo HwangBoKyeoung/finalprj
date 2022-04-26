@@ -24,6 +24,9 @@
 <script type="text/javascript" src="resources/js/d3.js"></script>
 <script type="text/javascript" src="resources/js/korea.js"></script>
 <style type="text/css">
+*{
+	list-style: none;
+}
 .p1 {
 	font-size: 250%;
 	font-weight: bold;
@@ -158,7 +161,7 @@
 			<div class="card">
 				<div class="card__image-holder">
 					<img class="card__image"
-						src="https://source.unsplash.com/300x225/?wave" alt="wave" />
+						src="https://source.unsplash.com/300x225/?wave" style="height: 200px;width: 266px;" />
 				</div>
 				<div class="card-title">
 					<a class="toggle-info btn"> <span class="left"></span> <span
@@ -172,9 +175,10 @@
 						something nice that works on touch devices. Ignoring hover states
 						when they're not available etc.</div>
 					<div class="card-flap flap2">
-						<div class="card-actions">
-						</div>
-					</div>
+                    <div class="card-actions">
+                      <a id="reservBtn" class="btn" href="userLoginForm.do">예매하기</a>
+                    </div>
+                  </div>
 				</div>
 			</div>
 		</div>
@@ -249,11 +253,11 @@
 													<span class="icon a12 ir_pm">18세이상관람가</span>
 												</c:if>
 
-												<strong>${movie.name }</strong>
-
+												<strong>${movie.name }  </strong>
+    
 											</h3>
 											<div class="infor_btn">
-												<a href="#">상세정보</a> <a href="#">예매하기</a>
+												<a href="movieDetail.do?docId=${movie.docId }">상세정보</a> <a href="movieBooking.do">예매하기</a>
 											</div>
 										</div>
 									</div>

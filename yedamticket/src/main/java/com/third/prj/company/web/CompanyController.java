@@ -112,6 +112,7 @@ public class CompanyController {
    //기업회원 로그인
    @RequestMapping("/companyLogin.do")
    public ModelAndView companyLogin(HttpSession session, CompanyVO vo, ModelAndView mv) {
+
       int cidCheck = companyDao.cidChk(vo);
       
       switch(cidCheck) {
@@ -136,13 +137,13 @@ public class CompanyController {
     	      session.setAttribute("sessionAuth", login.getRole());
     	      mv.addObject("msg", msg);
     	      mv.addObject("url", url);
-    	      mv.setViewName("company/alert");
+    	      mv.setViewName("user/alert");
     	  }else {
     		  msg = "비밀번호가 일치하지 않습니다 다시 로그인 해주세요";
               url = "userLoginForm.do";
               mv.addObject("msg", msg);
               mv.addObject("url", url);
-              mv.setViewName("company/alert");
+              mv.setViewName("user/alert");
     	  }
     	  break;
     	  
@@ -154,6 +155,7 @@ public class CompanyController {
           mv.setViewName("user/alert");
           break;
       }
+
       return mv;
    }
    //기업 마이페이지 메인 겸 조회/수정

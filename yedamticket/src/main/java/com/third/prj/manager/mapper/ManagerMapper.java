@@ -29,4 +29,5 @@ public interface ManagerMapper {
 	
 //  company 아이디 체크
 	int midChk(ManagerVO vo);
+
 }

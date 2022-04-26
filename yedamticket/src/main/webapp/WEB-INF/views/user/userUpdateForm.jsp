@@ -153,7 +153,7 @@ label{
 			<form class="form-horizontal" role="form" method="post" id="form"
 				action="userUpdate.do" onsubmit="return updateTest();">
 				<div class="form-group" id="divId">
-					<label for="inputId" class="col-lg-2 control-label">아이디</label>
+					<label for="inputId" class="col-lg-4 control-label">아이디</label>
 					<div class="col-lg-10">
 						<input type="text" class="form-control " id="UId" name="UId"
 							value="${sessionId}" data-rule-required="true"
@@ -161,7 +161,7 @@ label{
 					</div>
 				</div>
 				<div class="form-group" id="divPassword">
-					<label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
+					<label for="inputPassword" class="col-lg-4 control-label">패스워드</label>
 					<div class="col-lg-10">
 						<input type="password" class="form-control" id="pwd" name="pwd"
 							data-rule-required="true" placeholder="패스워드" maxlength="100"
@@ -171,7 +171,7 @@ label{
 				<p id="pppp" style="display: none;">비밀번호는 8자 이상이어야 하며, 숫자/특수문자를
 					모두 포함해야 합니다</p>
 				<div class="form-group" id="divPasswordCheck">
-					<label for="inputPasswordCheck" class="col-lg-2 control-label">패스워드
+					<label for="inputPasswordCheck" class="col-lg-4 control-label">패스워드
 						확인</label>
 
 					<div class="col-lg-10">
@@ -181,7 +181,7 @@ label{
 					</div>
 				</div>
 				<div class="form-group" id="divName">
-					<label for="inputName" class="col-lg-2 control-label">이름</label>
+					<label for="inputName" class="col-lg-4 control-label">이름</label>
 					<div class="col-lg-10">
 						<input type="text" class="form-control " id="name" name="name"
 							value="${user.name }" data-rule-required="true" maxlength="15"
@@ -190,7 +190,7 @@ label{
 				</div>
 
 				<div class="form-group" id="divEmail">
-					<label for="inputEmail" class="col-lg-2 control-label">이메일</label>
+					<label for="inputEmail" class="col-lg-4 control-label">이메일</label>
 					<div class="col-lg-10">
 						<input type="email" class="form-control" id="email" name="email"
 							value="${user.email }" data-rule-required="true"
@@ -198,7 +198,7 @@ label{
 					</div>
 				</div>
 				<div class="form-group" id="divPhoneNumber">
-					<label for="inputPhoneNumber" class="col-lg-2 control-label">휴대폰
+					<label for="inputPhoneNumber" class="col-lg-4 control-label">휴대폰
 						번호</label>
 					<div class="col-lg-10">
 						<input type="tel" class="form-control onlyNumber"

@@ -24,4 +24,5 @@ public interface ManagerService {
 	
 //  company 아이디 체크
 	int midChk(ManagerVO vo);
+
 }

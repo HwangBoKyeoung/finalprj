@@ -134,14 +134,14 @@ label {
 			<p class="lead">회원탈퇴를 하실려면 비밀번호를 입력해주세요.</p>
 			<form class="frm" action="userDelete.do" method="POST" id="deleteForm" >
 				<div class="form-group" id="divPassword">
-					<label for="inputPassword" class="col-lg-2 control-label">패스워드</label>
+					<label for="inputPassword" class="col-lg-4 control-label">패스워드</label>
 					<div class="col-lg-10">
 						<input type="password" class="form-control" id="pwd" name="pwd"
 							data-rule-required="true" placeholder="패스워드" maxlength="10">
 					</div>
 				</div>
 				<div class="form-group" id="divPasswordCheck">
-					<label for="inputPasswordCheck" class="col-lg-3 control-label">패스워드
+					<label for="inputPasswordCheck" class="col-lg-4 control-label">패스워드
 						확인</label>
 					<div class="col-lg-10">
 						<input type="password" class="form-control" id="pwd2" name="pwd2"

@@ -9,7 +9,7 @@
 
 <body>
    <!--Div that will hold the pie chart-->
-   <div id="barchart_values" style="width: 100%; height: 100%;"></div>
+   <div id="barchart_values" style="width: 100%; height: 80%; margin-bottom: 30px;"></div>
    
    <script type="text/javascript">
       google.charts.load("current", {
@@ -38,7 +38,7 @@
                
                var data = new google.visualization.DataTable();
                
-               data.addColumn('string', '공연이름');
+               data.addColumn('string', '영화제목');
                data.addColumn('number', '관객수');
                
                for(let i=0; i<result.length; i++){

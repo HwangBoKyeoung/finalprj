@@ -11,7 +11,7 @@
 	}
 	
 	#point::placeholder{
-		color: white;
+		color: purple;
 	}
 	
 	.payBtn{
@@ -38,20 +38,28 @@
 		padding-right: 0px;
 	}
 	
+	.swal-modal {
+		width: 30%;
+	}
+	
+	.swal-button--confirm {
+		background-color: #ffb236;
+	}
+	
 </style>
 </head>
 <body>
-<div class="container-fluid">
-	<div id="pointdiv1" class="section section-signup" style="background-image : url('./resources/users/img/ssp7_ab.jpg'); height: 100vh;background-repeat : no-repeat; background-size : cover;background-position: top center;">
-		<div id="pointdiv2" style="width: 535px; height: 600px; padding: 1rem; margin: 1rem; float: left; padding-top: 20px;"> 
-			<div class="card card-signup" style="height:90%; width:100%; background: #cfc5e9;">
+	<div id="pointdiv1" class="section section-signup" style="background-image : url('./resources/users/img/ssp7_ab.jpg');padding-bottom: 30px; text-align: center;height: 100vh;background-repeat : no-repeat; width: 100%;background-size : cover;background-position: top center;">
+		<!-- <div id="pointdiv2" style="width: 535px; height: 600px; padding: 1rem; margin: 1rem; float: left; padding-top: 20px;"> --> 
+<div class="container">
+		<div class="card card-signup" style="margin-left: 670px;height:90%;padding-bottom: 30px; width:100%; background: #cfc5e9;margin-left: auto; margin-right: auto;">
 				<form id="form" action="point_2.do" method="POST">
 					<div class="card-header text-center">
-						<h3 class="card-title title-up">충전</h3>
+						<h3 class="card-title title-up" style="font-weight: bold;">충전</h3>
 					</div>
 					<div class="card-header text-center">
 						<input type="number" id="point" class="form-control" placeholder="금액을 입력해주세요." required="required" readonly="readonly" name="point" maxlength="7" onkeyup="maxPoint();" oninput="maxLengthChk(this);" 
-						 style="background-color: gray; height: 39px; color:white; margin-bottom: 20px; width: 80%; margin-left: auto; margin-right: auto;"/>
+						 style="background-color: #8080801f; height: 39px; color:black; margin-bottom: 20px; width: 80%; margin-left: auto; margin-right: auto;"/>
 					    <input type="hidden" id="UId" name="UId" value="${sessionId}"/>
 							<button class="btn payBtn" type="button" onclick="fiveThousand();">+5천 원</button>
 						    <button class="btn payBtn" type="button" onclick="tenThousand();">+1만 원</button>
@@ -62,8 +70,8 @@
 						<img alt="kakaopay" style="width: 25%;" src="./resources/kakaopay/payment_icon_yellow_large.png">
 						<input type="button" id="payment" class="btn btn-neutral btn-round btn-lg" value="충전" onclick="pay();">
 						<br>
-					</div>
-					<a id="reset" onclick="resetPoint();" style="text-decoration: underline; padding-left: 177px; cursor: pointer;">초기화하시겠습니까?</a>
+					</div><br>
+					<a id="reset" onclick="resetPoint();" style="text-align:center; text-decoration: underline; margin-bottom: 5px; cursor: pointer;">초기화하시겠습니까?</a>
 					<!-- <div id="divfooter1" class="card-footer text-center" style="
 						position: absolute;
 						bottom: 11px;
@@ -72,12 +80,11 @@
 						left: 0;
 						right: 0;"> -->
 						
-					</div><!--  -->
 				</form>
-			</div>
-		</div>
-	</div>
-</div>
+					</div>
+		</div></div>
+			
+			<!-- </div> -->
 <script>
 function pay(){
 	var IMP = window.IMP // 생략가능
@@ -110,12 +117,15 @@ function pay(){
 			// success.submit();
 			// 결제 성공 시 정보를 넘겨줘야한다면 body에 form을 만든 뒤 위의 코드를 사용하는 방법이 있습니다.
 			// 자세한 설명은 구글링으로 보시는게 좋습니다.
-			$("form").submit();
 		} else {
-			var msg = "결제에 실패하였습니다."
+			var msg = "결제에 실패하였습니다.";
 			msg += "에러내용 : " + rsp.error_msg
 		}
-		alert(msg)
+		swal("결제 안내 메세지", msg);
+		
+		$(".swal-button--confirm").on("click", function(){
+			$("#form").submit();
+		});
 	})
 }
 

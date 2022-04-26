@@ -13,7 +13,7 @@ textarea {
 <input type="hidden" name="mvNo" id="mvNo">
 <body>
 	<div class="container">
-		<div class="row">
+		<div class="row" style="padding-bottom: 20px;">
 			<div class="col-md-2"></div>
 			<div class="col-md-9">
 				<br>
@@ -23,7 +23,7 @@ textarea {
 					<table class="table">
 						<tr>
 							<td>기업명</td>
-							<td><input type="text" id="" name="" value="${sessionName }"class="form-control" readonly="readonly"></td>
+							<td><input type="text" id="CId" name="CId" value="${sessionName }"class="form-control" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td>영화 이름</td>
@@ -38,10 +38,10 @@ textarea {
 						<tr>
 							<td>관람 등급</td>
 							<td><select name="rating" class="form-control" required="required">
-									<option value="전체 관람가" selected="selected">전체 관람가</option>
-									<option value="12세 관람가">12세 관람가</option>
-									<option value="15세 관람가">15세 관람가</option>
-									<option value="청소년 관람불가">청소년 관람불가</option>
+									<option value="전체관람가" selected="selected">전체관람가</option>
+									<option value="12세관람가">12세관람가</option>
+									<option value="15세관람가">15세관람가</option>
+									<option value="18세관람가(청소년관람불가)">18세관람가(청소년관람불가)</option>
 							</select></td>
 						</tr>
 						<tr>
@@ -95,7 +95,7 @@ textarea {
 								></textarea></td>
 						</tr>
 					</table>
-					<button type="submit" class="form-control">등록</button>
+					<button type="submit" style="background-color: #cfc5e9;" class="form-control">등록</button>
 				</form>
 			</div>
 		</div>

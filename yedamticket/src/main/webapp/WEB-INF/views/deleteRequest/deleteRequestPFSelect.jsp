@@ -77,7 +77,7 @@
 			if($(this).val()=='거절'){
 				$("#refusal").show();
 			} else{
-				$("#show").empty();
+				$("#show").hide();
 			}
 			});
 	</script>

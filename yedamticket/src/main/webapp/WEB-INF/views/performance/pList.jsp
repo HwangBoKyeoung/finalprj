@@ -26,8 +26,8 @@ input::-webkit-input-placeholder { color: black; }
 	margin-bottom: 5px;
 	font-family: 'Gowun Dodum', sans-serif;
 	width: 1400px;
+	font-size: 3.5em;
 }
-
 
 </style>
 </head>
@@ -72,7 +72,14 @@ input::-webkit-input-placeholder { color: black; }
     	<form action="pBookingForm.do" method="post">
         <div class="col-12 col-lg-6 single-event">
             <figure class="events-thumbnail">
-                <img src="resources/performance/images/event-1.jpg" alt="">
+            <c:choose>
+          		<c:when test="${not empty p.fileCd}">
+          		  <img src="resources/performance/images/${p.fileCd}" style="width: 559px; height: 300px;">
+          		</c:when>  
+               	<c:otherwise>
+               		<img src="resources/performance/images/alt.jpg" style="width: 559px; height: 300px;">
+               	</c:otherwise>
+            </c:choose>
             </figure>
             <div class="event-content-wrap">
                 <header class="entry-header flex justify-content-between">
@@ -168,11 +175,11 @@ input::-webkit-input-placeholder { color: black; }
                 </div>
             </div>
         </div>
-    </div>
+    </div> --%>
     <input type="hidden" value="${psvo.startDate}" id="vostart">
     <input type="hidden" value="${psvo.endDate}" id="voend">
     <input type="hidden" value="${vo.name}" id="voname">
-    <input type="hidden" value="${vo.loc}" id="voloc"> --%>
+    <input type="hidden" value="${vo.loc}" id="voloc">
 <script>
 
 let actionForm = $("#actionForm");
@@ -198,6 +205,7 @@ $("#content a").on("click", function(e) {
 	actionForm.find("input[name='endDate']").val($("#voend").val());
 	actionForm.find("input[name='name']").val($("#voname").val());
 	actionForm.find("input[name='loc']").val($("#voloc").val());
+	console.log($("#vostart").val());
 	console.log($("#voloc").val());
 	
  	actionForm.submit();
