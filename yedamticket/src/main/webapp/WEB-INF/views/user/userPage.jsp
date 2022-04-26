@@ -654,7 +654,7 @@ span{
 			var LUId = $(event.target).parent().parent().children().eq(6)
 					.text();
 
-			var Lprice2 = parseInt(Lprice) * 1.1
+			var Lprice2 = Lprice;
 
 			$("#Mname").text("공연제목 : " + Lname)
 			$("#MPReservNo").text("예매번호 : " + LPReservNo)
