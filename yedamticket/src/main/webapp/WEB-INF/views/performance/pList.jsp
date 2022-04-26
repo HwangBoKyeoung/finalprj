@@ -175,11 +175,11 @@ input::-webkit-input-placeholder { color: black; }
                 </div>
             </div>
         </div>
-    </div>
+    </div> --%>
     <input type="hidden" value="${psvo.startDate}" id="vostart">
     <input type="hidden" value="${psvo.endDate}" id="voend">
     <input type="hidden" value="${vo.name}" id="voname">
-    <input type="hidden" value="${vo.loc}" id="voloc"> --%>
+    <input type="hidden" value="${vo.loc}" id="voloc">
 <script>
 
 let actionForm = $("#actionForm");
@@ -205,6 +205,7 @@ $("#content a").on("click", function(e) {
 	actionForm.find("input[name='endDate']").val($("#voend").val());
 	actionForm.find("input[name='name']").val($("#voname").val());
 	actionForm.find("input[name='loc']").val($("#voloc").val());
+	console.log($("#vostart").val());
 	console.log($("#voloc").val());
 	
  	actionForm.submit();

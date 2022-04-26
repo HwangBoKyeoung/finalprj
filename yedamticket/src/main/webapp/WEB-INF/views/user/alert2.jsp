@@ -24,14 +24,13 @@
 </head>
 <%
 	String msg = (String)request.getAttribute("msg");
-	String url = (String)request.getAttribute("url");
 %>
 <script>
 	localStorage.clear();
-	swal("예담티켓에 방문해주셔서 감사합니다.", `<%=msg%>`);
+	swal("예.담.티.켓.", `<%=msg%>`);
 	
 	$(".swal-button--confirm").on("click", function(){
-		location.href=`<%=url%>`;
+		location.href='home.do';
 	});
 </script>
 <body>

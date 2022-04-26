@@ -535,10 +535,9 @@ span{
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="닫기">
+<!-- 							<button type="button" class="close" data-dismiss="modal" aria-label="닫기">
 								<span aria-hidden="true">&times;</span>
-							</button>
+							</button> -->
 						</div>
 						<form action="reservedticket_1.do" method="POST">
 							<div class="modal-body">
@@ -587,10 +586,6 @@ span{
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal"
-								aria-label="닫기">
-								<span aria-hidden="true">&times;</span>
-							</button>
 						</div>
 						<form action="cancelticket_1.do" method="POST">
 							<div class="modal-body">

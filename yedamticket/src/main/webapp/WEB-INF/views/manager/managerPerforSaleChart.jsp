@@ -11,7 +11,7 @@
    <!--Div that will hold the pie chart-->
   <!--  <h1 style="text-align: center;">공연 매출 차트</h1>
    <br><br> -->
-   <div id=chart_div style="width:50%; height: 100%;"></div>
+   <div id=chart_div style="width:100%; height: 1000px;"></div>
    
    <script type="text/javascript">
       google.charts.load("current", {
@@ -39,8 +39,8 @@
                
                var data = new google.visualization.DataTable();
                
-               data.addColumn('string', 'dayDate');
-               data.addColumn('number', 'sales');
+               data.addColumn('string', '일');
+               data.addColumn('number', '매출');
                
                for(let i=0; i<result.length; i++){
                   arr.push([result[i].dayDate, result[i].sales]);   
@@ -50,24 +50,28 @@
                console.log(data);
                
                var options = {
-            	          title: {
-//             	        	  display: true,
-            	        	  text : 'Company Performance',
-//             	        	  fontSize : '150px'
-            	          },
-            	          series: {
+            	          title: '공연일일매출',
+            	          /* series: {
             	              0: { color: '#a561bd' },
             	              1: { color: '#c784de' },
             	              2: { color: '#f1ca3a' },
             	              3: { color: '#2980b9' },
             	              4: { color: '#e67e22' }
-            	            },
-            	          hAxis: {title: 'Year',  titleTextStyle: {color: 'red'} },
-            	          vAxis: {minValue: 0}
+            	            }, */
+            	          hAxis: {title: '2022',  titleTextStyle: {color: 'black'} },
+            	          vAxis: {minValue: 0},
+            	          responsive: false,
+            	          scales: {
+            					yAxes: [{
+            						ticks: {
+            							beginAtZero: true
+            						}
+            					}]
+            				},
             	        };
 
                var chart = new google.visualization.AreaChart(document.getElementById('chart_div'),options);
-               chart.draw(data);
+               chart.draw(data,options);
             }
          });
       }

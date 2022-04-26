@@ -3,12 +3,35 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<style>
+	*{
+		list-style: none;
+	}
+	.footer{
+		position: fixed;
+	}
+	
+	.swal-modal {
+		width: 30%;
+	}
+	
+	.swal-button--confirm {
+		background-color: #ffb236;
+	}
+</style>
+<%
+	String msg = (String)request.getAttribute("msg");
+	String url = (String)request.getAttribute("url");
+%>
 </head>
 <body>
-<div align="center">
-<h2>자유거래 등록이 완료되었습니다!</h2>
-<input type="button" class="btn" onclick="location.href='home.do'" value="홈으로">
-<input type="button" class="btn" onclick="location.href='ticketassignment_1.do'" value="내 티켓 보기">
-</div>
+
+<script>
+	swal("예담티켓에 방문해주셔서 감사합니다.", `<%=msg%>`);
+	
+	$(".swal-button--confirm").on("click", function(){
+		location.href='userPage.do';
+	});
+</script>
 </body>
 </html>

@@ -1001,6 +1001,7 @@ $('#backBtn').on('click',function(){
    let selectedSeat = document.getElementById('selectedSeat');
    let tdList=selectedSeat.getElementsByTagName('td');
    console.log(tdList);
+   $('#seatNo').val('');
    for(let i =0;i<tdList.length;i++){
       tdList[i].classList.remove('seatGray');
       tdList[i].innerText='+';
