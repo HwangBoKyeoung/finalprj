@@ -250,7 +250,8 @@ public class PerformanceReservationController {
 		System.out.println("====================" + performanceReservationVO);
 		int i = performancereservationDao.ticketReserv(performanceReservationVO);
 		if (i != 0) {
-			return "ticket/ticketassignment_personal_4";
+			model.addAttribute("msg", "양도 신청이 완료되었습니다!");
+			return "user/alert3";
 		}
 		return "ticket/ticketassignment_error";
 	}
@@ -336,15 +337,14 @@ public class PerformanceReservationController {
 		String frDt = httpServletRequest.getParameter("frDt");
 		String seatNo = httpServletRequest.getParameter("seatNo");
 		String loc = httpServletRequest.getParameter("loc");
-		String price = httpServletRequest.getParameter("price");
+		long price = Long.parseLong((httpServletRequest.getParameter("price")));
 		String UId = httpServletRequest.getParameter("UId");
-		int price2 = Integer.parseInt(price);
-		price2 *= 1.1;
+		long price2 = price;
 
 		String sessionId = (String) session.getAttribute("sessionId");
 
 		userVO = userDao.getUser2(sessionId);
-		int point = userVO.getPoint();
+		long point = userVO.getPoint();
 
 		model.addAttribute("point", point);
 		model.addAttribute("name", name);
