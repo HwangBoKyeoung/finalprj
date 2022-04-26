@@ -131,10 +131,10 @@ function readURL(input) {
 							<img id="preImage" src="/upload/${mv.renames}" alt="${mv.fileCd}"/>
 						</div>
 						 
-						<button type="submit" class="btn btn-gradient-primary me-2">Update</button>
-						<input type="button" class="btn btn-light" value="Cancel" onclick="location.href='companyMovieList.do'">
+						<button type="submit" style="background: #301e4e;margin-top: 5px;" class="btn btn-gradient-primary me-2">Update</button>
+						<input type="button" class="btn btn-light" style="background: #301e4e;margin-top: 5px;" value="Cancel" onclick="location.href='companyMovieList.do'">
 					</form>
-						<button class="btn btn-gradient-primary me-2" onclick="location.href='companyMoviedel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
+						<button class="btn btn-gradient-primary me-2" style="background: #301e4e;margin-top: 5px;" onclick="location.href='companyMoviedel.do?mvNo=${mv.mvNo}&cId=${mv.CId}'">삭제요청</button>
 						<input type="hidden" value="${mv.docId }" id="docId" name="docId">
 				</div>
 			</div>
