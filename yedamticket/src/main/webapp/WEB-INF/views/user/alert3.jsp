@@ -30,7 +30,7 @@
 	swal("예.담.티.켓.", `<%=msg%>`);
 	
 	$(".swal-button--confirm").on("click", function(){
-		locatiolo	n.href='userPage.do';
+		location.href='userPage.do';
 	});
 </script>
 <body>
