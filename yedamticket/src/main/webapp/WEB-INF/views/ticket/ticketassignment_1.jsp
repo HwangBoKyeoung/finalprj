@@ -274,7 +274,7 @@ body {
 									<input type="hidden" id="price" name="price">
 								</div>
 								<div class="modal-footer" style="display: block">
-									<p>예약을 취소하시려면 버튼을 눌러주세요.</p>
+									<p>양도거래를 취소하시려면 버튼을 눌러주세요.</p>
 									<button type="button" class="btn btn-secondary"
 										data-dismiss="modal">취소</button>
 									<input type="submit" class="btn btn-primary" value="확인">
