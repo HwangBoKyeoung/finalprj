@@ -430,7 +430,7 @@ h4 {
 	</script>
 	<script src="./resources/users/js/core/jquery.min.js"></script>
 	<script src="./resources/users/js/core/popper.js"></script>
-	<script src="./resources/users/js/core/bootstrap.min.js"></script>
+	<!--<script src="./resources/users/js/core/bootstrap.min.js"></script>-->
 	<script src="./resources/users/js/main.js"></script>
 </body>
 </html>
