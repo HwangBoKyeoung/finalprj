@@ -7,6 +7,13 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+* {
+	list-style: none;
+}
+/* 
+.footer{
+	position: absolute;
+} */
 .btnn {
 	display: block;
 	margin: auto;
@@ -95,12 +102,15 @@
 	width: 300px;
 	height: 390px;
 }
+.body-content {
+    margin-bottom: 10%;
+    }
 </style>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-	
 
-	
+
+
 </head>
 <body>
 	${search}
@@ -134,77 +144,84 @@
 		<br> <br>
 		<h2>전체목록</h2>
 		<div class="row">
-			<c:forEach items="${searchName}" var="sN" varStatus="status">
-				<div class="col-3">
-				Movie<br>
-					<div class="card">
-						<div class="poster" id="poster">
-							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
+			<c:if test="${not empty searchName }">
+				<c:forEach items="${searchName}" var="sN" varStatus="status">
+					<div class="col-3">
+
+						<div class="card">
+							<div class="poster" id="poster">
+								<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
-							<input type="hidden" class="rankPoster" value="${sN.fileCd }">
-							<input type="hidden"  value="${sN.renames }">
-							<img class="rPoster">
-						</div>
-						<div class="details">
-							<br> <br>
-							<div class="info">
-								<p class="pbox">${sN.content}</p>
+								<input type="hidden" class="rankPoster" value="${sN.fileCd }">
+								<input type="hidden" value="${sN.renames }"> <img
+									class="rPoster">
+							</div>
+							<div class="details">
+								<br> <br>
+								<div class="info">
+									<p class="pbox">${sN.content}</p>
+								</div>
 							</div>
 						</div>
+						<p id="mname">${sN.name}</p>
+						<form action="movieDetail.do" method="post">
+							<div>
+								<input type="hidden" name="docId" id="docId"
+									value="${sN.docId }">
+								<button type="submit" class="btnn">상세보기</button>
+							</div>
+						</form>
 					</div>
-					<p id="mname">${sN.name}</p>
-					<form action="movieDetail.do" method="post">
-						<div>
-							<input type="hidden" name="docId" id="docId" value="${sN.docId }">
-							<button type="submit" class="btnn">상세보기</button>
-						</div>
-					</form>
-				</div>
-			</c:forEach>
-			<c:forEach items="${searchName2}" var="sN2" varStatus="status">
-			
-				<div class="col-3">
-				Performance<br>
-					<div class="card">
-						<div class="poster" id="poster">
-							<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
+				</c:forEach>
+			</c:if>
+			<c:if test="${not empty searchName2 }">
+				<c:forEach items="${searchName2}" var="sN2" varStatus="status">
+
+					<div class="col-3">
+
+						<div class="card">
+							<div class="poster" id="poster">
+								<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
-							<input type="hidden" class="rankPoster" value="${sN2.fileCd }">
-							<input type="hidden"  value="${sN2.renames }">
-									<img src="/upload/${sN2.renames }" alt="dd">
-						</div>
-						<div class="details">
-							<br> <br>
-							<div class="info">
-								<p class="pbox">${sN2.content}</p>
+								<input type="hidden" class="rankPoster" value="${sN2.fileCd }">
+								<input type="hidden" value="${sN2.renames }"> <img
+									src="/upload/${sN2.renames }" alt="dd">
+							</div>
+							<div class="details">
+								<br> <br>
+								<div class="info">
+									<p class="pbox">${sN2.content}</p>
+								</div>
 							</div>
 						</div>
+						<p id="mname">${sN2.name}</p>
+						<form action="pBookingForm.do" method="post">
+							<div>
+								<input type="hidden" name="PNo" id="PNo" value="${sN2.PNo }">
+								<button type="submit" class="btnn">예매</button>
+							</div>
+						</form>
 					</div>
-					<p id="mname">${sN2.name}</p>
-					<form action="pBookingForm.do" method="post">
-						<div>
-							<input type="hidden" name="PNo" id="PNo" value="${sN2.PNo }">
-							<button type="submit" class="btnn">예매</button>
-						</div>
-					</form>
-				</div>
-				
-			</c:forEach>
+
+				</c:forEach>
+			</c:if>
 		</div>
-		<c:if test="${empty searchName }">
-			<tr>
-				<td>검색된 아이템이 없습니다.</td>
-			</tr>
-		</c:if>
-		<c:if test="${empty searchName2 }">
-			<tr>
-				<td>검색된 아이템이 없습니다.</td>
-			</tr>
-		</c:if>
+		<div class="row">
+			<div class="col-3"></div>
+			<div class="col-6" style="margin-top: 50px;">
+				<c:if test="${empty searchName }">
+					<c:if test="${empty searchName2 }">
+						<h3>검색한 제목을 찾을수 없습니다</h3>
+					</c:if>
+				</c:if>
+			</div>
+			<div class="col-3"></div>
+		</div>
+
+
 	</div>
 
 	<script>
-	
 		/*  $.ajax({
 		    url: "ajaxFileCd.do",
 		    type: "post",
@@ -243,7 +260,7 @@
 		}); */
 
 		///박스오피스 포스터 filecd자르기
-		 let fileCd = document.getElementsByClassName('rankPoster');
+		let fileCd = document.getElementsByClassName('rankPoster');
 		let rPoster = document.getElementsByClassName('rPoster');
 		console.log(fileCd);
 		for (var i = 0; i < fileCd.length; i++) {
@@ -255,7 +272,7 @@
 				var split = (fileCd[i].defaultValue).split('|');
 				rPoster[i].setAttribute('src', split[0]);
 			}
-		} 
+		}
 		//
 	</script>
 </body>

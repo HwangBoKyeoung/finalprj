@@ -412,6 +412,7 @@ html, body {
 </style>
 </head>
 <body>
+
 	<div class="wrapper d-flex align-items-stretch">
 		<nav id="sidebar" style="height: 1000px;">
 			<div class="custom-menu"></div>

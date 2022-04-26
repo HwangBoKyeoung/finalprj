@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.third.prj.faq.service.FaqService;
 import com.third.prj.movie.service.MovieService;
@@ -269,7 +271,7 @@ public class UserController {
    }
 
    @RequestMapping("/userDelete.do")
-   public String userDelete(UserVO vo, HttpSession session) {
+   public String userDelete(UserVO vo, HttpSession session,RedirectAttributes rttr) {
 	   UserVO login = userDao.loginChk(vo, session);
 	      System.out.println("===========================================");
 	      System.out.println("sesion : " + session.toString());
@@ -290,6 +292,7 @@ public class UserController {
 
 	         if (result == 1) {
 	        	 session.invalidate();
+	        	 
 	            return "redirect:/";
 	         }
 
@@ -325,6 +328,10 @@ public class UserController {
 
       model.addAttribute("pfList", userDao.pfRList(cri));
 
+      System.out.println("*********************************************************");
+      System.out.println(userDao.pfRList(cri));
+      System.out.println("*********************************************************");
+      
       vo.setUId((String) session.getAttribute("sessionId"));
       model.addAttribute("user", userDao.userSelectOne(vo));
       return "user/pfReservList";
@@ -429,6 +436,28 @@ public class UserController {
       return "user/userInfoCheck";
    }
   
+  
+  
+  
+//  @RequestMapping(value="/userDelete.do", method=RequestMethod.POST)
+// 	public String userDelete(UserVO vo,RedirectAttributes rttr,HttpSession session){
+// 		userDao.userDelete(vo);
+// 		session.invalidate();
+// 		rttr.addFlashAttribute("msg", "이용해주셔서 감사합니다.");
+// 		return "redirect:/user/alert";
+// 	}
+  
+  @RequestMapping(value="/pwdCheck.do" , method=RequestMethod.POST)
+	@ResponseBody
+	public int pwCheck(UserVO vo) throws Exception{
+		String userPwd = userDao.pwdCheck2(vo.getUId());
+		
+		if(vo == null || !BCrypt.checkpw(vo.getPwd(), userPwd)) {
+			return 0;
+		}
+		
+		return 1;
+	}
   
   
 }

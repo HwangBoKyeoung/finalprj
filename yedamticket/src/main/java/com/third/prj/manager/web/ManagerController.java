@@ -19,82 +19,82 @@ import com.third.prj.manager.service.PageVO;
 @Controller
 public class ManagerController {
 
-   @Autowired
-   private ManagerService managerDao;
-   
+	@Autowired
+	private ManagerService managerDao;
 
-   // 관리자 리스트 페이지
-   @RequestMapping("/manager.do")
-   public String manager(Model model, CriteriaVO cri) {
-      PageVO pageVO = new PageVO(cri, managerDao.getTotal(cri));
-      model.addAttribute("manas", managerDao.managerSelectList(cri));
-      model.addAttribute("pageVO",pageVO);
-      return "manager/manager/manager";
-   }
+	// 관리자 리스트 페이지
+	@RequestMapping("/manager.do")
+	public String manager(Model model, CriteriaVO cri) {
+		PageVO pageVO = new PageVO(cri, managerDao.getTotal(cri));
+		model.addAttribute("manas", managerDao.managerSelectList(cri));
+		model.addAttribute("pageVO", pageVO);
+		return "manager/manager/manager";
+	}
 
-   // 관리자 등록 폼
-   @GetMapping("/managerForm.do")
-   public String managerForm() {
-      return "manager/manager/managerForm";
-   }
+	// 관리자 등록 폼
+	@GetMapping("/managerForm.do")
+	public String managerForm() {
+		return "manager/manager/managerForm";
+	}
 
-   // 관리자 등록
-   @RequestMapping("/managerInsert.do")
-   public String managerInsert(ManagerVO vo) {
-      String encodedPwd = vo.getPwd();
-      BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
-      String decodedPwd = pwdEncoder.encode(encodedPwd);
-      vo.setPwd(decodedPwd);
-      int n = managerDao.managerInsert(vo);
-      if (n != 0) {
-         return "redirect:manager.do";
-      }
-      return "manager/manager/managerError";
-   }
+	// 관리자 등록
+	@RequestMapping("/managerInsert.do")
+	public String managerInsert(ManagerVO vo) {
+		String encodedPwd = vo.getPwd();
+		BCryptPasswordEncoder pwdEncoder = new BCryptPasswordEncoder(10);
+		String decodedPwd = pwdEncoder.encode(encodedPwd);
+		vo.setPwd(decodedPwd);
+		int n = managerDao.managerInsert(vo);
+		if (n != 0) {
+			return "redirect:manager.do";
+		}
+		return "manager/manager/managerError";
+	}
 
-   // 관리자 상세정보
-   @RequestMapping("/managerSelet.do")
-   public String managerSelet(ManagerVO vo, Model model) {
-      vo = managerDao.managerSelect(vo);
-      model.addAttribute("mana", vo);
-      return "manager/manager/managerSelect";
-   }
+	// 관리자 상세정보
+	@RequestMapping("/managerSelet.do")
+	public String managerSelet(ManagerVO vo, Model model) {
+		vo = managerDao.managerSelect(vo);
+		model.addAttribute("mana", vo);
+		return "manager/manager/managerSelect";
+	}
 
-   // 관리자 정보변경
-   @RequestMapping("/managerUpdate.do")
-   public String managerUpdate(ManagerVO vo) {
-      int n = managerDao.managerUpdate(vo);
-      if (n != 0) {
-         return "redirect:manager.do";
-      }
-      return "manager/manager/managerError";
-   }
+	// 관리자 정보변경
+	@RequestMapping("/managerUpdate.do")
+	public String managerUpdate(ManagerVO vo) {
+		int n = managerDao.managerUpdate(vo);
+		if (n != 0) {
+			return "redirect:manager.do";
+		}
+		return "manager/manager/managerError";
+	}
 
-   // 관리자 정보 삭제
-   @RequestMapping("/managerDelete.do")
-   public String managerDelete(ManagerVO vo) {
+	// 관리자 정보 삭제
+	@RequestMapping("/managerDelete.do")
+	public String managerDelete(ManagerVO vo) {
 //      ManagerVO vo = new ManagerVO();
 //      vo.setMId(id);
-      int n = managerDao.managerDelete(vo);
-      if (n != 0) {
-         return "redirect:/manager.do";
-      }
-      return "manager/manager/managerError";
-   }
+		int n = managerDao.managerDelete(vo);
+		if (n != 0) {
+			return "redirect:/manager.do";
+		}
+		return "manager/manager/managerError";
+	}
 
-   // 관리자 등록 아이디 중복확인
-   @ResponseBody
-   @RequestMapping("/idCheck.do")
-   public int idCheck(String MId) throws Exception {
-      int result = managerDao.idCheck(MId);
-      return result;
-   }
-   
-   @RequestMapping("/managerLoginForm.do")
-   public String managerLoginForm() {
-      return "company/manager/managerLoginForm";
-   }
-     
+
+	// 관리자 등록 아이디 중복확인
+	@ResponseBody
+	@RequestMapping("/idCheck.do")
+	public int idCheck(String MId) throws Exception {
+		int result = managerDao.idCheck(MId);
+		return result;
+	}
+
+	@RequestMapping("/managerLoginForm.do")
+	public String managerLoginForm() {
+		return "company/manager/managerLoginForm";
+	}
+
       // 관리자회원 로그인
    @RequestMapping("/manaLogin.do")
    public ModelAndView companyLogin(HttpSession session, ManagerVO vo, ModelAndView mv) {
@@ -132,12 +132,11 @@ public class ManagerController {
          String url2 = "managerLoginForm.do";
          mv.addObject("msg", msg2);
          mv.addObject("url", url2);
-         mv.setViewName("company/alert");
+         mv.setViewName("user/alert");
          break;
       }
       return mv;
    }
-      
-      
+  
 
 }

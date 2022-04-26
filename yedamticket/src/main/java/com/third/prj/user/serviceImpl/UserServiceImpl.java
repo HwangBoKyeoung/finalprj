@@ -369,5 +369,11 @@ public class UserServiceImpl implements UserService {
 		return mapper.pwdUpdate(vo);
 	}
 
+	@Override
+	public String pwdCheck2(String UId) {
+		// TODO Auto-generated method stub
+		return mapper.pwdCheck2(UId);
+	}
+
 
 }
