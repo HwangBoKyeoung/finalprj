@@ -196,7 +196,6 @@ iframe {
 	width: 100% !important
 }
 
-
 /* .row:hover {
     background-color: #ececff;
     cursor: pointer
@@ -279,19 +278,17 @@ iframe {
 .logo {
 	color: white;
 }
-.btn{
-border-radius: 20px;
-padding: 4px;
-font-size: 12px;
-margin-top: -7px;
+
+.btn {
+	border-radius: 20px;
+	padding: 4px;
+	font-size: 12px;
+	margin-top: -7px;
 }
 
-span{
-    font-size: 20px;
+span {
+	font-size: 20px;
 }
-.clickBtn{
-cursor: pointer;
-}	
 </style>
 
 <body>
@@ -302,12 +299,15 @@ cursor: pointer;
 				<h1>
 					<a href="userPage.do" class="logo">마이페이지</a>
 				</h1>
-				<div>	
+				<div>
 					<h6>${sessionId }님의</h6>
-					<fmt:formatNumber value="${user.point }" var="Point"/>
-					<h6>보유 포인트${Point }P<button class="btn btn-sm" style="background: #cec5e9; margin-left: 10px;"
-								onclick="location.href='point_1.do'">충전</button></h6>
-					
+					<fmt:formatNumber value="${user.point }" var="Point" />
+					<h6>
+						보유 포인트 <br>${Point }P</h6>
+					<button class="btn btn-sm"
+						style="background: #cec5e9; color: black; border-radius: 0px; margin-left: 0; margin-top: 20px; margin-bottom: 20px; width: 100%;"
+						onclick="location.href='point_1.do'">충전</button>
+
 					<br>
 				</div>
 				<ul class="list-unstyled components mb-5">
@@ -333,11 +333,13 @@ cursor: pointer;
 			</div>
 		</nav>
 		<div class="container">
-		<div class="cols-12">
-			<br><h2>나의 예매내역</h2><br>
-		</div>
+			<div class="cols-12">
+				<br>
+				<h2>나의 예매내역</h2>
+				<br>
+			</div>
 			<c:if test="${not empty prList}">
-				<span style="font-size: 25px;color: black;">결제대기티켓</span>
+				<span style="font-size: 25px; color: black;">결제대기티켓</span>
 				<div class="cols-12">
 					<table class="table table-sm">
 						<thead>
@@ -384,7 +386,7 @@ cursor: pointer;
 			</c:if>
 			<br> <br>
 			<c:if test="${empty prList}">
-				<span style="font-size: 25px;color: black;">결제대기티켓</span>
+				<span style="font-size: 25px; color: black;">결제대기티켓</span>
 				<div class="cols-12">
 					<table class="table table-sm">
 						<thead>
@@ -410,9 +412,12 @@ cursor: pointer;
 					</table>
 				</div>
 			</c:if>
-			<br><br>
+			<br>
+			<br>
 			<c:if test="${not empty mvList}">
-				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs"onclick="location.href='mvReservList.do'">더보기</button>
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"
+					class="btn1 btn btn-primary btn-xs"
+					onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -429,13 +434,14 @@ cursor: pointer;
 							<tbody>
 								<c:forEach items="${mvList}" var="mv" begin="0" end="1">
 									<tr>
-										<td >${mv.mvReservNo}</td>
-										<td><fmt:formatDate
+										<td class="text-center">${mv.mvReservNo}</td>
+										<td class="text-center"><fmt:formatDate
 												value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-										<td class="clickBtn" onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}
+										<td class="text-center"
+											onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}
 										</td>
-										<td>${mv.schDate}</td>
-										<td>${mv.schTime}</td>
+										<td class="text-center">${mv.schDate}</td>
+										<td class="text-center">${mv.schTime}</td>
 										<td>${mv.seatName}</td>
 										<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
 									</tr>
@@ -448,7 +454,9 @@ cursor: pointer;
 			<br> <br>
 			<c:if test="${empty mvList}">
 
-				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='mvReservList.do'">더보기</button>
+				<span>영화예매내역</span>&nbsp;&nbsp;<button type="button"
+					class="btn1 btn btn-primary btn-xs"
+					onclick="location.href='mvReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -473,7 +481,9 @@ cursor: pointer;
 			</c:if>
 			<br> <br>
 			<c:if test="${not empty pfList}">
-				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"
+					class="btn1 btn btn-primary btn-xs"
+					onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm tblMemSearch">
@@ -507,7 +517,9 @@ cursor: pointer;
 			</c:if>
 			<br>
 			<c:if test="${empty pfList}">
-				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"class="btn1 btn btn-primary btn-xs" onclick="location.href='pfReservList.do'">더보기</button>
+				<span>공연예매내역</span>&nbsp;&nbsp;<button type="button"
+					class="btn1 btn btn-primary btn-xs"
+					onclick="location.href='pfReservList.do'">더보기</button>
 				<div class="main-content">
 					<div class="cols-12">
 						<table class="table table-sm">
@@ -537,7 +549,7 @@ cursor: pointer;
 				<div class="modal-dialog">
 					<div class="modal-content">
 						<div class="modal-header">
-<!-- 							<button type="button" class="close" data-dismiss="modal" aria-label="닫기">
+							<!-- 							<button type="button" class="close" data-dismiss="modal" aria-label="닫기">
 								<span aria-hidden="true">&times;</span>
 							</button> -->
 						</div>
@@ -587,8 +599,7 @@ cursor: pointer;
 			<div class="modal fade" id="prCancelModal">
 				<div class="modal-dialog">
 					<div class="modal-content">
-						<div class="modal-header">
-						</div>
+						<div class="modal-header"></div>
 						<form action="cancelticket_1.do" method="POST">
 							<div class="modal-body">
 
