@@ -78,8 +78,8 @@ body {
 								<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
 							</c:forEach>	
 					    <p class="card-text">좌석구역 : ${t.loc }</p>
-					    <fmt:formatNumber value="${t.price * seatCnt2}" var="Point3"/>
-					    <p class="card-text">가  격 : ${Point3}원</p>
+					    
+					    <p class="card-text">가  격 : ${t.price * seatCnt2}</p>
 					    
 					    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" onclick="selectedFnc();">선택</button>
 					  </div>
