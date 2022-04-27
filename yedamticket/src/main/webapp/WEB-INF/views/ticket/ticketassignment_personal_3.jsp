@@ -1,4 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +38,7 @@
       <p style="padding-top: 10px;">수신인 : ${RId }</p>
       <p style="padding-top: 10px;">주 소 : ${buyerAddr }</p>
       <br />
-      
+      <fmt:formatNumber value="${price }" var="price"/>
       <p>발신인(양도인)은 채권양도의 양수인과 체결한 약정에 따라 발신인의 수신인에 대한 채권을 양수인에게 양도하였습니다. 따라서 수신인이 발신인에게 지급하여야 할 <span style="color:red">금 "${price }원"</span>의 청구채권을 양수인에게 양도하였음을 통지하오니 양수인에게 위 대금을 지급하여 주시기 바랍니다.</p>
       <br />
       
