@@ -23,7 +23,7 @@ textarea {
 					<table class="table">
 						<tr>
 							<td>기업명</td>
-							<td><input type="text" id="CId" name="CId" value="${sessionName }"class="form-control" readonly="readonly"></td>
+							<td><input type="text" value="${sessionName }"class="form-control" readonly="readonly"></td>
 						</tr>
 						<tr>
 							<td>영화 이름</td>
