@@ -29,7 +29,7 @@ public class MovieReservController {
 		map.put("p3", mvPrice);
 		int i = movieDao.cancelreservMovie(map);
 		if(i != 0) {
-			return "user/userPage";
+			return "redirect:userPage.do";
 		}else {
 			return "user/errorPage";
 		}
