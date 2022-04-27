@@ -27,7 +27,7 @@
 <script src="https://www.google.com/recaptcha/api.js"></script>
 <script
 	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <style>
 .loginBtn {
 	border-radius: 30px;
@@ -71,6 +71,13 @@
     margin-right: auto;
     margin-top: 10%;
 }
+	.swal-modal {
+		width: 30%;
+	}
+	
+	.swal-button--confirm {
+		background-color: #ffb236;
+	}
 </style>
 </head>
 
@@ -415,7 +422,11 @@
 												email : $('#email').val()
 											},
 											success : function(result) {
-												alert(result)
+												swal("예.담.티.켓.", result);
+												
+												$(".swal-button--confirm").on("click", function(){
+													location.href="userLoginForm.do";
+												});
 
 											}
 
