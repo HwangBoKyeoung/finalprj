@@ -407,7 +407,7 @@ public class PerformanceReservationController {
 		map.put("p3", reserv);
 		int i = performancereservationDao.cancelpersonalPerf(map);
 		if(i != 0) {
-			return "user/userPage";			
+			return "redirect:userPage.do";			
 		}else {
 			return "user/errorPage";
 		}
