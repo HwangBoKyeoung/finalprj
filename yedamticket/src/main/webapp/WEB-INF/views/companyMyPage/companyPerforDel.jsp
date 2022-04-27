@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		*{
+			list-style:none;
+		}
+		.footer{
+			float:fixed;
+		}
+	</style>
 </head>
 <body>
 	<div class="col-lg-6 grid-margin stretch-card">
