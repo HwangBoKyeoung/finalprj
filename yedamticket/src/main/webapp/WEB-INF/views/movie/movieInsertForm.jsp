@@ -5,6 +5,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+	*{
+list-style:none;
+	}
 textarea {
     resize: none;
   }
