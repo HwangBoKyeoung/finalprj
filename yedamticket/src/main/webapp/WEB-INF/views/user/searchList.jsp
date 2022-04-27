@@ -113,7 +113,7 @@
 
 </head>
 <body>
-	${search}
+	
 	<input type="hidden" name="search" id="search" value="${search}">
 	<%-- <input type="hidden" name="searchName" id="searchName" value="${searchName }"> --%>
 	<%--    <table class="table">
@@ -153,7 +153,7 @@
 								<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
 								<input type="hidden" class="rankPoster" value="${sN.fileCd }">
-								<input type="hidden" value="${sN.renames }"> <img
+								<input type="hidden" id="renames1" value="${sN.renames }"> <img
 									class="rPoster">
 							</div>
 							<div class="details">
@@ -184,8 +184,8 @@
 								<%-- <input id="imgTag${status.index }" class="imgInfo" type="hidden"
 								value="${sN.fileCd}"> <img id="posterA" class=""> --%>
 								<input type="hidden" class="rankPoster" value="${sN2.fileCd }">
-								<input type="hidden" value="${sN2.renames }"> <img
-									src="/upload/${sN2.renames }" alt="dd">
+								<input type="hidden" id="renames2" value="${sN2.renames }"> <img
+									 src="/upload/${sN2.renames }" alt="dd">
 							</div>
 							<div class="details">
 								<br> <br>
@@ -270,7 +270,16 @@
 				console.log(fileCd[i]);
 			} else {
 				var split = (fileCd[i].defaultValue).split('|');
-				rPoster[i].setAttribute('src', split[0]);
+				var splitT = fileCd[i].defaultValue;
+				if(split[0].slice(0,3)=='htt'){
+					rPoster[i].setAttribute('src', split[0]);
+				} else if(split[0].slice(0,3)=='res'){
+					rPoster[i].setAttribute('src',split[0]);
+				} else if(splitT.indexOf('|') == -1){
+					rPoster[i].setAttribute('src','/upload/' + $("#renames1").val());
+				} else{
+					rPoster[i].setAttribute('src', split[0]);
+				}
 			}
 		}
 		//
