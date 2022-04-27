@@ -11,7 +11,7 @@
 			list-style:none;
 		}
 		.footer{
-			float:fixed;
+			position:fixed;
 		}
 	</style>
 <script src="./resources/users/js/core/jquery.min.js"
