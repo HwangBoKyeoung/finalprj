@@ -139,12 +139,13 @@ textarea.form-control {
 </head>
 
 <body>
+<input type="hidden" id="renames1" value="${movie.renames}">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-6">
 				<br>
 				<div id="logo">
-					<img id="poster">
+					<img id="poster" class="poster1">
 				</div>
 			</div>
 			<div class="col-lg-6">
@@ -323,8 +324,25 @@ function deleteReply(no){
 }
 //filecd가 여러개 잇는 값 자르기
 let fileCd="${movie.fileCd}";
-let splitCd=fileCd.split('|');
-$('#poster').attr("src",splitCd[0]);
+
+console.log(fileCd);
+let poster1 = $(".poster1");
+console.log(poster);
+// for (var i = 0; i < fileCd.length; i++) {
+	let splitCd=fileCd.split('|');
+	console.log(splitCd[0]);
+	console.log(splitCd[0].slice(0,3));
+	console.log(splitCd.slice(0,8));
+	if(splitCd[0].slice(0,3)=='htt'){
+		poster1.attr('src', splitCd[0]);
+	} else if(splitCd[0].slice(0,3)=='res'){
+		poster1.attr('src',splitCd[0]);
+	} else if(splitCd.indexOf('|') == -1){
+		poster1.attr('src','/upload/' + $("#renames1").val());
+	} else{
+		poster1.attr('src', 'resources/yedamticket.png');
+	}
+// }
 
 </script>
 </html>
