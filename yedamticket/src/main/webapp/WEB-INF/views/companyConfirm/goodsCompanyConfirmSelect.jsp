@@ -6,6 +6,14 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<style>
+		*{
+			list-style:none;
+		}
+		.footer{
+			float:fixed;
+		}
+	</style>
 <script src="./resources/users/js/core/jquery.min.js"
 	type="text/javascript"></script>
 </head>
