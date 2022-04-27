@@ -804,9 +804,12 @@ section>article>#map {
 		</form>
 		<figure class="events-thumbnail">
 					  <c:choose>
-		          		<c:when test="${not empty performance.fileCd}">
+		          		 <c:when test="${performance.renames == null}">
 		          		  	<img src="resources/performance/images/${performance.fileCd}" style="width: 1111px; height: 900px;">
 		          		</c:when>  
+		          		<c:when test="${performance.renames != null}">
+                  			<img src="/upload/${performance.renames}" style="width: 1111px; height: 900px;">
+               			 </c:when> 
 		               	<c:otherwise>
 		               		<img src="resources/performance/images/alt.jpg" style="width: 1111px; height: 430px;">
 		               	</c:otherwise>
