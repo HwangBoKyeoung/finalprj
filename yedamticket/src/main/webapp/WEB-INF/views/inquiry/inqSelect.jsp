@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+*{
+list-style: none;
+}
 textarea {
 	resize: none;
 	color: transparent;
@@ -71,22 +74,23 @@ th {
 			</div>
 		</div>
 		<br><br>
-		<div class="container2" style="display:none">
+		<div class="container" id="container2" style="display:none">
 			<div class="row">
-				<div class="col-md-2"></div>
-				<div class="col-md-9">
+				<div class="col-md-10" style="padding: 0px;">
 					<br>
 					<table class="table">
-						<tr>
+					<tr style="padding: 20px;">
+					</tr>
+						<tr style="border-top: 2px solid black;">
 							<th>답변</th>
-							<td colspan="3"><textarea rows="4" cols="87"
+							<td colspan="3"><textarea rows="4" cols="90"
 									readonly="readonly" id="txt" disabled></textarea></td>
 					</table>
 				</div>
 			</div>
 		</div>
 
-	</div><br><br>
+	<br><br>
 
 	<script type="text/javascript">
 	$.ajax({
@@ -98,7 +102,7 @@ th {
 			var successCnt = 1
 			if(successCnt == 1){
 				$("#txt").val(result.ans);
-				$(".container2").show()
+				$("#container2").show()
 			}
 			console.log(result);
 		}
