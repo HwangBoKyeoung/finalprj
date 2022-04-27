@@ -88,6 +88,9 @@
 	        }
 </script>
 <style type="text/css">
+	*{
+		list-style:none;
+	}
 body {
 	margin: 10px;
 }
