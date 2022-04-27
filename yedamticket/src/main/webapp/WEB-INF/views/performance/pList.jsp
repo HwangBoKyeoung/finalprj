@@ -33,6 +33,7 @@ input::-webkit-input-placeholder { color: black; }
 </head>
 
 <body class="events-list-page">
+${performance }
 <div class="container">
    <h1 class="hr-sect">공연 리스트</h1>
       <hr>
@@ -73,8 +74,11 @@ input::-webkit-input-placeholder { color: black; }
         <div class="col-12 col-lg-6 single-event">
             <figure class="events-thumbnail">
             <c:choose>
-                <c:when test="${not empty p.fileCd}">
+                <c:when test="${p.renames == null}">
                   <img src="resources/performance/images/${p.fileCd}" style="width: 559px; height: 300px;">
+                </c:when> 
+                <c:when test="${p.renames != null}">
+                  <img src="/upload/${p.renames}" style="width: 559px; height: 300px;">
                 </c:when>  
                   <c:otherwise>
                      <img src="resources/performance/images/alt.jpg" style="width: 559px; height: 300px;">
