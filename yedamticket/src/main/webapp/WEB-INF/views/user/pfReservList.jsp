@@ -420,10 +420,15 @@ html, body {
 				<h1>
 					<a href="userPage.do" class="logo">마이페이지</a>
 				</h1>
-				<div>	
+				<div>
 					<h6>${sessionId }님의</h6>
-					<fmt:formatNumber value="${user.point }" var="Point"/>
-					<h6>보유 포인트${Point }P</h6>
+					<fmt:formatNumber value="${user.point }" var="Point" />
+					<h6>
+						보유 포인트 <br>${Point }P</h6>
+					<button class="btn btn-sm"
+						style="background: #cec5e9; color: black; border-radius: 0px; margin-left: 0; margin-top: 20px; margin-bottom: 20px; width: 100%;"
+						onclick="location.href='point_1.do'">충전</button>
+
 					<br>
 				</div>
 				<ul class="list-unstyled components mb-5">
