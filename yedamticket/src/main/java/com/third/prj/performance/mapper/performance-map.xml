@@ -132,7 +132,7 @@
 	      </if>
 	      <!-- 날짜만 입력받은 경우 -->
 	      <if test="startDate != null and startDate !='' and endDate != null and endDate !=''">
-	      AND PS.FRDT BETWEEN #{startDate} AND #{endDate}
+	      AND to_char(PS.FRDT,'yyyy-mm-dd') BETWEEN #{startDate} AND #{endDate}
 	      </if>
 	      <!-- 날짜 + 이벤트 -->
 	      <if test="name != null and name !=''" >
