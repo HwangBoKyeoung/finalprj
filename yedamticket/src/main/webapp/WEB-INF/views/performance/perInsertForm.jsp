@@ -9,6 +9,10 @@
 	src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
 	<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <style>
+	*{
+			list-style:none;
+		}
+
 .btn1{
     border-radius: 10px;
     background: #8867bf;
