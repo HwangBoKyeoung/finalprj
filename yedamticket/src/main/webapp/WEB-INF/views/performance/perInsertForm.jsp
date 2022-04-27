@@ -104,11 +104,14 @@
 						</tr>
 						<tr>
 							<td>주소</td>
-							<td ><input type="text" class="form-control" placeholder="주소" required="required" id="addr" name="addr" maxlength="20">
-								<input type="text" class="form-control" placeholder="상세주소" required="required" id="addr2" name="addr2">
+							<td ><input type="text" style="margin-bottom: 10px;" class="form-control" placeholder="주소" required="required" id="addr" name="addr" maxlength="20">
+							
+								<input type="text" style="margin-bottom: 10px;" class="form-control" placeholder="상세주소" required="required" id="addr2" name="addr2">
 								<input type="hidden" id="sample6_extraAddress">
 								<input type="hidden" id="sample6_postcode">
+								<div align="right">
 								<input type="button" id="AddrSample" onclick="findAddr();" value="주소찾기" class="btn1 btn btn-primary btn-xs"> 
+								</div>
 								<div id="wrap" style="display:none;border:1px solid;width:500px;height:300px;margin:5px 0;position:relative">
 								<img src="//t1.daumcdn.net/postcode/resource/images/close.png" id="btnFoldWrap" style="cursor:pointer;position:absolute;right:0px;top:-1px;z-index:1" onclick="foldDaumPostcode()" alt="접기 버튼">
 								</div></td>
