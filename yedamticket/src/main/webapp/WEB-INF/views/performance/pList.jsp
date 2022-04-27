@@ -33,7 +33,6 @@ input::-webkit-input-placeholder { color: black; }
 </head>
 
 <body class="events-list-page">
-${performance }
 <div class="container">
    <h1 class="hr-sect">공연 리스트</h1>
       <hr>
