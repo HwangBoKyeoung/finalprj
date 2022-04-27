@@ -279,7 +279,7 @@
 			FROM PERFORMANCE
 		</selectKey>
 		INSERT INTO PERFORMANCE (P_NO, NAME, CONTENT, C_ID,ACTOR,FILE_CD,LOC,ADDR,PRICE,LAT,LNG,RENAMES)
-		VALUES(#{pNo},#{name},#{content},#{CId},#{actor},#{fileCd},#{loc},#{addr},#{price},#{lat},#{lng},#{renames})
+		VALUES(#{pNo},#{name},#{content},#{CId},#{actor},#{fileCd},#{loc},#{addr},#{price},36.59128004,128.198086,#{renames})
 	</insert>
 	
 	<!-- 류지희 performance 테이블에 관객수 업데이트문 추가 -->
