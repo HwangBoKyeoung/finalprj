@@ -801,7 +801,7 @@ section>article>#map {
 					</c:otherwise>
 				</c:choose>
 			</div>
-		</form>
+		</form><br>
 		<figure class="events-thumbnail">
 					  <c:choose>
 		          		 <c:when test="${performance.renames == null}">
