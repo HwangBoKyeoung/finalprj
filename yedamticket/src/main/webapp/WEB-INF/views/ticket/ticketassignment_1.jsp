@@ -125,8 +125,7 @@ body {
 														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
 													</c:forEach>	
 												<p class="card-text">좌석구역 : ${pr.loc }</p>
-												<fmt:formatNumber value="${pr.price * seatCnt2}" var="Point"/>
-												<p class="card-text">가 격 : ${Point}원</p>											
+												<p class="card-text">가 격 : ${pr.price * seatCnt2}</p>											
 												
 												<input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택"> 
 												<input type="button" onclick="selectedFnc4()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal3" value="환불">
@@ -155,8 +154,7 @@ body {
 														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
 													</c:forEach>	
 												<p class="card-text">좌석구역 : ${pr.loc }</p>
-												<fmt:formatNumber value="${pr.price * seatCnt2}" var="Point2"/>
-												<p class="card-text">가 격 : ${Point2}원</p>	
+												<p class="card-text">가 격 : ${pr.price * seatCnt2}</p>	
 											<button type="button" class="btn btn-secondary"
 												data-toggle="tooltip" data-placement="bottom"
 												title="자유시장에 올라가있는 티켓입니다!">선택</button>
@@ -186,8 +184,7 @@ body {
 														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
 													</c:forEach>	
 												<p class="card-text">좌석구역 : ${pr.loc }</p>
-												<fmt:formatNumber value="${pr.price * seatCnt2}" var="Point3"/>
-												<p class="card-text">가 격 : ${Point3}원</p>	
+												<p class="card-text">가 격 : ${pr.price * seatCnt2}</p>	
 											<button type="button" class="btn btn-secondary"
 												data-toggle="tooltip" data-placement="bottom"
 												title="거래 예정중인 티켓입니다!">선택</button>
@@ -364,8 +361,7 @@ body {
 												<c:set var="mtt" value="${mseatCnt2 = mseatCnt2 + 1 }"/>
 											</c:forEach>	
 											<p class="card-text">영화관지역 : ${mr.reservHall }</p>
-											<fmt:formatNumber value="${13000 * mseatCnt2}" var="Point4"/>
-											<p class="card-text">가 격 : ${Point4}원</p>	
+											<p class="card-text">가 격 : ${13000 * mseatCnt2}</p>	
 										<input type="button" onclick="selectedFnc3()" class="btn btn-primary" data-toggle="modal" data-target="#mrInfoModal" value="환불">
 									</div>
 								</div>
