@@ -789,11 +789,11 @@ section>article>#map {
 				type="hidden" id="seatNo" name="seatNo"> <input
 				type="hidden" id="price" name="price" value="${performance.price }">
 			<div
-				class="buy-tickets flex justify-content-center align-items-center"
-				style="margin-left: 900px;">
+				class="buy-tickets justify-content-center align-items-center"
+				align="right">
 				<c:choose>
 					<c:when test="${not empty sessionId}">
-						<button type="submit" class="btn gradient-bg">예매하기</button>
+						<button type="submit" class="btn gradient-bg" >예매하기</button>
 					</c:when>
 					<c:otherwise>
 						<button type="button" id="ajaxBtn" class="btn gradient-bg"
