@@ -289,6 +289,9 @@ margin-top: -7px;
 span{
     font-size: 20px;
 }
+.clickBtn{
+cursor: pointer;
+}	
 </style>
 
 <body>
@@ -426,14 +429,13 @@ span{
 							<tbody>
 								<c:forEach items="${mvList}" var="mv" begin="0" end="1">
 									<tr>
-										<td class="text-center">${mv.mvReservNo}</td>
-										<td class="text-center"><fmt:formatDate
+										<td >${mv.mvReservNo}</td>
+										<td><fmt:formatDate
 												value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-										<td class="text-center"
-											onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}
+										<td class="clickBtn" onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}
 										</td>
-										<td class="text-center">${mv.schDate}</td>
-										<td class="text-center">${mv.schTime}</td>
+										<td>${mv.schDate}</td>
+										<td>${mv.schTime}</td>
 										<td>${mv.seatName}</td>
 										<!-- <td><input type="button" class="checkBtn" value="더보기" class="btn btn-primary" ></td> -->
 									</tr>
