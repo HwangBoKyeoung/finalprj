@@ -409,6 +409,10 @@ html, body {
 	padding: 4px;
 	font-size: 14px;
 }
+	
+.clickBtn{
+cursor: pointer;
+}	
 
 
 </style>
@@ -473,7 +477,7 @@ html, body {
 									<td class="text-center">${mv.mvReservNo}</td>
 									<td class="text-center"><fmt:formatDate
 											value="${mv.reservDt}" pattern="yyyy-MM-dd HH:mm:ss" /></td>
-									<td class="text-center"
+									<td class="text-center clickBtn"
 										onClick="location.href='movieDetail.do?docId=${mv.docId }'">${mv.name}</td>
 									<td class="text-center">${mv.schDate}</td>
 									<td class="text-center">${mv.schTime}</td>
