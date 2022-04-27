@@ -21,12 +21,6 @@
 				<h1>
 					<a href="userPage.do" class="logo">마이페이지</a>
 				</h1>
-				<div>	
-					<h6>${sessionId }님의</h6>
-					<fmt:formatNumber value="${user.point }" var="Point"/>
-					<h6>보유 포인트${Point }P</h6>
-					<br>
-				</div>
 				<ul class="list-unstyled components mb-5">
 					<li><a href="userInfoCheckForm.do">회원정보수정</a></li>
 					<li><a href="pfReservList.do">공연예매내역</a></li>
