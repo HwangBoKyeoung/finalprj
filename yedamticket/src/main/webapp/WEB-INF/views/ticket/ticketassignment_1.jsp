@@ -125,7 +125,8 @@ body {
 														<c:set var="tt" value="${seatCnt2 = seatCnt2 + 1 }"/>
 													</c:forEach>	
 												<p class="card-text">좌석구역 : ${pr.loc }</p>
-												<p class="card-text">가 격 : ${pr.price * seatCnt2 }</p>													
+												<fmt:formatNumber value="${pr.price * seatCnt2}" var="Point"/>
+												<p class="card-text">가 격 : ${Point}원</p>											
 												
 												<input type="button" onclick="selectedFnc()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal" value="선택"> 
 												<input type="button" onclick="selectedFnc4()" class="btn btn-primary" data-toggle="modal" data-target="#prInfoModal3" value="환불">
