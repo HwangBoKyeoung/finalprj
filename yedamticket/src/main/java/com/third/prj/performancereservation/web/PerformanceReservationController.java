@@ -159,7 +159,7 @@ public class PerformanceReservationController {
 		performanceReservationVO.setPReservNo(PReservNo2);
 		int i = performancereservationDao.cancelReserv(performanceReservationVO);
 		if (i != 0) {
-			return "redirect:ticketassignment_1.do";
+			return "redirect:userPage.do";
 		}
 		return "ticket/ticketassignment_error";
 	}
