@@ -355,7 +355,7 @@ public class PerformanceReservationController {
 		model.addAttribute("price", price2);
 		model.addAttribute("UId", UId);
 
-		return "ticket/reservedticket_1";
+		return "redirect:userPage.do";
 	}
 
 	@RequestMapping("/reservedticket_2.do")
