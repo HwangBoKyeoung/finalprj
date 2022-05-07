@@ -11,7 +11,7 @@
 
 -좌석도 마찬가지로 다른 사용자가 예약을 하엿으면 선택할수 없도록 예외 처리 하엿습니다.
 
-![movierank](https://user-images.githubusercontent.com/65701774/167264265-59a7d8de-df95-4dca-8fe9-a0dfc06dacf1.png)
+![movierank1](https://user-images.githubusercontent.com/65701774/167264384-14988c39-7cc7-4364-a209-841b333057cd.png)
 
 [영화순위]
 
