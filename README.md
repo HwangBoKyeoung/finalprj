@@ -11,3 +11,8 @@
 
 -좌석도 마찬가지로 다른 사용자가 예약을 하엿으면 선택할수 없도록 예외 처리 하엿습니다.
 
+![movierank](https://user-images.githubusercontent.com/65701774/167264265-59a7d8de-df95-4dca-8fe9-a0dfc06dacf1.png)
+
+[영화순위]
+
+-사용자가 관객수를 기준으로 영화순위 한 눈에 확인하고 상세보기 or 예매하기 화면으로 이동가능.
