@@ -428,7 +428,7 @@ body {
 		</div>
 	</div>
 	<script>		
-		//영화관지역
+		
 		$('#movieList').on('click','div',selectedList);
 		function selectedList() {
 			let posterArry = event.target.getAttribute('data-poster').split('|');					
