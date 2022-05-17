@@ -111,7 +111,6 @@
 	display: inline-block;
 	border: 0.5px solid gray;
 	text-align: center;
-	/* background: #f6f6f6; */
 	width: 45%;
 	line-height: 150%;
 }
@@ -303,8 +302,7 @@ body {
 <body>
 <div class="container">
 	<h1 class="hr-sect">영화 예매</h1>
-		<hr>
-		
+	<hr>		
 </div>
 	<div class="container-fluid" style="margin-top: 80px;">
 		<div class="row">
@@ -313,21 +311,20 @@ body {
 			<div class="col-lg-2">
 				<h5>영화선택</h5>
 				<div id="movieList">
-					<c:forEach var="m" items="${movies}">
-						<div data-cd="${m.docId}" data-poster="${m.fileCd}"
-							data-runtime="${m.runtime }">
-							${m.name}
+					<c:forEach var="movie" items="${movies}">
+						<div data-cd="${movie.docId}" data-poster="${movie.fileCd}" data-runtime="${movie.runtime }">							
+							${movie.name}
 							<c:choose>
-								<c:when test="${m.rating eq '전체관람가'}">
+								<c:when test="${movie.rating eq '전체관람가'}">
 									<span class="all">ALL</span>
 								</c:when>
-								<c:when test="${m.rating eq '12세관람가'}">
+								<c:when test="${movie.rating eq '12세관람가'}">
 									<span class="a">12</span>
 								</c:when>
-								<c:when test="${m.rating eq '15세관람가'}">
+								<c:when test="${movie.rating eq '15세관람가'}">
 									<span class="b">15</span>
 								</c:when>
-								<c:when test="${m.rating eq '18세관람가(청소년관람불가)'}">
+								<c:when test="${movie.rating eq '18세관람가(청소년관람불가)'}">
 									<span class="c">18</span>
 								</c:when>
 								<c:otherwise>
@@ -345,8 +342,8 @@ body {
 							<td colspan="2"><h5>지역</h5></td>
 						</tr>
 						<tr>
-							<td><ul id="hallList"></ul></td>
 							<td><ul id="locList"></ul></td>
+							<td><ul id="hallList"></ul></td>							
 						</tr>
 					</tbody>
 				</table>
@@ -356,7 +353,6 @@ body {
 				<div id="datepicker" style="width: 100%;"></div>
 				<div id="showTime" style="display: none;">
 					<ul id="schList">
-
 					</ul>
 				</div>
 			</div>
@@ -365,10 +361,8 @@ body {
 			<div class="col-lg-1"></div>
 			<div class="col-lg-6" style="padding-bottom: 20px;">
 				<h5>자리배치도</h5>
-				<hr id="hrs" align="center"
-					style="border: solid 1.5px purple; width: 50%; display: none; margin-top: 150px;">
-				<div id="divs"
-					style="font-size: 100%; text-align: center; color: #a1a1a196; display: none;">SCREEN</div>
+				<hr id="hrs" align="center" style="border: solid 1.5px purple; width: 50%; display: none; margin-top: 150px;">					
+				<div id="divs" style="font-size: 100%; text-align: center; color: #a1a1a196; display: none;">SCREEN</div>					
 				<br>
 				<div id="seat" align="center"></div>
 				<div class="row align-items-end"></div>
@@ -379,11 +373,9 @@ body {
 					<div class="col" style="display: none;" id="seatResult">
 						<div>관람객수</div>
 						<div style="display: inline-block;">
-
 							<div id="minus">-</div>
 							<div id="cnt">0</div>
 							<div id="plus">+</div>
-
 						</div>
 						<span><br> <br>선택좌석</span>
 						<table id="selectedSeat">
@@ -411,128 +403,42 @@ body {
 				</div>
 
 				<form action="movieReservation.do" method="post" id="ajaxPay">
-					<input type="hidden" id="docId" name="docId"> <input
-						type="hidden" id="reservLoc" name="reservLoc"> <input
-						type="hidden" id="reservHall" name="reservHall"> <input
-						type="hidden" id="UId" name="UId" value="${sessionId }"> <input
-						type="hidden" id="schDate" name="schDate"> <input
-						type="hidden" id="schTime" name="schTime"> <input
-						type="hidden" id="seatName" name="seatName">
+					<input type="hidden" id="docId" name="docId"> 
+					<input type="hidden" id="reservLoc" name="reservLoc"> 
+					<input type="hidden" id="reservHall" name="reservHall"> 
+					<input type="hidden" id="UId" name="UId" value="${sessionId}"> 
+					<input type="hidden" id="schDate" name="schDate"> 
+					<input type="hidden" id="schTime" name="schTime"> 
+					<input type="hidden" id="seatName" name="seatName">
 					<c:choose>
 						<c:when test="${not empty sessionId}">
 							<button type="submit" id="payBtn" style="display: none;"
 								class="btn btn-warning">결제하기</button>
 						</c:when>
 						<c:otherwise>
-<!-- 							<button type="button" onclick="ajaxLogin()" id="ajaxBtn" -->
-<!-- 								style="display: none;" class="btn btn-warning">로그인하러가기</button> -->
-								<button type="button" onclick="location.href='userLoginForm.do'" id="ajaxBtn"
-								style="display: none;" class="btn btn-warning">로그인하러가기</button>
+								<button type="button" onclick="location.href='userLoginForm.do'" id="ajaxBtn" style="display: none;" class="btn btn-warning">
+									로그인하러가기
+								</button>
 						</c:otherwise>
 					</c:choose>
-
-
 				</form>
-				<input type="hidden" id="name" name="name"> <input
-					type="hidden" id="runtime" name="runtime">
+				<input type="hidden" id="name" name="name"> 
+				<input type="hidden" id="runtime" name="runtime">	
 			</div>
 		</div>
 	</div>
-
-	<!-- <div class="modal">
-		<div class="modal_content" title="클릭하면 창이 닫힙니다.">
-			<div class="container">
-				<div class="col-md-4 ml-auto mr-auto">
-					<div class="card card-login card-plain">
-						<form class="form" action="userLogin.do" method="POST">
-							<div class="card-body">
-								<div class="input-group no-border input-lg">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i
-											class="now-ui-icons users_circle-08"></i>
-										</span>
-									</div>
-									<input type="text" class="form-control UId" name="UId"
-										placeholder="Id...">
-								</div>
-								<div class="input-group no-border input-lg">
-									<div class="input-group-prepend">
-										<span class="input-group-text"> <i
-											class="now-ui-icons objects_key-25"></i>
-										</span>
-									</div>
-									<input type="password" placeholder="Password..." name="pwd"
-										class="form-control pwd" />
-								</div>
-								<div class="card-footer text-center">
-									<input type="submit" class="btn-round btn btn-block btnLogin"
-										style="background: #cfc5e9; border: 0px;" value="로그인"><br>
-									<a
-										href="https://kauth.kakao.com/oauth/authorize?client_id=876f8c44421d27c420bd6ffaab02bb68&redirect_uri=http://3.39.54.67:8080/yedamticket/kakaoLogin.do&response_type=code">
-
-										<img src="resources/users/img/kakao_login_large_wide.png"
-										class="loginBtn">
-									</a>
-								</div>
-								<br>
-							</div>
-						</form>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div> -->
-
-
-
-	<script>
-		//ajaxLogin()
-		function ajaxLogin() {
-			$.ajax({
-				url : 'userLogin1.do',
-				type : 'post',
-				data : {
-					"UId" : $('#UId1').val(),
-					"pwd" : $('#pwd').val()
-				},
-				dataType : "json",
-				success : function(data) {
-					console.log(data);
-					if (data != null) {
-						$('#UId').val(data.username);
-
-						$('#ajaxPay').submit();
-					} else {
-						swal("", "아이디 또는 비밀번호가 틀립니다.", "error");
-					}
-				}
-			});
-		}
-
-		//모달
-
-		$(function() {
-			$("#ajaxBtn").click(function() {
-				$(".modal").fadeIn();
-			});
-
-			$("#close").click(function() {
-				$(".modal").fadeOut();
-			});
-
-		});
-
+	<script>		
 		//영화관지역
-		$('#movieList').on('click', 'div', selectedList);
+		$('#movieList').on('click','div',selectedList);
 		function selectedList() {
-			let posterArry = event.target.getAttribute('data-poster')
-					.split('|');
+			let posterArry = event.target.getAttribute('data-poster').split('|');					
 			moviePoster.setAttribute('src', posterArry[0]);
+			let docId=document.getElementById('docId');
 			docId.value = event.target.getAttribute('data-cd');
-			runtime.value = event.target.getAttribute('data-runtime');
-			//버튼누르면 색바뀜
-			let childNodes = event.target.parentNode.children;
-			for (var i = 0; i < childNodes.length; i++) {
+			let runtime=document.getElementById('runtime');
+			runtime.value = event.target.getAttribute('data-runtime');		
+			let childNodes = event.target.parentNode.children;		
+			for (let i = 0; i < childNodes.length; i++) {
 				childNodes[i].classList.remove('selectedList');
 			}
 			event.target.setAttribute('class', 'selectedList');
@@ -540,14 +446,12 @@ body {
 			$.ajax({
 				url : "movieHallList.do",
 				type : "post",
-				data : {
-					docId : $(event.target).data("cd")
-				},
+				data : {docId : event.target.dataset.cd},				
 				success : function(data) {
-					for (var i = 0; i < data.length; i++) {
+					for (let i = 0; i < data.length; i++) {
 						let li = document.createElement('li');
 						li.setAttribute("data-loc", data[i].loc);
-						li.innerText = data[i].loc + '(' + data[i].mvNo + ')';
+						li.innerText = data[i].loc+'('+data[i].mvNo+')';
 						hallList.append(li);
 					}
 				}
@@ -594,89 +498,57 @@ body {
 				childNodes[i].classList.remove('selectedList');
 			}
 			event.target.setAttribute('class', 'selectedList');
-			$
-					.ajax({
-						url : "movieSchdtList.do",
-						type : "post",
-						data : {
-							docId : $(event.target).data("docid")
-						},
-						success : function(data) {
-							console.log(data);
-
-							$("#datepicker")
-									.datepicker(
-											{
+			$.ajax({url : "movieSchdtList.do",
+					type : "post",
+					data : {docId : $(event.target).data("docid")},					
+					success :function(data){
+							console.log(data[0].schDt);
+						$("#datepicker").datepicker({										
 												minDate : 0,
 												maxDate : data[0].schDt,
 												onSelect : function() {
-													date = $("#datepicker")
-															.val();
+													date = $("#datepicker").val();														
 													var sDate = date.split('/');
 													let mm = sDate[0];
 													let yy = sDate[2];
 													let dd = sDate[1];
-													let sumDate = yy + '-' + mm
-															+ '-' + dd;
+													let sumDate = yy+'-'+mm+'-'+dd;														
 													console.log(sumDate);
 													$('#schDate').val(sumDate);
 													$('#schList').empty();
 													//영화 런타임으로 영화 스케쥴 만들기
-													let runtime = $('#runtime')
-															.val();
-													let sch = new Date(yy,
-															(mm - 1), dd);
+													let runtime = $('#runtime').val();														
+													let sch = new Date(yy,(mm - 1), dd);														
 													sch.setHours(9, 0, 0, 0);
 													let tmp = sch;
 													for (var i = 0; i < 6; i++) {
-														let time = new Date(
-																tmp.getTime()
-																		+ (runtime * 60)
-																		* 1000);
-														let startHours = tmp
-																.getHours();
+														let time = new Date(tmp.getTime()+ (runtime * 60)* 1000);																	
+														let startHours = tmp.getHours();																
 														if (startHours < 10) {
-															startHours = '0'
-																	+ startHours;
+															startHours = '0'+ startHours;																	
 														} else {
-															startHours = ''
-																	+ startHours;
-														}
-														;
-														let startMinutes = tmp
-																.getMinutes();
+															startHours = ''+ startHours;																	
+														};													
+														let startMinutes = tmp.getMinutes();															
 														if (startMinutes < 10) {
-															startMinutes = '0'
-																	+ startMinutes;
+															startMinutes = '0'+ startMinutes;																
 														} else {
-															startMinutes = ''
-																	+ startMinutes;
-														}
-														;
-														let endtHours = time
-																.getHours();
+															startMinutes = ''+ startMinutes;																
+														};														
+														let endtHours = time.getHours();																
 														if (endtHours < 10) {
-															endtHours = '0'
-																	+ endtHours;
+															endtHours = '0'+ endtHours;																	
 														} else {
-															endtHours = ''
-																	+ endtHours;
-														}
-														;
-														let endMinutes = time
-																.getMinutes();
+															endtHours = ''+ endtHours;																	
+														};														
+														let endMinutes = time.getMinutes();															
 														if (endMinutes < 10) {
-															endMinutes = '0'
-																	+ endMinutes;
+															endMinutes = '0'+ endMinutes;																
 														} else {
-															endMinutes = ''
-																	+ endMinutes;
-														}
-														;
-														let li = document
-																.createElement('li');
-														let timeBtn = document
-																.createElement('button');
+															endMinutes = ''+ endMinutes;																	
+														};														
+														let li = document.createElement('li');															
+														let timeBtn = document.createElement('button');																
 														timeBtn.type = "button";
 														timeBtn.style.width = '100%';
 														timeBtn.innerText = startHours
@@ -687,8 +559,7 @@ body {
 																+ ':'
 																+ endMinutes;
 														li.append(timeBtn);
-														li.dataset.timestamp = tmp
-																.getTime();
+														li.dataset.timestamp = tmp.getTime();																
 														schList.append(li);
 														tmp = new Date(
 																time.getTime() + (1800) * 1000);
@@ -724,7 +595,6 @@ body {
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		$('#schList').on('click', 'button', selectedTime);
 		function selectedTime() {
-
 			$(".col").css("display", "block");
 			$('#moviePoster').css("display", "inline-block");
 			$('#finalReserv').css('display', "block");
@@ -732,20 +602,13 @@ body {
 			$('#ajaxBtn').css('display', "block");
 			for (var i = 0; i < $('#schList button').length; i++) {
 				$('#schList button').removeClass('selectedList');
-			}
-			;
+			};			
 			event.target.setAttribute('class', 'selectedList');
 			$('#schTime').val($(event.target).text())
 			//버튼누르면 색바뀜
 			let childNodes = event.target.parentNode.children;
-
-			/*   for (var i = 0; i < childNodes.length; i++) {
-			     childNodes[i].classList.remove('selectedList');
-			  } */
 			event.target.setAttribute('class', 'selectedList');
-
 			//영화(docId),지역,영화관이름,날짜,시간을 ajax로 넘겨서 예약된좌석이름을 가져옴                  
-			// 황보경수정
 			let divLoc = $("<div>");
 			let divHall = $("<div>");
 
@@ -815,9 +678,7 @@ body {
 
 					function selectSeat() {
 						//선택된 좌석을 좌석표 밑에 표시하기
-						let selectedSeat = document
-								.getElementById('selectedSeat');
-
+						let selectedSeat = document.getElementById('selectedSeat');
 						let tdList = selectedSeat.getElementsByTagName('td');
 						//seatGray class의 수 만큼만 좌석을 선택가능 
 						if ($('#selectedSeat .seatGray').length > cnt) {
@@ -841,8 +702,7 @@ body {
 							swal("", "인원 선택을 먼저 해주세요.", "error");
 						} else if ($('#selectedSeat .seatGray').length < cnt) {
 							cnt = 0;
-						};
-						
+						};						
 					}//end selectseat
 					console.log(result);
 					let arry=[];
@@ -901,7 +761,6 @@ body {
 						$('#cnt').text(0);
 						cnt = 0;
 					} else {
-
 						--cnt;
 						//예약인원을 줄일 때 마다 seatGray class없애기
 						let selectedSeat = document
