@@ -427,171 +427,132 @@ body {
 			</div>
 		</div>
 	</div>
-	<script>		
-		
-		$('#movieList').on('click','div',selectedList);
-		function selectedList() {
-			let posterArry = event.target.getAttribute('data-poster').split('|');					
-			moviePoster.setAttribute('src', posterArry[0]);
-			let docId=document.getElementById('docId');
-			docId.value = event.target.getAttribute('data-cd');
-			let runtime=document.getElementById('runtime');
-			runtime.value = event.target.getAttribute('data-runtime');		
-			let childNodes = event.target.parentNode.children;		
-			for (let i = 0; i < childNodes.length; i++) {
-				childNodes[i].classList.remove('selectedList');
-			}
-			event.target.setAttribute('class', 'selectedList');
-			$('#hallList').empty();
-			$.ajax({
-				url : "movieHallList.do",
-				type : "post",
-				data : {docId : event.target.dataset.cd},				
-				success : function(data) {
-					for (let i = 0; i < data.length; i++) {
-						let li = document.createElement('li');
-						li.setAttribute("data-loc", data[i].loc);
-						li.innerText = data[i].loc+'('+data[i].mvNo+')';
-						hallList.append(li);
-					}
+<script>				
+$('#movieList').on('click','div',selectedList);
+function selectedList() {
+	let posterArry = event.target.getAttribute('data-poster').split('|');					
+	moviePoster.setAttribute('src', posterArry[0]);
+	let docId=document.getElementById('docId');
+	docId.value = event.target.getAttribute('data-cd');
+	let runtime=document.getElementById('runtime');
+	runtime.value = event.target.getAttribute('data-runtime');		
+	let childNodes = event.target.parentNode.children;		
+	for (let i = 0; i < childNodes.length; i++) {
+		childNodes[i].classList.remove('selectedList');
+	}
+	event.target.setAttribute('class', 'selectedList');
+	$('#locList').empty();
+	$.ajax({
+		url : "movieLocList.do",
+		type : "post",
+		data : {docId : event.target.dataset.cd},				
+		success : function(data) {
+			for (let i = 0; i < data.length; i++) {
+				let li = document.createElement('li');
+				li.setAttribute("data-loc", data[i].loc);
+				li.innerText = data[i].loc+'('+data[i].mvNo+')';
+				locList.append(li);
 				}
-			});
-		};
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$('#hallList').on('click', 'li', selectedLoc);
-		function selectedLoc() {
-			$('#reservLoc').val($(event.target).data("loc"));
-			//버튼누르면 색바뀜
-			let childNodes = event.target.parentNode.childNodes;
-			for (var i = 0; i < childNodes.length; i++) {
-				childNodes[i].classList.remove('selectedList');
-			}
-			event.target.setAttribute('class', 'selectedList');
-			$('#locList').empty();
-			$.ajax({
-				url : "movieLocList.do",
-				type : "post",
-				data : {
-					loc : $(event.target).data("loc"),
-					docId : $('#docId').val()
-				},
-				success : function(data) {
-					for (var i = 0; i < data.length; i++) {
-						let li = document.createElement('li');
-						li.setAttribute("data-docid", data[i].docId);
-						li.setAttribute("data-hallNo", data[i].mvHallNo);
-						li.setAttribute("data-name", data[i].name);
-						li.innerText = data[i].name + ' 영화관';
-						locList.append(li);
-					}
-
-				}
-			});
 		}
-		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-		$('#locList').on('click', 'li', selectedHall);
-		function selectedHall() {
-			$('#reservHall').val($(event.target).data("name"));
-			//버튼누르면 색바뀜
-			let childNodes = event.target.parentNode.childNodes;
-			for (var i = 0; i < childNodes.length; i++) {
-				childNodes[i].classList.remove('selectedList');
+	});
+};
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$('#locList').on('click', 'li', selectedLoc);
+function selectedLoc() {
+	$('#reservLoc').val($(event.target).data("loc"));
+	//버튼누르면 색바뀜
+	let childNodes = event.target.parentNode.childNodes;
+	for (let i = 0; i < childNodes.length; i++) {
+		childNodes[i].classList.remove('selectedList');
+	}
+	event.target.setAttribute('class', 'selectedList');
+	$('#hallList').empty();
+	$.ajax({
+		url : "movieHallList.do",
+		type : "post",
+		data : {
+			loc : $(event.target).data("loc"),
+			docId : $('#docId').val()
+		},
+		success : function(data) {
+			for (let i = 0; i < data.length; i++) {
+				let li = document.createElement('li');
+				li.setAttribute("data-docid", data[i].docId);
+				li.setAttribute("data-hallNo", data[i].mvHallNo);
+				li.setAttribute("data-name", data[i].name);
+				li.innerText = data[i].name + ' 영화관';
+				hallList.append(li);
 			}
-			event.target.setAttribute('class', 'selectedList');
-			$.ajax({url : "movieSchdtList.do",
-					type : "post",
-					data : {docId : $(event.target).data("docid")},					
-					success :function(data){
-							console.log(data[0].schDt);
-						$("#datepicker").datepicker({										
-												minDate : 0,
-												maxDate : data[0].schDt,
-												onSelect : function() {
-													date = $("#datepicker").val();														
-													var sDate = date.split('/');
-													let mm = sDate[0];
-													let yy = sDate[2];
-													let dd = sDate[1];
-													let sumDate = yy+'-'+mm+'-'+dd;														
-													console.log(sumDate);
-													$('#schDate').val(sumDate);
-													$('#schList').empty();
-													//영화 런타임으로 영화 스케쥴 만들기
-													let runtime = $('#runtime').val();														
-													let sch = new Date(yy,(mm - 1), dd);														
-													sch.setHours(9, 0, 0, 0);
-													let tmp = sch;
-													for (var i = 0; i < 6; i++) {
-														let time = new Date(tmp.getTime()+ (runtime * 60)* 1000);																	
-														let startHours = tmp.getHours();																
-														if (startHours < 10) {
-															startHours = '0'+ startHours;																	
-														} else {
-															startHours = ''+ startHours;																	
-														};													
-														let startMinutes = tmp.getMinutes();															
-														if (startMinutes < 10) {
-															startMinutes = '0'+ startMinutes;																
-														} else {
-															startMinutes = ''+ startMinutes;																
-														};														
-														let endtHours = time.getHours();																
-														if (endtHours < 10) {
-															endtHours = '0'+ endtHours;																	
-														} else {
-															endtHours = ''+ endtHours;																	
-														};														
-														let endMinutes = time.getMinutes();															
-														if (endMinutes < 10) {
-															endMinutes = '0'+ endMinutes;																
-														} else {
-															endMinutes = ''+ endMinutes;																	
-														};														
-														let li = document.createElement('li');															
-														let timeBtn = document.createElement('button');																
-														timeBtn.type = "button";
-														timeBtn.style.width = '100%';
-														timeBtn.innerText = startHours
-																+ ':'
-																+ startMinutes
-																+ ' ~ '
-																+ endtHours
-																+ ':'
-																+ endMinutes;
-														li.append(timeBtn);
-														li.dataset.timestamp = tmp.getTime();																
-														schList.append(li);
-														tmp = new Date(
-																time.getTime() + (1800) * 1000);
-													}
-
-													let timeStr = new Date();
-													let Lst = document
-															.getElementById('schList');
-													let timeList = Lst
-															.getElementsByTagName('li');
-													console
-															.log("현재시간 초"
-																	+ timeStr
-																			.getTime());
-													for (var i = 0; i < timeList.length; i++) {
-														if (timeStr.getTime() > timeList[i]
-																.getAttribute('data-timestamp')) {
-															timeList[i].children[0].classList
-																	.add('out');
-															timeList[i].children[0].disabled = true;
-
-														} else {
-															console
-																	.log('상영시간 아직안지남');
-														}
-													}
-													showTime.style.display = "block";
-												}
-											});
+		}
+	});
+}
+		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$('#hallList').on('click', 'li', selectedHall);
+function selectedHall() {
+	$('#reservHall').val($(event.target).data("name"));
+	let childNodes = event.target.parentNode.childNodes;
+	for (let i = 0; i < childNodes.length; i++) {
+		childNodes[i].classList.remove('selectedList');
+	}
+	event.target.setAttribute('class', 'selectedList');
+	$.ajax({url : "movieSchdtList.do",
+			type : "post",
+			data : {docId : $(event.target).data("docid")},					
+			success :function(data){
+				$("#datepicker").datepicker({										
+					minDate : 0,
+					maxDate : data[0].schDt,
+					onSelect : function() {
+						date = $("#datepicker").val();														
+						let sDate = date.split('/');																										
+						let yy = sDate[2];
+						let mm = sDate[0];
+						let dd = sDate[1];
+						let sumDate = yy+'-'+mm+'-'+dd;														
+						$('#schDate').val(sumDate);
+						$('#schList').empty();
+						//영화 런타임으로 영화 스케쥴 만들기
+						let runtime = $('#runtime').val();														
+						let sch = new Date(yy,(mm - 1), dd);														
+						sch.setHours(9, 0, 0, 0);
+						let tmp = sch;
+						for (let i = 0; i < 6; i++) {
+							let time = new Date(tmp.getTime()+ (runtime * 60)* 1000);																	
+							let startHours = tmp.getHours();
+							timeSet(startHours);																																							
+							let startMinutes = tmp.getMinutes();	
+							timeSet(startMinutes);																			
+							let endtHours = time.getHours();	
+							timeSet(endtHours);													
+							let endMinutes = time.getMinutes();															
+							timeSet(endMinutes);												
+							let li = document.createElement('li');															
+							let timeBtn = document.createElement('button');																
+							timeBtn.type = "button";
+							timeBtn.style.width = '100%';
+							timeBtn.innerText =startHours+':'+startMinutes+' ~ '+endtHours+':'+endMinutes;								
+							li.append(timeBtn);
+							li.dataset.timestamp = tmp.getTime();																
+							schList.append(li);
+							tmp = new Date(time.getTime()+(1800)*1000);									
 						}
-					});
-		}
+						let timeStr = new Date();
+						let Lst = document.getElementById('schList');								
+						let timeList = Lst.getElementsByTagName('li');
+						for (let i = 0; i < timeList.length; i++) {
+							if (timeStr.getTime() > timeList[i].getAttribute('data-timestamp')){								 
+								timeList[i].children[0].classList.add('out');										
+								timeList[i].children[0].disabled = true;
+							} else {
+								console.log('상영시간 아직안지남');										
+	 						}
+					}
+						showTime.style.display = "block";
+				}
+   			});
+  		}
+ 	});
+}
 		/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 		$('#schList').on('click', 'button', selectedTime);
 		function selectedTime() {
@@ -600,7 +561,7 @@ body {
 			$('#finalReserv').css('display', "block");
 			$('#payBtn').css('display', "block");
 			$('#ajaxBtn').css('display', "block");
-			for (var i = 0; i < $('#schList button').length; i++) {
+			for (let i = 0; i < $('#schList button').length; i++) {
 				$('#schList button').removeClass('selectedList');
 			};			
 			event.target.setAttribute('class', 'selectedList');
@@ -715,9 +676,7 @@ body {
 						}
 						console.log(arry);					
 						for(var i=0;i<arry.length;i++){
-							//console.log(arry[i].length);
 							for(var j=0;j<arry[i].length;j++){
-								//console.log(arry[i][j]);
 								var a = "#seat td:contains(" + arry[i][j] + ")";
 					            $($(a)[0]).off('click');
 					            $(a).css("backgroundColor", "black");
@@ -783,7 +742,16 @@ body {
 					}
 
 				});
-	</script>
+function timeSet(value){
+	let result;
+	if (value < 10) {
+		result = '0'+ value;																	
+	} else {
+		result = ''+ value;																	
+	};
+	return result;
+}
+</script>
 </body>
 
 </html>

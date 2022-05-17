@@ -66,13 +66,6 @@ public class MovieController {
 	@Autowired
 	private PointService pointDao;
 
-	// select 해서 가져올때 필요(기업회원쪽 -> rjh(2022/04/05))
-//	@Autowired
-//	private PerformanceImageService periDao;
-
-//	@Autowired
-//	private MovieVideoService pervDao;
-
 	@RequestMapping("/movieList.do")
 	public String movieList(Model model) {
 		model.addAttribute("movies", movieDao.mList());
@@ -124,18 +117,17 @@ public class MovieController {
 	public String movieBooking(Model model) {
 		model.addAttribute("movies", movieDao.movieReservList());
 		return "movie/movieBookingForm";
-
 	}
 
 	// 영화예약페이지에서 영화를 클릭하면 해당영화를 상영하는 영화관리스트호출
-	@RequestMapping("/movieHallList.do")
+	@RequestMapping("/movieLocList.do")
 	@ResponseBody
 	public List<MovieHallVO> movieHallList(Model model, MovieHallVO vo) {
 		System.out.println("docid" + vo.getDocId());
 		return movieHallDao.movieHallList(vo);
 	}
 
-	@RequestMapping("/movieLocList.do")
+	@RequestMapping("/movieHallList.do")
 	@ResponseBody
 	public List<MovieHallVO> movieLocList(Model model, MovieHallVO vo) {
 		System.out.println("loc" + vo.getLoc());
