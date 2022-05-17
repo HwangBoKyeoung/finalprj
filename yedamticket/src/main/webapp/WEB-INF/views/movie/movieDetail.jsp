@@ -5,13 +5,9 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <!DOCTYPE html>
-
 <html>
-
 <head>
-
 <meta charset="UTF-8">
-
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"
 	integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
@@ -135,9 +131,7 @@ textarea.form-control {
 	line-height: 1;
 }
 </style>
-
 </head>
-
 <body>
 	<div class="container">
 		<div class="row">
@@ -155,21 +149,15 @@ textarea.form-control {
 					<p>감독:${movie.director }</p>
 					<p>배우:${movie.actor }</p>
 					<p>장르:${movie.genre }</p>
-					<p id="startD">
-						<input type="hidden" value="${movie.startDate}" id="hd" name="hd">
-					</p>
-
-					<fmt:formatNumber var="starFloat" value="${star.star/20}"
-						pattern="#.#" />
-					<fmt:formatNumber var="starAvg" value="${star.star}" pattern="#.#" />
+					<p>개봉일:${movie.startDate}</p>					
+					<fmt:formatNumber var="starFloat" value="${star.star/20}" pattern="#.#" />						
+					<fmt:formatNumber var="starAvg" value="${star.star}" pattern="#.#" />				
 					<p>
-						평점: <span class="starAvg"> ★★★★★ <span
-							style="width:${starAvg}%;">★★★★★</span>
-						</span>(${starFloat})
+						평점: <span class="starAvg"> ★★★★★ 
+								<span style="width:${starAvg}%;">★★★★★</span>							
+							 </span>(${starFloat})
 					</p>
-					<button id="reservBtn" class="btn btn-lg"
-						onclick="location.href='movieBooking.do'"
-						style="background: #cfc5e9;">예매하기</button>
+					<button id="reservBtn" class="btn btn-lg" onclick="location.href='movieBooking.do'"style="background: #cfc5e9;">예매하기</button>												
 				</div>
 			</div>
 			<div class="col-lg-12" style="padding-top: 50px; text-align: center;">
@@ -178,7 +166,7 @@ textarea.form-control {
 					줄거리
 				</h2>
 				<br>
-				<p style="text-align: center;">${movie.content }</p>
+					<p style="text-align: center;">${movie.content }</p>
 				<br>
 				<hr>
 				<br>
@@ -193,9 +181,8 @@ textarea.form-control {
 						allowfullscreen></iframe>
 				</div>
 			</div>
-
 			<div class="col-lg-12" style="padding-top: 50px; text-align: center;">
-					<hr>
+				<hr>
 				<c:if test="${not empty sessionId }">
 					<div id="contents" style="padding-top: 50px;">
 						<div id="links">
@@ -206,21 +193,18 @@ textarea.form-control {
 										step="1" min="0" max="10">
 									</span>
 								</form>
-
 								<form>
 									<input type="hidden" name="star" id="star">
 									<h3>
 										<label for="content">Comments</label>
 									</h3>
 									<textarea class="form-control" style="float: left; width: 70%"
-										rows="3" id="content" name="content" placeholder="댓글을 입력해주세요."
-										required></textarea>
-									<button type="button" class="btn btn-lg"
-										style="background: #cfc5e9; float: left; margin-left: 53px;"
-										onclick="aJaxCall()">입력</button>
+									rows="3" id="content" name="content" placeholder="댓글을 입력해주세요." required>
+									</textarea>
+									<button type="button" class="btn btn-lg"style="background: #cfc5e9; float: left; margin-left: 53px;" onclick="aJaxCall()">입력</button>																				
 								</form>
 							</div>
-					</div>
+						</div>
 					</div>
 				</c:if>
 				<div id="reply">
@@ -234,13 +218,15 @@ textarea.form-control {
 						<c:if test="${empty replys}">
 							<h2>아직 입력된 댓글이 없습니다.</h2>
 						</c:if>
-						<c:forEach items="${replys }" var="r">
-						
+						<c:forEach items="${replys }" var="r">						
 							<tr>
 								<td>${r.UId }</td>
-								<td><span class="star"> ★★★★★ <c:set var="star"
-											value="${r.star}" /> <span style="width:${star}%;">★★★★★</span>
-								</span></td>
+								<td>
+									<span class="star"> ★★★★★ 
+									<c:set var="star" value="${r.star}" />
+									<span style="width:${star}%;">★★★★★</span>
+									</span>
+								</td>
 								<td>
 									<p>${r.content }</p>
 									<p>${r.wrDt }</p>
@@ -258,20 +244,8 @@ textarea.form-control {
 			</div>
 		</div>
 	</div>
-	</div>
-	</div>
-
 </body>
-
 <script>
-
-let sd = $("#hd").val();
-console.log(sd);
-
-let sdStr = sd.substr(0,10);
-console.log(sdStr);
-
-$("#startD").append("개봉: " + sdStr);
 
 
 const drawStar = (target) => {
