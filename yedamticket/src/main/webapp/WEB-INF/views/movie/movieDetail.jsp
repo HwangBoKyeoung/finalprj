@@ -221,20 +221,20 @@ textarea.form-control {
 						<c:forEach items="${replys }" var="r">						
 							<tr>
 								<td>${r.UId }</td>
-								<td>
-									<span class="star"> ★★★★★ 
-									<c:set var="star" value="${r.star}" />
-									<span style="width:${star}%;">★★★★★</span>
-									</span>
-								</td>
+									<td>
+										<span class="star"> ★★★★★ 
+										<c:set var="star" value="${r.star}" />
+										<span style="width:${star}%;">★★★★★</span>
+										</span>
+									</td>
 								<td>
 									<p>${r.content }</p>
 									<p>${r.wrDt }</p>
 								</td>
 								<td>
-								<c:if test="${sessionId eq r.UId }">
-									<button type="button" class='btn' id="delBtn"
-										onclick="deleteReply(${r.mvReNo })">삭제</button></c:if>
+									<c:if test="${sessionId eq r.UId }">
+										<button type="button" class='btn' id="delBtn" onclick="deleteReply(${r.mvReNo })">삭제</button>
+									</c:if>
 								</td>
 							</tr>
 						</c:forEach>

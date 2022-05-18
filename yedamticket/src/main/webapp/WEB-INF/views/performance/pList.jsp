@@ -90,11 +90,7 @@ input::-webkit-input-placeholder { color: black; }
                   
                         <div class="event-date">${p.performanceScheduleVO.frDt }  ${p.performanceScheduleVO.time }</div>
                     </div>
-                    <%-- <div class="event-cost flex justify-content-center align-items-center">
-                        <p>${p.price }</p>
-                    </div> --%>
-                   <input type="hidden" name='pNo' value="${p.PNo }">
-                    
+                   <input type="hidden" name='pNo' value="${p.PNo }">                   
                 </header>
             <br>
                 <footer class="entry-footer" style="text-align: right;">
@@ -134,58 +130,12 @@ input::-webkit-input-placeholder { color: black; }
                      type="button" value="다음"  class="btn" style="background:#6c757d; color: white; width: 38px; font-weight:initial; height: 38px;padding:0px;"></a>
                </c:if>
             </div><br><br>
-<%-- <div class="upcoming-events-outer">
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="upcoming-events">
-                    <div class="upcoming-events-header">
-                        <h4>Upcoming Events</h4>
-                    </div>
-
-                    <div class="upcoming-events-list">
-                        
-               <c:forEach items="${Eperformance }" var="ep">
-                        <div class="upcoming-event-wrap flex flex-wrap justify-content-between align-items-center">
-                            <figure class="events-thumbnail">
-                                <a href="#"><img src="/upload/${ep.renames }"></a>
-                            </figure>
-
-                            <div class="entry-meta">
-                                <div class="event-date">27
-                                    <span>February</span>
-                                </div>
-                            </div>
-
-                            <header class="entry-header">
-                                <h3 class="entry-title"><a href="#">${ ep.name}</a></h3>
-
-                                <div class="event-date-time">${ep.performanceScheduleVO.frDt }  ${ep.performanceScheduleVO.time }</div>
-
-                                <div class="event-speaker">${ep.actor }</div>
-                            </header>
-
-                            <footer class="entry-footer">
-                                <a href="#">Buy Tikets</a>
-                            </footer>
-                        </div>
-                       </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-<<<<<<< HEAD
-    </div>--%>
     <input type="hidden" value="${psvo.startDate}" id="vostart">
     <input type="hidden" value="${psvo.endDate}" id="voend">
     <input type="hidden" value="${vo.name}" id="voname">
     <input type="hidden" value="${vo.loc}" id="voloc"> 
-
 <script>
-
 let actionForm = $("#actionForm");
-
 let sd = $("#startDate").val();
 let ed = $("#endDate").val();
 let nm = $("#name").val();
